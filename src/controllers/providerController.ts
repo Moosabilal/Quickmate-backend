@@ -26,9 +26,11 @@ export class ProviderController {
             const profile = files?.profilePhoto?.[0];
             const certification = files?.businessCertifications?.[0];
 
-            const aadhaarUrl = aadhaar ? await uploadToCloudinary(aadhaar.path) : '';
-            const profileUrl = profile ? await uploadToCloudinary(profile.path) : '';
-            const certificationUrl = certification ? await uploadToCloudinary(certification.path) : '';
+            const baseUrl = process.env.CLOUDINARY_BASE_URL;
+
+            const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl,'') : '';
+            const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl,'') : '';
+            const certificationUrl = certification ? (await uploadToCloudinary(certification.path)).replace(baseUrl,'') : '';
 
             const formData = {
                 ...req.body,
@@ -59,6 +61,17 @@ export class ProviderController {
             const providerWithDetails = await this.providerService.getProviderWithAllDetails();
             res.status(200).json(providerWithDetails);
         } catch (error) {
+            next(error);
+        }
+    }
+
+    public getProvidersforAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const providersDetails = await this.providerService.providersForAdmin();
+            console.log('called')
+            res.status(200).json(providersDetails);
+        } catch (error) {
+            console.log('error',error)
             next(error);
         }
     }

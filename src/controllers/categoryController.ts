@@ -51,7 +51,9 @@ export class CategoryController {
       let iconUrl: string | undefined | null;
 
       if (iconFile) {
-        iconUrl = await uploadToCloudinary(iconFile.path);
+        const fullUrl = await uploadToCloudinary(iconFile.path);
+        const baseUrl = process.env.CLOUDINARY_BASE_URL;
+        iconUrl = fullUrl.replace(baseUrl, '');
       } else if (req.body.iconUrl === '') {
         iconUrl = null;
       }
@@ -77,29 +79,29 @@ export class CategoryController {
 
       let commissionRuleInputForService: CommissionRuleInputController | undefined = undefined;
 
-        const parsedCommissionValue = commissionValue !== '' ? Number(commissionValue) : undefined;
+      const parsedCommissionValue = commissionValue !== '' ? Number(commissionValue) : undefined;
 
-        if (commissionType === 'none') {
+      if (commissionType === 'none') {
+        commissionRuleInputForService = {
+          removeRule: true,
+          status: commissionStatus,
+        };
+      } else if (commissionType && parsedCommissionValue !== undefined) {
+        if (commissionType === 'percentage') {
           commissionRuleInputForService = {
-            removeRule: true,
+            categoryCommission: parsedCommissionValue,
+            flatFee: undefined,
             status: commissionStatus,
           };
-        } else if (commissionType && parsedCommissionValue !== undefined) {
-          if (commissionType === 'percentage') {
-            commissionRuleInputForService = {
-              categoryCommission: parsedCommissionValue,
-              flatFee: undefined,
-              status: commissionStatus,
-            };
-          } else if (commissionType === 'flatFee') {
-            commissionRuleInputForService = {
-              flatFee: parsedCommissionValue,
-              categoryCommission: undefined,
-              status: commissionStatus,
-            };
-          }
+        } else if (commissionType === 'flatFee') {
+          commissionRuleInputForService = {
+            flatFee: parsedCommissionValue,
+            categoryCommission: undefined,
+            status: commissionStatus,
+          };
         }
-      
+      }
+
 
       const { category, commissionRule } = await this.categoryService.createCategory(
         categoryInput,
@@ -148,7 +150,9 @@ export class CategoryController {
       let iconUrl: string | undefined | null;
 
       if (iconFile) {
-        iconUrl = await uploadToCloudinary(iconFile.path);
+        const fullUrl = await uploadToCloudinary(iconFile.path);
+        const baseUrl = process.env.CLOUDINARY_BASE_URL;
+        iconUrl = fullUrl.replace(baseUrl, '');
       } else if (req.body.iconUrl === '') {
         iconUrl = null;
       } else if (req.body.iconUrl !== undefined) {
@@ -177,29 +181,29 @@ export class CategoryController {
 
       let commissionRuleInputForService: CommissionRuleInputController | undefined = undefined;
 
-      
-        const parsedCommissionValue = commissionValue !== '' ? Number(commissionValue) : undefined;
-        if (commissionType === 'none') {
+
+      const parsedCommissionValue = commissionValue !== '' ? Number(commissionValue) : undefined;
+      if (commissionType === 'none') {
+        commissionRuleInputForService = {
+          removeRule: true,
+          status: commissionStatus,
+        };
+      } else if (commissionType && parsedCommissionValue !== undefined) {
+
+        if (commissionType === 'percentage') {
           commissionRuleInputForService = {
-            removeRule: true,
+            categoryCommission: parsedCommissionValue,
+            flatFee: undefined,
             status: commissionStatus,
           };
-        } else if (commissionType && parsedCommissionValue !== undefined) {
+        } else if (commissionType === 'flatFee') {
+          commissionRuleInputForService = {
+            flatFee: parsedCommissionValue,
+            categoryCommission: undefined,
+            status: commissionStatus,
+          };
+        }
 
-          if (commissionType === 'percentage') {
-            commissionRuleInputForService = {
-              categoryCommission: parsedCommissionValue,
-              flatFee: undefined,
-              status: commissionStatus,
-            };
-          } else if (commissionType === 'flatFee') {
-            commissionRuleInputForService = {
-              flatFee: parsedCommissionValue,
-              categoryCommission: undefined,
-              status: commissionStatus,
-            };
-          }
-        
       }
 
 
@@ -261,30 +265,30 @@ export class CategoryController {
         parentId: category.parentId ? category.parentId.toString() : null,
       };
 
-      
-        const mappedCategoryForFrontend: ICategoryFormCombinedData = {
-          ...commonData,
-          commissionType: 'none',
-          commissionValue: '',
-          commissionStatus: false,
-        };
+
+      const mappedCategoryForFrontend: ICategoryFormCombinedData = {
+        ...commonData,
+        commissionType: 'none',
+        commissionValue: '',
+        commissionStatus: false,
+      };
 
 
-        if (commissionRule) {
-          if (commissionRule.categoryCommission !== undefined && commissionRule.categoryCommission !== null && commissionRule.categoryCommission !== 0) {
-            mappedCategoryForFrontend.commissionType = 'percentage';
-            mappedCategoryForFrontend.commissionValue = commissionRule.categoryCommission;
-          } else if (commissionRule.flatFee !== undefined && commissionRule.flatFee !== null && commissionRule.flatFee !== 0) {
-            mappedCategoryForFrontend.commissionType = 'flatFee';
-            mappedCategoryForFrontend.commissionValue = commissionRule.flatFee;
-          }
-          mappedCategoryForFrontend.commissionStatus = commissionRule.status ?? false;
+      if (commissionRule) {
+        if (commissionRule.categoryCommission !== undefined && commissionRule.categoryCommission !== null && commissionRule.categoryCommission !== 0) {
+          mappedCategoryForFrontend.commissionType = 'percentage';
+          mappedCategoryForFrontend.commissionValue = commissionRule.categoryCommission;
+        } else if (commissionRule.flatFee !== undefined && commissionRule.flatFee !== null && commissionRule.flatFee !== 0) {
+          mappedCategoryForFrontend.commissionType = 'flatFee';
+          mappedCategoryForFrontend.commissionValue = commissionRule.flatFee;
         }
-        res.status(200).json({
-          ...mappedCategoryForFrontend,
-          subCategories
-        });
-      
+        mappedCategoryForFrontend.commissionStatus = commissionRule.status ?? false;
+      }
+      res.status(200).json({
+        ...mappedCategoryForFrontend,
+        subCategories
+      });
+
       return;
     } catch (error: any) {
       if (error.message.includes('Category not found')) {
@@ -326,7 +330,7 @@ export class CategoryController {
           let commissionStatus = false;
 
           if (hasCommissionRule(cat)) {
-            if (cat.commissionRule.categoryCommission !== 0 && cat.commissionRule.categoryCommission !== null && cat.commissionRule.categoryCommission !== undefined)  {
+            if (cat.commissionRule.categoryCommission !== 0 && cat.commissionRule.categoryCommission !== null && cat.commissionRule.categoryCommission !== undefined) {
               commissionType = 'percentage';
               commissionValue = cat.commissionRule.categoryCommission;
             } else if (cat.commissionRule.flatFee !== undefined && cat.commissionRule.flatFee !== undefined && cat.commissionRule.flatFee !== null) {

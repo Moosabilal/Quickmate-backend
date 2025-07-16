@@ -17,6 +17,7 @@ router.post('/register',authenticateToken, upload.fields([{ name: 'aadhaarIdProo
 
 // admin
 router.get('/getAllProviders', providerController.getAllProvidersList)
+router.get('/getProviderList', providerController.getProvidersforAdmin)
 
 
 export default router

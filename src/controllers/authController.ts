@@ -156,7 +156,9 @@ export class AuthController {
       let profilePicture: string | undefined | null;
 
       if (profilePicturePath) {
-        profilePicture = await uploadToCloudinary(profilePicturePath);
+        const fullUrl = await uploadToCloudinary(profilePicturePath);
+        const baseUrl = process.env.CLOUDINARY_BASE_URL;
+        profilePicture = fullUrl.replace(baseUrl, '');
       } else if (req.body.iconUrl === '') {
         profilePicture = null;
       } else if (req.body.iconUrl !== undefined) {

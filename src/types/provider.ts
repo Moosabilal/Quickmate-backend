@@ -28,3 +28,17 @@ export interface IProviderRegisterRequest {
 
   averageChargeRange?: string;
 }
+
+export interface IProviderForAdminResponce {
+  userId: string
+  fullName: string;
+  phoneNumber: string;
+  email: string;
+  serviceId: string;
+  serviceArea: string;
+  profilePhoto: string;
+  status: string;
+  serviceName?: string;
+  serviceCategoryId?: string
+
+}
