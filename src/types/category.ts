@@ -56,7 +56,7 @@ export interface ICategoryFormCombinedData {
     status: boolean; 
     parentId?: string | null; 
 
-    commissionType: 'percentage' | 'flat' | 'none'; 
+    commissionType: 'percentage' | 'flatFee' | 'none'; 
     commissionValue: number | ''; 
     commissionStatus: boolean; 
 }

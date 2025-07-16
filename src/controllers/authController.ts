@@ -1,9 +1,7 @@
 
 import { inject, injectable } from 'inversify';
 import { Request, Response, NextFunction } from 'express';
-import { AuthService } from '../services/implementation/authService';
 import { IAuthService } from '../services/interface/IAuthService';
-// import { UserRepository } from '../repositories/implementation/userRepositories'; 
 import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../types/auth';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import TYPES from '../di/type';

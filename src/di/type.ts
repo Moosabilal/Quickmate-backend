@@ -7,6 +7,10 @@ const TYPES = {
     CategoryService: Symbol.for('CategoryService'),
     CategoryRepository: Symbol.for('CategoryRepository'),
     CommissionRuleRepository: Symbol.for('CommissionRuleRepository'),
+    ProviderController: Symbol.for('ProviderController'),
+    ProviderService: Symbol.for('ProviderService'),
+    ProviderRepository: Symbol.for('ProviderRepository')
+
 }
 
 export default TYPES

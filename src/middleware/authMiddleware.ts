@@ -5,7 +5,7 @@ interface AuthPayload {
   id: string;
   role: string
 }
-interface AuthRequest extends Request {
+export interface AuthRequest extends Request {
   user?: AuthPayload;
 }
 
@@ -20,6 +20,7 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
     req.user = decoded as AuthPayload;
+
     next();
   } catch (error) {
     res.status(401).json({ message: 'Access token invalid or expired' });
@@ -30,6 +31,7 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
 
 export const authorizeRoles = (roles: string[]) => {
   return (req: AuthRequest, res: Response, next: NextFunction): void => { 
+    
     if (!req.user) {
       res.status(401).json({ message: 'User not authenticated for role check.' });
       return; 

@@ -31,9 +31,7 @@ export class AuthService implements IAuthService {
 
 
         if (user && user.isVerified) {
-            const error = new Error('User with this email already exists and is verified.');
-            (error as any).statusCode = 400;
-            throw error;
+            throw new CustomError('User with this email already exists and is verified.', 400);
         }
 
         if (!user) {
@@ -45,13 +43,16 @@ export class AuthService implements IAuthService {
             user.isVerified = false;
         }
 
-        const otp = generateOTP();
-        user.registrationOtp = otp;
-        user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
-        user.registrationOtpAttempts = 0;
-        await this.userRepository.update(user);
+        
+        if(role === "Customer" && role !== null){
+            const otp = generateOTP();
+            user.registrationOtp = otp;
+            user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
+            user.registrationOtpAttempts = 0;
+            await this.userRepository.update(user);
 
-        await sendVerificationEmail(email, otp);
+            await sendVerificationEmail(email, otp);
+        }
 
         return {
             message: 'Registration successful! An OTP has been sent to your email for verification.',

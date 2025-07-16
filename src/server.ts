@@ -10,6 +10,7 @@ import { rateLimiter } from './middleware/rateLimiter';
 import connectDB from './config/database';
 import path from 'path';
 import categoryRoutes from './routes/categoryRoutes'
+import providerRoutes from './routes/providerRoute'
 import fs from 'fs';
 import { CustomError } from './utils/CustomError';
 import { errorHandler } from './middleware/errorHandler';
@@ -38,7 +39,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser()) 
-app.use(rateLimiter);
+// app.use(rateLimiter);
 
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
@@ -46,6 +47,7 @@ app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/provider', providerRoutes)
 
 app.use((req, res, next) => {
   const error = new CustomError(`Not Found - ${req.originalUrl}`, 404)

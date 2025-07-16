@@ -1,4 +1,4 @@
-import { ICategoryInput, ICategoryResponse, ICommissionRuleResponse } from '../../types/category';
+import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleResponse } from '../../types/category';
 import { ServiceCommissionRuleInput } from '../implementation/categoryService';
 
 
@@ -15,7 +15,7 @@ export interface ICategoryService {
     updateManySubcategoriesStatus(parentCategoryId: string, status: boolean): Promise<void>
     getCategoryById(categoryId: string): Promise<{ category: ICategoryResponse; commissionRule?: ICommissionRuleResponse | null }>
     getAllTopLevelCategoriesWithDetails(): Promise<Array<ICategoryResponse>>
-    getAllSubcategories(parentId: string): Promise<ICategoryResponse[]>
+    getAllSubcategories(parentId: string): Promise<ICategoryFormCombinedData[]>
     deleteCategory(categoryId: string): Promise<ICategoryResponse>
     
 }
