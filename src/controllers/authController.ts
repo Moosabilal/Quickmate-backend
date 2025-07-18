@@ -175,7 +175,12 @@ export class AuthController {
 
   public getUserWithRelated = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const userWithDetails = await this.authService.getUserWithAllDetails();
+
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+      const search = (req.query.search as string) || '';
+      const status = req.query.status as string || "All"
+      const userWithDetails = await this.authService.getUserWithAllDetails(page, limit, search, status);
       res.status(200).json(userWithDetails);
     } catch (error) {
       next(error);

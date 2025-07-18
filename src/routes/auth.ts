@@ -8,7 +8,7 @@ import { authenticateToken, authorizeRoles } from '../middleware/authMiddleware'
 const router = express.Router();
 const authController = container.get<AuthController>(TYPES.AuthController)
 
-const isUser = [authenticateToken, authorizeRoles(['Customer','Provider'])];
+const isUser = [authenticateToken, authorizeRoles(['Customer','ServiceProvider'])];
 
 router.post('/register',authController.register);
 router.post('/login',  authController.login);

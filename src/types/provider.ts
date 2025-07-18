@@ -30,6 +30,7 @@ export interface IProviderRegisterRequest {
 }
 
 export interface IProviderForAdminResponce {
+  id: string
   userId: string
   fullName: string;
   phoneNumber: string;
@@ -40,5 +41,14 @@ export interface IProviderForAdminResponce {
   status: string;
   serviceName?: string;
   serviceCategoryId?: string
+
+}
+
+export interface IFeaturedProviders {
+  id: string;
+  userId: string;
+  fullName: string;
+  profilePhoto: string;
+  serviceName: string;
 
 }

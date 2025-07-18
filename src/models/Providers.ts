@@ -32,6 +32,11 @@ const ProviderSchema = new Schema({
         ref: 'Category',
         required: true,
     },
+    serviceName: {
+        type: String,
+        required: false,
+        trim: true,
+    },
     serviceLocation: {
         type: String,
         required: true,
@@ -68,8 +73,8 @@ const ProviderSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['active', 'suspended', 'pending', 'rejected'],
-        default: 'pending',
+        enum: ['Active', 'Suspended', 'Pending', 'Rejected'],
+        default: 'Pending',
     },
     totalBookings: {
         type: Number,

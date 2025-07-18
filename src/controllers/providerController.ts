@@ -22,15 +22,17 @@ export class ProviderController {
                 businessCertifications?: Express.Multer.File[];
             };
 
+            const _userId = req.user?.id
+
             const aadhaar = files?.aadhaarIdProof?.[0];
             const profile = files?.profilePhoto?.[0];
             const certification = files?.businessCertifications?.[0];
 
             const baseUrl = process.env.CLOUDINARY_BASE_URL;
 
-            const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl,'') : '';
-            const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl,'') : '';
-            const certificationUrl = certification ? (await uploadToCloudinary(certification.path)).replace(baseUrl,'') : '';
+            const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '') : '';
+            const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '') : '';
+            const certificationUrl = certification ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '') : '';
 
             const formData = {
                 ...req.body,
@@ -67,13 +69,25 @@ export class ProviderController {
 
     public getProvidersforAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const providersDetails = await this.providerService.providersForAdmin();
-            console.log('called')
+            const page = parseInt(req.query.page as string) || 1;
+            const limit = parseInt(req.query.limit as string) || 10;
+            const search = (req.query.search as string) || '';
+            const status = req.query.status as string || "All"
+            const providersDetails = await this.providerService.providersForAdmin(page, limit, search, status);
             res.status(200).json(providersDetails);
         } catch (error) {
-            console.log('error',error)
             next(error);
         }
+    }
+
+    public featuredProviders = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const getFeaturedProviders = await this.providerService.getFeaturedProviders()
+            res.status(200).json(getFeaturedProviders)
+        } catch (error) {
+            next(error);
+        }
+        
     }
 
 }

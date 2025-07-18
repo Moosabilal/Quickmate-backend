@@ -385,4 +385,18 @@ export class CategoryController {
       next(error);
     }
   };
+
+  getSubCategories = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+      const search = (req.query.search as string) || ''
+      const allSubCategories = await this.categoryService.getSubcategories(page, limit, search)
+      console.log('thei subcatghoris', allSubCategories)
+      res.status(200).json(allSubCategories)
+    } catch (error) {
+      console.log('the roro', error)
+      next(error)
+    }
+  }
 }

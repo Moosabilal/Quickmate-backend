@@ -1,6 +1,6 @@
 import { CategoryRepository } from '../../repositories/implementation/categoryRepository';
 import { CommissionRuleRepository } from '../../repositories/implementation/commissionRuleRepository';
-import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse } from '../../types/category';
+import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse, IserviceResponse } from '../../types/category';
 import { ICategory } from '../../models/Categories';
 import { Types } from 'mongoose';
 import { inject, injectable } from 'inversify';
@@ -270,11 +270,11 @@ export class CategoryService implements ICategoryService {
                     }
                     mappedSubCategoryForFrontend.commissionStatus = commissionRuleDoc.status ?? false;
                 }
-                return {...mappedSubCategoryForFrontend};
+                return { ...mappedSubCategoryForFrontend };
             })
         );
         return subcategoriesWithRule
-         
+
     }
 
 
@@ -307,5 +307,34 @@ export class CategoryService implements ICategoryService {
             }
         }
         return deletedCategoryDoc.toJSON() as unknown as ICategoryResponse;
+    }
+
+    async getSubcategories(page: number, limit: number, search: string): Promise<{
+        allServices: IserviceResponse[];
+        total: number;
+        totalPages: number;
+        currentPage: number
+    }> {
+        const skip = (page - 1) * limit;
+        const filter: any = {
+            name: { $regex: search, $options: 'i' },
+            parentId:{ $ne:null }}
+        const services = await this.categoryRepository.findAllSubCategories(filter, skip, limit);
+        const total = await this.categoryRepository.countOfSubCategories(filter)
+        const featuredServices = services.map(service => {
+            return {
+                id: service._id.toString(),
+                name: service.name,
+                iconUrl: service.iconUrl,
+                parentId: service.parentId.toString()
+            }
+
+        })
+        return {
+            allServices: featuredServices,
+            total,
+            totalPages: Math.ceil(total / limit),
+            currentPage: page,
+        }
     }
 }

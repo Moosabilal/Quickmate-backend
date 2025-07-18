@@ -12,14 +12,13 @@ const categoryController = container.get<CategoryController>(TYPES.CategoryContr
 const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
 
 
-
+router.get('/', categoryController.getAllCategories); 
 router.post('/', isAdmin, upload.single('categoryIcon'), categoryController.createCategory);
+router.get('/getAllSubCategories', categoryController.getSubCategories)
+
 router.put('/:id', isAdmin, upload.single('categoryIcon'), categoryController.updateCategory);
 
 router.get('/:id', isAdmin, categoryController.getCategoryById);
-
-router.get('/', categoryController.getAllCategories); 
-
 
 
 

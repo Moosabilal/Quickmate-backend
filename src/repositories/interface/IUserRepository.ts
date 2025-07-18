@@ -9,5 +9,7 @@ export interface IUserRepository {
   findAllUsers(): Promise<IUserDocument[]>; 
 
   findByPasswordResetToken(token: string): Promise<IUserDocument | null>;
+  findUsersWithFilter(filter: any, skip: number, limit: number): Promise<IUserDocument[]>
+  countUsers(filter: any): Promise<number>
 
 }

@@ -1,11 +1,12 @@
 import { IProvider } from "../../models/Providers";
-import { IProviderForAdminResponce } from "../../types/provider";
+import { IFeaturedProviders, IProviderForAdminResponce } from "../../types/provider";
 
 
 export interface IProviderService {
     registerProvider(data: IProvider): Promise<{email: string, message: string}>;
     getProviderWithAllDetails(): Promise<IProvider[]>;
-    providersForAdmin(): Promise<IProviderForAdminResponce[]>
+    providersForAdmin(page: number, limit: number, search: string, status: string): Promise<{data:IProviderForAdminResponce[], total: number, totalPages: number, currentPage: number}> ;
+    getFeaturedProviders(): Promise<IFeaturedProviders[]>
 
 
 }

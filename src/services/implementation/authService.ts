@@ -20,8 +20,8 @@ const PASSWORD_RESET_EXPIRY_MINUTES = parseInt(process.env.PASSWORD_RESET_EXPIRY
 export class AuthService implements IAuthService {
     private userRepository: IUserRepository;
 
-    constructor(@inject(TYPES.UserRepository) userRepository: IUserRepository){
-      this.userRepository = userRepository
+    constructor(@inject(TYPES.UserRepository) userRepository: IUserRepository) {
+        this.userRepository = userRepository
     }
 
     public async registerUser(data: RegisterRequestBody): Promise<{ message: string; email: string }> {
@@ -43,8 +43,8 @@ export class AuthService implements IAuthService {
             user.isVerified = false;
         }
 
-        
-        if(role === "Customer" && role !== null){
+
+        if (role === "Customer" && role !== null) {
             const otp = generateOTP();
             user.registrationOtp = otp;
             user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
@@ -151,17 +151,17 @@ export class AuthService implements IAuthService {
 
         if (!user.isVerified) {
             throw new CustomError('Account not verified. Please verify your email or contact admin.', 403);
-            
+
         }
 
         const isMatch = await bcrypt.compare(password, String(user.password));
         if (!isMatch) {
             throw new CustomError('Invalid credentials.', 401);
-            
+
         }
 
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d'})
+        const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
 
         user.refreshToken = refreshToken
         await this.userRepository.update(user)
@@ -228,7 +228,7 @@ export class AuthService implements IAuthService {
         return { message: 'Your password has been reset successfully.' };
     }
 
-    public async googleAuthLogin(token: string): Promise<{user: { id: string; name: string; email: string; role: string };token: string;refreshToken: string;}> {
+    public async googleAuthLogin(token: string): Promise<{ user: { id: string; name: string; email: string; role: string }; token: string; refreshToken: string; }> {
         const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
         const ticket = await client.verifyIdToken({
             idToken: token,
@@ -275,9 +275,9 @@ export class AuthService implements IAuthService {
         }
 
 
-        const jwtToken = jwt.sign({ id: user._id, role: user.role },process.env.JWT_SECRET,{ expiresIn: '1h' });
+        const jwtToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d'})
+        const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
 
         user.refreshToken = refreshToken
         await this.userRepository.update(user)
@@ -294,26 +294,26 @@ export class AuthService implements IAuthService {
         };
     }
 
-    public async createRefreshToken(refresh_token: string): Promise<{newToken: string}> {
+    public async createRefreshToken(refresh_token: string): Promise<{ newToken: string }> {
         try {
-            const decoded = jwt.verify(refresh_token,process.env.REFRESH_TOKEN_SECRET as string) as JwtPayload & { id: string };
+            const decoded = jwt.verify(refresh_token, process.env.REFRESH_TOKEN_SECRET as string) as JwtPayload & { id: string };
 
             const user = await this.userRepository.findById(decoded.id);
             if (!user || user.refreshToken !== refresh_token) {
-            throw new CustomError('Refresh token not found in database. Please re-login', 403);
+                throw new CustomError('Refresh token not found in database. Please re-login', 403);
             }
-            const newToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET as string,{ expiresIn: '1h' });
+            const newToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
             return { newToken };
         } catch (err) {
-            throw new CustomError('Refresh token invalid or expired. Please re-login',403);
-        
+            throw new CustomError('Refresh token invalid or expired. Please re-login', 403);
+
         }
     }
 
     public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }> {
 
         if (!token) {
-            throw new CustomError('service No token provided.',401);
+            throw new CustomError('service No token provided.', 401);
         }
         let decoded;
         try {
@@ -380,30 +380,61 @@ export class AuthService implements IAuthService {
         };
     }
 
-    public async getUserWithAllDetails(): Promise<Array<{
-        id: string;
-        name: string;
-        email: string;
-        role: string;
-        isVerified: boolean;
-        profilePicture?: string;
-    }>> {
-        const users = await this.userRepository.findAllUsers();
+    public async getUserWithAllDetails(page: number, limit: number, search: string, status: string): Promise<{
+        users: Array<{
+            id: string;
+            name: string;
+            email: string;
+            role: string;
+            isVerified: boolean;
+            profilePicture?: string;
+        }>;
+        total: number;
+        totalPages: number;
+        currentPage: number;
+    }> {
+        const skip = (page - 1) * limit;
 
-        if (!users || users.length === 0) {
-            const error = new Error('No users found.');
-            (error as any).statusCode = 404;
-            throw error;
+        const filter: any = {
+            $or: [
+                { name: { $regex: search, $options: 'i' } },
+                { email: { $regex: search, $options: 'i' } },
+            ],
+        };
+
+        if (status && status !== 'All') {
+            if (status === 'Active') {
+                filter.isVerified = true;
+            } else if (status === 'Inactive') {
+                filter.isVerified = false;
+            }
         }
 
-        return users.map(user => ({
-            id: (user._id as { toString(): string }).toString(),
+        const [users, total] = await Promise.all([
+            this.userRepository.findUsersWithFilter(filter, skip, limit),
+            this.userRepository.countUsers(filter),
+        ]);
+
+        if (!users || users.length === 0) {
+            throw new CustomError('No users found.',404);
+            
+        }
+
+        const mappedUsers = users.map(user => ({
+            id: user._id.toString(),
             name: user.name as string,
             email: user.email as string,
             role: typeof user.role === 'string' ? user.role : 'Customer',
             isVerified: Boolean(user.isVerified),
             profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
         }));
+
+        return {
+            users: mappedUsers,
+            total,
+            totalPages: Math.ceil(total / limit),
+            currentPage: page,
+        };
     }
 
     public async updateUser(id: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }> {
@@ -440,7 +471,7 @@ export class AuthService implements IAuthService {
             const user = await this.userRepository.findById(decoded.id);
 
             if (user && user.refreshToken === refreshToken) {
-                user.refreshToken = null; 
+                user.refreshToken = null;
                 await this.userRepository.update(user);
                 return { message: 'Logged out successfully and refresh token invalidated.' };
             } else {

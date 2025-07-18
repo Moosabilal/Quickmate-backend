@@ -26,42 +26,19 @@ export class ProviderRepository implements IProviderRepository {
     }
 
     async getAllProviders(): Promise<IProvider[]> {
-        return Provider.find();
+        return Provider.find({});
     }
 
-    async getProvidersForAdmin(): Promise<IProviderForAdminResponce[]> {
-        const data = await Provider.aggregate([
-            {
-                $lookup: {
-                    from: 'categories', // 🔧 corrected collection name
-                    localField: 'serviceId',
-                    foreignField: '_id',
-                    as: 'services',
-                },
-            },
-            {
-                $unwind: {
-                    path: '$services',
-                    preserveNullAndEmptyArrays: true, // Optional: keep provider even if no matching category
-                },
-            },
-            {
-                $project: {
-                    userId: 1,
-                    fullName: 1,
-                    phoneNumber: 1,
-                    email: 1,
-                    serviceId: 1,
-                    serviceArea: 1,
-                    profilePhoto: 1,
-                    status: 1,
-                    serviceName: '$services.name', // 👈 simplified access
-                    serviceCategoryId: '$services._id',
-                },
-            },
-        ]);
-
-        console.log('this isthe data', data)
-        return data
+    async findProvidersWithFilter(filter: any, skip: number, limit: number): Promise<IProvider[]> {
+        return await Provider.find(filter)
+            .skip(skip)
+            .limit(limit)
+            .sort({ createdAt: -1 });
     }
+
+    async countProviders(filter: any): Promise<number> {
+        return await Provider.countDocuments(filter);
+    }
+
+
 }
