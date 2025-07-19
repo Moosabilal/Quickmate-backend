@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { IUserRepository } from '../../repositories/interface/IUserRepository';
 import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../../types/auth';
 import { generateOTP } from '../../utils/otpGenerator';
-import { sendVerificationEmail, sendPasswordResetEmail } from '../../utils/emailService';
+import { sendVerificationEmail, sendPasswordResetEmail, sendContactUsEmail  } from '../../utils/emailService';
 import bcrypt from 'bcryptjs';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import crypto from 'crypto';
@@ -309,6 +309,16 @@ export class AuthService implements IAuthService {
 
         }
     }
+
+    public async sendSubmissionEmail(name: string, email: string, message: string): Promise<{message: string}> {
+        try {
+            await sendContactUsEmail(name, email, message)
+            return { message: "Email sent successfully"}
+        } catch (error) {
+            throw new Error("Failed to send email")
+        }
+    }
+
 
     public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }> {
 

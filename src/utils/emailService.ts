@@ -62,4 +62,25 @@ export const sendPasswordResetEmail = async (to: string, resetLink: string) => {
     console.error(`Error sending password reset email to ${to}:`, error);
     throw new Error('Failed to send password reset email.');
   }
+
 };
+
+export const sendContactUsEmail = async (name: string, email: string , message: string) => {
+  const mailOptions = {
+    from: `"${name}" <${email}>`,
+    to: process.env.RECEIVER_EMAIL,
+    subject: 'New Contact Form Submission',
+    text: message,
+    html: `<p><strong>Name:</strong> ${name}</p>
+           <p><strong>Email:</strong> ${email}</p>
+           <p><strong>Message:</strong><br/>${message}</p>`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('Email received from the customer ')
+  } catch (err) {
+    console.error('Error sending email:', err);
+    throw new Error('Failed to send email' );
+  }
+}

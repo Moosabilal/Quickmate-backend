@@ -3,10 +3,15 @@ import { IFeaturedProviders, IProviderForAdminResponce } from "../../types/provi
 
 
 export interface IProviderService {
-    registerProvider(data: IProvider): Promise<{email: string, message: string}>;
+    registerProvider(data: IProvider): Promise<{ email: string, message: string }>;
     getProviderWithAllDetails(): Promise<IProvider[]>;
-    providersForAdmin(page: number, limit: number, search: string, status: string): Promise<{data:IProviderForAdminResponce[], total: number, totalPages: number, currentPage: number}> ;
-    getFeaturedProviders(): Promise<IFeaturedProviders[]>
+    providersForAdmin(page: number, limit: number, search: string, status: string): Promise<{ data: IProviderForAdminResponce[], total: number, totalPages: number, currentPage: number }>;
+    getFeaturedProviders(page: number, limit: number, search: string): Promise<{
+        providers: IFeaturedProviders[],
+        total: number;
+        totalPages: number;
+        currentPage: number;
+    }>
 
 
 }

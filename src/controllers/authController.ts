@@ -5,6 +5,7 @@ import { IAuthService } from '../services/interface/IAuthService';
 import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../types/auth';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import TYPES from '../di/type';
+import { AuthRequest } from '../middleware/authMiddleware';
 
 @injectable()
 export class AuthController {
@@ -134,6 +135,16 @@ export class AuthController {
 
     } catch (error) {
       next(error)
+    }
+  }
+
+  public contactUsEmail = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const {name, email, message} = req.body
+      const response = await this.authService.sendSubmissionEmail(name, email, message);
+      res.status(200).json(response);
+    } catch (error) {
+      next(error);
     }
   }
 

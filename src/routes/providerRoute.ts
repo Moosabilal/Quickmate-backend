@@ -16,6 +16,7 @@ router.post('/register',authenticateToken, upload.fields([{ name: 'aadhaarIdProo
     { name: 'businessCertifications', maxCount: 1 },]), providerController.register)
 router.get('/getFeaturedProviders', providerController.featuredProviders)
 
+
 // admin
 router.get('/getAllProviders', providerController.getAllProvidersList)
 router.get('/getProviderList', providerController.getProvidersforAdmin)

@@ -102,8 +102,17 @@ export class ProviderService implements IProviderService {
         };
     }
 
-    public async getFeaturedProviders(): Promise<IFeaturedProviders[]> {
-        const providers = await this.providerRepository.getAllProviders();
+    public async getFeaturedProviders(page: number, limit: number, search: string): Promise<{providers: IFeaturedProviders[],total: number, totalPages: number, currentPage: number}> {
+        const skip = (page - 1) * limit;
+
+        const filter: any = {
+            $or: [
+                {fullName: { $regex: search, $options: 'i'}},
+                {serviceName: { $regex: search, $options: 'i'}},
+            ]
+        }
+        const providers = await this.providerRepository.findProvidersWithFilter(filter, skip, limit);
+        const total = await this.providerRepository.countProviders(filter)
 
         const featuredProviders =  providers.map(provider => ({
             id: provider._id.toString(),
@@ -114,7 +123,12 @@ export class ProviderService implements IProviderService {
 
         }))
 
-        return featuredProviders
+        return {
+            providers: featuredProviders,
+            total,
+            totalPages: Math.ceil(total / limit),
+            currentPage: page
+        }
     }
 
 

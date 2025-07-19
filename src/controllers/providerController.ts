@@ -82,12 +82,15 @@ export class ProviderController {
 
     public featuredProviders = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const getFeaturedProviders = await this.providerService.getFeaturedProviders()
+            const page = parseInt(req.query.page as string) || 1;
+            const limit = parseInt(req.query.limit as string) || 10;
+            const search = (req.query.search as string) || '';
+            const getFeaturedProviders = await this.providerService.getFeaturedProviders(page, limit, search)
             res.status(200).json(getFeaturedProviders)
         } catch (error) {
             next(error);
         }
-        
+
     }
 
 }

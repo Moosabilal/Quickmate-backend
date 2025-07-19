@@ -392,10 +392,9 @@ export class CategoryController {
       const limit = parseInt(req.query.limit as string) || 10;
       const search = (req.query.search as string) || ''
       const allSubCategories = await this.categoryService.getSubcategories(page, limit, search)
-      console.log('thei subcatghoris', allSubCategories)
       res.status(200).json(allSubCategories)
     } catch (error) {
-      console.log('the roro', error)
+      console.log('the error', error)
       next(error)
     }
   }
