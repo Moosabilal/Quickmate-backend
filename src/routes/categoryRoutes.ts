@@ -18,7 +18,7 @@ router.get('/getAllSubCategories', categoryController.getSubCategories)
 
 router.put('/:id', isAdmin, upload.single('categoryIcon'), categoryController.updateCategory);
 
-router.get('/:id', isAdmin, categoryController.getCategoryById);
+router.get('/:id', categoryController.getCategoryById);
 
 
 
