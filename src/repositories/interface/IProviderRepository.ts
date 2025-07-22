@@ -7,4 +7,5 @@ export interface IProviderRepository {
     getAllProviders(): Promise<IProvider[]>;
     findProvidersWithFilter(filter: any, skip: number, limit: number): Promise<IProvider[]>;
     countProviders(filter: any): Promise<number>;
+    getProviderByUserid(userId: string);
 }

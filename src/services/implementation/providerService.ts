@@ -102,6 +102,12 @@ export class ProviderService implements IProviderService {
         };
     }
 
+    public async fetchProviderById(userId: string): Promise<IProvider> {
+        const provider = await this.providerRepository.getProviderByUserid(userId)
+        console.log('the response in service', provider)
+        return provider
+    }
+
     public async getFeaturedProviders(page: number, limit: number, search: string): Promise<{providers: IFeaturedProviders[],total: number, totalPages: number, currentPage: number}> {
         const skip = (page - 1) * limit;
 

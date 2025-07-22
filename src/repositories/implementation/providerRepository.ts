@@ -25,6 +25,13 @@ export class ProviderRepository implements IProviderRepository {
 
     }
 
+    async getProviderByUserid(userId: string) {
+        const data =  Provider.find({userId: userId})
+        console.log('the backen dat', data)
+        return data
+        
+    }
+
     async getAllProviders(): Promise<IProvider[]> {
         return Provider.find({});
     }

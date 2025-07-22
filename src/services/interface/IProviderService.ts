@@ -11,7 +11,8 @@ export interface IProviderService {
         total: number;
         totalPages: number;
         currentPage: number;
-    }>
+    }>;
+    fetchProviderById(userId: string): Promise<IProvider>;
 
 
 }

@@ -67,6 +67,18 @@ export class ProviderController {
         }
     }
 
+    public getProviderById = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.params.userId
+            console.log('userId is reaching to  backdne', userId)
+            const provider = await this.providerService.fetchProviderById(userId)
+            console.log('the category response', provider)
+            res.json(200).json(provider)
+        } catch (error) {
+            next(error);
+        }
+    }
+
     public getProvidersforAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const page = parseInt(req.query.page as string) || 1;
