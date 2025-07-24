@@ -47,6 +47,7 @@ export class AuthController {
       })
       res.status(200).json(result);
     } catch (error) {
+      console.log('the error is comign', error)
       next(error);
     }
   }

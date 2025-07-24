@@ -18,6 +18,11 @@ import { ProviderController } from '../controllers/providerController';
 import { ProviderService } from '../services/implementation/providerService';
 import { IProviderRepository } from '../repositories/interface/IProviderRepository';
 import { ProviderRepository } from '../repositories/implementation/providerRepository';
+import { AddressController } from '../controllers/addressController';
+import { IAddressService } from '../services/interface/IAddressService';
+import { AddressService } from '../services/implementation/AddressService';
+import { IAddressRepository } from '../repositories/interface/IAddressRepository';
+import { AddressRepository } from '../repositories/implementation/addressRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -32,5 +37,9 @@ container.bind<ICommissionRuleRepository>(TYPES.CommissionRuleRepository).to(Com
 container.bind<ProviderController>(TYPES.ProviderController).to(ProviderController)
 container.bind<IProviderService>(TYPES.ProviderService).to(ProviderService)
 container.bind<IProviderRepository>(TYPES.ProviderRepository).to(ProviderRepository)
+
+container.bind<AddressController>(TYPES.AddressController).to(AddressController);
+container.bind<IAddressService>(TYPES.AddressService).to(AddressService);
+container.bind<IAddressRepository>(TYPES.AddressRepository).to(AddressRepository)
 
 export {container}

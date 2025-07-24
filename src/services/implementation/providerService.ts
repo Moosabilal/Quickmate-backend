@@ -3,8 +3,9 @@ import { IProviderRepository } from "../../repositories/interface/IProviderRepos
 import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import { IProvider } from "../../models/Providers";
-import { IFeaturedProviders, IProviderForAdminResponce } from "../../types/provider";
+import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from "../../types/provider";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
+import jwt, { JwtPayload } from 'jsonwebtoken'
 
 @injectable()
 export class ProviderService implements IProviderService {
@@ -18,14 +19,50 @@ export class ProviderService implements IProviderService {
         this.categoryRepository = categoryRepository
     }
 
-    public async registerProvider(data: IProvider): Promise<{ email: string; message: string }> {
+    public async registerProvider(data: IProvider): Promise<IProviderProfile> {
         const savedProvider = await this.providerRepository.createProvider(data);
 
         return {
+            id: savedProvider._id.toString(),
+            userId: savedProvider.userId.toString(),
+            fullName: savedProvider.fullName,
+            phoneNumber: savedProvider.phoneNumber,
             email: savedProvider.email,
-            message: 'Provider registered successfully',
-        };
+            serviceId: savedProvider.serviceId.toString(),
+            serviceLocation: savedProvider.serviceLocation,
+            serviceArea: savedProvider.serviceArea,
+            profilePhoto: savedProvider.profilePhoto,
+            status: savedProvider.status,
+            experience: savedProvider.experience,
+            timeSlot: savedProvider.timeSlot,
+            verificationDocs: savedProvider.verificationDocs,
+            availableDays: savedProvider.availableDays
+
+        }
     }
+
+    public async updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile> {
+        const updatedProvider = await this.providerRepository.updateProvider(updateData)
+        return {
+            id: updatedProvider._id.toString(),
+            userId: updatedProvider.userId.toString(),
+            fullName: updatedProvider.fullName,
+            phoneNumber: updatedProvider.phoneNumber,
+            email: updatedProvider.email,
+            serviceId: updatedProvider.serviceId.toString(),
+            serviceLocation: updatedProvider.serviceLocation,
+            serviceArea: updatedProvider.serviceArea,
+            profilePhoto: updatedProvider.profilePhoto,
+            status: updatedProvider.status,
+            experience: updatedProvider.experience,
+            timeSlot: updatedProvider.timeSlot,
+            verificationDocs: updatedProvider.verificationDocs,
+            availableDays: updatedProvider.availableDays
+
+        }
+
+    }
+
 
     public async getProviderWithAllDetails(): Promise<IProvider[]> {
         return this.providerRepository.getAllProviders();
@@ -57,9 +94,9 @@ export class ProviderService implements IProviderService {
                 filter.status = "Active";
             } else if (status === 'Rejected') {
                 filter.status = "Rejected";
-            } else if(status === "Suspended"){
+            } else if (status === "Suspended") {
                 filter.status = "Suspended";
-            } else if(status === "Pending"){
+            } else if (status === "Pending") {
                 filter.status = "Pending"
             }
         }
@@ -102,25 +139,52 @@ export class ProviderService implements IProviderService {
         };
     }
 
-    public async fetchProviderById(userId: string): Promise<IProvider> {
-        const provider = await this.providerRepository.getProviderByUserid(userId)
-        console.log('the response in service', provider)
-        return provider
+    public async fetchProviderById(token: string): Promise<IProviderProfile> {
+        if (!token) {
+            const error = new Error('service No token provided.');
+            (error as any).statusCode = 401;
+            throw error;
+        }
+        let decoded: JwtPayload;
+        try {
+            decoded = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
+        } catch (error) {
+            throw new Error('Invalid token.');
+        }
+        
+        const provider = await this.providerRepository.getProviderByUserId(decoded.id)
+        return {
+            id: provider._id.toString(),
+            userId: provider.userId.toString(),
+            fullName: provider.fullName,
+            phoneNumber: provider.phoneNumber,
+            email: provider.email,
+            serviceId: provider.serviceId.toString(),
+            serviceLocation: provider.serviceLocation,
+            serviceArea: provider.serviceArea,
+            profilePhoto: provider.profilePhoto,
+            status: provider.status,
+            experience: provider.experience,
+            timeSlot: provider.timeSlot,
+            verificationDocs: provider.verificationDocs,
+            availableDays: provider.availableDays
+
+        }
     }
 
-    public async getFeaturedProviders(page: number, limit: number, search: string): Promise<{providers: IFeaturedProviders[],total: number, totalPages: number, currentPage: number}> {
+    public async getFeaturedProviders(page: number, limit: number, search: string): Promise<{ providers: IFeaturedProviders[], total: number, totalPages: number, currentPage: number }> {
         const skip = (page - 1) * limit;
 
         const filter: any = {
             $or: [
-                {fullName: { $regex: search, $options: 'i'}},
-                {serviceName: { $regex: search, $options: 'i'}},
+                { fullName: { $regex: search, $options: 'i' } },
+                { serviceName: { $regex: search, $options: 'i' } },
             ]
         }
         const providers = await this.providerRepository.findProvidersWithFilter(filter, skip, limit);
         const total = await this.providerRepository.countProviders(filter)
 
-        const featuredProviders =  providers.map(provider => ({
+        const featuredProviders = providers.map(provider => ({
             id: provider._id.toString(),
             userId: provider.userId.toString(),
             fullName: provider.fullName,

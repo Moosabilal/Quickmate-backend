@@ -14,7 +14,9 @@ const isProvider = [authenticateToken, authorizeRoles(['Provider'])];
 
 router.post('/register',authenticateToken, upload.fields([{ name: 'aadhaarIdProof', maxCount: 1 },{ name: 'profilePhoto', maxCount: 1 },
     { name: 'businessCertifications', maxCount: 1 },]), providerController.register)
-router.get('/getProviderById/:userId', providerController.getProviderById)
+router.post('/updateProvider', authenticateToken, upload.fields([{ name: 'aadhaarIdProof', maxCount: 1 },{ name: 'profilePhoto', maxCount: 1 },
+    { name: 'businessCertifications', maxCount: 1 },]), providerController.updateProvider)
+router.get('/getProvider', providerController.getProvider)
 router.get('/getFeaturedProviders', providerController.featuredProviders)
 
 

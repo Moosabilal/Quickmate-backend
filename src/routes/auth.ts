@@ -20,7 +20,7 @@ router.post('/reset-password', authController.resetPassword);
 
 router.post('/google-login', authController.googleLogin);
 
-router.post('/refresh-token', authController.refreshToken)
+router.post('/refresh-token',isUser, authController.refreshToken)
 router.post('/contactUsSubmission', authController.contactUsEmail)
 
 

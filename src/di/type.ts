@@ -9,7 +9,10 @@ const TYPES = {
     CommissionRuleRepository: Symbol.for('CommissionRuleRepository'),
     ProviderController: Symbol.for('ProviderController'),
     ProviderService: Symbol.for('ProviderService'),
-    ProviderRepository: Symbol.for('ProviderRepository')
+    ProviderRepository: Symbol.for('ProviderRepository'),
+    AddressController: Symbol.for('AddressController'),
+    AddressService: Symbol.for('AddressService'),
+    AddressRepository: Symbol.for('AddressRepository'),
 
 }
 

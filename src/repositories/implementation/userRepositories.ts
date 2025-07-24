@@ -6,6 +6,12 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class UserRepository implements IUserRepository {
+
+  async create(userData: Partial<IUser>): Promise<IUserDocument> {
+    const user = new User(userData);
+    return await user.save();
+  }
+
   async findByEmail(email: string, includeOtpFields: boolean = false): Promise<IUserDocument | null> {
     let query = User.findOne<IUserDocument>({ email });
 
@@ -13,11 +19,6 @@ export class UserRepository implements IUserRepository {
       query = query.select('+registrationOtp +registrationOtpExpires +registrationOtpAttempts +password');
     }
     return await query.exec();
-  }
-
-  async create(userData: Partial<IUser>): Promise<IUserDocument> {
-    const user = new User(userData);
-    return await user.save();
   }
 
   async update(user: IUserDocument): Promise<IUserDocument> {

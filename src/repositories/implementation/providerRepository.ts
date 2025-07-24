@@ -1,7 +1,7 @@
 import { Category } from "../../models/Categories";
 import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
-import { IProviderForAdminResponce } from "../../types/provider";
+import { IProviderForAdminResponce, IProviderProfile } from "../../types/provider";
 import { IProviderRepository } from "../interface/IProviderRepository";
 
 
@@ -25,15 +25,20 @@ export class ProviderRepository implements IProviderRepository {
 
     }
 
-    async getProviderByUserid(userId: string) {
-        const data =  Provider.find({userId: userId})
-        console.log('the backen dat', data)
+    async updateProvider(updateData: Partial<IProviderProfile>): Promise<IProvider | null> {
+        const data = await Provider.findOneAndUpdate({ userId: updateData.userId }, updateData, { new: true });
+        return data
+
+    }
+
+    async getProviderByUserId(userId: string): Promise<IProvider | null> {
+        const data = await Provider.findOne({userId: userId})
         return data
         
     }
 
     async getAllProviders(): Promise<IProvider[]> {
-        return Provider.find({});
+        return await Provider.find({});
     }
 
     async findProvidersWithFilter(filter: any, skip: number, limit: number): Promise<IProvider[]> {

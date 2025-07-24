@@ -2,14 +2,14 @@ import { inject, injectable } from 'inversify';
 import { IUserRepository } from '../../repositories/interface/IUserRepository';
 import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../../types/auth';
 import { generateOTP } from '../../utils/otpGenerator';
-import { sendVerificationEmail, sendPasswordResetEmail, sendContactUsEmail  } from '../../utils/emailService';
+import { sendVerificationEmail, sendPasswordResetEmail, sendContactUsEmail } from '../../utils/emailService';
 import bcrypt from 'bcryptjs';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import crypto from 'crypto';
 import { OAuth2Client } from 'google-auth-library';
 import TYPES from '../../di/type';
 import { IAuthService } from '../interface/IAuthService';
-import { CustomError } from '../../utils/CustomError';
+
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
@@ -31,7 +31,9 @@ export class AuthService implements IAuthService {
 
 
         if (user && user.isVerified) {
-            throw new CustomError('User with this email already exists and is verified.', 400);
+            const error = new Error('User with this email already exists and is verified.');
+            (error as any).statusCode = 400;
+            throw error;
         }
 
         if (!user) {
@@ -146,17 +148,23 @@ export class AuthService implements IAuthService {
         const user = await this.userRepository.findByEmail(email, true);
 
         if (!user || !user.password) {
-            throw new CustomError('Invalid credentials.', 401);
+            const error = new Error('Invalid Credentails');
+            (error as any).statusCode = 401;
+            throw error;
         }
 
         if (!user.isVerified) {
-            throw new CustomError('Account not verified. Please verify your email or contact admin.', 403);
+            const error = new Error(`Account not verified. Please verify your email or contact admin.`);
+            (error as any).statusCode = 403;
+            throw error;
 
         }
 
         const isMatch = await bcrypt.compare(password, String(user.password));
         if (!isMatch) {
-            throw new CustomError('Invalid credentials.', 401);
+            const error = new Error('Invalid Credentails');
+            (error as any).statusCode = 401;
+            throw error;
 
         }
 
@@ -196,6 +204,7 @@ export class AuthService implements IAuthService {
         await this.userRepository.update(user);
 
         const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+        console.log('the reset linke', resetLink)
 
         await sendPasswordResetEmail(String(user.email), resetLink);
 
@@ -300,20 +309,24 @@ export class AuthService implements IAuthService {
 
             const user = await this.userRepository.findById(decoded.id);
             if (!user || user.refreshToken !== refresh_token) {
-                throw new CustomError('Refresh token not found in database. Please re-login', 403);
+                const error = new Error('Refresh token not found in database. Please re-login.');
+                (error as any).statusCode = 403;
+                throw error;
             }
             const newToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
             return { newToken };
         } catch (err) {
-            throw new CustomError('Refresh token invalid or expired. Please re-login', 403);
+            const error = new Error('Refresh token invalid or expired. Please re-login.');
+            (error as any).statusCode = 403;
+            throw error;
 
         }
     }
 
-    public async sendSubmissionEmail(name: string, email: string, message: string): Promise<{message: string}> {
+    public async sendSubmissionEmail(name: string, email: string, message: string): Promise<{ message: string }> {
         try {
             await sendContactUsEmail(name, email, message)
-            return { message: "Email sent successfully"}
+            return { message: "Email sent successfully" }
         } catch (error) {
             throw new Error("Failed to send email")
         }
@@ -323,13 +336,15 @@ export class AuthService implements IAuthService {
     public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }> {
 
         if (!token) {
-            throw new CustomError('service No token provided.', 401);
+            const error = new Error('service No token provided.');
+            (error as any).statusCode = 401;
+            throw error;
         }
-        let decoded;
+        let decoded: JwtPayload;
         try {
-            decoded = jwt.verify(token, process.env.JWT_SECRET);
+            decoded = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
         } catch (error) {
-            throw new CustomError('Invalid token.', 401);
+            throw new Error('Invalid token.');
         }
 
         const user = await this.userRepository.findById(decoded.id);
@@ -426,8 +441,10 @@ export class AuthService implements IAuthService {
         ]);
 
         if (!users || users.length === 0) {
-            throw new CustomError('No users found.',404);
-            
+            const error = new Error('User not found.');
+            (error as any).statusCode = 404;
+            throw error;
+
         }
 
         const mappedUsers = users.map(user => ({
