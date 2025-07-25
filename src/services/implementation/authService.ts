@@ -2,14 +2,14 @@ import { inject, injectable } from 'inversify';
 import { IUserRepository } from '../../repositories/interface/IUserRepository';
 import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../../types/auth';
 import { generateOTP } from '../../utils/otpGenerator';
-import { sendVerificationEmail, sendPasswordResetEmail } from '../../utils/emailService';
+import { sendVerificationEmail, sendPasswordResetEmail, sendContactUsEmail } from '../../utils/emailService';
 import bcrypt from 'bcryptjs';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import crypto from 'crypto';
 import { OAuth2Client } from 'google-auth-library';
 import TYPES from '../../di/type';
 import { IAuthService } from '../interface/IAuthService';
-import { CustomError } from '../../utils/CustomError';
+
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
@@ -20,8 +20,8 @@ const PASSWORD_RESET_EXPIRY_MINUTES = parseInt(process.env.PASSWORD_RESET_EXPIRY
 export class AuthService implements IAuthService {
     private userRepository: IUserRepository;
 
-    constructor(@inject(TYPES.UserRepository) userRepository: IUserRepository){
-      this.userRepository = userRepository
+    constructor(@inject(TYPES.UserRepository) userRepository: IUserRepository) {
+        this.userRepository = userRepository
     }
 
     public async registerUser(data: RegisterRequestBody): Promise<{ message: string; email: string }> {
@@ -31,7 +31,9 @@ export class AuthService implements IAuthService {
 
 
         if (user && user.isVerified) {
-            throw new CustomError('User with this email already exists and is verified.', 400);
+            const error = new Error('User with this email already exists and is verified.');
+            (error as any).statusCode = 400;
+            throw error;
         }
 
         if (!user) {
@@ -43,8 +45,8 @@ export class AuthService implements IAuthService {
             user.isVerified = false;
         }
 
-        
-        if(role === "Customer" && role !== null){
+
+        if (role === "Customer" && role !== null) {
             const otp = generateOTP();
             user.registrationOtp = otp;
             user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
@@ -146,22 +148,28 @@ export class AuthService implements IAuthService {
         const user = await this.userRepository.findByEmail(email, true);
 
         if (!user || !user.password) {
-            throw new CustomError('Invalid credentials.', 401);
+            const error = new Error('Invalid Credentails');
+            (error as any).statusCode = 401;
+            throw error;
         }
 
         if (!user.isVerified) {
-            throw new CustomError('Account not verified. Please verify your email or contact admin.', 403);
-            
+            const error = new Error(`Account not verified. Please verify your email or contact admin.`);
+            (error as any).statusCode = 403;
+            throw error;
+
         }
 
         const isMatch = await bcrypt.compare(password, String(user.password));
         if (!isMatch) {
-            throw new CustomError('Invalid credentials.', 401);
-            
+            const error = new Error('Invalid Credentails');
+            (error as any).statusCode = 401;
+            throw error;
+
         }
 
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d'})
+        const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
 
         user.refreshToken = refreshToken
         await this.userRepository.update(user)
@@ -196,6 +204,7 @@ export class AuthService implements IAuthService {
         await this.userRepository.update(user);
 
         const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+        console.log('the reset linke', resetLink)
 
         await sendPasswordResetEmail(String(user.email), resetLink);
 
@@ -228,7 +237,7 @@ export class AuthService implements IAuthService {
         return { message: 'Your password has been reset successfully.' };
     }
 
-    public async googleAuthLogin(token: string): Promise<{user: { id: string; name: string; email: string; role: string };token: string;refreshToken: string;}> {
+    public async googleAuthLogin(token: string): Promise<{ user: { id: string; name: string; email: string; role: string }; token: string; refreshToken: string; }> {
         const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
         const ticket = await client.verifyIdToken({
             idToken: token,
@@ -275,9 +284,9 @@ export class AuthService implements IAuthService {
         }
 
 
-        const jwtToken = jwt.sign({ id: user._id, role: user.role },process.env.JWT_SECRET,{ expiresIn: '1h' });
+        const jwtToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d'})
+        const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
 
         user.refreshToken = refreshToken
         await this.userRepository.update(user)
@@ -294,32 +303,48 @@ export class AuthService implements IAuthService {
         };
     }
 
-    public async createRefreshToken(refresh_token: string): Promise<{newToken: string}> {
+    public async createRefreshToken(refresh_token: string): Promise<{ newToken: string }> {
         try {
-            const decoded = jwt.verify(refresh_token,process.env.REFRESH_TOKEN_SECRET as string) as JwtPayload & { id: string };
+            const decoded = jwt.verify(refresh_token, process.env.REFRESH_TOKEN_SECRET as string) as JwtPayload & { id: string };
 
             const user = await this.userRepository.findById(decoded.id);
             if (!user || user.refreshToken !== refresh_token) {
-            throw new CustomError('Refresh token not found in database. Please re-login', 403);
+                const error = new Error('Refresh token not found in database. Please re-login.');
+                (error as any).statusCode = 403;
+                throw error;
             }
-            const newToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET as string,{ expiresIn: '1h' });
+            const newToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
             return { newToken };
         } catch (err) {
-            throw new CustomError('Refresh token invalid or expired. Please re-login',403);
-        
+            const error = new Error('Refresh token invalid or expired. Please re-login.');
+            (error as any).statusCode = 403;
+            throw error;
+
         }
     }
+
+    public async sendSubmissionEmail(name: string, email: string, message: string): Promise<{ message: string }> {
+        try {
+            await sendContactUsEmail(name, email, message)
+            return { message: "Email sent successfully" }
+        } catch (error) {
+            throw new Error("Failed to send email")
+        }
+    }
+
 
     public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }> {
 
         if (!token) {
-            throw new CustomError('service No token provided.',401);
+            const error = new Error('service No token provided.');
+            (error as any).statusCode = 401;
+            throw error;
         }
-        let decoded;
+        let decoded: JwtPayload;
         try {
-            decoded = jwt.verify(token, process.env.JWT_SECRET);
+            decoded = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
         } catch (error) {
-            throw new CustomError('Invalid token.', 401);
+            throw new Error('Invalid token.');
         }
 
         const user = await this.userRepository.findById(decoded.id);
@@ -370,8 +395,8 @@ export class AuthService implements IAuthService {
             user.profilePicture = data.profilePicture;
         }
 
-        await this.userRepository.update(user);
-
+        const updatedUser = await this.userRepository.update(user);
+        const {} = updatedUser
         return {
             id: (user._id as { toString(): string }).toString(),
             name: user.name as string,
@@ -380,30 +405,63 @@ export class AuthService implements IAuthService {
         };
     }
 
-    public async getUserWithAllDetails(): Promise<Array<{
-        id: string;
-        name: string;
-        email: string;
-        role: string;
-        isVerified: boolean;
-        profilePicture?: string;
-    }>> {
-        const users = await this.userRepository.findAllUsers();
+    public async getUserWithAllDetails(page: number, limit: number, search: string, status: string): Promise<{
+        users: Array<{
+            id: string;
+            name: string;
+            email: string;
+            role: string;
+            isVerified: boolean;
+            profilePicture?: string;
+        }>;
+        total: number;
+        totalPages: number;
+        currentPage: number;
+    }> {
+        const skip = (page - 1) * limit;
 
-        if (!users || users.length === 0) {
-            const error = new Error('No users found.');
-            (error as any).statusCode = 404;
-            throw error;
+        const filter: any = {
+            $or: [
+                { name: { $regex: search, $options: 'i' } },
+                { email: { $regex: search, $options: 'i' } },
+            ],
+        };
+
+        if (status && status !== 'All') {
+            if (status === 'Active') {
+                filter.isVerified = true;
+            } else if (status === 'Inactive') {
+                filter.isVerified = false;
+            }
         }
 
-        return users.map(user => ({
-            id: (user._id as { toString(): string }).toString(),
+        const [users, total] = await Promise.all([
+            this.userRepository.findUsersWithFilter(filter, skip, limit),
+            this.userRepository.countUsers(filter),
+        ]);
+
+        if (!users || users.length === 0) {
+            const error = new Error('User not found.');
+            (error as any).statusCode = 404;
+            throw error;
+
+        }
+
+        const mappedUsers = users.map(user => ({
+            id: user._id.toString(),
             name: user.name as string,
             email: user.email as string,
             role: typeof user.role === 'string' ? user.role : 'Customer',
             isVerified: Boolean(user.isVerified),
             profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
         }));
+
+        return {
+            users: mappedUsers,
+            total,
+            totalPages: Math.ceil(total / limit),
+            currentPage: page,
+        };
     }
 
     public async updateUser(id: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }> {
@@ -440,7 +498,7 @@ export class AuthService implements IAuthService {
             const user = await this.userRepository.findById(decoded.id);
 
             if (user && user.refreshToken === refreshToken) {
-                user.refreshToken = null; 
+                user.refreshToken = null;
                 await this.userRepository.update(user);
                 return { message: 'Logged out successfully and refresh token invalidated.' };
             } else {

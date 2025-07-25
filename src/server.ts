@@ -11,6 +11,7 @@ import connectDB from './config/database';
 import path from 'path';
 import categoryRoutes from './routes/categoryRoutes'
 import providerRoutes from './routes/providerRoute'
+import addressRoutes from './routes/address'
 import fs from 'fs';
 import { CustomError } from './utils/CustomError';
 import { errorHandler } from './middleware/errorHandler';
@@ -47,7 +48,8 @@ app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
-app.use('/api/provider', providerRoutes)
+app.use('/api/provider', providerRoutes);
+app.use('/api/address', addressRoutes)
 
 app.use((req, res, next) => {
   const error = new CustomError(`Not Found - ${req.originalUrl}`, 404)

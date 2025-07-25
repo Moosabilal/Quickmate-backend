@@ -50,6 +50,10 @@ export class CategoryRepository implements ICategoryRepository {
         return Category.find({ parentId: { $ne: null} }).exec();
     }
 
+    async getAllCategories(): Promise<ICategory[]> {
+        return Category.find({})
+    }
+
 
     async update(id: string | Types.ObjectId, updateData: Partial<ICategoryInput>): Promise<ICategory | null> {
         const dataToUpdate = { ...updateData };
@@ -78,6 +82,14 @@ export class CategoryRepository implements ICategoryRepository {
     async updateSubcategoriesStatus(parentId: string | Types.ObjectId, status: boolean): Promise<void> {
         const parentObjectId = typeof parentId === 'string' ? new Types.ObjectId(parentId) : parentId;
         await Category.updateMany({ parentId: parentObjectId }, { status }).exec();
+    }
+
+    async findAllSubCategories(filter: any, skip: number, limit: number): Promise<ICategory[]> {
+        return await Category.find(filter).skip(skip).limit(limit).exec()
+    }
+
+    async countOfSubCategories(filter: any): Promise<number> {
+        return await Category.countDocuments(filter).exec()
     }
 
 }

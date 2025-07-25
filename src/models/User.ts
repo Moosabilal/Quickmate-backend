@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, HydratedDocument, InferSchemaType } from 'm
 import bcrypt from 'bcrypt';
 
 
-export interface IUserDocument extends HydratedDocument<UserSchemaType> {}
+// export interface IUserDocument extends HydratedDocument<UserSchemaType> {}
 
 const UserSchema: Schema = new Schema({
   name: { type: String, required: true },
@@ -21,7 +21,7 @@ const UserSchema: Schema = new Schema({
   provider: { type: String, enum: ['local', 'google'], default: 'local' },
 }, { timestamps: true });
 
-UserSchema.pre<IUserDocument>('save', async function (next) {
+UserSchema.pre('save', async function (next) {
   if (this.isModified('password') && this.password) {
     this.password = await bcrypt.hash(this.password as string, 10); 
   }

@@ -5,6 +5,7 @@ import { IAuthService } from '../services/interface/IAuthService';
 import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../types/auth';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import TYPES from '../di/type';
+import { AuthRequest } from '../middleware/authMiddleware';
 
 @injectable()
 export class AuthController {
@@ -46,6 +47,7 @@ export class AuthController {
       })
       res.status(200).json(result);
     } catch (error) {
+      console.log('the error is comign', error)
       next(error);
     }
   }
@@ -137,6 +139,16 @@ export class AuthController {
     }
   }
 
+  public contactUsEmail = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const {name, email, message} = req.body
+      const response = await this.authService.sendSubmissionEmail(name, email, message);
+      res.status(200).json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
+
 
   public getUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -156,7 +168,9 @@ export class AuthController {
       let profilePicture: string | undefined | null;
 
       if (profilePicturePath) {
-        profilePicture = await uploadToCloudinary(profilePicturePath);
+        const fullUrl = await uploadToCloudinary(profilePicturePath);
+        const baseUrl = process.env.CLOUDINARY_BASE_URL;
+        profilePicture = fullUrl.replace(baseUrl, '');
       } else if (req.body.iconUrl === '') {
         profilePicture = null;
       } else if (req.body.iconUrl !== undefined) {
@@ -173,7 +187,12 @@ export class AuthController {
 
   public getUserWithRelated = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const userWithDetails = await this.authService.getUserWithAllDetails();
+
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+      const search = (req.query.search as string) || '';
+      const status = req.query.status as string || "All"
+      const userWithDetails = await this.authService.getUserWithAllDetails(page, limit, search, status);
       res.status(200).json(userWithDetails);
     } catch (error) {
       next(error);

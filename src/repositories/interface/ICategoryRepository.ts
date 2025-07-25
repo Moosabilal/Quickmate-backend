@@ -10,9 +10,12 @@ export interface ICategoryRepository {
     findByNameAndParent(name: string, parentId: string | Types.ObjectId): Promise<ICategory | null>
     findAll(filter: any): Promise<ICategory[]>
     findAllSubcategories(p0: {}): Promise<ICategory[]>
+    getAllCategories(): Promise<ICategory[]>
     update(id: string | Types.ObjectId, updateData: Partial<ICategoryInput>): Promise<ICategory | null>
     delete(id: string | Types.ObjectId): Promise<ICategory | null>
     countSubcategories(parentId: string | Types.ObjectId): Promise<number>
     updateSubcategoriesStatus(parentId: string | Types.ObjectId, status: boolean): Promise<void>
+    findAllSubCategories(filter: any, skip: number, limit: number): Promise<ICategory[]>;
+    countOfSubCategories(filter: any): Promise<number>;
 
 }   

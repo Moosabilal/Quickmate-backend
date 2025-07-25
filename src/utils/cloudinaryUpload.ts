@@ -15,7 +15,6 @@ export const uploadToCloudinary = async (filePath: string): Promise<string> => {
   try {
     const result = await cloudinary.uploader.upload(filePath, {
       folder: 'quickmate_images', 
-      transformation: [{ width: 200, height: 200, crop: "fill" }], 
       timeout: 60000,
     });
 

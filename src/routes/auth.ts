@@ -8,7 +8,7 @@ import { authenticateToken, authorizeRoles } from '../middleware/authMiddleware'
 const router = express.Router();
 const authController = container.get<AuthController>(TYPES.AuthController)
 
-const isUser = [authenticateToken, authorizeRoles(['Customer','Provider'])];
+const isUser = [authenticateToken, authorizeRoles(['Customer','ServiceProvider'])];
 
 router.post('/register',authController.register);
 router.post('/login',  authController.login);
@@ -20,7 +20,8 @@ router.post('/reset-password', authController.resetPassword);
 
 router.post('/google-login', authController.googleLogin);
 
-router.post('/refresh-token', authController.refreshToken)
+router.post('/refresh-token',isUser, authController.refreshToken)
+router.post('/contactUsSubmission', authController.contactUsEmail)
 
 
 router.get('/getUser', isUser, authController.getUser);
