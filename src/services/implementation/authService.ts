@@ -395,8 +395,8 @@ export class AuthService implements IAuthService {
             user.profilePicture = data.profilePicture;
         }
 
-        await this.userRepository.update(user);
-
+        const updatedUser = await this.userRepository.update(user);
+        const {} = updatedUser
         return {
             id: (user._id as { toString(): string }).toString(),
             name: user.name as string,
