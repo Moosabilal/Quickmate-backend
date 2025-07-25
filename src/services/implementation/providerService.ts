@@ -7,6 +7,14 @@ import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from 
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
+export enum ProviderStatus {
+  Active = 'Active',
+  Suspended = 'Suspended',
+  Pending = 'Pending',
+  Rejected = 'Rejected'
+}
+
+
 @injectable()
 export class ProviderService implements IProviderService {
     private providerRepository: IProviderRepository
@@ -151,7 +159,7 @@ export class ProviderService implements IProviderService {
         } catch (error) {
             throw new Error('Invalid token.');
         }
-        
+
         const provider = await this.providerRepository.getProviderByUserId(decoded.id)
         return {
             id: provider._id.toString(),
@@ -200,6 +208,21 @@ export class ProviderService implements IProviderService {
             currentPage: page
         }
     }
+
+    public async updateProviderStat(id: string, newStatus: string): Promise<{ message: string }> {
+        if (!newStatus) {
+            throw new Error('Status is required');
+        }
+
+        const allowedStatuses = Object.values(ProviderStatus);
+        if (!allowedStatuses.includes(newStatus as ProviderStatus)) {
+            throw new Error(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`);
+        }
+        await this.providerRepository.updateStatusById(id, newStatus)
+        return { message: "provider Status updated" }
+    }
+
+
 
 
 }

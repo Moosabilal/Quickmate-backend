@@ -52,5 +52,9 @@ export class ProviderRepository implements IProviderRepository {
         return await Provider.countDocuments(filter);
     }
 
+    async updateStatusById(id: string, newStatus: string): Promise<void> {
+        await Provider.findByIdAndUpdate(id,{status: newStatus})
+    }
+
 
 }

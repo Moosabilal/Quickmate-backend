@@ -9,4 +9,6 @@ export interface IProviderRepository {
     countProviders(filter: any): Promise<number>;
     getProviderByUserId(userId: string): Promise<IProvider | null>;
     updateProvider(updateData: Partial<IProviderProfile>): Promise<IProvider | null>;
+    updateStatusById(id: string, newStatus: string): Promise<void>;
+
 }

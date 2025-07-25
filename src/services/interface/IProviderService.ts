@@ -14,6 +14,8 @@ export interface IProviderService {
     }>;
     fetchProviderById(userId: string): Promise<IProviderProfile>;
     updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile>;
+    updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
+
 
 
 }

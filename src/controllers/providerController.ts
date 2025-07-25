@@ -157,4 +157,15 @@ export class ProviderController {
 
     }
 
+    public updateProviderStatus = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            console.log('the bakcen ', req.body.newStatus)
+            const response = await this.providerService.updateProviderStat(req.params.id, req.body.newStatus)
+            console.log('the backen res', response)
+            res.status(200).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }

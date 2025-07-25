@@ -23,6 +23,7 @@ router.get('/getFeaturedProviders', providerController.featuredProviders)
 // admin
 router.get('/getAllProviders', providerController.getAllProvidersList)
 router.get('/getProviderList', providerController.getProvidersforAdmin)
+router.patch('/updateProviderStatus/:id', providerController.updateProviderStatus)
 
 
 export default router
