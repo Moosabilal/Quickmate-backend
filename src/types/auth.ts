@@ -1,19 +1,3 @@
-// export interface IUser {
-//   _id?: string; 
-//   name: string;
-//   email: string;
-//   password?: string; 
-//   role?: 'Customer' | 'ServiceProvider' | 'Admin';
-//   isVerified: boolean;
-//   profilePicture: string; 
-//   googleId?: string; 
-//   provider?: 'local' | 'google';
-//   registrationOtp?: string;
-//   registrationOtpExpires?: Date;
-//   registrationOtpAttempts?: number;
-//   createdAt?: Date;
-//   updatedAt?: Date;
-// }
 export interface RegisterRequestBody {
   name: string;
   email: string;

@@ -109,7 +109,7 @@ export class CategoryService implements ICategoryService {
                 if (!parentCategory) {
                     throw new Error('New parent category not found.');
                 }
-                updateCategoryInput.parentId = newParentObjectId.toString(); // Store as string for input
+                updateCategoryInput.parentId = newParentObjectId.toString(); 
             } else {
                 throw new Error('Invalid parent category ID provided.');
             }
