@@ -1,6 +1,5 @@
 import { Schema, model, Types, HydratedDocument, InferSchemaType } from 'mongoose';
 
-// Define the schema
 const AddressSchema = new Schema({
   userId: {
     type: Types.ObjectId,

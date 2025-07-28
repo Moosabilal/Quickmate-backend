@@ -6,16 +6,6 @@ export interface ICategoryInput {
     status?: boolean;
     iconUrl?: string | null; 
 }
-// export interface ICategory extends Document {
-//     _id: Types.ObjectId;
-//     name: string;
-//     description?: string | null;
-//     parentId?: Types.ObjectId | null;
-//     status: boolean;
-//     iconUrl?: string | null;
-//     createdAt: Date;
-//     updatedAt: Date;
-// }
 export interface ICategoryResponse extends Omit<ICategoryInput, 'parentId'> {
     _id: string; 
     parentId?: string | null; 

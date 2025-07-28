@@ -1,5 +1,4 @@
 import 'reflect-metadata'
-// import User, { IUserDocument } from '../../models/User';
 import { IUserRepository } from '../interface/IUserRepository';
 import { IUser } from '../../models/User';
 import { injectable } from 'inversify';
@@ -42,7 +41,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async findAllUsers(): Promise<IUser[]> {
-    return await User.find({}).select('-password -registrationOtp -registrationOtpExpires -registrationOtpAttempts -passwordResetToken -passwordResetExpires -googleId'); // Exclude sensitive fields
+    return await User.find({}).select('-password -registrationOtp -registrationOtpExpires -registrationOtpAttempts -passwordResetToken -passwordResetExpires -googleId'); 
   }
 
   public async findUsersWithFilter(filter: any, skip: number, limit: number): Promise<IUser[]> {

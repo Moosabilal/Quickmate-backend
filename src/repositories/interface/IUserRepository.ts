@@ -1,4 +1,3 @@
-// import { IUserDocument } from '../../models/User'; 
 import { IUser } from '../../models/User';
 export interface IUserRepository {
   findByEmail(email: string, includeOtpFields?: boolean): Promise<IUser | null>;

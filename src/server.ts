@@ -15,7 +15,7 @@ import addressRoutes from './routes/address'
 import fs from 'fs';
 import { CustomError } from './utils/CustomError';
 import { errorHandler } from './middleware/errorHandler';
-
+import logger from './logger/logger';
 
 
 const uploadDir = path.join(__dirname, '../uploads');
@@ -58,4 +58,4 @@ app.use((req, res, next) => {
 
 app.use(errorHandler)
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));

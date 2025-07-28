@@ -101,7 +101,7 @@ export class AuthController {
         httpOnly: true,
         secure: false,
         sameSite: 'strict',
-        maxAge: 24 * 60 * 60 * 1000 //7d
+        maxAge: 24 * 60 * 60 * 1000 //1h
 
       })
       res.cookie('refreshToken', response.refreshToken, {
@@ -119,12 +119,16 @@ export class AuthController {
 
   public refreshToken = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log('the request is not reaching')
       const refresh_token = req.cookies.refreshToken
+      console.log('findind the refresh token', refresh_token)
       if (!refresh_token) {
         res.status(401).json({ message: 'Refresh token not found' })
         return
       }
+      console.log('thsi mean there is not refresh token')
       const response = await this.authService.createRefreshToken(refresh_token)
+      console.log('the token is creatd')
       res.cookie('token', response.newToken, {
         httpOnly: true,
         secure: false,
