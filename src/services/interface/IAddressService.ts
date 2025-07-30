@@ -1,5 +1,5 @@
 import { IAddress } from "../../models/address";
-import { IAddressRequest } from "../../types/address";
+import { IAddressRequest } from "../../dto/address..dto";
 export interface IAddressService {
     addAddress(data: IAddressRequest): Promise<IAddressRequest>;
     getAllAddress(userId: string): Promise<IAddressRequest[]>;

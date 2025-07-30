@@ -18,6 +18,7 @@ router.post('/updateProvider', authenticateToken, upload.fields([{ name: 'aadhaa
     { name: 'businessCertifications', maxCount: 1 },]), providerController.updateProvider)
 router.get('/getProvider', providerController.getProvider)
 router.get('/getFeaturedProviders', providerController.featuredProviders)
+router.get('/getFilteredServiceProvider', providerController.getServiceProvider)
 
 
 // admin

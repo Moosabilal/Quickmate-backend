@@ -2,16 +2,20 @@ import { inject, injectable } from "inversify";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
+import mongoose from "mongoose";
 import { IProvider } from "../../models/Providers";
-import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from "../../types/provider";
+import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from "../../dto/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
+import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import { ErrorMessage } from "../../enums/ErrorMessage";
+import { CustomError } from "../../utils/CustomError";
 
 export enum ProviderStatus {
-  Active = 'Active',
-  Suspended = 'Suspended',
-  Pending = 'Pending',
-  Rejected = 'Rejected'
+    Active = 'Active',
+    Suspended = 'Suspended',
+    Pending = 'Pending',
+    Rejected = 'Rejected'
 }
 
 
@@ -40,6 +44,7 @@ export class ProviderService implements IProviderService {
             serviceLocation: savedProvider.serviceLocation,
             serviceArea: savedProvider.serviceArea,
             profilePhoto: savedProvider.profilePhoto,
+            price: savedProvider.price,
             status: savedProvider.status,
             experience: savedProvider.experience,
             timeSlot: savedProvider.timeSlot,
@@ -61,6 +66,7 @@ export class ProviderService implements IProviderService {
             serviceLocation: updatedProvider.serviceLocation,
             serviceArea: updatedProvider.serviceArea,
             profilePhoto: updatedProvider.profilePhoto,
+            price: updatedProvider.price,
             status: updatedProvider.status,
             experience: updatedProvider.experience,
             timeSlot: updatedProvider.timeSlot,
@@ -149,9 +155,7 @@ export class ProviderService implements IProviderService {
 
     public async fetchProviderById(token: string): Promise<IProviderProfile> {
         if (!token) {
-            const error = new Error('service No token provided.');
-            (error as any).statusCode = 401;
-            throw error;
+            throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
         }
         let decoded: JwtPayload;
         try {
@@ -174,6 +178,7 @@ export class ProviderService implements IProviderService {
             status: provider.status,
             experience: provider.experience,
             timeSlot: provider.timeSlot,
+            price: provider.price,
             verificationDocs: provider.verificationDocs,
             availableDays: provider.availableDays
 
@@ -211,16 +216,49 @@ export class ProviderService implements IProviderService {
 
     public async updateProviderStat(id: string, newStatus: string): Promise<{ message: string }> {
         if (!newStatus) {
-            throw new Error('Status is required');
+            throw new CustomError('Status is required', HttpStatusCode.BAD_REQUEST);
         }
 
         const allowedStatuses = Object.values(ProviderStatus);
         if (!allowedStatuses.includes(newStatus as ProviderStatus)) {
-            throw new Error(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`);
+            throw new CustomError(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`, HttpStatusCode.BAD_REQUEST);
         }
         await this.providerRepository.updateStatusById(id, newStatus)
         return { message: "provider Status updated" }
     }
+
+    public async getProviderwithFilters(serviceId: string, filters: { area?: string; experience?: number; day?: string; time?: string; price?: number }): Promise<IProvider[]> {
+        const filterQuery: any = {
+            serviceId: new mongoose.Types.ObjectId(serviceId),
+        };
+
+        if (filters.area) {
+            filterQuery.serviceArea = { $regex: new RegExp(filters.area, 'i') };
+        }
+
+        if (filters.experience) {
+            filterQuery.experience = { $gte: filters.experience };
+        }
+
+        if (filters.day) {
+            filterQuery.availableDays = filters.day;
+        }
+
+        if (filters.time) {
+            filterQuery['timeSlot.startTime'] = { $lte: filters.time };
+            filterQuery['timeSlot.endTime'] = { $gte: filters.time };
+        }
+
+        if (filters.price) {
+            filterQuery['price'] = { $lte: filters.price };
+        }
+        const provider = await this.providerRepository.getProviderByServiceId(filterQuery)
+        
+        return provider
+
+    }
+
+
 
 
 

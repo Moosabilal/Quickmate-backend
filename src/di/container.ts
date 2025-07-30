@@ -23,6 +23,11 @@ import { IAddressService } from '../services/interface/IAddressService';
 import { AddressService } from '../services/implementation/AddressService';
 import { IAddressRepository } from '../repositories/interface/IAddressRepository';
 import { AddressRepository } from '../repositories/implementation/addressRepository';
+import { BookingController } from '../controllers/bookingController';
+import { IBookingService } from '../services/interface/IBookingService';
+import { BookingService } from '../services/implementation/bookingService';
+import { IBookingRepository } from '../repositories/interface/IBookingRepository';
+import { BookingRepository } from '../repositories/implementation/bookingRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -41,5 +46,9 @@ container.bind<IProviderRepository>(TYPES.ProviderRepository).to(ProviderReposit
 container.bind<AddressController>(TYPES.AddressController).to(AddressController);
 container.bind<IAddressService>(TYPES.AddressService).to(AddressService);
 container.bind<IAddressRepository>(TYPES.AddressRepository).to(AddressRepository)
+
+container.bind<BookingController>(TYPES.BookingController).to(BookingController);
+container.bind<IBookingService>(TYPES.BookingService).to(BookingService);
+container.bind<IBookingRepository>(TYPES.BookingRepository).to(BookingRepository)
 
 export {container}

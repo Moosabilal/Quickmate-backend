@@ -17,7 +17,6 @@ export interface ICategoryResponse extends Omit<ICategoryInput, 'parentId'> {
 }
 export interface ICommissionRuleInput {
     categoryId?: string | null; 
-    globalCommission?: number | null | undefined ; 
     flatFee?: number; 
     categoryCommission?: number; 
     status?: boolean;

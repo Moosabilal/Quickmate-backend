@@ -3,8 +3,9 @@ import { Request, Response, NextFunction } from 'express';
 import { IProviderService } from "../services/interface/IProviderService";
 import TYPES from "../di/type";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { IProviderProfile, IProviderRegisterRequest } from "../types/provider";
+import { IProviderProfile, IProviderRegisterRequest } from "../dto/provider.dto";
 import { AuthRequest } from "../middleware/authMiddleware";
+import { HttpStatusCode } from "../enums/HttpStatusCode";
 
 @injectable()
 export class ProviderController {
@@ -16,7 +17,6 @@ export class ProviderController {
     public register = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
-            console.log('the body to check', req.body)
 
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
@@ -52,7 +52,7 @@ export class ProviderController {
             delete formData.endTime;
 
             const response = await this.providerService.registerProvider(formData);
-            res.status(200).json({ provider: response, message: "registration completed successfully" });
+            res.status(HttpStatusCode.OK).json({ provider: response, message: "registration completed successfully" });
         } catch (error) {
             next(error);
         }
@@ -61,61 +61,61 @@ export class ProviderController {
     public updateProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
-        const files = req.files as {
-            aadhaarIdProof?: Express.Multer.File[];
-            profilePhoto?: Express.Multer.File[];
-            businessCertifications?: Express.Multer.File[];
-        };
+            const files = req.files as {
+                aadhaarIdProof?: Express.Multer.File[];
+                profilePhoto?: Express.Multer.File[];
+                businessCertifications?: Express.Multer.File[];
+            };
 
-        const aadhaar = files?.aadhaarIdProof?.[0];
-        const profile = files?.profilePhoto?.[0];
-        const certification = files?.businessCertifications?.[0];
+            const aadhaar = files?.aadhaarIdProof?.[0];
+            const profile = files?.profilePhoto?.[0];
+            const certification = files?.businessCertifications?.[0];
 
-        const baseUrl = process.env.CLOUDINARY_BASE_URL;
+            const baseUrl = process.env.CLOUDINARY_BASE_URL;
 
-        const aadhaarUrl = aadhaar
-            ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '')
-            : undefined;
-        const profileUrl = profile
-            ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '')
-            : undefined;
-        const certificationUrl = certification
-            ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '')
-            : undefined;
+            const aadhaarUrl = aadhaar
+                ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '')
+                : undefined;
+            const profileUrl = profile
+                ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '')
+                : undefined;
+            const certificationUrl = certification
+                ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '')
+                : undefined;
 
             const updateData: Partial<IProviderProfile> = {
-            ...req.body,
-            timeSlot: JSON.parse(req.body.timeSlot),
-            availableDays: JSON.parse(req.body.availableDays || '[]'),
-            userId: req.user.id
-        };
-
-        if (aadhaarUrl || certificationUrl) {
-            updateData.verificationDocs = {
-                aadhaarIdProof: aadhaarUrl || req.body.existingAadhaarUrl,
-                businessCertifications: certificationUrl || req.body.existingCertificationUrl,
+                ...req.body,
+                timeSlot: JSON.parse(req.body.timeSlot),
+                availableDays: JSON.parse(req.body.availableDays || '[]'),
+                userId: req.user.id
             };
+
+            if (aadhaarUrl || certificationUrl) {
+                updateData.verificationDocs = {
+                    aadhaarIdProof: aadhaarUrl || req.body.existingAadhaarUrl,
+                    businessCertifications: certificationUrl || req.body.existingCertificationUrl,
+                };
+            }
+
+            if (profileUrl) {
+                updateData.profilePhoto = profileUrl;
+            }
+
+            const updatedProvider = await this.providerService.updateProviderDetails(updateData);
+
+            res.status(HttpStatusCode.OK).json({
+                provider: updatedProvider,
+                message: "Profile updated successfully",
+            });
+        } catch (error) {
+            next(error);
         }
-
-        if (profileUrl) {
-            updateData.profilePhoto = profileUrl;
-        }
-
-        const updatedProvider = await this.providerService.updateProviderDetails(updateData);
-
-        res.status(200).json({
-            provider: updatedProvider,
-            message: "Profile updated successfully",
-        });
-    } catch (error) {
-        next(error);
-    }
     }
 
     public getAllProvidersList = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const providerWithDetails = await this.providerService.getProviderWithAllDetails();
-            res.status(200).json(providerWithDetails);
+            res.status(HttpStatusCode.OK).json(providerWithDetails);
         } catch (error) {
             next(error);
         }
@@ -125,7 +125,7 @@ export class ProviderController {
         try {
             const token = req.cookies.token
             const provider = await this.providerService.fetchProviderById(token)
-            res.status(200).json(provider)
+            res.status(HttpStatusCode.OK).json(provider)
         } catch (error) {
             next(error);
         }
@@ -138,7 +138,7 @@ export class ProviderController {
             const search = (req.query.search as string) || '';
             const status = req.query.status as string || "All"
             const providersDetails = await this.providerService.providersForAdmin(page, limit, search, status);
-            res.status(200).json(providersDetails);
+            res.status(HttpStatusCode.OK).json(providersDetails);
         } catch (error) {
             next(error);
         }
@@ -150,7 +150,7 @@ export class ProviderController {
             const limit = parseInt(req.query.limit as string) || 10;
             const search = (req.query.search as string) || '';
             const getFeaturedProviders = await this.providerService.getFeaturedProviders(page, limit, search)
-            res.status(200).json(getFeaturedProviders)
+            res.status(HttpStatusCode.OK).json(getFeaturedProviders)
         } catch (error) {
             next(error);
         }
@@ -159,9 +159,24 @@ export class ProviderController {
 
     public updateProviderStatus = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log('the bakcen ', req.body.newStatus)
             const response = await this.providerService.updateProviderStat(req.params.id, req.body.newStatus)
-            console.log('the backen res', response)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public getServiceProvider = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const serviceId = req.query.serviceId as string;
+            const area = req.query.area as string;
+            const experience = req.query.experience ? Number(req.query.experience) : undefined;
+            const day = req.query.day as string;
+            const time = req.query.time as string;
+            const price = req.query.price ? Number(req.query.price) : undefined;
+
+            const filters = { area, experience, day, time, price };
+            const response = await this.providerService.getProviderwithFilters(serviceId, filters)
             res.status(200).json(response)
         } catch (error) {
             next(error)

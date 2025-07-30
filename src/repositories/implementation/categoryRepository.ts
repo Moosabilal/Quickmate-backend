@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import { Category, ICategory } from '../../models/Categories'; 
-import { ICategoryInput } from '../../types/category'; 
+import { ICategoryInput } from '../../dto/category.dto'; 
 import { Types } from 'mongoose';
 import { ICategoryRepository } from '../interface/ICategoryRepository';
 

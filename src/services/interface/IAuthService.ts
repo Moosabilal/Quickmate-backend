@@ -1,7 +1,7 @@
-import { ForgotPasswordRequestBody, RegisterRequestBody, ResendOtpRequestBody, ResetPasswordRequestBody, VerifyOtpRequestBody } from "../../types/auth";
+import { AuthSuccessResponse, ForgotPasswordRequestBody, RegisterRequestBody, ResendOtpRequestBody, ResetPasswordRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
 
 export interface IAuthService {
-  registerUser(data: RegisterRequestBody): Promise<{ message: string, email: string }>;
+  registerUser(data: RegisterRequestBody): Promise<AuthSuccessResponse>;
   verifyOtp(data: VerifyOtpRequestBody): Promise<{ message: string }>;
   resendOtp(data: ResendOtpRequestBody): Promise<{ message: string }>;
   login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; }; token: string; refreshToken: string }>;

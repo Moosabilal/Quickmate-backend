@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { CategoryService } from '../services/implementation/categoryService';
-import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../types/category';
+import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../dto/category.dto';
 import { ICategory } from '../models/Categories';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import { validationResult } from 'express-validator';
@@ -9,6 +9,7 @@ import * as fsPromises from 'fs/promises';
 import { inject, injectable } from 'inversify';
 import TYPES from '../di/type';
 import { ICategoryService } from '../services/interface/ICategoryService';
+import { HttpStatusCode } from '../enums/HttpStatusCode';
 
 interface AuthRequest extends Request {
   user?: { id: string; role: string };
@@ -42,7 +43,7 @@ export class CategoryController {
           console.error("Error deleting temp file after validation error:", fileErr);
         }
       }
-      res.status(400).json({ errors: errors.array() });
+      res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
       return;
     }
 
@@ -108,7 +109,7 @@ export class CategoryController {
         commissionRuleInputForService
       );
 
-      res.status(201).json({
+      res.status(HttpStatusCode.CREATED).json({
         message: `${category.parentId ? 'Subcategory' : 'Category'} created successfully`,
         category,
         commissionRule,
@@ -123,7 +124,7 @@ export class CategoryController {
         }
       }
       if (error.message.includes('Category with this name already exists') || error.message.includes('A subcategory with this name already exists under the specified parent')) {
-        res.status(409).json({ message: error.message });
+        res.status(HttpStatusCode.CONFLICT).json({ message: error.message });
         return;
       }
       next(error);
@@ -140,7 +141,7 @@ export class CategoryController {
           console.error("Error deleting temp file after validation error:", fileErr);
         }
       }
-      res.status(400).json({ errors: errors.array() });
+      res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
       return;
     }
 
@@ -214,7 +215,7 @@ export class CategoryController {
       );
 
       if (!category) {
-        res.status(500).json({ message: 'Category update failed: category is null.' });
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Category update failed: category is null.' });
         return;
       }
 
@@ -224,7 +225,7 @@ export class CategoryController {
         await this.categoryService.updateManySubcategoriesStatus(categoryId, updateCategoryData.status);
       }
 
-      res.status(200).json({
+      res.status(HttpStatusCode.OK).json({
         message: `${category.parentId ? 'Subcategory' : 'Category'} updated successfully`,
         category,
         commissionRule,
@@ -239,11 +240,11 @@ export class CategoryController {
         }
       }
       if (error.message.includes('Category not found')) {
-        res.status(404).json({ message: error.message });
+        res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;
       }
       if (error.message.includes('Category with this name already exists') || error.message.includes('A subcategory with this name already exists under the specified parent')) {
-        res.status(409).json({ message: error.message });
+        res.status(HttpStatusCode.CONFLICT).json({ message: error.message });
         return;
       }
       next(error);
@@ -284,7 +285,7 @@ export class CategoryController {
         }
         mappedCategoryForFrontend.commissionStatus = commissionRule.status ?? false;
       }
-      res.status(200).json({
+      res.status(HttpStatusCode.OK).json({
         ...mappedCategoryForFrontend,
         subCategories
       });
@@ -292,7 +293,7 @@ export class CategoryController {
       return;
     } catch (error: any) {
       if (error.message.includes('Category not found')) {
-        res.status(404).json({ message: error.message });
+        res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;
       }
       next(error);
@@ -316,7 +317,7 @@ export class CategoryController {
           status: cat.status ?? false,
           parentId: cat.parentId ? cat.parentId.toString() : null,
         }));
-        res.status(200).json(mappedSubcategories);
+        res.status(HttpStatusCode.OK).json(mappedSubcategories);
 
       } else {
         categories = await this.categoryService.getAllTopLevelCategoriesWithDetails();
@@ -355,7 +356,7 @@ export class CategoryController {
             commissionStatus,
           };
         });
-        res.status(200).json(mappedCategories);
+        res.status(HttpStatusCode.OK).json(mappedCategories);
       }
       return;
     } catch (error: any) {
@@ -368,18 +369,18 @@ export class CategoryController {
     try {
       const { id } = req.params;
       const deletedCategory = await this.categoryService.deleteCategory(id);
-      res.status(200).json({
+      res.status(HttpStatusCode.OK).json({
         message: 'Category deleted successfully',
         category: deletedCategory,
       });
       return;
     } catch (error: any) {
       if (error.message.includes('Category not found')) {
-        res.status(404).json({ message: error.message });
+        res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;
       }
       if (error.message.includes('Cannot delete category with existing subcategories')) {
-        res.status(400).json({ message: error.message });
+        res.status(HttpStatusCode.BAD_REQUEST).json({ message: error.message });
         return;
       }
       next(error);
@@ -392,9 +393,8 @@ export class CategoryController {
       const limit = parseInt(req.query.limit as string) || 10;
       const search = (req.query.search as string) || ''
       const allSubCategories = await this.categoryService.getSubcategories(page, limit, search)
-      res.status(200).json(allSubCategories)
+      res.status(HttpStatusCode.OK).json(allSubCategories)
     } catch (error) {
-      console.log('the error', error)
       next(error)
     }
   }

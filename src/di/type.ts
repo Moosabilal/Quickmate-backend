@@ -13,6 +13,9 @@ const TYPES = {
     AddressController: Symbol.for('AddressController'),
     AddressService: Symbol.for('AddressService'),
     AddressRepository: Symbol.for('AddressRepository'),
+    BookingController: Symbol.for('BookingController'),
+    BookingService: Symbol.for('BookingService'),
+    BookingRepository: Symbol.for('BookingRepository'),
 
 }
 

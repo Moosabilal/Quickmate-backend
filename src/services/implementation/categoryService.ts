@@ -1,6 +1,6 @@
 import { CategoryRepository } from '../../repositories/implementation/categoryRepository';
 import { CommissionRuleRepository } from '../../repositories/implementation/commissionRuleRepository';
-import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse, IserviceResponse } from '../../types/category';
+import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse, IserviceResponse } from '../../dto/category.dto';
 import { ICategory } from '../../models/Categories';
 import { Types } from 'mongoose';
 import { inject, injectable } from 'inversify';

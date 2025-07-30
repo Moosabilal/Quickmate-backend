@@ -3,7 +3,7 @@ import { IAddressService } from "../interface/IAddressService";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
 import TYPES from "../../di/type";
 import { IAddress } from "../../models/address";
-import { IAddressRequest } from "../../types/address";
+import { IAddressRequest } from "../../dto/address..dto";
 
 injectable()
 export class AddressService implements IAddressService {
@@ -13,9 +13,7 @@ export class AddressService implements IAddressService {
     }
 
     public async addAddress(data: IAddressRequest): Promise<IAddressRequest> {
-        console.log('the data is coming to the servive', data)
         const createdAddress = await this.addressRepsitory.createAddress(data)
-        console.log('the udpated data in service', createdAddress)
         return {
             id: createdAddress._id.toString(),
             userId: createdAddress.userId.toString(),

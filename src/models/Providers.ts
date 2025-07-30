@@ -50,6 +50,10 @@ const ProviderSchema = new Schema({
         min: 0,
         required: true,
     },
+    price: {
+        type: Number,
+        required: false,
+    },
     availableDays: {
         type: [String], 
         required: true,

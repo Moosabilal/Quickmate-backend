@@ -1,5 +1,5 @@
 import { IProvider } from "../../models/Providers";
-import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from "../../types/provider";
+import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from "../../dto/provider.dto";
 
 
 export interface IProviderService {
@@ -15,6 +15,7 @@ export interface IProviderService {
     fetchProviderById(userId: string): Promise<IProviderProfile>;
     updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile>;
     updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
+    getProviderwithFilters(serviceId: string, filters: {area?: string; experience?: number; day?: string; time?: string; price?: number}): Promise<IProvider[]>;
 
 
 

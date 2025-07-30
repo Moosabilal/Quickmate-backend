@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 export interface IProviderRegisterRequest {
   fullName: string;
   phoneNumber: string;
@@ -67,6 +68,7 @@ export interface IProviderProfile {
     fullName: string;
     phoneNumber: string;
     email: string;
+    price: Number;
     serviceId: string;
     serviceLocation: string;
     serviceArea: string;
@@ -75,4 +77,14 @@ export interface IProviderProfile {
     status: string;
     availableDays: string[];
   
+}
+
+export interface ProviderFilterQuery {
+  serviceId: Types.ObjectId;
+  serviceArea?: { $regex: RegExp };
+  experience?: { $gte: number };
+  availableDays?: string;
+  'timeSlot.startTime'?: { $lte: string };
+  'timeSlot.endTime'?: { $gte: string };
+  price?: { $lte: number };
 }

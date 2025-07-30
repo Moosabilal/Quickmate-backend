@@ -1,5 +1,5 @@
 import { CommissionRule, ICommissionRule } from '../../models/Commission';
-import { ICommissionRuleInput } from '../../types/category'; 
+import { ICommissionRuleInput } from '../../dto/category.dto'; 
 import { Types } from 'mongoose';
 import { ICommissionRuleRepository } from '../interface/ICommissonRuleRepository';
 

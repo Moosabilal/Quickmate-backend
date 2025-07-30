@@ -1,4 +1,4 @@
-import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleResponse, IserviceResponse } from '../../types/category';
+import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleResponse, IserviceResponse } from '../../dto/category.dto';
 import { ServiceCommissionRuleInput } from '../implementation/categoryService';
 
 

@@ -1,7 +1,9 @@
 import { Category } from "../../models/Categories";
+import mongoose from 'mongoose';
+
 import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
-import { IProviderForAdminResponce, IProviderProfile } from "../../types/provider";
+import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../dto/provider.dto";
 import { IProviderRepository } from "../interface/IProviderRepository";
 
 
@@ -54,6 +56,11 @@ export class ProviderRepository implements IProviderRepository {
 
     async updateStatusById(id: string, newStatus: string): Promise<void> {
         await Provider.findByIdAndUpdate(id,{status: newStatus})
+    }
+
+    async getProviderByServiceId(filterQuery: ProviderFilterQuery): Promise<IProvider[]> {
+        return await Provider.find(filterQuery)
+
     }
 
 

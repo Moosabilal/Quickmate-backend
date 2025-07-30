@@ -1,5 +1,5 @@
 import { IProvider } from "../../models/Providers";
-import { IProviderForAdminResponce, IProviderProfile } from "../../types/provider";
+import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../dto/provider.dto";
 
 
 export interface IProviderRepository {
@@ -10,5 +10,7 @@ export interface IProviderRepository {
     getProviderByUserId(userId: string): Promise<IProvider | null>;
     updateProvider(updateData: Partial<IProviderProfile>): Promise<IProvider | null>;
     updateStatusById(id: string, newStatus: string): Promise<void>;
+    getProviderByServiceId(filterQuery: ProviderFilterQuery): Promise<IProvider[]>;
+
 
 }
