@@ -1,4 +1,5 @@
 import { Types } from "mongoose";
+import { ProviderStatus } from "../enums/provider.enum";
 export interface IProviderRegisterRequest {
   fullName: string;
   phoneNumber: string;
@@ -11,19 +12,19 @@ export interface IProviderRegisterRequest {
   serviceArea: string;
   experience: number;
 
-  availableDays: string[]; 
+  availableDays: string[];
 
   timeSlot: {
-    startTime: string;  
-    endTime: string;    
+    startTime: string;
+    endTime: string;
   };
 
   verificationDocs: {
-    aadhaarIdProof: string; 
-    businessCertifications?: string; 
+    aadhaarIdProof: string;
+    businessCertifications?: string;
   };
 
-  profilePhoto: string; 
+  profilePhoto: string;
 
   userId: string;
 
@@ -50,7 +51,7 @@ export interface IFeaturedProviders {
   userId: string;
   fullName: string;
   profilePhoto: string;
-  serviceName: string;
+  // serviceName: string;
 
 }
 
@@ -59,24 +60,23 @@ export interface IProviderProfile {
     startTime: string;
     endTime: string;
   };
-  verificationDocs: {
-    aadhaarIdProof: string;
-    businessCertifications?: string;
-  }
-    id: string;
-    userId: string;
-    fullName: string;
-    phoneNumber: string;
-    email: string;
-    price: Number;
-    serviceId: string;
-    serviceLocation: string;
-    serviceArea: string;
-    experience: number
-    profilePhoto: string;
-    status: string;
-    availableDays: string[];
-  
+  aadhaarIdProof?: string;
+  id: string;
+  userId: string;
+  fullName: string;
+  phoneNumber: string;
+  email: string;
+  serviceId: string[];
+  serviceLocation: string;
+  serviceArea: string;
+  profilePhoto: string;
+  status: ProviderStatus;
+  availableDays: string[];
+  earnings: number;
+  totalBookings: number;
+  payoutPending: number;
+  rating: number;
+  isVerified: boolean
 }
 
 export interface ProviderFilterQuery {

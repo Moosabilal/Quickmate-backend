@@ -11,20 +11,32 @@ export class ProviderRepository implements IProviderRepository {
     async createProvider(data: Partial<IProvider>): Promise<IProvider> {
         const provider = new Provider(data);
         await provider.save();
-        if (data.userId) {
-            const updatedUser = await User.findByIdAndUpdate(
-                data.userId,
-                { role: 'ServiceProvider' },
-                { new: true }
-            );
+        // if (data.userId) {
+        //     const updatedUser = await User.findByIdAndUpdate(
+        //         data.userId,
+        //         { role: 'ServiceProvider' },
+        //         { new: true }
+        //     );
 
-            if (!updatedUser) {
-                throw new Error('User not found while updating role.');
-            }
-        }
+        //     if (!updatedUser) {
+        //         throw new Error('User not found while updating role.');
+        //     }
+        // }
 
         return provider;
 
+    }
+
+    async findByEmail(email: string, includeOtpFields?: boolean): Promise<IProvider> {
+        let query = Provider.findOne<IProvider>({ email });
+        if (includeOtpFields) {
+            query = query.select('+registrationOtp +registrationOtpExpires +registrationOtpAttempts');
+        }
+        return await query.exec();
+    }
+
+    async update(provider: IProvider): Promise<IProvider> {
+        return await provider.save()
     }
 
     async updateProvider(updateData: Partial<IProviderProfile>): Promise<IProvider | null> {
@@ -34,9 +46,9 @@ export class ProviderRepository implements IProviderRepository {
     }
 
     async getProviderByUserId(userId: string): Promise<IProvider | null> {
-        const data = await Provider.findOne({userId: userId})
+        const data = await Provider.findOne({ userId: userId })
         return data
-        
+
     }
 
     async getAllProviders(): Promise<IProvider[]> {
@@ -55,7 +67,7 @@ export class ProviderRepository implements IProviderRepository {
     }
 
     async updateStatusById(id: string, newStatus: string): Promise<void> {
-        await Provider.findByIdAndUpdate(id,{status: newStatus})
+        await Provider.findByIdAndUpdate(id, { status: newStatus })
     }
 
     async getProviderByServiceId(filterQuery: ProviderFilterQuery): Promise<IProvider[]> {

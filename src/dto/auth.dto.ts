@@ -1,3 +1,15 @@
+import { Roles } from "../enums/userRoles";
+
+export interface ILoginResponseDTO {
+  id: string;
+  name: string;
+  email: string;
+  role: Roles;
+  isVerified: boolean;
+  profilePicture?: string;
+}
+
+
 export interface RegisterRequestBody {
   name: string;
   email: string;

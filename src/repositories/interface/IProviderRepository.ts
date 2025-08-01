@@ -4,6 +4,8 @@ import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from
 
 export interface IProviderRepository {
     createProvider(data: Partial<IProvider>): Promise<IProvider>;
+    findByEmail(email: string, includeOtpFields?: boolean): Promise<IProvider>;
+    update(provider: IProvider): Promise<IProvider>;
     getAllProviders(): Promise<IProvider[]>;
     findProvidersWithFilter(filter: any, skip: number, limit: number): Promise<IProvider[]>;
     countProviders(filter: any): Promise<number>;

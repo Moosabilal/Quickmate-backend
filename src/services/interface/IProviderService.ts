@@ -1,9 +1,12 @@
 import { IProvider } from "../../models/Providers";
 import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from "../../dto/provider.dto";
+import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
 
 
 export interface IProviderService {
-    registerProvider(data: IProvider): Promise<IProviderProfile>;
+    registerProvider(data: IProvider): Promise<{message: string, email: string}>;
+    verifyOtp(data: VerifyOtpRequestBody): Promise<{ provider?: IProviderProfile, user?: ILoginResponseDTO, message?: string }>
+    resendOtp(data: ResendOtpRequestBody): Promise<{ message: string }>
     getProviderWithAllDetails(): Promise<IProvider[]>;
     providersForAdmin(page: number, limit: number, search: string, status: string): Promise<{ data: IProviderForAdminResponce[], total: number, totalPages: number, currentPage: number }>;
     getFeaturedProviders(page: number, limit: number, search: string): Promise<{

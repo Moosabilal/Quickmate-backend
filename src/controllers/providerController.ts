@@ -6,6 +6,7 @@ import { uploadToCloudinary } from "../utils/cloudinaryUpload";
 import { IProviderProfile, IProviderRegisterRequest } from "../dto/provider.dto";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../dto/auth.dto";
 
 @injectable()
 export class ProviderController {
@@ -17,32 +18,30 @@ export class ProviderController {
     public register = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
-
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
                 profilePhoto?: Express.Multer.File[];
-                businessCertifications?: Express.Multer.File[];
+                // businessCertifications?: Express.Multer.File[];
             };
-
-            const _userId = req.user?.id
 
             const aadhaar = files?.aadhaarIdProof?.[0];
             const profile = files?.profilePhoto?.[0];
-            const certification = files?.businessCertifications?.[0];
+            // const certification = files?.businessCertifications?.[0];
 
             const baseUrl = process.env.CLOUDINARY_BASE_URL;
 
             const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '') : '';
             const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '') : '';
-            const certificationUrl = certification ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '') : '';
+            // const certificationUrl = certification ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '') : '';
 
             const formData = {
                 ...req.body,
                 timeSlot: JSON.parse(req.body.timeSlot),
-                verificationDocs: {
-                    aadhaarIdProof: aadhaarUrl,
-                    businessCertifications: certificationUrl,
-                },
+                // verificationDocs: {
+                //     aadhaarIdProof: aadhaarUrl,
+                //     businessCertifications: certificationUrl,
+                // },
+                aadhaarIdProof: aadhaarUrl,
                 availableDays: JSON.parse(req.body.availableDays),
                 profilePhoto: profileUrl,
                 userId: req.user?.id
@@ -58,18 +57,36 @@ export class ProviderController {
         }
     };
 
+    public verifyOtp = async (req: Request<{}, {}, VerifyOtpRequestBody>, res: Response, next: NextFunction) => {
+        try {
+            const response = await this.providerService.verifyOtp(req.body);
+            res.status(HttpStatusCode.OK).json(response);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public resendOtp = async (req: Request<{}, {}, ResendOtpRequestBody>, res: Response, next: NextFunction) => {
+        try {
+            const response = await this.providerService.resendOtp(req.body);
+            res.status(HttpStatusCode.OK).json(response);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     public updateProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
                 profilePhoto?: Express.Multer.File[];
-                businessCertifications?: Express.Multer.File[];
+                // businessCertifications?: Express.Multer.File[];
             };
 
             const aadhaar = files?.aadhaarIdProof?.[0];
             const profile = files?.profilePhoto?.[0];
-            const certification = files?.businessCertifications?.[0];
+            // const certification = files?.businessCertifications?.[0];
 
             const baseUrl = process.env.CLOUDINARY_BASE_URL;
 
@@ -79,9 +96,9 @@ export class ProviderController {
             const profileUrl = profile
                 ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '')
                 : undefined;
-            const certificationUrl = certification
-                ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '')
-                : undefined;
+            // const certificationUrl = certification
+            //     ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '')
+            //     : undefined;
 
             const updateData: Partial<IProviderProfile> = {
                 ...req.body,
@@ -90,15 +107,18 @@ export class ProviderController {
                 userId: req.user.id
             };
 
-            if (aadhaarUrl || certificationUrl) {
-                updateData.verificationDocs = {
-                    aadhaarIdProof: aadhaarUrl || req.body.existingAadhaarUrl,
-                    businessCertifications: certificationUrl || req.body.existingCertificationUrl,
-                };
-            }
+            // if (aadhaarUrl || certificationUrl) {
+            //     updateData.verificationDocs = {
+            //         aadhaarIdProof: aadhaarUrl || req.body.existingAadhaarUrl,
+            //         businessCertifications: certificationUrl || req.body.existingCertificationUrl,
+            //     };
+            // }
 
             if (profileUrl) {
                 updateData.profilePhoto = profileUrl;
+            }
+            if (aadhaarUrl) {
+                updateData.aadhaarIdProof = aadhaarUrl;
             }
 
             const updatedProvider = await this.providerService.updateProviderDetails(updateData);
