@@ -13,6 +13,7 @@ export interface IProviderRepository {
     updateProvider(updateData: Partial<IProviderProfile>): Promise<IProvider | null>;
     updateStatusById(id: string, newStatus: string): Promise<void>;
     getProviderByServiceId(filterQuery: ProviderFilterQuery): Promise<IProvider[]>;
+    getProviderId(userId: string): Promise<string>;
 
 
 }

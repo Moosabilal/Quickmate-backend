@@ -75,5 +75,10 @@ export class ProviderRepository implements IProviderRepository {
 
     }
 
+    async getProviderId(userId: string): Promise<string> {
+        const provider =  await Provider.findOne({userId}).select('_id')
+        return provider._id.toString()
+    }
+
 
 }

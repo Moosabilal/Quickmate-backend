@@ -21,12 +21,10 @@ export class ProviderController {
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
                 profilePhoto?: Express.Multer.File[];
-                // businessCertifications?: Express.Multer.File[];
             };
 
             const aadhaar = files?.aadhaarIdProof?.[0];
             const profile = files?.profilePhoto?.[0];
-            // const certification = files?.businessCertifications?.[0];
 
             const baseUrl = process.env.CLOUDINARY_BASE_URL;
 
@@ -39,7 +37,6 @@ export class ProviderController {
                 timeSlot: JSON.parse(req.body.timeSlot),
                 // verificationDocs: {
                 //     aadhaarIdProof: aadhaarUrl,
-                //     businessCertifications: certificationUrl,
                 // },
                 aadhaarIdProof: aadhaarUrl,
                 availableDays: JSON.parse(req.body.availableDays),
@@ -78,15 +75,15 @@ export class ProviderController {
     public updateProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
+            console.log('req.body ', req.body)
+
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
                 profilePhoto?: Express.Multer.File[];
-                // businessCertifications?: Express.Multer.File[];
             };
 
             const aadhaar = files?.aadhaarIdProof?.[0];
             const profile = files?.profilePhoto?.[0];
-            // const certification = files?.businessCertifications?.[0];
 
             const baseUrl = process.env.CLOUDINARY_BASE_URL;
 
@@ -96,23 +93,15 @@ export class ProviderController {
             const profileUrl = profile
                 ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '')
                 : undefined;
-            // const certificationUrl = certification
-            //     ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '')
-            //     : undefined;
 
             const updateData: Partial<IProviderProfile> = {
                 ...req.body,
+                serviceId: JSON.parse(req.body.serviceId),
                 timeSlot: JSON.parse(req.body.timeSlot),
                 availableDays: JSON.parse(req.body.availableDays || '[]'),
                 userId: req.user.id
             };
 
-            // if (aadhaarUrl || certificationUrl) {
-            //     updateData.verificationDocs = {
-            //         aadhaarIdProof: aadhaarUrl || req.body.existingAadhaarUrl,
-            //         businessCertifications: certificationUrl || req.body.existingCertificationUrl,
-            //     };
-            // }
 
             if (profileUrl) {
                 updateData.profilePhoto = profileUrl;
@@ -148,6 +137,15 @@ export class ProviderController {
             res.status(HttpStatusCode.OK).json(provider)
         } catch (error) {
             next(error);
+        }
+    }
+
+    public getServicesForAddPage = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const response = await this.providerService.getServicesForAddservice();
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
         }
     }
 

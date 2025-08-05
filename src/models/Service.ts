@@ -4,13 +4,18 @@ const ServiceSchema = new Schema(
   {
     description: {
       type: String,
-      required: true,
+      required: false,
     },
     title: {
       type: String,
       required: true,
     },
     categoryId: {
+      type: Types.ObjectId,
+      ref: 'Category',
+      required: true,
+    },
+    subCategoryId: {
       type: Types.ObjectId,
       ref: 'Category',
       required: true,
@@ -24,32 +29,37 @@ const ServiceSchema = new Schema(
       enum: ['PerHour', 'PerService'],
       required: true,
     },
+    duration: {
+      type: String,
+      
+    },
     providerId: {
       type: Types.ObjectId,
       ref: 'Provider',
       required: true,
     },
     status: {
-      type: String,
-      enum: ['active', 'inactive'],
-      default: 'inactive',
+      type: Boolean,
+      default: false,
     },
     price: {
       type: Number,
       required: true,
     },
-    // longitude: {
-    //   type: String,
-    //   required: true,
-    // },
-    // latitude: {
-    //   type: String,
-    //   required: true,
-    // },
+
+    experience: {
+      type: Number,
+      required: false
+    },
+
     businessCertification: {
       type: String,
       required: false,
     },
+    isApproved: {
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );

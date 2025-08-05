@@ -69,11 +69,6 @@ const ProviderSchema = new Schema({
         required: true
     },
 
-    // businessCertifications: { 
-    //     type: String, 
-    //     required: false 
-    // },
-
     profilePhoto: {
         type: String,
         required: false,

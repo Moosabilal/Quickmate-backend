@@ -10,6 +10,7 @@ export interface ICategoryRepository {
     findByNameAndParent(name: string, parentId: string | Types.ObjectId): Promise<ICategory | null>
     findAll(filter: any): Promise<ICategory[]>
     findAllSubcategories(p0: {}): Promise<ICategory[]>
+    getAllMainCategories(): Promise<ICategory[]>
     getAllCategories(): Promise<ICategory[]>
     update(id: string | Types.ObjectId, updateData: Partial<ICategoryInput>): Promise<ICategory | null>
     delete(id: string | Types.ObjectId): Promise<ICategory | null>

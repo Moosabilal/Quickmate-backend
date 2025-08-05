@@ -1,307 +1,8 @@
-[ERROR  ] - [Error] PATCH /api/provider/updateProviderStatus/68829405db9866957a7edd10 400 Invalid status. Allowed: Active, Suspended, Pending, Rejected -> Invalid status. Allowed: Active, Suspended, Pending, Rejected
-[ERROR  ] - [Error] PATCH /api/provider/updateProviderStatus/68829405db9866957a7edd10 400 Invalid status. Allowed: Active, Suspended, Pending, Rejected -> Invalid status. Allowed: Active, Suspended, Pending, Rejected
-[ERROR  ] - [Error] PATCH /api/provider/updateProviderStatus/68829405db9866957a7edd10 400 Invalid status. Allowed: Active, Suspended, Pending, Rejected -> Invalid status. Allowed: Active, Suspended, Pending, Rejected
-[ERROR  ] - [Error] PATCH /api/provider/updateProviderStatus/68829405db9866957a7edd10 400 Invalid status. Allowed: Active, Suspended, Pending, Rejected -> Invalid status. Allowed: Active, Suspended, Pending, Rejected
-[ERROR  ] - [Error] PATCH /api/provider/updateProviderStatus/68829405db9866957a7edd10 400 Invalid status. Allowed: Active, Suspended, Pending, Rejected -> Invalid status. Allowed: Active, Suspended, Pending, Rejected
-[ERROR  ] - [Error] PATCH /api/provider/updateProviderStatus/68829405db9866957a7edd10 400 Invalid status. Allowed: Active, Suspended, Pending, Rejected -> Invalid status. Allowed: Active, Suspended, Pending, Rejected
-[ERROR  ] - [Error] PATCH /api/provider/updateProviderStatus/68829405db9866957a7edd10 400 Invalid status. Allowed: Active, Suspended, Pending, Rejected -> Invalid status. Allowed: Active, Suspended, Pending, Rejected
-[ERROR  ] - [Error] PATCH /api/provider/updateProviderStatus/68829405db9866957a7edd10 400 Invalid status. Allowed: Active, Suspended, Pending, Rejected -> Invalid status. Allowed: Active, Suspended, Pending, Rejected
-[ERROR  ] - [Error] PATCH /api/provider/updateProviderStatus/68829405db9866957a7edd10 400 Invalid status. Allowed: Active, Suspended, Pending, Rejected -> Invalid status. Allowed: Active, Suspended, Pending, Rejected
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/687796e3039c42d2e78e1f29 404 provider not found -> provider not found
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider/68751818b0abc1e47522b42a 404 provider not found -> provider not found
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories/68751818b0abc1e47522b42a 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=101 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=101 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=101
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=102 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=102 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=102
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=103 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=103 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=103
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=104 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=104 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=104
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=105 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=105 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=105
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=106 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=106 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=106
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=107 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=107 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=107
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=106 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=106 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=106
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=105 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=105 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=105
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=104 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=104 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=104
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=103 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=103 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=103
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=102 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=102 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=102
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=101 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=101 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=101
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=99 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=99 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=99
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=98 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=98 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=98
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=97 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=97 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=97
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=Monday&time=&price=97 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=Monday&time=&price=97 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=Monday&time=&price=97
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=m&experience=0&day=Monday&time=&price=97 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=m&experience=0&day=Monday&time=&price=97 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=m&experience=0&day=Monday&time=&price=97
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=ma&experience=0&day=Monday&time=&price=97 404 Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=ma&experience=0&day=Monday&time=&price=97 -> Not Found - /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=ma&experience=0&day=Monday&time=&price=97
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=&experience=0&day=&time=&price=100 404 provider not found -> provider not found
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 404 provider not found -> provider not found
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 404 provider not found -> provider not found
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a 500 Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider" -> Cast to ObjectId failed for value "'68751818b0abc1e47522b42a'" (type string) at path "serviceId" for model "Provider"
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=kozhikode&day=Sunday 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=kozhikode&day=Sunday 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&area=kozhikode&day=Sunday 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&day=Sunday 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&day=Sunday 404 provider not found -> provider not found
-[ERROR  ] - [Error] GET /api/provider/getFilteredServiceProvider?serviceId=68751818b0abc1e47522b42a&day=Sunday 404 provider not found -> provider not found
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - [Error] POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
-[ERROR  ] - [Error] POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - [Error] GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
-[INFO   ] - Server running on port 5000
-[ERROR  ] - MongoDB connection error:
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 Operation `categories.find()` buffering timed out after 10000ms -> Operation `categories.find()` buffering timed out after 10000ms
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 Operation `categories.find()` buffering timed out after 10000ms -> Operation `categories.find()` buffering timed out after 10000ms
-[ERROR  ] - MongoDB connection error:
-[INFO   ] - Server running on port 5000
-[ERROR  ] - MongoDB connection error:
-[INFO   ] - tryiong to connect
-[INFO   ] - Server running on port 5000
-[INFO   ] - tryiong to connect
-[INFO   ] - Server running on port 5000
-[ERROR  ] - MongoDB connection error:
-[INFO   ] - tryiong to connect
+[ERROR  ] - POST /api/categories 500 Failed to upload image to Cloudinary. -> Failed to upload image to Cloudinary.
+[ERROR  ] - POST /api/categories 500 Failed to upload image to Cloudinary. -> Failed to upload image to Cloudinary.
+[ERROR  ] - POST /api/categories 500 Failed to upload image to Cloudinary. -> Failed to upload image to Cloudinary.
 [INFO   ] - Server running on port 5000
 [ERROR  ] - MongoDB connection error:
 [INFO   ] - Server running on port 5000
@@ -313,17 +14,6 @@
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/provider/register 500 Failed to upload image to Cloudinary. -> Failed to upload image to Cloudinary.
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
@@ -334,26 +24,6 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/provider/register 500 Provider validation failed: profilePhoto: Path `profilePhoto` is required. -> Provider validation failed: profilePhoto: Path `profilePhoto` is required.
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/provider/register 500 Cannot set properties of null (setting 'registrationOtp') -> Cannot set properties of null (setting 'registrationOtp')
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
@@ -364,7 +34,6 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/provider/register 500 Cannot set properties of null (setting 'registrationOtp') -> Cannot set properties of null (setting 'registrationOtp')
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
@@ -373,89 +42,310 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/provider/register 500 Cannot set properties of null (setting 'registrationOtp') -> Cannot set properties of null (setting 'registrationOtp')
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 197668 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/provider/register 500 Cannot set properties of null (setting 'registrationOtp') -> Cannot set properties of null (setting 'registrationOtp')
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 638881 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
-[ERROR  ] - POST /api/auth/verify-registration-otp 404 User not found. -> User not found.
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 994264 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 337950 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 Cast to Number failed for value "NaN" (type number) at path "commissionValue" -> Cast to Number failed for value "NaN" (type number) at path "commissionValue"
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&verification=undefined&rating=undefined&page=1&limit=2 404 No providers found. -> No providers found.
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 Cast to Number failed for value "NaN" (type number) at path "commissionValue" -> Cast to Number failed for value "NaN" (type number) at path "commissionValue"
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 Cast to Number failed for value "NaN" (type number) at path "commissionValue" -> Cast to Number failed for value "NaN" (type number) at path "commissionValue"
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 Cast to Number failed for value "NaN" (type number) at path "commissionValue" -> Cast to Number failed for value "NaN" (type number) at path "commissionValue"
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 Cast to Number failed for value "NaN" (type number) at path "commissionValue" -> Cast to Number failed for value "NaN" (type number) at path "commissionValue"
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 Cast to Number failed for value "NaN" (type number) at path "commissionValue" -> Cast to Number failed for value "NaN" (type number) at path "commissionValue"
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 Cast to Number failed for value "NaN" (type number) at path "commissionValue" -> Cast to Number failed for value "NaN" (type number) at path "commissionValue"
+[ERROR  ] - PUT /api/categories/689052218e590753867b2bcb 500 Cast to Number failed for value "NaN" (type number) at path "commissionValue" -> Cast to Number failed for value "NaN" (type number) at path "commissionValue"
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&verification=undefined&rating=undefined&page=1&limit=2 404 No providers found. -> No providers found.
+[INFO   ] - Sending verification email to habid@gmail.com with OTP: 588181 mail
+[INFO   ] - Verification OTP sent to habid@gmail.com
 [ERROR  ] - POST /api/provider/verify-registration-otp 400 Invalid OTP. Please try again. -> Invalid OTP. Please try again.
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 863371 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
-[ERROR  ] - POST /api/provider/verify-registration-otp 403 Something went wrong, Please contact admin -> Something went wrong, Please contact admin
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 409585 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
-[ERROR  ] - POST /api/provider/verify-registration-otp 403 Something went wrong, Please contact admin -> Something went wrong, Please contact admin
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 989134 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/provider/getProvider 500 Cannot read properties of null (reading '_id') -> Cannot read properties of null (reading '_id')
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 281922 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
-[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 266658 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 151254 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
-[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 937694 mail
-[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 Cannot read properties of null (reading 'toString') -> Cannot read properties of null (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 Cannot read properties of null (reading 'toString') -> Cannot read properties of null (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 Cannot read properties of null (reading 'toString') -> Cannot read properties of null (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 Cannot read properties of null (reading 'toString') -> Cannot read properties of null (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 Cannot set headers after they are sent to the client -> Cannot set headers after they are sent to the client
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/services/AddService 404 Not Found - /api/services/AddService -> Not Found - /api/services/AddService
+[ERROR  ] - POST /api/services/AddService 404 Not Found - /api/services/AddService -> Not Found - /api/services/AddService
+[ERROR  ] - POST /api/services/AddService 404 Not Found - /api/services/AddService -> Not Found - /api/services/AddService
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/AddService 404 Not Found - /api/services/AddService -> Not Found - /api/services/AddService
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/addService 500 Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required. -> Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required.
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/addService 500 Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required. -> Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/addService 500 status is not defined -> status is not defined
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/addService 500 Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required. -> Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/addService 500 Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required. -> Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/addService 500 Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required. -> Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required.
+[ERROR  ] - POST /api/services/addService 500 Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required. -> Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required.
+[ERROR  ] - POST /api/services/addService 500 Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required. -> Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required.
+[ERROR  ] - POST /api/services/addService 500 Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required. -> Service validation failed: price: Path `price` is required., providerId: Path `providerId` is required., priceUnit: Path `priceUnit` is required., basePrice: Path `basePrice` is required., subCategoryId: Path `subCategoryId` is required., categoryId: Path `categoryId` is required., title: Path `title` is required.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

@@ -1,4 +1,5 @@
 import { Schema, HydratedDocument, InferSchemaType, Types, model } from 'mongoose';
+import { CommissionTypes } from '../enums/CommissionType.enum';
 
 const CommissionRuleSchema = new Schema({
     categoryId: {
@@ -8,12 +9,13 @@ const CommissionRuleSchema = new Schema({
         unique: true,
         sparse: true,
     },
-    flatFee: {
-        type: Number,
+    commissionType: {
+        type: String,
+        enum: Object.values(CommissionTypes),
+        default: CommissionTypes.NONE,
         required: false,
-        min: 0,
     },
-    categoryCommission: {
+    commissionValue: {
         type: Number,
         required: false,
         min: 0,

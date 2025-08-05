@@ -8,13 +8,11 @@ import { ICategoryRepository } from '../../repositories/interface/ICategoryRepos
 import TYPES from '../../di/type';
 import { ICommissionRuleRepository } from '../../repositories/interface/ICommissonRuleRepository';
 import { ICategoryService } from '../interface/ICategoryService';
+import { CommissionTypes } from '../../enums/CommissionType.enum';
+import { CustomError } from '../../utils/CustomError';
+import { HttpStatusCode } from '../../enums/HttpStatusCode';
+import { toHomePageDTO } from '../../mappers/category.mapper';
 
-export interface ServiceCommissionRuleInput {
-    flatFee?: number;
-    categoryCommission?: number;
-    status?: boolean;
-    removeRule?: boolean;
-}
 
 @injectable()
 export class CategoryService implements ICategoryService {
@@ -29,30 +27,31 @@ export class CategoryService implements ICategoryService {
 
     async createCategory(
         categoryInput: ICategoryInput,
-        commissionRuleInput?: ServiceCommissionRuleInput
+        commissionRuleInput?: ICommissionRuleInput
     ): Promise<{ category: ICategoryResponse; commissionRule?: ICommissionRuleResponse }> {
 
         let parentObjectId: Types.ObjectId | null = null;
         if (categoryInput.parentId) {
             if (!Types.ObjectId.isValid(categoryInput.parentId)) {
-                throw new Error('Invalid parent category ID.');
+                throw new CustomError('Invalid parent category ID.',HttpStatusCode.BAD_REQUEST);
             }
+
             parentObjectId = new Types.ObjectId(categoryInput.parentId);
             const parentCategory = await this.categoryRepository.findById(parentObjectId);
             if (!parentCategory) {
-                throw new Error('Parent category not found.');
+                throw new CustomError('Parent category not found.', HttpStatusCode.NOT_FOUND);
             }
-
             const existingSubcategory = await this.categoryRepository.findByNameAndParent(categoryInput.name, parentObjectId);
             if (existingSubcategory) {
-                throw new Error('A subcategory with this name already exists under the specified parent.');
+                throw new CustomError('A subcategory with this name already exists under the specified parent.', HttpStatusCode.CONFLICT);
             }
         } else {
             const existingTopLevelCategory = await this.categoryRepository.findByName(categoryInput.name);
             if (existingTopLevelCategory) {
-                throw new Error('A top-level category with this name already exists.');
+                throw new CustomError('A top-level category with this name already exists.', HttpStatusCode.CONFLICT);
             }
         }
+
 
         const categoryDataToCreate: ICategoryInput = {
             ...categoryInput,
@@ -60,24 +59,21 @@ export class CategoryService implements ICategoryService {
             status: categoryInput.status ?? true,
         };
 
-
         const createdCategoryDoc = await this.categoryRepository.create(categoryDataToCreate);
 
         const categoryResponse: ICategoryResponse = createdCategoryDoc.toJSON() as unknown as ICategoryResponse;
 
         let createdCommissionRule: ICommissionRuleResponse | undefined;
 
-
         const ruleData: ICommissionRuleInput = {
             categoryId: createdCategoryDoc._id.toString(),
-            flatFee: commissionRuleInput.flatFee,
-            categoryCommission: commissionRuleInput.categoryCommission,
+            commissionType: commissionRuleInput.commissionType,
+            commissionValue: commissionRuleInput.commissionValue,
             status: commissionRuleInput.status ?? true,
         };
 
         const newRule = await this.commissionRuleRepository.create(ruleData);
         createdCommissionRule = newRule.toJSON() as unknown as ICommissionRuleResponse;
-
 
         return { category: categoryResponse, commissionRule: createdCommissionRule };
     }
@@ -85,7 +81,7 @@ export class CategoryService implements ICategoryService {
     async updateCategory(
         categoryId: string,
         updateCategoryInput: Partial<ICategoryInput>,
-        commissionRuleInput?: ServiceCommissionRuleInput
+        commissionRuleInput?: ICommissionRuleInput
     ): Promise<{ category: ICategoryResponse | null; commissionRule?: ICommissionRuleResponse | null }> {
         if (!Types.ObjectId.isValid(categoryId)) {
             throw new Error('Invalid category ID.');
@@ -142,11 +138,10 @@ export class CategoryService implements ICategoryService {
         const updatedCategory: ICategoryResponse | null = updatedCategoryDoc ? updatedCategoryDoc.toJSON() as unknown as ICategoryResponse : null;
 
         let updatedCommissionRule: ICommissionRuleResponse | null | undefined;
-
         if (commissionRuleInput !== undefined) {
             const existingRule = await this.commissionRuleRepository.findByCategoryId(categoryId);
 
-            if (commissionRuleInput.removeRule) {
+            if (commissionRuleInput.commissionType === CommissionTypes.NONE) {
                 if (existingRule) {
                     await this.commissionRuleRepository.delete(existingRule._id);
                     updatedCommissionRule = null;
@@ -154,8 +149,8 @@ export class CategoryService implements ICategoryService {
             } else {
                 const ruleData: ICommissionRuleInput = {
                     categoryId: categoryId,
-                    flatFee: commissionRuleInput.flatFee ?? 0,
-                    categoryCommission: commissionRuleInput.categoryCommission ?? 0,
+                    commissionType: commissionRuleInput.commissionType,
+                    commissionValue: commissionRuleInput.commissionValue,
                     status: commissionRuleInput.status ?? true,
                 };
 
@@ -206,11 +201,20 @@ export class CategoryService implements ICategoryService {
         };
     }
 
+    async getAllTopCategories(): Promise<IserviceResponse[]> {
+        const categories = await this.categoryRepository.getAllMainCategories()
+        if(!categories){
+            throw new CustomError("Service not found, Please try again later", HttpStatusCode.NOT_FOUND)
+        }
+        console.log('the cat')
+        return categories.map(category => toHomePageDTO(category))
+    
+    }
 
-    async getAllTopLevelCategoriesWithDetails(): Promise<Array<ICategoryResponse>> {
+
+    async getAllCategoriesWithDetails(): Promise<Array<ICategoryResponse>> {
         const topLevelCategoryDocs = await this.categoryRepository.findAll({ parentId: null });
         const subCategories = await this.categoryRepository.findAllSubcategories({});
-
         const resultPromises = topLevelCategoryDocs.map(async (catDoc) => {
             const category = catDoc.toJSON() as unknown as ICategoryResponse;
             const subCategoryCount = await this.categoryRepository.countSubcategories(catDoc._id);
@@ -234,7 +238,6 @@ export class CategoryService implements ICategoryService {
         if (!Types.ObjectId.isValid(parentId)) {
             throw new Error('Invalid parent ID.');
         }
-
         const subcategoryDocs = await this.categoryRepository.findAll({
             parentId: new Types.ObjectId(parentId),
         });
@@ -256,18 +259,13 @@ export class CategoryService implements ICategoryService {
                 const commissionRuleDoc = await this.commissionRuleRepository.findByCategoryId(doc._id);
                 const mappedSubCategoryForFrontend: ICategoryFormCombinedData = {
                     ...commonData,
-                    commissionType: 'none',
-                    commissionValue: '',
+                    commissionType: CommissionTypes.NONE,
+                    commissionValue: 0,
                     commissionStatus: false,
                 };
                 if (commissionRuleDoc) {
-                    if (commissionRuleDoc.categoryCommission !== undefined && commissionRuleDoc.categoryCommission !== null && commissionRuleDoc.categoryCommission !== 0) {
-                        mappedSubCategoryForFrontend.commissionType = 'percentage';
-                        mappedSubCategoryForFrontend.commissionValue = commissionRuleDoc.categoryCommission;
-                    } else if (commissionRuleDoc.flatFee !== undefined && commissionRuleDoc.flatFee !== null && commissionRuleDoc.flatFee !== 0) {
-                        mappedSubCategoryForFrontend.commissionType = 'flatFee';
-                        mappedSubCategoryForFrontend.commissionValue = commissionRuleDoc.flatFee;
-                    }
+                    mappedSubCategoryForFrontend.commissionType = commissionRuleDoc.commissionType;
+                    mappedSubCategoryForFrontend.commissionValue = commissionRuleDoc.commissionValue;
                     mappedSubCategoryForFrontend.commissionStatus = commissionRuleDoc.status ?? false;
                 }
                 return { ...mappedSubCategoryForFrontend };
@@ -276,9 +274,6 @@ export class CategoryService implements ICategoryService {
         return subcategoriesWithRule
 
     }
-
-
-
 
     async deleteCategory(categoryId: string): Promise<ICategoryResponse> {
         if (!Types.ObjectId.isValid(categoryId)) {

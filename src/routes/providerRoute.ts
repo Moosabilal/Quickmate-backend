@@ -8,7 +8,7 @@ import { ProviderController } from '../controllers/providerController';
 const router = express.Router();
 const providerController = container.get<ProviderController>(TYPES.ProviderController)
 
-const isProvider = [authenticateToken, authorizeRoles(['Provider'])];
+const isProvider = [authenticateToken, authorizeRoles(['ServiceProvider'])];
 
 
 
@@ -19,6 +19,7 @@ router.post('/updateProvider', authenticateToken, upload.fields([{ name: 'aadhaa
 router.get('/getProvider', providerController.getProvider)
 router.get('/getFeaturedProviders', providerController.featuredProviders)
 router.get('/getFilteredServiceProvider', providerController.getServiceProvider)
+router.get('/getServicesForAddPage', providerController.getServicesForAddPage)
 
 
 // admin

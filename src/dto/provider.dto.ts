@@ -18,11 +18,7 @@ export interface IProviderRegisterRequest {
     startTime: string;
     endTime: string;
   };
-
-  verificationDocs: {
-    aadhaarIdProof: string;
-    businessCertifications?: string;
-  };
+  aadhaarIdProof: string;
 
   profilePhoto: string;
 
@@ -87,4 +83,11 @@ export interface ProviderFilterQuery {
   'timeSlot.startTime'?: { $lte: string };
   'timeSlot.endTime'?: { $gte: string };
   price?: { $lte: number };
+}
+
+export interface IServiceAddPageResponse {
+  id: string;
+  name: string;
+  parentId: string | null;
+
 }

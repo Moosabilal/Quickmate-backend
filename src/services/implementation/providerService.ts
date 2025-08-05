@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider } from "../../models/Providers";
-import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from "../../dto/provider.dto";
+import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -15,7 +15,7 @@ import { sendVerificationEmail } from "../../utils/emailService";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
-import { toProviderDTO } from "../../mappers/provider.mapper";
+import { toProviderDTO, toServiceAddPage } from "../../mappers/provider.mapper";
 import { toLoginResponseDTO } from "../../mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
 
@@ -184,6 +184,7 @@ export class ProviderService implements IProviderService {
     }
 
     public async updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile> {
+        console.log('the update provider in service', updateData)
         const updatedProvider = await this.providerRepository.updateProvider(updateData)
         return {
             id: updatedProvider._id.toString(),
@@ -286,6 +287,16 @@ export class ProviderService implements IProviderService {
             totalPages: Math.ceil(total / limit),
             currentPage: page,
         };
+    }
+
+    public async getServicesForAddservice() : Promise<{mainCategories: IServiceAddPageResponse[], services: IServiceAddPageResponse[]}> {
+        const categories = await this.categoryRepository.getAllCategories()
+        const mainCategories = categories.filter(category => !category.parentId ).map(category => toServiceAddPage(category))
+        const services = categories.filter(category => !!category.parentId).map(category => toServiceAddPage(category))
+        return {
+            mainCategories,
+            services
+        }
     }
 
     public async fetchProviderById(token: string): Promise<IProviderProfile> {

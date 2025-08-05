@@ -1,5 +1,5 @@
 import { IProvider } from "../../models/Providers";
-import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from "../../dto/provider.dto";
+import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
 
 
@@ -15,6 +15,7 @@ export interface IProviderService {
         totalPages: number;
         currentPage: number;
     }>;
+    getServicesForAddservice() : Promise<{mainCategories: IServiceAddPageResponse[], services: IServiceAddPageResponse[]}>
     fetchProviderById(userId: string): Promise<IProviderProfile>;
     updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile>;
     updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;

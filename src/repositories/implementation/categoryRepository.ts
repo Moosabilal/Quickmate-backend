@@ -23,18 +23,22 @@ export class CategoryRepository implements ICategoryRepository {
     }
 
     async findById(id: string | Types.ObjectId): Promise<ICategory | null> {
-        return Category.findById({_id:id}).exec();
+        return await Category.findById({_id:id}).exec();
     }
 
  
     async findByName(name: string): Promise<ICategory | null> {
-        return Category.findOne({ name, parentId: null}).exec();
+        return await Category.findOne({ name, parentId: null}).exec();
     }
 
 
     async findByNameAndParent(name: string, parentId: string | Types.ObjectId): Promise<ICategory | null> {
         const parentObjectId = new Types.ObjectId(parentId);
-        return Category.findOne({ name, parentId: parentObjectId}).exec();
+        return await Category.findOne({ name, parentId: parentObjectId}).exec();
+    }
+
+    async getAllMainCategories(): Promise<ICategory[]> {
+        return await Category.find()
     }
 
     async findAll(filter: any = {}): Promise<ICategory[]> {
@@ -43,15 +47,15 @@ export class CategoryRepository implements ICategoryRepository {
             queryFilter.parentId = new Types.ObjectId(queryFilter.parentId);
              
         }
-        return Category.find(queryFilter).exec();
+        return await Category.find(queryFilter).exec();
     }
 
     async findAllSubcategories(p0: {}): Promise<ICategory[]> {
-        return Category.find({ parentId: { $ne: null} }).exec();
+        return await Category.find({ parentId: { $ne: null} }).exec();
     }
 
     async getAllCategories(): Promise<ICategory[]> {
-        return Category.find({})
+        return await Category.find({})
     }
 
 
@@ -66,17 +70,17 @@ export class CategoryRepository implements ICategoryRepository {
                 delete dataToUpdate.parentId;
             }
         }
-        return Category.findByIdAndUpdate(id, dataToUpdate, { new: true }).exec();
+        return await Category.findByIdAndUpdate(id, dataToUpdate, { new: true }).exec();
     }
 
 
     async delete(id: string | Types.ObjectId): Promise<ICategory | null> {
-        return Category.findByIdAndDelete(id).exec();
+        return await Category.findByIdAndDelete(id).exec();
     }
 
 
     async countSubcategories(parentId: string | Types.ObjectId): Promise<number> {
-        return Category.countDocuments({ parentId: new Types.ObjectId(parentId) }).exec();
+        return await Category.countDocuments({ parentId: new Types.ObjectId(parentId) }).exec();
     }
 
     async updateSubcategoriesStatus(parentId: string | Types.ObjectId, status: boolean): Promise<void> {

@@ -21,6 +21,9 @@ export class CommissionRuleRepository implements ICommissionRuleRepository {
     return CommissionRule.findOne({ categoryId: new Types.ObjectId(categoryId) }).exec();
   }
 
+  async getAllCommissions(): Promise<ICommissionRule[]> {
+    return CommissionRule.find()
+  }
 
 
   async findAll(filter: any): Promise<ICommissionRule[]> {

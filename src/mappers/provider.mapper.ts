@@ -1,5 +1,6 @@
 import { IProvider } from '../models/Providers';
-import { IProviderProfile } from '../dto/provider.dto';
+import { IProviderProfile, IServiceAddPageResponse } from '../dto/provider.dto';
+import { ICategory } from '../models/Categories';
 
 export function toProviderDTO(provider: IProvider): IProviderProfile {
   return {
@@ -21,4 +22,12 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     rating: provider.rating,
     isVerified: provider.isVerified,
   };
+}
+
+export function toServiceAddPage(category: ICategory): IServiceAddPageResponse {
+  return {
+    id: category._id.toString(),
+    name: category.name,
+    parentId: category.parentId ? category.parentId.toString() : null
+  }
 }

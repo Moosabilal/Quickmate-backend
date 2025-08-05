@@ -10,6 +10,7 @@ import { inject, injectable } from 'inversify';
 import TYPES from '../di/type';
 import { ICategoryService } from '../services/interface/ICategoryService';
 import { HttpStatusCode } from '../enums/HttpStatusCode';
+import { CommissionTypes } from '../enums/CommissionType.enum';
 
 interface AuthRequest extends Request {
   user?: { id: string; role: string };
@@ -17,10 +18,9 @@ interface AuthRequest extends Request {
 }
 
 type CommissionRuleInputController = {
-  flatFee?: number;
-  categoryCommission?: number;
+  commissionType: CommissionTypes;
+  commissionValue: number;
   status?: boolean;
-  removeRule?: boolean;
 };
 
 @injectable()
@@ -82,27 +82,11 @@ export class CategoryController {
 
       const parsedCommissionValue = commissionValue !== '' ? Number(commissionValue) : undefined;
 
-      if (commissionType === 'none') {
         commissionRuleInputForService = {
-          removeRule: true,
-          status: commissionStatus,
-        };
-      } else if (commissionType && parsedCommissionValue !== undefined) {
-        if (commissionType === 'percentage') {
-          commissionRuleInputForService = {
-            categoryCommission: parsedCommissionValue,
-            flatFee: undefined,
-            status: commissionStatus,
-          };
-        } else if (commissionType === 'flatFee') {
-          commissionRuleInputForService = {
-            flatFee: parsedCommissionValue,
-            categoryCommission: undefined,
-            status: commissionStatus,
-          };
+          commissionType: commissionType,
+          commissionValue: parsedCommissionValue,
+          status: commissionStatus
         }
-      }
-
 
       const { category, commissionRule } = await this.categoryService.createCategory(
         categoryInput,
@@ -184,28 +168,14 @@ export class CategoryController {
 
 
       const parsedCommissionValue = commissionValue !== '' ? Number(commissionValue) : undefined;
-      if (commissionType === 'none') {
+      
         commissionRuleInputForService = {
-          removeRule: true,
-          status: commissionStatus,
-        };
-      } else if (commissionType && parsedCommissionValue !== undefined) {
-
-        if (commissionType === 'percentage') {
-          commissionRuleInputForService = {
-            categoryCommission: parsedCommissionValue,
-            flatFee: undefined,
-            status: commissionStatus,
-          };
-        } else if (commissionType === 'flatFee') {
-          commissionRuleInputForService = {
-            flatFee: parsedCommissionValue,
-            categoryCommission: undefined,
-            status: commissionStatus,
-          };
+          commissionType: commissionType,
+          commissionValue: parsedCommissionValue,
+          status: commissionStatus
         }
 
-      }
+      
 
 
       const { category, commissionRule } = await this.categoryService.updateCategory(
@@ -269,20 +239,15 @@ export class CategoryController {
 
       const mappedCategoryForFrontend: ICategoryFormCombinedData = {
         ...commonData,
-        commissionType: 'none',
-        commissionValue: '',
+        commissionType: CommissionTypes.NONE,
+        commissionValue: 0,
         commissionStatus: false,
       };
 
 
       if (commissionRule) {
-        if (commissionRule.categoryCommission !== undefined && commissionRule.categoryCommission !== null && commissionRule.categoryCommission !== 0) {
-          mappedCategoryForFrontend.commissionType = 'percentage';
-          mappedCategoryForFrontend.commissionValue = commissionRule.categoryCommission;
-        } else if (commissionRule.flatFee !== undefined && commissionRule.flatFee !== null && commissionRule.flatFee !== 0) {
-          mappedCategoryForFrontend.commissionType = 'flatFee';
-          mappedCategoryForFrontend.commissionValue = commissionRule.flatFee;
-        }
+        mappedCategoryForFrontend.commissionType = commissionRule.commissionType;
+        mappedCategoryForFrontend.commissionValue = commissionRule.commissionValue;
         mappedCategoryForFrontend.commissionStatus = commissionRule.status ?? false;
       }
       res.status(HttpStatusCode.OK).json({
@@ -300,27 +265,21 @@ export class CategoryController {
     }
   };
 
+  getAllMainCategories = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log('it scoming but error')
+      const response = await this.categoryService.getAllTopCategories()
+      console.log('the top response', response)
+    } catch (error) {
+      next(error)
+    }
+  }
+
 
   getAllCategories = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { parentId } = req.query;
-
       let categories: ICategory[] | ICategoryResponse[] | ICategoryFormCombinedData[];
-
-      if (parentId) {
-        categories = await this.categoryService.getAllSubcategories(parentId.toString());
-        const mappedSubcategories = (categories as ICategoryFormCombinedData[]).map(cat => ({
-          _id: cat._id.toString(),
-          name: cat.name,
-          description: cat.description || '',
-          iconUrl: cat.iconUrl || '',
-          status: cat.status ?? false,
-          parentId: cat.parentId ? cat.parentId.toString() : null,
-        }));
-        res.status(HttpStatusCode.OK).json(mappedSubcategories);
-
-      } else {
-        categories = await this.categoryService.getAllTopLevelCategoriesWithDetails();
+        categories = await this.categoryService.getAllCategoriesWithDetails();
 
         const mappedCategories = categories.map(cat => {
           const hasCommissionRule = (obj: any): obj is { commissionRule: any } =>
@@ -331,13 +290,8 @@ export class CategoryController {
           let commissionStatus = false;
 
           if (hasCommissionRule(cat)) {
-            if (cat.commissionRule.categoryCommission !== 0 && cat.commissionRule.categoryCommission !== null && cat.commissionRule.categoryCommission !== undefined) {
-              commissionType = 'percentage';
-              commissionValue = cat.commissionRule.categoryCommission;
-            } else if (cat.commissionRule.flatFee !== undefined && cat.commissionRule.flatFee !== undefined && cat.commissionRule.flatFee !== null) {
-              commissionType = 'flatFee';
-              commissionValue = cat.commissionRule.flatFee;
-            }
+            commissionType = cat.commissionRule.commissionType;
+            commissionValue = cat.commissionRule.commissionValue;
             commissionStatus = cat.commissionRule.status ?? false;
           }
 
@@ -357,7 +311,7 @@ export class CategoryController {
           };
         });
         res.status(HttpStatusCode.OK).json(mappedCategories);
-      }
+      
       return;
     } catch (error: any) {
       next(error);
