@@ -349,3 +349,222 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/68905cc463c12f6ec992d71f 500 Cannot read properties of undefined (reading 'findByIds') -> Cannot read properties of undefined (reading 'findByIds')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/68905cc463c12f6ec992d71f 500 Cannot read properties of undefined (reading 'findByIds') -> Cannot read properties of undefined (reading 'findByIds')
+[ERROR  ] - GET /api/services/getServicesForProvider/68905cc463c12f6ec992d71f 500 Cannot read properties of undefined (reading 'findByIds') -> Cannot read properties of undefined (reading 'findByIds')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/undefined 404 Not Found - /api/services/getServiceById/undefined -> Not Found - /api/services/getServiceById/undefined
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 404 Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 -> Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 404 Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 -> Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 404 Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 -> Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 404 Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 -> Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 404 Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 -> Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 404 Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 -> Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 404 Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 -> Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 404 Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 -> Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 404 Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 -> Not Found - /api/services/getServiceById/6892aa6e4e1109e8aaed83a1
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of null (reading 'name') -> Cannot read properties of null (reading 'name')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of null (reading 'name') -> Cannot read properties of null (reading 'name')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of null (reading 'name') -> Cannot read properties of null (reading 'name')
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of null (reading 'name') -> Cannot read properties of null (reading 'name')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServiceById/6892aa6e4e1109e8aaed83a1 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'status') -> Cannot read properties of undefined (reading 'status')
+[ERROR  ] - POST /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'status') -> Cannot read properties of undefined (reading 'status')
+[ERROR  ] - POST /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'status') -> Cannot read properties of undefined (reading 'status')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'status') -> Cannot read properties of undefined (reading 'status')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'status') -> Cannot read properties of undefined (reading 'status')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'status') -> Cannot read properties of undefined (reading 'status')
+[ERROR  ] - PUT /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'status') -> Cannot read properties of undefined (reading 'status')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'status') -> Cannot read properties of undefined (reading 'status')
+[ERROR  ] - PUT /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'status') -> Cannot read properties of undefined (reading 'status')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'user') -> Cannot read properties of undefined (reading 'user')
+[ERROR  ] - PUT /api/services/updateService/6892aa6e4e1109e8aaed83a1 500 Cannot read properties of undefined (reading 'user') -> Cannot read properties of undefined (reading 'user')
+[ERROR  ] - PUT /api/services/updateService/6892aa6e4e1109e8aaed83a11 500 Cannot read properties of undefined (reading 'user') -> Cannot read properties of undefined (reading 'user')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/services/updateService/6892aa6e4e1109e8aaed83a11 500 Cast to ObjectId failed for value "6892aa6e4e1109e8aaed83a11" (type string) at path "_id" for model "Service" -> Cast to ObjectId failed for value "6892aa6e4e1109e8aaed83a11" (type string) at path "_id" for model "Service"
+[ERROR  ] - PUT /api/services/updateService/6892aa6e4e1109e8aaed83a11 500 Cast to ObjectId failed for value "6892aa6e4e1109e8aaed83a11" (type string) at path "_id" for model "Service" -> Cast to ObjectId failed for value "6892aa6e4e1109e8aaed83a11" (type string) at path "_id" for model "Service"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/

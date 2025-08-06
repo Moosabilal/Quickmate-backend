@@ -33,6 +33,8 @@ import { IServiceService } from '../services/interface/IServiceService';
 import { ServiceService } from '../services/implementation/serviceService';
 import { IServiceRepository } from '../repositories/interface/IServiceRepository';
 import { ServiceRepository } from '../repositories/implementation/serviceRepository';
+import { IBaseRepository } from '../repositories/interface/base/IBaseRepository';
+import { BaseRepository } from '../repositories/implementation/base/BaseRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)

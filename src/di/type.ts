@@ -1,3 +1,4 @@
+import { BaseRepository } from "../repositories/implementation/base/BaseRepository"
 
 const TYPES = {
     AuthController: Symbol.for('AuthController'),

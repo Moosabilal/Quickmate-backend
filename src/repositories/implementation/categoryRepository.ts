@@ -1,40 +1,45 @@
 import { injectable } from 'inversify';
-import { Category, ICategory } from '../../models/Categories'; 
-import { ICategoryInput } from '../../dto/category.dto'; 
+import { Category, ICategory } from '../../models/Categories';
+import { ICategoryInput } from '../../dto/category.dto';
 import { Types } from 'mongoose';
 import { ICategoryRepository } from '../interface/ICategoryRepository';
+import { BaseRepository } from './base/BaseRepository';
 
 @injectable()
-export class CategoryRepository implements ICategoryRepository {
+export class CategoryRepository extends BaseRepository<ICategory> implements ICategoryRepository {
 
-    async create(categoryData: ICategoryInput): Promise<ICategory> {
-        const dataToSave = { ...categoryData };
-        if (dataToSave.parentId && typeof dataToSave.parentId === 'string') {
-            dataToSave.parentId = new Types.ObjectId(dataToSave.parentId);
-        } else if (dataToSave.parentId === null) {
-             dataToSave.parentId = null; 
-        } else {
-             delete dataToSave.parentId; 
-        }
-
-        const category = new Category(dataToSave);
-        await category.save();
-        return category;
+    constructor() {
+        super(Category)
     }
+
+    // async create(categoryData: ICategoryInput): Promise<ICategory> {
+    //     const dataToSave = { ...categoryData };
+    //     if (dataToSave.parentId && typeof dataToSave.parentId === 'string') {
+    //         dataToSave.parentId = new Types.ObjectId(dataToSave.parentId);
+    //     } else if (dataToSave.parentId === null) {
+    //         dataToSave.parentId = null;
+    //     } else {
+    //         delete dataToSave.parentId;
+    //     }
+
+    //     const category = new Category(dataToSave);
+    //     await category.save();
+    //     return category;
+    // }
 
     async findById(id: string | Types.ObjectId): Promise<ICategory | null> {
-        return await Category.findById({_id:id}).exec();
+        return await Category.findById({ _id: id }).exec();
     }
 
- 
+
     async findByName(name: string): Promise<ICategory | null> {
-        return await Category.findOne({ name, parentId: null}).exec();
+        return await Category.findOne({ name, parentId: null }).exec();
     }
 
 
     async findByNameAndParent(name: string, parentId: string | Types.ObjectId): Promise<ICategory | null> {
         const parentObjectId = new Types.ObjectId(parentId);
-        return await Category.findOne({ name, parentId: parentObjectId}).exec();
+        return await Category.findOne({ name, parentId: parentObjectId }).exec();
     }
 
     async getAllMainCategories(): Promise<ICategory[]> {
@@ -45,13 +50,13 @@ export class CategoryRepository implements ICategoryRepository {
         const queryFilter = { ...filter };
         if (queryFilter.parentId && typeof queryFilter.parentId === 'string') {
             queryFilter.parentId = new Types.ObjectId(queryFilter.parentId);
-             
+
         }
         return await Category.find(queryFilter).exec();
     }
 
     async findAllSubcategories(p0: {}): Promise<ICategory[]> {
-        return await Category.find({ parentId: { $ne: null} }).exec();
+        return await Category.find({ parentId: { $ne: null } }).exec();
     }
 
     async getAllCategories(): Promise<ICategory[]> {
@@ -63,7 +68,7 @@ export class CategoryRepository implements ICategoryRepository {
         const dataToUpdate = { ...updateData };
         if (dataToUpdate.parentId !== undefined) {
             if (dataToUpdate.parentId === null) {
-                dataToUpdate.parentId = null; 
+                dataToUpdate.parentId = null;
             } else if (typeof dataToUpdate.parentId === 'string' && Types.ObjectId.isValid(dataToUpdate.parentId)) {
                 dataToUpdate.parentId = new Types.ObjectId(dataToUpdate.parentId);
             } else {
@@ -95,5 +100,10 @@ export class CategoryRepository implements ICategoryRepository {
     async countOfSubCategories(filter: any): Promise<number> {
         return await Category.countDocuments(filter).exec()
     }
+
+    async findByIds(ids: string[]): Promise<ICategory[]> {
+        return Category.find({ _id: { $in: ids } });
+    }
+
 
 }

@@ -2,7 +2,9 @@ import { CommissionRule, ICommissionRule } from '../../models/Commission';
 import { ICommissionRuleInput } from '../../dto/category.dto'; 
 import { Types } from 'mongoose';
 import { ICommissionRuleRepository } from '../interface/ICommissonRuleRepository';
+import { injectable } from 'inversify';
 
+@injectable()
 export class CommissionRuleRepository implements ICommissionRuleRepository {
 
   async create(ruleData: ICommissionRuleInput): Promise<ICommissionRule> {

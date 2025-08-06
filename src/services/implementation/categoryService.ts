@@ -59,7 +59,7 @@ export class CategoryService implements ICategoryService {
             status: categoryInput.status ?? true,
         };
 
-        const createdCategoryDoc = await this.categoryRepository.create(categoryDataToCreate);
+        const createdCategoryDoc = await this.categoryRepository.create(categoryDataToCreate as Partial<ICategory>);
 
         const categoryResponse: ICategoryResponse = createdCategoryDoc.toJSON() as unknown as ICategoryResponse;
 

@@ -1,10 +1,11 @@
 import { Types } from "mongoose";
 import { ICategory } from "../../models/Categories";
 import { ICategoryInput } from "../../dto/category.dto";
+import { IBaseRepository } from "./base/IBaseRepository";
 
 
-export interface ICategoryRepository {
-    create(categoryData: ICategoryInput): Promise<ICategory>
+export interface ICategoryRepository extends IBaseRepository<ICategory> {
+    // create(categoryData: ICategoryInput): Promise<ICategory>
     findById(id: string | Types.ObjectId): Promise<ICategory | null>
     findByName(name: string): Promise<ICategory | null>
     findByNameAndParent(name: string, parentId: string | Types.ObjectId): Promise<ICategory | null>
@@ -18,5 +19,6 @@ export interface ICategoryRepository {
     updateSubcategoriesStatus(parentId: string | Types.ObjectId, status: boolean): Promise<void>
     findAllSubCategories(filter: any, skip: number, limit: number): Promise<ICategory[]>;
     countOfSubCategories(filter: any): Promise<number>;
+    findByIds(ids: string[]): Promise<ICategory[]>;
 
 }   

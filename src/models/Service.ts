@@ -1,4 +1,5 @@
 import mongoose, { Schema, Types, InferSchemaType, HydratedDocument } from 'mongoose';
+import { ServicesPriceUnit } from '../enums/Services.enum';
 
 const ServiceSchema = new Schema(
   {
@@ -26,7 +27,8 @@ const ServiceSchema = new Schema(
     },
     priceUnit: {
       type: String,
-      enum: ['PerHour', 'PerService'],
+      enum: ServicesPriceUnit,
+      default: ServicesPriceUnit.PERSERVICE,
       required: true,
     },
     duration: {

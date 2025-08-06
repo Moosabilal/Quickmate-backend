@@ -5,24 +5,13 @@ import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
 import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../dto/provider.dto";
 import { IProviderRepository } from "../interface/IProviderRepository";
+import { injectable } from "inversify";
 
-
+@injectable()
 export class ProviderRepository implements IProviderRepository {
     async createProvider(data: Partial<IProvider>): Promise<IProvider> {
         const provider = new Provider(data);
         await provider.save();
-        // if (data.userId) {
-        //     const updatedUser = await User.findByIdAndUpdate(
-        //         data.userId,
-        //         { role: 'ServiceProvider' },
-        //         { new: true }
-        //     );
-
-        //     if (!updatedUser) {
-        //         throw new Error('User not found while updating role.');
-        //     }
-        // }
-
         return provider;
 
     }
