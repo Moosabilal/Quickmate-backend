@@ -33,12 +33,11 @@ export interface IProviderForAdminResponce {
   fullName: string;
   phoneNumber: string;
   email: string;
-  serviceId: string;
   serviceArea: string;
   profilePhoto: string;
   status: string;
   serviceName?: string;
-  serviceCategoryId?: string
+  serviceOffered?: string[]
 
 }
 
@@ -90,4 +89,27 @@ export interface IServiceAddPageResponse {
   name: string;
   parentId: string | null;
 
+}
+
+
+export interface IBackendProvider {
+  _id: string;
+  fullName: string;
+  phoneNumber: string;
+  email: string;
+  profilePhoto: string;
+  serviceName?: string;
+  serviceArea: string;
+  experience: number;
+  timeSlot: {
+    startTime: string;
+    endTime: string;
+  };
+  availableDays: string[];
+  status: string;
+  earnings: number;
+  price: number;
+  totalBookings: number;
+  rating?: number;
+  reviews?: number;
 }

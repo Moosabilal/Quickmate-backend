@@ -6,9 +6,15 @@ import User from "../../models/User";
 import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../dto/provider.dto";
 import { IProviderRepository } from "../interface/IProviderRepository";
 import { injectable } from "inversify";
+import { BaseRepository } from "./base/BaseRepository";
 
 @injectable()
-export class ProviderRepository implements IProviderRepository {
+export class ProviderRepository extends BaseRepository<IProvider> implements IProviderRepository {
+
+    constructor() {
+        super(Provider)
+    }
+
     async createProvider(data: Partial<IProvider>): Promise<IProvider> {
         const provider = new Provider(data);
         await provider.save();
@@ -24,9 +30,9 @@ export class ProviderRepository implements IProviderRepository {
         return await query.exec();
     }
 
-    async update(provider: IProvider): Promise<IProvider> {
-        return await provider.save()
-    }
+    // async update(provider: IProvider): Promise<IProvider> {
+    //     return await provider.save()
+    // }
 
     async updateProvider(updateData: Partial<IProviderProfile>): Promise<IProvider | null> {
         const data = await Provider.findOneAndUpdate({ userId: updateData.userId }, updateData, { new: true });

@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider } from "../../models/Providers";
-import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
+import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -18,6 +18,8 @@ import { Roles } from "../../enums/userRoles";
 import { toProviderDTO, toServiceAddPage } from "../../mappers/provider.mapper";
 import { toLoginResponseDTO } from "../../mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
+import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
+import { IService } from "../../models/Service";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
@@ -27,16 +29,19 @@ const RESEND_COOLDOWN_SECONDS = 30;
 @injectable()
 export class ProviderService implements IProviderService {
     private providerRepository: IProviderRepository
-    private categoryRepository: ICategoryRepository;
+    private serviceRepository: IServiceRepository;
     private userRepository: IUserRepository
+    private categoryRepository: ICategoryRepository;
 
     constructor(@inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
-        @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
-        @inject(TYPES.UserRepository) userRepository: IUserRepository
+        @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
+        @inject(TYPES.UserRepository) userRepository: IUserRepository,
+        @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository
     ) {
         this.providerRepository = providerRepository
-        this.categoryRepository = categoryRepository
+        this.serviceRepository = serviceRepository
         this.userRepository = userRepository
+        this.categoryRepository = categoryRepository
     }
 
     public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
@@ -60,36 +65,13 @@ export class ProviderService implements IProviderService {
         console.log('the otop is generating')
 
         const otp = generateOTP();
-        console.log('the otp', provider)
 
         provider.registrationOtp = otp;
         provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         provider.registrationOtpAttempts = 0;
-        console.log('the provider is updateing')
-        await this.providerRepository.update(provider);
-        console.log('the provider is udpated successfully')
-        console.log('sending email')
+        await this.providerRepository.update(provider.id,provider);
         await sendVerificationEmail(provider.email, otp);
 
-        // return {
-        //     id: savedProvider._id.toString(),
-        //     userId: savedProvider.userId.toString(),
-        //     fullName: savedProvider.fullName,
-        //     phoneNumber: savedProvider.phoneNumber,
-        //     email: savedProvider.email,
-        //     serviceId: savedProvider.serviceId.toString(),
-        //     serviceLocation: savedProvider.serviceLocation,
-        //     serviceArea: savedProvider.serviceArea,
-        //     profilePhoto: savedProvider.profilePhoto,
-        //     price: savedProvider.price,
-        //     status: savedProvider.status,
-        //     aadhaarIdProof: savedProvider.aadhaarIdProof,
-        //     // experience: savedProvider.experience,
-        //     timeSlot: savedProvider.timeSlot,
-        //     // verificationDocs: savedProvider.verificationDocs,
-        //     availableDays: savedProvider.availableDays
-
-        // }
 
         return {
             message: 'Registration successful! An OTP has been sent to your email for verification.',
@@ -117,7 +99,7 @@ export class ProviderService implements IProviderService {
 
         if (!provider.registrationOtp || provider.registrationOtp !== otp) {
             provider.registrationOtpAttempts = (typeof provider.registrationOtpAttempts === 'number' ? provider.registrationOtpAttempts : 0) + 1;
-            await this.providerRepository.update(provider);
+            await this.providerRepository.update(provider.id, provider);
             throw new CustomError('Invalid OTP. Please try again.', HttpStatusCode.BAD_REQUEST);
         }
 
@@ -125,7 +107,7 @@ export class ProviderService implements IProviderService {
             provider.registrationOtp = undefined;
             provider.registrationOtpExpires = undefined;
             provider.registrationOtpAttempts = 0;
-            await this.providerRepository.update(provider);
+            await this.providerRepository.update(provider.id, provider);
             throw new CustomError('OTP has expired. Please request a new one.', HttpStatusCode.BAD_REQUEST);
         }
 
@@ -133,7 +115,7 @@ export class ProviderService implements IProviderService {
         provider.registrationOtp = undefined;
         provider.registrationOtpExpires = undefined;
         provider.registrationOtpAttempts = 0;
-        const updatedProvider = await this.providerRepository.update(provider);
+        const updatedProvider = await this.providerRepository.update(provider.id, provider);
 
         const userId = provider.userId.toString()
         const user = await this.userRepository.findById(userId)
@@ -176,7 +158,7 @@ export class ProviderService implements IProviderService {
         provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         provider.registrationOtpAttempts = 0;
 
-        await this.providerRepository.update(provider);
+        await this.providerRepository.update(provider.id, provider);
 
         await sendVerificationEmail(email, newOtp);
 
@@ -202,7 +184,7 @@ export class ProviderService implements IProviderService {
             // experience: updatedProvider.experience,
             timeSlot: updatedProvider.timeSlot,
             // verificationDocs: updatedProvider.verificationDocs,
-            availableDays: updatedProvider.availableDays, 
+            availableDays: updatedProvider.availableDays,
             earnings: updatedProvider.earnings,
             totalBookings: updatedProvider.totalBookings,
             payoutPending: updatedProvider.payoutPending,
@@ -262,24 +244,33 @@ export class ProviderService implements IProviderService {
             throw error;
         }
 
-        const categories = await this.categoryRepository.getAllCategories();
-        const categoryMap = new Map(categories.map(cat => [cat._id.toString(), cat]));
+        const providerIds = providers.map(p => p._id);
+        const services = await this.serviceRepository.findAll({ providerId: { $in: providerIds } });
+
+        const serviceMap = new Map<string, string[]>();
+        for (const service of services) {
+            const key = service.providerId.toString();
+            if (!serviceMap.has(key)) {
+                serviceMap.set(key, []);
+            }
+            serviceMap.get(key)!.push(service.title);
+        }
 
         const data = providers.map(provider => {
-            const category = categoryMap.get(provider.serviceId.toString());
+            const providerIdStr = provider._id.toString();
             return {
-                id: provider._id.toString(),
+                id: providerIdStr,
                 userId: provider.userId.toString(),
                 fullName: provider.fullName,
                 phoneNumber: provider.phoneNumber,
                 email: provider.email,
-                serviceId: provider.serviceId.toString(),
                 serviceArea: provider.serviceArea,
                 profilePhoto: provider.profilePhoto,
                 status: provider.status,
-                servicesOffered: category?.name || null,
+                serviceOffered: serviceMap.get(providerIdStr) || [],
             };
         });
+
 
         return {
             data,
@@ -289,9 +280,9 @@ export class ProviderService implements IProviderService {
         };
     }
 
-    public async getServicesForAddservice() : Promise<{mainCategories: IServiceAddPageResponse[], services: IServiceAddPageResponse[]}> {
+    public async getServicesForAddservice(): Promise<{ mainCategories: IServiceAddPageResponse[], services: IServiceAddPageResponse[] }> {
         const categories = await this.categoryRepository.getAllCategories()
-        const mainCategories = categories.filter(category => !category.parentId ).map(category => toServiceAddPage(category))
+        const mainCategories = categories.filter(category => !category.parentId).map(category => toServiceAddPage(category))
         const services = categories.filter(category => !!category.parentId).map(category => toServiceAddPage(category))
         return {
             mainCategories,
@@ -376,36 +367,87 @@ export class ProviderService implements IProviderService {
         return { message: "provider Status updated" }
     }
 
-    public async getProviderwithFilters(serviceId: string, filters: { area?: string; experience?: number; day?: string; time?: string; price?: number }): Promise<IProvider[]> {
-        const filterQuery: any = {
-            serviceId: new mongoose.Types.ObjectId(serviceId),
-        };
-
-        if (filters.area) {
-            filterQuery.serviceArea = { $regex: new RegExp(filters.area, 'i') };
-        }
-
-        if (filters.experience) {
-            filterQuery.experience = { $gte: filters.experience };
-        }
-
-        if (filters.day) {
-            filterQuery.availableDays = filters.day;
-        }
-
-        if (filters.time) {
-            filterQuery['timeSlot.startTime'] = { $lte: filters.time };
-            filterQuery['timeSlot.endTime'] = { $gte: filters.time };
-        }
-
-        if (filters.price) {
-            filterQuery['price'] = { $lte: filters.price };
-        }
-        const provider = await this.providerRepository.getProviderByServiceId(filterQuery)
-
-        return provider
-
+    public async getProviderwithFilters(
+    serviceId: string,
+    filters: {
+        area?: string;
+        experience?: number;
+        day?: string;
+        time?: string;
+        price?: number;
     }
+): Promise<IBackendProvider[]> {
+    const serviceFilter: any = {
+        subCategoryId: serviceId,
+    };
+
+    if (filters.experience) {
+        serviceFilter.experience = { $gte: filters.experience };
+    }
+
+    if (filters.price) {
+        serviceFilter.price = { $lte: filters.price };
+    }
+
+    const services = await this.serviceRepository.findAll(serviceFilter);
+
+    if (!services || services.length === 0) return [];
+
+    const servicesByProvider = new Map<string, IService[]>();
+    services.forEach(service => {
+        const pid = service.providerId.toString();
+        if (!servicesByProvider.has(pid)) {
+            servicesByProvider.set(pid, []);
+        }
+        servicesByProvider.get(pid)!.push(service);
+    });
+
+    const providerIds = Array.from(servicesByProvider.keys());
+
+    const providerFilter: any = { _id: { $in: providerIds.map(id => new mongoose.Types.ObjectId(id)) } };
+
+    if (filters.area) {
+        providerFilter.serviceArea = { $regex: new RegExp(filters.area, 'i') };
+    }
+
+    if (filters.day) {
+        providerFilter.availableDays = filters.day;
+    }
+
+    if (filters.time) {
+        providerFilter['timeSlot.startTime'] = { $lte: filters.time };
+        providerFilter['timeSlot.endTime'] = { $gte: filters.time };
+    }
+
+    const providers = await this.providerRepository.findAll(providerFilter);
+
+    const result: IBackendProvider[] = providers.map(provider => {
+        const providerServices = servicesByProvider.get(provider._id.toString()) || [];
+
+        const primaryService = providerServices[0];
+
+        return {
+            _id: provider._id.toString(),
+            fullName: provider.fullName,
+            phoneNumber: provider.phoneNumber,
+            email: provider.email,
+            profilePhoto: provider.profilePhoto,
+            serviceArea: provider.serviceArea,
+            timeSlot: provider.timeSlot,
+            availableDays: provider.availableDays,
+            status: provider.status,
+            earnings: provider.earnings,
+            totalBookings: provider.totalBookings,
+            experience: primaryService?.experience || 0,
+            price: primaryService?.price || 0,
+            rating: provider.rating ?? 0,
+            // reviews: provider.reviews ?? 0,
+        };
+    });
+
+    return result;
+}
+
 
 
 

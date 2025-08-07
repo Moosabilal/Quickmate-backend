@@ -66,9 +66,7 @@ const BookingSchema: Schema = new Schema(
       default: 'Manual',
     },
   },
-  {
-    timestamps: { createdAt: true, updatedAt: true },
-  }
+  { timestamps: true }
 );
 
 type BookingSchemaType = InferSchemaType<typeof BookingSchema>

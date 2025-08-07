@@ -19,4 +19,24 @@ export class BookingController {
             next(error)
         }
     }
+
+    public confirmPayment = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const {amount, currency, receipt} = req.body
+            const response = await this.bookingService.createPayment(amount, currency, receipt)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public verifyPayment = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const {razorpay_order_id, razorpay_payment_id, razorpay_signature} = req.body
+            const response = await this.bookingService.paymentVerification(razorpay_order_id, razorpay_payment_id, razorpay_signature)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
 }

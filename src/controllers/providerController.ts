@@ -156,6 +156,7 @@ export class ProviderController {
             const search = (req.query.search as string) || '';
             const status = req.query.status as string || "All"
             const providersDetails = await this.providerService.providersForAdmin(page, limit, search, status);
+            console.log('the providers details', providersDetails)
             res.status(HttpStatusCode.OK).json(providersDetails);
         } catch (error) {
             next(error);
