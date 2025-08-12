@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import logger from '../logger/logger';
 
 dotenv.config();
 
@@ -31,12 +32,12 @@ export const sendVerificationEmail = async (toEmail: string, otp: string): Promi
         </div>
       `,
     };
-    console.log(`Sending verification email to ${toEmail} with OTP: ${otp} mail`);
+    logger.info(`Sending verification email to ${toEmail} with OTP: ${otp} mail`);
 
     await transporter.sendMail(mailOptions);
-    console.log(`Verification OTP sent to ${toEmail}`);
+    logger.info(`Verification OTP sent to ${toEmail}`);
   } catch (error) {
-    console.error(`Error sending verification email to ${toEmail}:`, error);
+    logger.error(`Error sending verification email to ${toEmail}:`, error);
     throw new Error('Failed to send verification email.');
   }
 };
@@ -57,9 +58,9 @@ export const sendPasswordResetEmail = async (to: string, resetLink: string) => {
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`Password reset email sent to ${to}`);
+    logger.info(`Password reset email sent to ${to}`);
   } catch (error) {
-    console.error(`Error sending password reset email to ${to}:`, error);
+    logger.error(`Error sending password reset email to ${to}:`, error);
     throw new Error('Failed to send password reset email.');
   }
 
@@ -78,9 +79,9 @@ export const sendContactUsEmail = async (name: string, email: string , message: 
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log('Email received from the customer ')
+    logger.info('Email received from the customer ')
   } catch (err) {
-    console.error('Error sending email:', err);
+    logger.error('Error sending email:', err);
     throw new Error('Failed to send email' );
   }
 }

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { CategoryService } from '../services/implementation/categoryService';
-import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../types/category';
+import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../dto/category.dto';
 import { ICategory } from '../models/Categories';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import { validationResult } from 'express-validator';
@@ -9,6 +9,8 @@ import * as fsPromises from 'fs/promises';
 import { inject, injectable } from 'inversify';
 import TYPES from '../di/type';
 import { ICategoryService } from '../services/interface/ICategoryService';
+import { HttpStatusCode } from '../enums/HttpStatusCode';
+import { CommissionTypes } from '../enums/CommissionType.enum';
 
 interface AuthRequest extends Request {
   user?: { id: string; role: string };
@@ -16,10 +18,9 @@ interface AuthRequest extends Request {
 }
 
 type CommissionRuleInputController = {
-  flatFee?: number;
-  categoryCommission?: number;
+  commissionType: CommissionTypes;
+  commissionValue: number;
   status?: boolean;
-  removeRule?: boolean;
 };
 
 @injectable()
@@ -42,7 +43,7 @@ export class CategoryController {
           console.error("Error deleting temp file after validation error:", fileErr);
         }
       }
-      res.status(400).json({ errors: errors.array() });
+      res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
       return;
     }
 
@@ -81,34 +82,18 @@ export class CategoryController {
 
       const parsedCommissionValue = commissionValue !== '' ? Number(commissionValue) : undefined;
 
-      if (commissionType === 'none') {
         commissionRuleInputForService = {
-          removeRule: true,
-          status: commissionStatus,
-        };
-      } else if (commissionType && parsedCommissionValue !== undefined) {
-        if (commissionType === 'percentage') {
-          commissionRuleInputForService = {
-            categoryCommission: parsedCommissionValue,
-            flatFee: undefined,
-            status: commissionStatus,
-          };
-        } else if (commissionType === 'flatFee') {
-          commissionRuleInputForService = {
-            flatFee: parsedCommissionValue,
-            categoryCommission: undefined,
-            status: commissionStatus,
-          };
+          commissionType: commissionType,
+          commissionValue: parsedCommissionValue,
+          status: commissionStatus
         }
-      }
-
 
       const { category, commissionRule } = await this.categoryService.createCategory(
         categoryInput,
         commissionRuleInputForService
       );
 
-      res.status(201).json({
+      res.status(HttpStatusCode.CREATED).json({
         message: `${category.parentId ? 'Subcategory' : 'Category'} created successfully`,
         category,
         commissionRule,
@@ -123,7 +108,7 @@ export class CategoryController {
         }
       }
       if (error.message.includes('Category with this name already exists') || error.message.includes('A subcategory with this name already exists under the specified parent')) {
-        res.status(409).json({ message: error.message });
+        res.status(HttpStatusCode.CONFLICT).json({ message: error.message });
         return;
       }
       next(error);
@@ -140,7 +125,7 @@ export class CategoryController {
           console.error("Error deleting temp file after validation error:", fileErr);
         }
       }
-      res.status(400).json({ errors: errors.array() });
+      res.status(HttpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
       return;
     }
 
@@ -183,28 +168,14 @@ export class CategoryController {
 
 
       const parsedCommissionValue = commissionValue !== '' ? Number(commissionValue) : undefined;
-      if (commissionType === 'none') {
+      
         commissionRuleInputForService = {
-          removeRule: true,
-          status: commissionStatus,
-        };
-      } else if (commissionType && parsedCommissionValue !== undefined) {
-
-        if (commissionType === 'percentage') {
-          commissionRuleInputForService = {
-            categoryCommission: parsedCommissionValue,
-            flatFee: undefined,
-            status: commissionStatus,
-          };
-        } else if (commissionType === 'flatFee') {
-          commissionRuleInputForService = {
-            flatFee: parsedCommissionValue,
-            categoryCommission: undefined,
-            status: commissionStatus,
-          };
+          commissionType: commissionType,
+          commissionValue: parsedCommissionValue,
+          status: commissionStatus
         }
 
-      }
+      
 
 
       const { category, commissionRule } = await this.categoryService.updateCategory(
@@ -214,7 +185,7 @@ export class CategoryController {
       );
 
       if (!category) {
-        res.status(500).json({ message: 'Category update failed: category is null.' });
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Category update failed: category is null.' });
         return;
       }
 
@@ -224,7 +195,7 @@ export class CategoryController {
         await this.categoryService.updateManySubcategoriesStatus(categoryId, updateCategoryData.status);
       }
 
-      res.status(200).json({
+      res.status(HttpStatusCode.OK).json({
         message: `${category.parentId ? 'Subcategory' : 'Category'} updated successfully`,
         category,
         commissionRule,
@@ -239,11 +210,11 @@ export class CategoryController {
         }
       }
       if (error.message.includes('Category not found')) {
-        res.status(404).json({ message: error.message });
+        res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;
       }
       if (error.message.includes('Category with this name already exists') || error.message.includes('A subcategory with this name already exists under the specified parent')) {
-        res.status(409).json({ message: error.message });
+        res.status(HttpStatusCode.CONFLICT).json({ message: error.message });
         return;
       }
       next(error);
@@ -268,23 +239,18 @@ export class CategoryController {
 
       const mappedCategoryForFrontend: ICategoryFormCombinedData = {
         ...commonData,
-        commissionType: 'none',
-        commissionValue: '',
+        commissionType: CommissionTypes.NONE,
+        commissionValue: 0,
         commissionStatus: false,
       };
 
 
       if (commissionRule) {
-        if (commissionRule.categoryCommission !== undefined && commissionRule.categoryCommission !== null && commissionRule.categoryCommission !== 0) {
-          mappedCategoryForFrontend.commissionType = 'percentage';
-          mappedCategoryForFrontend.commissionValue = commissionRule.categoryCommission;
-        } else if (commissionRule.flatFee !== undefined && commissionRule.flatFee !== null && commissionRule.flatFee !== 0) {
-          mappedCategoryForFrontend.commissionType = 'flatFee';
-          mappedCategoryForFrontend.commissionValue = commissionRule.flatFee;
-        }
+        mappedCategoryForFrontend.commissionType = commissionRule.commissionType;
+        mappedCategoryForFrontend.commissionValue = commissionRule.commissionValue;
         mappedCategoryForFrontend.commissionStatus = commissionRule.status ?? false;
       }
-      res.status(200).json({
+      res.status(HttpStatusCode.OK).json({
         ...mappedCategoryForFrontend,
         subCategories
       });
@@ -292,34 +258,28 @@ export class CategoryController {
       return;
     } catch (error: any) {
       if (error.message.includes('Category not found')) {
-        res.status(404).json({ message: error.message });
+        res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;
       }
       next(error);
     }
   };
 
+  getAllMainCategories = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log('it scoming but error')
+      const response = await this.categoryService.getAllTopCategories()
+      console.log('the top response', response)
+    } catch (error) {
+      next(error)
+    }
+  }
+
 
   getAllCategories = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { parentId } = req.query;
-
       let categories: ICategory[] | ICategoryResponse[] | ICategoryFormCombinedData[];
-
-      if (parentId) {
-        categories = await this.categoryService.getAllSubcategories(parentId.toString());
-        const mappedSubcategories = (categories as ICategoryFormCombinedData[]).map(cat => ({
-          _id: cat._id.toString(),
-          name: cat.name,
-          description: cat.description || '',
-          iconUrl: cat.iconUrl || '',
-          status: cat.status ?? false,
-          parentId: cat.parentId ? cat.parentId.toString() : null,
-        }));
-        res.status(200).json(mappedSubcategories);
-
-      } else {
-        categories = await this.categoryService.getAllTopLevelCategoriesWithDetails();
+        categories = await this.categoryService.getAllCategoriesWithDetails();
 
         const mappedCategories = categories.map(cat => {
           const hasCommissionRule = (obj: any): obj is { commissionRule: any } =>
@@ -330,13 +290,8 @@ export class CategoryController {
           let commissionStatus = false;
 
           if (hasCommissionRule(cat)) {
-            if (cat.commissionRule.categoryCommission !== 0 && cat.commissionRule.categoryCommission !== null && cat.commissionRule.categoryCommission !== undefined) {
-              commissionType = 'percentage';
-              commissionValue = cat.commissionRule.categoryCommission;
-            } else if (cat.commissionRule.flatFee !== undefined && cat.commissionRule.flatFee !== undefined && cat.commissionRule.flatFee !== null) {
-              commissionType = 'flatFee';
-              commissionValue = cat.commissionRule.flatFee;
-            }
+            commissionType = cat.commissionRule.commissionType;
+            commissionValue = cat.commissionRule.commissionValue;
             commissionStatus = cat.commissionRule.status ?? false;
           }
 
@@ -355,8 +310,8 @@ export class CategoryController {
             commissionStatus,
           };
         });
-        res.status(200).json(mappedCategories);
-      }
+        res.status(HttpStatusCode.OK).json(mappedCategories);
+      
       return;
     } catch (error: any) {
       next(error);
@@ -368,18 +323,18 @@ export class CategoryController {
     try {
       const { id } = req.params;
       const deletedCategory = await this.categoryService.deleteCategory(id);
-      res.status(200).json({
+      res.status(HttpStatusCode.OK).json({
         message: 'Category deleted successfully',
         category: deletedCategory,
       });
       return;
     } catch (error: any) {
       if (error.message.includes('Category not found')) {
-        res.status(404).json({ message: error.message });
+        res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;
       }
       if (error.message.includes('Cannot delete category with existing subcategories')) {
-        res.status(400).json({ message: error.message });
+        res.status(HttpStatusCode.BAD_REQUEST).json({ message: error.message });
         return;
       }
       next(error);
@@ -392,9 +347,8 @@ export class CategoryController {
       const limit = parseInt(req.query.limit as string) || 10;
       const search = (req.query.search as string) || ''
       const allSubCategories = await this.categoryService.getSubcategories(page, limit, search)
-      res.status(200).json(allSubCategories)
+      res.status(HttpStatusCode.OK).json(allSubCategories)
     } catch (error) {
-      console.log('the error', error)
       next(error)
     }
   }

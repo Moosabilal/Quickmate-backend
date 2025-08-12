@@ -2,54 +2,171 @@ import { inject, injectable } from "inversify";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
+import mongoose from "mongoose";
 import { IProvider } from "../../models/Providers";
-import { IFeaturedProviders, IProviderForAdminResponce, IProviderProfile } from "../../types/provider";
+import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
+import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import { ErrorMessage } from "../../enums/ErrorMessage";
+import { CustomError } from "../../utils/CustomError";
+import { generateOTP } from "../../utils/otpGenerator";
+import { sendVerificationEmail } from "../../utils/emailService";
+import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
+import { IUserRepository } from "../../repositories/interface/IUserRepository";
+import { Roles } from "../../enums/userRoles";
+import { toProviderDTO, toServiceAddPage } from "../../mappers/provider.mapper";
+import { toLoginResponseDTO } from "../../mappers/user.mapper";
+import { ProviderStatus } from "../../enums/provider.enum";
+import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
+import { IService } from "../../models/Service";
 
-export enum ProviderStatus {
-  Active = 'Active',
-  Suspended = 'Suspended',
-  Pending = 'Pending',
-  Rejected = 'Rejected'
-}
+const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
+const MAX_OTP_ATTEMPTS = 5;
+const RESEND_COOLDOWN_SECONDS = 30;
 
 
 @injectable()
 export class ProviderService implements IProviderService {
     private providerRepository: IProviderRepository
+    private serviceRepository: IServiceRepository;
+    private userRepository: IUserRepository
     private categoryRepository: ICategoryRepository;
 
     constructor(@inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
+        @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
+        @inject(TYPES.UserRepository) userRepository: IUserRepository,
         @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository
     ) {
         this.providerRepository = providerRepository
+        this.serviceRepository = serviceRepository
+        this.userRepository = userRepository
         this.categoryRepository = categoryRepository
     }
 
-    public async registerProvider(data: IProvider): Promise<IProviderProfile> {
-        const savedProvider = await this.providerRepository.createProvider(data);
+    public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
+
+        let provider = await this.providerRepository.findByEmail(data.email);
+        console.log('the provider is not getting', provider)
+
+
+        if (provider && provider.isVerified) {
+            throw new CustomError(ErrorMessage.USER_ALREADY_EXISTS, HttpStatusCode.CONFLICT)
+        }
+
+        if (!provider) {
+            provider = await this.providerRepository.createProvider(data);
+        } else {
+            console.log('the else condition is working')
+            provider.fullName = data.fullName;
+            provider.phoneNumber = data.phoneNumber;
+            provider.isVerified = false;
+        }
+        console.log('the otop is generating')
+
+        const otp = generateOTP();
+
+        provider.registrationOtp = otp;
+        provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
+        provider.registrationOtpAttempts = 0;
+        await this.providerRepository.update(provider.id,provider);
+        await sendVerificationEmail(provider.email, otp);
+
 
         return {
-            id: savedProvider._id.toString(),
-            userId: savedProvider.userId.toString(),
-            fullName: savedProvider.fullName,
-            phoneNumber: savedProvider.phoneNumber,
-            email: savedProvider.email,
-            serviceId: savedProvider.serviceId.toString(),
-            serviceLocation: savedProvider.serviceLocation,
-            serviceArea: savedProvider.serviceArea,
-            profilePhoto: savedProvider.profilePhoto,
-            status: savedProvider.status,
-            experience: savedProvider.experience,
-            timeSlot: savedProvider.timeSlot,
-            verificationDocs: savedProvider.verificationDocs,
-            availableDays: savedProvider.availableDays
-
+            message: 'Registration successful! An OTP has been sent to your email for verification.',
+            email: String(provider.email),
         }
     }
 
+    public async verifyOtp(data: VerifyOtpRequestBody): Promise<{ provider?: IProviderProfile, user?: ILoginResponseDTO, message?: string }> {
+        const { email, otp } = data;
+
+        const provider = await this.providerRepository.findByEmail(email, true);
+
+        if (!provider) {
+            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+        }
+
+        if (provider.isVerified) {
+            return { message: 'Account already verified.' };
+        }
+
+        if (typeof provider.registrationOtpAttempts === 'number' && provider.registrationOtpAttempts >= MAX_OTP_ATTEMPTS) {
+            throw new CustomError(`Too many failed OTP attempts. Please request a new OTP.`, HttpStatusCode.FORBIDDEN);
+
+        }
+
+        if (!provider.registrationOtp || provider.registrationOtp !== otp) {
+            provider.registrationOtpAttempts = (typeof provider.registrationOtpAttempts === 'number' ? provider.registrationOtpAttempts : 0) + 1;
+            await this.providerRepository.update(provider.id, provider);
+            throw new CustomError('Invalid OTP. Please try again.', HttpStatusCode.BAD_REQUEST);
+        }
+
+        if (!provider.registrationOtpExpires || new Date() > provider.registrationOtpExpires) {
+            provider.registrationOtp = undefined;
+            provider.registrationOtpExpires = undefined;
+            provider.registrationOtpAttempts = 0;
+            await this.providerRepository.update(provider.id, provider);
+            throw new CustomError('OTP has expired. Please request a new one.', HttpStatusCode.BAD_REQUEST);
+        }
+
+        provider.isVerified = true;
+        provider.registrationOtp = undefined;
+        provider.registrationOtpExpires = undefined;
+        provider.registrationOtpAttempts = 0;
+        const updatedProvider = await this.providerRepository.update(provider.id, provider);
+
+        const userId = provider.userId.toString()
+        const user = await this.userRepository.findById(userId)
+        if (!user) {
+            throw new CustomError("Something went wrong, Please contact admin", HttpStatusCode.FORBIDDEN)
+        }
+        user.role = Roles.PROVIDER
+        const updatedUser = await this.userRepository.update(user)
+
+        return {
+            provider: toProviderDTO(updatedProvider),
+            user: toLoginResponseDTO(updatedUser)
+        };
+    }
+
+    public async resendOtp(data: ResendOtpRequestBody): Promise<{ message: string }> {
+        const { email } = data;
+
+        const provider = await this.providerRepository.findByEmail(email, true);
+
+        if (!provider) {
+            return { message: 'If an account with this email exists, a new OTP has been sent.' };
+        }
+
+        if (provider.isVerified) {
+            return { message: 'Account already verified. Please proceed to login.' };
+        }
+
+        if (provider.registrationOtpExpires && provider.registrationOtpExpires instanceof Date) {
+            const timeSinceLastOtpSent = Date.now() - (provider.registrationOtpExpires.getTime() - (OTP_EXPIRY_MINUTES * 60 * 1000));
+            if (timeSinceLastOtpSent < RESEND_COOLDOWN_SECONDS * 1000) {
+                const error = new Error(`Please wait ${RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000)} seconds before requesting another OTP.`);
+                (error as any).statusCode = 429;
+                throw error;
+            }
+        }
+
+        const newOtp = generateOTP();
+        provider.registrationOtp = newOtp;
+        provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
+        provider.registrationOtpAttempts = 0;
+
+        await this.providerRepository.update(provider.id, provider);
+
+        await sendVerificationEmail(email, newOtp);
+
+        return { message: 'A new OTP has been sent to your email.' };
+    }
+
     public async updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile> {
+        console.log('the update provider in service', updateData)
         const updatedProvider = await this.providerRepository.updateProvider(updateData)
         return {
             id: updatedProvider._id.toString(),
@@ -57,15 +174,22 @@ export class ProviderService implements IProviderService {
             fullName: updatedProvider.fullName,
             phoneNumber: updatedProvider.phoneNumber,
             email: updatedProvider.email,
-            serviceId: updatedProvider.serviceId.toString(),
+            serviceId: updatedProvider.serviceId.map(id => id.toString()),
             serviceLocation: updatedProvider.serviceLocation,
             serviceArea: updatedProvider.serviceArea,
             profilePhoto: updatedProvider.profilePhoto,
+            // price: updatedProvider.price,
             status: updatedProvider.status,
-            experience: updatedProvider.experience,
+            // aadhaarIdProof: updatedProvider.aadhaarIdProof,
+            // experience: updatedProvider.experience,
             timeSlot: updatedProvider.timeSlot,
-            verificationDocs: updatedProvider.verificationDocs,
-            availableDays: updatedProvider.availableDays
+            // verificationDocs: updatedProvider.verificationDocs,
+            availableDays: updatedProvider.availableDays,
+            earnings: updatedProvider.earnings,
+            totalBookings: updatedProvider.totalBookings,
+            payoutPending: updatedProvider.payoutPending,
+            rating: updatedProvider.rating,
+            isVerified: updatedProvider.isVerified,
 
         }
 
@@ -120,24 +244,33 @@ export class ProviderService implements IProviderService {
             throw error;
         }
 
-        const categories = await this.categoryRepository.getAllCategories();
-        const categoryMap = new Map(categories.map(cat => [cat._id.toString(), cat]));
+        const providerIds = providers.map(p => p._id);
+        const services = await this.serviceRepository.findAll({ providerId: { $in: providerIds } });
+
+        const serviceMap = new Map<string, string[]>();
+        for (const service of services) {
+            const key = service.providerId.toString();
+            if (!serviceMap.has(key)) {
+                serviceMap.set(key, []);
+            }
+            serviceMap.get(key)!.push(service.title);
+        }
 
         const data = providers.map(provider => {
-            const category = categoryMap.get(provider.serviceId.toString());
+            const providerIdStr = provider._id.toString();
             return {
-                id: provider._id.toString(),
+                id: providerIdStr,
                 userId: provider.userId.toString(),
                 fullName: provider.fullName,
                 phoneNumber: provider.phoneNumber,
                 email: provider.email,
-                serviceId: provider.serviceId.toString(),
                 serviceArea: provider.serviceArea,
                 profilePhoto: provider.profilePhoto,
                 status: provider.status,
-                servicesOffered: category?.name || null,
+                serviceOffered: serviceMap.get(providerIdStr) || [],
             };
         });
+
 
         return {
             data,
@@ -147,11 +280,19 @@ export class ProviderService implements IProviderService {
         };
     }
 
+    public async getServicesForAddservice(): Promise<{ mainCategories: IServiceAddPageResponse[], services: IServiceAddPageResponse[] }> {
+        const categories = await this.categoryRepository.getAllCategories()
+        const mainCategories = categories.filter(category => !category.parentId).map(category => toServiceAddPage(category))
+        const services = categories.filter(category => !!category.parentId).map(category => toServiceAddPage(category))
+        return {
+            mainCategories,
+            services
+        }
+    }
+
     public async fetchProviderById(token: string): Promise<IProviderProfile> {
         if (!token) {
-            const error = new Error('service No token provided.');
-            (error as any).statusCode = 401;
-            throw error;
+            throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
         }
         let decoded: JwtPayload;
         try {
@@ -167,15 +308,19 @@ export class ProviderService implements IProviderService {
             fullName: provider.fullName,
             phoneNumber: provider.phoneNumber,
             email: provider.email,
-            serviceId: provider.serviceId.toString(),
+            serviceId: provider.serviceId.map(id => id.toString()),
             serviceLocation: provider.serviceLocation,
             serviceArea: provider.serviceArea,
             profilePhoto: provider.profilePhoto,
             status: provider.status,
-            experience: provider.experience,
+            aadhaarIdProof: provider.aadhaarIdProof,
             timeSlot: provider.timeSlot,
-            verificationDocs: provider.verificationDocs,
-            availableDays: provider.availableDays
+            availableDays: provider.availableDays,
+            earnings: provider.earnings,
+            totalBookings: provider.totalBookings,
+            payoutPending: provider.payoutPending,
+            rating: provider.rating,
+            isVerified: provider.isVerified,
 
         }
     }
@@ -197,7 +342,7 @@ export class ProviderService implements IProviderService {
             userId: provider.userId.toString(),
             fullName: provider.fullName,
             profilePhoto: provider.profilePhoto,
-            serviceName: provider.serviceName
+            // serviceName: provider.serviceName
 
         }))
 
@@ -211,16 +356,100 @@ export class ProviderService implements IProviderService {
 
     public async updateProviderStat(id: string, newStatus: string): Promise<{ message: string }> {
         if (!newStatus) {
-            throw new Error('Status is required');
+            throw new CustomError('Status is required', HttpStatusCode.BAD_REQUEST);
         }
 
         const allowedStatuses = Object.values(ProviderStatus);
         if (!allowedStatuses.includes(newStatus as ProviderStatus)) {
-            throw new Error(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`);
+            throw new CustomError(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`, HttpStatusCode.BAD_REQUEST);
         }
         await this.providerRepository.updateStatusById(id, newStatus)
         return { message: "provider Status updated" }
     }
+
+    public async getProviderwithFilters(
+    serviceId: string,
+    filters: {
+        area?: string;
+        experience?: number;
+        day?: string;
+        time?: string;
+        price?: number;
+    }
+): Promise<IBackendProvider[]> {
+    const serviceFilter: any = {
+        subCategoryId: serviceId,
+    };
+
+    if (filters.experience) {
+        serviceFilter.experience = { $gte: filters.experience };
+    }
+
+    if (filters.price) {
+        serviceFilter.price = { $lte: filters.price };
+    }
+
+    const services = await this.serviceRepository.findAll(serviceFilter);
+
+    if (!services || services.length === 0) return [];
+
+    const servicesByProvider = new Map<string, IService[]>();
+    services.forEach(service => {
+        const pid = service.providerId.toString();
+        if (!servicesByProvider.has(pid)) {
+            servicesByProvider.set(pid, []);
+        }
+        servicesByProvider.get(pid)!.push(service);
+    });
+
+    const providerIds = Array.from(servicesByProvider.keys());
+
+    const providerFilter: any = { _id: { $in: providerIds.map(id => new mongoose.Types.ObjectId(id)) } };
+
+    if (filters.area) {
+        providerFilter.serviceArea = { $regex: new RegExp(filters.area, 'i') };
+    }
+
+    if (filters.day) {
+        providerFilter.availableDays = filters.day;
+    }
+
+    if (filters.time) {
+        providerFilter['timeSlot.startTime'] = { $lte: filters.time };
+        providerFilter['timeSlot.endTime'] = { $gte: filters.time };
+    }
+
+    const providers = await this.providerRepository.findAll(providerFilter);
+
+    const result: IBackendProvider[] = providers.map(provider => {
+        const providerServices = servicesByProvider.get(provider._id.toString()) || [];
+
+        const primaryService = providerServices[0];
+
+        return {
+            _id: provider._id.toString(),
+            fullName: provider.fullName,
+            phoneNumber: provider.phoneNumber,
+            email: provider.email,
+            profilePhoto: provider.profilePhoto,
+            serviceArea: provider.serviceArea,
+            timeSlot: provider.timeSlot,
+            availableDays: provider.availableDays,
+            status: provider.status,
+            earnings: provider.earnings,
+            totalBookings: provider.totalBookings,
+            experience: primaryService?.experience || 0,
+            price: primaryService?.price || 0,
+            rating: provider.rating ?? 0,
+            // reviews: provider.reviews ?? 0,
+        };
+    });
+
+    return result;
+}
+
+
+
 
 
 

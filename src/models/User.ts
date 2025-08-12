@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document, HydratedDocument, InferSchemaType } from 'mongoose';
 import bcrypt from 'bcrypt';
+import { Roles } from '../enums/userRoles';
 
 
 // export interface IUserDocument extends HydratedDocument<UserSchemaType> {}
@@ -8,7 +9,7 @@ const UserSchema: Schema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: false, select: false }, 
-  role: { type: String, enum: ['Customer', 'ServiceProvider', 'Admin'], default: 'Customer' },
+  role: { type: String, enum: Object.values(Roles), default: Roles.USER },
   isVerified: { type: Boolean, default: false },
   profilePicture: { type: String, default: null }, 
   registrationOtp: { type: String, select: false },

@@ -1,9 +1,26 @@
+import { Roles } from "../enums/userRoles";
+
+export interface ILoginResponseDTO {
+  id: string;
+  name: string;
+  email: string;
+  role: Roles;
+  isVerified: boolean;
+  profilePicture?: string;
+}
+
+
 export interface RegisterRequestBody {
   name: string;
   email: string;
   password: string;
-  role?: 'Customer' | 'ServiceProvider' | 'Admin';
 }
+
+export interface AuthSuccessResponse {
+  message: string;
+  email?: string; 
+}
+
 export interface VerifyOtpRequestBody {
   email: string;
   otp: string;
@@ -12,10 +29,6 @@ export interface ResendOtpRequestBody {
   email: string;
 }
 
-export interface AuthSuccessResponse {
-  message: string;
-  email?: string; 
-}
 
 export interface AuthErrorResponse {
   message: string;

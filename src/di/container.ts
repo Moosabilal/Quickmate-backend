@@ -11,8 +11,8 @@ import { ICategoryService } from '../services/interface/ICategoryService';
 import { CategoryService } from '../services/implementation/categoryService';
 import { ICategoryRepository } from '../repositories/interface/ICategoryRepository';
 import { CategoryRepository } from '../repositories/implementation/categoryRepository';
-import { ICommissionRuleRepository } from '../repositories/interface/ICommissonRuleRepository';
 import { CommissionRuleRepository } from '../repositories/implementation/commissionRuleRepository';
+import { ICommissionRuleRepository } from '../repositories/interface/ICommissonRuleRepository';
 import { IProviderService } from '../services/interface/IProviderService';
 import { ProviderController } from '../controllers/providerController';
 import { ProviderService } from '../services/implementation/providerService';
@@ -23,6 +23,20 @@ import { IAddressService } from '../services/interface/IAddressService';
 import { AddressService } from '../services/implementation/AddressService';
 import { IAddressRepository } from '../repositories/interface/IAddressRepository';
 import { AddressRepository } from '../repositories/implementation/addressRepository';
+import { BookingController } from '../controllers/bookingController';
+import { IBookingService } from '../services/interface/IBookingService';
+import { BookingService } from '../services/implementation/bookingService';
+import { IBookingRepository } from '../repositories/interface/IBookingRepository';
+import { BookingRepository } from '../repositories/implementation/bookingRepository';
+import { ServiceController } from '../controllers/serviceController';
+import { IServiceService } from '../services/interface/IServiceService';
+import { ServiceService } from '../services/implementation/serviceService';
+import { IServiceRepository } from '../repositories/interface/IServiceRepository';
+import { ServiceRepository } from '../repositories/implementation/serviceRepository';
+import { IBaseRepository } from '../repositories/interface/base/IBaseRepository';
+import { BaseRepository } from '../repositories/implementation/base/BaseRepository';
+import { IPaymentRepository } from '../repositories/interface/IPaymentRepository';
+import { PaymentRepository } from '../repositories/implementation/paymentRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -41,5 +55,14 @@ container.bind<IProviderRepository>(TYPES.ProviderRepository).to(ProviderReposit
 container.bind<AddressController>(TYPES.AddressController).to(AddressController);
 container.bind<IAddressService>(TYPES.AddressService).to(AddressService);
 container.bind<IAddressRepository>(TYPES.AddressRepository).to(AddressRepository)
+
+container.bind<BookingController>(TYPES.BookingController).to(BookingController);
+container.bind<IBookingService>(TYPES.BookingService).to(BookingService);
+container.bind<IBookingRepository>(TYPES.BookingRepository).to(BookingRepository)
+container.bind<IPaymentRepository>(TYPES.PaymentRepository).to(PaymentRepository)
+
+container.bind<ServiceController>(TYPES.ServiceController).to(ServiceController);
+container.bind<IServiceService>(TYPES.ServiceService).to(ServiceService)
+container.bind<IServiceRepository>(TYPES.ServiceRepository).to(ServiceRepository)
 
 export {container}

@@ -1,4 +1,5 @@
 import { Schema, model, Types, HydratedDocument, InferSchemaType } from 'mongoose';
+import { ProviderStatus } from '../enums/provider.enum';
 
 
 const ProviderSchema = new Schema({
@@ -22,21 +23,21 @@ const ProviderSchema = new Schema({
         required: true,
         trim: true,
     },
-    categoryId: {
-        type: Types.ObjectId,
-        ref: 'Category',
-        required: true,
-    },
+    // categoryId: {
+    //     type: Types.ObjectId,
+    //     ref: 'Category',
+    //     required: true,
+    // },
     serviceId: {
-        type: Types.ObjectId,
+        type: [Types.ObjectId],
         ref: 'Category',
         required: true,
     },
-    serviceName: {
-        type: String,
-        required: false,
-        trim: true,
-    },
+    // serviceName: {
+    //     type: String,
+    //     required: false,
+    //     trim: true,
+    // },
     serviceLocation: {
         type: String,
         required: true,
@@ -45,13 +46,17 @@ const ProviderSchema = new Schema({
         type: String,
         required: true,
     },
-    experience: {
-        type: Number,
-        min: 0,
-        required: true,
-    },
+    // experience: {
+    //     type: Number,
+    //     min: 0,
+    //     required: true,
+    // },
+    // price: {
+    //     type: Number,
+    //     required: false,
+    // },
     availableDays: {
-        type: [String], 
+        type: [String],
         required: true,
     },
     timeSlot: {
@@ -59,13 +64,14 @@ const ProviderSchema = new Schema({
         endTime: { type: String, required: true },
     },
 
-    verificationDocs: {
-        aadhaarIdProof: { type: String, required: true },
-        businessCertifications: { type: String, required: false },
+    aadhaarIdProof: {
+        type: String,
+        required: true
     },
+
     profilePhoto: {
         type: String,
-        required: true,
+        required: false,
     },
     earnings: {
         type: Number,
@@ -73,8 +79,8 @@ const ProviderSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['Active', 'Suspended', 'Pending', 'Rejected'],
-        default: 'Pending',
+        enum: Object.values(ProviderStatus),
+        default: ProviderStatus.PENDING,
     },
     totalBookings: {
         type: Number,
@@ -83,6 +89,27 @@ const ProviderSchema = new Schema({
     payoutPending: {
         type: Number,
         default: 0,
+    },
+    rating: {
+        type: Number,
+        default: 0,
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
+    registrationOtp: { 
+        type: String, 
+        select: false 
+    },
+    registrationOtpExpires: { 
+        type: Date, 
+        select: false 
+    },
+    registrationOtpAttempts: { 
+        type: Number, 
+        default: 0, 
+        select: false 
     },
 }, {
     timestamps: true,

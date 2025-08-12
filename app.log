@@ -1,0 +1,74 @@
+[ERROR  ] - GET /api/bookings/getBookingById/6898c4a7719366b76304472c 404 No service found -> No service found
+[ERROR  ] - GET /api/bookings/getBookingById/6898c4a7719366b76304472c 404 No service found -> No service found
+[ERROR  ] - GET /api/bookings/getBookingById/6898c4a7719366b76304472c 404 No service found -> No service found
+[ERROR  ] - GET /api/bookings/getBookingById/6898c4a7719366b76304472c 404 No service found -> No service found
+[ERROR  ] - GET /api/bookings/getBookingById/6898c4a7719366b76304472c 404 No service found -> No service found
+[ERROR  ] - GET /api/bookings/getBookingById/6898c4a7719366b76304472c 404 No service found -> No service found
+[ERROR  ] - GET /api/bookings/getBookingById/6898c4a7719366b76304472c 404 No service found -> No service found
+[ERROR  ] - GET /api/bookings/getBookingById/6898c4a7719366b76304472c 404 No service found -> No service found
+[ERROR  ] - GET /api/bookings/getBookingById/6898c4a7719366b76304472c 404 No service found -> No service found
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings 500 Cast to ObjectId failed for value "Set(3) {
+  '6892af9a77b9ca873a292d49',
+  '6893a6b46f6fe22fa7c54f6d',
+  '68943d3e44bc34723e2fffa5'
+}" (type Set) at path "_id" for model "Service" -> Cast to ObjectId failed for value "Set(3) {
+  '6892af9a77b9ca873a292d49',
+  '6893a6b46f6fe22fa7c54f6d',
+  '68943d3e44bc34723e2fffa5'
+}" (type Set) at path "_id" for model "Service"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings 500 Cast to ObjectId failed for value "Set(3) {
+  '6892af9a77b9ca873a292d49',
+  '6893a6b46f6fe22fa7c54f6d',
+  '68943d3e44bc34723e2fffa5'
+}" (type Set) at path "_id" for model "Service" -> Cast to ObjectId failed for value "Set(3) {
+  '6892af9a77b9ca873a292d49',
+  '6893a6b46f6fe22fa7c54f6d',
+  '68943d3e44bc34723e2fffa5'
+}" (type Set) at path "_id" for model "Service"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

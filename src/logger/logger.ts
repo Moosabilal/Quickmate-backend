@@ -6,7 +6,7 @@ const logger = createLogger({
     format: customFormat,
     transports:[
         new transports.Console({ level: "silly"}),
-        // new transports.File({filename:"app.log" , level: "info"})
+        new transports.File({filename:"app.log" , level: "info"})
     ]
 });
 

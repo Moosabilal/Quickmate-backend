@@ -2,10 +2,11 @@
 import { inject, injectable } from 'inversify';
 import { Request, Response, NextFunction } from 'express';
 import { IAuthService } from '../services/interface/IAuthService';
-import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../types/auth';
+import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../dto/auth.dto';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import TYPES from '../di/type';
 import { AuthRequest } from '../middleware/authMiddleware';
+import { HttpStatusCode } from '../enums/HttpStatusCode';
 
 @injectable()
 export class AuthController {
@@ -18,7 +19,7 @@ export class AuthController {
   public register = async (req: Request<{}, {}, RegisterRequestBody>, res: Response, next: NextFunction) => {
     try {
       const response = await this.authService.registerUser(req.body);
-      res.status(200).json(response);
+      res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
     }
@@ -45,9 +46,8 @@ export class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000 //7d
 
       })
-      res.status(200).json(result);
+      res.status(HttpStatusCode.OK).json(result);
     } catch (error) {
-      console.log('the error is comign', error)
       next(error);
     }
   }
@@ -56,7 +56,7 @@ export class AuthController {
   public verifyOtp = async (req: Request<{}, {}, VerifyOtpRequestBody>, res: Response, next: NextFunction) => {
     try {
       const response = await this.authService.verifyOtp(req.body);
-      res.status(200).json(response);
+      res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
     }
@@ -66,7 +66,7 @@ export class AuthController {
   public resendOtp = async (req: Request<{}, {}, ResendOtpRequestBody>, res: Response, next: NextFunction) => {
     try {
       const response = await this.authService.resendOtp(req.body);
-      res.status(200).json(response);
+      res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
     }
@@ -75,7 +75,7 @@ export class AuthController {
   public forgotPassword = async (req: Request<{}, {}, ForgotPasswordRequestBody>, res: Response, next: NextFunction) => {
     try {
       const response = await this.authService.requestPasswordReset(req.body);
-      res.status(200).json(response);
+      res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
     }
@@ -85,7 +85,7 @@ export class AuthController {
   public resetPassword = async (req: Request<{}, {}, ResetPasswordRequestBody>, res: Response, next: NextFunction) => {
     try {
       const response = await this.authService.resetPassword(req.body);
-      res.status(200).json(response);
+      res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
     }
@@ -111,7 +111,7 @@ export class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000 //7d
 
       })
-      res.status(200).json(response);
+      res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
     }
@@ -119,16 +119,12 @@ export class AuthController {
 
   public refreshToken = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log('the request is not reaching')
       const refresh_token = req.cookies.refreshToken
-      console.log('findind the refresh token', refresh_token)
       if (!refresh_token) {
         res.status(401).json({ message: 'Refresh token not found' })
         return
       }
-      console.log('thsi mean there is not refresh token')
       const response = await this.authService.createRefreshToken(refresh_token)
-      console.log('the token is creatd')
       res.cookie('token', response.newToken, {
         httpOnly: true,
         secure: false,
@@ -136,7 +132,7 @@ export class AuthController {
         maxAge: 7 * 24 * 60 * 60 * 1000 //7d
       })
 
-      res.status(200).json(response);
+      res.status(HttpStatusCode.OK).json(response);
 
     } catch (error) {
       next(error)
@@ -147,7 +143,7 @@ export class AuthController {
     try {
       const {name, email, message} = req.body
       const response = await this.authService.sendSubmissionEmail(name, email, message);
-      res.status(200).json(response);
+      res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
     }
@@ -158,7 +154,7 @@ export class AuthController {
     try {
       const token = req.cookies.token
       const user = await this.authService.getUser(token);
-      res.status(200).json(user);
+      res.status(HttpStatusCode.OK).json(user);
     } catch (error) {
       next(error);
     }
@@ -182,7 +178,7 @@ export class AuthController {
       }
       const { name, email } = req.body;
       const updatedUser = await this.authService.updateProfile(token, { name, email, profilePicture });
-      res.status(200).json(updatedUser);
+      res.status(HttpStatusCode.OK).json(updatedUser);
     } catch (error) {
       next(error);
     }
@@ -197,7 +193,7 @@ export class AuthController {
       const search = (req.query.search as string) || '';
       const status = req.query.status as string || "All"
       const userWithDetails = await this.authService.getUserWithAllDetails(page, limit, search, status);
-      res.status(200).json(userWithDetails);
+      res.status(HttpStatusCode.OK).json(userWithDetails);
     } catch (error) {
       next(error);
     }
@@ -207,7 +203,7 @@ export class AuthController {
     try {
       const userId = req.params.userId;
       const updatedUser = await this.authService.updateUser(userId);
-      res.status(200).json(updatedUser);
+      res.status(HttpStatusCode.OK).json(updatedUser);
     } catch (error) {
       next(error);
     }
@@ -233,7 +229,7 @@ export class AuthController {
         expires: new Date(0)
       });
 
-      res.status(200).json({ message: 'Logged out successfully' });
+      res.status(HttpStatusCode.OK).json({ message: 'Logged out successfully' });
     } catch (error) {
       res.cookie('token', '', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', expires: new Date(0) });
       res.cookie('refreshToken', '', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', expires: new Date(0) });

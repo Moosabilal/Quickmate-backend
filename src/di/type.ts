@@ -1,3 +1,4 @@
+import { BaseRepository } from "../repositories/implementation/base/BaseRepository"
 
 const TYPES = {
     AuthController: Symbol.for('AuthController'),
@@ -13,6 +14,13 @@ const TYPES = {
     AddressController: Symbol.for('AddressController'),
     AddressService: Symbol.for('AddressService'),
     AddressRepository: Symbol.for('AddressRepository'),
+    BookingController: Symbol.for('BookingController'),
+    BookingService: Symbol.for('BookingService'),
+    BookingRepository: Symbol.for('BookingRepository'),
+    PaymentRepository: Symbol.for('PaymentRepository'),
+    ServiceController: Symbol.for('ServiceController'),
+    ServiceService: Symbol.for('ServiceService'),
+    ServiceRepository: Symbol.for('ServiceRepository')
 
 }
 

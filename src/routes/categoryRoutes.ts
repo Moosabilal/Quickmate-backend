@@ -15,6 +15,7 @@ const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
 router.get('/', categoryController.getAllCategories); 
 router.post('/', isAdmin, upload.single('categoryIcon'), categoryController.createCategory);
 router.get('/getAllSubCategories', categoryController.getSubCategories)
+router.get('/top-level-details', categoryController.getAllMainCategories)
 
 router.put('/:id', isAdmin, upload.single('categoryIcon'), categoryController.updateCategory);
 

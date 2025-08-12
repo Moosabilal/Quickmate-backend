@@ -8,16 +8,18 @@ import { ProviderController } from '../controllers/providerController';
 const router = express.Router();
 const providerController = container.get<ProviderController>(TYPES.ProviderController)
 
-const isProvider = [authenticateToken, authorizeRoles(['Provider'])];
+const isProvider = [authenticateToken, authorizeRoles(['ServiceProvider'])];
 
 
 
-router.post('/register',authenticateToken, upload.fields([{ name: 'aadhaarIdProof', maxCount: 1 },{ name: 'profilePhoto', maxCount: 1 },
-    { name: 'businessCertifications', maxCount: 1 },]), providerController.register)
-router.post('/updateProvider', authenticateToken, upload.fields([{ name: 'aadhaarIdProof', maxCount: 1 },{ name: 'profilePhoto', maxCount: 1 },
-    { name: 'businessCertifications', maxCount: 1 },]), providerController.updateProvider)
+router.post('/register',authenticateToken, upload.fields([{ name: 'aadhaarIdProof', maxCount: 1 },{ name: 'profilePhoto', maxCount: 1 }]), providerController.register)
+router.post('/verify-registration-otp', providerController.verifyOtp);
+router.post('/resend-registration-otp', providerController.resendOtp);
+router.post('/updateProvider', authenticateToken, upload.fields([{ name: 'aadhaarIdProof', maxCount: 1 },{ name: 'profilePhoto', maxCount: 1 }]), providerController.updateProvider)
 router.get('/getProvider', providerController.getProvider)
 router.get('/getFeaturedProviders', providerController.featuredProviders)
+router.get('/getFilteredServiceProvider', providerController.getServiceProvider)
+router.get('/getServicesForAddPage', providerController.getServicesForAddPage)
 
 
 // admin
