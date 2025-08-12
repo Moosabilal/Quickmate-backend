@@ -12,8 +12,8 @@ export class AddressService implements IAddressService {
         this.addressRepsitory = addressRepsitory
     }
 
-    public async addAddress(data: IAddressRequest): Promise<IAddressRequest> {
-        const createdAddress = await this.addressRepsitory.createAddress(data)
+    public async addAddress(data: Partial<IAddress>): Promise<IAddressRequest> {
+        const createdAddress = await this.addressRepsitory.create(data)
         return {
             id: createdAddress._id.toString(),
             userId: createdAddress.userId.toString(),
@@ -26,7 +26,7 @@ export class AddressService implements IAddressService {
     }
 
     public async getAllAddress(userId: string): Promise<IAddressRequest[]> {
-        const allAddress = await this.addressRepsitory.fetchAddress(userId)
+        const allAddress = await this.addressRepsitory.findAll({ userId: userId })
         return allAddress.map((adr) => ({
             id: adr._id.toString(),
             userId: adr.userId.toString(),
@@ -39,7 +39,7 @@ export class AddressService implements IAddressService {
     }
 
     public async updateAddressById(id: string, data: IAddressRequest): Promise<IAddressRequest> {
-        const updatedAddress = await this.addressRepsitory.updateAddress(id, data)
+        const updatedAddress = await this.addressRepsitory.update(id, data)
         return {
             id: updatedAddress._id.toString(),
             userId: updatedAddress.userId.toString(),
@@ -52,7 +52,7 @@ export class AddressService implements IAddressService {
     }
 
     public async delete_Address(id: string): Promise<{message: string}> {
-        await this.addressRepsitory.deleteAddressById(id)
+        await this.addressRepsitory.delete(id)
         return {
             message: "Address Deleted"
         }

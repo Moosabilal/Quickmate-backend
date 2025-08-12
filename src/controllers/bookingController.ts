@@ -3,6 +3,8 @@ import { IBookingService } from "../services/interface/IBookingService";
 import TYPES from "../di/type";
 import { NextFunction, Request, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
+import { AuthRequest } from "../middleware/authMiddleware";
+import { IPaymentVerificationRequest } from "../dto/payment.dto";
 
 @injectable()
 export class BookingController {
@@ -11,8 +13,9 @@ export class BookingController {
         this.bookingService = bookingService
     }
 
-    public createBooking = async (req: Request, res: Response, next: NextFunction) => {
+    public createBooking = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+            console.log('the amount type', typeof req.body.amount)
             const response = await this.bookingService.createNewBooking(req.body)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -30,10 +33,37 @@ export class BookingController {
         }
     }
 
-    public verifyPayment = async (req: Request, res: Response, next: NextFunction) => {
+    public verifyPayment = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const {razorpay_order_id, razorpay_payment_id, razorpay_signature} = req.body
-            const response = await this.bookingService.paymentVerification(razorpay_order_id, razorpay_payment_id, razorpay_signature)
+            const paymentData: IPaymentVerificationRequest = {
+                ...req.body,
+                userId: req.user.id,
+                adminCommisson: 0,
+                providerAmount: 0,
+            }
+            const response = await this.bookingService.paymentVerification(paymentData)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public getBookingById = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            console.log('the req params', req.params)
+            const bookingId = req.params.id
+            console.log('the bookgin si in controller', bookingId)
+            const response = await this.bookingService.findBookingById(bookingId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public getAllBookings = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id;
+            const response = await this.bookingService.getAllFilteredBookings(userId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

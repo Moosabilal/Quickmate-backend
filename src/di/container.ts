@@ -11,8 +11,8 @@ import { ICategoryService } from '../services/interface/ICategoryService';
 import { CategoryService } from '../services/implementation/categoryService';
 import { ICategoryRepository } from '../repositories/interface/ICategoryRepository';
 import { CategoryRepository } from '../repositories/implementation/categoryRepository';
-import { ICommissionRuleRepository } from '../repositories/interface/ICommissonRuleRepository';
 import { CommissionRuleRepository } from '../repositories/implementation/commissionRuleRepository';
+import { ICommissionRuleRepository } from '../repositories/interface/ICommissonRuleRepository';
 import { IProviderService } from '../services/interface/IProviderService';
 import { ProviderController } from '../controllers/providerController';
 import { ProviderService } from '../services/implementation/providerService';
@@ -35,6 +35,8 @@ import { IServiceRepository } from '../repositories/interface/IServiceRepository
 import { ServiceRepository } from '../repositories/implementation/serviceRepository';
 import { IBaseRepository } from '../repositories/interface/base/IBaseRepository';
 import { BaseRepository } from '../repositories/implementation/base/BaseRepository';
+import { IPaymentRepository } from '../repositories/interface/IPaymentRepository';
+import { PaymentRepository } from '../repositories/implementation/paymentRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -57,6 +59,7 @@ container.bind<IAddressRepository>(TYPES.AddressRepository).to(AddressRepository
 container.bind<BookingController>(TYPES.BookingController).to(BookingController);
 container.bind<IBookingService>(TYPES.BookingService).to(BookingService);
 container.bind<IBookingRepository>(TYPES.BookingRepository).to(BookingRepository)
+container.bind<IPaymentRepository>(TYPES.PaymentRepository).to(PaymentRepository)
 
 container.bind<ServiceController>(TYPES.ServiceController).to(ServiceController);
 container.bind<IServiceService>(TYPES.ServiceService).to(ServiceService)

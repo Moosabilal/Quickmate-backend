@@ -1,5 +1,7 @@
 
 import mongoose, { Schema, Document, HydratedDocument, InferSchemaType } from 'mongoose';
+import { PaymentStatus } from '../enums/userRoles';
+import { BookingStatus } from '../enums/booking.enum';
 
 const BookingSchema: Schema = new Schema(
   {
@@ -26,7 +28,6 @@ const BookingSchema: Schema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Address'
     },
-
     customerName: {
       type: String,
       required: false,
@@ -38,19 +39,26 @@ const BookingSchema: Schema = new Schema(
     instructions: {
       type: String,
     },
-    amount: {
-      type: Number,
-      required: false,
-    },
     paymentStatus: {
       type: String,
-      enum: ['Paid', 'Unpaid', 'Refunded'],
-      default: 'Unpaid',
+      enum: Object.values(PaymentStatus),
+      default: PaymentStatus.UNPAID,
+    },
+    amount: {
+      type: String,
     },
     status: {
       type: String,
-      enum: ['Pending', 'Confirmed', 'Cancelled', 'Completed'],
-      default: 'Pending',
+      enum: Object.values(BookingStatus),
+      default: BookingStatus.PENDING,
+    },
+    scheduledDate: {
+      type: String,
+      required: false
+    },
+    scheduledTime: {
+      type: String,
+      required: false
     },
     bookingDate: {
       type: Date,

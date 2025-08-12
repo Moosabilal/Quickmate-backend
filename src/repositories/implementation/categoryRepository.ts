@@ -27,9 +27,9 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
     //     return category;
     // }
 
-    async findById(id: string | Types.ObjectId): Promise<ICategory | null> {
-        return await Category.findById({ _id: id }).exec();
-    }
+    // async findById(id: string | Types.ObjectId): Promise<ICategory | null> {
+    //     return await Category.findById({ _id: id }).exec();
+    // }
 
 
     async findByName(name: string): Promise<ICategory | null> {
@@ -70,7 +70,7 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
             if (dataToUpdate.parentId === null) {
                 dataToUpdate.parentId = null;
             } else if (typeof dataToUpdate.parentId === 'string' && Types.ObjectId.isValid(dataToUpdate.parentId)) {
-                dataToUpdate.parentId = new Types.ObjectId(dataToUpdate.parentId);
+                dataToUpdate.parentId = dataToUpdate.parentId;
             } else {
                 delete dataToUpdate.parentId;
             }

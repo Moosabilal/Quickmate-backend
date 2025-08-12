@@ -3,7 +3,7 @@ import { CommissionTypes } from '../enums/CommissionType.enum';
 export interface ICategoryInput {
     name: string;
     description?: string | null;
-    parentId?: string | Types.ObjectId | null; 
+    parentId?: string | null; 
     status?: boolean;
     iconUrl?: string | null; 
 }

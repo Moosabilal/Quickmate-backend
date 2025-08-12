@@ -27,7 +27,7 @@ const ServiceSchema = new Schema(
     },
     priceUnit: {
       type: String,
-      enum: ServicesPriceUnit,
+      enum: Object.values(ServicesPriceUnit),
       default: ServicesPriceUnit.PERSERVICE,
       required: true,
     },
