@@ -37,6 +37,8 @@ import { IBaseRepository } from '../repositories/interface/base/IBaseRepository'
 import { BaseRepository } from '../repositories/implementation/base/BaseRepository';
 import { IPaymentRepository } from '../repositories/interface/IPaymentRepository';
 import { PaymentRepository } from '../repositories/implementation/paymentRepository';
+import { IMessageRepository } from '../repositories/interface/IMessageRepository';
+import { MessageRepository } from '../repositories/implementation/messageRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -64,5 +66,7 @@ container.bind<IPaymentRepository>(TYPES.PaymentRepository).to(PaymentRepository
 container.bind<ServiceController>(TYPES.ServiceController).to(ServiceController);
 container.bind<IServiceService>(TYPES.ServiceService).to(ServiceService)
 container.bind<IServiceRepository>(TYPES.ServiceRepository).to(ServiceRepository)
+
+container.bind<IMessageRepository>(TYPES.MessageRepository).to(MessageRepository)
 
 export {container}

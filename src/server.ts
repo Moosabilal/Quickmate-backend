@@ -4,10 +4,13 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser'
 import helmet from 'helmet';
 import dotenv from 'dotenv';
+import http from 'http';
+import { Server as SocketIOServer } from 'socket.io';
 dotenv.config();
 import authRoutes from './routes/auth';
 import { rateLimiter } from './middleware/rateLimiter';
 import connectDB from './config/database';
+
 import path from 'path';
 import categoryRoutes from './routes/categoryRoutes'
 import providerRoutes from './routes/providerRoute'
@@ -18,6 +21,7 @@ import fs from 'fs';
 import { CustomError } from './utils/CustomError';
 import { errorHandler } from './middleware/errorHandler';
 import logger from './logger/logger';
+import { chatSocket } from './utils/socket';
 
 
 const uploadDir = path.join(__dirname, '../uploads');
@@ -62,4 +66,18 @@ app.use((req, res, next) => {
 
 app.use(errorHandler)
 
-app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
+const server = http.createServer(app);
+
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
+
+chatSocket(io)
+
+
+
+server.listen(PORT, () => logger.info(`Server running on port ${PORT}`));

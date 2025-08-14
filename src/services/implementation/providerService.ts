@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider } from "../../models/Providers";
-import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
+import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -15,11 +15,12 @@ import { sendVerificationEmail } from "../../utils/emailService";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
-import { toProviderDTO, toServiceAddPage } from "../../mappers/provider.mapper";
+import { toProviderDTO, toProviderForChatListPage, toServiceAddPage } from "../../mappers/provider.mapper";
 import { toLoginResponseDTO } from "../../mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
 import { IService } from "../../models/Service";
+import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
@@ -32,16 +33,19 @@ export class ProviderService implements IProviderService {
     private serviceRepository: IServiceRepository;
     private userRepository: IUserRepository
     private categoryRepository: ICategoryRepository;
+    private bookingRepository: IBookingRepository
 
     constructor(@inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
         @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
         @inject(TYPES.UserRepository) userRepository: IUserRepository,
-        @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository
+        @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
+        @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
     ) {
         this.providerRepository = providerRepository
         this.serviceRepository = serviceRepository
         this.userRepository = userRepository
         this.categoryRepository = categoryRepository
+        this.bookingRepository = bookingRepository
     }
 
     public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
@@ -123,7 +127,7 @@ export class ProviderService implements IProviderService {
             throw new CustomError("Something went wrong, Please contact admin", HttpStatusCode.FORBIDDEN)
         }
         user.role = Roles.PROVIDER
-        const updatedUser = await this.userRepository.update(user)
+        const updatedUser = await this.userRepository.update(userId, user)
 
         return {
             provider: toProviderDTO(updatedProvider),
@@ -447,6 +451,22 @@ export class ProviderService implements IProviderService {
 
     return result;
 }
+
+public async providerForChatPage(userId: string): Promise<IProviderForChatListPage[]> {
+  if (!userId) {
+    throw new CustomError("Sorry UserId not found", HttpStatusCode.NOT_FOUND);
+  }
+
+  const bookings = await this.bookingRepository.findAll({ userId });
+  if (!bookings.length) return [];
+  const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
+
+  const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } });
+  const services = await this.serviceRepository.findAll({ providerId: { $in: providerIds } });
+
+  return toProviderForChatListPage(bookings, providers, services);
+}
+
 
 
 

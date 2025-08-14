@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IBookingService } from "../interface/IBookingService";
 import TYPES from "../../di/type";
-import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest } from "../../dto/booking.dto";
+import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../dto/booking.dto";
 import { razorpay } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
@@ -14,13 +14,16 @@ import { ICategoryRepository } from "../../repositories/interface/ICategoryRepos
 import { ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
 import { CommissionTypes } from "../../enums/CommissionType.enum";
 import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
-import { Types } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { IPayment } from "../../models/payment";
 import { PaymentStatus } from "../../enums/userRoles";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
-import { toBookingConfirmationPage, toBookingHistoryPage } from "../../mappers/booking.mapper";
+import { toBookingConfirmationPage, toBookingHistoryPage, toProviderBookingManagement } from "../../mappers/booking.mapper";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
+import { IUserRepository } from "../../repositories/interface/IUserRepository";
+import { IMessageRepository } from "../../repositories/interface/IMessageRepository";
+import { IMessage } from "../../models/message";
 
 @injectable()
 export class BookingService implements IBookingService {
@@ -31,6 +34,8 @@ export class BookingService implements IBookingService {
     private addressRepository: IAddressRepository;
     private providerRepository: IProviderRepository;
     private serviceRepository: IServiceRepository;
+    private userRepository: IUserRepository;
+    private messageRepository: IMessageRepository;
     constructor(@inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
         @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
         @inject(TYPES.CommissionRuleRepository) commissionRuleRepository: ICommissionRuleRepository,
@@ -38,14 +43,18 @@ export class BookingService implements IBookingService {
         @inject(TYPES.AddressRepository) addressRepository: IAddressRepository,
         @inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
         @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
+        @inject(TYPES.UserRepository) userRepository: IUserRepository,
+        @inject(TYPES.MessageRepository) messageRepository: IMessageRepository
     ) {
         this.bookingRepository = bookingRepository;
         this.categoryRepository = categoryRepository;
         this.commissionRuleRepository = commissionRuleRepository
         this.paymentRepository = paymentRepository
         this.addressRepository = addressRepository;
-        this.providerRepository = providerRepository,
-        this.serviceRepository = serviceRepository
+        this.providerRepository = providerRepository;
+        this.serviceRepository = serviceRepository;
+        this.userRepository = userRepository;
+        this.messageRepository = messageRepository;
     }
 
     async createNewBooking(data: Partial<IBookingRequest>): Promise<{ bookingId: string, message: string }> {
@@ -63,7 +72,7 @@ export class BookingService implements IBookingService {
         // }
         const subCategoryId = data.serviceId
         console.log('the serviceid', subCategoryId)
-        const findServiceId = await this.serviceRepository.findOne({subCategoryId})
+        const findServiceId = await this.serviceRepository.findOne({ subCategoryId })
 
         console.log('the get servidddddddces', findServiceId)
         data.serviceId = findServiceId._id.toString()
@@ -166,21 +175,21 @@ export class BookingService implements IBookingService {
         }
     }
 
-    async findBookingById (id: string): Promise<IBookingConfirmationRes> {
+    async findBookingById(id: string): Promise<IBookingConfirmationRes> {
         const booking = await this.bookingRepository.findById(id)
-        if(!booking) {
+        if (!booking) {
             throw new CustomError('Your booking is not found, Please contact admin', HttpStatusCode.NOT_FOUND)
         }
         const address = await this.addressRepository.findById(booking.addressId.toString())
-        if(!address) {
+        if (!address) {
             throw new CustomError('No mathced address found', HttpStatusCode.NOT_FOUND)
         }
         const service = await this.serviceRepository.findById(booking.serviceId.toString())
-        if(!service) {
+        if (!service) {
             throw new CustomError('No service found', HttpStatusCode.NOT_FOUND)
         }
         const subCat = await this.categoryRepository.findById(service.subCategoryId.toString())
-        if(!subCat) {
+        if (!subCat) {
             throw new CustomError('No service found', HttpStatusCode.NOT_FOUND)
         }
 
@@ -190,26 +199,65 @@ export class BookingService implements IBookingService {
     }
 
     async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
-        const bookings = await this.bookingRepository.findAll({userId})
+        const bookings = await this.bookingRepository.findAll({ userId })
         console.log('the booking we gor withour data', bookings)
         const providerIds = [...new Set(bookings.map(s => s.providerId.toString()))]
-        const providers = await this.providerRepository.findAll({_id: {$in: providerIds}})
+        const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } })
         const addressIds = [...new Set(bookings.map(s => s.addressId.toString()))]
-        const addresses = await this.addressRepository.findAll({_id: {$in: addressIds}})
+        const addresses = await this.addressRepository.findAll({ _id: { $in: addressIds } })
         const serviceIds = [...new Set(bookings.map(s => s.serviceId.toString()))]
-        const services = await this.serviceRepository.findAll({_id: {$in: serviceIds}})
+        const services = await this.serviceRepository.findAll({ _id: { $in: serviceIds } })
         const subCategoryIds = [...new Set(services.map(s => s.subCategoryId.toString()))]
-        const subCategories = await this.categoryRepository.findAll({_id: {$in: subCategoryIds}})
+        const subCategories = await this.categoryRepository.findAll({ _id: { $in: subCategoryIds } })
 
-        const providerMap = new Map(providers.map(prov => [prov._id.toString(),{fullName: prov.fullName, profilePhoto: prov.profilePhoto}]))
-        const subCategoryMap = new Map(subCategories.map(sub => [sub._id.toString(), {iconUrl: sub.iconUrl}]))
-        const serviceMap = new Map(services.map(serv => [serv._id.toString(), {title: serv.title, priceUnit: serv.priceUnit, duration: serv.duration, price: serv.price, subCategoryId: serv.subCategoryId.toString()}]))
-        const addressMap = new Map(addresses.map(add => [add._id.toString(), {street: add.street, city: add.city}]))
+        const providerMap = new Map(providers.map(prov => [prov._id.toString(), { fullName: prov.fullName, profilePhoto: prov.profilePhoto }]))
+        const subCategoryMap = new Map(subCategories.map(sub => [sub._id.toString(), { iconUrl: sub.iconUrl }]))
+        const serviceMap = new Map(services.map(serv => [serv._id.toString(), { title: serv.title, priceUnit: serv.priceUnit, duration: serv.duration, price: serv.price, subCategoryId: serv.subCategoryId.toString() }]))
+        const addressMap = new Map(addresses.map(add => [add._id.toString(), { street: add.street, city: add.city }]))
 
         const mappedBooking = toBookingHistoryPage(bookings, addressMap, providerMap, subCategoryMap, serviceMap)
-        console.log('the mapped booking', mappedBooking)
 
         return mappedBooking
 
     }
+
+    async getBookingFor_Prov_mngmnt(providerId: string): Promise<IProviderBookingManagement[]> {
+        const bookings = await this.bookingRepository.findAll({ providerId });
+
+        const userIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
+        const users = await this.userRepository.findAll({ _id: { $in: userIds } });
+
+        const serviceIds = [...new Set(bookings.map(b => b.serviceId?.toString()).filter(Boolean))];
+        const services = await this.serviceRepository.findAll({ _id: { $in: serviceIds } });
+
+        const addressIds = [...new Set(bookings.map(b => b.addressId?.toString()).filter(Boolean))];
+        const addresses = await this.addressRepository.findAll({ _id: { $in: addressIds } });
+
+        const paymentIds = [...new Set(bookings.map(b => b.paymentId?.toString()).filter(Boolean))];
+        const payments = await this.paymentRepository.findAll({ _id: { $in: paymentIds } }); // fixed here
+
+        return toProviderBookingManagement(bookings, users, services, addresses, payments);
+    }
+
+    async saveAndEmitMessage(io: any, bookingId: string, senderId: string, text: string) {
+        const data = {
+            bookingId: new mongoose.Types.ObjectId(bookingId),
+            senderId: senderId,
+            text,
+        };
+
+        const message = await this.messageRepository.create(data);
+
+        io.to(bookingId).emit("receiveBookingMessage", message);
+
+        return message;
+    }
+
+    async getBookingMessages(bookingId: string): Promise<IMessage[]> {
+
+        return await this.messageRepository.findAllSorted(bookingId);
+        
+    }
+
+
 }

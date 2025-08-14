@@ -202,4 +202,16 @@ export class ProviderController {
         }
     }
 
+    public getProviderForChatPage = async (req: AuthRequest, res: Response, next: NextFunction ) => {
+        try {
+            console.log('its working')
+            const userId = req.user.id
+            console.log('the userId', userId)
+            const response = await this.providerService.providerForChatPage(userId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }

@@ -51,7 +51,7 @@ export class AuthService implements IAuthService {
             user.registrationOtp = otp;
             user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
             user.registrationOtpAttempts = 0;
-            await this.userRepository.update(user);
+            await this.userRepository.update(user._id.toString(), user);
 
             await sendVerificationEmail(email, otp);
 
@@ -81,7 +81,7 @@ export class AuthService implements IAuthService {
 
         if (!user.registrationOtp || user.registrationOtp !== otp) {
             user.registrationOtpAttempts = (typeof user.registrationOtpAttempts === 'number' ? user.registrationOtpAttempts : 0) + 1;
-            await this.userRepository.update(user);
+            await this.userRepository.update(user._id.toString(), user);
             const error = new Error('Invalid OTP. Please try again.');
             (error as any).statusCode = 400;
             throw error;
@@ -91,7 +91,7 @@ export class AuthService implements IAuthService {
             user.registrationOtp = undefined;
             user.registrationOtpExpires = undefined;
             user.registrationOtpAttempts = 0;
-            await this.userRepository.update(user);
+            await this.userRepository.update(user._id.toString(), user);
             throw new CustomError('OTP has expired. Please request a new one.', HttpStatusCode.BAD_REQUEST);
         }
 
@@ -99,7 +99,7 @@ export class AuthService implements IAuthService {
         user.registrationOtp = undefined;
         user.registrationOtpExpires = undefined;
         user.registrationOtpAttempts = 0;
-        await this.userRepository.update(user);
+        await this.userRepository.update(user._id.toString(), user);
 
         return { message: 'Account successfully verified!' };
     }
@@ -131,7 +131,7 @@ export class AuthService implements IAuthService {
         user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         user.registrationOtpAttempts = 0;
 
-        await this.userRepository.update(user);
+        await this.userRepository.update(user._id.toString(), user);
 
         await sendVerificationEmail(email, newOtp);
 
@@ -161,7 +161,7 @@ export class AuthService implements IAuthService {
         const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
 
         user.refreshToken = refreshToken
-        await this.userRepository.update(user)
+        await this.userRepository.update(user._id.toString(), user)
 
         return {
             user: {
@@ -190,7 +190,7 @@ export class AuthService implements IAuthService {
         user.passwordResetToken = resetToken;
         user.passwordResetExpires = new Date(Date.now() + PASSWORD_RESET_EXPIRY_MINUTES * 60 * 1000);
 
-        await this.userRepository.update(user);
+        await this.userRepository.update(user._id.toString(), user);
 
         const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
         logger.info('the reset linke', resetLink)
@@ -218,7 +218,7 @@ export class AuthService implements IAuthService {
         user.passwordResetToken = undefined;
         user.passwordResetExpires = undefined;
 
-        await this.userRepository.update(user);
+        await this.userRepository.update(user._id.toString(), user);
 
         return { message: 'Your password has been reset successfully.' };
     }
@@ -246,7 +246,7 @@ export class AuthService implements IAuthService {
                 if (!user.googleId) {
                     user.googleId = googleId;
                     user.provider = 'google';
-                    await this.userRepository.update(user);
+                    await this.userRepository.update(user._id.toString(), user);
                 }
             } else {
                 user = await this.userRepository.create({
@@ -267,7 +267,7 @@ export class AuthService implements IAuthService {
         const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
 
         user.refreshToken = refreshToken
-        await this.userRepository.update(user)
+        await this.userRepository.update(user._id.toString(), user)
 
         return {
             user: {
@@ -359,7 +359,7 @@ export class AuthService implements IAuthService {
             user.profilePicture = data.profilePicture;
         }
 
-        const updatedUser = await this.userRepository.update(user);
+        const updatedUser = await this.userRepository.update(user._id.toString(), user);
         const {} = updatedUser
         return {
             id: (user._id as { toString(): string }).toString(),
@@ -435,7 +435,7 @@ export class AuthService implements IAuthService {
 
         user.isVerified = !user.isVerified;
 
-        await this.userRepository.update(user);
+        await this.userRepository.update(user._id.toString(), user);
 
         return {
             id: (user._id as { toString(): string }).toString(),
@@ -459,7 +459,7 @@ export class AuthService implements IAuthService {
 
             if (user && user.refreshToken === refreshToken) {
                 user.refreshToken = null;
-                await this.userRepository.update(user);
+                await this.userRepository.update(user._id.toString(), user);
                 return { message: 'Logged out successfully and refresh token invalidated.' };
             } else {
                 return { message: 'Refresh token not found or already invalidated in database. Logout complete.' };

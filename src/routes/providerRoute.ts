@@ -20,6 +20,7 @@ router.get('/getProvider', providerController.getProvider)
 router.get('/getFeaturedProviders', providerController.featuredProviders)
 router.get('/getFilteredServiceProvider', providerController.getServiceProvider)
 router.get('/getServicesForAddPage', providerController.getServicesForAddPage)
+router.get('/getProviderForChatPage', authenticateToken, providerController.getProviderForChatPage)
 
 
 // admin

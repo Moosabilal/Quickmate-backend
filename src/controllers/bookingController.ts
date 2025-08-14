@@ -63,7 +63,29 @@ export class BookingController {
     public getAllBookings = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const userId = req.user.id;
+            console.log('the userid', userId)
             const response = await this.bookingService.getAllFilteredBookings(userId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public getBookingFor_Prov_mngmnt = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const providerId = req.params.id
+            console.log('the userid', providerId)
+            const response = await this.bookingService.getBookingFor_Prov_mngmnt(providerId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public getAllPreviousChats = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const bookingId = req.params.bookingId
+            const response = await this.bookingService.getBookingMessages(bookingId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

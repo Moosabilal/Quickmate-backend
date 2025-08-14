@@ -72,3 +72,539 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: sKR3nnydsEd12550AAAC
+[INFO   ] - New client connected: yg6ggeZr8F2vjrUZAAAD
+[INFO   ] - Client disconnected: sKR3nnydsEd12550AAAC
+[INFO   ] - Client disconnected: yg6ggeZr8F2vjrUZAAAD
+[INFO   ] - New client connected: 2NVjMgZhO21SPAlvAAAF
+[INFO   ] - New client connected: 8kny7JOUYruSmjqbAAAH
+[INFO   ] - Client disconnected: 2NVjMgZhO21SPAlvAAAF
+[INFO   ] - New client connected: lhkLHdCWcCPtUIiOAAAJ
+[INFO   ] - Client disconnected: lhkLHdCWcCPtUIiOAAAJ
+[INFO   ] - New client connected: VUg7-JfII2Bv4CjSAAAL
+[INFO   ] - Client disconnected: VUg7-JfII2Bv4CjSAAAL
+[INFO   ] - Client disconnected: 8kny7JOUYruSmjqbAAAH
+[INFO   ] - New client connected: pTLaoTdIc8kJ2b-YAAAO
+[INFO   ] - Client disconnected: pTLaoTdIc8kJ2b-YAAAO
+[INFO   ] - New client connected: opTP1jGA3FbrVEM0AAAP
+[INFO   ] - New client connected: MfRguGl9QNrchS4vAAAR
+[INFO   ] - New client connected: EYnIDON1jJP8IBp1AAAT
+[INFO   ] - Client disconnected: opTP1jGA3FbrVEM0AAAP
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: ggbA_BdehyUpo0z5AAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: qpnTSTVBheNfyIZ5AAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: 4DMaMcKqJ0O7oPNKAAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: w-i2bM-O4tl3wt2wAAAD
+[INFO   ] - Message from w-i2bM-O4tl3wt2wAAAD: [object Object]
+[INFO   ] - Client disconnected: w-i2bM-O4tl3wt2wAAAD
+[INFO   ] - New client connected: Za0M4qj3_LJ-m06vAAAF
+[INFO   ] - Message from Za0M4qj3_LJ-m06vAAAF: helloadfasdfdsf
+[INFO   ] - Client disconnected: Za0M4qj3_LJ-m06vAAAF
+[INFO   ] - New client connected: x7jywzvbNPn4_qYTAAAH
+[INFO   ] - Message from x7jywzvbNPn4_qYTAAAH: hello iam moosa
+[INFO   ] - Message from x7jywzvbNPn4_qYTAAAH: mmoosaasdf
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: DaytEFxdVuitxFdoAAAB
+[INFO   ] - New client connected: k-9ue4PPqj9Z4L0yAAAD
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Message from k-9ue4PPqj9Z4L0yAAAD: hello iam moosa : E8qhR
+[INFO   ] - Client disconnected: k-9ue4PPqj9Z4L0yAAAD
+[INFO   ] - New client connected: VcMAKxLZaFkN_nwqAAAF
+[INFO   ] - Message from VcMAKxLZaFkN_nwqAAAF: helloadfasdfdsf : Iqmf3
+[INFO   ] - Message from VcMAKxLZaFkN_nwqAAAF: asdfasd : r7m7M
+[INFO   ] - Client disconnected: DaytEFxdVuitxFdoAAAB
+[INFO   ] - Client disconnected: VcMAKxLZaFkN_nwqAAAF
+[INFO   ] - New client connected: v2wSEZ3SA3QG1dJ_AAAH
+[INFO   ] - New client connected: XEEJgS5JQrtch9O7AAAJ
+[INFO   ] - Client disconnected: v2wSEZ3SA3QG1dJ_AAAH
+[INFO   ] - Client disconnected: XEEJgS5JQrtch9O7AAAJ
+[INFO   ] - New client connected: a1qCwVt9ILU0kSXSAAAM
+[INFO   ] - New client connected: -u3a_QfgKjaKh9PLAAAN
+[INFO   ] - Message from -u3a_QfgKjaKh9PLAAAN: [object Object] : undefined
+[INFO   ] - Message from -u3a_QfgKjaKh9PLAAAN: [object Object] : undefined
+[INFO   ] - Client disconnected: -u3a_QfgKjaKh9PLAAAN
+[INFO   ] - New client connected: 9qRsSO5EqWmYLBfuAAAP
+[INFO   ] - Message from 9qRsSO5EqWmYLBfuAAAP: [object Object] : undefined
+[INFO   ] - Server running on port 5000
+[INFO   ] - Socket.IO server ready for connections
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: VsuodjJwAker7GPHAAAB
+[INFO   ] - New client connected: Xrfxx-EYI1QzgvWIAAAD
+[INFO   ] - Message from XfQHU (Xrfxx-EYI1QzgvWIAAAD): hello
+[INFO   ] - Message from mSMMc (Xrfxx-EYI1QzgvWIAAAD): hi
+[INFO   ] - Message from nrvMt (VsuodjJwAker7GPHAAAB): hello
+[INFO   ] - Message from ym99p (Xrfxx-EYI1QzgvWIAAAD): asdfa
+[INFO   ] - Message from ZnCO2 (Xrfxx-EYI1QzgvWIAAAD): asdasd
+[INFO   ] - Client disconnected: Xrfxx-EYI1QzgvWIAAAD, reason: transport close
+[INFO   ] - Client disconnected: VsuodjJwAker7GPHAAAB, reason: transport error
+[INFO   ] - New client connected: jXKJqoTPepcDsAzxAAAG
+[INFO   ] - New client connected: RPrP7ZaszXZMRkbrAAAH
+[INFO   ] - New client connected: PIjtQ8oaeBJ27QxDAAAJ
+[INFO   ] - New client connected: 6QegCVor5aQFpFabAAAL
+[INFO   ] - Message from uAs4D (PIjtQ8oaeBJ27QxDAAAJ): hllle
+[INFO   ] - Client disconnected: RPrP7ZaszXZMRkbrAAAH, reason: ping timeout
+[INFO   ] - Client disconnected: jXKJqoTPepcDsAzxAAAG, reason: ping timeout
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: TtF2FCC-sSq-1of-AAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: YWdUq6V0rADfBpv4AAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: aLnvesG9I4sZO0_AAAAB
+[INFO   ] - New client connected: DCNdyIqNxN_YdmsNAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: 8u67n0t-XA2FNL5FAAAB
+[INFO   ] - New client connected: RqHBvXMn6xRdJ5HFAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: Jhkn3l3zrPLy_6e0AAAB
+[INFO   ] - New client connected: F2uHO-0OZtqBTru1AAAD
+[INFO   ] - Client disconnected: Jhkn3l3zrPLy_6e0AAAB
+[INFO   ] - New client connected: ie6PqIQbU6yNMFzDAAAF
+[INFO   ] - Client disconnected: ie6PqIQbU6yNMFzDAAAF
+[INFO   ] - New client connected: yalLiRFOyf-cr58zAAAH
+[INFO   ] - Client disconnected: yalLiRFOyf-cr58zAAAH
+[INFO   ] - New client connected: g8kt7MLxaCV-pCreAAAJ
+[INFO   ] - Client disconnected: g8kt7MLxaCV-pCreAAAJ
+[INFO   ] - New client connected: usf0JBHHvO4RKG5iAAAL
+[INFO   ] - Client disconnected: usf0JBHHvO4RKG5iAAAL
+[INFO   ] - New client connected: MH0uwiSF34m4wCdEAAAN
+[INFO   ] - Client disconnected: MH0uwiSF34m4wCdEAAAN
+[INFO   ] - New client connected: QDjyc6NrudIY2kSHAAAP
+[INFO   ] - Client disconnected: QDjyc6NrudIY2kSHAAAP
+[INFO   ] - New client connected: Q_Bc7-cLaBny-9QCAAAR
+[INFO   ] - Client disconnected: Q_Bc7-cLaBny-9QCAAAR
+[INFO   ] - Client disconnected: F2uHO-0OZtqBTru1AAAD
+[INFO   ] - New client connected: WQ_vWJy9RgE0W1naAAAT
+[INFO   ] - Client disconnected: WQ_vWJy9RgE0W1naAAAT
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderForChatPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt 404 Not Found - /api/bookings/getBookingFor_Prov_mngmnt -> Not Found - /api/bookings/getBookingFor_Prov_mngmnt
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt 404 Not Found - /api/bookings/getBookingFor_Prov_mngmnt -> Not Found - /api/bookings/getBookingFor_Prov_mngmnt
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt 404 Not Found - /api/bookings/getBookingFor_Prov_mngmnt -> Not Found - /api/bookings/getBookingFor_Prov_mngmnt
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt 404 Not Found - /api/bookings/getBookingFor_Prov_mngmnt -> Not Found - /api/bookings/getBookingFor_Prov_mngmnt
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/$ 404 Not Found - /api/bookings/getBookingFor_Prov_mngmnt/$ -> Not Found - /api/bookings/getBookingFor_Prov_mngmnt/$
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/undefined 404 Not Found - /api/bookings/getBookingFor_Prov_mngmnt/undefined -> Not Found - /api/bookings/getBookingFor_Prov_mngmnt/undefined
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/undefined 404 Not Found - /api/bookings/getBookingFor_Prov_mngmnt/undefined -> Not Found - /api/bookings/getBookingFor_Prov_mngmnt/undefined
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings/ 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking" -> Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking"
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking" -> Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking"
+[INFO   ] - Server running on port 5000
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking" -> Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking"
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: v_ZXoGW-A9VhTGzNAAAB
+[INFO   ] - New client connected: F24Ac3nQDx2IlrWdAAAD
+[INFO   ] - Client disconnected: v_ZXoGW-A9VhTGzNAAAB
+[INFO   ] - New client connected: GU3b5VbLJogGOp4JAAAF
+[INFO   ] - Client disconnected: F24Ac3nQDx2IlrWdAAAD
+[INFO   ] - New client connected: Cd7YNEGTiTUTwMN0AAAH
+[INFO   ] - Client disconnected: GU3b5VbLJogGOp4JAAAF
+[INFO   ] - New client connected: FRhiWvrvvXo-5gK6AAAJ
+[INFO   ] - Client disconnected: Cd7YNEGTiTUTwMN0AAAH
+[INFO   ] - New client connected: cJJm2D-xgSRTWB38AAAL
+[INFO   ] - Client disconnected: FRhiWvrvvXo-5gK6AAAJ
+[INFO   ] - New client connected: 9hP4Xz4LBwW6P5j3AAAN
+[INFO   ] - Client disconnected: 9hP4Xz4LBwW6P5j3AAAN
+[INFO   ] - New client connected: XE_5rRj56bM3V0U6AAAP
+[INFO   ] - Client disconnected: XE_5rRj56bM3V0U6AAAP
+[INFO   ] - New client connected: X19Sdea-bWlqU2osAAAR
+[INFO   ] - Client disconnected: X19Sdea-bWlqU2osAAAR
+[INFO   ] - Client disconnected: cJJm2D-xgSRTWB38AAAL
+[INFO   ] - New client connected: pxPnCXz8_tkVJKiSAAAU
+[INFO   ] - New client connected: 6R_kaTvBlpmgvzUkAAAV
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking" -> Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking"
+[INFO   ] - New client connected: -VFBfEH4FzIL--ioAAAX
+[INFO   ] - Client disconnected: 6R_kaTvBlpmgvzUkAAAV
+[INFO   ] - Client disconnected: pxPnCXz8_tkVJKiSAAAU
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: VBdAB6XGbIR9RtB_AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: 5Oqj_ItHgfNfe_mxAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: APt3W0VlVW51mg5tAAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: oLIOv_dYl-vKdKBDAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: 8FzHDvGLVN_VYTMQAAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: swcGgj6tX_VCqcMIAAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: TeovIzg4wqNbi8niAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: JaFxoep_drOqeDsVAAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: Dm7T1CA5HNIJqj3kAAAB
+[INFO   ] - Client disconnected: Dm7T1CA5HNIJqj3kAAAB
+[INFO   ] - New client connected: KUkuzuqIo4KD5uBjAAAD
+[INFO   ] - New client connected: GpvsVpT15aC5QJJ9AAAF
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking" -> Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking"
+[INFO   ] - Client disconnected: KUkuzuqIo4KD5uBjAAAD
+[INFO   ] - Client disconnected: GpvsVpT15aC5QJJ9AAAF
+[INFO   ] - New client connected: Cai03UF-H-Tuo4OdAAAH
+[INFO   ] - Client disconnected: Cai03UF-H-Tuo4OdAAAH
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: ekNprnPdOZxE0HPIAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: omjROlKzTthyqmwEAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: ybScYEqQgMd1paf1AAAB
+[INFO   ] - New client connected: SD-WnFHknKFouykJAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: jVG3VJhlcW_ePGMwAAAC
+[INFO   ] - New client connected: itxRDTjZbdIfElHHAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: CLT-qr3JBowZ6ihYAAAB
+[INFO   ] - New client connected: z8FeTyyofbEkw_tmAAAD
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: ToalHQaoRvISyPKyAAAC
+[INFO   ] - New client connected: fGBsPSx7WSLvKSukAAAD
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: 6tSXqddb_Kgy8SFMAAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected: _d_hdtKkuQlrA-oXAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected: enQLrXWRZxZukRYfAAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 404 Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b -> Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 404 Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b -> Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 404 Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b -> Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 404 Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b -> Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 404 Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b -> Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 404 Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b -> Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 404 Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b -> Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 404 Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b -> Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 404 Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b -> Not Found - /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6898c1e8059d83270f3cfd2b 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/[object%20Object] 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking" -> Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking"
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking" -> Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Booking"

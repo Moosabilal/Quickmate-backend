@@ -113,3 +113,15 @@ export interface IBackendProvider {
   rating?: number;
   reviews?: number;
 }
+
+export interface IProviderForChatListPage {
+  id: string;
+  bookingId?: string;
+  name: string;
+  profilePicture: string;
+  location: string;
+  isOnline: boolean;
+  services: string[]
+  // completedJobs: number;
+  description: string;
+}

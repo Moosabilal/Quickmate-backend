@@ -1,6 +1,8 @@
 import { IProvider } from '../models/Providers';
-import { IProviderProfile, IServiceAddPageResponse } from '../dto/provider.dto';
+import { IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from '../dto/provider.dto';
 import { ICategory } from '../models/Categories';
+import { IBooking } from '../models/Booking';
+import { IService } from '../models/Service';
 
 export function toProviderDTO(provider: IProvider): IProviderProfile {
   return {
@@ -30,4 +32,32 @@ export function toServiceAddPage(category: ICategory): IServiceAddPageResponse {
     name: category.name,
     parentId: category.parentId ? category.parentId.toString() : null
   }
+}
+
+export function toProviderForChatListPage(
+  bookings: IBooking[],
+  providers: IProvider[],
+  services: IService[]
+): IProviderForChatListPage[] {
+  return providers.map((provider) => {
+    const booking = bookings.find(
+      (b) => b.providerId?.toString() === provider._id.toString()
+    );
+    console.log('the booking', booking)
+    const providerServices = services.filter(
+      (s) => s.providerId?.toString() === provider._id.toString()
+    );
+    console.log('the provider services', providerServices)
+
+    return {
+      id: provider._id.toString(),
+      bookingId: booking?._id.toString(),
+      name: provider.fullName,
+      profilePicture: provider.profilePhoto || "",
+      location: provider.serviceArea,
+      isOnline: true, 
+      services: providerServices.map((s) => s.title),
+      description: providerServices[0]?.description || "",
+    };
+  });
 }

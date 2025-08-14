@@ -3,14 +3,19 @@ import { IUserRepository } from '../interface/IUserRepository';
 import { IUser } from '../../models/User';
 import { injectable } from 'inversify';
 import User from '../../models/User';
+import { BaseRepository } from './base/BaseRepository';
 
 @injectable()
-export class UserRepository implements IUserRepository {
+export class UserRepository extends BaseRepository<IUser> implements IUserRepository {
 
-  async create(userData: Partial<IUser>): Promise<IUser> {
-    const user = new User(userData);
-    return await user.save();
+  constructor() {
+    super(User)
   }
+
+  // async create(userData: Partial<IUser>): Promise<IUser> {
+  //   const user = new User(userData);
+  //   return await user.save();
+  // }
 
   async findByEmail(email: string, includeOtpFields: boolean = false): Promise<IUser | null> {
     let query = User.findOne<IUser>({ email });
@@ -21,9 +26,9 @@ export class UserRepository implements IUserRepository {
     return await query.exec();
   }
 
-  async update(user: IUser): Promise<IUser> {
-    return await user.save();
-  }
+  // async update(user: IUser): Promise<IUser> {
+  //   return await user.save();
+  // }
 
   async findByPasswordResetToken(token: string): Promise<IUser | null> {
     return User.findOne({
