@@ -24,6 +24,7 @@ import { IServiceRepository } from "../../repositories/interface/IServiceReposit
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { IMessageRepository } from "../../repositories/interface/IMessageRepository";
 import { IMessage } from "../../models/message";
+import { BookingStatus } from "../../enums/booking.enum";
 
 @injectable()
 export class BookingService implements IBookingService {
@@ -192,15 +193,17 @@ export class BookingService implements IBookingService {
         if (!subCat) {
             throw new CustomError('No service found', HttpStatusCode.NOT_FOUND)
         }
-
+        const provider = await this.providerRepository.findById(booking.providerId.toString())
+        if (!provider) {
+            throw new CustomError('No provider found', HttpStatusCode.NOT_FOUND)
+        }
         const payment = await this.paymentRepository.findById(booking.paymentId.toString())
 
-        return toBookingConfirmationPage(booking, address, subCat, payment)
+        return toBookingConfirmationPage(booking, address, subCat.iconUrl, service, payment, provider);
     }
 
     async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
         const bookings = await this.bookingRepository.findAll({ userId })
-        console.log('the booking we gor withour data', bookings)
         const providerIds = [...new Set(bookings.map(s => s.providerId.toString()))]
         const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } })
         const addressIds = [...new Set(bookings.map(s => s.addressId.toString()))]
@@ -257,6 +260,18 @@ export class BookingService implements IBookingService {
 
         return await this.messageRepository.findAllSorted(bookingId);
         
+    }
+
+    async cancelBooking(bookingId: string): Promise<{ message: string }> {
+        const booking = await this.bookingRepository.findById(bookingId)
+        if (!booking) {
+            throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+        }
+        if (booking.status === BookingStatus.CANCELLED) {
+            return { message: ErrorMessage.BOOKING_IS_ALREADY_CANCELLED }
+        }
+        await this.bookingRepository.update(bookingId, { status: BookingStatus.CANCELLED })
+        return { message: ErrorMessage.BOOKING_CANCELLED_SUCCESSFULLY }
     }
 
 

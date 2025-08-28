@@ -8,11 +8,17 @@ import { ICategory } from "../models/Categories";
 import message, { IMessage } from "../models/message";
 import { IPayment } from "../models/payment";
 import { IService } from "../models/Service";
+import { IProvider } from "../models/Providers";
 
-export function toBookingConfirmationPage(booking: IBooking, address: IAddress, category: ICategory, payment: IPayment): IBookingConfirmationRes {
+export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider): IBookingConfirmationRes {
     return {
         id: booking._id.toString(),
-        serviceName: category.name,
+        serviceName: service.title,
+        serviceImage: categoryIcon || '',
+        providerName: provider.fullName,
+        providerImage: provider.profilePhoto || '',
+        priceUnit: service.priceUnit as string,
+        duration: service.duration || '',
         bookedOrderId: payment.razorpay_order_id,
         customer: booking.customerName as string,
         phone: booking.phone as string,

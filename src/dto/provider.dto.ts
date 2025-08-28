@@ -1,5 +1,12 @@
 import { Types } from "mongoose";
 import { ProviderStatus } from "../enums/provider.enum";
+
+ export interface Availability {
+    day: string;       
+    startTime: string; 
+    endTime: string;  
+}
+
 export interface IProviderRegisterRequest {
   fullName: string;
   phoneNumber: string;
@@ -12,7 +19,7 @@ export interface IProviderRegisterRequest {
   serviceArea: string;
   experience: number;
 
-  availableDays: string[];
+  availability: Availability[];
 
   timeSlot: {
     startTime: string;
@@ -51,10 +58,6 @@ export interface IFeaturedProviders {
 }
 
 export interface IProviderProfile {
-  timeSlot: {
-    startTime: string;
-    endTime: string;
-  };
   aadhaarIdProof?: string;
   id: string;
   userId: string;
@@ -66,7 +69,7 @@ export interface IProviderProfile {
   serviceArea: string;
   profilePhoto: string;
   status: ProviderStatus;
-  availableDays: string[];
+  availability: Availability[];
   earnings: number;
   totalBookings: number;
   payoutPending: number;
@@ -78,9 +81,7 @@ export interface ProviderFilterQuery {
   serviceId: Types.ObjectId;
   serviceArea?: { $regex: RegExp };
   experience?: { $gte: number };
-  availableDays?: string;
-  'timeSlot.startTime'?: { $lte: string };
-  'timeSlot.endTime'?: { $gte: string };
+  availability?: Availability[];
   price?: { $lte: number };
 }
 
@@ -101,11 +102,7 @@ export interface IBackendProvider {
   serviceName?: string;
   serviceArea: string;
   experience: number;
-  timeSlot: {
-    startTime: string;
-    endTime: string;
-  };
-  availableDays: string[];
+  availability: Availability[];
   status: string;
   earnings: number;
   price: number;

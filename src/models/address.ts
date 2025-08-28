@@ -31,12 +31,24 @@ const AddressSchema = new Schema({
     required: true,
     trim: true,
   },
+  locationCoords: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      type: [Number], // [longitude, latitude]
+      required: true
+    }
+  },
+  
 }, {
   timestamps: true,
 });
 
 type AddressSchemaType = InferSchemaType<typeof AddressSchema>;
 
-export interface IAddress extends HydratedDocument<AddressSchemaType> {}
+export interface IAddress extends HydratedDocument<AddressSchemaType> { }
 
 export const Address = model<IAddress>('Address', AddressSchema);

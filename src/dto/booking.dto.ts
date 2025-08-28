@@ -17,6 +17,11 @@ export interface IBookingConfirmationRes {
   id: string;
   bookedOrderId: string
   serviceName: string;
+  serviceImage: string;
+  providerName: string;
+  providerImage: string;
+  priceUnit: string;
+  duration: string;
   customer?: string;
   phone: string;
   date: string;

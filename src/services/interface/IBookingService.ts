@@ -9,6 +9,7 @@ export interface IBookingService {
     paymentVerification(verifyPayment: IPaymentVerificationRequest): Promise<{message: string, orderId: string, paymentId: string}>;
     findBookingById (id: string): Promise<IBookingConfirmationRes>;
     getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]>;
+    cancelBooking(bookingId: string): Promise<{message: string}>;
 
     //provider
     getBookingFor_Prov_mngmnt(providerId: string): Promise<IProviderBookingManagement[]>;

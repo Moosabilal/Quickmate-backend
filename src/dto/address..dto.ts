@@ -6,4 +6,5 @@ export interface IAddressRequest {
     city: string;
     state: string;
     zip: string;
+    locationCoords?: string;
 }

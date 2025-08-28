@@ -15,9 +15,12 @@ export class AddressController {
 
     public createAddress = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+            const locationString = req.body.locationCoords;
+            const [lat, lon] = locationString.split(",").map(Number);
             const data = {
                 ...req.body,
-                userId: req.user.id
+                userId: req.user.id,
+                locationCoords: { type: "Point", coordinates: [lon, lat] }
             }
             const updatedAddress = await this.addressService.addAddress(data)
             res.status(HttpStatusCode.OK).json(updatedAddress)
@@ -38,6 +41,9 @@ export class AddressController {
 
     public updateAddress = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            const locationString = req.body.locationCoords;
+            const [lat, lon] = locationString.split(",").map(Number);
+            req.body.locationCoords = { type: "Point", coordinates: [lon, lat] }
             const updateAddress = await this.addressService.updateAddressById(req.params.id, req.body)
             res.status(HttpStatusCode.OK).json(updateAddress)
         } catch (error) {

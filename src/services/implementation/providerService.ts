@@ -51,7 +51,6 @@ export class ProviderService implements IProviderService {
     public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
 
         let provider = await this.providerRepository.findByEmail(data.email);
-        console.log('the provider is not getting', provider)
 
 
         if (provider && provider.isVerified) {
@@ -59,21 +58,20 @@ export class ProviderService implements IProviderService {
         }
 
         if (!provider) {
+            console.log('Creating new provider', data);
             provider = await this.providerRepository.createProvider(data);
         } else {
-            console.log('the else condition is working')
             provider.fullName = data.fullName;
             provider.phoneNumber = data.phoneNumber;
             provider.isVerified = false;
         }
-        console.log('the otop is generating')
 
         const otp = generateOTP();
 
         provider.registrationOtp = otp;
         provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         provider.registrationOtpAttempts = 0;
-        await this.providerRepository.update(provider.id,provider);
+        await this.providerRepository.update(provider.id, provider);
         await sendVerificationEmail(provider.email, otp);
 
 
@@ -170,7 +168,6 @@ export class ProviderService implements IProviderService {
     }
 
     public async updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile> {
-        console.log('the update provider in service', updateData)
         const updatedProvider = await this.providerRepository.updateProvider(updateData)
         return {
             id: updatedProvider._id.toString(),
@@ -179,16 +176,16 @@ export class ProviderService implements IProviderService {
             phoneNumber: updatedProvider.phoneNumber,
             email: updatedProvider.email,
             serviceId: updatedProvider.serviceId.map(id => id.toString()),
-            serviceLocation: updatedProvider.serviceLocation,
+            serviceLocation: `${updatedProvider.serviceLocation.coordinates[1]},${updatedProvider.serviceLocation.coordinates[0]}`,
             serviceArea: updatedProvider.serviceArea,
             profilePhoto: updatedProvider.profilePhoto,
             // price: updatedProvider.price,
             status: updatedProvider.status,
             // aadhaarIdProof: updatedProvider.aadhaarIdProof,
             // experience: updatedProvider.experience,
-            timeSlot: updatedProvider.timeSlot,
+            // timeSlot: updatedProvider.timeSlot,
             // verificationDocs: updatedProvider.verificationDocs,
-            availableDays: updatedProvider.availableDays,
+            availability: updatedProvider.availability,
             earnings: updatedProvider.earnings,
             totalBookings: updatedProvider.totalBookings,
             payoutPending: updatedProvider.payoutPending,
@@ -313,13 +310,13 @@ export class ProviderService implements IProviderService {
             phoneNumber: provider.phoneNumber,
             email: provider.email,
             serviceId: provider.serviceId.map(id => id.toString()),
-            serviceLocation: provider.serviceLocation,
+            serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
             serviceArea: provider.serviceArea,
             profilePhoto: provider.profilePhoto,
             status: provider.status,
             aadhaarIdProof: provider.aadhaarIdProof,
-            timeSlot: provider.timeSlot,
-            availableDays: provider.availableDays,
+            // timeSlot: provider.timeSlot,
+            availability: provider.availability,
             earnings: provider.earnings,
             totalBookings: provider.totalBookings,
             payoutPending: provider.payoutPending,
@@ -365,107 +362,118 @@ export class ProviderService implements IProviderService {
 
         const allowedStatuses = Object.values(ProviderStatus);
         if (!allowedStatuses.includes(newStatus as ProviderStatus)) {
+            console.log('the new status', newStatus, allowedStatuses)
             throw new CustomError(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`, HttpStatusCode.BAD_REQUEST);
         }
+        console.log('the id and new status', id, newStatus)
         await this.providerRepository.updateStatusById(id, newStatus)
         return { message: "provider Status updated" }
     }
 
     public async getProviderwithFilters(
-    serviceId: string,
-    filters: {
-        area?: string;
-        experience?: number;
-        day?: string;
-        time?: string;
-        price?: number;
-    }
-): Promise<IBackendProvider[]> {
-    const serviceFilter: any = {
-        subCategoryId: serviceId,
-    };
-
-    if (filters.experience) {
-        serviceFilter.experience = { $gte: filters.experience };
-    }
-
-    if (filters.price) {
-        serviceFilter.price = { $lte: filters.price };
-    }
-
-    const services = await this.serviceRepository.findAll(serviceFilter);
-
-    if (!services || services.length === 0) return [];
-
-    const servicesByProvider = new Map<string, IService[]>();
-    services.forEach(service => {
-        const pid = service.providerId.toString();
-        if (!servicesByProvider.has(pid)) {
-            servicesByProvider.set(pid, []);
+        serviceId: string,
+        filters: {
+            area?: string;
+            experience?: number;
+            day?: string;
+            time?: string;
+            price?: number;
         }
-        servicesByProvider.get(pid)!.push(service);
-    });
-
-    const providerIds = Array.from(servicesByProvider.keys());
-
-    const providerFilter: any = { _id: { $in: providerIds.map(id => new mongoose.Types.ObjectId(id)) } };
-
-    if (filters.area) {
-        providerFilter.serviceArea = { $regex: new RegExp(filters.area, 'i') };
-    }
-
-    if (filters.day) {
-        providerFilter.availableDays = filters.day;
-    }
-
-    if (filters.time) {
-        providerFilter['timeSlot.startTime'] = { $lte: filters.time };
-        providerFilter['timeSlot.endTime'] = { $gte: filters.time };
-    }
-
-    const providers = await this.providerRepository.findAll(providerFilter);
-
-    const result: IBackendProvider[] = providers.map(provider => {
-        const providerServices = servicesByProvider.get(provider._id.toString()) || [];
-
-        const primaryService = providerServices[0];
-
-        return {
-            _id: provider._id.toString(),
-            fullName: provider.fullName,
-            phoneNumber: provider.phoneNumber,
-            email: provider.email,
-            profilePhoto: provider.profilePhoto,
-            serviceArea: provider.serviceArea,
-            timeSlot: provider.timeSlot,
-            availableDays: provider.availableDays,
-            status: provider.status,
-            earnings: provider.earnings,
-            totalBookings: provider.totalBookings,
-            experience: primaryService?.experience || 0,
-            price: primaryService?.price || 0,
-            rating: provider.rating ?? 0,
-            // reviews: provider.reviews ?? 0,
+    ): Promise<IBackendProvider[]> {
+        const serviceFilter: any = {
+            subCategoryId: serviceId,
         };
-    });
 
-    return result;
-}
+        if (filters.experience) {
+            serviceFilter.experience = { $gte: filters.experience };
+        }
 
-public async providerForChatPage(userId: string): Promise<IProviderForChatListPage[]> {
-  if (!userId) {
-    throw new CustomError("Sorry UserId not found", HttpStatusCode.NOT_FOUND);
-  }
+        if (filters.price) {
+            serviceFilter.price = { $lte: filters.price };
+        }
 
-  const bookings = await this.bookingRepository.findAll({ userId });
-  if (!bookings.length) return [];
-  const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
+        const services = await this.serviceRepository.findAll(serviceFilter);
 
-  const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } });
-  const services = await this.serviceRepository.findAll({ providerId: { $in: providerIds } });
+        if (!services || services.length === 0) return [];
 
-  return toProviderForChatListPage(bookings, providers, services);
-}
+        const servicesByProvider = new Map<string, IService[]>();
+        services.forEach(service => {
+            const pid = service.providerId.toString();
+            if (!servicesByProvider.has(pid)) {
+                servicesByProvider.set(pid, []);
+            }
+            servicesByProvider.get(pid)!.push(service);
+        });
+
+        const providerIds = Array.from(servicesByProvider.keys());
+
+        const providerFilter: any = { _id: { $in: providerIds.map(id => new mongoose.Types.ObjectId(id)) } };
+
+        if (filters.area) {
+            providerFilter.serviceArea = { $regex: new RegExp(filters.area, 'i') };
+        }
+
+        if (filters.day || filters.time) {
+            providerFilter.availability = {
+                $elemMatch: {} as any
+            };
+
+            if (filters.day) {
+                providerFilter.availability.$elemMatch.day = filters.day;
+            }
+
+            if (filters.time) {
+                providerFilter.availability.$elemMatch.startTime = { $lte: filters.time };
+                providerFilter.availability.$elemMatch.endTime = { $gte: filters.time };
+            }
+        }
+
+        const providers = await this.providerRepository.findAll(providerFilter);
+
+        const result: IBackendProvider[] = providers.map(provider => {
+            const providerServices = servicesByProvider.get(provider._id.toString()) || [];
+
+            const primaryService = providerServices[0];
+
+            return {
+                _id: provider._id.toString(),
+                fullName: provider.fullName,
+                phoneNumber: provider.phoneNumber,
+                email: provider.email,
+                profilePhoto: provider.profilePhoto,
+                serviceArea: provider.serviceArea,
+                serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
+                // timeSlot: provider.timeSlot,
+                availability: provider.availability,
+                status: provider.status,
+                earnings: provider.earnings,
+                totalBookings: provider.totalBookings,
+                experience: primaryService?.experience || 0,
+                price: primaryService?.price || 0,
+                rating: provider.rating ?? 0,
+                // reviews: provider.reviews ?? 0,
+            };
+        });
+
+        console.log('the final result', result)
+
+        return result;
+    }
+
+    public async providerForChatPage(userId: string): Promise<IProviderForChatListPage[]> {
+        if (!userId) {
+            throw new CustomError("Sorry UserId not found", HttpStatusCode.NOT_FOUND);
+        }
+
+        const bookings = await this.bookingRepository.findAll({ userId });
+        if (!bookings.length) return [];
+        const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
+
+        const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } });
+        const services = await this.serviceRepository.findAll({ providerId: { $in: providerIds } });
+
+        return toProviderForChatListPage(bookings, providers, services);
+    }
 
 
 

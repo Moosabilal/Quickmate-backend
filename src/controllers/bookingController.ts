@@ -50,9 +50,7 @@ export class BookingController {
 
     public getBookingById = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            console.log('the req params', req.params)
             const bookingId = req.params.id
-            console.log('the bookgin si in controller', bookingId)
             const response = await this.bookingService.findBookingById(bookingId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -63,7 +61,6 @@ export class BookingController {
     public getAllBookings = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const userId = req.user.id;
-            console.log('the userid', userId)
             const response = await this.bookingService.getAllFilteredBookings(userId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -86,6 +83,16 @@ export class BookingController {
         try {
             const bookingId = req.params.bookingId
             const response = await this.bookingService.getBookingMessages(bookingId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public cancelBooking = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const bookingId = req.params.id
+            const response = await this.bookingService.cancelBooking(bookingId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

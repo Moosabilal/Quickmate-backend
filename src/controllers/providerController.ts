@@ -32,20 +32,23 @@ export class ProviderController {
             const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '') : '';
             // const certificationUrl = certification ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '') : '';
 
+
+
             const formData = {
                 ...req.body,
-                timeSlot: JSON.parse(req.body.timeSlot),
+                // timeSlot: JSON.parse(req.body.timeSlot),
                 // verificationDocs: {
                 //     aadhaarIdProof: aadhaarUrl,
                 // },
                 aadhaarIdProof: aadhaarUrl,
-                availableDays: JSON.parse(req.body.availableDays),
+                availability: JSON.parse(req.body.availability || '[]'),
                 profilePhoto: profileUrl,
                 userId: req.user?.id
 
             };
-            delete formData.startTime;
-            delete formData.endTime;
+            const [lat, lon] = req.body.serviceLocation.split(",").map(Number);
+            formData.serviceLocation = { type: "Point", coordinates: [lon, lat] };
+
 
             const response = await this.providerService.registerProvider(formData);
             res.status(HttpStatusCode.OK).json({ provider: response, message: "registration completed successfully" });
@@ -94,12 +97,14 @@ export class ProviderController {
                 ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '')
                 : undefined;
 
+            const [lat, lon] = req.body.serviceLocation.split(",").map(Number);
+
             const updateData: Partial<IProviderProfile> = {
                 ...req.body,
                 serviceId: JSON.parse(req.body.serviceId),
-                timeSlot: JSON.parse(req.body.timeSlot),
-                availableDays: JSON.parse(req.body.availableDays || '[]'),
-                userId: req.user.id
+                availability: JSON.parse(req.body.availability || '[]'),
+                userId: req.user.id,
+                serviceLocation: { type: "Point", coordinates: [lon, lat] }
             };
 
 
@@ -204,7 +209,6 @@ export class ProviderController {
 
     public getProviderForChatPage = async (req: AuthRequest, res: Response, next: NextFunction ) => {
         try {
-            console.log('its working')
             const userId = req.user.id
             console.log('the userId', userId)
             const response = await this.providerService.providerForChatPage(userId)
