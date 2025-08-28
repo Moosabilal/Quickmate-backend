@@ -1,6 +1,8 @@
 import { IProvider } from '../models/Providers';
-import { IProviderProfile, IServiceAddPageResponse } from '../dto/provider.dto';
+import { IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from '../dto/provider.dto';
 import { ICategory } from '../models/Categories';
+import { IBooking } from '../models/Booking';
+import { IService } from '../models/Service';
 
 export function toProviderDTO(provider: IProvider): IProviderProfile {
   return {
@@ -10,10 +12,13 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     phoneNumber: provider.phoneNumber,
     email: provider.email,
     serviceId: provider.serviceId.map(id => id.toString()),
-    serviceLocation: provider.serviceLocation,
+    serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
     serviceArea: provider.serviceArea,
-    availableDays: provider.availableDays,
-    timeSlot: provider.timeSlot,
+    availability: provider.availability.map(a => ({
+      day: a.day,
+      startTime: a.startTime,
+      endTime: a.endTime,
+    })),
     profilePhoto: provider.profilePhoto,
     earnings: provider.earnings,
     status: provider.status,
@@ -30,4 +35,32 @@ export function toServiceAddPage(category: ICategory): IServiceAddPageResponse {
     name: category.name,
     parentId: category.parentId ? category.parentId.toString() : null
   }
+}
+
+export function toProviderForChatListPage(
+  bookings: IBooking[],
+  providers: IProvider[],
+  services: IService[]
+): IProviderForChatListPage[] {
+  return providers.map((provider) => {
+    const booking = bookings.find(
+      (b) => b.providerId?.toString() === provider._id.toString()
+    );
+    console.log('the booking', booking)
+    const providerServices = services.filter(
+      (s) => s.providerId?.toString() === provider._id.toString()
+    );
+    console.log('the provider services', providerServices)
+
+    return {
+      id: provider._id.toString(),
+      bookingId: booking?._id.toString(),
+      name: provider.fullName,
+      profilePicture: provider.profilePhoto || "",
+      location: provider.serviceArea,
+      isOnline: true, 
+      services: providerServices.map((s) => s.title),
+      description: providerServices[0]?.description || "",
+    };
+  });
 }

@@ -50,9 +50,7 @@ export class BookingController {
 
     public getBookingById = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            console.log('the req params', req.params)
             const bookingId = req.params.id
-            console.log('the bookgin si in controller', bookingId)
             const response = await this.bookingService.findBookingById(bookingId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -64,6 +62,37 @@ export class BookingController {
         try {
             const userId = req.user.id;
             const response = await this.bookingService.getAllFilteredBookings(userId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public getBookingFor_Prov_mngmnt = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const providerId = req.params.id
+            console.log('the userid', providerId)
+            const response = await this.bookingService.getBookingFor_Prov_mngmnt(providerId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public getAllPreviousChats = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const bookingId = req.params.bookingId
+            const response = await this.bookingService.getBookingMessages(bookingId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public cancelBooking = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const bookingId = req.params.id
+            const response = await this.bookingService.cancelBooking(bookingId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

@@ -22,12 +22,13 @@ export class AddressService implements IAddressService {
             city: createdAddress.city,
             state: createdAddress.state,
             zip: createdAddress.zip,
+            locationCoords: `${createdAddress.locationCoords.coordinates[1]},${createdAddress.locationCoords.coordinates[0]}` || "",
         }
     }
 
     public async getAllAddress(userId: string): Promise<IAddressRequest[]> {
         const allAddress = await this.addressRepsitory.findAll({ userId: userId })
-        return allAddress.map((adr) => ({
+        return allAddress.filter((adr => adr.label !== "Current Location")).map((adr) => ({
             id: adr._id.toString(),
             userId: adr.userId.toString(),
             label: adr.label,
@@ -35,6 +36,7 @@ export class AddressService implements IAddressService {
             city: adr.city,
             state: adr.state,
             zip: adr.zip,
+            locationCoords: `${adr.locationCoords.coordinates[1]},${adr.locationCoords.coordinates[0]}` || "",
         }))
     }
 
@@ -48,6 +50,7 @@ export class AddressService implements IAddressService {
             city: updatedAddress.city,
             state: updatedAddress.state,
             zip: updatedAddress.zip,
+            locationCoords: `${updatedAddress.locationCoords.coordinates[1]},${updatedAddress.locationCoords.coordinates[0]}` || "",
         } 
     }
 

@@ -39,9 +39,20 @@ const ProviderSchema = new Schema({
     //     trim: true,
     // },
     serviceLocation: {
-        type: String,
-        required: true,
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number], // [longitude, latitude]
+            required: true
+        }
     },
+    // serviceLocation: {
+    //     type: String,
+    //     required: true,
+    // },
     serviceArea: {
         type: String,
         required: true,
@@ -55,13 +66,16 @@ const ProviderSchema = new Schema({
     //     type: Number,
     //     required: false,
     // },
-    availableDays: {
-        type: [String],
+    availability: {
+        type: [
+            {
+                day: { type: String, required: true }, // e.g., "Monday"
+                startTime: { type: String, required: true }, // e.g., "09:00"
+                endTime: { type: String, required: true },   // e.g., "17:00"
+            }
+        ],
         required: true,
-    },
-    timeSlot: {
-        startTime: { type: String, required: true },
-        endTime: { type: String, required: true },
+        default: []
     },
 
     aadhaarIdProof: {
@@ -98,18 +112,18 @@ const ProviderSchema = new Schema({
         type: Boolean,
         default: false
     },
-    registrationOtp: { 
-        type: String, 
-        select: false 
+    registrationOtp: {
+        type: String,
+        select: false
     },
-    registrationOtpExpires: { 
-        type: Date, 
-        select: false 
+    registrationOtpExpires: {
+        type: Date,
+        select: false
     },
-    registrationOtpAttempts: { 
-        type: Number, 
-        default: 0, 
-        select: false 
+    registrationOtpAttempts: {
+        type: Number,
+        default: 0,
+        select: false
     },
 }, {
     timestamps: true,

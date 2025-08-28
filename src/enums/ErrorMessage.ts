@@ -11,4 +11,10 @@ export enum ErrorMessage {
   INVALID_TOKEN = 'Invalid token.',
   MISSING_TOKEN = 'Authorization token is missing. Please re-login',
   INVALID_REFRESH_TOKEN = 'Refresh token invalid or expired. Please re-login.',
+
+  //booking errors
+  BOOKING_NOT_FOUND = "Booking not found.",
+  BOOKING_CANNOT_BE_CANCELLED = "Booking cannot be cancelled at this stage.",
+  BOOKING_IS_ALREADY_CANCELLED = "Booking is already cancelled.",
+  BOOKING_CANCELLED_SUCCESSFULLY = "Booking cancelled successfully.",
 }

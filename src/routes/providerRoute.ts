@@ -9,6 +9,7 @@ const router = express.Router();
 const providerController = container.get<ProviderController>(TYPES.ProviderController)
 
 const isProvider = [authenticateToken, authorizeRoles(['ServiceProvider'])];
+const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
 
 
 
@@ -20,12 +21,13 @@ router.get('/getProvider', providerController.getProvider)
 router.get('/getFeaturedProviders', providerController.featuredProviders)
 router.get('/getFilteredServiceProvider', providerController.getServiceProvider)
 router.get('/getServicesForAddPage', providerController.getServicesForAddPage)
+router.get('/getProviderForChatPage', authenticateToken, providerController.getProviderForChatPage)
 
 
 // admin
 router.get('/getAllProviders', providerController.getAllProvidersList)
 router.get('/getProviderList', providerController.getProvidersforAdmin)
-router.patch('/updateProviderStatus/:id', providerController.updateProviderStatus)
+router.patch('/updateProviderStatus/:id',isAdmin, providerController.updateProviderStatus)
 
 
 export default router
