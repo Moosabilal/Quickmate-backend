@@ -46,7 +46,8 @@ export interface ResetPasswordSuccessResponse {
 }
 
 export interface ForgotPasswordRequestBody {
-  email: string;
+  email?: string;
+  currentPassword?: string;
 }
 
 export interface ForgotPasswordSuccessResponse {

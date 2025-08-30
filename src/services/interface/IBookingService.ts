@@ -1,6 +1,7 @@
 import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../dto/booking.dto";
 import { IPaymentVerificationRequest } from "../../dto/payment.dto";
 import { RazorpayOrder } from "../../dto/razorpay.dto";
+import { BookingStatus } from "../../enums/booking.enum";
 import { IMessage } from "../../models/message";
 
 export interface IBookingService {
@@ -9,7 +10,8 @@ export interface IBookingService {
     paymentVerification(verifyPayment: IPaymentVerificationRequest): Promise<{message: string, orderId: string, paymentId: string}>;
     findBookingById (id: string): Promise<IBookingConfirmationRes>;
     getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]>;
-    cancelBooking(bookingId: string): Promise<{message: string}>;
+    updateStatus(bookingId: string, status: BookingStatus): Promise<{message: string}>;
+    updateBookingDateTime(bookingId: string, date: string, time: string): Promise<void>;
 
     //provider
     getBookingFor_Prov_mngmnt(providerId: string): Promise<IProviderBookingManagement[]>;

@@ -36,6 +36,10 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         return await Category.findOne({ name, parentId: null }).exec();
     }
 
+    async findSubCatByName(name: string): Promise<ICategory | null> {
+        return await Category.findOne({ name, parentId: { $ne: null } }).exec();
+    }
+
 
     async findByNameAndParent(name: string, parentId: string | Types.ObjectId): Promise<ICategory | null> {
         const parentObjectId = new Types.ObjectId(parentId);
@@ -47,13 +51,24 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
     }
 
     async findAll(filter: any = {}): Promise<ICategory[]> {
-        const queryFilter = { ...filter };
-        if (queryFilter.parentId && typeof queryFilter.parentId === 'string') {
-            queryFilter.parentId = new Types.ObjectId(queryFilter.parentId);
+    const queryFilter = { ...filter };
 
-        }
-        return await Category.find(queryFilter).exec();
+    // Handle parentId conversion
+    if (queryFilter.parentId && typeof queryFilter.parentId === 'string') {
+        queryFilter.parentId = new Types.ObjectId(queryFilter.parentId);
     }
+
+    // Extract special options like "take"
+    const { take, skip, ...conditions } = queryFilter;
+
+    let query = Category.find(conditions);
+
+    if (skip) query = query.skip(Number(skip));
+    if (take) query = query.limit(Number(take));
+
+    return await query.exec();
+}
+
 
     async findAllSubcategories(p0: {}): Promise<ICategory[]> {
         return await Category.find({ parentId: { $ne: null } }).exec();

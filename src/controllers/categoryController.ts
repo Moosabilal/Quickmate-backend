@@ -93,6 +93,8 @@ export class CategoryController {
         commissionRuleInputForService
       );
 
+      console.log('Created category:', category, 'with commission rule:', commissionRule);
+
       res.status(HttpStatusCode.CREATED).json({
         message: `${category.parentId ? 'Subcategory' : 'Category'} created successfully`,
         category,
@@ -100,6 +102,7 @@ export class CategoryController {
       });
       return;
     } catch (error: any) {
+      console.error('Error in createCategory controller:', error);
       if (req.file && fs.existsSync(req.file.path)) {
         try {
           await fsPromises.unlink(req.file.path);

@@ -78,7 +78,6 @@ export class BookingService implements IBookingService {
         console.log('the get servidddddddces', findServiceId)
         data.serviceId = findServiceId._id.toString()
         const bookings = await this.bookingRepository.create(data)
-        console.log('the booking created', bookings)
         return { bookingId: (bookings._id as { toString(): string }).toString(), message: "your booking confirmed successfully" }
     }
 
@@ -121,12 +120,9 @@ export class BookingService implements IBookingService {
 
         const bookingId = verifyPayment.bookingId
         const booking = await this.bookingRepository.findById(bookingId)
-        console.log('the booking', booking)
         const service = await this.serviceRepository.findById(booking.serviceId.toString())
-        console.log(' the service we got', service)
         const subCategoryId = service.subCategoryId.toString()
         const subCategory = await this.categoryRepository.findById(subCategoryId)
-        console.log('the subcategory we goth from mistake', subCategory)
 
         const commission = await this.commissionRuleRepository.findOne({ categoryId: subCategory._id.toString() })
         let totalCommission = 0;
@@ -203,7 +199,7 @@ export class BookingService implements IBookingService {
     }
 
     async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
-        const bookings = await this.bookingRepository.findAll({ userId })
+        const bookings = (await this.bookingRepository.findAll({ userId }, { createdAt: -1}))
         const providerIds = [...new Set(bookings.map(s => s.providerId.toString()))]
         const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } })
         const addressIds = [...new Set(bookings.map(s => s.addressId.toString()))]
@@ -262,7 +258,7 @@ export class BookingService implements IBookingService {
         
     }
 
-    async cancelBooking(bookingId: string): Promise<{ message: string }> {
+    async updateStatus(bookingId: string, status: BookingStatus): Promise<{ message: string }> {
         const booking = await this.bookingRepository.findById(bookingId)
         if (!booking) {
             throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
@@ -270,8 +266,19 @@ export class BookingService implements IBookingService {
         if (booking.status === BookingStatus.CANCELLED) {
             return { message: ErrorMessage.BOOKING_IS_ALREADY_CANCELLED }
         }
-        await this.bookingRepository.update(bookingId, { status: BookingStatus.CANCELLED })
+        await this.bookingRepository.update(bookingId, { status: status })
         return { message: ErrorMessage.BOOKING_CANCELLED_SUCCESSFULLY }
+    }
+
+    async updateBookingDateTime(bookingId: string, date: string, time: string): Promise<void> {
+        const booking = await this.bookingRepository.findById(bookingId)
+        if (!booking) {
+            throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+        }
+        if (booking.status !== BookingStatus.PENDING) {
+            throw new CustomError("You can only udpate Date/Time on Pending", HttpStatusCode.BAD_REQUEST)
+        }
+        await this.bookingRepository.update(bookingId, { scheduledDate: date, scheduledTime: time })
     }
 
 

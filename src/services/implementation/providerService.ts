@@ -21,6 +21,7 @@ import { ProviderStatus } from "../../enums/provider.enum";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
 import { IService } from "../../models/Service";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
+import { IMessageRepository } from "../../repositories/interface/IMessageRepository";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
@@ -34,18 +35,21 @@ export class ProviderService implements IProviderService {
     private userRepository: IUserRepository
     private categoryRepository: ICategoryRepository;
     private bookingRepository: IBookingRepository
+    private messageRepository: IMessageRepository;
 
     constructor(@inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
         @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
         @inject(TYPES.UserRepository) userRepository: IUserRepository,
         @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
         @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
+        @inject(TYPES.MessageRepository) messageRepository: IMessageRepository,
     ) {
         this.providerRepository = providerRepository
         this.serviceRepository = serviceRepository
         this.userRepository = userRepository
         this.categoryRepository = categoryRepository
         this.bookingRepository = bookingRepository
+        this.messageRepository = messageRepository;
     }
 
     public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
@@ -455,8 +459,6 @@ export class ProviderService implements IProviderService {
             };
         });
 
-        console.log('the final result', result)
-
         return result;
     }
 
@@ -470,9 +472,14 @@ export class ProviderService implements IProviderService {
         const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
 
         const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } });
-        const services = await this.serviceRepository.findAll({ providerId: { $in: providerIds } });
+        const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
+        if (!serviceIds.length) return [];
+        const services = await this.serviceRepository.findAll({ _id: { $in: serviceIds } });
 
-        return toProviderForChatListPage(bookings, providers, services);
+        const bookingIds = bookings.map(b => b._id.toString());
+        const messages = await this.messageRepository.findLastMessagesByBookingIds(bookingIds)
+
+        return toProviderForChatListPage(bookings, providers, services, messages);
     }
 
 

@@ -9,6 +9,7 @@ const router = express.Router();
 const authController = container.get<AuthController>(TYPES.AuthController)
 
 const isUser = [authenticateToken, authorizeRoles(['Customer','ServiceProvider'])];
+const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
 
 router.post('/register',authController.register);
 router.post('/login',  authController.login);
@@ -17,19 +18,21 @@ router.post('/resend-registration-otp', authController.resendOtp);
 
 router.post('/forgot-password', authController.forgotPassword);
 router.post('/reset-password', authController.resetPassword);
+// router.post('/verify-password', isUser, authController.verifyPassword);
 
 router.post('/google-login', authController.googleLogin);
 
 router.post('/refresh-token', authController.refreshToken)
-router.post('/contactUsSubmission', authController.contactUsEmail)
+router.post('/contactUsSubmission',isUser, authController.contactUsEmail)
 
 
 router.get('/getUser', isUser, authController.getUser);
 router.put('/update-profile', isUser, upload.single('profilePicture') , authController.updateProfile);
+router.get('/getAllDataForChatBot', isUser, authController.getAllDataForChatBot)
 router.post('/logout', authController.logout )
 
 // admin routes
-router.put('/update-user/:userId', authController.updateUser);
+router.put('/update-user/:userId',isAdmin,  authController.updateUser);
 router.get('/getUserWithAllDetails', authController.getUserWithRelated);
 
 

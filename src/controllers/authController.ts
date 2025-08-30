@@ -91,6 +91,18 @@ export class AuthController {
     }
   }
 
+  // public verifyPassword = async (req: Request<{}, {}, { currentPassword: string }>, res: Response, next: NextFunction) => {
+  //   try {
+  //     const { currentPassword } = req.body;
+  //     const id = (req as AuthRequest).user.id
+  //     console.log('User ID from token:', id); 
+  //     const response = await this.authService.verifyPassword(id, currentPassword);
+  //     res.status(HttpStatusCode.OK).json(response);
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
+
 
   public googleLogin = async (req: Request<{}, {}, { token: string }>, res: Response, next: NextFunction) => {
     try {
@@ -236,6 +248,18 @@ export class AuthController {
       next(error);
     }
   }
+
+  public getAllDataForChatBot = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user.id;
+      const response = await this.authService.getAllDataForChatBot(userId)
+      res.status(HttpStatusCode.OK).json(response)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  
 
 
 

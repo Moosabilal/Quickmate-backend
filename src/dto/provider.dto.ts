@@ -118,7 +118,8 @@ export interface IProviderForChatListPage {
   profilePicture: string;
   location: string;
   isOnline: boolean;
-  services: string[]
+  services: string;
   // completedJobs: number;
-  description: string;
+  lastMessage?: string;
+  lastMessageAt?: Date | null;
 }
