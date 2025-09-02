@@ -3,7 +3,7 @@ import { IBookingRepository } from "../../repositories/interface/IBookingReposit
 import { IBookingService } from "../interface/IBookingService";
 import TYPES from "../../di/type";
 import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../dto/booking.dto";
-import { razorpay } from "../../utils/razorpay";
+import { razorpay, verifyPaymentSignature } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -107,13 +107,9 @@ export class BookingService implements IBookingService {
         //         orderId: razorpay_order_id,
         //         paymentId: razorpay_payment_id
         //     }
-        // }
-
-        const sha = createHmac("sha256", process.env.RAZORPAY_SECRET);
-
-        sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
-        const digest = sha.digest("hex");
-        if (digest !== razorpay_signature) {
+        // }    
+        const isValid = verifyPaymentSignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
+        if (!isValid) {
             throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST)
         }
 
@@ -215,7 +211,6 @@ export class BookingService implements IBookingService {
         const addressMap = new Map(addresses.map(add => [add._id.toString(), { street: add.street, city: add.city }]))
 
         const mappedBooking = toBookingHistoryPage(bookings, addressMap, providerMap, subCategoryMap, serviceMap)
-
         return mappedBooking
 
     }
