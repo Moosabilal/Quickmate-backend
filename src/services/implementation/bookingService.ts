@@ -3,7 +3,7 @@ import { IBookingRepository } from "../../repositories/interface/IBookingReposit
 import { IBookingService } from "../interface/IBookingService";
 import TYPES from "../../di/type";
 import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../dto/booking.dto";
-import { razorpay, verifyPaymentSignature } from "../../utils/razorpay";
+import { paymentCreation, razorpay, verifyPaymentSignature } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -81,12 +81,8 @@ export class BookingService implements IBookingService {
         return { bookingId: (bookings._id as { toString(): string }).toString(), message: "your booking confirmed successfully" }
     }
 
-    async createPayment(amount: number, currency: string, receipt: string): Promise<RazorpayOrder> {
-        const order = await razorpay.orders.create({
-            amount: amount * 100,
-            currency,
-            receipt
-        });
+    async createPayment(amount: number): Promise<RazorpayOrder> {
+        const order = await paymentCreation(amount)
 
         if (!order) {
             throw new CustomError(ErrorMessage.INTERNAL_ERROR, HttpStatusCode.INTERNAL_SERVER_ERROR)

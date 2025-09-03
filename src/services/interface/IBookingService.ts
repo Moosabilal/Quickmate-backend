@@ -6,7 +6,7 @@ import { IMessage } from "../../models/message";
 
 export interface IBookingService {
     createNewBooking(data: IBookingRequest ): Promise<{message: string}>;
-    createPayment(amount: number, currency: string, receiptId: string): Promise<RazorpayOrder>
+    createPayment(amount: number): Promise<RazorpayOrder>
     paymentVerification(verifyPayment: IPaymentVerificationRequest): Promise<{message: string, orderId: string, paymentId: string}>;
     findBookingById (id: string): Promise<IBookingConfirmationRes>;
     getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]>;

@@ -39,6 +39,11 @@ import { IPaymentRepository } from '../repositories/interface/IPaymentRepository
 import { PaymentRepository } from '../repositories/implementation/paymentRepository';
 import { IMessageRepository } from '../repositories/interface/IMessageRepository';
 import { MessageRepository } from '../repositories/implementation/messageRepository';
+import { WalletController } from '../controllers/walletController';
+import { IWalletService } from '../services/interface/IWalletService';
+import { WalletService } from '../services/implementation/WalletService';
+import { IWalletRepository } from '../repositories/interface/IWalletRepository';
+import { WalletRepository } from '../repositories/implementation/WalletRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -68,5 +73,9 @@ container.bind<IServiceService>(TYPES.ServiceService).to(ServiceService)
 container.bind<IServiceRepository>(TYPES.ServiceRepository).to(ServiceRepository)
 
 container.bind<IMessageRepository>(TYPES.MessageRepository).to(MessageRepository)
+
+container.bind<WalletController>(TYPES.WalletController).to(WalletController)
+container.bind<IWalletService>(TYPES.WalletService).to(WalletService)
+container.bind<IWalletRepository>(TYPES.WalletRepository).to(WalletRepository)
 
 export {container}

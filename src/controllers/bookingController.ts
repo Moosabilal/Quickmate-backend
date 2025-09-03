@@ -25,8 +25,8 @@ export class BookingController {
 
     public confirmPayment = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const {amount, currency, receipt} = req.body
-            const response = await this.bookingService.createPayment(amount, currency, receipt)
+            const {amount} = req.body
+            const response = await this.bookingService.createPayment(amount)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
