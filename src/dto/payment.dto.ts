@@ -1,5 +1,12 @@
 import { PaymentMethod } from "../enums/userRoles";
 
+export interface IOrder {
+    id?: string,
+    amount: number,
+    currency: string,
+    receipt: string
+}
+
 export interface IPaymentVerificationRequest {
     userId: string,
     providerId: string,

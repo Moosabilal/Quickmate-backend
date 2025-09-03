@@ -25,8 +25,8 @@ export class BaseRepository<T extends Document> implements IBaseRepository<T> {
         return await this.model.findOne(filter);
     }
 
-    async findAll(filter: FilterQuery<T> = {}): Promise<T[]> {
-        return await this.model.find(filter);
+    async findAll(filter: FilterQuery<T> = {}, sort: Record<string, 1 | -1> = {}): Promise<T[]> {
+        return await this.model.find(filter).sort(sort);
     }
 
     async update(id: string, updateData: UpdateQuery<T>): Promise<T | null> {

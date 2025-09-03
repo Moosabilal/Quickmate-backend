@@ -17,6 +17,7 @@ import providerRoutes from './routes/providerRoute'
 import addressRoutes from './routes/address'
 import bookingRoutes from './routes/bookingRoutes'
 import serviceRoutes from './routes/serviceRoutes'
+import walletRoutes from './routes/walletRoutes'
 import fs from 'fs';
 import { CustomError } from './utils/CustomError';
 import { errorHandler } from './middleware/errorHandler';
@@ -58,6 +59,7 @@ app.use('/api/provider', providerRoutes);
 app.use('/api/address', addressRoutes)
 app.use('/api/bookings', bookingRoutes)
 app.use('/api/services', serviceRoutes)
+app.use('/api/wallet', walletRoutes)
 
 app.use((req, res, next) => {
   const error = new CustomError(`Not Found - ${req.originalUrl}`, 404)

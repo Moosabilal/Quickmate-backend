@@ -37,6 +37,8 @@ export interface IBookingConfirmationRes {
   status: BookingStatus;
   paymentStatus: PaymentStatus;
   specialInstruction: string;
+  providerTimings?: { day: string; startTime: string; endTime: string }[];
+  createdAt: Date;
 }
 
 

@@ -13,6 +13,14 @@ import { CustomError } from '../../utils/CustomError';
 import { ErrorMessage } from '../../enums/ErrorMessage';
 import { HttpStatusCode } from '../../enums/HttpStatusCode';
 import logger from '../../logger/logger';
+import { IBooking } from '../../models/Booking';
+import { IBookingRepository } from '../../repositories/interface/IBookingRepository';
+import { IProviderRepository } from '../../repositories/interface/IProviderRepository';
+import { IServiceRepository } from '../../repositories/interface/IServiceRepository';
+import { ICategoryRepository } from '../../repositories/interface/ICategoryRepository';
+import { ICategory } from '../../models/Categories';
+import { IService } from '../../models/Service';
+import { IProvider } from '../../models/Providers';
 
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
@@ -23,9 +31,22 @@ const PASSWORD_RESET_EXPIRY_MINUTES = parseInt(process.env.PASSWORD_RESET_EXPIRY
 @injectable()
 export class AuthService implements IAuthService {
     private userRepository: IUserRepository;
+    private bookingRepository: IBookingRepository;
+    private providerRepository: IProviderRepository;
+    private categoryRepository: ICategoryRepository;
+    private serviceRepository: IServiceRepository;
 
-    constructor(@inject(TYPES.UserRepository) userRepository: IUserRepository) {
+    constructor(@inject(TYPES.UserRepository) userRepository: IUserRepository,
+        @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
+        @inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
+        @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
+        @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
+    ) {
         this.userRepository = userRepository
+        this.bookingRepository = bookingRepository
+        this.providerRepository = providerRepository
+        this.categoryRepository = categoryRepository
+        this.serviceRepository = serviceRepository
     }
 
     public async registerUser(data: RegisterRequestBody): Promise<AuthSuccessResponse> {
@@ -35,7 +56,7 @@ export class AuthService implements IAuthService {
 
 
         if (user && user.isVerified) {
-            throw new CustomError(ErrorMessage.USER_ALREADY_EXISTS,HttpStatusCode.CONFLICT)
+            throw new CustomError(ErrorMessage.USER_ALREADY_EXISTS, HttpStatusCode.CONFLICT)
         }
 
         if (!user) {
@@ -47,13 +68,13 @@ export class AuthService implements IAuthService {
         }
 
 
-            const otp = generateOTP();
-            user.registrationOtp = otp;
-            user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
-            user.registrationOtpAttempts = 0;
-            await this.userRepository.update(user._id.toString(), user);
+        const otp = generateOTP();
+        user.registrationOtp = otp;
+        user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
+        user.registrationOtpAttempts = 0;
+        await this.userRepository.update(user._id.toString(), user);
 
-            await sendVerificationEmail(email, otp);
+        await sendVerificationEmail(email, otp);
 
         return {
             message: 'Registration successful! An OTP has been sent to your email for verification.',
@@ -67,7 +88,7 @@ export class AuthService implements IAuthService {
         const user = await this.userRepository.findByEmail(email, true);
 
         if (!user) {
-            throw new CustomError(ErrorMessage.USER_NOT_FOUND,HttpStatusCode.NOT_FOUND)
+            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
 
         if (user.isVerified) {
@@ -76,7 +97,7 @@ export class AuthService implements IAuthService {
 
         if (typeof user.registrationOtpAttempts === 'number' && user.registrationOtpAttempts >= MAX_OTP_ATTEMPTS) {
             throw new CustomError(`Too many failed OTP attempts. Please request a new OTP.`, HttpStatusCode.FORBIDDEN);
-    
+
         }
 
         if (!user.registrationOtp || user.registrationOtp !== otp) {
@@ -143,7 +164,7 @@ export class AuthService implements IAuthService {
 
         if (!user || !user.password) {
             throw new CustomError('Invalid Credentails', HttpStatusCode.UNAUTHORIZED);
-            
+
         }
 
         if (!user.isVerified) {
@@ -178,13 +199,22 @@ export class AuthService implements IAuthService {
     }
 
     public async requestPasswordReset(data: ForgotPasswordRequestBody): Promise<{ message: string }> {
-        const { email } = data;
-
-        const user = await this.userRepository.findByEmail(email);
+        const { email, currentPassword } = data;
+        const user = await this.userRepository.findByEmail(email, true);
 
         if (!user) {
             return { message: 'If an account with that email exists, a password reset link has been sent.' };
         }
+
+        if (currentPassword) {
+
+            const isMatch = await bcrypt.compare(currentPassword, String(user.password));
+            if (!isMatch) {
+                throw new CustomError(ErrorMessage.INVALID_CREDENTIALS, HttpStatusCode.UNAUTHORIZED)
+            }
+
+        }
+
 
         const resetToken = crypto.randomBytes(32).toString('hex');
         user.passwordResetToken = resetToken;
@@ -193,7 +223,7 @@ export class AuthService implements IAuthService {
         await this.userRepository.update(user._id.toString(), user);
 
         const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
-        logger.info('the reset linke', resetLink)
+        logger.info('the reset link', resetLink)
 
         await sendPasswordResetEmail(String(user.email), resetLink);
 
@@ -214,14 +244,34 @@ export class AuthService implements IAuthService {
             throw new CustomError('Invalid or expired password reset token.', HttpStatusCode.BAD_REQUEST);
         }
 
-        user.password = newPassword;
-        user.passwordResetToken = undefined;
-        user.passwordResetExpires = undefined;
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-        await this.userRepository.update(user._id.toString(), user);
+        await this.userRepository.update(user._id.toString(), {
+            password: hashedPassword,
+            passwordResetToken: undefined,
+            passwordResetExpires: undefined,
+        });
 
         return { message: 'Your password has been reset successfully.' };
     }
+
+    // public async verifyPassword(id: string, currentPassword: string): Promise<{ message: string }> {
+    //     const user = await this.userRepository.findById(id);
+    //     console.log('the user is', user)
+
+    //     if (!user || !user.password) {
+    //         throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+    //     }
+
+    //     const isMatch = await bcrypt.compare(currentPassword, String(user.password));
+    //     if (!isMatch) {
+    //         throw new CustomError(ErrorMessage.INVALID_CREDENTIALS, HttpStatusCode.UNAUTHORIZED)
+
+    //     }
+
+    //     return { message: 'Password verified successfully.' };
+
+    // }
 
     public async googleAuthLogin(token: string): Promise<{ user: { id: string; name: string; email: string; role: string }; token: string; refreshToken: string; }> {
         const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -292,7 +342,7 @@ export class AuthService implements IAuthService {
             const newToken = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
             return { newToken };
         } catch (err) {
-            throw new CustomError(ErrorMessage.INVALID_REFRESH_TOKEN,HttpStatusCode.FORBIDDEN);
+            throw new CustomError(ErrorMessage.INVALID_REFRESH_TOKEN, HttpStatusCode.FORBIDDEN);
 
         }
     }
@@ -360,7 +410,7 @@ export class AuthService implements IAuthService {
         }
 
         const updatedUser = await this.userRepository.update(user._id.toString(), user);
-        const {} = updatedUser
+        const { } = updatedUser
         return {
             id: (user._id as { toString(): string }).toString(),
             name: user.name as string,
@@ -447,6 +497,21 @@ export class AuthService implements IAuthService {
         };
     }
 
+    getAllDataForChatBot = async (userId: string): Promise<{ categories: ICategory[]; services: IService[]; providers: IProvider[]; bookings: IBooking[] }> => {
+
+        const user = await this.userRepository.findById(userId);
+        if (!user) {
+            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+        }
+        const bookings = await this.bookingRepository.findAll({ userId });
+        const providers = await this.providerRepository.findAll();
+        const categories = await this.categoryRepository.getAllCategories();
+        const services = await this.serviceRepository.findAll();
+
+        return { categories, services, providers, bookings };
+
+    }
+
     public async logout(refreshToken: string | undefined): Promise<{ message: string }> {
         if (!refreshToken) {
             return { message: 'No refresh token provided for logout.' };
@@ -470,6 +535,8 @@ export class AuthService implements IAuthService {
             return { message: 'Logout process complete (refresh token was invalid or expired).' };
         }
     }
+
+    
 
 
 }

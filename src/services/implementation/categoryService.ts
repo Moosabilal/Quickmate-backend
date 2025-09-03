@@ -33,17 +33,18 @@ export class CategoryService implements ICategoryService {
         commissionRuleInput?: ICommissionRuleInput
     ): Promise<{ category: ICategoryResponse; commissionRule?: ICommissionRuleResponse }> {
 
-        let parentObjectId: string | null = null;
-        if (categoryInput.parentId) {
+        console.log('Creating category with input:', categoryInput);
 
+        // let parentObjectId: string | null = null;
+        if (categoryInput.parentId) {
 
             const parentCategory = await this.categoryRepository.findOne({parentId: categoryInput.parentId});
             if (!parentCategory) {
                 throw new CustomError('Parent category not found.', HttpStatusCode.NOT_FOUND);
             }
-            const existingSubcategory = await this.categoryRepository.findByNameAndParent(categoryInput.name, categoryInput.parentId);
+            const existingSubcategory = await this.categoryRepository.findSubCatByName(categoryInput.name);
             if (existingSubcategory) {
-                throw new CustomError('A subcategory with this name already exists under the specified parent.', HttpStatusCode.CONFLICT);
+                throw new CustomError('A subcategory with this name already exists under the parent.', HttpStatusCode.CONFLICT);
             }
         } else {
             const existingTopLevelCategory = await this.categoryRepository.findByName(categoryInput.name);

@@ -1,4 +1,8 @@
 import { AuthSuccessResponse, ForgotPasswordRequestBody, RegisterRequestBody, ResendOtpRequestBody, ResetPasswordRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
+import { IBooking } from "../../models/Booking";
+import { ICategory } from "../../models/Categories";
+import { IProvider } from "../../models/Providers";
+import { IService } from "../../models/Service";
 
 export interface IAuthService {
   registerUser(data: RegisterRequestBody): Promise<AuthSuccessResponse>;
@@ -7,6 +11,7 @@ export interface IAuthService {
   login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; }; token: string; refreshToken: string }>;
   requestPasswordReset(data: ForgotPasswordRequestBody): Promise<{ message: string }>;
   resetPassword(data: ResetPasswordRequestBody): Promise<{ message: string }>;
+  // verifyPassword(id: string, currentPassword: string): Promise<{ message: string }>;
   googleAuthLogin(token: string): Promise<{ user: { id: string; name: string; email: string; role: string }; token: string; refreshToken: string }>;
   createRefreshToken(refresh_token: string): Promise<{ newToken: string }>;
   sendSubmissionEmail(name: string, email: string, message: string): Promise<{message: string}>
@@ -26,6 +31,7 @@ export interface IAuthService {
     currentPage: number;
   }>
   updateUser(id: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }>;
+  getAllDataForChatBot(userId: string): Promise<{categories: ICategory[], services: IService[], providers: IProvider[], bookings: IBooking[]}>
   logout(refreshToken: string | undefined): Promise<{ message: string }>;
 
 

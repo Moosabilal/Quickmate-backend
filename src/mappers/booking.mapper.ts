@@ -34,7 +34,9 @@ export function toBookingConfirmationPage(booking: IBooking, address: IAddress, 
         amount: payment.amount,
         status: booking.status as BookingStatus,
         paymentStatus: booking.paymentStatus as PaymentStatus,
-        specialInstruction: booking.instructions as string
+        specialInstruction: booking.instructions as string,
+        providerTimings: provider.availability || [],
+        createdAt: booking.createdAt as Date,
     }
 }
 
@@ -54,7 +56,7 @@ export function toBookingHistoryPage(
         date: booking.scheduledDate as string,
         time: booking.scheduledTime as string,
         status: booking.status as BookingStatus,
-        price: serviceMap.get(booking.serviceId.toString())?.price || 0,
+        price: Number(booking.amount || 0),
         location: `${addressMap.get(booking.addressId.toString())?.street || ''}, ${addressMap.get(booking.addressId.toString())?.city || ''}`,
         priceUnit: serviceMap.get(booking.serviceId.toString())?.priceUnit || '',
         duration: serviceMap.get(booking.serviceId.toString())?.duration || '',

@@ -3,4 +3,5 @@ export enum BookingStatus {
     CONFIRMED = "Confirmed",
     CANCELLED = "Cancelled",
     COMPLETED = "Completed",
+    IN_PROGRESS = "In-Progress"
 }

@@ -3,7 +3,7 @@ import { IBookingRepository } from "../../repositories/interface/IBookingReposit
 import { IBookingService } from "../interface/IBookingService";
 import TYPES from "../../di/type";
 import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../dto/booking.dto";
-import { razorpay } from "../../utils/razorpay";
+import { paymentCreation, razorpay, verifyPaymentSignature } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -78,16 +78,11 @@ export class BookingService implements IBookingService {
         console.log('the get servidddddddces', findServiceId)
         data.serviceId = findServiceId._id.toString()
         const bookings = await this.bookingRepository.create(data)
-        console.log('the booking created', bookings)
         return { bookingId: (bookings._id as { toString(): string }).toString(), message: "your booking confirmed successfully" }
     }
 
-    async createPayment(amount: number, currency: string, receipt: string): Promise<RazorpayOrder> {
-        const order = await razorpay.orders.create({
-            amount: amount * 100,
-            currency,
-            receipt
-        });
+    async createPayment(amount: number): Promise<RazorpayOrder> {
+        const order = await paymentCreation(amount)
 
         if (!order) {
             throw new CustomError(ErrorMessage.INTERNAL_ERROR, HttpStatusCode.INTERNAL_SERVER_ERROR)
@@ -108,25 +103,18 @@ export class BookingService implements IBookingService {
         //         orderId: razorpay_order_id,
         //         paymentId: razorpay_payment_id
         //     }
-        // }
-
-        const sha = createHmac("sha256", process.env.RAZORPAY_SECRET);
-
-        sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
-        const digest = sha.digest("hex");
-        if (digest !== razorpay_signature) {
+        // }    
+        const isValid = verifyPaymentSignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
+        if (!isValid) {
             throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST)
         }
 
 
         const bookingId = verifyPayment.bookingId
         const booking = await this.bookingRepository.findById(bookingId)
-        console.log('the booking', booking)
         const service = await this.serviceRepository.findById(booking.serviceId.toString())
-        console.log(' the service we got', service)
         const subCategoryId = service.subCategoryId.toString()
         const subCategory = await this.categoryRepository.findById(subCategoryId)
-        console.log('the subcategory we goth from mistake', subCategory)
 
         const commission = await this.commissionRuleRepository.findOne({ categoryId: subCategory._id.toString() })
         let totalCommission = 0;
@@ -203,7 +191,7 @@ export class BookingService implements IBookingService {
     }
 
     async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
-        const bookings = await this.bookingRepository.findAll({ userId })
+        const bookings = (await this.bookingRepository.findAll({ userId }, { createdAt: -1}))
         const providerIds = [...new Set(bookings.map(s => s.providerId.toString()))]
         const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } })
         const addressIds = [...new Set(bookings.map(s => s.addressId.toString()))]
@@ -219,7 +207,6 @@ export class BookingService implements IBookingService {
         const addressMap = new Map(addresses.map(add => [add._id.toString(), { street: add.street, city: add.city }]))
 
         const mappedBooking = toBookingHistoryPage(bookings, addressMap, providerMap, subCategoryMap, serviceMap)
-
         return mappedBooking
 
     }
@@ -262,7 +249,7 @@ export class BookingService implements IBookingService {
         
     }
 
-    async cancelBooking(bookingId: string): Promise<{ message: string }> {
+    async updateStatus(bookingId: string, status: BookingStatus): Promise<{ message: string }> {
         const booking = await this.bookingRepository.findById(bookingId)
         if (!booking) {
             throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
@@ -270,8 +257,19 @@ export class BookingService implements IBookingService {
         if (booking.status === BookingStatus.CANCELLED) {
             return { message: ErrorMessage.BOOKING_IS_ALREADY_CANCELLED }
         }
-        await this.bookingRepository.update(bookingId, { status: BookingStatus.CANCELLED })
+        await this.bookingRepository.update(bookingId, { status: status })
         return { message: ErrorMessage.BOOKING_CANCELLED_SUCCESSFULLY }
+    }
+
+    async updateBookingDateTime(bookingId: string, date: string, time: string): Promise<void> {
+        const booking = await this.bookingRepository.findById(bookingId)
+        if (!booking) {
+            throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+        }
+        if (booking.status !== BookingStatus.PENDING) {
+            throw new CustomError("You can only udpate Date/Time on Pending", HttpStatusCode.BAD_REQUEST)
+        }
+        await this.bookingRepository.update(bookingId, { scheduledDate: date, scheduledTime: time })
     }
 
 

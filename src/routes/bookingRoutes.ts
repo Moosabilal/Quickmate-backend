@@ -16,7 +16,8 @@ router.post('/verifyPayment', isUser, bookingController.verifyPayment)
 router.get('/getBookingById/:id', isUser, bookingController.getBookingById)
 router.get('/', isUser, bookingController.getAllBookings)
 router.get('/getAllPreviousChats/:bookingId', isUser, bookingController.getAllPreviousChats)
-router.patch('/cancelBooking/:id', isUser, bookingController.cancelBooking)
+router.patch('/updateBookingStatus/:id', isUser, bookingController.updateBookingStatus)
+router.patch('/updateBookingDateTime/:id', isUser, bookingController.updateBookingDateTime)
 
 //provider
 router.get('/getBookingFor_Prov_mngmnt/:id', isProvider, bookingController.getBookingFor_Prov_mngmnt)

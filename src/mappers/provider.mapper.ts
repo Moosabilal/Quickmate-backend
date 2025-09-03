@@ -40,17 +40,20 @@ export function toServiceAddPage(category: ICategory): IServiceAddPageResponse {
 export function toProviderForChatListPage(
   bookings: IBooking[],
   providers: IProvider[],
-  services: IService[]
+  services: IService[],
+  messages: { bookingId: string; lastMessage: string; createdAt: Date }[]
 ): IProviderForChatListPage[] {
+  
   return providers.map((provider) => {
     const booking = bookings.find(
       (b) => b.providerId?.toString() === provider._id.toString()
     );
-    console.log('the booking', booking)
     const providerServices = services.filter(
       (s) => s.providerId?.toString() === provider._id.toString()
     );
-    console.log('the provider services', providerServices)
+    const lastMessageData = messages.find(
+      (m) => m.bookingId === booking?._id.toString()
+    )
 
     return {
       id: provider._id.toString(),
@@ -59,8 +62,9 @@ export function toProviderForChatListPage(
       profilePicture: provider.profilePhoto || "",
       location: provider.serviceArea,
       isOnline: true, 
-      services: providerServices.map((s) => s.title),
-      description: providerServices[0]?.description || "",
+      services: providerServices[0]?.title || "",
+      lastMessage: lastMessageData?.lastMessage || "",
+      lastMessageAt: lastMessageData?.createdAt || null,
     };
   });
 }

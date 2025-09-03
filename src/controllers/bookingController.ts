@@ -25,8 +25,8 @@ export class BookingController {
 
     public confirmPayment = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const {amount, currency, receipt} = req.body
-            const response = await this.bookingService.createPayment(amount, currency, receipt)
+            const {amount} = req.body
+            const response = await this.bookingService.createPayment(amount)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -89,11 +89,22 @@ export class BookingController {
         }
     }
 
-    public cancelBooking = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    public updateBookingStatus = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const bookingId = req.params.id
-            const response = await this.bookingService.cancelBooking(bookingId)
+            const response = await this.bookingService.updateStatus(bookingId, req.body.status)
             res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public updateBookingDateTime = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const bookingId = req.params.id
+            const { date, time } = req.body;
+            await this.bookingService.updateBookingDateTime(bookingId, date, time);
+            res.status(HttpStatusCode.NO_CONTENT).send()
         } catch (error) {
             next(error)
         }
