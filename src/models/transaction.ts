@@ -3,7 +3,7 @@ import { Schema, model, Types, HydratedDocument, InferSchemaType } from "mongoos
 const TransactionSchema = new Schema(
   {
     walletId: {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Wallet",
       required: true,
     },

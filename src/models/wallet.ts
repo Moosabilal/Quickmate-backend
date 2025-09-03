@@ -1,4 +1,5 @@
 import { Schema, model, Types, HydratedDocument, InferSchemaType } from "mongoose";
+import { Roles } from "../enums/userRoles";
 
 const WalletSchema = new Schema(
   {
@@ -8,14 +9,15 @@ const WalletSchema = new Schema(
       default: 0,
     },
     ownerId: {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
     ownerType: {
       type: String,
-      enum: ["Customer", "Provider", "Admin"],
+      enum: Object.values(Roles),
       required: true,
+      default: Roles.USER
     },
   },
   {
