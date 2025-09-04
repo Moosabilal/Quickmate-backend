@@ -19,6 +19,7 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+    console.log('the role', req.user)
     req.user = decoded as AuthPayload;
 
     next();

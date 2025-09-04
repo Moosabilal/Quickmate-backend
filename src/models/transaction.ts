@@ -1,4 +1,5 @@
 import { Schema, model, Types, HydratedDocument, InferSchemaType } from "mongoose";
+import { TransactionStatus } from "../enums/payment&Wallet.enum";
 
 const TransactionSchema = new Schema(
   {
@@ -25,6 +26,16 @@ const TransactionSchema = new Schema(
       type: Number,
       required: true,
     },
+    description: {
+      type: String,
+      trim: true,
+    },
+    status: {
+      type: String,
+      enum: Object.values(TransactionStatus),
+      default: TransactionStatus.PAYMENT
+
+    }
   },
   {
     timestamps: true,

@@ -32,42 +32,48 @@ export class WalletService implements IWalletService {
         return wallet;
     }
 
-    public async deposit(
-        userId: string,
-        ownerType: Roles,
-        amount: number,
-        source = "ManualTopup",
-        remarks?: string
-    ) {
-        if (amount <= 0) throw new CustomError("Amount must be > 0", HttpStatusCode.BAD_REQUEST);
+    // public async deposit(
+    //     userId: string,
+    //     ownerType: Roles,
+    //     amount: number,
+    //     source = "ManualTopup",
+    //     description: string,
+    //     transactionType: "credit" | "debit",
+    //     remarks?: string,
+        
+    // ) {
+    //     if (amount <= 0) throw new CustomError("Amount must be > 0", HttpStatusCode.BAD_REQUEST);
 
-        const session = await startSession();
-        session.startTransaction();
-        try {
-            const wallet = await this.getOrCreateWallet(userId, ownerType);
-            wallet.balance += amount;
-            await this.walletRepository.saveWallet(wallet, session);
+    //     const session = await startSession();
+    //     session.startTransaction();
+    //     try {
+    //         const wallet = await this.getOrCreateWallet(userId, ownerType);
+    //         if(transactionType === "credit") wallet.balance += amount;
+    //         else if(transactionType === "debit") wallet.balance -= amount
+            
+    //         await this.walletRepository.saveWallet(wallet, session);
 
-            await this.walletRepository.createTransaction(
-                {
-                    walletId: wallet._id,
-                    transactionType: "credit",
-                    source,
-                    remarks,
-                    amount,
-                },
-                session
-            );
+    //         await this.walletRepository.createTransaction(
+    //             {
+    //                 walletId: wallet._id,
+    //                 transactionType,
+    //                 source,
+    //                 remarks,
+    //                 amount,
+    //                 description,
+    //             },
+    //             session
+    //         );
 
-            await session.commitTransaction();
-            session.endSession();
-            return wallet;
-        } catch (err) {
-            await session.abortTransaction();
-            session.endSession();
-            throw err;
-        }
-    }
+    //         await session.commitTransaction();
+    //         session.endSession();
+    //         return wallet;
+    //     } catch (err) {
+    //         await session.abortTransaction();
+    //         session.endSession();
+    //         throw err;
+    //     }
+    // }
 
     public async getSummary(userId: string, ownerType: Roles) {
         const wallet = await this.getOrCreateWallet(userId, ownerType);
@@ -81,20 +87,40 @@ export class WalletService implements IWalletService {
         }
 
         const order = await paymentCreation(amount)
+        console.log('the order', order)
         return toIInitiateDepositRes(order as IOrder)
 
     }
 
     public async verifyDeposit(depositVerification: IDepositVerification): Promise<{ message: string }> {
 
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, amount, userId } = depositVerification
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, amount, userId, description, transactionType, ownerType } = depositVerification
 
         const isValid = verifyPaymentSignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
         if (!isValid) {
             throw new CustomError("signature mismatch", HttpStatusCode.BAD_REQUEST)
         }
 
-        await this.deposit(userId, Roles.USER, Number(amount) / 100, "Razorpay", `Order ${razorpay_order_id}`)
+        const wallet = await this.getOrCreateWallet(userId, ownerType);
+         if(transactionType === "credit") wallet.balance += amount;
+            else if(transactionType === "debit") wallet.balance -= amount
+            
+            await this.walletRepository.create(wallet);
+
+            const source = transactionType === "credit" ? "deposit" : "withdrawn"
+
+            await this.walletRepository.createTransaction(
+                {
+                    walletId: wallet._id,
+                    transactionType,
+                    source,
+                    remarks: `Order ${razorpay_order_id}`,
+                    amount: amount,
+                    description,
+                },
+            );
+
+        // await this.deposit(userId, Roles.USER, Number(amount) / 100, "Razorpay", description, transactionType, `Order ${razorpay_order_id}`)
         return {
             message: "transaction verified"
         }

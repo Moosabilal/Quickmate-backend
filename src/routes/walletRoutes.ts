@@ -9,7 +9,7 @@ const walletController = container.get<WalletController>(TYPES.WalletController)
 const isUser = [authenticateToken, authorizeRoles(["Customer", "ServiceProvider"])]
 
 router.get("/", isUser, walletController.getWallet);
-router.post("/deposit", isUser, walletController.deposit);
+// router.post("/deposit", isUser, walletController.deposit);
 
 router.post("/deposit/initiate", isUser, walletController.initiateDeposit);
 router.post("/deposit/verify", isUser, walletController.verifyDeposit);
