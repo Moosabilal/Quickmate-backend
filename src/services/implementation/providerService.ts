@@ -30,12 +30,12 @@ const RESEND_COOLDOWN_SECONDS = 30;
 
 @injectable()
 export class ProviderService implements IProviderService {
-    private providerRepository: IProviderRepository
-    private serviceRepository: IServiceRepository;
-    private userRepository: IUserRepository
-    private categoryRepository: ICategoryRepository;
-    private bookingRepository: IBookingRepository
-    private messageRepository: IMessageRepository;
+    private _providerRepository: IProviderRepository
+    private _serviceRepository: IServiceRepository;
+    private _userRepository: IUserRepository
+    private _categoryRepository: ICategoryRepository;
+    private _bookingRepository: IBookingRepository
+    private _messageRepository: IMessageRepository;
 
     constructor(@inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
         @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
@@ -44,17 +44,17 @@ export class ProviderService implements IProviderService {
         @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
         @inject(TYPES.MessageRepository) messageRepository: IMessageRepository,
     ) {
-        this.providerRepository = providerRepository
-        this.serviceRepository = serviceRepository
-        this.userRepository = userRepository
-        this.categoryRepository = categoryRepository
-        this.bookingRepository = bookingRepository
-        this.messageRepository = messageRepository;
+        this._providerRepository = providerRepository
+        this._serviceRepository = serviceRepository
+        this._userRepository = userRepository
+        this._categoryRepository = categoryRepository
+        this._bookingRepository = bookingRepository
+        this._messageRepository = messageRepository;
     }
 
     public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
 
-        let provider = await this.providerRepository.findByEmail(data.email);
+        let provider = await this._providerRepository.findByEmail(data.email);
 
 
         if (provider && provider.isVerified) {
@@ -63,7 +63,7 @@ export class ProviderService implements IProviderService {
 
         if (!provider) {
             console.log('Creating new provider', data);
-            provider = await this.providerRepository.createProvider(data);
+            provider = await this._providerRepository.createProvider(data);
         } else {
             provider.fullName = data.fullName;
             provider.phoneNumber = data.phoneNumber;
@@ -75,7 +75,7 @@ export class ProviderService implements IProviderService {
         provider.registrationOtp = otp;
         provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         provider.registrationOtpAttempts = 0;
-        await this.providerRepository.update(provider.id, provider);
+        await this._providerRepository.update(provider.id, provider);
         await sendVerificationEmail(provider.email, otp);
 
 
@@ -88,7 +88,7 @@ export class ProviderService implements IProviderService {
     public async verifyOtp(data: VerifyOtpRequestBody): Promise<{ provider?: IProviderProfile, user?: ILoginResponseDTO, message?: string }> {
         const { email, otp } = data;
 
-        const provider = await this.providerRepository.findByEmail(email, true);
+        const provider = await this._providerRepository.findByEmail(email, true);
 
         if (!provider) {
             throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
@@ -105,7 +105,7 @@ export class ProviderService implements IProviderService {
 
         if (!provider.registrationOtp || provider.registrationOtp !== otp) {
             provider.registrationOtpAttempts = (typeof provider.registrationOtpAttempts === 'number' ? provider.registrationOtpAttempts : 0) + 1;
-            await this.providerRepository.update(provider.id, provider);
+            await this._providerRepository.update(provider.id, provider);
             throw new CustomError('Invalid OTP. Please try again.', HttpStatusCode.BAD_REQUEST);
         }
 
@@ -113,7 +113,7 @@ export class ProviderService implements IProviderService {
             provider.registrationOtp = undefined;
             provider.registrationOtpExpires = undefined;
             provider.registrationOtpAttempts = 0;
-            await this.providerRepository.update(provider.id, provider);
+            await this._providerRepository.update(provider.id, provider);
             throw new CustomError('OTP has expired. Please request a new one.', HttpStatusCode.BAD_REQUEST);
         }
 
@@ -121,15 +121,15 @@ export class ProviderService implements IProviderService {
         provider.registrationOtp = undefined;
         provider.registrationOtpExpires = undefined;
         provider.registrationOtpAttempts = 0;
-        const updatedProvider = await this.providerRepository.update(provider.id, provider);
+        const updatedProvider = await this._providerRepository.update(provider.id, provider);
 
         const userId = provider.userId.toString()
-        const user = await this.userRepository.findById(userId)
+        const user = await this._userRepository.findById(userId)
         if (!user) {
             throw new CustomError("Something went wrong, Please contact admin", HttpStatusCode.FORBIDDEN)
         }
         user.role = Roles.PROVIDER
-        const updatedUser = await this.userRepository.update(userId, user)
+        const updatedUser = await this._userRepository.update(userId, user)
 
         return {
             provider: toProviderDTO(updatedProvider),
@@ -140,7 +140,7 @@ export class ProviderService implements IProviderService {
     public async resendOtp(data: ResendOtpRequestBody): Promise<{ message: string }> {
         const { email } = data;
 
-        const provider = await this.providerRepository.findByEmail(email, true);
+        const provider = await this._providerRepository.findByEmail(email, true);
 
         if (!provider) {
             return { message: 'If an account with this email exists, a new OTP has been sent.' };
@@ -164,7 +164,7 @@ export class ProviderService implements IProviderService {
         provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         provider.registrationOtpAttempts = 0;
 
-        await this.providerRepository.update(provider.id, provider);
+        await this._providerRepository.update(provider.id, provider);
 
         await sendVerificationEmail(email, newOtp);
 
@@ -172,7 +172,7 @@ export class ProviderService implements IProviderService {
     }
 
     public async updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile> {
-        const updatedProvider = await this.providerRepository.updateProvider(updateData)
+        const updatedProvider = await this._providerRepository.updateProvider(updateData)
         return {
             id: updatedProvider._id.toString(),
             userId: updatedProvider.userId.toString(),
@@ -202,7 +202,7 @@ export class ProviderService implements IProviderService {
 
 
     public async getProviderWithAllDetails(): Promise<IProvider[]> {
-        return this.providerRepository.getAllProviders();
+        return this._providerRepository.getAllProviders();
     }
 
     public async providersForAdmin(
@@ -239,8 +239,8 @@ export class ProviderService implements IProviderService {
         }
 
         const [providers, total] = await Promise.all([
-            this.providerRepository.findProvidersWithFilter(filter, skip, limit),
-            this.providerRepository.countProviders(filter),
+            this._providerRepository.findProvidersWithFilter(filter, skip, limit),
+            this._providerRepository.countProviders(filter),
         ]);
 
         if (!providers || providers.length === 0) {
@@ -250,7 +250,7 @@ export class ProviderService implements IProviderService {
         }
 
         const providerIds = providers.map(p => p._id);
-        const services = await this.serviceRepository.findAll({ providerId: { $in: providerIds } });
+        const services = await this._serviceRepository.findAll({ providerId: { $in: providerIds } });
 
         const serviceMap = new Map<string, string[]>();
         for (const service of services) {
@@ -286,7 +286,7 @@ export class ProviderService implements IProviderService {
     }
 
     public async getServicesForAddservice(): Promise<{ mainCategories: IServiceAddPageResponse[], services: IServiceAddPageResponse[] }> {
-        const categories = await this.categoryRepository.getAllCategories()
+        const categories = await this._categoryRepository.getAllCategories()
         const mainCategories = categories.filter(category => !category.parentId).map(category => toServiceAddPage(category))
         const services = categories.filter(category => !!category.parentId).map(category => toServiceAddPage(category))
         return {
@@ -306,7 +306,7 @@ export class ProviderService implements IProviderService {
             throw new Error('Invalid token.');
         }
 
-        const provider = await this.providerRepository.getProviderByUserId(decoded.id)
+        const provider = await this._providerRepository.getProviderByUserId(decoded.id)
         return {
             id: provider._id.toString(),
             userId: provider.userId.toString(),
@@ -339,8 +339,8 @@ export class ProviderService implements IProviderService {
                 { serviceName: { $regex: search, $options: 'i' } },
             ]
         }
-        const providers = await this.providerRepository.findProvidersWithFilter(filter, skip, limit);
-        const total = await this.providerRepository.countProviders(filter)
+        const providers = await this._providerRepository.findProvidersWithFilter(filter, skip, limit);
+        const total = await this._providerRepository.countProviders(filter)
 
         const featuredProviders = providers.map(provider => ({
             id: provider._id.toString(),
@@ -370,7 +370,7 @@ export class ProviderService implements IProviderService {
             throw new CustomError(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`, HttpStatusCode.BAD_REQUEST);
         }
         console.log('the id and new status', id, newStatus)
-        await this.providerRepository.updateStatusById(id, newStatus)
+        await this._providerRepository.updateStatusById(id, newStatus)
         return { message: "provider Status updated" }
     }
 
@@ -396,7 +396,7 @@ export class ProviderService implements IProviderService {
             serviceFilter.price = { $lte: filters.price };
         }
 
-        const services = await this.serviceRepository.findAll(serviceFilter);
+        const services = await this._serviceRepository.findAll(serviceFilter);
 
         if (!services || services.length === 0) return [];
 
@@ -432,7 +432,7 @@ export class ProviderService implements IProviderService {
             }
         }
 
-        const providers = await this.providerRepository.findAll(providerFilter);
+        const providers = await this._providerRepository.findAll(providerFilter);
 
         const result: IBackendProvider[] = providers.map(provider => {
             const providerServices = servicesByProvider.get(provider._id.toString()) || [];
@@ -467,17 +467,17 @@ export class ProviderService implements IProviderService {
             throw new CustomError("Sorry UserId not found", HttpStatusCode.NOT_FOUND);
         }
 
-        const bookings = await this.bookingRepository.findAll({ userId });
+        const bookings = await this._bookingRepository.findAll({ userId });
         if (!bookings.length) return [];
         const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
 
-        const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } });
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
         const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
         if (!serviceIds.length) return [];
-        const services = await this.serviceRepository.findAll({ _id: { $in: serviceIds } });
+        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
 
         const bookingIds = bookings.map(b => b._id.toString());
-        const messages = await this.messageRepository.findLastMessagesByBookingIds(bookingIds)
+        const messages = await this._messageRepository.findLastMessagesByBookingIds(bookingIds)
 
         return toProviderForChatListPage(bookings, providers, services, messages);
     }

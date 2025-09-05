@@ -10,9 +10,9 @@ import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../dto/auth.dto";
 
 @injectable()
 export class ProviderController {
-    private providerService: IProviderService
+    private _providerService: IProviderService
     constructor(@inject(TYPES.ProviderService) providerService: IProviderService) {
-        this.providerService = providerService
+        this._providerService = providerService
     }
 
     public register = async (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -50,7 +50,7 @@ export class ProviderController {
             formData.serviceLocation = { type: "Point", coordinates: [lon, lat] };
 
 
-            const response = await this.providerService.registerProvider(formData);
+            const response = await this._providerService.registerProvider(formData);
             res.status(HttpStatusCode.OK).json({ provider: response, message: "registration completed successfully" });
         } catch (error) {
             next(error);
@@ -59,7 +59,7 @@ export class ProviderController {
 
     public verifyOtp = async (req: Request<{}, {}, VerifyOtpRequestBody>, res: Response, next: NextFunction) => {
         try {
-            const response = await this.providerService.verifyOtp(req.body);
+            const response = await this._providerService.verifyOtp(req.body);
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);
@@ -68,7 +68,7 @@ export class ProviderController {
 
     public resendOtp = async (req: Request<{}, {}, ResendOtpRequestBody>, res: Response, next: NextFunction) => {
         try {
-            const response = await this.providerService.resendOtp(req.body);
+            const response = await this._providerService.resendOtp(req.body);
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);
@@ -115,7 +115,7 @@ export class ProviderController {
                 updateData.aadhaarIdProof = aadhaarUrl;
             }
 
-            const updatedProvider = await this.providerService.updateProviderDetails(updateData);
+            const updatedProvider = await this._providerService.updateProviderDetails(updateData);
 
             res.status(HttpStatusCode.OK).json({
                 provider: updatedProvider,
@@ -128,7 +128,7 @@ export class ProviderController {
 
     public getAllProvidersList = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const providerWithDetails = await this.providerService.getProviderWithAllDetails();
+            const providerWithDetails = await this._providerService.getProviderWithAllDetails();
             res.status(HttpStatusCode.OK).json(providerWithDetails);
         } catch (error) {
             next(error);
@@ -138,7 +138,7 @@ export class ProviderController {
     public getProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const token = req.cookies.token
-            const provider = await this.providerService.fetchProviderById(token)
+            const provider = await this._providerService.fetchProviderById(token)
             res.status(HttpStatusCode.OK).json(provider)
         } catch (error) {
             next(error);
@@ -147,7 +147,7 @@ export class ProviderController {
 
     public getServicesForAddPage = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const response = await this.providerService.getServicesForAddservice();
+            const response = await this._providerService.getServicesForAddservice();
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -160,7 +160,7 @@ export class ProviderController {
             const limit = parseInt(req.query.limit as string) || 10;
             const search = (req.query.search as string) || '';
             const status = req.query.status as string || "All"
-            const providersDetails = await this.providerService.providersForAdmin(page, limit, search, status);
+            const providersDetails = await this._providerService.providersForAdmin(page, limit, search, status);
             console.log('the providers details', providersDetails)
             res.status(HttpStatusCode.OK).json(providersDetails);
         } catch (error) {
@@ -173,7 +173,7 @@ export class ProviderController {
             const page = parseInt(req.query.page as string) || 1;
             const limit = parseInt(req.query.limit as string) || 10;
             const search = (req.query.search as string) || '';
-            const getFeaturedProviders = await this.providerService.getFeaturedProviders(page, limit, search)
+            const getFeaturedProviders = await this._providerService.getFeaturedProviders(page, limit, search)
             res.status(HttpStatusCode.OK).json(getFeaturedProviders)
         } catch (error) {
             next(error);
@@ -183,7 +183,7 @@ export class ProviderController {
 
     public updateProviderStatus = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const response = await this.providerService.updateProviderStat(req.params.id, req.body.newStatus)
+            const response = await this._providerService.updateProviderStat(req.params.id, req.body.newStatus)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -200,7 +200,7 @@ export class ProviderController {
             const price = req.query.price ? Number(req.query.price) : undefined;
 
             const filters = { area, experience, day, time, price };
-            const response = await this.providerService.getProviderwithFilters(serviceId, filters)
+            const response = await this._providerService.getProviderwithFilters(serviceId, filters)
             res.status(200).json(response)
         } catch (error) {
             next(error)
@@ -211,7 +211,7 @@ export class ProviderController {
         try {
             const userId = req.user.id
             console.log('the userId', userId)
-            const response = await this.providerService.providerForChatPage(userId)
+            const response = await this._providerService.providerForChatPage(userId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

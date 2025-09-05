@@ -15,20 +15,20 @@ import { TransactionStatus } from "../../enums/payment&wallet.enum";
 
 @injectable()
 export class WalletService implements IWalletService {
-    private walletRepository: IWalletRepository;
+    private _walletRepository: IWalletRepository;
     constructor(@inject(TYPES.WalletRepository) walletRepository: IWalletRepository) {
-        this.walletRepository = walletRepository
+        this._walletRepository = walletRepository
     }
 
     private async getOrCreateWallet(userId: string, ownerType: Roles) {
-        let wallet = await this.walletRepository.findOne({ ownerId: userId, ownerType });
+        let wallet = await this._walletRepository.findOne({ ownerId: userId, ownerType });
 
         if (!wallet) {
             const newWallet: Partial<IWallet> = {
                 ownerId: new Types.ObjectId(userId),
                 ownerType,
             }
-            wallet = await this.walletRepository.create(newWallet);
+            wallet = await this._walletRepository.create(newWallet);
         }
         return wallet;
     }
@@ -94,8 +94,8 @@ export class WalletService implements IWalletService {
             query.createdAt = { $gte: new Date(filters.startDate) };
         }
         const [txns, total] = await Promise.all([
-            this.walletRepository.getTransactions(query, skip, limit),
-            this.walletRepository.transactionCount()
+            this._walletRepository.getTransactions(query, skip, limit),
+            this._walletRepository.transactionCount()
         ]) 
         return { 
             wallet, 
@@ -132,11 +132,11 @@ export class WalletService implements IWalletService {
         if (transactionType === "credit") wallet.balance += amount;
         else if (transactionType === "debit") wallet.balance -= amount
 
-        await this.walletRepository.create(wallet);
+        await this._walletRepository.create(wallet);
 
         const source = transactionType === "credit" ? "deposit" : "withdrawn"
 
-        await this.walletRepository.createTransaction(
+        await this._walletRepository.createTransaction(
             {
                 walletId: wallet._id,
                 transactionType,

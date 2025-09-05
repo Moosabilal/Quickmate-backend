@@ -10,15 +10,15 @@ import { HttpStatusCode } from '../enums/HttpStatusCode';
 
 @injectable()
 export class AuthController {
-  private authService: IAuthService
+  private _authService: IAuthService
   constructor(@inject(TYPES.AuthService) authService: IAuthService) {
-    this.authService = authService
+    this._authService = authService
   }
 
 
   public register = async (req: Request<{}, {}, RegisterRequestBody>, res: Response, next: NextFunction) => {
     try {
-      const response = await this.authService.registerUser(req.body);
+      const response = await this._authService.registerUser(req.body);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -29,7 +29,7 @@ export class AuthController {
   public login = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { email, password } = req.body;
-      const result = await this.authService.login(email, password);
+      const result = await this._authService.login(email, password);
 
       let token = result.token
       res.cookie('token', token, {
@@ -55,7 +55,7 @@ export class AuthController {
 
   public verifyOtp = async (req: Request<{}, {}, VerifyOtpRequestBody>, res: Response, next: NextFunction) => {
     try {
-      const response = await this.authService.verifyOtp(req.body);
+      const response = await this._authService.verifyOtp(req.body);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -65,7 +65,7 @@ export class AuthController {
 
   public resendOtp = async (req: Request<{}, {}, ResendOtpRequestBody>, res: Response, next: NextFunction) => {
     try {
-      const response = await this.authService.resendOtp(req.body);
+      const response = await this._authService.resendOtp(req.body);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -74,7 +74,7 @@ export class AuthController {
 
   public forgotPassword = async (req: Request<{}, {}, ForgotPasswordRequestBody>, res: Response, next: NextFunction) => {
     try {
-      const response = await this.authService.requestPasswordReset(req.body);
+      const response = await this._authService.requestPasswordReset(req.body);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -84,7 +84,7 @@ export class AuthController {
 
   public resetPassword = async (req: Request<{}, {}, ResetPasswordRequestBody>, res: Response, next: NextFunction) => {
     try {
-      const response = await this.authService.resetPassword(req.body);
+      const response = await this._authService.resetPassword(req.body);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -107,7 +107,7 @@ export class AuthController {
   public googleLogin = async (req: Request<{}, {}, { token: string }>, res: Response, next: NextFunction) => {
     try {
       const { token } = req.body;
-      const response = await this.authService.googleAuthLogin(token);
+      const response = await this._authService.googleAuthLogin(token);
       let jwtToken = response.token
       res.cookie('token', jwtToken, {
         httpOnly: true,
@@ -136,7 +136,7 @@ export class AuthController {
         res.status(401).json({ message: 'Refresh token not found' })
         return
       }
-      const response = await this.authService.createRefreshToken(refresh_token)
+      const response = await this._authService.createRefreshToken(refresh_token)
       res.cookie('token', response.newToken, {
         httpOnly: true,
         secure: false,
@@ -154,7 +154,7 @@ export class AuthController {
   public contactUsEmail = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       const {name, email, message} = req.body
-      const response = await this.authService.sendSubmissionEmail(name, email, message);
+      const response = await this._authService.sendSubmissionEmail(name, email, message);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -165,7 +165,7 @@ export class AuthController {
   public getUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = req.cookies.token
-      const user = await this.authService.getUser(token);
+      const user = await this._authService.getUser(token);
       res.status(HttpStatusCode.OK).json(user);
     } catch (error) {
       next(error);
@@ -189,7 +189,7 @@ export class AuthController {
         profilePicture = req.body.iconUrl;
       }
       const { name, email } = req.body;
-      const updatedUser = await this.authService.updateProfile(token, { name, email, profilePicture });
+      const updatedUser = await this._authService.updateProfile(token, { name, email, profilePicture });
       res.status(HttpStatusCode.OK).json(updatedUser);
     } catch (error) {
       next(error);
@@ -204,7 +204,7 @@ export class AuthController {
       const limit = parseInt(req.query.limit as string) || 10;
       const search = (req.query.search as string) || '';
       const status = req.query.status as string || "All"
-      const userWithDetails = await this.authService.getUserWithAllDetails(page, limit, search, status);
+      const userWithDetails = await this._authService.getUserWithAllDetails(page, limit, search, status);
       res.status(HttpStatusCode.OK).json(userWithDetails);
     } catch (error) {
       next(error);
@@ -214,7 +214,7 @@ export class AuthController {
   public updateUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId = req.params.userId;
-      const updatedUser = await this.authService.updateUser(userId);
+      const updatedUser = await this._authService.updateUser(userId);
       res.status(HttpStatusCode.OK).json(updatedUser);
     } catch (error) {
       next(error);
@@ -225,7 +225,7 @@ export class AuthController {
     try {
       const refreshToken = req.cookies.refreshToken;
 
-      await this.authService.logout(refreshToken);
+      await this._authService.logout(refreshToken);
 
       res.cookie('token', '', {
         httpOnly: true,
@@ -252,7 +252,7 @@ export class AuthController {
   public getAllDataForChatBot = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       const userId = req.user.id;
-      const response = await this.authService.getAllDataForChatBot(userId)
+      const response = await this._authService.getAllDataForChatBot(userId)
       res.status(HttpStatusCode.OK).json(response)
     } catch (error) {
       next(error)

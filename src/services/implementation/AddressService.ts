@@ -7,13 +7,13 @@ import { IAddressRequest } from "../../dto/address..dto";
 
 injectable()
 export class AddressService implements IAddressService {
-    private addressRepsitory: IAddressRepository
+    private _addressRepsitory: IAddressRepository
     constructor(@inject(TYPES.AddressRepository) addressRepsitory: IAddressRepository) {
-        this.addressRepsitory = addressRepsitory
+        this._addressRepsitory = addressRepsitory
     }
 
     public async addAddress(data: Partial<IAddress>): Promise<IAddressRequest> {
-        const createdAddress = await this.addressRepsitory.create(data)
+        const createdAddress = await this._addressRepsitory.create(data)
         return {
             id: createdAddress._id.toString(),
             userId: createdAddress.userId.toString(),
@@ -27,7 +27,7 @@ export class AddressService implements IAddressService {
     }
 
     public async getAllAddress(userId: string): Promise<IAddressRequest[]> {
-        const allAddress = await this.addressRepsitory.findAll({ userId: userId })
+        const allAddress = await this._addressRepsitory.findAll({ userId: userId })
         return allAddress.filter((adr => adr.label !== "Current Location")).map((adr) => ({
             id: adr._id.toString(),
             userId: adr.userId.toString(),
@@ -41,7 +41,7 @@ export class AddressService implements IAddressService {
     }
 
     public async updateAddressById(id: string, data: IAddressRequest): Promise<IAddressRequest> {
-        const updatedAddress = await this.addressRepsitory.update(id, data)
+        const updatedAddress = await this._addressRepsitory.update(id, data)
         return {
             id: updatedAddress._id.toString(),
             userId: updatedAddress.userId.toString(),
@@ -55,7 +55,7 @@ export class AddressService implements IAddressService {
     }
 
     public async delete_Address(id: string): Promise<{message: string}> {
-        await this.addressRepsitory.delete(id)
+        await this._addressRepsitory.delete(id)
         return {
             message: "Address Deleted"
         }

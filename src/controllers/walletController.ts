@@ -9,9 +9,9 @@ import { TransactionStatus } from "../enums/payment&wallet.enum";
 
 @injectable()
 export class WalletController {
-    private walletService: IWalletService;
+    private _walletService: IWalletService;
     constructor(@inject(TYPES.WalletService) walletService: IWalletService) {
-        this.walletService = walletService
+        this._walletService = walletService
     }
 
     public getWallet = async (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -24,7 +24,7 @@ export class WalletController {
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
         const filters = { status, startDate, transactionType }
-        const data = await this.walletService.getSummary(userId, ownerType, filters, page, limit);
+        const data = await this._walletService.getSummary(userId, ownerType, filters, page, limit);
         console.log('the return data', data)
         res.json({ success: true, data });
     };
@@ -39,7 +39,7 @@ export class WalletController {
     public initiateDeposit = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const { amount } = req.body
-            const response = await this.walletService.initiateDeposit(amount)
+            const response = await this._walletService.initiateDeposit(amount)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -53,7 +53,7 @@ export class WalletController {
                 userId: req.user.id,
                 ownerType: req.user.role
             }
-            const response = await this.walletService.verifyDeposit(data)
+            const response = await this._walletService.verifyDeposit(data)
             res.status(HttpStatusCode.OK).json(response)
 
         } catch (error) {

@@ -8,15 +8,15 @@ import { IPaymentVerificationRequest } from "../dto/payment.dto";
 
 @injectable()
 export class BookingController {
-    private bookingService: IBookingService
+    private _bookingService: IBookingService
     constructor(@inject(TYPES.BookingService) bookingService: IBookingService){
-        this.bookingService = bookingService
+        this._bookingService = bookingService
     }
 
     public createBooking = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             console.log('the amount type', typeof req.body.amount)
-            const response = await this.bookingService.createNewBooking(req.body)
+            const response = await this._bookingService.createNewBooking(req.body)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -26,7 +26,7 @@ export class BookingController {
     public confirmPayment = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const {amount} = req.body
-            const response = await this.bookingService.createPayment(amount)
+            const response = await this._bookingService.createPayment(amount)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -41,7 +41,7 @@ export class BookingController {
                 adminCommisson: 0,
                 providerAmount: 0,
             }
-            const response = await this.bookingService.paymentVerification(paymentData)
+            const response = await this._bookingService.paymentVerification(paymentData)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -51,7 +51,7 @@ export class BookingController {
     public getBookingById = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const bookingId = req.params.id
-            const response = await this.bookingService.findBookingById(bookingId)
+            const response = await this._bookingService.findBookingById(bookingId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -61,7 +61,7 @@ export class BookingController {
     public getAllBookings = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const userId = req.user.id;
-            const response = await this.bookingService.getAllFilteredBookings(userId)
+            const response = await this._bookingService.getAllFilteredBookings(userId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -72,7 +72,7 @@ export class BookingController {
         try {
             const providerId = req.params.id
             console.log('the userid', providerId)
-            const response = await this.bookingService.getBookingFor_Prov_mngmnt(providerId)
+            const response = await this._bookingService.getBookingFor_Prov_mngmnt(providerId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -82,7 +82,7 @@ export class BookingController {
     public getAllPreviousChats = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const bookingId = req.params.bookingId
-            const response = await this.bookingService.getBookingMessages(bookingId)
+            const response = await this._bookingService.getBookingMessages(bookingId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -92,7 +92,7 @@ export class BookingController {
     public updateBookingStatus = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const bookingId = req.params.id
-            const response = await this.bookingService.updateStatus(bookingId, req.body.status)
+            const response = await this._bookingService.updateStatus(bookingId, req.body.status)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -103,7 +103,7 @@ export class BookingController {
         try {
             const bookingId = req.params.id
             const { date, time } = req.body;
-            await this.bookingService.updateBookingDateTime(bookingId, date, time);
+            await this._bookingService.updateBookingDateTime(bookingId, date, time);
             res.status(HttpStatusCode.NO_CONTENT).send()
         } catch (error) {
             next(error)
