@@ -7,6 +7,7 @@ import { IProviderProfile, IProviderRegisterRequest } from "../dto/provider.dto"
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../dto/auth.dto";
+import { IProvider } from "../models/Providers";
 
 @injectable()
 export class ProviderController {
@@ -51,7 +52,7 @@ export class ProviderController {
 
 
             const response = await this._providerService.registerProvider(formData);
-            res.status(HttpStatusCode.OK).json({ provider: response, message: "registration completed successfully" });
+            res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);
         }
@@ -79,6 +80,7 @@ export class ProviderController {
         try {
 
             console.log('req.body ', req.body)
+            console.log('req.fafasdfas', req.files)
 
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
@@ -86,6 +88,7 @@ export class ProviderController {
             };
 
             const aadhaar = files?.aadhaarIdProof?.[0];
+            console.log('the aadhar', aadhaar)
             const profile = files?.profilePhoto?.[0];
 
             const baseUrl = process.env.CLOUDINARY_BASE_URL;
@@ -97,9 +100,13 @@ export class ProviderController {
                 ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '')
                 : undefined;
 
-            const [lat, lon] = req.body.serviceLocation.split(",").map(Number);
+            let lat: number | undefined;
+            let lon: number | undefined;
+            if (req.body.serviceLocation) {
+                [lat, lon] = req.body.serviceLocation.split(",").map(Number);
+            }
 
-            const updateData: Partial<IProviderProfile> = {
+            const updateData: Partial<IProvider> = {
                 ...req.body,
                 serviceId: JSON.parse(req.body.serviceId),
                 availability: JSON.parse(req.body.availability || '[]'),
@@ -114,6 +121,8 @@ export class ProviderController {
             if (aadhaarUrl) {
                 updateData.aadhaarIdProof = aadhaarUrl;
             }
+
+            console.log('the adhara updatetion', aadhaarUrl)
 
             const updatedProvider = await this._providerService.updateProviderDetails(updateData);
 
@@ -161,7 +170,6 @@ export class ProviderController {
             const search = (req.query.search as string) || '';
             const status = req.query.status as string || "All"
             const providersDetails = await this._providerService.providersForAdmin(page, limit, search, status);
-            console.log('the providers details', providersDetails)
             res.status(HttpStatusCode.OK).json(providersDetails);
         } catch (error) {
             next(error);
@@ -207,7 +215,7 @@ export class ProviderController {
         }
     }
 
-    public getProviderForChatPage = async (req: AuthRequest, res: Response, next: NextFunction ) => {
+    public getProviderForChatPage = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const userId = req.user.id
             console.log('the userId', userId)

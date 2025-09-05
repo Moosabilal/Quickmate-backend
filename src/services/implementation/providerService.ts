@@ -3,7 +3,7 @@ import { IProviderRepository } from "../../repositories/interface/IProviderRepos
 import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
-import { IProvider } from "../../models/Providers";
+import { IProvider, Provider } from "../../models/Providers";
 import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
@@ -57,13 +57,14 @@ export class ProviderService implements IProviderService {
         let provider = await this._providerRepository.findByEmail(data.email);
 
 
-        if (provider && provider.isVerified) {
+        if (provider && provider.isVerified && provider.status !== ProviderStatus.REJECTED) {
             throw new CustomError(ErrorMessage.USER_ALREADY_EXISTS, HttpStatusCode.CONFLICT)
         }
 
         if (!provider) {
-            console.log('Creating new provider', data);
             provider = await this._providerRepository.createProvider(data);
+        } else if (provider && provider.status === ProviderStatus.REJECTED) {
+            provider = await this._providerRepository.updateProvider(data)
         } else {
             provider.fullName = data.fullName;
             provider.phoneNumber = data.phoneNumber;
@@ -73,6 +74,7 @@ export class ProviderService implements IProviderService {
         const otp = generateOTP();
 
         provider.registrationOtp = otp;
+        console.log('the registration otp', otp)
         provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         provider.registrationOtpAttempts = 0;
         await this._providerRepository.update(provider.id, provider);
@@ -91,23 +93,27 @@ export class ProviderService implements IProviderService {
         const provider = await this._providerRepository.findByEmail(email, true);
 
         if (!provider) {
+            console.log('no provider')
             throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
 
-        if (provider.isVerified) {
+        if (provider.isVerified && provider.status !== ProviderStatus.REJECTED) {
+            console.log('the accoutn si already')
             return { message: 'Account already verified.' };
         }
 
         if (typeof provider.registrationOtpAttempts === 'number' && provider.registrationOtpAttempts >= MAX_OTP_ATTEMPTS) {
+            console.log('the too many attempts')
             throw new CustomError(`Too many failed OTP attempts. Please request a new OTP.`, HttpStatusCode.FORBIDDEN);
 
         }
-
+        console.log('the provider registration otp', provider.registrationOtp, otp)
         if (!provider.registrationOtp || provider.registrationOtp !== otp) {
             provider.registrationOtpAttempts = (typeof provider.registrationOtpAttempts === 'number' ? provider.registrationOtpAttempts : 0) + 1;
             await this._providerRepository.update(provider.id, provider);
             throw new CustomError('Invalid OTP. Please try again.', HttpStatusCode.BAD_REQUEST);
         }
+        console.log('the success')
 
         if (!provider.registrationOtpExpires || new Date() > provider.registrationOtpExpires) {
             provider.registrationOtp = undefined;
@@ -121,6 +127,7 @@ export class ProviderService implements IProviderService {
         provider.registrationOtp = undefined;
         provider.registrationOtpExpires = undefined;
         provider.registrationOtpAttempts = 0;
+        provider.status = ProviderStatus.PENDING
         const updatedProvider = await this._providerRepository.update(provider.id, provider);
 
         const userId = provider.userId.toString()
@@ -171,7 +178,7 @@ export class ProviderService implements IProviderService {
         return { message: 'A new OTP has been sent to your email.' };
     }
 
-    public async updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile> {
+    public async updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile> {
         const updatedProvider = await this._providerRepository.updateProvider(updateData)
         return {
             id: updatedProvider._id.toString(),

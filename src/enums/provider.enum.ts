@@ -1,5 +1,5 @@
 export enum ProviderStatus {
-  ACTIVE = 'Active',
+  ACTIVE = 'Approved',
   SUSPENDED = 'Suspended',
   PENDING = 'Pending',
   REJECTED = 'Rejected',
