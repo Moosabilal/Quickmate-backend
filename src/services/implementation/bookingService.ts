@@ -72,10 +72,8 @@ export class BookingService implements IBookingService {
         //     };
         // }
         const subCategoryId = data.serviceId
-        console.log('the serviceid', subCategoryId)
         const findServiceId = await this._serviceRepository.findOne({ subCategoryId })
 
-        console.log('the get servidddddddces', findServiceId)
         data.serviceId = findServiceId._id.toString()
         const bookings = await this._bookingRepository.create(data)
         return { bookingId: (bookings._id as { toString(): string }).toString(), message: "your booking confirmed successfully" }
@@ -124,10 +122,8 @@ export class BookingService implements IBookingService {
                 : totalCommission += commission.commissionValue
         }
         if (subCategory.parentId) {
-            console.log('there is parentId')
 
             const category = await this._categoryRepository.findOne({ parentId: subCategory.parentId.toString() })
-            console.log('we got the catehroy', category)
             const mainFilter = {
                 categoryId: category._id.toString()
             }
@@ -139,7 +135,6 @@ export class BookingService implements IBookingService {
                     : totalCommission += parentCommission.commissionValue
             }
         }
-        console.log('the totlal commission', totalCommission)
 
         const updatedPayment = {
             ...verifyPayment,

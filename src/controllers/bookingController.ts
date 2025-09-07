@@ -15,7 +15,6 @@ export class BookingController {
 
     public createBooking = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            console.log('the amount type', typeof req.body.amount)
             const response = await this._bookingService.createNewBooking(req.body)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {

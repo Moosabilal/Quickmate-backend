@@ -659,3 +659,12 @@
 [ERROR  ] - POST /api/address/createAddress 500 Cannot read properties of undefined (reading 'split') -> Cannot read properties of undefined (reading 'split')
 [ERROR  ] - POST /api/address/createAddress 500 Cannot read properties of undefined (reading 'split') -> Cannot read properties of undefined (reading 'split')
 [ERROR  ] - POST /api/address/createAddress 500 Cannot read properties of undefined (reading 'split') -> Cannot read properties of undefined (reading 'split')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingById/68bd268da281c515aa6273ba 500 Cannot read properties of undefined (reading 'toString') -> Cannot read properties of undefined (reading 'toString')
+[ERROR  ] - GET /api/bookings/getBookingById/68bd268da281c515aa6273ba 500 Cannot read properties of undefined (reading 'toString') -> Cannot read properties of undefined (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
