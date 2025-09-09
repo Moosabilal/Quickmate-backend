@@ -87,3 +87,10 @@ export interface IGetMessages {
   text: string
 
 }
+
+export interface BookingOtpPayload {
+  bookingId: string;
+  otp: string;
+  iat: number;
+  exp: number; 
+}

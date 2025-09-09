@@ -85,3 +85,31 @@ export const sendContactUsEmail = async (name: string, email: string , message: 
     throw new Error('Failed to send email' );
   }
 }
+
+export const sendBookingVerificationEmail = async (toEmail: string, otp: string): Promise<void> => {
+  try {
+    console.log('the email', toEmail, otp)
+    const mailOptions = {
+      from: process.env.EMAIL_FROM,
+      to: toEmail,
+      subject: 'QuickMate Booked Service Completion OTP',
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+          <h2>Booking Completion Verification</h2>
+          <p>Hello,</p>
+          <p>Thank you for the service with QuickMate. To complete your service, please use the following One-Time Password (OTP):</p>
+          <p style="font-size: 24px; font-weight: bold; color: #007bff; background-color: #f0f0f0; padding: 15px; border-radius: 5px; text-align: center;">${otp}</p>
+          <p>This OTP is valid for <strong>10 minutes</strong>.</p>
+          <p>Regards,<br/>QuickMate Team</p>
+        </div>
+      `,
+    };
+    logger.info(`Sending verification email to ${toEmail} with OTP: ${otp} mail`);
+
+    await transporter.sendMail(mailOptions);
+    logger.info(`Verification OTP sent to ${toEmail}`);
+  } catch (error) {
+    logger.error(`Error sending booking completion email to ${toEmail}:`, error);
+    throw new Error('Failed to send booking completion email.');
+  }
+};

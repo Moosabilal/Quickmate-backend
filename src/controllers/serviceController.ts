@@ -10,9 +10,9 @@ import { HttpStatusCode } from "../enums/HttpStatusCode";
 
 @injectable()
 export class ServiceController {
-    private serviceService: IServiceService
+    private _serviceService: IServiceService
     constructor(@inject(TYPES.ServiceService) serviceService: IServiceService) {
-        this.serviceService = serviceService;
+        this._serviceService = serviceService;
     }
 
     public addService = async (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -38,7 +38,7 @@ export class ServiceController {
                 price: parseInt(req.body.price),
                 userId: req.user.id,
             }
-            const response = await this.serviceService.addService(serviceToAdd)
+            const response = await this._serviceService.addService(serviceToAdd)
             res.status(200).json(response)
         } catch (error) {
             next(error)
@@ -48,7 +48,7 @@ export class ServiceController {
     public getServicesForProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const providerId = req.params.providerId;
-            const response = await this.serviceService.getProviderServices(providerId)
+            const response = await this._serviceService.getProviderServices(providerId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -58,7 +58,7 @@ export class ServiceController {
     public getServiceById = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
-            const response = await this.serviceService.getServiceById(id)
+            const response = await this._serviceService.getServiceById(id)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -77,7 +77,7 @@ export class ServiceController {
                 price: parseInt(req.body.price),
                 userId: req.user.id,
             }
-            const response = await this.serviceService.updateService(id, serviceToUpdate)
+            const response = await this._serviceService.updateService(id, serviceToUpdate)
             res.status(200).json(response)
         } catch (error) {
             next(error)
@@ -87,7 +87,7 @@ export class ServiceController {
     public deleteService = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id
-            const response = await this.serviceService.deleteService(id)
+            const response = await this._serviceService.deleteService(id)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

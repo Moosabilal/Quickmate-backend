@@ -5,18 +5,27 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import { NextFunction, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { Roles } from "../enums/userRoles";
+import { TransactionStatus } from "../enums/payment&wallet.enum";
 
 @injectable()
 export class WalletController {
-    private walletService: IWalletService;
+    private _walletService: IWalletService;
     constructor(@inject(TYPES.WalletService) walletService: IWalletService) {
-        this.walletService = walletService
+        this._walletService = walletService
     }
 
     public getWallet = async (req: AuthRequest, res: Response, next: NextFunction) => {
-        const userId = req.user.id as string;  
-        const ownerType = req.user.role as Roles;  
-        const data = await this.walletService.getSummary(userId, ownerType);
+        console.log('it si reaching backend', req.query)
+        const userId = req.user.id as string;
+        const ownerType = req.user.role as Roles;
+        const status = req.query.status as TransactionStatus;
+        const startDate = req.query.startDate as string;
+        const transactionType = req.query.transactionType as "credit" | "debit" | "";
+        const page = parseInt(req.query.page as string) || 1;
+        const limit = parseInt(req.query.limit as string) || 10;
+        const filters = { status, startDate, transactionType }
+        const data = await this._walletService.getSummary(userId, ownerType, filters, page, limit);
+        console.log('the return data', data)
         res.json({ success: true, data });
     };
 
@@ -30,9 +39,7 @@ export class WalletController {
     public initiateDeposit = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const { amount } = req.body
-            console.log('the smount in initial deposit', amount)
-            const response = await this.walletService.initiateDeposit(amount)
-            console.log('the response of init', response)
+            const response = await this._walletService.initiateDeposit(amount)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -46,8 +53,7 @@ export class WalletController {
                 userId: req.user.id,
                 ownerType: req.user.role
             }
-            console.log('the amount in verifying ', data)
-            const response = await this.walletService.verifyDeposit(data)
+            const response = await this._walletService.verifyDeposit(data)
             res.status(HttpStatusCode.OK).json(response)
 
         } catch (error) {

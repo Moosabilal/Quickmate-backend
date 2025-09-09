@@ -12,6 +12,10 @@ export enum ErrorMessage {
   MISSING_TOKEN = 'Authorization token is missing. Please re-login',
   INVALID_REFRESH_TOKEN = 'Refresh token invalid or expired. Please re-login.',
 
+  //otp
+  INVALID_OTP = "Invalid OTP!, Please Enter the Correct OTP.",
+  OTP_VERIFICATION_FAILED = "OTP Verification Failed. Please try again later.",
+
   //booking errors
   BOOKING_NOT_FOUND = "Booking not found.",
   BOOKING_CANNOT_BE_CANCELLED = "Booking cannot be cancelled at this stage.",

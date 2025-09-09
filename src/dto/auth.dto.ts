@@ -29,12 +29,6 @@ export interface ResendOtpRequestBody {
   email: string;
 }
 
-
-export interface AuthErrorResponse {
-  message: string;
-  errors?: any; 
-}
-
 export interface ResetPasswordRequestBody {
   token: string; 
   newPassword: string;

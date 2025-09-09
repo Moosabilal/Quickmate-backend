@@ -25,7 +25,11 @@ const TYPES = {
     MessageRepository: Symbol.for('MessageRepository'),
     WalletController: Symbol.for('WalletController'),
     WalletService: Symbol.for('WalletService'),
-    WalletRepository: Symbol.for('WalletRepository')
+    WalletRepository: Symbol.for('WalletRepository'),
+    ReviewController: Symbol.for('ReviewerController'),
+    ReviewService: Symbol.for('ReviewService'),
+    ReviewRepository: Symbol.for('ReviewRepository'),
+
 }
 
 export default TYPES

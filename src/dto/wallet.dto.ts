@@ -1,3 +1,4 @@
+import { TransactionStatus } from "../enums/payment&wallet.enum";
 import { Roles } from "../enums/userRoles";
 
 export interface IInitiateDepositRes {
@@ -16,6 +17,7 @@ export interface IDepositVerification {
      description: string
      userId: string
      transactionType: "credit" | "debit";
+     status: TransactionStatus
      ownerType: Roles
 }
 

@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IBookingService } from "../interface/IBookingService";
 import TYPES from "../../di/type";
-import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../dto/booking.dto";
+import { BookingOtpPayload, IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../dto/booking.dto";
 import { paymentCreation, razorpay, verifyPaymentSignature } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
@@ -16,7 +16,7 @@ import { CommissionTypes } from "../../enums/CommissionType.enum";
 import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
 import mongoose, { Types } from "mongoose";
 import { IPayment } from "../../models/payment";
-import { PaymentStatus } from "../../enums/userRoles";
+import { PaymentMethod, PaymentStatus } from "../../enums/userRoles";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
 import { toBookingConfirmationPage, toBookingHistoryPage, toProviderBookingManagement } from "../../mappers/booking.mapper";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
@@ -25,18 +25,28 @@ import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { IMessageRepository } from "../../repositories/interface/IMessageRepository";
 import { IMessage } from "../../models/message";
 import { BookingStatus } from "../../enums/booking.enum";
+import { IWalletRepository } from "../../repositories/interface/IWalletRepository";
+import { WalletRepository } from "../../repositories/implementation/WalletRepository";
+import { TransactionStatus } from "../../enums/payment&wallet.enum";
+import { IWallet } from "../../models/wallet";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
+import { generateOTP } from "../../utils/otpGenerator";
+import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils/emailService";
+import jwt from 'jsonwebtoken'
+
 
 @injectable()
 export class BookingService implements IBookingService {
-    private bookingRepository: IBookingRepository;
-    private categoryRepository: ICategoryRepository;
-    private commissionRuleRepository: ICommissionRuleRepository;
-    private paymentRepository: IPaymentRepository;
-    private addressRepository: IAddressRepository;
-    private providerRepository: IProviderRepository;
-    private serviceRepository: IServiceRepository;
-    private userRepository: IUserRepository;
-    private messageRepository: IMessageRepository;
+    private _bookingRepository: IBookingRepository;
+    private _categoryRepository: ICategoryRepository;
+    private _commissionRuleRepository: ICommissionRuleRepository;
+    private _paymentRepository: IPaymentRepository;
+    private _addressRepository: IAddressRepository;
+    private _providerRepository: IProviderRepository;
+    private _serviceRepository: IServiceRepository;
+    private _userRepository: IUserRepository;
+    private _messageRepository: IMessageRepository;
+    private _walletRepository: IWalletRepository;
     constructor(@inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
         @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
         @inject(TYPES.CommissionRuleRepository) commissionRuleRepository: ICommissionRuleRepository,
@@ -45,17 +55,19 @@ export class BookingService implements IBookingService {
         @inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
         @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
         @inject(TYPES.UserRepository) userRepository: IUserRepository,
-        @inject(TYPES.MessageRepository) messageRepository: IMessageRepository
+        @inject(TYPES.MessageRepository) messageRepository: IMessageRepository,
+        @inject(TYPES.WalletRepository) WalletRepository: IWalletRepository
     ) {
-        this.bookingRepository = bookingRepository;
-        this.categoryRepository = categoryRepository;
-        this.commissionRuleRepository = commissionRuleRepository
-        this.paymentRepository = paymentRepository
-        this.addressRepository = addressRepository;
-        this.providerRepository = providerRepository;
-        this.serviceRepository = serviceRepository;
-        this.userRepository = userRepository;
-        this.messageRepository = messageRepository;
+        this._bookingRepository = bookingRepository;
+        this._categoryRepository = categoryRepository;
+        this._commissionRuleRepository = commissionRuleRepository
+        this._paymentRepository = paymentRepository
+        this._addressRepository = addressRepository;
+        this._providerRepository = providerRepository;
+        this._serviceRepository = serviceRepository;
+        this._userRepository = userRepository;
+        this._messageRepository = messageRepository;
+        this._walletRepository = WalletRepository;
     }
 
     async createNewBooking(data: Partial<IBookingRequest>): Promise<{ bookingId: string, message: string }> {
@@ -72,12 +84,10 @@ export class BookingService implements IBookingService {
         //     };
         // }
         const subCategoryId = data.serviceId
-        console.log('the serviceid', subCategoryId)
-        const findServiceId = await this.serviceRepository.findOne({ subCategoryId })
+        const findServiceId = await this._serviceRepository.findOne({ subCategoryId })
 
-        console.log('the get servidddddddces', findServiceId)
         data.serviceId = findServiceId._id.toString()
-        const bookings = await this.bookingRepository.create(data)
+        const bookings = await this._bookingRepository.create(data)
         return { bookingId: (bookings._id as { toString(): string }).toString(), message: "your booking confirmed successfully" }
     }
 
@@ -91,32 +101,46 @@ export class BookingService implements IBookingService {
         return order as RazorpayOrder;
     }
 
-    async paymentVerification(verifyPayment: IPaymentVerificationRequest): Promise<{ message: string, orderId: string, paymentId: string }> {
+    async paymentVerification(verifyPayment: IPaymentVerificationRequest): Promise<{ message: string, orderId: string }> {
         // console.log('the booking id', verifyPayment.bookingId)
         // const isPaid = await this.bookingRepository.findById(verifyPayment.bookingId)
         // console.log('the bookings', isPaid)
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = verifyPayment
+        let razorpay_order_id: string;
+        let razorpay_payment_id: string;
+        let razorpay_signature: string;
+        if (verifyPayment.razorpay_order_id) {
+            razorpay_order_id = verifyPayment.razorpay_order_id
+        }
+        if (verifyPayment.razorpay_payment_id, verifyPayment.razorpay_signature) {
+            razorpay_payment_id = verifyPayment.razorpay_payment_id;
+            razorpay_signature = verifyPayment.razorpay_signature;
+        }
+        // const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = verifyPayment
 
-        // if (isPaid.paymentStatus === PaymentStatus.PAID) {
-        //     return {
-        //         message: "payment already verified",
-        //         orderId: razorpay_order_id,
-        //         paymentId: razorpay_payment_id
-        //     }
-        // }    
-        const isValid = verifyPaymentSignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
-        if (!isValid) {
-            throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST)
+        if (verifyPayment.paymentMethod === PaymentMethod.BANK) {
+
+            // if (isPaid.paymentStatus === PaymentStatus.PAID) {
+            //     return {
+            //         message: "payment already verified",
+            //         orderId: razorpay_order_id,
+            //         paymentId: razorpay_payment_id
+            //     }
+            // }    
+            const isValid = verifyPaymentSignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
+            if (!isValid) {
+                throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST)
+            }
         }
 
 
-        const bookingId = verifyPayment.bookingId
-        const booking = await this.bookingRepository.findById(bookingId)
-        const service = await this.serviceRepository.findById(booking.serviceId.toString())
-        const subCategoryId = service.subCategoryId.toString()
-        const subCategory = await this.categoryRepository.findById(subCategoryId)
 
-        const commission = await this.commissionRuleRepository.findOne({ categoryId: subCategory._id.toString() })
+        const bookingId = verifyPayment.bookingId
+        const booking = await this._bookingRepository.findById(bookingId)
+        const service = await this._serviceRepository.findById(booking.serviceId.toString())
+        const subCategoryId = service.subCategoryId.toString()
+        const subCategory = await this._categoryRepository.findById(subCategoryId)
+
+        const commission = await this._commissionRuleRepository.findOne({ categoryId: subCategory._id.toString() })
         let totalCommission = 0;
         if (commission.commissionType !== CommissionTypes.NONE) {
             commission.commissionType === CommissionTypes.PERCENTAGE
@@ -124,14 +148,12 @@ export class BookingService implements IBookingService {
                 : totalCommission += commission.commissionValue
         }
         if (subCategory.parentId) {
-            console.log('there is parentId')
 
-            const category = await this.categoryRepository.findOne({ parentId: subCategory.parentId.toString() })
-            console.log('we got the catehroy', category)
+            const category = await this._categoryRepository.findOne({ parentId: subCategory.parentId.toString() })
             const mainFilter = {
                 categoryId: category._id.toString()
             }
-            const parentCommission = await this.commissionRuleRepository.findOne(mainFilter)
+            const parentCommission = await this._commissionRuleRepository.findOne(mainFilter)
 
             if (parentCommission.commissionType !== CommissionTypes.NONE) {
                 parentCommission.commissionType === CommissionTypes.PERCENTAGE
@@ -139,7 +161,6 @@ export class BookingService implements IBookingService {
                     : totalCommission += parentCommission.commissionValue
             }
         }
-        console.log('the totlal commission', totalCommission)
 
         const updatedPayment = {
             ...verifyPayment,
@@ -150,56 +171,79 @@ export class BookingService implements IBookingService {
             providerAmount: verifyPayment.amount - totalCommission
         };
 
-        const createdPayment = await this.paymentRepository.create(updatedPayment as Partial<IPayment>);
+
+        const createdPayment = await this._paymentRepository.create(updatedPayment as Partial<IPayment>);
+
+        const userId = verifyPayment.userId;
+        const wallet = await this._walletRepository.findOne({ ownerId: userId })
+
+        if (verifyPayment.paymentMethod === PaymentMethod.WALLET) {
+
+            wallet.balance -= verifyPayment.amount
+            await this._walletRepository.update(wallet._id.toString(), wallet)
+        }
+
+        await this._walletRepository.createTransaction(
+            {
+                walletId: wallet._id,
+                transactionType: "debit",
+                source: "booking",
+                remarks: `Order ${razorpay_order_id}`,
+                amount: verifyPayment.amount,
+                status: TransactionStatus.PAYMENT,
+                description: `payment to ${service.title}`,
+            },
+        );
+        console.log('created transactionc')
         const updateBooking = {
             paymentId: createdPayment._id,
             paymentStatus: PaymentStatus.PAID
         }
-        const book = await this.bookingRepository.update(verifyPayment.bookingId, updateBooking)
+        await this._bookingRepository.update(verifyPayment.bookingId, updateBooking)
+        console.log('pament updated')
 
         return {
             message: "payment successfully verified",
-            orderId: razorpay_order_id,
-            paymentId: razorpay_payment_id
+            orderId: createdPayment.razorpay_order_id
         }
     }
 
     async findBookingById(id: string): Promise<IBookingConfirmationRes> {
-        const booking = await this.bookingRepository.findById(id)
+        const booking = await this._bookingRepository.findById(id)
         if (!booking) {
             throw new CustomError('Your booking is not found, Please contact admin', HttpStatusCode.NOT_FOUND)
         }
-        const address = await this.addressRepository.findById(booking.addressId.toString())
+        const address = await this._addressRepository.findById(booking.addressId.toString())
         if (!address) {
             throw new CustomError('No mathced address found', HttpStatusCode.NOT_FOUND)
         }
-        const service = await this.serviceRepository.findById(booking.serviceId.toString())
+        const service = await this._serviceRepository.findById(booking.serviceId.toString())
         if (!service) {
             throw new CustomError('No service found', HttpStatusCode.NOT_FOUND)
         }
-        const subCat = await this.categoryRepository.findById(service.subCategoryId.toString())
+        const subCat = await this._categoryRepository.findById(service.subCategoryId.toString())
         if (!subCat) {
             throw new CustomError('No service found', HttpStatusCode.NOT_FOUND)
         }
-        const provider = await this.providerRepository.findById(booking.providerId.toString())
+        const provider = await this._providerRepository.findById(booking.providerId.toString())
         if (!provider) {
             throw new CustomError('No provider found', HttpStatusCode.NOT_FOUND)
         }
-        const payment = await this.paymentRepository.findById(booking.paymentId.toString())
+        const payment = await this._paymentRepository.findById(booking.paymentId.toString())
 
         return toBookingConfirmationPage(booking, address, subCat.iconUrl, service, payment, provider);
     }
 
     async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
-        const bookings = (await this.bookingRepository.findAll({ userId }, { createdAt: -1}))
+        const bookings = (await this._bookingRepository.findAll({ userId }, { createdAt: -1 }))
         const providerIds = [...new Set(bookings.map(s => s.providerId.toString()))]
-        const providers = await this.providerRepository.findAll({ _id: { $in: providerIds } })
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } })
         const addressIds = [...new Set(bookings.map(s => s.addressId.toString()))]
-        const addresses = await this.addressRepository.findAll({ _id: { $in: addressIds } })
+        const addresses = await this._addressRepository.findAll({ _id: { $in: addressIds } })
         const serviceIds = [...new Set(bookings.map(s => s.serviceId.toString()))]
-        const services = await this.serviceRepository.findAll({ _id: { $in: serviceIds } })
+        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } })
         const subCategoryIds = [...new Set(services.map(s => s.subCategoryId.toString()))]
-        const subCategories = await this.categoryRepository.findAll({ _id: { $in: subCategoryIds } })
+        const subCategories = await this._categoryRepository.findAll({ _id: { $in: subCategoryIds } })
 
         const providerMap = new Map(providers.map(prov => [prov._id.toString(), { fullName: prov.fullName, profilePhoto: prov.profilePhoto }]))
         const subCategoryMap = new Map(subCategories.map(sub => [sub._id.toString(), { iconUrl: sub.iconUrl }]))
@@ -211,20 +255,20 @@ export class BookingService implements IBookingService {
 
     }
 
-    async getBookingFor_Prov_mngmnt(providerId: string): Promise<IProviderBookingManagement[]> {
-        const bookings = await this.bookingRepository.findAll({ providerId });
+    async getBookingFor_Prov_mngmnt(userId: string, providerId: string): Promise<IProviderBookingManagement[]> {
+        const bookings = await this._bookingRepository.findAll({ providerId, userId: { $ne: userId } });
 
         const userIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
-        const users = await this.userRepository.findAll({ _id: { $in: userIds } });
+        const users = await this._userRepository.findAll({ _id: { $in: userIds } });
 
         const serviceIds = [...new Set(bookings.map(b => b.serviceId?.toString()).filter(Boolean))];
-        const services = await this.serviceRepository.findAll({ _id: { $in: serviceIds } });
+        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
 
         const addressIds = [...new Set(bookings.map(b => b.addressId?.toString()).filter(Boolean))];
-        const addresses = await this.addressRepository.findAll({ _id: { $in: addressIds } });
+        const addresses = await this._addressRepository.findAll({ _id: { $in: addressIds } });
 
         const paymentIds = [...new Set(bookings.map(b => b.paymentId?.toString()).filter(Boolean))];
-        const payments = await this.paymentRepository.findAll({ _id: { $in: paymentIds } }); // fixed here
+        const payments = await this._paymentRepository.findAll({ _id: { $in: paymentIds } }); // fixed here
 
         return toProviderBookingManagement(bookings, users, services, addresses, payments);
     }
@@ -236,7 +280,7 @@ export class BookingService implements IBookingService {
             text,
         };
 
-        const message = await this.messageRepository.create(data);
+        const message = await this._messageRepository.create(data);
 
         io.to(bookingId).emit("receiveBookingMessage", message);
 
@@ -245,31 +289,135 @@ export class BookingService implements IBookingService {
 
     async getBookingMessages(bookingId: string): Promise<IMessage[]> {
 
-        return await this.messageRepository.findAllSorted(bookingId);
-        
+        return await this._messageRepository.findAllSorted(bookingId);
+
     }
 
-    async updateStatus(bookingId: string, status: BookingStatus): Promise<{ message: string }> {
-        const booking = await this.bookingRepository.findById(bookingId)
+    async updateStatus(bookingId: string, status: BookingStatus, userId?: string): Promise<{ message: string, completionToken?: string }> {
+        const booking = await this._bookingRepository.findById(bookingId)
         if (!booking) {
             throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
+        console.log('the status were updating')
         if (booking.status === BookingStatus.CANCELLED) {
             return { message: ErrorMessage.BOOKING_IS_ALREADY_CANCELLED }
         }
-        await this.bookingRepository.update(bookingId, { status: status })
-        return { message: ErrorMessage.BOOKING_CANCELLED_SUCCESSFULLY }
+        let bookingOtp: string | undefined;
+        if (status === BookingStatus.CANCELLED) {
+            const userId = booking.userId.toString()
+            const wallet = await this._walletRepository.findOne({ ownerId: userId })
+            let returAmount: number;
+            if (booking.status === BookingStatus.CONFIRMED) {
+                returAmount = (Number(booking.amount) * 0.5)
+                wallet.balance += returAmount
+            } else {
+                returAmount = Number(booking.amount)
+                wallet.balance += returAmount
+            }
+            await this._walletRepository.update(wallet._id.toString(), wallet)
+            const paymentId = booking.paymentId.toString()
+            const payment = await this._paymentRepository.findById(paymentId)
+            const service = await this._serviceRepository.findById(booking.serviceId.toString())
+            await this._walletRepository.createTransaction(
+                {
+                    walletId: wallet._id,
+                    transactionType: "credit",
+                    source: "refund",
+                    remarks: `Order ${payment.razorpay_order_id}`,
+                    amount: returAmount,
+                    status: TransactionStatus.REFUND,
+                    description: `Refund Received from ${service.title}`,
+                },
+            );
+            console.log('refun sucessfull')
+
+
+        } else if (status === BookingStatus.COMPLETED) {
+            const user = await this._userRepository.findById(userId)
+            console.log('we got the user', user)
+            if (!user) {
+                throw new CustomError('userId not found', HttpStatusCode.NOT_FOUND)
+            }
+            const otp = generateOTP()
+            bookingOtp = jwt.sign({ bookingId, otp }, process.env.JWT_SECRET, { expiresIn: "10m" })
+            await sendBookingVerificationEmail(String(user.email), otp)
+            return {
+                message: `An OTP has been sent to Customers Email for verification, please verify that OTP`,
+                completionToken: bookingOtp
+
+            }
+        }
+        console.log('it si updateding')
+        await this._bookingRepository.update(bookingId, { status: status })
+
+        return {
+            message: `Booking ${status === BookingStatus.IN_PROGRESS ? 'Started' : ''} ${status} Successfully`,
+        }
     }
 
     async updateBookingDateTime(bookingId: string, date: string, time: string): Promise<void> {
-        const booking = await this.bookingRepository.findById(bookingId)
+        const booking = await this._bookingRepository.findById(bookingId)
         if (!booking) {
             throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
         if (booking.status !== BookingStatus.PENDING) {
             throw new CustomError("You can only udpate Date/Time on Pending", HttpStatusCode.BAD_REQUEST)
         }
-        await this.bookingRepository.update(bookingId, { scheduledDate: date, scheduledTime: time })
+        await this._bookingRepository.update(bookingId, { scheduledDate: date, scheduledTime: time })
+    }
+
+    public async verifyOtp(data: VerifyOtpRequestBody, bookingToken: string): Promise<void> {
+        const { email, otp } = data;
+
+        const user = await this._userRepository.findByEmail(email, true);
+
+        if (!user) {
+            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+        }
+
+        try {
+            const decoded = jwt.verify(bookingToken, process.env.JWT_SECRET as string) as BookingOtpPayload;
+            if (!decoded) {
+                console.log('not decoded')
+                throw new CustomError(`OTP ${ErrorMessage.TOKEN_EXPIRED}`, HttpStatusCode.FORBIDDEN)
+            }
+            console.log('the decoded token of otp', decoded, 'the otp', otp)
+
+            if (otp !== decoded.otp) {
+                throw new CustomError(ErrorMessage.INVALID_OTP, HttpStatusCode.BAD_REQUEST)
+            }
+
+            const booking = await this._bookingRepository.findById(decoded.bookingId)
+            if(!booking){
+                throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+            }
+
+            booking.status = BookingStatus.COMPLETED
+            await this._bookingRepository.update(booking._id.toString(), booking)
+
+        } catch (error) {
+            throw new CustomError(ErrorMessage.OTP_VERIFICATION_FAILED, HttpStatusCode.FORBIDDEN)
+        }
+
+    }
+
+    public async resendOtp(data: ResendOtpRequestBody, userId?: string): Promise<{ message: string, newCompletionToken?: string }> {
+        const { email } = data;
+        const user = await this._userRepository.findByEmail(email, true);
+
+        if (!user) {
+            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+        }
+
+        const newOtp = generateOTP();
+        const newBookingOtp = jwt.sign({ userId, newOtp }, process.env.JWT_SECRET, { expiresIn: "10m" })
+
+        await sendVerificationEmail(email, newOtp);
+
+        return {
+            message: 'A new OTP has been sent to your email.',
+            newCompletionToken: newBookingOtp
+        };
     }
 
 

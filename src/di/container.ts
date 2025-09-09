@@ -44,6 +44,11 @@ import { IWalletService } from '../services/interface/IWalletService';
 import { WalletService } from '../services/implementation/WalletService';
 import { IWalletRepository } from '../repositories/interface/IWalletRepository';
 import { WalletRepository } from '../repositories/implementation/WalletRepository';
+import { ReviewController } from '../controllers/reviewController';
+import { IReviewService } from '../services/interface/IReviewService';
+import { ReviewService } from '../services/implementation/reviewService';
+import { IReviewRepository } from '../repositories/interface/IReviewRepository';
+import { ReviewRepository } from '../repositories/implementation/reviewRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -77,5 +82,9 @@ container.bind<IMessageRepository>(TYPES.MessageRepository).to(MessageRepository
 container.bind<WalletController>(TYPES.WalletController).to(WalletController)
 container.bind<IWalletService>(TYPES.WalletService).to(WalletService)
 container.bind<IWalletRepository>(TYPES.WalletRepository).to(WalletRepository)
+
+container.bind<ReviewController>(TYPES.ReviewController).to(ReviewController)
+container.bind<IReviewService>(TYPES.ReviewService).to(ReviewService)
+container.bind<IReviewRepository>(TYPES.ReviewRepository).to(ReviewRepository)
 
 export {container}

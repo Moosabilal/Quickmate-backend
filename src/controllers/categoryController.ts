@@ -25,10 +25,10 @@ type CommissionRuleInputController = {
 
 @injectable()
 export class CategoryController {
-  private categoryService: ICategoryService;
+  private _categoryService: ICategoryService;
 
   constructor(@inject(TYPES.CategoryService) categoryService: ICategoryService) {
-    this.categoryService = categoryService
+    this._categoryService = categoryService
 
 
   }
@@ -88,7 +88,7 @@ export class CategoryController {
           status: commissionStatus
         }
 
-      const { category, commissionRule } = await this.categoryService.createCategory(
+      const { category, commissionRule } = await this._categoryService.createCategory(
         categoryInput,
         commissionRuleInputForService
       );
@@ -101,7 +101,7 @@ export class CategoryController {
         commissionRule,
       });
       return;
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error in createCategory controller:', error);
       if (req.file && fs.existsSync(req.file.path)) {
         try {
@@ -181,7 +181,7 @@ export class CategoryController {
       
 
 
-      const { category, commissionRule } = await this.categoryService.updateCategory(
+      const { category, commissionRule } = await this._categoryService.updateCategory(
         id,
         updateCategoryData,
         commissionRuleInputForService
@@ -195,7 +195,7 @@ export class CategoryController {
       const categoryId = category._id;
 
       if (!category.parentId && updateCategoryData.status) {
-        await this.categoryService.updateManySubcategoriesStatus(categoryId, updateCategoryData.status);
+        await this._categoryService.updateManySubcategoriesStatus(categoryId, updateCategoryData.status);
       }
 
       res.status(HttpStatusCode.OK).json({
@@ -204,7 +204,7 @@ export class CategoryController {
         commissionRule,
       });
       return;
-    } catch (error: any) {
+    } catch (error) {
       if (req.file && fs.existsSync(req.file.path)) {
         try {
           await fsPromises.unlink(req.file.path);
@@ -227,8 +227,8 @@ export class CategoryController {
   getCategoryById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { id } = req.params;
-      const { category, commissionRule } = await this.categoryService.getCategoryById(id);
-      const subCategories = await this.categoryService.getAllSubcategories(id);
+      const { category, commissionRule } = await this._categoryService.getCategoryById(id);
+      const subCategories = await this._categoryService.getAllSubcategories(id);
 
       const commonData = {
         _id: category._id.toString(),
@@ -259,7 +259,7 @@ export class CategoryController {
       });
 
       return;
-    } catch (error: any) {
+    } catch (error) {
       if (error.message.includes('Category not found')) {
         res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;
@@ -271,7 +271,7 @@ export class CategoryController {
   getAllMainCategories = async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log('it scoming but error')
-      const response = await this.categoryService.getAllTopCategories()
+      const response = await this._categoryService.getAllTopCategories()
       console.log('the top response', response)
     } catch (error) {
       next(error)
@@ -282,10 +282,10 @@ export class CategoryController {
   getAllCategories = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       let categories: ICategory[] | ICategoryResponse[] | ICategoryFormCombinedData[];
-        categories = await this.categoryService.getAllCategoriesWithDetails();
+        categories = await this._categoryService.getAllCategoriesWithDetails();
 
         const mappedCategories = categories.map(cat => {
-          const hasCommissionRule = (obj: any): obj is { commissionRule: any } =>
+          const hasCommissionRule = (obj): obj is { commissionRule } =>
             obj && typeof obj === 'object' && 'commissionRule' in obj && obj.commissionRule !== undefined && obj.commissionRule !== null;
 
           let commissionType = 'none';
@@ -306,8 +306,8 @@ export class CategoryController {
             iconUrl: cat.iconUrl || '',
             status: cat.status ?? false,
             parentId: cat.parentId ? cat.parentId.toString() : null,
-            subCategoriesCount: (cat as any).subCategoryCount || 0,
-            subCategories: (cat as any).subCategories || [],
+            subCategoriesCount: (cat).subCategoryCount || 0,
+            subCategories: (cat).subCategories || [],
             commissionType,
             commissionValue,
             commissionStatus,
@@ -316,7 +316,7 @@ export class CategoryController {
         res.status(HttpStatusCode.OK).json(mappedCategories);
       
       return;
-    } catch (error: any) {
+    } catch (error) {
       next(error);
     }
   };
@@ -325,13 +325,13 @@ export class CategoryController {
   deleteCategory = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { id } = req.params;
-      const deletedCategory = await this.categoryService.deleteCategory(id);
+      const deletedCategory = await this._categoryService.deleteCategory(id);
       res.status(HttpStatusCode.OK).json({
         message: 'Category deleted successfully',
         category: deletedCategory,
       });
       return;
-    } catch (error: any) {
+    } catch (error) {
       if (error.message.includes('Category not found')) {
         res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;
@@ -349,7 +349,7 @@ export class CategoryController {
       const page = parseInt(req.query.page as string) || 1;
       const limit = parseInt(req.query.limit as string) || 10;
       const search = (req.query.search as string) || ''
-      const allSubCategories = await this.categoryService.getSubcategories(page, limit, search)
+      const allSubCategories = await this._categoryService.getSubcategories(page, limit, search)
       res.status(HttpStatusCode.OK).json(allSubCategories)
     } catch (error) {
       next(error)

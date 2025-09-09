@@ -9,6 +9,7 @@ const router = express.Router();
 const providerController = container.get<ProviderController>(TYPES.ProviderController)
 
 const isProvider = [authenticateToken, authorizeRoles(['ServiceProvider'])];
+const isProvOrUser = [authenticateToken, authorizeRoles(['ServiceProvider', "Customer"])];
 const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
 
 
@@ -19,7 +20,7 @@ router.post('/resend-registration-otp', providerController.resendOtp);
 router.post('/updateProvider', authenticateToken, upload.fields([{ name: 'aadhaarIdProof', maxCount: 1 },{ name: 'profilePhoto', maxCount: 1 }]), providerController.updateProvider)
 router.get('/getProvider', providerController.getProvider)
 router.get('/getFeaturedProviders', providerController.featuredProviders)
-router.get('/getFilteredServiceProvider', providerController.getServiceProvider)
+router.get('/getFilteredServiceProvider',isProvOrUser, providerController.getServiceProvider)
 router.get('/getServicesForAddPage', providerController.getServicesForAddPage)
 router.get('/getProviderForChatPage', authenticateToken, providerController.getProviderForChatPage)
 

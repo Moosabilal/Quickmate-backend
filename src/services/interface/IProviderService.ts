@@ -17,9 +17,9 @@ export interface IProviderService {
     }>;
     getServicesForAddservice() : Promise<{mainCategories: IServiceAddPageResponse[], services: IServiceAddPageResponse[]}>
     fetchProviderById(userId: string): Promise<IProviderProfile>;
-    updateProviderDetails(updateData: Partial<IProviderProfile>): Promise<IProviderProfile>;
+    updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile>;
     updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
-    getProviderwithFilters(serviceId: string, filters: {area?: string; experience?: number; day?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
+    getProviderwithFilters(userId: string, serviceId: string, filters: {area?: string; experience?: number; day?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
     providerForChatPage(userId: string): Promise<IProviderForChatListPage[]>
 
 

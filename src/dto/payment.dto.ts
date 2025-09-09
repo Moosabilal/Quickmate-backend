@@ -1,3 +1,4 @@
+import { TransactionStatus } from "../enums/payment&wallet.enum";
 import { PaymentMethod } from "../enums/userRoles";
 
 export interface IOrder {
@@ -16,7 +17,13 @@ export interface IPaymentVerificationRequest {
     amount: number,
     adminCommission: number,
     providerAmount: number,
-    razorpay_order_id: string, 
-    razorpay_payment_id: string, 
-    razorpay_signature: string,
+    razorpay_order_id?: string, 
+    razorpay_payment_id?: string, 
+    razorpay_signature?: string,
+}
+
+export interface WalletFilter {
+    status?: TransactionStatus | '',
+    startDate?: string;
+    transactionType?: "credit" | "debit" | "",
 }

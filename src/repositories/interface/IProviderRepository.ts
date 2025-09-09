@@ -11,7 +11,7 @@ export interface IProviderRepository extends IBaseRepository<IProvider> {
     findProvidersWithFilter(filter: any, skip: number, limit: number): Promise<IProvider[]>;
     countProviders(filter: any): Promise<number>;
     getProviderByUserId(userId: string): Promise<IProvider | null>;
-    updateProvider(updateData: Partial<IProviderProfile>): Promise<IProvider | null>;
+    updateProvider(updateData: Partial<IProvider>): Promise<IProvider | null>;
     updateStatusById(id: string, newStatus: string): Promise<void>;
     getProviderByServiceId(filterQuery: ProviderFilterQuery): Promise<IProvider[]>;
     getProviderId(userId: string): Promise<string>;

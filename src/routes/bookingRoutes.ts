@@ -21,6 +21,9 @@ router.patch('/updateBookingDateTime/:id', isUser, bookingController.updateBooki
 
 //provider
 router.get('/getBookingFor_Prov_mngmnt/:id', isProvider, bookingController.getBookingFor_Prov_mngmnt)
+router.post('/verify-bookingCompletion-otp', isProvider, bookingController.verifyOtp);
+router.post('/resend-bookingCompletion-otp', isProvider, bookingController.resendOtp);
+
 
 
 

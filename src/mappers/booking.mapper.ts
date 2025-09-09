@@ -9,6 +9,7 @@ import message, { IMessage } from "../models/message";
 import { IPayment } from "../models/payment";
 import { IService } from "../models/Service";
 import { IProvider } from "../models/Providers";
+import { IUser } from "../models/User";
 
 export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider): IBookingConfirmationRes {
     return {
@@ -67,7 +68,7 @@ export function toBookingHistoryPage(
 
 export function toProviderBookingManagement(
     bookings: IBooking[],
-    users: any[], 
+    users: IUser[], 
     services: IService[],
     addresses: IAddress[],
     payments: IPayment[]

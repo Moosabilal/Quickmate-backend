@@ -5,7 +5,7 @@ export interface IUserRepository extends IBaseRepository<IUser> {
   // create(userData: Partial<IUser>): Promise<IUser>; 
   // update(user: IUser): Promise<IUser>;
   findByGoogleId(googleId: string): Promise<IUser | null>;
-  findById(id: string): Promise<IUser | null>; 
+  findByIdForRefreshToken(id: string): Promise<IUser | null>; 
   findAllUsers(): Promise<IUser[]>; 
 
   findByPasswordResetToken(token: string): Promise<IUser | null>;
