@@ -101,7 +101,7 @@ export class CategoryController {
         commissionRule,
       });
       return;
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error in createCategory controller:', error);
       if (req.file && fs.existsSync(req.file.path)) {
         try {
@@ -204,7 +204,7 @@ export class CategoryController {
         commissionRule,
       });
       return;
-    } catch (error: any) {
+    } catch (error) {
       if (req.file && fs.existsSync(req.file.path)) {
         try {
           await fsPromises.unlink(req.file.path);
@@ -259,7 +259,7 @@ export class CategoryController {
       });
 
       return;
-    } catch (error: any) {
+    } catch (error) {
       if (error.message.includes('Category not found')) {
         res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;
@@ -285,7 +285,7 @@ export class CategoryController {
         categories = await this._categoryService.getAllCategoriesWithDetails();
 
         const mappedCategories = categories.map(cat => {
-          const hasCommissionRule = (obj: any): obj is { commissionRule: any } =>
+          const hasCommissionRule = (obj): obj is { commissionRule } =>
             obj && typeof obj === 'object' && 'commissionRule' in obj && obj.commissionRule !== undefined && obj.commissionRule !== null;
 
           let commissionType = 'none';
@@ -306,8 +306,8 @@ export class CategoryController {
             iconUrl: cat.iconUrl || '',
             status: cat.status ?? false,
             parentId: cat.parentId ? cat.parentId.toString() : null,
-            subCategoriesCount: (cat as any).subCategoryCount || 0,
-            subCategories: (cat as any).subCategories || [],
+            subCategoriesCount: (cat).subCategoryCount || 0,
+            subCategories: (cat).subCategories || [],
             commissionType,
             commissionValue,
             commissionStatus,
@@ -316,7 +316,7 @@ export class CategoryController {
         res.status(HttpStatusCode.OK).json(mappedCategories);
       
       return;
-    } catch (error: any) {
+    } catch (error) {
       next(error);
     }
   };
@@ -331,7 +331,7 @@ export class CategoryController {
         category: deletedCategory,
       });
       return;
-    } catch (error: any) {
+    } catch (error) {
       if (error.message.includes('Category not found')) {
         res.status(HttpStatusCode.NOT_FOUND).json({ message: error.message });
         return;

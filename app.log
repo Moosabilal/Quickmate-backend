@@ -429,3 +429,16 @@
 [INFO   ] - Verification OTP sent to habid@gmail.com
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Sending verification email to habid@gmail.com with OTP: 521752 mail
+[INFO   ] - Verification OTP sent to habid@gmail.com
