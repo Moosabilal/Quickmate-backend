@@ -41,7 +41,11 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
     return await User.findOne({ googleId })
   }
 
-  async findById(id: string): Promise<IUser | null> {
+  // async findById(id: string): Promise<IUser | null> {
+  //   return await User.findById(id).select('+refreshToken')
+  // }
+
+  async findByIdForRefreshToken(id: string): Promise<IUser | null> {
     return await User.findById(id).select('+refreshToken')
   }
 

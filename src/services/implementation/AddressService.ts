@@ -12,8 +12,25 @@ export class AddressService implements IAddressService {
         this._addressRepsitory = addressRepsitory
     }
 
-    public async addAddress(data: Partial<IAddress>): Promise<IAddressRequest> {
-        const createdAddress = await this._addressRepsitory.create(data)
+    public async addAddress(userId: string, data: Partial<IAddress>): Promise<IAddressRequest> {
+        const address = await this._addressRepsitory.findOne({
+            userId,
+            label: data.label,
+            street: data.street,
+            city: data.city,
+            zip: data.zip,
+        });
+
+        let createdAddress: IAddress;
+
+        if (address) {
+            console.log("Address already exists");
+            createdAddress = address;
+        } else {
+            createdAddress = await this._addressRepsitory.create(data);
+        }
+
+        console.log('if there returned')
         return {
             id: createdAddress._id.toString(),
             userId: createdAddress.userId.toString(),
@@ -51,10 +68,10 @@ export class AddressService implements IAddressService {
             state: updatedAddress.state,
             zip: updatedAddress.zip,
             locationCoords: `${updatedAddress.locationCoords.coordinates[1]},${updatedAddress.locationCoords.coordinates[0]}` || "",
-        } 
+        }
     }
 
-    public async delete_Address(id: string): Promise<{message: string}> {
+    public async delete_Address(id: string): Promise<{ message: string }> {
         await this._addressRepsitory.delete(id)
         return {
             message: "Address Deleted"

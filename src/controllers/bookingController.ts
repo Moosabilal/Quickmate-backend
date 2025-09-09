@@ -5,11 +5,12 @@ import { NextFunction, Request, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { IPaymentVerificationRequest } from "../dto/payment.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../dto/auth.dto";
 
 @injectable()
 export class BookingController {
     private _bookingService: IBookingService
-    constructor(@inject(TYPES.BookingService) bookingService: IBookingService){
+    constructor(@inject(TYPES.BookingService) bookingService: IBookingService) {
         this._bookingService = bookingService
     }
 
@@ -24,7 +25,7 @@ export class BookingController {
 
     public confirmPayment = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const {amount} = req.body
+            const { amount } = req.body
             const response = await this._bookingService.createPayment(amount)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -70,8 +71,8 @@ export class BookingController {
     public getBookingFor_Prov_mngmnt = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const providerId = req.params.id
-            console.log('the userid', providerId)
-            const response = await this._bookingService.getBookingFor_Prov_mngmnt(providerId)
+            const userId = req.user.id
+            const response = await this._bookingService.getBookingFor_Prov_mngmnt(userId, providerId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -91,8 +92,18 @@ export class BookingController {
     public updateBookingStatus = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const bookingId = req.params.id
-            const response = await this._bookingService.updateStatus(bookingId, req.body.status)
-            res.status(HttpStatusCode.OK).json(response)
+            const userId = req.user.id
+            const response = await this._bookingService.updateStatus(bookingId, req.body.status, userId)
+            console.log('the jwt respnse in controller', response)
+            let bookingVerifyToken = response.completionToken
+            res.cookie('bookingToken', bookingVerifyToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'strict',
+                maxAge: 10 * 60 * 1000
+            })
+
+            res.status(HttpStatusCode.OK).json(response.message)
         } catch (error) {
             next(error)
         }
@@ -108,4 +119,32 @@ export class BookingController {
             next(error)
         }
     }
+
+    public verifyOtp = async (req: Request<{}, {}, VerifyOtpRequestBody>, res: Response, next: NextFunction) => {
+        try {
+            const bookingToken: string = req.cookies.bookingToken
+            const response = await this._bookingService.verifyOtp(req.body, bookingToken);
+            res.status(HttpStatusCode.OK).json(response);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public resendOtp = async (req: AuthRequest & { body: ResendOtpRequestBody }, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id
+            const response = await this._bookingService.resendOtp(req.body, userId);
+            let newBookingVerifyToken = response.newCompletionToken
+            res.cookie('bookingToken', newBookingVerifyToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'strict',
+                maxAge: 10 * 60 * 1000
+            })
+            res.status(HttpStatusCode.OK).json(response.message);
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }

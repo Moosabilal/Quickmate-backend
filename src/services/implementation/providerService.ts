@@ -382,6 +382,7 @@ export class ProviderService implements IProviderService {
     }
 
     public async getProviderwithFilters(
+        userId: string,
         serviceId: string,
         filters: {
             area?: string;
@@ -416,9 +417,13 @@ export class ProviderService implements IProviderService {
             servicesByProvider.get(pid)!.push(service);
         });
 
+
         const providerIds = Array.from(servicesByProvider.keys());
 
-        const providerFilter: any = { _id: { $in: providerIds.map(id => new mongoose.Types.ObjectId(id)) } };
+        const providerFilter: any = {
+            _id: { $in: providerIds.map(id => new mongoose.Types.ObjectId(id)) },
+            userId: { $ne: userId }
+        };
 
         if (filters.area) {
             providerFilter.serviceArea = { $regex: new RegExp(filters.area, 'i') };
@@ -476,9 +481,10 @@ export class ProviderService implements IProviderService {
 
         const bookings = await this._bookingRepository.findAll({ userId });
         if (!bookings.length) return [];
-        const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
 
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
+        const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds }});
+
         const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
         if (!serviceIds.length) return [];
         const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });

@@ -103,9 +103,7 @@ export class AuthService implements IAuthService {
         if (!user.registrationOtp || user.registrationOtp !== otp) {
             user.registrationOtpAttempts = (typeof user.registrationOtpAttempts === 'number' ? user.registrationOtpAttempts : 0) + 1;
             await this._userRepository.update(user._id.toString(), user);
-            const error = new Error('Invalid OTP. Please try again.');
-            (error as any).statusCode = 400;
-            throw error;
+            throw new CustomError(ErrorMessage.INVALID_OTP, HttpStatusCode.BAD_REQUEST)
         }
 
         if (!user.registrationOtpExpires || new Date() > user.registrationOtpExpires) {
@@ -335,7 +333,7 @@ export class AuthService implements IAuthService {
         try {
             const decoded = jwt.verify(refresh_token, process.env.REFRESH_TOKEN_SECRET as string) as JwtPayload & { id: string };
 
-            const user = await this._userRepository.findById(decoded.id);
+            const user = await this._userRepository.findByIdForRefreshToken(decoded.id);
             if (!user || user.refreshToken !== refresh_token) {
                 throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.FORBIDDEN);
             }

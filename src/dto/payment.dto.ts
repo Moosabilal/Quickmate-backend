@@ -17,9 +17,9 @@ export interface IPaymentVerificationRequest {
     amount: number,
     adminCommission: number,
     providerAmount: number,
-    razorpay_order_id: string, 
-    razorpay_payment_id: string, 
-    razorpay_signature: string,
+    razorpay_order_id?: string, 
+    razorpay_payment_id?: string, 
+    razorpay_signature?: string,
 }
 
 export interface WalletFilter {

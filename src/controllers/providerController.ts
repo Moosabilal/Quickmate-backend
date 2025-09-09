@@ -198,7 +198,7 @@ export class ProviderController {
         }
     }
 
-    public getServiceProvider = async (req: Request, res: Response, next: NextFunction) => {
+    public getServiceProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const serviceId = req.query.serviceId as string;
             const area = req.query.area as string;
@@ -206,9 +206,10 @@ export class ProviderController {
             const day = req.query.day as string;
             const time = req.query.time as string;
             const price = req.query.price ? Number(req.query.price) : undefined;
+            const userId = req.user.id
 
             const filters = { area, experience, day, time, price };
-            const response = await this._providerService.getProviderwithFilters(serviceId, filters)
+            const response = await this._providerService.getProviderwithFilters(userId, serviceId, filters)
             res.status(200).json(response)
         } catch (error) {
             next(error)
@@ -218,7 +219,6 @@ export class ProviderController {
     public getProviderForChatPage = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const userId = req.user.id
-            console.log('the userId', userId)
             const response = await this._providerService.providerForChatPage(userId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {

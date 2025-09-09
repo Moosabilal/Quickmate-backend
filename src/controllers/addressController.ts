@@ -22,7 +22,8 @@ export class AddressController {
                 userId: req.user.id,
                 locationCoords: { type: "Point", coordinates: [lon, lat] }
             }
-            const updatedAddress = await this._addressService.addAddress(data)
+            const userId = req.user.id
+            const updatedAddress = await this._addressService.addAddress(userId, data)
             res.status(HttpStatusCode.OK).json(updatedAddress)
         } catch (error) {
             next(error)
