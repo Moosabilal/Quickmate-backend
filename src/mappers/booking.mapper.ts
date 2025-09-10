@@ -10,8 +10,9 @@ import { IPayment } from "../models/payment";
 import { IService } from "../models/Service";
 import { IProvider } from "../models/Providers";
 import { IUser } from "../models/User";
+import { IReview } from "../models/Review";
 
-export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider): IBookingConfirmationRes {
+export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider, review?: IReview): IBookingConfirmationRes {
     return {
         id: booking._id.toString(),
         serviceName: service.title,
@@ -38,6 +39,9 @@ export function toBookingConfirmationPage(booking: IBooking, address: IAddress, 
         specialInstruction: booking.instructions as string,
         providerTimings: provider.availability || [],
         createdAt: booking.createdAt as Date,
+        reviewed: (booking.reviewed as boolean) || false,
+        rating: (review && review.rating as number) || 0,
+        review: (review && review.reviewText as string) || ''
     }
 }
 

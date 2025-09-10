@@ -39,6 +39,9 @@ export interface IBookingConfirmationRes {
   specialInstruction: string;
   providerTimings?: { day: string; startTime: string; endTime: string }[];
   createdAt: Date;
+  reviewed?: Boolean;
+  rating?: number;
+  review?: string
 }
 
 

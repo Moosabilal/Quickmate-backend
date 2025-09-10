@@ -9,5 +9,7 @@ const reviewController = container.get<ReviewController>(TYPES.ReviewController)
 
 const isProvOrUser = [authenticateToken, authorizeRoles(['Customer','ServieProvider'])]
 
+router.post('/addReview', isProvOrUser, reviewController.addReview)
+
 
 export default router

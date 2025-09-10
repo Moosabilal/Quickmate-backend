@@ -210,6 +210,7 @@ export class ProviderController {
 
             const filters = { area, experience, day, time, price };
             const response = await this._providerService.getProviderwithFilters(userId, serviceId, filters)
+            console.log('the response in the controller', response)
             res.status(200).json(response)
         } catch (error) {
             next(error)

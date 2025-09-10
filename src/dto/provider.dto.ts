@@ -92,6 +92,12 @@ export interface IServiceAddPageResponse {
 
 }
 
+export interface IReviewsOfUser {
+    userName: string,
+    rating: number
+    review: string,
+}
+
 
 export interface IBackendProvider {
   _id: string;
@@ -108,7 +114,7 @@ export interface IBackendProvider {
   price: number;
   totalBookings: number;
   rating?: number;
-  reviews?: number;
+  reviews?: IReviewsOfUser;
 }
 
 export interface IProviderForChatListPage {

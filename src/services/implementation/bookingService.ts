@@ -33,6 +33,8 @@ import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
 import { generateOTP } from "../../utils/otpGenerator";
 import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils/emailService";
 import jwt from 'jsonwebtoken'
+import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
+import { IReview } from "../../models/Review";
 
 
 @injectable()
@@ -47,6 +49,7 @@ export class BookingService implements IBookingService {
     private _userRepository: IUserRepository;
     private _messageRepository: IMessageRepository;
     private _walletRepository: IWalletRepository;
+    private _reviewRepository: IReviewRepository;
     constructor(@inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
         @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
         @inject(TYPES.CommissionRuleRepository) commissionRuleRepository: ICommissionRuleRepository,
@@ -56,7 +59,8 @@ export class BookingService implements IBookingService {
         @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
         @inject(TYPES.UserRepository) userRepository: IUserRepository,
         @inject(TYPES.MessageRepository) messageRepository: IMessageRepository,
-        @inject(TYPES.WalletRepository) WalletRepository: IWalletRepository
+        @inject(TYPES.WalletRepository) WalletRepository: IWalletRepository,
+        @inject(TYPES.ReviewRepository) reviewRepository: IReviewRepository
     ) {
         this._bookingRepository = bookingRepository;
         this._categoryRepository = categoryRepository;
@@ -68,6 +72,7 @@ export class BookingService implements IBookingService {
         this._userRepository = userRepository;
         this._messageRepository = messageRepository;
         this._walletRepository = WalletRepository;
+        this._reviewRepository = reviewRepository;
     }
 
     async createNewBooking(data: Partial<IBookingRequest>): Promise<{ bookingId: string, message: string }> {
@@ -230,8 +235,12 @@ export class BookingService implements IBookingService {
             throw new CustomError('No provider found', HttpStatusCode.NOT_FOUND)
         }
         const payment = await this._paymentRepository.findById(booking.paymentId.toString())
-
-        return toBookingConfirmationPage(booking, address, subCat.iconUrl, service, payment, provider);
+        let review: IReview;
+        if (booking.reviewed) {
+            review = await this._reviewRepository.findOne({ bookingId: booking._id.toString() })
+        }
+        console.log('te review', review)
+        return toBookingConfirmationPage(booking, address, subCat.iconUrl, service, payment, provider, review);
     }
 
     async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
@@ -388,7 +397,7 @@ export class BookingService implements IBookingService {
             }
 
             const booking = await this._bookingRepository.findById(decoded.bookingId)
-            if(!booking){
+            if (!booking) {
                 throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
             }
 

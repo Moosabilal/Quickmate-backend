@@ -22,6 +22,13 @@ import { IServiceRepository } from "../../repositories/interface/IServiceReposit
 import { IService } from "../../models/Service";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IMessageRepository } from "../../repositories/interface/IMessageRepository";
+import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
+
+interface reviewsOfUser {
+    username: string,
+    rating: number
+    review: string,
+}
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
@@ -36,6 +43,7 @@ export class ProviderService implements IProviderService {
     private _categoryRepository: ICategoryRepository;
     private _bookingRepository: IBookingRepository
     private _messageRepository: IMessageRepository;
+    private _reviewRepository: IReviewRepository;
 
     constructor(@inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
         @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
@@ -43,6 +51,7 @@ export class ProviderService implements IProviderService {
         @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
         @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
         @inject(TYPES.MessageRepository) messageRepository: IMessageRepository,
+        @inject(TYPES.ReviewRepository) reviewRepository: IReviewRepository,
     ) {
         this._providerRepository = providerRepository
         this._serviceRepository = serviceRepository
@@ -50,6 +59,7 @@ export class ProviderService implements IProviderService {
         this._categoryRepository = categoryRepository
         this._bookingRepository = bookingRepository
         this._messageRepository = messageRepository;
+        this._reviewRepository = reviewRepository;
     }
 
     public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
@@ -383,7 +393,7 @@ export class ProviderService implements IProviderService {
 
     public async getProviderwithFilters(
         userId: string,
-        serviceId: string,
+        subCategoryId: string,
         filters: {
             area?: string;
             experience?: number;
@@ -393,7 +403,7 @@ export class ProviderService implements IProviderService {
         }
     ): Promise<IBackendProvider[]> {
         const serviceFilter: any = {
-            subCategoryId: serviceId,
+            subCategoryId: subCategoryId,
         };
 
         if (filters.experience) {
@@ -405,6 +415,7 @@ export class ProviderService implements IProviderService {
         }
 
         const services = await this._serviceRepository.findAll(serviceFilter);
+        console.log('the services', services)
 
         if (!services || services.length === 0) return [];
 
@@ -445,6 +456,15 @@ export class ProviderService implements IProviderService {
         }
 
         const providers = await this._providerRepository.findAll(providerFilter);
+        console.log('the provie', providerIds, subCategoryId)
+
+        const serviceIds = [...new Set(services.map(s => s._id.toString()))];
+
+        const reviews = await this._reviewRepository.findAll({
+            providerId: {$in : providerIds},
+            serviceId: {$in: serviceIds}
+        })
+        console.log('the reviews', reviews)
 
         const result: IBackendProvider[] = providers.map(provider => {
             const providerServices = servicesByProvider.get(provider._id.toString()) || [];
@@ -467,7 +487,7 @@ export class ProviderService implements IProviderService {
                 experience: primaryService?.experience || 0,
                 price: primaryService?.price || 0,
                 rating: provider.rating ?? 0,
-                // reviews: provider.reviews ?? 0,
+                // reviews: {} ?? 0,
             };
         });
 
@@ -483,7 +503,7 @@ export class ProviderService implements IProviderService {
         if (!bookings.length) return [];
 
         const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds }});
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
 
         const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
         if (!serviceIds.length) return [];

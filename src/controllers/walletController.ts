@@ -15,7 +15,6 @@ export class WalletController {
     }
 
     public getWallet = async (req: AuthRequest, res: Response, next: NextFunction) => {
-        console.log('it si reaching backend', req.query)
         const userId = req.user.id as string;
         const ownerType = req.user.role as Roles;
         const status = req.query.status as TransactionStatus;
@@ -25,7 +24,6 @@ export class WalletController {
         const limit = parseInt(req.query.limit as string) || 10;
         const filters = { status, startDate, transactionType }
         const data = await this._walletService.getSummary(userId, ownerType, filters, page, limit);
-        console.log('the return data', data)
         res.json({ success: true, data });
     };
 
