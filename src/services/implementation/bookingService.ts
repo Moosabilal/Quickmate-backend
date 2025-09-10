@@ -76,18 +76,7 @@ export class BookingService implements IBookingService {
     }
 
     async createNewBooking(data: Partial<IBookingRequest>): Promise<{ bookingId: string, message: string }> {
-        // console.log('the providerId', data.providerId)
-        // const isBooked = await this.bookingRepository.findOne({ userId: data.userId, serviceId: data.serviceId, providerId: data.providerId })
-        // console.log(' the booked dtaa', isBooked)
-        // const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000); // 1 hour ago
 
-        // if (isBooked.createdAt > oneHourAgo) {
-        //     console.log('this is working')
-        //     return {
-        //         bookingId: isBooked._id.toString(),
-        //         message: "you already paid for this booking"
-        //     };
-        // }
         const subCategoryId = data.serviceId
         const findServiceId = await this._serviceRepository.findOne({ subCategoryId })
 
@@ -107,9 +96,6 @@ export class BookingService implements IBookingService {
     }
 
     async paymentVerification(verifyPayment: IPaymentVerificationRequest): Promise<{ message: string, orderId: string }> {
-        // console.log('the booking id', verifyPayment.bookingId)
-        // const isPaid = await this.bookingRepository.findById(verifyPayment.bookingId)
-        // console.log('the bookings', isPaid)
         let razorpay_order_id: string;
         let razorpay_payment_id: string;
         let razorpay_signature: string;
@@ -120,17 +106,7 @@ export class BookingService implements IBookingService {
             razorpay_payment_id = verifyPayment.razorpay_payment_id;
             razorpay_signature = verifyPayment.razorpay_signature;
         }
-        // const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = verifyPayment
-
-        if (verifyPayment.paymentMethod === PaymentMethod.BANK) {
-
-            // if (isPaid.paymentStatus === PaymentStatus.PAID) {
-            //     return {
-            //         message: "payment already verified",
-            //         orderId: razorpay_order_id,
-            //         paymentId: razorpay_payment_id
-            //     }
-            // }    
+        if (verifyPayment.paymentMethod === PaymentMethod.BANK) {   
             const isValid = verifyPaymentSignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
             if (!isValid) {
                 throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST)
@@ -199,13 +175,11 @@ export class BookingService implements IBookingService {
                 description: `payment to ${service.title}`,
             },
         );
-        console.log('created transactionc')
         const updateBooking = {
             paymentId: createdPayment._id,
             paymentStatus: PaymentStatus.PAID
         }
         await this._bookingRepository.update(verifyPayment.bookingId, updateBooking)
-        console.log('pament updated')
 
         return {
             message: "payment successfully verified",
@@ -239,7 +213,6 @@ export class BookingService implements IBookingService {
         if (booking.reviewed) {
             review = await this._reviewRepository.findOne({ bookingId: booking._id.toString() })
         }
-        console.log('te review', review)
         return toBookingConfirmationPage(booking, address, subCat.iconUrl, service, payment, provider, review);
     }
 
@@ -307,7 +280,6 @@ export class BookingService implements IBookingService {
         if (!booking) {
             throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
-        console.log('the status were updating')
         if (booking.status === BookingStatus.CANCELLED) {
             return { message: ErrorMessage.BOOKING_IS_ALREADY_CANCELLED }
         }
@@ -338,12 +310,10 @@ export class BookingService implements IBookingService {
                     description: `Refund Received from ${service.title}`,
                 },
             );
-            console.log('refun sucessfull')
 
 
         } else if (status === BookingStatus.COMPLETED) {
             const user = await this._userRepository.findById(userId)
-            console.log('we got the user', user)
             if (!user) {
                 throw new CustomError('userId not found', HttpStatusCode.NOT_FOUND)
             }
@@ -356,7 +326,6 @@ export class BookingService implements IBookingService {
 
             }
         }
-        console.log('it si updateding')
         await this._bookingRepository.update(bookingId, { status: status })
 
         return {
@@ -387,20 +356,15 @@ export class BookingService implements IBookingService {
         try {
             const decoded = jwt.verify(bookingToken, process.env.JWT_SECRET as string) as BookingOtpPayload;
             if (!decoded) {
-                console.log('not decoded')
                 throw new CustomError(`OTP ${ErrorMessage.TOKEN_EXPIRED}`, HttpStatusCode.FORBIDDEN)
             }
-            console.log('the decoded token of otp', decoded, 'the otp', otp)
-
             if (otp !== decoded.otp) {
                 throw new CustomError(ErrorMessage.INVALID_OTP, HttpStatusCode.BAD_REQUEST)
             }
-
             const booking = await this._bookingRepository.findById(decoded.bookingId)
             if (!booking) {
                 throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
             }
-
             booking.status = BookingStatus.COMPLETED
             await this._bookingRepository.update(booking._id.toString(), booking)
 

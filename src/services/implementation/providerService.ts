@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider, Provider } from "../../models/Providers";
-import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
+import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IReviewsOfUser, IServiceAddPageResponse } from "../../dto/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -103,27 +103,19 @@ export class ProviderService implements IProviderService {
         const provider = await this._providerRepository.findByEmail(email, true);
 
         if (!provider) {
-            console.log('no provider')
             throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
-
         if (provider.isVerified && provider.status !== ProviderStatus.REJECTED) {
-            console.log('the accoutn si already')
             return { message: 'Account already verified.' };
         }
-
         if (typeof provider.registrationOtpAttempts === 'number' && provider.registrationOtpAttempts >= MAX_OTP_ATTEMPTS) {
-            console.log('the too many attempts')
             throw new CustomError(`Too many failed OTP attempts. Please request a new OTP.`, HttpStatusCode.FORBIDDEN);
-
         }
-        console.log('the provider registration otp', provider.registrationOtp, otp)
         if (!provider.registrationOtp || provider.registrationOtp !== otp) {
             provider.registrationOtpAttempts = (typeof provider.registrationOtpAttempts === 'number' ? provider.registrationOtpAttempts : 0) + 1;
             await this._providerRepository.update(provider.id, provider);
             throw new CustomError('Invalid OTP. Please try again.', HttpStatusCode.BAD_REQUEST);
         }
-        console.log('the success')
 
         if (!provider.registrationOtpExpires || new Date() > provider.registrationOtpExpires) {
             provider.registrationOtp = undefined;
@@ -383,10 +375,8 @@ export class ProviderService implements IProviderService {
 
         const allowedStatuses = Object.values(ProviderStatus);
         if (!allowedStatuses.includes(newStatus as ProviderStatus)) {
-            console.log('the new status', newStatus, allowedStatuses)
             throw new CustomError(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`, HttpStatusCode.BAD_REQUEST);
         }
-        console.log('the id and new status', id, newStatus)
         await this._providerRepository.updateStatusById(id, newStatus)
         return { message: "provider Status updated" }
     }
@@ -415,7 +405,6 @@ export class ProviderService implements IProviderService {
         }
 
         const services = await this._serviceRepository.findAll(serviceFilter);
-        console.log('the services', services)
 
         if (!services || services.length === 0) return [];
 
@@ -456,15 +445,39 @@ export class ProviderService implements IProviderService {
         }
 
         const providers = await this._providerRepository.findAll(providerFilter);
-        console.log('the provie', providerIds, subCategoryId)
-
         const serviceIds = [...new Set(services.map(s => s._id.toString()))];
-
         const reviews = await this._reviewRepository.findAll({
-            providerId: {$in : providerIds},
-            serviceId: {$in: serviceIds}
-        })
-        console.log('the reviews', reviews)
+            providerId: { $in: providerIds },
+            serviceId: { $in: serviceIds }
+        });
+
+        const userIds = [...new Set(reviews.map(r => r.userId.toString()))];
+        const users = await this._userRepository.findAll({
+            _id: { $in: userIds }
+        });
+
+        const userMap = new Map(
+            users.map(u => [u._id.toString(), { name: String(u.name), profilePicture: String(u.profilePicture || ""), }])
+        );
+
+        const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
+
+        reviews.forEach(review => {
+            const pid = review.providerId.toString();
+
+            if (!reviewsByProvider.has(pid)) {
+                reviewsByProvider.set(pid, []);
+            }
+
+            const userData = userMap.get(review.userId.toString());
+
+            reviewsByProvider.get(pid)!.push({
+                userName: userData?.name || "Unknown User",
+                userImg: userData?.profilePicture || "",
+                rating: Number(review.rating),
+                review: String(review.reviewText),
+            });
+        });
 
         const result: IBackendProvider[] = providers.map(provider => {
             const providerServices = servicesByProvider.get(provider._id.toString()) || [];
@@ -486,8 +499,7 @@ export class ProviderService implements IProviderService {
                 totalBookings: provider.totalBookings,
                 experience: primaryService?.experience || 0,
                 price: primaryService?.price || 0,
-                rating: provider.rating ?? 0,
-                // reviews: {} ?? 0,
+                reviews: reviewsByProvider.get(provider._id.toString()) || [],
             };
         });
 

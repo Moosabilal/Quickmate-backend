@@ -94,7 +94,6 @@ export class BookingController {
             const bookingId = req.params.id
             const userId = req.user.id
             const response = await this._bookingService.updateStatus(bookingId, req.body.status, userId)
-            console.log('the jwt respnse in controller', response)
             let bookingVerifyToken = response.completionToken
             res.cookie('bookingToken', bookingVerifyToken, {
                 httpOnly: true,

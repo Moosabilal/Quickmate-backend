@@ -33,9 +33,6 @@ export class CategoryService implements ICategoryService {
         commissionRuleInput?: ICommissionRuleInput
     ): Promise<{ category: ICategoryResponse; commissionRule?: ICommissionRuleResponse }> {
 
-        console.log('Creating category with input:', categoryInput);
-
-        // let parentObjectId: string | null = null;
         if (categoryInput.parentId) {
 
             const parentCategory = await this._categoryRepository.findOne({parentId: categoryInput.parentId});
@@ -209,7 +206,6 @@ export class CategoryService implements ICategoryService {
         if (!categories) {
             throw new CustomError("Service not found, Please try again later", HttpStatusCode.NOT_FOUND)
         }
-        console.log('the cat')
         return categories.map(category => toHomePageDTO(category))
 
     }

@@ -53,7 +53,6 @@ export interface IFeaturedProviders {
   userId: string;
   fullName: string;
   profilePhoto: string;
-  // serviceName: string;
 
 }
 
@@ -94,6 +93,7 @@ export interface IServiceAddPageResponse {
 
 export interface IReviewsOfUser {
     userName: string,
+    userImg: string,
     rating: number
     review: string,
 }
@@ -114,7 +114,7 @@ export interface IBackendProvider {
   price: number;
   totalBookings: number;
   rating?: number;
-  reviews?: IReviewsOfUser;
+  reviews?: IReviewsOfUser[];
 }
 
 export interface IProviderForChatListPage {

@@ -67,20 +67,19 @@ export interface IProviderBookingManagement {
   id: string;
   customerName: string;
   customerImage: string;
-  service: string;    //service
-  date: string;       //bookings
-  time: string;       //bookings
-  duration: string;   //service
-  location: string;   //address
-  payment: number;    //service
-  paymentStatus: string;  //payment
-  status: BookingStatus;  //booking
-  description: string;    //service
-  customerPhone: string;  //boooking
-  customerEmail: string;  //booking
-  specialRequests: string;    //bookings
-  createdAt: string;      //booking
-  // rating: number | null;
+  service: string;    
+  date: string;    
+  time: string;   
+  duration: string; 
+  location: string; 
+  payment: number;  
+  paymentStatus: string; 
+  status: BookingStatus; 
+  description: string;  
+  customerPhone: string;
+  customerEmail: string;
+  specialRequests: string; 
+  createdAt: string; 
 }
 
 export interface IGetMessages {

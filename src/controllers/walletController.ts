@@ -27,13 +27,6 @@ export class WalletController {
         res.json({ success: true, data });
     };
 
-    // public deposit = async (req: AuthRequest, res: Response, next: NextFunction) => {
-    //     const userId = req.user.id as string;
-    //     const { amount, remarks } = req.body as { amount: number; remarks?: string };
-    //     const wallet = await this.walletService.deposit(userId, Roles.USER, amount, "ManualTopup", remarks);
-    //     res.json({ success: true, balance: wallet.balance });
-    // };
-
     public initiateDeposit = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const { amount } = req.body

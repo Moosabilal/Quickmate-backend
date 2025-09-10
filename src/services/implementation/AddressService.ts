@@ -24,13 +24,10 @@ export class AddressService implements IAddressService {
         let createdAddress: IAddress;
 
         if (address) {
-            console.log("Address already exists");
             createdAddress = address;
         } else {
             createdAddress = await this._addressRepsitory.create(data);
         }
-
-        console.log('if there returned')
         return {
             id: createdAddress._id.toString(),
             userId: createdAddress.userId.toString(),

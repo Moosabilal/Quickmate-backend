@@ -91,18 +91,6 @@ export class AuthController {
     }
   }
 
-  // public verifyPassword = async (req: Request<{}, {}, { currentPassword: string }>, res: Response, next: NextFunction) => {
-  //   try {
-  //     const { currentPassword } = req.body;
-  //     const id = (req as AuthRequest).user.id
-  //     console.log('User ID from token:', id); 
-  //     const response = await this.authService.verifyPassword(id, currentPassword);
-  //     res.status(HttpStatusCode.OK).json(response);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
-
 
   public googleLogin = async (req: Request<{}, {}, { token: string }>, res: Response, next: NextFunction) => {
     try {

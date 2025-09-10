@@ -17,7 +17,6 @@ export class ServiceController {
 
     public addService = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            console.log('reachig backend')
             const files = req.files as {
                 businessCertification?: Express.Multer.File[];
             };

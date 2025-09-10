@@ -31,16 +31,11 @@ export class ProviderController {
 
             const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '') : '';
             const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '') : '';
-            // const certificationUrl = certification ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '') : '';
 
 
 
             const formData = {
                 ...req.body,
-                // timeSlot: JSON.parse(req.body.timeSlot),
-                // verificationDocs: {
-                //     aadhaarIdProof: aadhaarUrl,
-                // },
                 aadhaarIdProof: aadhaarUrl,
                 availability: JSON.parse(req.body.availability || '[]'),
                 profilePhoto: profileUrl,
@@ -79,16 +74,12 @@ export class ProviderController {
     public updateProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
-            console.log('req.body ', req.body)
-            console.log('req.fafasdfas', req.files)
-
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
                 profilePhoto?: Express.Multer.File[];
             };
 
             const aadhaar = files?.aadhaarIdProof?.[0];
-            console.log('the aadhar', aadhaar)
             const profile = files?.profilePhoto?.[0];
 
             const baseUrl = process.env.CLOUDINARY_BASE_URL;
@@ -121,8 +112,6 @@ export class ProviderController {
             if (aadhaarUrl) {
                 updateData.aadhaarIdProof = aadhaarUrl;
             }
-
-            console.log('the adhara updatetion', aadhaarUrl)
 
             const updatedProvider = await this._providerService.updateProviderDetails(updateData);
 
@@ -210,7 +199,6 @@ export class ProviderController {
 
             const filters = { area, experience, day, time, price };
             const response = await this._providerService.getProviderwithFilters(userId, serviceId, filters)
-            console.log('the response in the controller', response)
             res.status(200).json(response)
         } catch (error) {
             next(error)

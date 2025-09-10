@@ -77,7 +77,6 @@ export class WalletService implements IWalletService {
     // }
 
     public async getSummary(userId: string, ownerType: Roles, filters: Partial<WalletFilter>, page: number, limit: number) {
-        console.log('the filters are reachign here', filters)
 
         const wallet = await this.getOrCreateWallet(userId, ownerType);
         const walletId = wallet._id.toString()
@@ -125,8 +124,6 @@ export class WalletService implements IWalletService {
         if (!isValid) {
             throw new CustomError("signature mismatch", HttpStatusCode.BAD_REQUEST)
         }
-
-        console.log('the status', status)
 
         const wallet = await this.getOrCreateWallet(userId, ownerType);
         if (transactionType === "credit") wallet.balance += amount;

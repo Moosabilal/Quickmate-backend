@@ -79,8 +79,6 @@ export class ServiceService implements IServiceService {
             throw new CustomError('No service found, Unable to update', HttpStatusCode.NOT_FOUND)
         }
         await this._serviceRepository.update(id, serviceData)
-        console.log('service second part working fine')
-
         return {
             message: "Service successfully updated ",
             success: true
