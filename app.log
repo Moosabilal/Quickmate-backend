@@ -748,3 +748,207 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/689051f98e590753867b2bc5 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 Operation `providers.findOne()` buffering timed out after 10000ms -> Operation `providers.findOne()` buffering timed out after 10000ms
+[ERROR  ] - GET /api/auth/getUser 500 Operation `users.findOne()` buffering timed out after 10000ms -> Operation `users.findOne()` buffering timed out after 10000ms
+[ERROR  ] - GET /api/provider/getProviderDashboard 500 Operation `providers.findOne()` buffering timed out after 10000ms -> Operation `providers.findOne()` buffering timed out after 10000ms
+[ERROR  ] - GET /api/auth/getUser 500 Operation `users.findOne()` buffering timed out after 10000ms -> Operation `users.findOne()` buffering timed out after 10000ms
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket 99Nk5hXTFz57duDfAAAB joined booking room: 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding offer from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding hangup from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - New client connected:
+[INFO   ] - Socket l9tXSdi43sbdHiLvAAAD joined booking room: 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding hangup from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding offer from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Call rejected by najath in room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding hangup from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding offer from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Call rejected by najath in room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding offer from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Call rejected by najath in room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding answer from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding answer from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding answer from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding offer from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Call rejected by habid in room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding offer from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Call rejected by habid in room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding offer from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Call rejected by najath in room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding offer from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from habid to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding answer from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding hangup from najath to room 68beefc8f75352c227edf4d3
+[INFO   ] - Client disconnected: l9tXSdi43sbdHiLvAAAD

@@ -215,4 +215,14 @@ export class ProviderController {
         }
     }
 
+    public getProviderDashboard = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id
+            const response = await this._providerService.getProviderDashboard(userId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }

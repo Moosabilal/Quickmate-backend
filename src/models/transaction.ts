@@ -15,7 +15,7 @@ const TransactionSchema = new Schema(
     },
     source: {
       type: String,
-      required: true, // e.g. Booking, Refund, Admin
+      required: true,
       trim: true,
     },
     remarks: {

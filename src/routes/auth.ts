@@ -18,7 +18,6 @@ router.post('/resend-registration-otp', authController.resendOtp);
 
 router.post('/forgot-password', authController.forgotPassword);
 router.post('/reset-password', authController.resetPassword);
-// router.post('/verify-password', isUser, authController.verifyPassword);
 
 router.post('/google-login', authController.googleLogin);
 

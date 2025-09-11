@@ -1,10 +1,11 @@
 import { Types } from "mongoose";
 import { ProviderStatus } from "../enums/provider.enum";
+import { BookingStatus } from "../enums/booking.enum";
 
- export interface Availability {
-    day: string;       
-    startTime: string; 
-    endTime: string;  
+export interface Availability {
+  day: string;
+  startTime: string;
+  endTime: string;
 }
 
 export interface IProviderRegisterRequest {
@@ -92,10 +93,10 @@ export interface IServiceAddPageResponse {
 }
 
 export interface IReviewsOfUser {
-    userName: string,
-    userImg: string,
-    rating: number
-    review: string,
+  userName?: string,
+  userImg?: string,
+  rating?: number
+  review?: string,
 }
 
 
@@ -128,4 +129,27 @@ export interface IProviderForChatListPage {
   // completedJobs: number;
   lastMessage?: string;
   lastMessageAt?: Date | null;
+}
+
+export interface IDashboardResponse {
+  id: string;
+  service: string;
+  client: string;
+  status: BookingStatus;
+  image: string;
+  category: string;
+
+}
+
+export interface IRatingPoint {
+  month: string;
+  rating: number;
+}
+
+export interface IDashboardStatus {
+  earnings: number;
+  completedJobs: number;
+  upcomingBookings: number;
+  averageRating?: number;
+  ratingHistory?: IRatingPoint[];
 }

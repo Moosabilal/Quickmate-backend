@@ -2,8 +2,6 @@ import { IUser } from '../../models/User';
 import { IBaseRepository } from './base/IBaseRepository';
 export interface IUserRepository extends IBaseRepository<IUser> {
   findByEmail(email: string, includeOtpFields?: boolean): Promise<IUser | null>;
-  // create(userData: Partial<IUser>): Promise<IUser>; 
-  // update(user: IUser): Promise<IUser>;
   findByGoogleId(googleId: string): Promise<IUser | null>;
   findByIdForRefreshToken(id: string): Promise<IUser | null>; 
   findAllUsers(): Promise<IUser[]>; 

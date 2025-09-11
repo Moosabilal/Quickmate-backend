@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider, Provider } from "../../models/Providers";
-import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IReviewsOfUser, IServiceAddPageResponse } from "../../dto/provider.dto";
+import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IReviewsOfUser, IServiceAddPageResponse } from "../../dto/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -15,7 +15,7 @@ import { sendVerificationEmail } from "../../utils/emailService";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
-import { toProviderDTO, toProviderForChatListPage, toServiceAddPage } from "../../mappers/provider.mapper";
+import { toProviderDashboardDTO, toProviderDTO, toProviderForChatListPage, toServiceAddPage } from "../../mappers/provider.mapper";
 import { toLoginResponseDTO } from "../../mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
@@ -23,6 +23,7 @@ import { IService } from "../../models/Service";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IMessageRepository } from "../../repositories/interface/IMessageRepository";
 import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
+import { BookingStatus } from "../../enums/booking.enum";
 
 interface reviewsOfUser {
     username: string,
@@ -192,12 +193,7 @@ export class ProviderService implements IProviderService {
             serviceLocation: `${updatedProvider.serviceLocation.coordinates[1]},${updatedProvider.serviceLocation.coordinates[0]}`,
             serviceArea: updatedProvider.serviceArea,
             profilePhoto: updatedProvider.profilePhoto,
-            // price: updatedProvider.price,
             status: updatedProvider.status,
-            // aadhaarIdProof: updatedProvider.aadhaarIdProof,
-            // experience: updatedProvider.experience,
-            // timeSlot: updatedProvider.timeSlot,
-            // verificationDocs: updatedProvider.verificationDocs,
             availability: updatedProvider.availability,
             earnings: updatedProvider.earnings,
             totalBookings: updatedProvider.totalBookings,
@@ -328,7 +324,6 @@ export class ProviderService implements IProviderService {
             profilePhoto: provider.profilePhoto,
             status: provider.status,
             aadhaarIdProof: provider.aadhaarIdProof,
-            // timeSlot: provider.timeSlot,
             availability: provider.availability,
             earnings: provider.earnings,
             totalBookings: provider.totalBookings,
@@ -356,7 +351,6 @@ export class ProviderService implements IProviderService {
             userId: provider.userId.toString(),
             fullName: provider.fullName,
             profilePhoto: provider.profilePhoto,
-            // serviceName: provider.serviceName
 
         }))
 
@@ -492,7 +486,6 @@ export class ProviderService implements IProviderService {
                 profilePhoto: provider.profilePhoto,
                 serviceArea: provider.serviceArea,
                 serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
-                // timeSlot: provider.timeSlot,
                 availability: provider.availability,
                 status: provider.status,
                 earnings: provider.earnings,
@@ -528,7 +521,37 @@ export class ProviderService implements IProviderService {
     }
 
 
+    public async getProviderDashboard(
+        userId: string
+    ): Promise<{ dashboardData: IDashboardResponse[]; dashboardStat: IDashboardStatus }> {
+        const provider = await this._providerRepository.findOne({ userId });
+        if (!provider) throw new CustomError("Provider not found", 404);
 
+        const bookings = await this._bookingRepository.findAll({
+            providerId: provider._id.toString(),
+        });
+
+        const serviceIds = [...new Set(bookings.map((b) => b.serviceId?.toString()))];
+        const services = await this._serviceRepository.findAll({
+            _id: { $in: serviceIds },
+        });
+
+        const subCategoryIds = [...new Set(services.map((s) => s.subCategoryId.toString()))];
+        const subCategories = await this._categoryRepository.findAll({
+            _id: { $in: subCategoryIds },
+        });
+
+        const parentCategoryIds = [...new Set(subCategories.map((sc) => sc.parentId.toString()))];
+        const parentCategories = await this._categoryRepository.findAll({
+            _id: { $in: parentCategoryIds },
+        });
+
+        const reviews = await this._reviewRepository.findAll({
+            providerId: provider._id.toString(),
+        });
+
+        return toProviderDashboardDTO(provider, bookings, services, subCategories, parentCategories, reviews);
+    }
 
 
 

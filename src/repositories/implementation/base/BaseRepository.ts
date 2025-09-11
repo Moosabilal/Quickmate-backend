@@ -1,5 +1,3 @@
-// src/repositories/base/BaseRepository.ts
-
 import { Model, Document, FilterQuery, UpdateQuery } from 'mongoose';
 import { IBaseRepository } from '../../interface/base/IBaseRepository';
 import { injectable } from 'inversify';

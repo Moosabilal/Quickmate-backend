@@ -33,49 +33,6 @@ export class WalletService implements IWalletService {
         return wallet;
     }
 
-    // public async deposit(
-    //     userId: string,
-    //     ownerType: Roles,
-    //     amount: number,
-    //     source = "ManualTopup",
-    //     description: string,
-    //     transactionType: "credit" | "debit",
-    //     remarks?: string,
-
-    // ) {
-    //     if (amount <= 0) throw new CustomError("Amount must be > 0", HttpStatusCode.BAD_REQUEST);
-
-    //     const session = await startSession();
-    //     session.startTransaction();
-    //     try {
-    //         const wallet = await this.getOrCreateWallet(userId, ownerType);
-    //         if(transactionType === "credit") wallet.balance += amount;
-    //         else if(transactionType === "debit") wallet.balance -= amount
-
-    //         await this.walletRepository.saveWallet(wallet, session);
-
-    //         await this.walletRepository.createTransaction(
-    //             {
-    //                 walletId: wallet._id,
-    //                 transactionType,
-    //                 source,
-    //                 remarks,
-    //                 amount,
-    //                 description,
-    //             },
-    //             session
-    //         );
-
-    //         await session.commitTransaction();
-    //         session.endSession();
-    //         return wallet;
-    //     } catch (err) {
-    //         await session.abortTransaction();
-    //         session.endSession();
-    //         throw err;
-    //     }
-    // }
-
     public async getSummary(userId: string, ownerType: Roles, filters: Partial<WalletFilter>, page: number, limit: number) {
 
         const wallet = await this.getOrCreateWallet(userId, ownerType);
@@ -145,7 +102,6 @@ export class WalletService implements IWalletService {
             },
         );
 
-        // await this.deposit(userId, Roles.USER, Number(amount) / 100, "Razorpay", description, transactionType, `Order ${razorpay_order_id}`)
         return {
             message: "transaction verified"
         }

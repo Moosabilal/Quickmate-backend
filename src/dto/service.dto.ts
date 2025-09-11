@@ -25,6 +25,4 @@ export interface IProviderServicePageResponse {
     price: number;
     serviceImage: string;
     description: string;
-    // rating: number;
-    // reviews: number;
 }

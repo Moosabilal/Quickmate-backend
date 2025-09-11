@@ -5,8 +5,6 @@ import { IBaseRepository } from "./base/IBaseRepository";
 
 
 export interface ICategoryRepository extends IBaseRepository<ICategory> {
-    // create(categoryData: ICategoryInput): Promise<ICategory>
-    // findById(id: string | Types.ObjectId): Promise<ICategory | null>
     findByName(name: string): Promise<ICategory | null>
     findSubCatByName(name: string): Promise<ICategory | null>
     findByNameAndParent(name: string, parentId: string | Types.ObjectId): Promise<ICategory | null>

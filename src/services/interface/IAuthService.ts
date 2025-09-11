@@ -11,7 +11,6 @@ export interface IAuthService {
   login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; }; token: string; refreshToken: string }>;
   requestPasswordReset(data: ForgotPasswordRequestBody): Promise<{ message: string }>;
   resetPassword(data: ResetPasswordRequestBody): Promise<{ message: string }>;
-  // verifyPassword(id: string, currentPassword: string): Promise<{ message: string }>;
   googleAuthLogin(token: string): Promise<{ user: { id: string; name: string; email: string; role: string }; token: string; refreshToken: string }>;
   createRefreshToken(refresh_token: string): Promise<{ newToken: string }>;
   sendSubmissionEmail(name: string, email: string, message: string): Promise<{message: string}>

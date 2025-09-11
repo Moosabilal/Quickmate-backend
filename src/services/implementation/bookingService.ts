@@ -16,7 +16,7 @@ import { CommissionTypes } from "../../enums/CommissionType.enum";
 import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
 import mongoose, { Types } from "mongoose";
 import { IPayment } from "../../models/payment";
-import { PaymentMethod, PaymentStatus } from "../../enums/userRoles";
+import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
 import { toBookingConfirmationPage, toBookingHistoryPage, toProviderBookingManagement } from "../../mappers/booking.mapper";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
@@ -60,7 +60,7 @@ export class BookingService implements IBookingService {
         @inject(TYPES.UserRepository) userRepository: IUserRepository,
         @inject(TYPES.MessageRepository) messageRepository: IMessageRepository,
         @inject(TYPES.WalletRepository) WalletRepository: IWalletRepository,
-        @inject(TYPES.ReviewRepository) reviewRepository: IReviewRepository
+        @inject(TYPES.ReviewRepository) reviewRepository: IReviewRepository,
     ) {
         this._bookingRepository = bookingRepository;
         this._categoryRepository = categoryRepository;
@@ -106,7 +106,7 @@ export class BookingService implements IBookingService {
             razorpay_payment_id = verifyPayment.razorpay_payment_id;
             razorpay_signature = verifyPayment.razorpay_signature;
         }
-        if (verifyPayment.paymentMethod === PaymentMethod.BANK) {   
+        if (verifyPayment.paymentMethod === PaymentMethod.BANK) {
             const isValid = verifyPaymentSignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
             if (!isValid) {
                 throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST)
@@ -250,7 +250,7 @@ export class BookingService implements IBookingService {
         const addresses = await this._addressRepository.findAll({ _id: { $in: addressIds } });
 
         const paymentIds = [...new Set(bookings.map(b => b.paymentId?.toString()).filter(Boolean))];
-        const payments = await this._paymentRepository.findAll({ _id: { $in: paymentIds } }); // fixed here
+        const payments = await this._paymentRepository.findAll({ _id: { $in: paymentIds } });
 
         return toProviderBookingManagement(bookings, users, services, addresses, payments);
     }
@@ -367,6 +367,35 @@ export class BookingService implements IBookingService {
             }
             booking.status = BookingStatus.COMPLETED
             await this._bookingRepository.update(booking._id.toString(), booking)
+
+            const provider = await this._providerRepository.findOne({ userId: user._id.toString() })
+            const payment = await this._paymentRepository.findById(booking.paymentId.toString())
+            const service = await this._serviceRepository.findById(booking.serviceId.toString())
+
+            const wallet = await this._walletRepository.findOne({ ownerId: user._id.toString() })
+            if (!wallet) {
+                await this._walletRepository.create({
+                    balance: payment.providerAmount,
+                    ownerId: user._id as Types.ObjectId,
+                    ownerType: Roles.PROVIDER,
+                })
+            }else{
+                wallet.balance += payment.providerAmount
+                provider.earnings += payment.providerAmount
+            }
+            await this._walletRepository.createTransaction(
+                {
+                    walletId: wallet._id,
+                    transactionType: "credit",
+                    source: "payment",
+                    remarks: `Order ${payment.razorpay_order_id}`,
+                    amount: payment.providerAmount,
+                    status: TransactionStatus.PAYMENT,
+                    description: `Payment Received from ${service.title}`,
+                },
+            );
+            
+
 
         } catch (error) {
             throw new CustomError(ErrorMessage.OTP_VERIFICATION_FAILED, HttpStatusCode.FORBIDDEN)

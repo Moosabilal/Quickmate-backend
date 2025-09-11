@@ -30,10 +30,6 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return await query.exec();
     }
 
-    // async update(provider: IProvider): Promise<IProvider> {
-    //     return await provider.save()
-    // }
-
     async updateProvider(updateData: Partial<IProvider>): Promise<IProvider | null> {
         const data = await Provider.findOneAndUpdate({ userId: updateData.userId }, updateData, { new: true });
         return data

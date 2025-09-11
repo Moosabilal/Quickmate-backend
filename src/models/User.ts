@@ -2,9 +2,6 @@ import mongoose, { Schema, Document, HydratedDocument, InferSchemaType } from 'm
 import bcrypt from 'bcrypt';
 import { Roles } from '../enums/userRoles';
 
-
-// export interface IUserDocument extends HydratedDocument<UserSchemaType> {}
-
 const UserSchema: Schema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },

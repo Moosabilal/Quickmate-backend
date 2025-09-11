@@ -1,5 +1,5 @@
 import { IProvider } from "../../models/Providers";
-import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
+import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
 
 
@@ -20,7 +20,8 @@ export interface IProviderService {
     updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile>;
     updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
     getProviderwithFilters(userId: string, serviceId: string, filters: {area?: string; experience?: number; day?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
-    providerForChatPage(userId: string): Promise<IProviderForChatListPage[]>
+    providerForChatPage(userId: string): Promise<IProviderForChatListPage[]>;
+    getProviderDashboard(userId: string): Promise<{dashboardData: IDashboardResponse[], dashboardStat: IDashboardStatus}>;
 
 
 
