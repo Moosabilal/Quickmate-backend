@@ -1,4 +1,4 @@
-import { IBookingRequest } from "../../dto/booking.dto";
+import { IBookingRequest } from "../../interface/booking.dto";
 import { IBooking } from "../../models/Booking";
 import { IBaseRepository } from "./base/IBaseRepository";
 

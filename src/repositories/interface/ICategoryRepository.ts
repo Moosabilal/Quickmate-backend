@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { ICategory } from "../../models/Categories";
-import { ICategoryInput } from "../../dto/category.dto";
+import { ICategoryInput } from "../../interface/category.dto";
 import { IBaseRepository } from "./base/IBaseRepository";
 
 

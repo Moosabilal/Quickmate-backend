@@ -1,6 +1,6 @@
 import { IProvider } from "../../models/Providers";
-import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
-import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
+import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../interface/provider.dto";
+import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
 
 
 export interface IProviderService {

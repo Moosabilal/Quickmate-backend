@@ -1,7 +1,7 @@
-import { ICategoryFormCombinedData, IserviceResponse } from "../dto/category.dto";
-import { CommissionTypes } from "../enums/CommissionType.enum";
-import { ICategory } from "../models/Categories";
-import { ICommissionRule } from "../models/Commission";
+import { ICategoryFormCombinedData, IserviceResponse } from "../../interface/category.dto";
+import { CommissionTypes } from "../../enums/CommissionType.enum";
+import { ICategory } from "../../models/Categories";
+import { ICommissionRule } from "../../models/Commission";
 
 export function toHomePageDTO(category: ICategory): IserviceResponse {
     return {

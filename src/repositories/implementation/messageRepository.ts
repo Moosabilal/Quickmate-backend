@@ -1,7 +1,7 @@
 import mongoose, { FilterQuery } from "mongoose";
 import Message, { IMessage } from "../../models/message";
 import { BaseRepository } from "./base/BaseRepository";
-import { IGetMessages } from "../../dto/booking.dto";
+import { IGetMessages } from "../../interface/booking.dto";
 import { IMessageRepository } from "../interface/IMessageRepository";
 
 export class MessageRepository extends BaseRepository<IMessage> implements IMessageRepository {

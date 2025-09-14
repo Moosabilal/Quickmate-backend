@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 import { ICommissionRule } from '../../models/Commission';
-import { ICommissionRuleInput } from '../../dto/category.dto';
+import { ICommissionRuleInput } from '../../interface/category.dto';
 import { IBaseRepository } from './base/IBaseRepository';
 
 

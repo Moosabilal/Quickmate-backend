@@ -1,4 +1,4 @@
-import { IGetMessages } from "../../dto/booking.dto";
+import { IGetMessages } from "../../interface/booking.dto";
 import { IMessage } from "../../models/message";
 import { IBaseRepository } from "./base/IBaseRepository";
 

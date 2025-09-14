@@ -1,7 +1,7 @@
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
-import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../dto/booking.dto";
-import { IPaymentVerificationRequest } from "../../dto/payment.dto";
-import { RazorpayOrder } from "../../dto/razorpay.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
+import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
+import { IPaymentVerificationRequest } from "../../interface/payment.dto";
+import { RazorpayOrder } from "../../interface/razorpay.dto";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IMessage } from "../../models/message";
 

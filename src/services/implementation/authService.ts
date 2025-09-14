@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { IUserRepository } from '../../repositories/interface/IUserRepository';
-import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody, AuthSuccessResponse } from '../../dto/auth.dto';
+import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody, AuthSuccessResponse } from '../../interface/auth.dto';
 import { generateOTP } from '../../utils/otpGenerator';
 import { sendVerificationEmail, sendPasswordResetEmail, sendContactUsEmail } from '../../utils/emailService';
 import bcrypt from 'bcryptjs';

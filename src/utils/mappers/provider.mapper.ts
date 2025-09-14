@@ -1,11 +1,11 @@
-import { IProvider } from '../models/Providers';
-import { IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from '../dto/provider.dto';
-import { ICategory } from '../models/Categories';
-import { IBooking } from '../models/Booking';
-import { IService } from '../models/Service';
-import { IDashboardResponse, IDashboardStatus } from "../dto/provider.dto";
-import { BookingStatus } from "../enums/booking.enum";
-import { IReview } from '../models/Review';
+import { IProvider } from '../../models/Providers';
+import { IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from '../../interface/provider.dto';
+import { ICategory } from '../../models/Categories';
+import { IBooking } from '../../models/Booking';
+import { IService } from '../../models/Service';
+import { IDashboardResponse, IDashboardStatus } from "../../interface/provider.dto";
+import { BookingStatus } from "../../enums/booking.enum";
+import { IReview } from '../../models/Review';
 
 
 export function toProviderDTO(provider: IProvider): IProviderProfile {

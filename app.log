@@ -952,3 +952,784 @@
 [INFO   ] - Forwarding ICE candidate from najath to room 68beefc8f75352c227edf4d3
 [INFO   ] - Forwarding hangup from najath to room 68beefc8f75352c227edf4d3
 [INFO   ] - Client disconnected: l9tXSdi43sbdHiLvAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - the email
+[INFO   ] - Sending verification email to habid@gmail.com with OTP: 143476 mail
+[INFO   ] - Verification OTP sent to habid@gmail.com
+[ERROR  ] - POST /api/bookings/verify-bookingCompletion-otp 403 OTP Verification Failed. Please try again later. -> OTP Verification Failed. Please try again later.
+[INFO   ] - New client connected:
+[INFO   ] - Socket yTeRmRv03-e684s7AAAB joined booking room: 68beefc8f75352c227edf4d3
+[INFO   ] - New client connected:
+[INFO   ] - Socket QVUvlzQAgoTsEA4pAAAD joined booking room: 68c2a797c4e360e77c21bb08
+[INFO   ] - Socket QVUvlzQAgoTsEA4pAAAD joined booking room: 68c2a797c4e360e77c21bb08
+[INFO   ] - Socket yTeRmRv03-e684s7AAAB joined booking room: 68beefc8f75352c227edf4d3
+[INFO   ] - Socket QVUvlzQAgoTsEA4pAAAD joined booking room: 68c2a797c4e360e77c21bb08
+[INFO   ] - Socket yTeRmRv03-e684s7AAAB joined booking room: 68bef71c5c778b82ed7f6c62
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Socket yTeRmRv03-e684s7AAAB joined booking room: 68c14c0bf44dec8685cf309e
+[INFO   ] - Socket QVUvlzQAgoTsEA4pAAAD joined booking room: 68c2a797c4e360e77c21bb08
+[INFO   ] - Socket QVUvlzQAgoTsEA4pAAAD joined booking room: 68c14c0bf44dec8685cf309e
+[INFO   ] - Client disconnected: QVUvlzQAgoTsEA4pAAAD
+[INFO   ] - New client connected:
+[INFO   ] - Socket etxRGbrJEWF0cmypAAAF joined booking room: 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding offer from sojil to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding ICE candidate from sojil to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding ICE candidate from sojil to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding ICE candidate from sojil to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding ICE candidate from sojil to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding ICE candidate from sojil to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding ICE candidate from sojil to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding answer from habid to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding ICE candidate from habid to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding ICE candidate from habid to room 68c14c0bf44dec8685cf309e
+[INFO   ] - Forwarding hangup from habid to room 68c14c0bf44dec8685cf309e
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - Error in createCategory controller: Parent category not found.
+[ERROR  ] - POST /api/categories 404 Parent category not found. -> Parent category not found.
+[ERROR  ] - Error in createCategory controller: Parent category not found.
+[ERROR  ] - POST /api/categories 404 Parent category not found. -> Parent category not found.
+[ERROR  ] - PUT /api/categories/689428490e204569ec823623 500 E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689428490e204569ec823623') } -> E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689428490e204569ec823623') }
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Socket yTeRmRv03-e684s7AAAB joined booking room: 68c2a797c4e360e77c21bb08
+[INFO   ] - Client disconnected: yTeRmRv03-e684s7AAAB
+[INFO   ] - Client disconnected: etxRGbrJEWF0cmypAAAF
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: Uxw-3vJqM198z3kqAAAJ
+[INFO   ] - Client disconnected: tRF_LvTL8vJVClntAAAI
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: Fzu73otuzOSbb988AAAL
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: Xn4h3_0Bwq2MKQa2AAAN
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: 46jSbqTx6WXapdUwAAAP
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: VV9ajaYIiE7W-VuOAAAR
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: xUGTZoT7HVFrFx_qAAAT
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - Error in createCategory controller: Parent category not found.
+[ERROR  ] - POST /api/categories 404 Parent category not found. -> Parent category not found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - Error in createCategory controller: Parent category not found.
+[ERROR  ] - POST /api/categories 404 Parent category not found. -> Parent category not found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - Error in createCategory controller: A top-level category with this name already exists.
+[ERROR  ] - POST /api/categories 409 A top-level category with this name already exists. -> A top-level category with this name already exists.
+[ERROR  ] - Error in createCategory controller: Parent category not found.
+[ERROR  ] - POST /api/categories 404 Parent category not found. -> Parent category not found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket WVwKjFr2KHFkuwgaAAAB joined booking room: 68c2a797c4e360e77c21bb08
+[INFO   ] - New client connected:
+[INFO   ] - Socket HEGMMVjBpk9Mwt4pAAAD joined booking room: 68beefc8f75352c227edf4d3
+[INFO   ] - Forwarding offer from habid to room 68c2a797c4e360e77c21bb08
+[INFO   ] - Forwarding ICE candidate from habid to room 68c2a797c4e360e77c21bb08
+[INFO   ] - Forwarding ICE candidate from habid to room 68c2a797c4e360e77c21bb08
+[INFO   ] - Forwarding ICE candidate from habid to room 68c2a797c4e360e77c21bb08
+[INFO   ] - Forwarding ICE candidate from habid to room 68c2a797c4e360e77c21bb08
+[INFO   ] - Forwarding hangup from habid to room 68c2a797c4e360e77c21bb08
+[INFO   ] - Client disconnected: HEGMMVjBpk9Mwt4pAAAD
+[INFO   ] - Client disconnected: WVwKjFr2KHFkuwgaAAAB
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: Lb8a49PLyvH1jupwAAAG
+[INFO   ] - New client connected:
+[INFO   ] - Socket Th0_B3LfeUb0GE76AAAJ joined booking room: 68beefc8f75352c227edf4d3
+[INFO   ] - Client disconnected: k5cpY3ShjxxEuHDoAAAH
+[INFO   ] - Client disconnected: Th0_B3LfeUb0GE76AAAJ
+[INFO   ] - New client connected:
+[INFO   ] - Socket FtLUgC6pb3NkjHg-AAAL joined booking room: 68c555e69510a2a50a9126f1
+[INFO   ] - New client connected:
+[INFO   ] - Socket yNPTg3J0988CZ5zxAAAN joined booking room: 68c555e69510a2a50a9126f1
+[INFO   ] - Forwarding offer from najath to room 68c555e69510a2a50a9126f1
+[INFO   ] - Forwarding ICE candidate from najath to room 68c555e69510a2a50a9126f1
+[INFO   ] - Forwarding ICE candidate from najath to room 68c555e69510a2a50a9126f1
+[INFO   ] - Forwarding ICE candidate from najath to room 68c555e69510a2a50a9126f1
+[INFO   ] - Forwarding ICE candidate from najath to room 68c555e69510a2a50a9126f1
+[INFO   ] - Forwarding ICE candidate from najath to room 68c555e69510a2a50a9126f1
+[INFO   ] - Forwarding ICE candidate from najath to room 68c555e69510a2a50a9126f1
+[INFO   ] - Call rejected by habid in room 68c555e69510a2a50a9126f1
+[INFO   ] - Client disconnected: yNPTg3J0988CZ5zxAAAN
+[INFO   ] - Client disconnected: FtLUgC6pb3NkjHg-AAAL
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: LHLh24gtcRS1oQckAAAP
+[INFO   ] - New client connected:
+[INFO   ] - Socket RgcQF1FXz1EfgdI8AAAR joined booking room: 68c555e69510a2a50a9126f1
+[INFO   ] - New client connected:
+[INFO   ] - Socket d-spazoaugD2zOj4AAAT joined booking room: 68c559979510a2a50a9127dd
+[INFO   ] - Socket RgcQF1FXz1EfgdI8AAAR joined booking room: 68c559979510a2a50a9127dd
+[INFO   ] - Socket d-spazoaugD2zOj4AAAT joined booking room: 68c555e69510a2a50a9126f1
+[INFO   ] - Socket RgcQF1FXz1EfgdI8AAAR joined booking room: 68c555e69510a2a50a9126f1
+[INFO   ] - Client disconnected: d-spazoaugD2zOj4AAAT
+[INFO   ] - Client disconnected: RgcQF1FXz1EfgdI8AAAR
+[INFO   ] - New client connected:
+[INFO   ] - Socket pUv9QJfDCNaRPEmYAAAV joined booking room: 68c555e69510a2a50a9126f1
+[INFO   ] - Socket pUv9QJfDCNaRPEmYAAAV joined booking room: 68c555e69510a2a50a9126f1
+[INFO   ] - New client connected:
+[INFO   ] - Socket 55InPFYi-OE43nMNAAAX joined booking room: 68c555e69510a2a50a9126f1
+[INFO   ] - Client disconnected: 55InPFYi-OE43nMNAAAX
+[INFO   ] - Client disconnected: pUv9QJfDCNaRPEmYAAAV
+[INFO   ] - New client connected:
+[INFO   ] - Socket dgpS5cc_hKzA7aIIAAAZ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - New client connected:
+[INFO   ] - Socket XfEVrgpqFFCtHDpvAAAb joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket dgpS5cc_hKzA7aIIAAAZ joined booking room: 68c66a839510a2a50a9129e5
+[INFO   ] - Client disconnected: XfEVrgpqFFCtHDpvAAAb
+[INFO   ] - Client disconnected: dgpS5cc_hKzA7aIIAAAZ
+[INFO   ] - New client connected:
+[INFO   ] - Socket qOVutUPVpG0bXK9FAAAd joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: qOVutUPVpG0bXK9FAAAd
+[INFO   ] - New client connected:
+[INFO   ] - Socket _BLOl-syX168Q-JWAAAf joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: _BLOl-syX168Q-JWAAAf
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/68c66a249510a2a50a912967 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: DcEuRCx2xtkQ85CGAAAh
+[INFO   ] - New client connected:
+[INFO   ] - Socket mh6oNe-nIMwGa2sPAAAj joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: mh6oNe-nIMwGa2sPAAAj
+[INFO   ] - New client connected:
+[INFO   ] - Socket 5JAdt7y1NvuKvfI7AAAl joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: 5JAdt7y1NvuKvfI7AAAl
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/68c66a249510a2a50a912967 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: DWhkJLkWWuIzFdD6AAAn
+[INFO   ] - New client connected:
+[INFO   ] - Socket CpDb0FyAuS05IkhHAAAp joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket my-ebMQYuz8ODm0NAAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: my-ebMQYuz8ODm0NAAAB
+[INFO   ] - New client connected:
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket bZAwKrkLFo9klxLRAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: bZAwKrkLFo9klxLRAAAD
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: DeULeuIHgEsGzfbsAAAF
+[INFO   ] - New client connected:
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - New client connected:
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket WvNI2jAdQArFmY2cAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: WvNI2jAdQArFmY2cAAAH
+[INFO   ] - New client connected:
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket MViAUtYZkVyoFxYAAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: MViAUtYZkVyoFxYAAAAJ
+[INFO   ] - New client connected:
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 4to37NBYdcAz8RGSAAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: 4to37NBYdcAz8RGSAAAL
+[INFO   ] - New client connected:
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket muDEZbE0F1_PhVD6AAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: muDEZbE0F1_PhVD6AAAP
+[INFO   ] - New client connected:
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket yXCbqpA5sn4pBHZYAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: yXCbqpA5sn4pBHZYAAAR
+[INFO   ] - New client connected:
+[INFO   ] - Socket adobiK-00QCwD5a3AAAT joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket adobiK-00QCwD5a3AAAT joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket adobiK-00QCwD5a3AAAT joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: adobiK-00QCwD5a3AAAT
+[INFO   ] - New client connected:
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 90-VzlOiRFYL8ktgAAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket LC7dhKzrIjsGsg-lAAAV joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: LC7dhKzrIjsGsg-lAAAV
+[INFO   ] - New client connected:
+[INFO   ] - Socket m2lZsVYdPC3lfKV-AAAX joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: 90-VzlOiRFYL8ktgAAAN
+[INFO   ] - Client disconnected: m2lZsVYdPC3lfKV-AAAX
+[INFO   ] - New client connected:
+[INFO   ] - Socket ZzMiyAoheGudLRgOAAAZ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: ZzMiyAoheGudLRgOAAAZ
+[INFO   ] - New client connected:
+[INFO   ] - Socket FrT862kwVMyAUxJHAAAb joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - New client connected:
+[INFO   ] - Socket VhJExD7LyzJvBvUkAAAd joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: FrT862kwVMyAUxJHAAAb
+[INFO   ] - New client connected:
+[INFO   ] - Socket uxOTryfjkYlHF4GqAAAf joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: uxOTryfjkYlHF4GqAAAf
+[INFO   ] - Client disconnected: VhJExD7LyzJvBvUkAAAd
+[INFO   ] - New client connected:
+[INFO   ] - Socket zN4RflSekxfWF4hGAAAh joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: zN4RflSekxfWF4hGAAAh
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket O39hIKHYlo-Bn6jjAAAk joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket aPG1FwkyMRSHYmGgAAAl joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: aPG1FwkyMRSHYmGgAAAl
+[INFO   ] - Client disconnected: O39hIKHYlo-Bn6jjAAAk
+[INFO   ] - New client connected:
+[INFO   ] - Socket aq9N7_pTmT2_QjG9AAAn joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - New client connected:
+[INFO   ] - Socket U8pZ-CF-kD4FJuEGAAAp joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: U8pZ-CF-kD4FJuEGAAAp
+[INFO   ] - Client disconnected: aq9N7_pTmT2_QjG9AAAn
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket oIKwy0lPgvqA_0hJAAAt joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ZzrHjpqtbbzXmKotAAAr joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: ZzrHjpqtbbzXmKotAAAr
+[INFO   ] - Client disconnected: oIKwy0lPgvqA_0hJAAAt
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket YtmjvTS0IiVTHPDGAAAx joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket UAXBLgFqThkzoyglAAAv joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: UAXBLgFqThkzoyglAAAv
+[INFO   ] - Client disconnected: YtmjvTS0IiVTHPDGAAAx
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket pAjf3F9-NfmRet25AAAz joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket v4Rwu_yV0wPB1_YzAAA1 joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: v4Rwu_yV0wPB1_YzAAA1
+[INFO   ] - Client disconnected: pAjf3F9-NfmRet25AAAz
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket zBINTG_ZSIbxMw6aAAA3 joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket QuxdsL9FO4oYb3vrAAA5 joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: zBINTG_ZSIbxMw6aAAA3
+[INFO   ] - Client disconnected: QuxdsL9FO4oYb3vrAAA5
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket bDAcBC-cpDqH5SVgAAA9 joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket hswNg1O9j5uiQVLHAAA8 joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: hswNg1O9j5uiQVLHAAA8
+[INFO   ] - Client disconnected: bDAcBC-cpDqH5SVgAAA9
+[INFO   ] - New client connected:
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - New client connected:
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket _rlAIsTBZKfO7eWzAABB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket p7iMmuqYYN7rNc8-AAA_ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: _rlAIsTBZKfO7eWzAABB
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: zEEFlQRa68Cj63U1AAAB
+[INFO   ] - New client connected:
+[INFO   ] - Socket DT5oriE0m6YUQrW0AAAF joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket DT5oriE0m6YUQrW0AAAF joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967

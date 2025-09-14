@@ -1,4 +1,4 @@
-import { AuthSuccessResponse, ForgotPasswordRequestBody, RegisterRequestBody, ResendOtpRequestBody, ResetPasswordRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
+import { AuthSuccessResponse, ForgotPasswordRequestBody, RegisterRequestBody, ResendOtpRequestBody, ResetPasswordRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
 import { IBooking } from "../../models/Booking";
 import { ICategory } from "../../models/Categories";
 import { IProvider } from "../../models/Providers";

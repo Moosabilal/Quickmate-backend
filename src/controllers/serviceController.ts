@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import TYPES from "../di/type";
 import { IServiceService } from "../services/interface/IServiceService";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { IAddAndEditServiceForm } from "../dto/service.dto";
+import { IAddAndEditServiceForm } from "../interface/service.dto";
 import { NextFunction, Request, Response } from "express";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";

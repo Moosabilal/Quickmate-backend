@@ -1,6 +1,6 @@
 import { CategoryRepository } from '../../repositories/implementation/categoryRepository';
 import { CommissionRuleRepository } from '../../repositories/implementation/commissionRuleRepository';
-import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse, IserviceResponse } from '../../dto/category.dto';
+import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse, IserviceResponse } from '../../interface/category.dto';
 import { ICategory } from '../../models/Categories';
 import { Types } from 'mongoose';
 import { inject, injectable } from 'inversify';
@@ -11,7 +11,7 @@ import { ICategoryService } from '../interface/ICategoryService';
 import { CommissionTypes } from '../../enums/CommissionType.enum';
 import { CustomError } from '../../utils/CustomError';
 import { HttpStatusCode } from '../../enums/HttpStatusCode';
-import { toHomePageDTO } from '../../mappers/category.mapper';
+import { toHomePageDTO } from '../../utils/mappers/category.mapper';
 import { ICommissionRule } from '../../models/Commission';
 
 
@@ -34,8 +34,7 @@ export class CategoryService implements ICategoryService {
     ): Promise<{ category: ICategoryResponse; commissionRule?: ICommissionRuleResponse }> {
 
         if (categoryInput.parentId) {
-
-            const parentCategory = await this._categoryRepository.findOne({parentId: categoryInput.parentId});
+            const parentCategory = await this._categoryRepository.findOne({_id: categoryInput.parentId});
             if (!parentCategory) {
                 throw new CustomError('Parent category not found.', HttpStatusCode.NOT_FOUND);
             }

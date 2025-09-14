@@ -4,8 +4,8 @@ import TYPES from "../di/type";
 import { NextFunction, Request, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { AuthRequest } from "../middleware/authMiddleware";
-import { IPaymentVerificationRequest } from "../dto/payment.dto";
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../dto/auth.dto";
+import { IPaymentVerificationRequest } from "../interface/payment.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth.dto";
 
 @injectable()
 export class BookingController {

@@ -1,7 +1,7 @@
-import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../dto/service.dto";
-import { ServicesPriceUnit } from "../enums/Services.enum";
-import { ICategory } from "../models/Categories";
-import { IService } from "../models/Service";
+import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../interface/service.dto";
+import { ServicesPriceUnit } from "../../enums/Services.enum";
+import { ICategory } from "../../models/Categories";
+import { IService } from "../../models/Service";
 
 export function toProviderServicePage(
     services: IService[],

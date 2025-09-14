@@ -3,7 +3,7 @@ import { IAddressService } from "../interface/IAddressService";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
 import TYPES from "../../di/type";
 import { IAddress } from "../../models/address";
-import { IAddressRequest } from "../../dto/address..dto";
+import { IAddressRequest } from "../../interface/address..dto";
 
 injectable()
 export class AddressService implements IAddressService {

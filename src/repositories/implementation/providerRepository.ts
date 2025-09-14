@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
-import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../dto/provider.dto";
+import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../interface/provider.dto";
 import { IProviderRepository } from "../interface/IProviderRepository";
 import { injectable } from "inversify";
 import { BaseRepository } from "./base/BaseRepository";

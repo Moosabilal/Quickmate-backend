@@ -2,7 +2,7 @@
 import { inject, injectable } from 'inversify';
 import { Request, Response, NextFunction } from 'express';
 import { IAuthService } from '../services/interface/IAuthService';
-import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../dto/auth.dto';
+import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../interface/auth.dto';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import TYPES from '../di/type';
 import { AuthRequest } from '../middleware/authMiddleware';

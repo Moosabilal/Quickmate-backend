@@ -1,16 +1,16 @@
 import { timeStamp } from "console";
-import { IBookingConfirmationRes, IBookingHistoryPage, IGetMessages, IProviderBookingManagement } from "../dto/booking.dto";
-import { BookingStatus } from "../enums/booking.enum";
-import { PaymentStatus } from "../enums/userRoles";
-import { IAddress } from "../models/address";
-import { IBooking } from "../models/Booking";
-import { ICategory } from "../models/Categories";
-import message, { IMessage } from "../models/message";
-import { IPayment } from "../models/payment";
-import { IService } from "../models/Service";
-import { IProvider } from "../models/Providers";
-import { IUser } from "../models/User";
-import { IReview } from "../models/Review";
+import { IBookingConfirmationRes, IBookingHistoryPage, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
+import { BookingStatus } from "../../enums/booking.enum";
+import { PaymentStatus } from "../../enums/userRoles";
+import { IAddress } from "../../models/address";
+import { IBooking } from "../../models/Booking";
+import { ICategory } from "../../models/Categories";
+import message, { IMessage } from "../../models/message";
+import { IPayment } from "../../models/payment";
+import { IService } from "../../models/Service";
+import { IProvider } from "../../models/Providers";
+import { IUser } from "../../models/User";
+import { IReview } from "../../models/Review";
 
 export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider, review?: IReview): IBookingConfirmationRes {
     return {
