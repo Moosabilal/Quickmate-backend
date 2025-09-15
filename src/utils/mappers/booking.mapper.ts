@@ -86,6 +86,7 @@ export function toProviderBookingManagement(
 
         return {
             id: booking._id.toString(),
+            customerId: user._id.toString(),
             customerName: String(booking.customerName || user?.fullName || ''),
             customerImage: String(user?.profilePicture || ''),
             service: String(service?.title || ''),

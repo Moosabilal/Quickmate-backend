@@ -16,8 +16,8 @@ export interface IBookingService {
 
     //provider
     getBookingFor_Prov_mngmnt(userId: string, providerId: string): Promise<IProviderBookingManagement[]>;
-    saveAndEmitMessage(io: any, bookingId: string, senderId: string, text: string)
-    getBookingMessages(bookingId: string): Promise<IMessage[]>;
+    saveAndEmitMessage(io: any, joiningId: string, senderId: string, text: string)
+    getBookingMessages(joiningId: string): Promise<IMessage[]>;
     verifyOtp(data: VerifyOtpRequestBody, bookingToken: string): Promise<void>
     resendOtp(data: ResendOtpRequestBody, userId?: string): Promise<{ message: string, newCompletionToken?: string }>
 

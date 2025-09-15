@@ -1733,3 +1733,685 @@
 [INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
 [INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
 [INFO   ] - Socket 9HdhqU7gVPQq61xUAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket NHsYF5tawrCsBGhxAAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket NHsYF5tawrCsBGhxAAAB joined booking room: 68c66a839510a2a50a9129e5
+[INFO   ] - Socket NHsYF5tawrCsBGhxAAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - New client connected:
+[INFO   ] - Socket 4gzOLK4E3RLyeE4lAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket NHsYF5tawrCsBGhxAAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket NHsYF5tawrCsBGhxAAAB joined booking room: 68c66a839510a2a50a9129e5
+[INFO   ] - Socket NHsYF5tawrCsBGhxAAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: 4gzOLK4E3RLyeE4lAAAD
+[INFO   ] - Client disconnected: NHsYF5tawrCsBGhxAAAB
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: oZ6y0NPZZNuDR_guAAAF
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket P6iU2V_Lh3btK9KwAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket 0YCzh28025hJplVNAAAI joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: P6iU2V_Lh3btK9KwAAAJ
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/68c66a249510a2a50a912967 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/68c66a249510a2a50a912967 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 0YCzh28025hJplVNAAAI
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: ptluXOjYpadFCdytAAAN
+[INFO   ] - Client disconnected: UIWQ7oSMdkjlenT4AAAM
+[INFO   ] - New client connected:
+[INFO   ] - Socket LnB2AJrIqJVNDXAOAAAP joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - New client connected:
+[INFO   ] - Socket 5l_Q2E7QdudWYO-AAAAR joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ocTKv7J1CKY5ubTNAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket pW1Eqp8JpYILS1k0AAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: n6Y6RlpZvWlpKcK9AAAB
+[INFO   ] - New client connected:
+[INFO   ] - Socket Tnxt_Laiho8UmxOUAAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: 9y1QKzM39w3MjcTKAAAD
+[INFO   ] - New client connected:
+[INFO   ] - Socket _MRQB3PRGE-QaI3QAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: 3I-4s0mumKItQM6uAAAD
+[INFO   ] - Client disconnected: lmIP366jVnKqC3MYAAAB
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: T_7PKeKkTmI5N8_iAAAF
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket D8qWt5xiCy97MYnzAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket D8qWt5xiCy97MYnzAAAD joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket JNlsO70RxiNVAGIXAAAB joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket JNlsO70RxiNVAGIXAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket D8qWt5xiCy97MYnzAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - Socket 6C-CsrwtRVGshRP7AAAB joined booking room: undefined
+[INFO   ] - Socket 6C-CsrwtRVGshRP7AAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 6C-CsrwtRVGshRP7AAAB
+[INFO   ] - New client connected:
+[INFO   ] - Socket yOZWDgZoZP6BlFbyAAAD joined booking room: undefined
+[INFO   ] - Socket yOZWDgZoZP6BlFbyAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: yOZWDgZoZP6BlFbyAAAD
+[INFO   ] - New client connected:
+[INFO   ] - Socket 0BXiPGaw6q7dKh9lAAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - New client connected:
+[INFO   ] - Socket 2ByKM3SWBrMnytRtAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 2ByKM3SWBrMnytRtAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket jhaLvoq4LSFfwE9dAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket H3UPjPUo__nR4VcxAAAC joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket jhaLvoq4LSFfwE9dAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket H3UPjPUo__nR4VcxAAAC joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket LzZ340RE-6QNpGOhAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket IyFaTMf-KfHWdISqAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket LzZ340RE-6QNpGOhAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6887a018f50acd7333997043-68aede6ea437231e6279f1bc 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[INFO   ] - Socket IyFaTMf-KfHWdISqAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6887a018f50acd7333997043-68aede6ea437231e6279f1bc 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[INFO   ] - Socket LzZ340RE-6QNpGOhAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket IyFaTMf-KfHWdISqAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket LzZ340RE-6QNpGOhAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket IyFaTMf-KfHWdISqAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket LzZ340RE-6QNpGOhAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket IyFaTMf-KfHWdISqAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket LzZ340RE-6QNpGOhAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6887a018f50acd7333997043-68aede6ea437231e6279f1bc 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[INFO   ] - Socket IyFaTMf-KfHWdISqAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[ERROR  ] - GET /api/bookings/getAllPreviousChats/6887a018f50acd7333997043-68aede6ea437231e6279f1bc 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket I_NrwkVRtRcRhpJ5AAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket Zrjsvq7MQ7jWNk6PAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket I_NrwkVRtRcRhpJ5AAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket Zrjsvq7MQ7jWNk6PAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: Zrjsvq7MQ7jWNk6PAAAB
+[INFO   ] - Client disconnected: I_NrwkVRtRcRhpJ5AAAD
+[INFO   ] - New client connected:
+[INFO   ] - Socket mY9ZnugS3MsGl01AAAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: mY9ZnugS3MsGl01AAAAF
+[INFO   ] - New client connected:
+[INFO   ] - Socket XwAHABOnEOjy_JozAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - New client connected:
+[INFO   ] - Socket OQa34GWl4zHTn2MSAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket XwAHABOnEOjy_JozAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket OQa34GWl4zHTn2MSAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding offer from najath to room 68c66a249510a2a50a912967
+[INFO   ] - Forwarding ICE candidate from najath to room 68c66a249510a2a50a912967
+[INFO   ] - Forwarding ICE candidate from najath to room 68c66a249510a2a50a912967
+[INFO   ] - Forwarding ICE candidate from najath to room 68c66a249510a2a50a912967
+[INFO   ] - Forwarding ICE candidate from najath to room 68c66a249510a2a50a912967
+[INFO   ] - Forwarding ICE candidate from najath to room 68c66a249510a2a50a912967
+[INFO   ] - Forwarding ICE candidate from najath to room 68c66a249510a2a50a912967
+[INFO   ] - Forwarding answer from habid to room 68c66a249510a2a50a912967
+[INFO   ] - Forwarding ICE candidate from habid to room 68c66a249510a2a50a912967
+[INFO   ] - Forwarding hangup from habid to room 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: OQa34GWl4zHTn2MSAAAJ
+[INFO   ] - Client disconnected: XwAHABOnEOjy_JozAAAH
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: RpKhUU-L4el8X_7yAAAM
+[INFO   ] - New client connected:
+[INFO   ] - Socket pyeBtqA2kVQqkKX3AAAO joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - New client connected:
+[INFO   ] - Socket Rjd5NukzxWNHR5RNAAAQ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - Socket MVE9S12fmVXZvwHUAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - New client connected:
+[INFO   ] - Socket y-4GzdUL4YIx16DBAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: MVE9S12fmVXZvwHUAAAB
+[INFO   ] - New client connected:
+[INFO   ] - Socket HHFI8piv54cNQ0DzAAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: y-4GzdUL4YIx16DBAAAD
+[INFO   ] - New client connected:
+[INFO   ] - Socket PGMS6X9RJFmo2rwlAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: PGMS6X9RJFmo2rwlAAAH
+[INFO   ] - New client connected:
+[INFO   ] - Socket toGxbnGQdzGAWXgrAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: HHFI8piv54cNQ0DzAAAF
+[INFO   ] - Client disconnected: toGxbnGQdzGAWXgrAAAJ
+[INFO   ] - New client connected:
+[INFO   ] - Socket sXanU71Jd4XXxVcnAAAL joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - New client connected:
+[INFO   ] - Socket lfyEpa_tEuDO3QqdAAAN joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: lfyEpa_tEuDO3QqdAAAN
+[INFO   ] - New client connected:
+[INFO   ] - Socket mDLxDyOLwcb8eVqHAAAP joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sXanU71Jd4XXxVcnAAAL joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket mDLxDyOLwcb8eVqHAAAP joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sXanU71Jd4XXxVcnAAAL joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket mDLxDyOLwcb8eVqHAAAP joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: fphe1pPCtj1KeisBAAAD
+[INFO   ] - Client disconnected: QPWFuNgYFvsFLgwDAAAB
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: tnBS81kkOkAIX25NAAAG
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: prF38x0rnhIxw1pyAAAH
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket 0yazQ6MhuStZJhRqAAAK joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket QenA7zLuOeYjFjx8AAAL joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: WftGKWV1XHhIuW38AAAB
+[INFO   ] - Client disconnected: Hu2inZCKqwTe8vvsAAAD
+[INFO   ] - New client connected:
+[INFO   ] - Socket WhKaMqhM129RFCMWAAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - New client connected:
+[INFO   ] - Socket tqsKDVntGZpirCVyAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket tqsKDVntGZpirCVyAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WhKaMqhM129RFCMWAAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: ptC9X3CRNG7Kfb7vAAAD
+[INFO   ] - New client connected:
+[INFO   ] - Socket l55yWF63WlI5deFiAAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: s7hMDWrGL4ioNVFKAAAB
+[INFO   ] - New client connected:
+[INFO   ] - Socket wzl_kyQdlYIXZEqyAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket 3wgoBy81Y5M_lxEyAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket rZoVhHC8sfQcGqLrAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket rZoVhHC8sfQcGqLrAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket WmTqUek0eOq6J1AyAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket sl8T_KI2Mz9YrITfAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket MlipsX69m3E4whE7AAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket ua2HJn6BQm9Q7hNxAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: MlipsX69m3E4whE7AAAD
+[INFO   ] - New client connected:
+[INFO   ] - Socket 4QAknxW_a94AU-8nAAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: ua2HJn6BQm9Q7hNxAAAB
+[INFO   ] - New client connected:
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: 4QAknxW_a94AU-8nAAAF
+[INFO   ] - New client connected:
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: undefined
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: undefined
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: undefined
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: undefined
+[INFO   ] - Socket 8Td32zfM0Wh0zrZZAAAH joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket ZWj1DgCV_3HwXyOoAAAJ joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Client disconnected: ZWj1DgCV_3HwXyOoAAAJ
+[INFO   ] - Client disconnected: 8Td32zfM0Wh0zrZZAAAH
+[INFO   ] - New client connected:
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - New client connected:
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a839510a2a50a9129e5
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: 68c66a249510a2a50a912967
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket c1ilSy6EuW4Sk2I-AAAN joined booking room: undefined
+[INFO   ] - Socket AQGteH_zj6C1Rud2AAAL joined booking room: undefined
+[INFO   ] - Client disconnected: c1ilSy6EuW4Sk2I-AAAN
+[INFO   ] - Client disconnected: AQGteH_zj6C1Rud2AAAL
+[INFO   ] - New client connected:
+[INFO   ] - Socket sacluEbL_FhrNQGwAAAP joined booking room: undefined
+[INFO   ] - New client connected:
+[INFO   ] - Socket aaK5nsqWfjSsED-CAAAR joined booking room: undefined
+[INFO   ] - Socket aaK5nsqWfjSsED-CAAAR joined booking room: undefined
+[INFO   ] - Socket sacluEbL_FhrNQGwAAAP joined booking room: undefined
+[INFO   ] - Socket aaK5nsqWfjSsED-CAAAR joined booking room: undefined
+[INFO   ] - Socket sacluEbL_FhrNQGwAAAP joined booking room: undefined
+[INFO   ] - Socket sacluEbL_FhrNQGwAAAP joined booking room: undefined
+[INFO   ] - Socket aaK5nsqWfjSsED-CAAAR joined booking room: undefined
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket 4_Rh8dVZfbPr3uDXAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket A_ZX0oLYExbGwTlnAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding offer from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Call rejected by habid in room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding offer from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding answer from habid to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from habid to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding hangup from habid to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: A_ZX0oLYExbGwTlnAAAB
+[INFO   ] - Client disconnected: 4_Rh8dVZfbPr3uDXAAAD
+[INFO   ] - New client connected:
+[INFO   ] - Socket CersYkPMIHEjfVF6AAAG joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - New client connected:
+[INFO   ] - Socket RlwRslWJ6GDNPu0qAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket 5Zco-8kNXcGl5Y0JAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket mZL4QWJlCQJzkVqXAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket kLKMGn4CIJNf__ASAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 5ZhyB4FA_Z7FdzzdAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket v120JhRBM0kbqIS5AAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket jchb0IgGZ3Kot_LDAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding offer from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding answer from habid to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from habid to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding hangup from habid to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding offer from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Forwarding ICE candidate from najath to room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Call rejected by habid in room 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket v120JhRBM0kbqIS5AAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket v120JhRBM0kbqIS5AAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket _GT4dnS005GY2SCnAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket _GT4dnS005GY2SCnAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket g6lF-JbGsmz9USw7AAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket -Utn-bpJomh7veuMAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket g6lF-JbGsmz9USw7AAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 9WoAwhFFKgEcK8XuAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket p5oBhCpaF45yXurCAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: 9WoAwhFFKgEcK8XuAAAB
+[INFO   ] - Client disconnected: p5oBhCpaF45yXurCAAAD
+[INFO   ] - New client connected:
+[INFO   ] - Client disconnected: hDIrwNA35xc--tb8AAAF
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket il3ErvqjfC8k87YZAAAI joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket FmuRTQrx6nzwmk7UAAAJ joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket nr3nPs6Y98avNrGJAAAB joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Socket n4Y0aol6UI_qC8OgAAAD joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: n4Y0aol6UI_qC8OgAAAD
+[INFO   ] - Client disconnected: --qPMyeQcZmcpnNvAAAB
+[INFO   ] - New client connected:
+[INFO   ] - Socket 5HH1zeEYo066Nip7AAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 5HH1zeEYo066Nip7AAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - New client connected:
+[INFO   ] - Socket pExBw8UFhP6_tBpsAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket pExBw8UFhP6_tBpsAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket 5HH1zeEYo066Nip7AAAF joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Socket pExBw8UFhP6_tBpsAAAH joined booking room: 6887a018f50acd7333997043-68aede6ea437231e6279f1bc
+[INFO   ] - Client disconnected: pExBw8UFhP6_tBpsAAAH
+[INFO   ] - Client disconnected: 5HH1zeEYo066Nip7AAAF

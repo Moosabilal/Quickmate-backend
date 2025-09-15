@@ -65,6 +65,7 @@ export interface IBookingHistoryPage {
 
 export interface IProviderBookingManagement {
   id: string;
+  customerId?: string;
   customerName: string;
   customerImage: string;
   service: string;    

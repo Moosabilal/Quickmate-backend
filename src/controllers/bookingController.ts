@@ -81,8 +81,8 @@ export class BookingController {
 
     public getAllPreviousChats = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const bookingId = req.params.bookingId
-            const response = await this._bookingService.getBookingMessages(bookingId)
+            const joiningId = req.params.joiningId
+            const response = await this._bookingService.getBookingMessages(joiningId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

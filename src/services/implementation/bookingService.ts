@@ -255,23 +255,25 @@ export class BookingService implements IBookingService {
         return toProviderBookingManagement(bookings, users, services, addresses, payments);
     }
 
-    async saveAndEmitMessage(io: any, bookingId: string, senderId: string, text: string) {
+    async saveAndEmitMessage(io: any, joiningId: string, senderId: string, text: string) {
         const data = {
-            bookingId: new mongoose.Types.ObjectId(bookingId),
+            joiningId,
             senderId: senderId,
             text,
         };
 
         const message = await this._messageRepository.create(data);
 
-        io.to(bookingId).emit("receiveBookingMessage", message);
+        io.to(joiningId).emit("receiveBookingMessage", message);
 
         return message;
     }
 
-    async getBookingMessages(bookingId: string): Promise<IMessage[]> {
+    async getBookingMessages(joiningId: string): Promise<IMessage[]> {
+        const data = await this._messageRepository.findAllSorted(joiningId);
+        console.log('the data', data)
 
-        return await this._messageRepository.findAllSorted(bookingId);
+        return data
 
     }
 
