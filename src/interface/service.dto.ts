@@ -9,7 +9,6 @@ export interface IAddAndEditServiceForm {
     categoryId: string;
     subCategoryId: string | null;
     duration: string,
-    basePrice: number;
     priceUnit: ServicesPriceUnit;
     providerId?: string;
     status: boolean;

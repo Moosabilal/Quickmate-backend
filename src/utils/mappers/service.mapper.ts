@@ -27,7 +27,6 @@ export function toServiceEditPage(service: IService, category: ICategory): IAddA
         categoryId: category.parentId.toString(),
         subCategoryId: category._id.toString(),
         duration: service.duration,
-        basePrice: service.basePrice,
         priceUnit: service.priceUnit as ServicesPriceUnit,
         status: service.status,
         price: service.price,

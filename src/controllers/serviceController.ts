@@ -33,7 +33,6 @@ export class ServiceController {
                 status: req.body.status === "true",
                 businessCertification: businessCertificationUrl,
                 experience: parseInt(req.body.experience),
-                basePrice: parseInt(req.body.basePrice),
                 price: parseInt(req.body.price),
                 userId: req.user.id,
             }
@@ -72,7 +71,6 @@ export class ServiceController {
                 ...req.body,
                 status: req.body.status === "true",
                 experience: parseInt(req.body.experience),
-                basePrice: parseInt(req.body.basePrice),
                 price: parseInt(req.body.price),
                 userId: req.user.id,
             }
