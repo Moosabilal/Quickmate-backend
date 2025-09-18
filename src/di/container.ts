@@ -49,11 +49,17 @@ import { IReviewService } from '../services/interface/IReviewService';
 import { ReviewService } from '../services/implementation/reviewService';
 import { IReviewRepository } from '../repositories/interface/IReviewRepository';
 import { ReviewRepository } from '../repositories/implementation/reviewRepository';
+import { AdminController } from '../controllers/adminController';
+import { IAdminService } from '../services/interface/IAdminService';
+import { AdminService } from '../services/implementation/AdminService';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
 container.bind<IAuthService>(TYPES.AuthService).to(AuthService)
 container.bind<IUserRepository>(TYPES.UserRepository).to(UserRepository)
+
+container.bind<AdminController>(TYPES.AdminController).to(AdminController)
+container.bind<IAdminService>(TYPES.AdminService).to(AdminService)
 
 container.bind<CategoryController>(TYPES.CategoryController).to(CategoryController)
 container.bind<ICategoryService>(TYPES.CategoryService).to(CategoryService)

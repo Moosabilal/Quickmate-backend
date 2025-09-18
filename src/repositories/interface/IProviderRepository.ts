@@ -15,5 +15,4 @@ export interface IProviderRepository extends IBaseRepository<IProvider> {
     getProviderByServiceId(filterQuery: ProviderFilterQuery): Promise<IProvider[]>;
     getProviderId(userId: string): Promise<string>;
 
-
 }

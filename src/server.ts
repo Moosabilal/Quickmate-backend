@@ -7,11 +7,12 @@ import dotenv from 'dotenv';
 import http from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 dotenv.config();
-import authRoutes from './routes/auth';
 import { rateLimiter } from './middleware/rateLimiter';
 import connectDB from './config/database';
 
 import path from 'path';
+import authRoutes from './routes/auth';
+import adminRoutes from './routes/adminRoutes'
 import categoryRoutes from './routes/categoryRoutes'
 import providerRoutes from './routes/providerRoute'
 import addressRoutes from './routes/address'
@@ -55,13 +56,15 @@ app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 
 app.use('/api/auth', authRoutes);
-app.use('/api/categories', categoryRoutes);
+app.use('/api/admin', adminRoutes)
 app.use('/api/provider', providerRoutes);
+app.use('/api/categories', categoryRoutes);
 app.use('/api/address', addressRoutes)
 app.use('/api/bookings', bookingRoutes)
 app.use('/api/services', serviceRoutes)
 app.use('/api/wallet', walletRoutes)
 app.use('/api/review', reviewRoutes)
+
 
 app.use((req, res, next) => {
   const error = new CustomError(`Not Found - ${req.originalUrl}`, 404)

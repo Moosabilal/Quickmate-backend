@@ -1,3 +1,4 @@
+import { FilterQuery } from 'mongoose';
 import { IUser } from '../../models/User';
 import { IBaseRepository } from './base/IBaseRepository';
 export interface IUserRepository extends IBaseRepository<IUser> {
@@ -8,6 +9,6 @@ export interface IUserRepository extends IBaseRepository<IUser> {
 
   findByPasswordResetToken(token: string): Promise<IUser | null>;
   findUsersWithFilter(filter: any, skip: number, limit: number): Promise<IUser[]>
-  countUsers(filter: any): Promise<number>
+  countUsers(filter?: FilterQuery<IUser>): Promise<number>
 
 }
