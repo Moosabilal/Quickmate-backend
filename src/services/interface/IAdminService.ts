@@ -1,4 +1,5 @@
+import { IProviderDashboardRes } from "../../interface/provider.dto";
 
 export interface IAdminService {
-    getAdminDashboard()
+    getAdminDashboard(): Promise<IProviderDashboardRes>
 }

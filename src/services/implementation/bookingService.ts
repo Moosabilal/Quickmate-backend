@@ -383,7 +383,8 @@ export class BookingService implements IBookingService {
                 })
             }else{
                 wallet.balance += payment.providerAmount
-                provider.earnings += payment.providerAmount
+                provider.earnings += payment.providerAmount;
+                provider.totalBookings += 1
             }
             await this._walletRepository.createTransaction(
                 {

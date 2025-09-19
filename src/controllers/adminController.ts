@@ -14,7 +14,6 @@ export class AdminController {
     public getAdminDashboard = async (req:AuthRequest, res: Response, next: NextFunction) => {
         try {
             const response = await this._adminService.getAdminDashboard()
-            console.log('the backend response', response)
             res.status(200).json(response)
         } catch (error) {
             next(error)

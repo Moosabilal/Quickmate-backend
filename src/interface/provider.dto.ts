@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 import { ProviderStatus } from "../enums/provider.enum";
 import { BookingStatus } from "../enums/booking.enum";
 
@@ -152,4 +152,28 @@ export interface IDashboardStatus {
   upcomingBookings: number;
   averageRating?: number;
   ratingHistory?: IRatingPoint[];
+}
+
+export interface ITopActiveProviders {
+  _id: Types.ObjectId | string;
+  fullName: string;
+  totalBookings: number;
+  profilePhoto: string;
+  rating: number;
+  reveiwCount?: number;
+}
+
+export interface IProviderDashboardRes {
+  totalUsers: number;
+  totalProviders: number;
+  totalBookings: number;
+  dailyBookings: {
+    date: string;
+    total: number;
+  }[];
+  monthlyRevenue: {
+    month: string;
+    total: number;
+  }[];
+  topActiveProviders: ITopActiveProviders[];
 }

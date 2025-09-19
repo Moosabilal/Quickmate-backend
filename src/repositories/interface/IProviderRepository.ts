@@ -14,5 +14,6 @@ export interface IProviderRepository extends IBaseRepository<IProvider> {
     updateStatusById(id: string, newStatus: string): Promise<void>;
     getProviderByServiceId(filterQuery: ProviderFilterQuery): Promise<IProvider[]>;
     getProviderId(userId: string): Promise<string>;
+    getTopActiveProviders(): Promise<any[]>;
 
 }

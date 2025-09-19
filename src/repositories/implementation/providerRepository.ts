@@ -67,9 +67,27 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
     }
 
     async getProviderId(userId: string): Promise<string> {
-        const provider =  await Provider.findOne({userId}).select('_id')
+        const provider = await Provider.findOne({ userId }).select('_id')
         return provider._id.toString()
     }
+
+    async getTopActiveProviders(): Promise<any[]> {
+        const result = await Provider.aggregate([
+            {
+                $project: {
+                    fullName: 1,
+                    totalBookings: 1,
+                    rating: 1,
+                    profilePhoto: 1,
+                }
+            },
+            { $sort: { totalBookings: -1 } },
+            { $limit: 10 }
+        ]);
+
+        return result;
+    }
+
 
 
 }

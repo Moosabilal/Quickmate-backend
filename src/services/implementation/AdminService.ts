@@ -6,26 +6,42 @@ import { IBookingRepository } from "../../repositories/interface/IBookingReposit
 import { BookingStatus } from "../../enums/booking.enum";
 import { Roles } from "../../enums/userRoles";
 import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
+import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
+import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
+import { toAdminDashboardDTO } from "../../utils/mappers/admin.mapper";
+import { IProviderDashboardRes } from "../../interface/provider.dto";
 
 @injectable()
 export class AdminService implements IAdminService {
     private _userRepository: IUserRepository;
     private _bookingRepository: IBookingRepository;
     private _paymentRepository: IPaymentRepository;
+    private _providerRepository: IProviderRepository;
+    private _reviewRepository: IReviewRepository;
 
     constructor(@inject(TYPES.UserRepository) userRepository: IUserRepository,
         @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
-        @inject(TYPES.ProviderRepository) paymentRepository: IPaymentRepository
+        @inject(TYPES.PaymentRepository) paymentRepository: IPaymentRepository,
+        @inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
+        @inject(TYPES.ReviewRepository) reviewRepository: IReviewRepository
     ) {
-        this._userRepository = userRepository;
+        this._userRepository = userRepository;;
         this._bookingRepository = bookingRepository;
         this._paymentRepository = paymentRepository;
+        this._providerRepository = providerRepository;
+        this._reviewRepository = reviewRepository;
     }
 
-    public async getAdminDashboard() {
+    public async getAdminDashboard(): Promise<IProviderDashboardRes> {
         const totalUsers = await this._userRepository.countUsers()
         const totalProviders = await this._userRepository.countUsers({role: Roles.PROVIDER})
-        const totalBookings = await this._bookingRepository.countBookings({status: BookingStatus.COMPLETED})
+        const dailyBookings = await this._bookingRepository.getDailyBookingCount({status: BookingStatus.COMPLETED})
         const monthlyRevenue = await this._paymentRepository.getMonthlyAdminRevenue()
+        const topActiveProviders = await this._providerRepository.getTopActiveProviders()
+        const providerReviewCounts = await this._reviewRepository.getReviewCountsByProvider()
+        const totalBookings = dailyBookings.reduce((acc,booking) => acc += booking.total, 0)
+
+        return toAdminDashboardDTO(totalUsers, totalProviders, totalBookings, dailyBookings, monthlyRevenue, topActiveProviders, providerReviewCounts)
+
     }
 }
