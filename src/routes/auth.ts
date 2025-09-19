@@ -26,7 +26,7 @@ router.post('/refresh-token', authController.refreshToken)
 router.post('/contactUsSubmission',isUser, authController.contactUsEmail)
 
 
-router.get('/getUser', authController.getUser);
+router.get('/getUser', authenticateToken, authController.getUser);
 router.put('/update-profile', isUser, upload.single('profilePicture') , authController.updateProfile);
 router.get('/getAllDataForChatBot', isUser, authController.getAllDataForChatBot)
 router.post('/logout', authController.logout )
