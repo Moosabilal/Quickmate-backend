@@ -9,11 +9,15 @@ import { SubscriptionPlanController } from '../controllers/subscriptionPlanContr
 const router = express.Router()
 const subscriptionController = container.get<SubscriptionPlanController>(TYPES.SubscriptionPlanController)
 const isAdmin = [authenticateToken, authorizeRoles(["Admin"])]
+const isAdminOrUser = [authenticateToken, authorizeRoles(["Admin", "ServiceProvider"])]
+const isProvider = [authenticateToken, authorizeRoles(["ServiceProvider"])]
 
 router.post('/createSubscriptionPlan',isAdmin, subscriptionController.createSubscriptionPlan)
-router.get('/getSubscriptionPlan',isAdmin, subscriptionController.getSubscriptionPlan)
+router.get('/getSubscriptionPlan',isAdminOrUser, subscriptionController.getSubscriptionPlan)
 router.put('/updateSubscriptionPlan',isAdmin, subscriptionController.updateSubscriptionPlan)
 router.delete('/deleteSubscriptionPlan/:id',isAdmin, subscriptionController.deleteSubscriptionPlan)
+router.post("/subscribe", isProvider, subscriptionController.subscribeProvider);
+router.get("/:providerId/check", isProvider, subscriptionController.checkProviderSubscription);
 
 
 export default router

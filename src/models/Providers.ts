@@ -93,7 +93,7 @@ const ProviderSchema = new Schema({
     subscription: {
         planId: { 
             type: Schema.Types.ObjectId, 
-            ref: "SubscriptionPlan" 
+            ref: "SubscriptionPlan",
         },
         startDate: Date,
         endDate: Date,

@@ -58,6 +58,13 @@ export interface IFeaturedProviders {
 
 }
 
+export interface ISubscription {
+  planId?: string | Types.ObjectId;
+  startDate?: Date;
+  endDate?: Date;
+  status: SubscriptionStatus
+}
+
 export interface IProviderProfile {
   aadhaarIdProof?: string;
   id: string;
@@ -76,12 +83,7 @@ export interface IProviderProfile {
   payoutPending: number;
   rating: number;
   isVerified: boolean
-  subscription?: {
-    planId?: string;
-    startDate: Date;
-    endDate: Date;
-    status: SubscriptionStatus
-  }
+  subscription?: ISubscription
 }
 
 export interface ProviderFilterQuery {

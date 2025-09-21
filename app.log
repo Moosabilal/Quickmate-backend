@@ -2999,3 +2999,55 @@
 [ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
 [ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
 [ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Service" -> Cast to ObjectId failed for value "undefined" (type string) at path "providerId" for model "Service"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

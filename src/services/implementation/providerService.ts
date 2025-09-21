@@ -85,7 +85,6 @@ export class ProviderService implements IProviderService {
         const otp = generateOTP();
 
         provider.registrationOtp = otp;
-        console.log('the registration otp', otp)
         provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         provider.registrationOtpAttempts = 0;
         await this._providerRepository.update(provider.id, provider);

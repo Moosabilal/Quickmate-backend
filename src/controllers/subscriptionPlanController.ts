@@ -8,7 +8,7 @@ import { HttpStatusCode } from "../enums/HttpStatusCode";
 @injectable()
 export class SubscriptionPlanController {
     private _subscriptionPlanService: ISubscriptionPlanService;
-    constructor(@inject(TYPES.SubscriptionPlanService) subscriptionPlanService: ISubscriptionPlanService){
+    constructor(@inject(TYPES.SubscriptionPlanService) subscriptionPlanService: ISubscriptionPlanService) {
         this._subscriptionPlanService = subscriptionPlanService
     }
 
@@ -42,10 +42,30 @@ export class SubscriptionPlanController {
     public deleteSubscriptionPlan = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
-            const response = await this._subscriptionPlanService.deleteSubscriptionPlan(id)
+            await this._subscriptionPlanService.deleteSubscriptionPlan(id)
             res.status(HttpStatusCode.OK).json()
         } catch (error) {
             next(error)
         }
     }
+
+    public subscribeProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { providerId, planId } = req.body;
+            const result = await this._subscriptionPlanService.subscribe(providerId, planId);
+            res.json(result);
+        } catch (error: any) {
+            res.status(400).json({ message: error.message });
+        }
+    };
+
+    public checkProviderSubscription = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { providerId } = req.params;
+            const subscription = await this._subscriptionPlanService.checkAndExpire(providerId);
+            res.json(subscription);
+        } catch (error: any) {
+            res.status(400).json({ message: error.message });
+        }
+    };
 }

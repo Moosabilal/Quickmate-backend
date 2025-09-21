@@ -8,18 +8,25 @@ import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
 import { toAdminSubscriptionPlanList } from "../../utils/mappers/subscription.mapper";
 import { AdminSubscriptionPlanDTO } from "../../interface/subscriptionPlan";
+import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
+import { SubscriptionStatus } from "../../enums/subscription.enum";
+import { ISubscription } from "../../interface/provider.dto";
 
 @injectable()
 export class SubscriptionPlanService implements ISubscriptionPlanService {
     private _subscriptionPlanRepository: ISubscriptionPlanRepository;
-    constructor(@inject(TYPES.SubscriptionPlanRepository) subscriptionPlanRepository: ISubscriptionPlanRepository) {
-        this._subscriptionPlanRepository = subscriptionPlanRepository
+    private _providerRepository: IProviderRepository;
+    constructor(@inject(TYPES.SubscriptionPlanRepository) subscriptionPlanRepository: ISubscriptionPlanRepository,
+        @inject(TYPES.ProviderRepository) providerRepository: IProviderRepository
+    ) {
+        this._subscriptionPlanRepository = subscriptionPlanRepository;
+        this._providerRepository = providerRepository;
     }
 
     public async createSubscriptionPlan(data: AdminSubscriptionPlanDTO): Promise<void> {
         const name = data.name.charAt(0).toUpperCase() + data.name.slice(1).toLowerCase();
-        const plan = await this._subscriptionPlanRepository.findOne({name})
-        if(plan){
+        const plan = await this._subscriptionPlanRepository.findOne({ name })
+        if (plan) {
             throw new CustomError(ErrorMessage.PLAN_ALREADY_EXITS, HttpStatusCode.CONFLICT)
         }
         const dataPlan: AdminSubscriptionPlanDTO = {
@@ -31,7 +38,7 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
 
     public async getSubscriptionPlan(): Promise<AdminSubscriptionPlanDTO[]> {
         const plans = await this._subscriptionPlanRepository.findAll()
-        if(!plans || plans.length <= 0){
+        if (!plans || plans.length <= 0) {
             return []
         }
         return toAdminSubscriptionPlanList(plans)
@@ -40,7 +47,7 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
     public async updateSubscriptionPlan(data: AdminSubscriptionPlanDTO): Promise<void> {
         const name = data.name.charAt(0).toUpperCase() + data.name.slice(1).toLowerCase();
         const plan = await this._subscriptionPlanRepository.findOne({ _id: { $ne: data.id } })
-        if(plan && plan.name === name){
+        if (plan && plan.name === name) {
             throw new CustomError(ErrorMessage.PLAN_ALREADY_EXITS, HttpStatusCode.CONFLICT)
         }
         const dataPlan: AdminSubscriptionPlanDTO = {
@@ -51,10 +58,48 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
     }
 
     public async deleteSubscriptionPlan(id: string): Promise<void> {
-        console.log('the id', id)
         const plan = await this._subscriptionPlanRepository.findById(id)
-        console.log('the plane exists', plan._id)
+        if (!plan) {
+            throw new CustomError(ErrorMessage.PLAN_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+        }
         await this._subscriptionPlanRepository.delete(id)
+    }
+
+    public async subscribe(providerId: string, planId: string): Promise<{message: string, plan: ISubscriptionPlan}> {
+        const plan = await this._subscriptionPlanRepository.findById(planId);
+        if (!plan) throw new CustomError(ErrorMessage.PLAN_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+
+        const startDate = new Date();
+        const endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + plan.durationInDays);
+
+        await this._providerRepository.update(providerId, {
+            subscription: {
+                status: SubscriptionStatus.ACTIVE,
+                planId: plan._id,
+                startDate,
+                endDate,
+            },
+        });
+
+        return { message: "Subscription activated", plan };
+    }
+
+    public async checkAndExpire(providerId: string): Promise<ISubscription> {
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) throw new CustomError(ErrorMessage.PROVIDER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+
+        const subscription = provider.subscription;
+        if (
+            subscription?.status === SubscriptionStatus.ACTIVE &&
+            subscription?.endDate &&
+            new Date(subscription.endDate) < new Date()
+        ) {
+            subscription.status = SubscriptionStatus.EXPIRED;
+            await provider.save();
+        }
+
+        return provider.subscription;
     }
 
 
