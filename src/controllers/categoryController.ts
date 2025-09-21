@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { CategoryService } from '../services/implementation/categoryService';
-import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../dto/category.dto';
+import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../interface/category.dto';
 import { ICategory } from '../models/Categories';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import { validationResult } from 'express-validator';
@@ -11,6 +11,7 @@ import TYPES from '../di/type';
 import { ICategoryService } from '../services/interface/ICategoryService';
 import { HttpStatusCode } from '../enums/HttpStatusCode';
 import { CommissionTypes } from '../enums/CommissionType.enum';
+import logger from '../logger/logger';
 
 interface AuthRequest extends Request {
   user?: { id: string; role: string };
@@ -93,7 +94,6 @@ export class CategoryController {
         commissionRuleInputForService
       );
 
-      console.log('Created category:', category, 'with commission rule:', commissionRule);
 
       res.status(HttpStatusCode.CREATED).json({
         message: `${category.parentId ? 'Subcategory' : 'Category'} created successfully`,
@@ -102,7 +102,7 @@ export class CategoryController {
       });
       return;
     } catch (error) {
-      console.error('Error in createCategory controller:', error);
+      logger.error('Error in createCategory controller:', error);
       if (req.file && fs.existsSync(req.file.path)) {
         try {
           await fsPromises.unlink(req.file.path);
@@ -270,9 +270,7 @@ export class CategoryController {
 
   getAllMainCategories = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log('it scoming but error')
       const response = await this._categoryService.getAllTopCategories()
-      console.log('the top response', response)
     } catch (error) {
       next(error)
     }

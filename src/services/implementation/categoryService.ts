@@ -1,6 +1,6 @@
 import { CategoryRepository } from '../../repositories/implementation/categoryRepository';
 import { CommissionRuleRepository } from '../../repositories/implementation/commissionRuleRepository';
-import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse, IserviceResponse } from '../../dto/category.dto';
+import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse, IserviceResponse } from '../../interface/category.dto';
 import { ICategory } from '../../models/Categories';
 import { Types } from 'mongoose';
 import { inject, injectable } from 'inversify';
@@ -11,7 +11,7 @@ import { ICategoryService } from '../interface/ICategoryService';
 import { CommissionTypes } from '../../enums/CommissionType.enum';
 import { CustomError } from '../../utils/CustomError';
 import { HttpStatusCode } from '../../enums/HttpStatusCode';
-import { toHomePageDTO } from '../../mappers/category.mapper';
+import { toHomePageDTO } from '../../utils/mappers/category.mapper';
 import { ICommissionRule } from '../../models/Commission';
 
 
@@ -33,12 +33,8 @@ export class CategoryService implements ICategoryService {
         commissionRuleInput?: ICommissionRuleInput
     ): Promise<{ category: ICategoryResponse; commissionRule?: ICommissionRuleResponse }> {
 
-        console.log('Creating category with input:', categoryInput);
-
-        // let parentObjectId: string | null = null;
         if (categoryInput.parentId) {
-
-            const parentCategory = await this._categoryRepository.findOne({parentId: categoryInput.parentId});
+            const parentCategory = await this._categoryRepository.findOne({_id: categoryInput.parentId});
             if (!parentCategory) {
                 throw new CustomError('Parent category not found.', HttpStatusCode.NOT_FOUND);
             }
@@ -209,7 +205,6 @@ export class CategoryService implements ICategoryService {
         if (!categories) {
             throw new CustomError("Service not found, Please try again later", HttpStatusCode.NOT_FOUND)
         }
-        console.log('the cat')
         return categories.map(category => toHomePageDTO(category))
 
     }

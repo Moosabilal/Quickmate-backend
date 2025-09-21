@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import TYPES from "../di/type";
 import { IServiceService } from "../services/interface/IServiceService";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { IAddAndEditServiceForm } from "../dto/service.dto";
+import { IAddAndEditServiceForm } from "../interface/service.dto";
 import { NextFunction, Request, Response } from "express";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
@@ -17,7 +17,6 @@ export class ServiceController {
 
     public addService = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            console.log('reachig backend')
             const files = req.files as {
                 businessCertification?: Express.Multer.File[];
             };
@@ -34,7 +33,6 @@ export class ServiceController {
                 status: req.body.status === "true",
                 businessCertification: businessCertificationUrl,
                 experience: parseInt(req.body.experience),
-                basePrice: parseInt(req.body.basePrice),
                 price: parseInt(req.body.price),
                 userId: req.user.id,
             }
@@ -73,7 +71,6 @@ export class ServiceController {
                 ...req.body,
                 status: req.body.status === "true",
                 experience: parseInt(req.body.experience),
-                basePrice: parseInt(req.body.basePrice),
                 price: parseInt(req.body.price),
                 userId: req.user.id,
             }

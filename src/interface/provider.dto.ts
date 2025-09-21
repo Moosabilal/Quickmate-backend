@@ -1,10 +1,12 @@
-import { Types } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 import { ProviderStatus } from "../enums/provider.enum";
+import { BookingStatus } from "../enums/booking.enum";
+import { SubscriptionStatus } from "../enums/subscription.enum";
 
- export interface Availability {
-    day: string;       
-    startTime: string; 
-    endTime: string;  
+export interface Availability {
+  day: string;
+  startTime: string;
+  endTime: string;
 }
 
 export interface IProviderRegisterRequest {
@@ -53,7 +55,6 @@ export interface IFeaturedProviders {
   userId: string;
   fullName: string;
   profilePhoto: string;
-  // serviceName: string;
 
 }
 
@@ -75,6 +76,12 @@ export interface IProviderProfile {
   payoutPending: number;
   rating: number;
   isVerified: boolean
+  subscription?: {
+    planId?: string;
+    startDate: Date;
+    endDate: Date;
+    status: SubscriptionStatus
+  }
 }
 
 export interface ProviderFilterQuery {
@@ -90,6 +97,13 @@ export interface IServiceAddPageResponse {
   name: string;
   parentId: string | null;
 
+}
+
+export interface IReviewsOfUser {
+  userName?: string,
+  userImg?: string,
+  rating?: number
+  review?: string,
 }
 
 
@@ -108,7 +122,7 @@ export interface IBackendProvider {
   price: number;
   totalBookings: number;
   rating?: number;
-  reviews?: number;
+  reviews?: IReviewsOfUser[];
 }
 
 export interface IProviderForChatListPage {
@@ -122,4 +136,51 @@ export interface IProviderForChatListPage {
   // completedJobs: number;
   lastMessage?: string;
   lastMessageAt?: Date | null;
+}
+
+export interface IDashboardResponse {
+  id: string;
+  service: string;
+  client: string;
+  status: BookingStatus;
+  image: string;
+  category: string;
+
+}
+
+export interface IRatingPoint {
+  month: string;
+  rating: number;
+}
+
+export interface IDashboardStatus {
+  earnings: number;
+  completedJobs: number;
+  upcomingBookings: number;
+  averageRating?: number;
+  ratingHistory?: IRatingPoint[];
+}
+
+export interface ITopActiveProviders {
+  _id: Types.ObjectId | string;
+  fullName: string;
+  totalBookings: number;
+  profilePhoto: string;
+  rating: number;
+  reveiwCount?: number;
+}
+
+export interface IProviderDashboardRes {
+  totalUsers: number;
+  totalProviders: number;
+  totalBookings: number;
+  dailyBookings: {
+    date: string;
+    total: number;
+  }[];
+  monthlyRevenue: {
+    month: string;
+    total: number;
+  }[];
+  topActiveProviders: ITopActiveProviders[];
 }

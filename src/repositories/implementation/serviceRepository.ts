@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { IAddAndEditServiceForm } from "../../dto/service.dto";
+import { IAddAndEditServiceForm } from "../../interface/service.dto";
 import Service, { IService } from "../../models/Service";
 import { IServiceRepository } from "../interface/IServiceRepository";
 import { BaseRepository } from "./base/BaseRepository";

@@ -1,5 +1,5 @@
 import { promises } from "dns";
-import { IAddAndEditServiceForm } from "../../dto/service.dto";
+import { IAddAndEditServiceForm } from "../../interface/service.dto";
 import { IService } from "../../models/Service";
 import { IBaseRepository } from "./base/IBaseRepository";
 

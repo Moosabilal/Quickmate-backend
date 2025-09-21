@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import { Category, ICategory } from '../../models/Categories';
-import { ICategoryInput } from '../../dto/category.dto';
+import { ICategoryInput } from '../../interface/category.dto';
 import { Types } from 'mongoose';
 import { ICategoryRepository } from '../interface/ICategoryRepository';
 import { BaseRepository } from './base/BaseRepository';
@@ -11,26 +11,6 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
     constructor() {
         super(Category)
     }
-
-    // async create(categoryData: ICategoryInput): Promise<ICategory> {
-    //     const dataToSave = { ...categoryData };
-    //     if (dataToSave.parentId && typeof dataToSave.parentId === 'string') {
-    //         dataToSave.parentId = new Types.ObjectId(dataToSave.parentId);
-    //     } else if (dataToSave.parentId === null) {
-    //         dataToSave.parentId = null;
-    //     } else {
-    //         delete dataToSave.parentId;
-    //     }
-
-    //     const category = new Category(dataToSave);
-    //     await category.save();
-    //     return category;
-    // }
-
-    // async findById(id: string | Types.ObjectId): Promise<ICategory | null> {
-    //     return await Category.findById({ _id: id }).exec();
-    // }
-
 
     async findByName(name: string): Promise<ICategory | null> {
         return await Category.findOne({ name, parentId: null }).exec();
@@ -53,12 +33,10 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
     async findAll(filter: any = {}): Promise<ICategory[]> {
     const queryFilter = { ...filter };
 
-    // Handle parentId conversion
     if (queryFilter.parentId && typeof queryFilter.parentId === 'string') {
         queryFilter.parentId = new Types.ObjectId(queryFilter.parentId);
     }
 
-    // Extract special options like "take"
     const { take, skip, ...conditions } = queryFilter;
 
     let query = Category.find(conditions);

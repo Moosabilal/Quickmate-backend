@@ -1,6 +1,6 @@
-import { ILoginResponseDTO } from "../dto/auth.dto";
-import { Roles } from "../enums/userRoles";
-import { IUser } from "../models/User";
+import { ILoginResponseDTO } from "../../interface/auth.dto";
+import { Roles } from "../../enums/userRoles";
+import { IUser } from "../../models/User";
 
 
 export function toLoginResponseDTO(user: IUser): ILoginResponseDTO {

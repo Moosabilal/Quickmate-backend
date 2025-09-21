@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider, Provider } from "../../models/Providers";
-import { IBackendProvider, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../dto/provider.dto";
+import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -12,16 +12,24 @@ import { ErrorMessage } from "../../enums/ErrorMessage";
 import { CustomError } from "../../utils/CustomError";
 import { generateOTP } from "../../utils/otpGenerator";
 import { sendVerificationEmail } from "../../utils/emailService";
-import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
+import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
-import { toProviderDTO, toProviderForChatListPage, toServiceAddPage } from "../../mappers/provider.mapper";
-import { toLoginResponseDTO } from "../../mappers/user.mapper";
+import { toProviderDashboardDTO, toProviderDTO, toProviderForChatListPage, toServiceAddPage } from "../../utils/mappers/provider.mapper";
+import { toLoginResponseDTO } from "../../utils/mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
 import { IService } from "../../models/Service";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IMessageRepository } from "../../repositories/interface/IMessageRepository";
+import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
+import { BookingStatus } from "../../enums/booking.enum";
+
+interface reviewsOfUser {
+    username: string,
+    rating: number
+    review: string,
+}
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
@@ -36,6 +44,7 @@ export class ProviderService implements IProviderService {
     private _categoryRepository: ICategoryRepository;
     private _bookingRepository: IBookingRepository
     private _messageRepository: IMessageRepository;
+    private _reviewRepository: IReviewRepository;
 
     constructor(@inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
         @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
@@ -43,6 +52,7 @@ export class ProviderService implements IProviderService {
         @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
         @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
         @inject(TYPES.MessageRepository) messageRepository: IMessageRepository,
+        @inject(TYPES.ReviewRepository) reviewRepository: IReviewRepository,
     ) {
         this._providerRepository = providerRepository
         this._serviceRepository = serviceRepository
@@ -50,6 +60,7 @@ export class ProviderService implements IProviderService {
         this._categoryRepository = categoryRepository
         this._bookingRepository = bookingRepository
         this._messageRepository = messageRepository;
+        this._reviewRepository = reviewRepository;
     }
 
     public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
@@ -93,27 +104,19 @@ export class ProviderService implements IProviderService {
         const provider = await this._providerRepository.findByEmail(email, true);
 
         if (!provider) {
-            console.log('no provider')
             throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
-
         if (provider.isVerified && provider.status !== ProviderStatus.REJECTED) {
-            console.log('the accoutn si already')
             return { message: 'Account already verified.' };
         }
-
         if (typeof provider.registrationOtpAttempts === 'number' && provider.registrationOtpAttempts >= MAX_OTP_ATTEMPTS) {
-            console.log('the too many attempts')
             throw new CustomError(`Too many failed OTP attempts. Please request a new OTP.`, HttpStatusCode.FORBIDDEN);
-
         }
-        console.log('the provider registration otp', provider.registrationOtp, otp)
         if (!provider.registrationOtp || provider.registrationOtp !== otp) {
             provider.registrationOtpAttempts = (typeof provider.registrationOtpAttempts === 'number' ? provider.registrationOtpAttempts : 0) + 1;
             await this._providerRepository.update(provider.id, provider);
             throw new CustomError('Invalid OTP. Please try again.', HttpStatusCode.BAD_REQUEST);
         }
-        console.log('the success')
 
         if (!provider.registrationOtpExpires || new Date() > provider.registrationOtpExpires) {
             provider.registrationOtp = undefined;
@@ -190,12 +193,7 @@ export class ProviderService implements IProviderService {
             serviceLocation: `${updatedProvider.serviceLocation.coordinates[1]},${updatedProvider.serviceLocation.coordinates[0]}`,
             serviceArea: updatedProvider.serviceArea,
             profilePhoto: updatedProvider.profilePhoto,
-            // price: updatedProvider.price,
             status: updatedProvider.status,
-            // aadhaarIdProof: updatedProvider.aadhaarIdProof,
-            // experience: updatedProvider.experience,
-            // timeSlot: updatedProvider.timeSlot,
-            // verificationDocs: updatedProvider.verificationDocs,
             availability: updatedProvider.availability,
             earnings: updatedProvider.earnings,
             totalBookings: updatedProvider.totalBookings,
@@ -325,8 +323,17 @@ export class ProviderService implements IProviderService {
             serviceArea: provider.serviceArea,
             profilePhoto: provider.profilePhoto,
             status: provider.status,
+            subscription: provider.subscription
+            ? {
+                planId: provider.subscription.planId
+                    ? provider.subscription.planId.toString()
+                    : undefined,
+                startDate: provider.subscription.startDate,
+                endDate: provider.subscription.endDate,
+                status: provider.subscription.status
+            }
+            : undefined,
             aadhaarIdProof: provider.aadhaarIdProof,
-            // timeSlot: provider.timeSlot,
             availability: provider.availability,
             earnings: provider.earnings,
             totalBookings: provider.totalBookings,
@@ -354,7 +361,6 @@ export class ProviderService implements IProviderService {
             userId: provider.userId.toString(),
             fullName: provider.fullName,
             profilePhoto: provider.profilePhoto,
-            // serviceName: provider.serviceName
 
         }))
 
@@ -373,17 +379,15 @@ export class ProviderService implements IProviderService {
 
         const allowedStatuses = Object.values(ProviderStatus);
         if (!allowedStatuses.includes(newStatus as ProviderStatus)) {
-            console.log('the new status', newStatus, allowedStatuses)
             throw new CustomError(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`, HttpStatusCode.BAD_REQUEST);
         }
-        console.log('the id and new status', id, newStatus)
         await this._providerRepository.updateStatusById(id, newStatus)
         return { message: "provider Status updated" }
     }
 
     public async getProviderwithFilters(
         userId: string,
-        serviceId: string,
+        subCategoryId: string,
         filters: {
             area?: string;
             experience?: number;
@@ -393,7 +397,7 @@ export class ProviderService implements IProviderService {
         }
     ): Promise<IBackendProvider[]> {
         const serviceFilter: any = {
-            subCategoryId: serviceId,
+            subCategoryId: subCategoryId,
         };
 
         if (filters.experience) {
@@ -445,6 +449,39 @@ export class ProviderService implements IProviderService {
         }
 
         const providers = await this._providerRepository.findAll(providerFilter);
+        const serviceIds = [...new Set(services.map(s => s._id.toString()))];
+        const reviews = await this._reviewRepository.findAll({
+            providerId: { $in: providerIds },
+            serviceId: { $in: serviceIds }
+        });
+
+        const userIds = [...new Set(reviews.map(r => r.userId.toString()))];
+        const users = await this._userRepository.findAll({
+            _id: { $in: userIds }
+        });
+
+        const userMap = new Map(
+            users.map(u => [u._id.toString(), { name: String(u.name), profilePicture: String(u.profilePicture || ""), }])
+        );
+
+        const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
+
+        reviews.forEach(review => {
+            const pid = review.providerId.toString();
+
+            if (!reviewsByProvider.has(pid)) {
+                reviewsByProvider.set(pid, []);
+            }
+
+            const userData = userMap.get(review.userId.toString());
+
+            reviewsByProvider.get(pid)!.push({
+                userName: userData?.name || "Unknown User",
+                userImg: userData?.profilePicture || "",
+                rating: Number(review.rating),
+                review: String(review.reviewText),
+            });
+        });
 
         const result: IBackendProvider[] = providers.map(provider => {
             const providerServices = servicesByProvider.get(provider._id.toString()) || [];
@@ -459,15 +496,13 @@ export class ProviderService implements IProviderService {
                 profilePhoto: provider.profilePhoto,
                 serviceArea: provider.serviceArea,
                 serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
-                // timeSlot: provider.timeSlot,
                 availability: provider.availability,
                 status: provider.status,
                 earnings: provider.earnings,
                 totalBookings: provider.totalBookings,
                 experience: primaryService?.experience || 0,
                 price: primaryService?.price || 0,
-                rating: provider.rating ?? 0,
-                // reviews: provider.reviews ?? 0,
+                reviews: reviewsByProvider.get(provider._id.toString()) || [],
             };
         });
 
@@ -483,7 +518,7 @@ export class ProviderService implements IProviderService {
         if (!bookings.length) return [];
 
         const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds }});
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
 
         const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
         if (!serviceIds.length) return [];
@@ -496,7 +531,37 @@ export class ProviderService implements IProviderService {
     }
 
 
+    public async getProviderDashboard(
+        userId: string
+    ): Promise<{ dashboardData: IDashboardResponse[]; dashboardStat: IDashboardStatus }> {
+        const provider = await this._providerRepository.findOne({ userId });
+        if (!provider) throw new CustomError("Provider not found", 404);
 
+        const bookings = await this._bookingRepository.findAll({
+            providerId: provider._id.toString(),
+        });
+
+        const serviceIds = [...new Set(bookings.map((b) => b.serviceId?.toString()))];
+        const services = await this._serviceRepository.findAll({
+            _id: { $in: serviceIds },
+        });
+
+        const subCategoryIds = [...new Set(services.map((s) => s.subCategoryId.toString()))];
+        const subCategories = await this._categoryRepository.findAll({
+            _id: { $in: subCategoryIds },
+        });
+
+        const parentCategoryIds = [...new Set(subCategories.map((sc) => sc.parentId.toString()))];
+        const parentCategories = await this._categoryRepository.findAll({
+            _id: { $in: parentCategoryIds },
+        });
+
+        const reviews = await this._reviewRepository.findAll({
+            providerId: provider._id.toString(),
+        });
+
+        return toProviderDashboardDTO(provider, bookings, services, subCategories, parentCategories, reviews);
+    }
 
 
 

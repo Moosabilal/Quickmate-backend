@@ -3,7 +3,7 @@ import { IAddressService } from "../interface/IAddressService";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
 import TYPES from "../../di/type";
 import { IAddress } from "../../models/address";
-import { IAddressRequest } from "../../dto/address..dto";
+import { IAddressRequest } from "../../interface/address..dto";
 
 injectable()
 export class AddressService implements IAddressService {
@@ -24,13 +24,10 @@ export class AddressService implements IAddressService {
         let createdAddress: IAddress;
 
         if (address) {
-            console.log("Address already exists");
             createdAddress = address;
         } else {
             createdAddress = await this._addressRepsitory.create(data);
         }
-
-        console.log('if there returned')
         return {
             id: createdAddress._id.toString(),
             userId: createdAddress.userId.toString(),

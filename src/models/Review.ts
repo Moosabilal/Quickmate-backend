@@ -38,11 +38,7 @@ const ReviewSchema: Schema = new Schema(
       type: String,
       enum: Object.values(ReviewStatus),
       default: ReviewStatus.PENDING,
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
+    }
   },
   { timestamps: true }
 );

@@ -1,17 +1,18 @@
 import { timeStamp } from "console";
-import { IBookingConfirmationRes, IBookingHistoryPage, IGetMessages, IProviderBookingManagement } from "../dto/booking.dto";
-import { BookingStatus } from "../enums/booking.enum";
-import { PaymentStatus } from "../enums/userRoles";
-import { IAddress } from "../models/address";
-import { IBooking } from "../models/Booking";
-import { ICategory } from "../models/Categories";
-import message, { IMessage } from "../models/message";
-import { IPayment } from "../models/payment";
-import { IService } from "../models/Service";
-import { IProvider } from "../models/Providers";
-import { IUser } from "../models/User";
+import { IBookingConfirmationRes, IBookingHistoryPage, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
+import { BookingStatus } from "../../enums/booking.enum";
+import { PaymentStatus } from "../../enums/userRoles";
+import { IAddress } from "../../models/address";
+import { IBooking } from "../../models/Booking";
+import { ICategory } from "../../models/Categories";
+import message, { IMessage } from "../../models/message";
+import { IPayment } from "../../models/payment";
+import { IService } from "../../models/Service";
+import { IProvider } from "../../models/Providers";
+import { IUser } from "../../models/User";
+import { IReview } from "../../models/Review";
 
-export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider): IBookingConfirmationRes {
+export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider, review?: IReview): IBookingConfirmationRes {
     return {
         id: booking._id.toString(),
         serviceName: service.title,
@@ -38,6 +39,9 @@ export function toBookingConfirmationPage(booking: IBooking, address: IAddress, 
         specialInstruction: booking.instructions as string,
         providerTimings: provider.availability || [],
         createdAt: booking.createdAt as Date,
+        reviewed: (booking.reviewed as boolean) || false,
+        rating: (review && review.rating as number) || 0,
+        review: (review && review.reviewText as string) || ''
     }
 }
 
@@ -75,13 +79,18 @@ export function toProviderBookingManagement(
 ): IProviderBookingManagement[] {
 
     return bookings.map((booking): IProviderBookingManagement => {
+        console.log('the bookingsi',booking.serviceId.toString())
+        services.map(s => console.log(s._id.toString()))
         const user = users.find(u => u._id.toString() === booking.userId?.toString());
         const service = services.find(s => s._id.toString() === booking.serviceId?.toString());
         const address = addresses.find(a => a._id.toString() === booking.addressId?.toString());
         const payment = payments.find(p => p._id.toString() === booking.paymentId?.toString());
 
+        console.log('the servide', service)
+
         return {
             id: booking._id.toString(),
+            customerId: user._id.toString(),
             customerName: String(booking.customerName || user?.fullName || ''),
             customerImage: String(user?.profilePicture || ''),
             service: String(service?.title || ''),

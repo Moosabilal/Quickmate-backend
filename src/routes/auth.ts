@@ -10,6 +10,7 @@ const authController = container.get<AuthController>(TYPES.AuthController)
 
 const isUser = [authenticateToken, authorizeRoles(['Customer','ServiceProvider'])];
 const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
+const isAdminOrUser = 
 
 router.post('/register',authController.register);
 router.post('/login',  authController.login);
@@ -18,7 +19,6 @@ router.post('/resend-registration-otp', authController.resendOtp);
 
 router.post('/forgot-password', authController.forgotPassword);
 router.post('/reset-password', authController.resetPassword);
-// router.post('/verify-password', isUser, authController.verifyPassword);
 
 router.post('/google-login', authController.googleLogin);
 
@@ -26,7 +26,7 @@ router.post('/refresh-token', authController.refreshToken)
 router.post('/contactUsSubmission',isUser, authController.contactUsEmail)
 
 
-router.get('/getUser', isUser, authController.getUser);
+router.get('/getUser', authenticateToken, authController.getUser);
 router.put('/update-profile', isUser, upload.single('profilePicture') , authController.updateProfile);
 router.get('/getAllDataForChatBot', isUser, authController.getAllDataForChatBot)
 router.post('/logout', authController.logout )

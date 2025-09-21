@@ -9,7 +9,6 @@ export interface IAddAndEditServiceForm {
     categoryId: string;
     subCategoryId: string | null;
     duration: string,
-    basePrice: number;
     priceUnit: ServicesPriceUnit;
     providerId?: string;
     status: boolean;
@@ -25,6 +24,4 @@ export interface IProviderServicePageResponse {
     price: number;
     serviceImage: string;
     description: string;
-    // rating: number;
-    // reviews: number;
 }

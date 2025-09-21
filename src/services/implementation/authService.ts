@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { IUserRepository } from '../../repositories/interface/IUserRepository';
-import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody, AuthSuccessResponse } from '../../dto/auth.dto';
+import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody, AuthSuccessResponse } from '../../interface/auth.dto';
 import { generateOTP } from '../../utils/otpGenerator';
 import { sendVerificationEmail, sendPasswordResetEmail, sendContactUsEmail } from '../../utils/emailService';
 import bcrypt from 'bcryptjs';
@@ -252,24 +252,6 @@ export class AuthService implements IAuthService {
 
         return { message: 'Your password has been reset successfully.' };
     }
-
-    // public async verifyPassword(id: string, currentPassword: string): Promise<{ message: string }> {
-    //     const user = await this.userRepository.findById(id);
-    //     console.log('the user is', user)
-
-    //     if (!user || !user.password) {
-    //         throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
-    //     }
-
-    //     const isMatch = await bcrypt.compare(currentPassword, String(user.password));
-    //     if (!isMatch) {
-    //         throw new CustomError(ErrorMessage.INVALID_CREDENTIALS, HttpStatusCode.UNAUTHORIZED)
-
-    //     }
-
-    //     return { message: 'Password verified successfully.' };
-
-    // }
 
     public async googleAuthLogin(token: string): Promise<{ user: { id: string; name: string; email: string; role: string }; token: string; refreshToken: string; }> {
         const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);

@@ -49,11 +49,22 @@ import { IReviewService } from '../services/interface/IReviewService';
 import { ReviewService } from '../services/implementation/reviewService';
 import { IReviewRepository } from '../repositories/interface/IReviewRepository';
 import { ReviewRepository } from '../repositories/implementation/reviewRepository';
+import { AdminController } from '../controllers/adminController';
+import { IAdminService } from '../services/interface/IAdminService';
+import { AdminService } from '../services/implementation/AdminService';
+import { SubscriptionPlanController } from '../controllers/subscriptionPlanController';
+import { ISubscriptionPlanService } from '../services/interface/ISubscriptionPlanService';
+import { ISubscriptionPlanRepository } from '../repositories/interface/ISubscriptionPlanRepository';
+import { SubscriptionPlanService } from '../services/implementation/subscriptionPlanService';
+import { SubscriptionPlanRepository } from '../repositories/implementation/subscriptionPlanRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
 container.bind<IAuthService>(TYPES.AuthService).to(AuthService)
 container.bind<IUserRepository>(TYPES.UserRepository).to(UserRepository)
+
+container.bind<AdminController>(TYPES.AdminController).to(AdminController)
+container.bind<IAdminService>(TYPES.AdminService).to(AdminService)
 
 container.bind<CategoryController>(TYPES.CategoryController).to(CategoryController)
 container.bind<ICategoryService>(TYPES.CategoryService).to(CategoryService)
@@ -86,5 +97,9 @@ container.bind<IWalletRepository>(TYPES.WalletRepository).to(WalletRepository)
 container.bind<ReviewController>(TYPES.ReviewController).to(ReviewController)
 container.bind<IReviewService>(TYPES.ReviewService).to(ReviewService)
 container.bind<IReviewRepository>(TYPES.ReviewRepository).to(ReviewRepository)
+
+container.bind<SubscriptionPlanController>(TYPES.SubscriptionPlanController).to(SubscriptionPlanController)
+container.bind<ISubscriptionPlanService>(TYPES.SubscriptionPlanService).to(SubscriptionPlanService)
+container.bind<ISubscriptionPlanRepository>(TYPES.SubscriptionPlanRepository).to(SubscriptionPlanRepository)
 
 export {container}

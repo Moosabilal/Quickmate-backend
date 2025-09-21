@@ -9,4 +9,24 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
     constructor() {
         super(Review)
     }
+
+    async getReviewCountsByProvider(): Promise<{ providerId: string; reviewCount: number }[]> {
+        const result = await Review.aggregate([
+            {
+                $group: {
+                    _id: "$providerId",
+                    reviewCount: { $sum: 1 }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    providerId: "$_id",
+                    reviewCount: 1
+                }
+            },
+        ]);
+
+        return result;
+    }
 }

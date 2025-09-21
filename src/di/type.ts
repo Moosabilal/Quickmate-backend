@@ -1,10 +1,10 @@
-import { BaseRepository } from "../repositories/implementation/base/BaseRepository"
-import { MessageRepository } from "../repositories/implementation/messageRepository"
 
 const TYPES = {
     AuthController: Symbol.for('AuthController'),
     AuthService: Symbol.for('AuthService'),
     UserRepository: Symbol.for('UserRepository'),
+    AdminController: Symbol.for('AdminController'),
+    AdminService: Symbol.for('AdminService'),
     CategoryController: Symbol.for('CategoryController'),
     CategoryService: Symbol.for('CategoryService'),
     CategoryRepository: Symbol.for('CategoryRepository'),
@@ -29,6 +29,9 @@ const TYPES = {
     ReviewController: Symbol.for('ReviewerController'),
     ReviewService: Symbol.for('ReviewService'),
     ReviewRepository: Symbol.for('ReviewRepository'),
+    SubscriptionPlanController: Symbol.for('SubscriptionPlanController'),
+    SubscriptionPlanService: Symbol.for('SubscriptionPlanService'),
+    SubscriptionPlanRepository: Symbol.for('SubscriptionPlanRepository'),
 
 }
 

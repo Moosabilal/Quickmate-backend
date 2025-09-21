@@ -88,7 +88,7 @@ export const sendContactUsEmail = async (name: string, email: string , message: 
 
 export const sendBookingVerificationEmail = async (toEmail: string, otp: string): Promise<void> => {
   try {
-    console.log('the email', toEmail, otp)
+    logger.info('the email', toEmail, otp)
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: toEmail,

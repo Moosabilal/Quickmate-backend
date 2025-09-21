@@ -3,10 +3,10 @@ import { Request, Response, NextFunction } from 'express';
 import { IProviderService } from "../services/interface/IProviderService";
 import TYPES from "../di/type";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { IProviderProfile, IProviderRegisterRequest } from "../dto/provider.dto";
+import { IProviderProfile, IProviderRegisterRequest } from "../interface/provider.dto";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../dto/auth.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth.dto";
 import { IProvider } from "../models/Providers";
 
 @injectable()
@@ -31,16 +31,11 @@ export class ProviderController {
 
             const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '') : '';
             const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '') : '';
-            // const certificationUrl = certification ? (await uploadToCloudinary(certification.path)).replace(baseUrl, '') : '';
 
 
 
             const formData = {
                 ...req.body,
-                // timeSlot: JSON.parse(req.body.timeSlot),
-                // verificationDocs: {
-                //     aadhaarIdProof: aadhaarUrl,
-                // },
                 aadhaarIdProof: aadhaarUrl,
                 availability: JSON.parse(req.body.availability || '[]'),
                 profilePhoto: profileUrl,
@@ -79,16 +74,12 @@ export class ProviderController {
     public updateProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
-            console.log('req.body ', req.body)
-            console.log('req.fafasdfas', req.files)
-
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
                 profilePhoto?: Express.Multer.File[];
             };
 
             const aadhaar = files?.aadhaarIdProof?.[0];
-            console.log('the aadhar', aadhaar)
             const profile = files?.profilePhoto?.[0];
 
             const baseUrl = process.env.CLOUDINARY_BASE_URL;
@@ -121,8 +112,6 @@ export class ProviderController {
             if (aadhaarUrl) {
                 updateData.aadhaarIdProof = aadhaarUrl;
             }
-
-            console.log('the adhara updatetion', aadhaarUrl)
 
             const updatedProvider = await this._providerService.updateProviderDetails(updateData);
 
@@ -220,6 +209,16 @@ export class ProviderController {
         try {
             const userId = req.user.id
             const response = await this._providerService.providerForChatPage(userId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public getProviderDashboard = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id
+            const response = await this._providerService.getProviderDashboard(userId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

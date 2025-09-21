@@ -8,7 +8,7 @@ export interface RazorpayOrder {
   receipt: string;
   status: string;
   attempts: number;
-  notes: Record<string, string | number>; // ✅ FIXED THIS LINE
+  notes: Record<string, string | number>;
   offer_id: string | null;
   created_at: number;
 }

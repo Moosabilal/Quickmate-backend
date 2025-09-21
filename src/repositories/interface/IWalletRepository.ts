@@ -5,7 +5,6 @@ import { ITransaction } from "../../models/transaction";
 
 
 export interface IWalletRepository extends IBaseRepository<IWallet> {
-    // saveWallet(wallet: IWallet, session?: ClientSession): Promise<IWallet>;
     createTransaction(data: Partial<ITransaction>,session?: ClientSession): Promise<ITransaction>;
     getTransactions(filter: FilterQuery<ITransaction>,skip?: number, limit?: number): Promise<ITransaction[]>;
     transactionCount(): Promise<number>

@@ -21,10 +21,10 @@ const ServiceSchema = new Schema(
       ref: 'Category',
       required: true,
     },
-    basePrice: {
-      type: Number,
-      required: true,
-    },
+    // basePrice: {
+    //   type: Number,
+    //   required: true,
+    // },
     priceUnit: {
       type: String,
       enum: Object.values(ServicesPriceUnit),

@@ -1,5 +1,6 @@
 import { Schema, model, Types, HydratedDocument, InferSchemaType } from 'mongoose';
 import { ProviderStatus } from '../enums/provider.enum';
+import { SubscriptionStatus } from '../enums/subscription.enum';
 
 
 const ProviderSchema = new Schema({
@@ -23,21 +24,11 @@ const ProviderSchema = new Schema({
         required: true,
         trim: true,
     },
-    // categoryId: {
-    //     type: Types.ObjectId,
-    //     ref: 'Category',
-    //     required: true,
-    // },
     serviceId: {
         type: [Types.ObjectId],
         ref: 'Category',
         required: true,
     },
-    // serviceName: {
-    //     type: String,
-    //     required: false,
-    //     trim: true,
-    // },
     serviceLocation: {
         type: {
             type: String,
@@ -45,33 +36,20 @@ const ProviderSchema = new Schema({
             required: true
         },
         coordinates: {
-            type: [Number], // [longitude, latitude]
+            type: [Number],
             required: true
         }
     },
-    // serviceLocation: {
-    //     type: String,
-    //     required: true,
-    // },
     serviceArea: {
         type: String,
         required: true,
     },
-    // experience: {
-    //     type: Number,
-    //     min: 0,
-    //     required: true,
-    // },
-    // price: {
-    //     type: Number,
-    //     required: false,
-    // },
     availability: {
         type: [
             {
-                day: { type: String, required: true }, // e.g., "Monday"
-                startTime: { type: String, required: true }, // e.g., "09:00"
-                endTime: { type: String, required: true },   // e.g., "17:00"
+                day: { type: String, required: true },
+                startTime: { type: String, required: true },
+                endTime: { type: String, required: true },
             }
         ],
         required: true,
@@ -111,6 +89,19 @@ const ProviderSchema = new Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    subscription: {
+        planId: { 
+            type: Schema.Types.ObjectId, 
+            ref: "SubscriptionPlan" 
+        },
+        startDate: Date,
+        endDate: Date,
+        status: { 
+            type: String, 
+            enum: Object.values(SubscriptionStatus), 
+            default: SubscriptionStatus.NONE
+        }
     },
     registrationOtp: {
         type: String,

@@ -1,7 +1,7 @@
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../dto/auth.dto";
-import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../dto/booking.dto";
-import { IPaymentVerificationRequest } from "../../dto/payment.dto";
-import { RazorpayOrder } from "../../dto/razorpay.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
+import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
+import { IPaymentVerificationRequest } from "../../interface/payment.dto";
+import { RazorpayOrder } from "../../interface/razorpay.dto";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IMessage } from "../../models/message";
 
@@ -16,8 +16,8 @@ export interface IBookingService {
 
     //provider
     getBookingFor_Prov_mngmnt(userId: string, providerId: string): Promise<IProviderBookingManagement[]>;
-    saveAndEmitMessage(io: any, bookingId: string, senderId: string, text: string)
-    getBookingMessages(bookingId: string): Promise<IMessage[]>;
+    saveAndEmitMessage(io: any, joiningId: string, senderId: string, text: string)
+    getBookingMessages(joiningId: string): Promise<IMessage[]>;
     verifyOtp(data: VerifyOtpRequestBody, bookingToken: string): Promise<void>
     resendOtp(data: ResendOtpRequestBody, userId?: string): Promise<{ message: string, newCompletionToken?: string }>
 

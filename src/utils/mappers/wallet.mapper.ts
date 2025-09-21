@@ -1,5 +1,5 @@
 import { Currency } from "lucide-react"
-import { IOrder } from "../dto/payment.dto"
+import { IOrder } from "../../interface/payment.dto"
 
 
 export const toIInitiateDepositRes = async (order: IOrder) => {

@@ -4,8 +4,8 @@ import TYPES from "../di/type";
 import { NextFunction, Request, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { AuthRequest } from "../middleware/authMiddleware";
-import { IPaymentVerificationRequest } from "../dto/payment.dto";
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../dto/auth.dto";
+import { IPaymentVerificationRequest } from "../interface/payment.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth.dto";
 
 @injectable()
 export class BookingController {
@@ -81,8 +81,8 @@ export class BookingController {
 
     public getAllPreviousChats = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const bookingId = req.params.bookingId
-            const response = await this._bookingService.getBookingMessages(bookingId)
+            const joiningId = req.params.joiningId
+            const response = await this._bookingService.getBookingMessages(joiningId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -94,7 +94,6 @@ export class BookingController {
             const bookingId = req.params.id
             const userId = req.user.id
             const response = await this._bookingService.updateStatus(bookingId, req.body.status, userId)
-            console.log('the jwt respnse in controller', response)
             let bookingVerifyToken = response.completionToken
             res.cookie('bookingToken', bookingVerifyToken, {
                 httpOnly: true,

@@ -2,7 +2,7 @@
 import { inject, injectable } from 'inversify';
 import { Request, Response, NextFunction } from 'express';
 import { IAuthService } from '../services/interface/IAuthService';
-import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../dto/auth.dto';
+import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../interface/auth.dto';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import TYPES from '../di/type';
 import { AuthRequest } from '../middleware/authMiddleware';
@@ -90,18 +90,6 @@ export class AuthController {
       next(error);
     }
   }
-
-  // public verifyPassword = async (req: Request<{}, {}, { currentPassword: string }>, res: Response, next: NextFunction) => {
-  //   try {
-  //     const { currentPassword } = req.body;
-  //     const id = (req as AuthRequest).user.id
-  //     console.log('User ID from token:', id); 
-  //     const response = await this.authService.verifyPassword(id, currentPassword);
-  //     res.status(HttpStatusCode.OK).json(response);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
 
 
   public googleLogin = async (req: Request<{}, {}, { token: string }>, res: Response, next: NextFunction) => {

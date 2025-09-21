@@ -11,10 +11,6 @@ export class WalletRepository extends BaseRepository<IWallet> implements IWallet
         super(Wallet)
     }
 
-    // async saveWallet(wallet: IWallet): Promise<IWallet> {
-    //     return wallet.save();
-    // }
-
     async createTransaction(
         data: Partial<ITransaction>,
         session?: ClientSession

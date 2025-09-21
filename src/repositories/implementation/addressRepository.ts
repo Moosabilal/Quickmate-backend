@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { IAddressRepository } from "../interface/IAddressRepository";
 import { Address, IAddress } from "../../models/address";
-import { IAddressRequest } from "../../dto/address..dto";
+import { IAddressRequest } from "../../interface/address..dto";
 import { BaseRepository } from "./base/BaseRepository";
 
 
@@ -11,20 +11,5 @@ export class AddressRepository extends BaseRepository<IAddress> implements IAddr
     constructor() {
         super(Address)
     }
-    // async createAddress(data: IAddressRequest): Promise<IAddress> {
-    //     const address = new Address(data)
-    //     return await address.save()
-    // }
 
-    // async fetchAddress(userId: string): Promise<IAddress[]> {
-    //     return await Address.find({userId: userId})
-    // }
-
-    // async updateAddress(id: string, data: IAddressRequest): Promise<IAddress> {
-    //     return await Address.findByIdAndUpdate(id, data,{new: true})
-    // }
-
-    // async deleteAddressById(id: string): Promise<void> {
-    //     await Address.findByIdAndDelete(id)
-    // }
 }

@@ -1,7 +1,8 @@
 import mongoose, { Schema, Document, InferSchemaType, HydratedDocument } from "mongoose";
 
 const MessageSchema = new Schema({
-  bookingId: { type: Schema.Types.ObjectId, ref: "Booking", required: true },
+  joiningId: { type: String},
+  // bookingId: { type: Schema.Types.ObjectId, ref: "Booking", required: false },
   senderId: { type: String, required: true },
   text: { type: String, required: true },
 }, { timestamps: true });

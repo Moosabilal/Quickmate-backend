@@ -4,6 +4,7 @@ import { IUser } from '../../models/User';
 import { injectable } from 'inversify';
 import User from '../../models/User';
 import { BaseRepository } from './base/BaseRepository';
+import { FilterQuery } from 'mongoose';
 
 @injectable()
 export class UserRepository extends BaseRepository<IUser> implements IUserRepository {
@@ -11,11 +12,6 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
   constructor() {
     super(User)
   }
-
-  // async create(userData: Partial<IUser>): Promise<IUser> {
-  //   const user = new User(userData);
-  //   return await user.save();
-  // }
 
   async findByEmail(email: string, includeOtpFields: boolean = false): Promise<IUser | null> {
     let query = User.findOne<IUser>({ email });
@@ -25,10 +21,6 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
     }
     return await query.exec();
   }
-
-  // async update(user: IUser): Promise<IUser> {
-  //   return await user.save();
-  // }
 
   async findByPasswordResetToken(token: string): Promise<IUser | null> {
     return User.findOne({
@@ -40,10 +32,6 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
   async findByGoogleId(googleId: string): Promise<IUser | null> {
     return await User.findOne({ googleId })
   }
-
-  // async findById(id: string): Promise<IUser | null> {
-  //   return await User.findById(id).select('+refreshToken')
-  // }
 
   async findByIdForRefreshToken(id: string): Promise<IUser | null> {
     return await User.findById(id).select('+refreshToken')
@@ -57,9 +45,8 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
     return await User.find(filter).skip(skip).limit(limit).exec();
   }
 
-  public async countUsers(filter: any): Promise<number> {
+  public async countUsers(filter: FilterQuery<IUser>): Promise<number> {
     return await User.countDocuments(filter).exec();
   }
-
 
 }

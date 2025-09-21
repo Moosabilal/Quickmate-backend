@@ -1,5 +1,3 @@
-// src/repositories/base/BaseRepository.ts
-
 import { Model, Document, FilterQuery, UpdateQuery } from 'mongoose';
 import { IBaseRepository } from '../../interface/base/IBaseRepository';
 import { injectable } from 'inversify';
@@ -36,4 +34,5 @@ export class BaseRepository<T extends Document> implements IBaseRepository<T> {
     async delete(id: string): Promise<T | null> {
         return await this.model.findByIdAndDelete(id);
     }
+
 }

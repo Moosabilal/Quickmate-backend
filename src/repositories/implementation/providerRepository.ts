@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
-import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../dto/provider.dto";
+import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../interface/provider.dto";
 import { IProviderRepository } from "../interface/IProviderRepository";
 import { injectable } from "inversify";
 import { BaseRepository } from "./base/BaseRepository";
@@ -29,10 +29,6 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         }
         return await query.exec();
     }
-
-    // async update(provider: IProvider): Promise<IProvider> {
-    //     return await provider.save()
-    // }
 
     async updateProvider(updateData: Partial<IProvider>): Promise<IProvider | null> {
         const data = await Provider.findOneAndUpdate({ userId: updateData.userId }, updateData, { new: true });
@@ -71,9 +67,27 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
     }
 
     async getProviderId(userId: string): Promise<string> {
-        const provider =  await Provider.findOne({userId}).select('_id')
+        const provider = await Provider.findOne({ userId }).select('_id')
         return provider._id.toString()
     }
+
+    async getTopActiveProviders(): Promise<any[]> {
+        const result = await Provider.aggregate([
+            {
+                $project: {
+                    fullName: 1,
+                    totalBookings: 1,
+                    rating: 1,
+                    profilePhoto: 1,
+                }
+            },
+            { $sort: { totalBookings: -1 } },
+            { $limit: 10 }
+        ]);
+
+        return result;
+    }
+
 
 
 }

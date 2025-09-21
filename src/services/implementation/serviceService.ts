@@ -2,10 +2,10 @@ import { inject, injectable } from "inversify";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
 import { IServiceService } from "../interface/IServiceService";
 import TYPES from "../../di/type";
-import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../dto/service.dto";
+import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../interface/service.dto";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
-import { toProviderServicePage, toServiceEditPage } from "../../mappers/service.mapper";
+import { toProviderServicePage, toServiceEditPage } from "../../utils/mappers/service.mapper";
 import { IService } from "../../models/Service";
 import { CustomError } from "../../utils/CustomError";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -79,8 +79,6 @@ export class ServiceService implements IServiceService {
             throw new CustomError('No service found, Unable to update', HttpStatusCode.NOT_FOUND)
         }
         await this._serviceRepository.update(id, serviceData)
-        console.log('service second part working fine')
-
         return {
             message: "Service successfully updated ",
             success: true
