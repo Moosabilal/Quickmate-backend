@@ -271,7 +271,6 @@ export class BookingService implements IBookingService {
 
     async getBookingMessages(joiningId: string): Promise<IMessage[]> {
         const data = await this._messageRepository.findAllSorted(joiningId);
-        console.log('the data', data)
 
         return data
 
@@ -397,6 +396,8 @@ export class BookingService implements IBookingService {
                     description: `Payment Received from ${service.title}`,
                 },
             );
+
+            await this._providerRepository.update(provider._id.toString(), provider)
             
 
 

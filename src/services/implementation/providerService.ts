@@ -323,6 +323,16 @@ export class ProviderService implements IProviderService {
             serviceArea: provider.serviceArea,
             profilePhoto: provider.profilePhoto,
             status: provider.status,
+            subscription: provider.subscription
+            ? {
+                planId: provider.subscription.planId
+                    ? provider.subscription.planId.toString()
+                    : undefined,
+                startDate: provider.subscription.startDate,
+                endDate: provider.subscription.endDate,
+                status: provider.subscription.status
+            }
+            : undefined,
             aadhaarIdProof: provider.aadhaarIdProof,
             availability: provider.availability,
             earnings: provider.earnings,

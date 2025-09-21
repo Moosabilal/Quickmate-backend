@@ -2633,3 +2633,369 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan/$ 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan/$ -> Not Found - /api/subscriptionPlan/getSubscriptionPlan/$
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 Not Found - /api/subscriptionPlan/getSubscriptionPlan -> Not Found - /api/subscriptionPlan/getSubscriptionPlan
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 404 No subscription Plan created -> No subscription Plan created
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 500 Cannot read properties of undefined (reading 'name') -> Cannot read properties of undefined (reading 'name')
+[ERROR  ] - POST /api/subscriptionPlan/createSubscriptionPlan 500 Cannot read properties of undefined (reading 'charAt') -> Cannot read properties of undefined (reading 'charAt')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/subscriptionPlan/createSubscriptionPlan 500 Cannot read properties of undefined (reading 'charAt') -> Cannot read properties of undefined (reading 'charAt')
+[ERROR  ] - POST /api/subscriptionPlan/createSubscriptionPlan 500 SubscriptionPlan validation failed: _id: Cast to ObjectId failed for value "mhot8xqmm" (type string) at path "_id" because of "BSONError" -> SubscriptionPlan validation failed: _id: Cast to ObjectId failed for value "mhot8xqmm" (type string) at path "_id" because of "BSONError"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/subscriptionPlan/createSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[ERROR  ] - POST /api/subscriptionPlan/createSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 500 Cannot read properties of undefined (reading 'name') -> Cannot read properties of undefined (reading 'name')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - DELETE /api/subscriptionPlan/deleteSubscriptionPlan/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "SubscriptionPlan" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "SubscriptionPlan"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - DELETE /api/subscriptionPlan/deleteSubscriptionPlan/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "SubscriptionPlan" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "SubscriptionPlan"
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[ERROR  ] - PUT /api/subscriptionPlan/updateSubscriptionPlan 409 This named plan already exist, Please provide another name -> This named plan already exist, Please provide another name
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - the email
+[INFO   ] - Sending verification email to habid@gmail.com with OTP: 553817 mail
+[INFO   ] - Verification OTP sent to habid@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - the email
+[INFO   ] - Sending verification email to habid@gmail.com with OTP: 196709 mail
+[INFO   ] - Verification OTP sent to habid@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingFor_Prov_mngmnt/68aede6ea437231e6279f1bc 500 Cannot read properties of undefined (reading 'priceUnit') -> Cannot read properties of undefined (reading 'priceUnit')
+[INFO   ] - Sending verification email to sojil@gmail.com with OTP: 233517 mail
+[INFO   ] - Verification OTP sent to sojil@gmail.com
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/provider/getServicesForAddPage 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/services/getServicesForProvider/ 404 Not Found - /api/services/getServicesForProvider/ -> Not Found - /api/services/getServicesForProvider/
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-00.1xluc.mongodb.net

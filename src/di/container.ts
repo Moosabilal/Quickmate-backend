@@ -52,6 +52,11 @@ import { ReviewRepository } from '../repositories/implementation/reviewRepositor
 import { AdminController } from '../controllers/adminController';
 import { IAdminService } from '../services/interface/IAdminService';
 import { AdminService } from '../services/implementation/AdminService';
+import { SubscriptionPlanController } from '../controllers/subscriptionPlanController';
+import { ISubscriptionPlanService } from '../services/interface/ISubscriptionPlanService';
+import { ISubscriptionPlanRepository } from '../repositories/interface/ISubscriptionPlanRepository';
+import { SubscriptionPlanService } from '../services/implementation/subscriptionPlanService';
+import { SubscriptionPlanRepository } from '../repositories/implementation/subscriptionPlanRepository';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -92,5 +97,9 @@ container.bind<IWalletRepository>(TYPES.WalletRepository).to(WalletRepository)
 container.bind<ReviewController>(TYPES.ReviewController).to(ReviewController)
 container.bind<IReviewService>(TYPES.ReviewService).to(ReviewService)
 container.bind<IReviewRepository>(TYPES.ReviewRepository).to(ReviewRepository)
+
+container.bind<SubscriptionPlanController>(TYPES.SubscriptionPlanController).to(SubscriptionPlanController)
+container.bind<ISubscriptionPlanService>(TYPES.SubscriptionPlanService).to(SubscriptionPlanService)
+container.bind<ISubscriptionPlanRepository>(TYPES.SubscriptionPlanRepository).to(SubscriptionPlanRepository)
 
 export {container}

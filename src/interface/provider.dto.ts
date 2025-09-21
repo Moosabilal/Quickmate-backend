@@ -1,6 +1,7 @@
 import mongoose, { Schema, Types } from "mongoose";
 import { ProviderStatus } from "../enums/provider.enum";
 import { BookingStatus } from "../enums/booking.enum";
+import { SubscriptionStatus } from "../enums/subscription.enum";
 
 export interface Availability {
   day: string;
@@ -75,6 +76,12 @@ export interface IProviderProfile {
   payoutPending: number;
   rating: number;
   isVerified: boolean
+  subscription?: {
+    planId?: string;
+    startDate: Date;
+    endDate: Date;
+    status: SubscriptionStatus
+  }
 }
 
 export interface ProviderFilterQuery {

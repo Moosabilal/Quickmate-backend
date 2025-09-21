@@ -21,4 +21,8 @@ export enum ErrorMessage {
   BOOKING_CANNOT_BE_CANCELLED = "Booking cannot be cancelled at this stage.",
   BOOKING_IS_ALREADY_CANCELLED = "Booking is already cancelled.",
   BOOKING_CANCELLED_SUCCESSFULLY = "Booking cancelled successfully.",
+
+  //subscriptionPlan errors
+  PLAN_ALREADY_EXITS = "This named plan already exist, Please provide another name",
+  NO_PLANS = "No subscription Plan created"
 }

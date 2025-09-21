@@ -79,10 +79,14 @@ export function toProviderBookingManagement(
 ): IProviderBookingManagement[] {
 
     return bookings.map((booking): IProviderBookingManagement => {
+        console.log('the bookingsi',booking.serviceId.toString())
+        services.map(s => console.log(s._id.toString()))
         const user = users.find(u => u._id.toString() === booking.userId?.toString());
         const service = services.find(s => s._id.toString() === booking.serviceId?.toString());
         const address = addresses.find(a => a._id.toString() === booking.addressId?.toString());
         const payment = payments.find(p => p._id.toString() === booking.paymentId?.toString());
+
+        console.log('the servide', service)
 
         return {
             id: booking._id.toString(),

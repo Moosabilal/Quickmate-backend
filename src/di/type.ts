@@ -29,6 +29,9 @@ const TYPES = {
     ReviewController: Symbol.for('ReviewerController'),
     ReviewService: Symbol.for('ReviewService'),
     ReviewRepository: Symbol.for('ReviewRepository'),
+    SubscriptionPlanController: Symbol.for('SubscriptionPlanController'),
+    SubscriptionPlanService: Symbol.for('SubscriptionPlanService'),
+    SubscriptionPlanRepository: Symbol.for('SubscriptionPlanRepository'),
 
 }
 

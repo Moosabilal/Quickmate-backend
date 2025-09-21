@@ -1,5 +1,6 @@
 import { Schema, model, Types, HydratedDocument, InferSchemaType } from 'mongoose';
 import { ProviderStatus } from '../enums/provider.enum';
+import { SubscriptionStatus } from '../enums/subscription.enum';
 
 
 const ProviderSchema = new Schema({
@@ -47,8 +48,8 @@ const ProviderSchema = new Schema({
         type: [
             {
                 day: { type: String, required: true },
-                startTime: { type: String, required: true }, 
-                endTime: { type: String, required: true },  
+                startTime: { type: String, required: true },
+                endTime: { type: String, required: true },
             }
         ],
         required: true,
@@ -88,6 +89,19 @@ const ProviderSchema = new Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    subscription: {
+        planId: { 
+            type: Schema.Types.ObjectId, 
+            ref: "SubscriptionPlan" 
+        },
+        startDate: Date,
+        endDate: Date,
+        status: { 
+            type: String, 
+            enum: Object.values(SubscriptionStatus), 
+            default: SubscriptionStatus.NONE
+        }
     },
     registrationOtp: {
         type: String,
