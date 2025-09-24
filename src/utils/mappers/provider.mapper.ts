@@ -30,6 +30,7 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     payoutPending: provider.payoutPending,
     rating: provider.rating,
     isVerified: provider.isVerified,
+    subscription: provider.subscription
   };
 }
 

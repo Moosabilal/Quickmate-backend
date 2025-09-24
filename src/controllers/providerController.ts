@@ -8,6 +8,7 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth.dto";
 import { IProvider } from "../models/Providers";
+import { getOAuthClient } from "../utils/googleCalendar";
 
 @injectable()
 export class ProviderController {
@@ -195,9 +196,11 @@ export class ProviderController {
             const day = req.query.day as string;
             const time = req.query.time as string;
             const price = req.query.price ? Number(req.query.price) : undefined;
+            const radius = req.query.radius ? Number(req.query.radius) : 10;
+            const locationCoords = req.query.locationCoords as string;
             const userId = req.user.id
 
-            const filters = { area, experience, day, time, price };
+            const filters = { area, experience, day, time, price, radius, locationCoords };
             const response = await this._providerService.getProviderwithFilters(userId, serviceId, filters)
             res.status(200).json(response)
         } catch (error) {
@@ -225,4 +228,62 @@ export class ProviderController {
         }
     }
 
+    public initiateGoogleAuth = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id
+            const response = await this._providerService.initiateGoogleAuth(userId);
+            res.status(HttpStatusCode.OK).json(response);
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    public googleCallback = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            console.log('the code in the callback', req.query)
+            const code = req.query.code as string;
+            console.log('the code', code)
+            const userId = req.query.state as string;
+
+            if (!userId) {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ message: "Invalid state: providerId is missing" });
+            }
+
+            await this._providerService.googleCallback(code, userId);
+            console.log('the is completed')
+
+            res.redirect(`${process.env.FRONTEND_URL}/provider/providerProfile/${userId}?calendar=success`);
+
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    public getProviderAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            let providerIds: string[] = [];
+
+            // If single string -> wrap in array
+            if (typeof req.query.providerIds === "string") {
+                providerIds = [req.query.providerIds];
+            }
+            // If already array -> use as is
+            else if (Array.isArray(req.query.providerIds)) {
+                providerIds = req.query.providerIds as string[];
+            }
+            else {
+                throw new Error("Invalid providerIds parameter");
+            }
+
+            console.log("Normalized providerIds:", providerIds);
+
+            const response = await this._providerService.getProviderAvailability(providerIds);
+            console.log('the bakcne abialable response', response)
+            res.status(HttpStatusCode.OK).json(response);
+        } catch (error) {
+            next(error);
+        }
+    };
+
 }
+

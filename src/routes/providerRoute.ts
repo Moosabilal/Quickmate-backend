@@ -25,11 +25,14 @@ router.get('/getServicesForAddPage', providerController.getServicesForAddPage)
 router.get('/getProviderForChatPage', authenticateToken, providerController.getProviderForChatPage)
 router.get('/getProviderDashboard', isProvider, providerController.getProviderDashboard)
 
+router.get('/google/auth',isProvOrUser, providerController.initiateGoogleAuth);
+router.get('/auth/google/callback', providerController.googleCallback)
+router.get('/calendar/availability', providerController.getProviderAvailability)
+
 
 // admin
 router.get('/getAllProviders', providerController.getAllProvidersList)
 router.get('/getProviderList', providerController.getProvidersforAdmin)
 router.patch('/updateProviderStatus/:id',isAdmin, providerController.updateProviderStatus)
-
 
 export default router

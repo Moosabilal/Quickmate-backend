@@ -154,6 +154,7 @@ export class AuthController {
     try {
       const token = req.cookies.token
       const user = await this._authService.getUser(token);
+      console.log('the user to backend', user)
       res.status(HttpStatusCode.OK).json(user);
     } catch (error) {
       next(error);

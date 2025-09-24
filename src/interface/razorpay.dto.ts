@@ -1,6 +1,6 @@
 export interface RazorpayOrder {
   id: string;
-  entity: 'order';
+  entity: "order";
   amount: number;
   amount_paid: number;
   amount_due: number;
@@ -8,7 +8,7 @@ export interface RazorpayOrder {
   receipt: string;
   status: string;
   attempts: number;
-  notes: Record<string, string | number>;
+  notes: Record<string, string | number> | [];
   offer_id: string | null;
   created_at: number;
 }

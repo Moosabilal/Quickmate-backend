@@ -2,7 +2,6 @@ import { Schema, model, Types, HydratedDocument, InferSchemaType } from 'mongoos
 import { ProviderStatus } from '../enums/provider.enum';
 import { SubscriptionStatus } from '../enums/subscription.enum';
 
-
 const ProviderSchema = new Schema({
     userId: {
         type: Types.ObjectId,
@@ -91,18 +90,19 @@ const ProviderSchema = new Schema({
         default: false
     },
     subscription: {
-        planId: { 
-            type: Schema.Types.ObjectId, 
+        planId: {
+            type: Schema.Types.ObjectId,
             ref: "SubscriptionPlan",
         },
         startDate: Date,
         endDate: Date,
-        status: { 
-            type: String, 
-            enum: Object.values(SubscriptionStatus), 
+        status: {
+            type: String,
+            enum: Object.values(SubscriptionStatus),
             default: SubscriptionStatus.NONE
         }
     },
+
     registrationOtp: {
         type: String,
         select: false
@@ -120,7 +120,9 @@ const ProviderSchema = new Schema({
     timestamps: true,
 });
 
+ProviderSchema.index({ serviceLocation: "2dsphere" });
+
 type ProviderSchemaType = InferSchemaType<typeof ProviderSchema>;
-export interface IProvider extends HydratedDocument<ProviderSchemaType> { }
+export interface IProvider extends HydratedDocument<ProviderSchemaType> {}
 
 export const Provider = model<IProvider>('Provider', ProviderSchema);

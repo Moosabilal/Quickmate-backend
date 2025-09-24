@@ -35,6 +35,9 @@ import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils
 import jwt from 'jsonwebtoken'
 import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
 import { IReview } from "../../models/Review";
+import { ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository";
+import { calculateCommission, calculateParentCommission } from "../../utils/helperFunctions/commissionRule";
+import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription";
 
 
 @injectable()
@@ -50,6 +53,7 @@ export class BookingService implements IBookingService {
     private _messageRepository: IMessageRepository;
     private _walletRepository: IWalletRepository;
     private _reviewRepository: IReviewRepository;
+    private _subscriptionPlanRepository: ISubscriptionPlanRepository;
     constructor(@inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
         @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
         @inject(TYPES.CommissionRuleRepository) commissionRuleRepository: ICommissionRuleRepository,
@@ -61,6 +65,7 @@ export class BookingService implements IBookingService {
         @inject(TYPES.MessageRepository) messageRepository: IMessageRepository,
         @inject(TYPES.WalletRepository) WalletRepository: IWalletRepository,
         @inject(TYPES.ReviewRepository) reviewRepository: IReviewRepository,
+        @inject(TYPES.SubscriptionPlanRepository) subscriptionPlanRepository: ISubscriptionPlanRepository,
     ) {
         this._bookingRepository = bookingRepository;
         this._categoryRepository = categoryRepository;
@@ -73,6 +78,7 @@ export class BookingService implements IBookingService {
         this._messageRepository = messageRepository;
         this._walletRepository = WalletRepository;
         this._reviewRepository = reviewRepository;
+        this._subscriptionPlanRepository = subscriptionPlanRepository
     }
 
     async createNewBooking(data: Partial<IBookingRequest>): Promise<{ bookingId: string, message: string }> {
@@ -95,52 +101,32 @@ export class BookingService implements IBookingService {
         return order as RazorpayOrder;
     }
 
-    async paymentVerification(verifyPayment: IPaymentVerificationRequest): Promise<{ message: string, orderId: string }> {
-        let razorpay_order_id: string;
-        let razorpay_payment_id: string;
-        let razorpay_signature: string;
-        if (verifyPayment.razorpay_order_id) {
-            razorpay_order_id = verifyPayment.razorpay_order_id
-        }
-        if (verifyPayment.razorpay_payment_id, verifyPayment.razorpay_signature) {
-            razorpay_payment_id = verifyPayment.razorpay_payment_id;
-            razorpay_signature = verifyPayment.razorpay_signature;
-        }
+    async paymentVerification(
+        verifyPayment: IPaymentVerificationRequest
+    ): Promise<{ message: string; orderId: string }> {
+        let { razorpay_order_id, razorpay_payment_id, razorpay_signature } = verifyPayment;
+
         if (verifyPayment.paymentMethod === PaymentMethod.BANK) {
-            const isValid = verifyPaymentSignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
-            if (!isValid) {
-                throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST)
-            }
+            const isValid = verifyPaymentSignature(
+                razorpay_order_id,
+                razorpay_payment_id,
+                razorpay_signature
+            );
+            if (!isValid) throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST);
         }
 
+        const booking = await this._bookingRepository.findById(verifyPayment.bookingId);
+        const service = await this._serviceRepository.findById(booking.serviceId.toString());
+        const subCategory = await this._categoryRepository.findById(service.subCategoryId.toString());
+        const commissionRule = await this._commissionRuleRepository.findOne({ categoryId: subCategory._id.toString() });
 
+        let totalCommission = await calculateCommission(verifyPayment.amount, commissionRule);
+        totalCommission += await calculateParentCommission(verifyPayment.amount, subCategory, this._categoryRepository, this._commissionRuleRepository);
 
-        const bookingId = verifyPayment.bookingId
-        const booking = await this._bookingRepository.findById(bookingId)
-        const service = await this._serviceRepository.findById(booking.serviceId.toString())
-        const subCategoryId = service.subCategoryId.toString()
-        const subCategory = await this._categoryRepository.findById(subCategoryId)
-
-        const commission = await this._commissionRuleRepository.findOne({ categoryId: subCategory._id.toString() })
-        let totalCommission = 0;
-        if (commission.commissionType !== CommissionTypes.NONE) {
-            commission.commissionType === CommissionTypes.PERCENTAGE
-                ? totalCommission += (verifyPayment.amount * commission.commissionValue) / 100
-                : totalCommission += commission.commissionValue
-        }
-        if (subCategory.parentId) {
-
-            const category = await this._categoryRepository.findOne({ parentId: subCategory.parentId.toString() })
-            const mainFilter = {
-                categoryId: category._id.toString()
-            }
-            const parentCommission = await this._commissionRuleRepository.findOne(mainFilter)
-
-            if (parentCommission.commissionType !== CommissionTypes.NONE) {
-                parentCommission.commissionType === CommissionTypes.PERCENTAGE
-                    ? totalCommission += (verifyPayment.amount * parentCommission.commissionValue) / 100
-                    : totalCommission += parentCommission.commissionValue
-            }
+        const provider = await this._providerRepository.findById(verifyPayment.providerId.toString());
+        if (provider?.subscription?.status === "ACTIVE") {
+            const plan = await this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
+            totalCommission = applySubscriptionAdjustments(verifyPayment.amount, totalCommission, plan, commissionRule);
         }
 
         const updatedPayment = {
@@ -149,23 +135,17 @@ export class BookingService implements IBookingService {
             providerId: new Types.ObjectId(verifyPayment.providerId),
             bookingId: new Types.ObjectId(verifyPayment.bookingId),
             adminCommission: totalCommission,
-            providerAmount: verifyPayment.amount - totalCommission
+            providerAmount: verifyPayment.amount - totalCommission,
         };
-
 
         const createdPayment = await this._paymentRepository.create(updatedPayment as Partial<IPayment>);
 
-        const userId = verifyPayment.userId;
-        const wallet = await this._walletRepository.findOne({ ownerId: userId })
-
         if (verifyPayment.paymentMethod === PaymentMethod.WALLET) {
+            const wallet = await this._walletRepository.findOne({ ownerId: verifyPayment.userId });
+            wallet.balance -= verifyPayment.amount;
+            await this._walletRepository.update(wallet._id.toString(), wallet);
 
-            wallet.balance -= verifyPayment.amount
-            await this._walletRepository.update(wallet._id.toString(), wallet)
-        }
-
-        await this._walletRepository.createTransaction(
-            {
+            await this._walletRepository.createTransaction({
                 walletId: wallet._id,
                 transactionType: "debit",
                 source: "booking",
@@ -173,69 +153,132 @@ export class BookingService implements IBookingService {
                 amount: verifyPayment.amount,
                 status: TransactionStatus.PAYMENT,
                 description: `payment to ${service.title}`,
-            },
-        );
-        const updateBooking = {
-            paymentId: createdPayment._id,
-            paymentStatus: PaymentStatus.PAID
+            });
         }
-        await this._bookingRepository.update(verifyPayment.bookingId, updateBooking)
+
+        await this._bookingRepository.update(verifyPayment.bookingId, {
+            paymentId: createdPayment._id,
+            paymentStatus: PaymentStatus.PAID,
+        });
 
         return {
             message: "payment successfully verified",
-            orderId: createdPayment.razorpay_order_id
-        }
+            orderId: createdPayment.razorpay_order_id,
+        };
     }
 
-    async findBookingById(id: string): Promise<IBookingConfirmationRes> {
-        const booking = await this._bookingRepository.findById(id)
-        if (!booking) {
-            throw new CustomError('Your booking is not found, Please contact admin', HttpStatusCode.NOT_FOUND)
-        }
-        const address = await this._addressRepository.findById(booking.addressId.toString())
-        if (!address) {
-            throw new CustomError('No mathced address found', HttpStatusCode.NOT_FOUND)
-        }
-        const service = await this._serviceRepository.findById(booking.serviceId.toString())
-        if (!service) {
-            throw new CustomError('No service found', HttpStatusCode.NOT_FOUND)
-        }
-        const subCat = await this._categoryRepository.findById(service.subCategoryId.toString())
-        if (!subCat) {
-            throw new CustomError('No service found', HttpStatusCode.NOT_FOUND)
-        }
-        const provider = await this._providerRepository.findById(booking.providerId.toString())
-        if (!provider) {
-            throw new CustomError('No provider found', HttpStatusCode.NOT_FOUND)
-        }
-        const payment = await this._paymentRepository.findById(booking.paymentId.toString())
-        let review: IReview;
-        if (booking.reviewed) {
-            review = await this._reviewRepository.findOne({ bookingId: booking._id.toString() })
-        }
-        return toBookingConfirmationPage(booking, address, subCat.iconUrl, service, payment, provider, review);
+async findBookingById(id: string): Promise<IBookingConfirmationRes> {
+    const booking = await this._bookingRepository.findById(id);
+    console.log("Booking fetched:", booking);
+
+    if (!booking) {
+        throw new CustomError('Your booking is not found, Please contact admin', HttpStatusCode.NOT_FOUND);
     }
 
-    async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
-        const bookings = (await this._bookingRepository.findAll({ userId }, { createdAt: -1 }))
-        const providerIds = [...new Set(bookings.map(s => s.providerId.toString()))]
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } })
-        const addressIds = [...new Set(bookings.map(s => s.addressId.toString()))]
-        const addresses = await this._addressRepository.findAll({ _id: { $in: addressIds } })
-        const serviceIds = [...new Set(bookings.map(s => s.serviceId.toString()))]
-        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } })
-        const subCategoryIds = [...new Set(services.map(s => s.subCategoryId.toString()))]
-        const subCategories = await this._categoryRepository.findAll({ _id: { $in: subCategoryIds } })
+    console.log("Booking.addressId:", booking.addressId);
+    const address = booking.addressId
+        ? await this._addressRepository.findById(booking.addressId.toString())
+        : null;
+    console.log("Address fetched:", address);
 
-        const providerMap = new Map(providers.map(prov => [prov._id.toString(), { fullName: prov.fullName, profilePhoto: prov.profilePhoto }]))
-        const subCategoryMap = new Map(subCategories.map(sub => [sub._id.toString(), { iconUrl: sub.iconUrl }]))
-        const serviceMap = new Map(services.map(serv => [serv._id.toString(), { title: serv.title, priceUnit: serv.priceUnit, duration: serv.duration, price: serv.price, subCategoryId: serv.subCategoryId.toString() }]))
-        const addressMap = new Map(addresses.map(add => [add._id.toString(), { street: add.street, city: add.city }]))
-
-        const mappedBooking = toBookingHistoryPage(bookings, addressMap, providerMap, subCategoryMap, serviceMap)
-        return mappedBooking
-
+    if (!address) {
+        throw new CustomError('No matched address found', HttpStatusCode.NOT_FOUND);
     }
+
+    console.log("Booking.serviceId:", booking.serviceId);
+    const service = booking.serviceId
+        ? await this._serviceRepository.findById(booking.serviceId.toString())
+        : null;
+    console.log("Service fetched:", service);
+
+    if (!service) {
+        throw new CustomError('No service found', HttpStatusCode.NOT_FOUND);
+    }
+
+    console.log("Service.subCategoryId:", service.subCategoryId);
+    const subCat = service.subCategoryId
+        ? await this._categoryRepository.findById(service.subCategoryId.toString())
+        : null;
+    console.log("SubCategory fetched:", subCat);
+
+    if (!subCat) {
+        throw new CustomError('No service found', HttpStatusCode.NOT_FOUND);
+    }
+
+    console.log("Booking.providerId:", booking.providerId);
+    const provider = booking.providerId
+        ? await this._providerRepository.findById(booking.providerId.toString())
+        : null;
+    console.log("Provider fetched:", provider);
+
+    if (!provider) {
+        throw new CustomError('No provider found', HttpStatusCode.NOT_FOUND);
+    }
+
+    console.log("Booking.paymentId:", booking.paymentId);
+    const payment = booking.paymentId
+        ? await this._paymentRepository.findById(booking.paymentId.toString())
+        : null;
+    console.log("Payment fetched:", payment);
+
+    let review: IReview | undefined;
+    if (booking.reviewed) {
+        review = await this._reviewRepository.findOne({ bookingId: booking._id.toString() });
+    }
+
+    return toBookingConfirmationPage(booking, address, subCat.iconUrl, service, payment, provider, review);
+}
+
+
+async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
+    const bookings = await this._bookingRepository.findAll({ userId }, { createdAt: -1 });
+    console.log("Fetched bookings:", bookings);
+
+    const providerIds = [...new Set(bookings.map(s => {
+        console.log("Booking.providerId:", s.providerId);
+        return s.providerId?.toString();
+    }).filter(Boolean))];
+    console.log("Unique providerIds:", providerIds);
+
+    const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
+    console.log("Fetched providers:", providers);
+
+    const addressIds = [...new Set(bookings.map(s => {
+        console.log("Booking.addressId:", s.addressId);
+        return s.addressId?.toString();
+    }).filter(Boolean))];
+    console.log("Unique addressIds:", addressIds);
+
+    const addresses = await this._addressRepository.findAll({ _id: { $in: addressIds } });
+    console.log("Fetched addresses:", addresses);
+
+    const serviceIds = [...new Set(bookings.map(s => {
+        console.log("Booking.serviceId:", s.serviceId);
+        return s.serviceId?.toString();
+    }).filter(Boolean))];
+    console.log("Unique serviceIds:", serviceIds);
+
+    const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+    console.log("Fetched services:", services);
+
+    const subCategoryIds = [...new Set(services.map(s => {
+        console.log("Service.subCategoryId:", s.subCategoryId);
+        return s.subCategoryId?.toString();
+    }).filter(Boolean))];
+    console.log("Unique subCategoryIds:", subCategoryIds);
+
+    const subCategories = await this._categoryRepository.findAll({ _id: { $in: subCategoryIds } });
+    console.log("Fetched subCategories:", subCategories);
+
+    const providerMap = new Map(providers.map(prov => [prov._id.toString(), { fullName: prov.fullName, profilePhoto: prov.profilePhoto }]));
+    const subCategoryMap = new Map(subCategories.map(sub => [sub._id.toString(), { iconUrl: sub.iconUrl }]));
+    const serviceMap = new Map(services.map(serv => [serv._id.toString(), { title: serv.title, priceUnit: serv.priceUnit, duration: serv.duration, price: serv.price, subCategoryId: serv.subCategoryId.toString() }]));
+    const addressMap = new Map(addresses.map(add => [add._id.toString(), { street: add.street, city: add.city }]));
+
+    const mappedBooking = toBookingHistoryPage(bookings, addressMap, providerMap, subCategoryMap, serviceMap);
+    return mappedBooking;
+}
+
 
     async getBookingFor_Prov_mngmnt(userId: string, providerId: string): Promise<IProviderBookingManagement[]> {
         const bookings = await this._bookingRepository.findAll({ providerId, userId: { $ne: userId } });
@@ -380,7 +423,7 @@ export class BookingService implements IBookingService {
                     ownerId: user._id as Types.ObjectId,
                     ownerType: Roles.PROVIDER,
                 })
-            }else{
+            } else {
                 wallet.balance += payment.providerAmount
                 provider.earnings += payment.providerAmount;
                 provider.totalBookings += 1
@@ -398,7 +441,7 @@ export class BookingService implements IBookingService {
             );
 
             await this._providerRepository.update(provider._id.toString(), provider)
-            
+
 
 
         } catch (error) {

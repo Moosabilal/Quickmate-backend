@@ -7,3 +7,11 @@ export interface AdminSubscriptionPlanDTO {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export interface IVerifySubscriptionPaymentReq {
+  providerId: string;
+  planId: string;
+  razorpay_order_id: string,
+  razorpay_payment_id: string,
+  razorpay_signature: string
+}

@@ -1,4 +1,5 @@
 import { inject, injectable } from "inversify";
+import { parse, formatISO } from "date-fns";
 import { IBookingService } from "../services/interface/IBookingService";
 import TYPES from "../di/type";
 import { NextFunction, Request, Response } from "express";
@@ -6,17 +7,44 @@ import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { IPaymentVerificationRequest } from "../interface/payment.dto";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth.dto";
+import { IProviderService } from "../services/interface/IProviderService";
 
 @injectable()
 export class BookingController {
-    private _bookingService: IBookingService
-    constructor(@inject(TYPES.BookingService) bookingService: IBookingService) {
+    private _bookingService: IBookingService;
+    private _providerService: IProviderService;
+    constructor(@inject(TYPES.BookingService) bookingService: IBookingService,
+        @inject(TYPES.ProviderService) providerService: IProviderService
+    ) {
         this._bookingService = bookingService
+        this._providerService = providerService
     }
 
     public createBooking = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+            console.log('the req body', req.body)
+            const providerId = req.body.providerId as string;
+            const customerName = req.body.customerName as string;
+            const scheduledDate = req.body.scheduledDate as string;
+            const scheduledTime = req.body.scheduledTime as string;
+            const serviceId = req.body.serviceId as string;
+
+            const combinedDate = parse(
+                `${scheduledDate} ${scheduledTime}`,
+                "yyyy-MM-dd hh:mm a",
+                new Date()
+            );
+
+            const startDate = formatISO(combinedDate);
+
             const response = await this._bookingService.createNewBooking(req.body)
+            await this._providerService.createCalendarEvent(providerId, serviceId, {
+                summary: "Service Booking",
+                description: `Booking by ${customerName}`,
+                start: startDate ,
+            });
+            console.log('the event created successfully in controller')
+
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

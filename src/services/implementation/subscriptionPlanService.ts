@@ -10,7 +10,10 @@ import { toAdminSubscriptionPlanList } from "../../utils/mappers/subscription.ma
 import { AdminSubscriptionPlanDTO } from "../../interface/subscriptionPlan";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { SubscriptionStatus } from "../../enums/subscription.enum";
-import { ISubscription } from "../../interface/provider.dto";
+import { IProviderProfile, ISubscription } from "../../interface/provider.dto";
+import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
+import { RazorpayOrder } from "../../interface/razorpay.dto";
+import { toProviderDTO } from "../../utils/mappers/provider.mapper";
 
 @injectable()
 export class SubscriptionPlanService implements ISubscriptionPlanService {
@@ -38,6 +41,7 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
 
     public async getSubscriptionPlan(): Promise<AdminSubscriptionPlanDTO[]> {
         const plans = await this._subscriptionPlanRepository.findAll()
+        console.log('the palns', plans)
         if (!plans || plans.length <= 0) {
             return []
         }
@@ -65,25 +69,6 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
         await this._subscriptionPlanRepository.delete(id)
     }
 
-    public async subscribe(providerId: string, planId: string): Promise<{message: string, plan: ISubscriptionPlan}> {
-        const plan = await this._subscriptionPlanRepository.findById(planId);
-        if (!plan) throw new CustomError(ErrorMessage.PLAN_NOT_FOUND, HttpStatusCode.NOT_FOUND)
-
-        const startDate = new Date();
-        const endDate = new Date(startDate);
-        endDate.setDate(endDate.getDate() + plan.durationInDays);
-
-        await this._providerRepository.update(providerId, {
-            subscription: {
-                status: SubscriptionStatus.ACTIVE,
-                planId: plan._id,
-                startDate,
-                endDate,
-            },
-        });
-
-        return { message: "Subscription activated", plan };
-    }
 
     public async checkAndExpire(providerId: string): Promise<ISubscription> {
         const provider = await this._providerRepository.findById(providerId);
@@ -101,6 +86,58 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
 
         return provider.subscription;
     }
+
+    public async createSubscriptionOrder(providerId: string, planId: string): Promise<{ order: RazorpayOrder, plan: ISubscriptionPlan}> {
+
+        const plan = await this._subscriptionPlanRepository.findById(planId);
+        if (!plan) throw new CustomError(ErrorMessage.PLAN_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+
+        const order = await paymentCreation(plan.price);
+
+        return {
+            order: {...order, entity: "order"} as RazorpayOrder,
+            plan
+        }
+    };
+
+    public async verifySubscriptionPayment(
+        providerId: string,
+        planId: string,
+        razorpay_order_id: string,
+        razorpay_payment_id: string,
+        razorpay_signature: string): Promise<{message: string, provider: IProviderProfile}> {
+
+        const isValid = verifyPaymentSignature(
+            razorpay_order_id,
+            razorpay_payment_id,
+            razorpay_signature
+        );
+
+        if (!isValid) {
+            throw new CustomError("invalid signature", HttpStatusCode.BAD_REQUEST)
+        }
+
+        const plan = await this._subscriptionPlanRepository.findById(planId);
+        if (!plan) throw new CustomError(ErrorMessage.PLAN_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+
+        const startDate = new Date();
+        const endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + plan.durationInDays);
+
+        const provider = await this._providerRepository.update(providerId, {
+            subscription: {
+                status: "ACTIVE",
+                planId,
+                startDate,
+                endDate,
+            },
+        });
+
+        return {
+            message: "Payment verified, subscription activated", 
+            provider: toProviderDTO(provider) 
+        }
+    };
 
 
 }

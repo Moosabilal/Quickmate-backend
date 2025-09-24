@@ -4,6 +4,7 @@ import { ISubscriptionPlanService } from "../services/interface/ISubscriptionPla
 import { AuthRequest } from "../middleware/authMiddleware";
 import { NextFunction, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
+import { IVerifySubscriptionPaymentReq } from "../interface/subscriptionPlan";
 
 @injectable()
 export class SubscriptionPlanController {
@@ -49,16 +50,6 @@ export class SubscriptionPlanController {
         }
     }
 
-    public subscribeProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
-        try {
-            const { providerId, planId } = req.body;
-            const result = await this._subscriptionPlanService.subscribe(providerId, planId);
-            res.json(result);
-        } catch (error: any) {
-            res.status(400).json({ message: error.message });
-        }
-    };
-
     public checkProviderSubscription = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const { providerId } = req.params;
@@ -68,4 +59,26 @@ export class SubscriptionPlanController {
             res.status(400).json({ message: error.message });
         }
     };
+
+    public createSubscriptionOrder = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { providerId, planId } = req.body
+            const response = await this._subscriptionPlanService.createSubscriptionOrder(providerId, planId)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public verifySubscriptionPayment = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {            
+            const {providerId, planId, razorpay_order_id, razorpay_payment_id, razorpay_signature} = req.body as IVerifySubscriptionPaymentReq
+            const response = await this._subscriptionPlanService.verifySubscriptionPayment(providerId, planId, razorpay_order_id, razorpay_payment_id, razorpay_signature)
+            res.status(HttpStatusCode.OK).json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    
 }

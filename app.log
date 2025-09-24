@@ -3051,3 +3051,562 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/services/getServicesForProvider/68aede6ea437231e6279f1bc 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServicesForProvider/68aede6ea437231e6279f1bc 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServicesForProvider/68aede6ea437231e6279f1bc 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServicesForProvider/68aede6ea437231e6279f1bc 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServicesForProvider/68aede6ea437231e6279f1bc 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServicesForProvider/68aede6ea437231e6279f1bc 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/services/getServicesForProvider/68aede6ea437231e6279f1bc 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/subscriptionPlan/getSubscriptionPlan 500 getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/payment 502 Internal server error ->
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/provider/calendar/68aede6ea437231e6279f1bc/availability 404 Not Found - /api/provider/calendar/68aede6ea437231e6279f1bc/availability -> Not Found - /api/provider/calendar/68aede6ea437231e6279f1bc/availability
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/68aede6ea437231e6279f1bc/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[ERROR  ] - GET /api/provider/calendar/68aede6ea437231e6279f1bc/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[ERROR  ] - GET /api/provider/calendar/68aede6ea437231e6279f1bc/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[ERROR  ] - GET /api/provider/calendar/68aede6ea437231e6279f1bc/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/68aede6ea437231e6279f1bc/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/68aede6ea437231e6279f1bc/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 Cannot read properties of undefined (reading 'providerId') -> Cannot read properties of undefined (reading 'providerId')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 Invalid time value -> Invalid time value
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 Invalid time value -> Invalid time value
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 Invalid time value -> Invalid time value
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 Invalid time value -> Invalid time value
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/68aede6ea437231e6279f1bc/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[ERROR  ] - GET /api/provider/calendar/68aede6ea437231e6279f1bc/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[ERROR  ] - POST /api/bookings/createBooking 500 Invalid time value -> Invalid time value
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 Service not found -> Service not found
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 Invalid booking start date -> Invalid booking start date
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 Invalid booking start date -> Invalid booking start date
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[INFO   ] - Sending verification email to safwanProvider@gmail.com with OTP: 932658 mail
+[INFO   ] - Verification OTP sent to safwanProvider@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/google/auth 404 Not Found - /api/provider/google/auth -> Not Found - /api/provider/google/auth
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /.well-known/appspecific/com.chrome.devtools.json 404 Not Found - /.well-known/appspecific/com.chrome.devtools.json -> Not Found - /.well-known/appspecific/com.chrome.devtools.json
+[ERROR  ] - GET /favicon.ico 404 Not Found - /favicon.ico -> Not Found - /favicon.ico
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/auth/google/callback?code=4/0AVGzR1BN7o-lKgeulI6bcqiW4ZwB3DriWpk42QS1VGOqHiS1FgUkmYEAXomV5D0oAFgepA&scope=https://www.googleapis.com/auth/calendar.events%20https://www.googleapis.com/auth/calendar 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[ERROR  ] - GET /.well-known/appspecific/com.chrome.devtools.json 404 Not Found - /.well-known/appspecific/com.chrome.devtools.json -> Not Found - /.well-known/appspecific/com.chrome.devtools.json
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/auth/google/callback?code=4/0AVGzR1CNknGUNXJyCRwHpR7fBIhRGGJUJtRlwXHHNDoouKatWvBT_V7lUWk22dWkqOob5Q&scope=https://www.googleapis.com/auth/calendar.events%20https://www.googleapis.com/auth/calendar 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[ERROR  ] - GET /.well-known/appspecific/com.chrome.devtools.json 404 Not Found - /.well-known/appspecific/com.chrome.devtools.json -> Not Found - /.well-known/appspecific/com.chrome.devtools.json
+[ERROR  ] - GET /api/provider/auth/google/callback?code=4/0AVGzR1AtFdBKluELuz_5rDAm74sq6RT1VrnZ109Pxqe6ROll1kwjNuk-qvvRrOou4RRYTQ&scope=https://www.googleapis.com/auth/calendar.events%20https://www.googleapis.com/auth/calendar 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[ERROR  ] - GET /.well-known/appspecific/com.chrome.devtools.json 404 Not Found - /.well-known/appspecific/com.chrome.devtools.json -> Not Found - /.well-known/appspecific/com.chrome.devtools.json
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /.well-known/appspecific/com.chrome.devtools.json 404 Not Found - /.well-known/appspecific/com.chrome.devtools.json -> Not Found - /.well-known/appspecific/com.chrome.devtools.json
+[ERROR  ] - GET /.well-known/appspecific/com.chrome.devtools.json 404 Not Found - /.well-known/appspecific/com.chrome.devtools.json -> Not Found - /.well-known/appspecific/com.chrome.devtools.json
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /.well-known/appspecific/com.chrome.devtools.json 404 Not Found - /.well-known/appspecific/com.chrome.devtools.json -> Not Found - /.well-known/appspecific/com.chrome.devtools.json
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /.well-known/appspecific/com.chrome.devtools.json 404 Not Found - /.well-known/appspecific/com.chrome.devtools.json -> Not Found - /.well-known/appspecific/com.chrome.devtools.json
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Sending verification email to moosabilal75608@gmail.com with OTP: 909834 mail
+[INFO   ] - Verification OTP sent to moosabilal75608@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[INFO   ] - the reset link
+[INFO   ] - Password reset email sent to moosabilal75608@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10&locationCoords=11.151739622003527,75.89333936726456 500 error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query -> error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10&locationCoords=11.151739622003527,75.89333936726456 500 error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query -> error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10&locationCoords=11.151739622003527,75.89333936726456 500 error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query -> error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10&locationCoords=11.151739622003527,75.89333936726456 500 error processing query: ns=QuickMate.providersTree: $and
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query -> error processing query: ns=QuickMate.providersTree: $and
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10&locationCoords=11.151739622003527,75.89333936726456 500 error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query -> error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('68d39e8c4ff443368da2ecd6')
+    GEONEAR  field=serviceLocation maxdist=10000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 Cannot read properties of undefined (reading '1') -> Cannot read properties of undefined (reading '1')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 Cannot read properties of undefined (reading '1') -> Cannot read properties of undefined (reading '1')
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6894287f0e204569ec82362e 500 Cannot read properties of undefined (reading '1') -> Cannot read properties of undefined (reading '1')
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=689052f58e590753867b2bf6 500 Cannot read properties of undefined (reading '1') -> Cannot read properties of undefined (reading '1')
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - GET /api/provider/getProvider 500 Cannot read properties of undefined (reading '1') -> Cannot read properties of undefined (reading '1')
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=25&locationCoords=11.1442071,75.88204 500 error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('6887a018f50acd7333997043')
+    GEONEAR  field=serviceLocation maxdist=25000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query -> error processing query: ns=QuickMate.providersTree: $and
+    _id $in [ ObjectId('68aede6ea437231e6279f1bc') ObjectId('68be7033d506e858a68dcf3c') ObjectId('68ced29b1db94be1fbada5a7') ObjectId('68d39f464ff443368da2ecf7')]
+    $not
+        userId $eq ObjectId('6887a018f50acd7333997043')
+    GEONEAR  field=serviceLocation maxdist=25000 isNearSphere=0
+Sort: {}
+Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
+ planner returned error :: caused by :: unable to find index for $geoNear query
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/68be7033d506e858a68dcf3c/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[ERROR  ] - GET /api/provider/calendar/68be7033d506e858a68dcf3c/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[ERROR  ] - GET /api/provider/calendar/68be7033d506e858a68dcf3c/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[ERROR  ] - GET /api/provider/availability-by-location 500 Cannot read properties of undefined (reading 'split') -> Cannot read properties of undefined (reading 'split')
+[ERROR  ] - GET /api/provider/calendar/68be7033d506e858a68dcf3c/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/68be7033d506e858a68dcf3c/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/68be7033d506e858a68dcf3c/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getProvider 500 Cannot read properties of null (reading '_id') -> Cannot read properties of null (reading '_id')
+[ERROR  ] - GET /api/provider/getProviderDashboard 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/getProvider 500 Cannot read properties of null (reading '_id') -> Cannot read properties of null (reading '_id')
+[ERROR  ] - GET /api/provider/getProvider 500 Cannot read properties of null (reading '_id') -> Cannot read properties of null (reading '_id')
+[ERROR  ] - GET /favicon.ico 404 Not Found - /favicon.ico -> Not Found - /favicon.ico
+[ERROR  ] - GET /api/provider/calendar/68be7033d506e858a68dcf3c/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[ERROR  ] - GET /api/provider/calendar/68d39f464ff443368da2ecf7/availability 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds[]=68d39f464ff443368da2ecf7 500 providerIds is not iterable -> providerIds is not iterable
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?providerIds=68d39f464ff443368da2ecf7 500 Cast to ObjectId failed for value "6" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "6" (type string) at path "_id" for model "Provider"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/bookings/createBooking 500 No access, refresh token, API key or refresh handler callback is set. -> No access, refresh token, API key or refresh handler callback is set.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/address/createAddress 500 Address validation failed: street: Path `street` is required. -> Address validation failed: street: Path `street` is required.
+[ERROR  ] - POST /api/address/createAddress 500 Address validation failed: street: Path `street` is required. -> Address validation failed: street: Path `street` is required.
+[ERROR  ] - POST /api/address/createAddress 500 Address validation failed: street: Path `street` is required. -> Address validation failed: street: Path `street` is required.
+[ERROR  ] - POST /api/address/createAddress 500 Address validation failed: street: Path `street` is required. -> Address validation failed: street: Path `street` is required.
+[ERROR  ] - POST /api/address/createAddress 500 Address validation failed: street: Path `street` is required. -> Address validation failed: street: Path `street` is required.
+[ERROR  ] - POST /api/address/createAddress 500 Address validation failed: street: Path `street` is required. -> Address validation failed: street: Path `street` is required.
+[ERROR  ] - POST /api/address/createAddress 500 Address validation failed: street: Path `street` is required. -> Address validation failed: street: Path `street` is required.
+[ERROR  ] - GET /api/bookings/getBookingById/68d463b9f0f82348bcefc05f 500 Cannot read properties of undefined (reading 'toString') -> Cannot read properties of undefined (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/getBookingById/68d463b9f0f82348bcefc05f 404 No matched address found -> No matched address found
+[ERROR  ] - GET /api/bookings 500 Cannot read properties of undefined (reading 'toString') -> Cannot read properties of undefined (reading 'toString')
+[ERROR  ] - GET /api/bookings/getBookingById/68d46571c2bd1b5e1c054587 404 No matched address found -> No matched address found
+[ERROR  ] - GET /api/bookings/getBookingById/68d46571c2bd1b5e1c054587 404 No matched address found -> No matched address found
+[ERROR  ] - GET /api/bookings 500 Cannot read properties of undefined (reading 'toString') -> Cannot read properties of undefined (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings 500 Cannot read properties of undefined (reading 'toString') -> Cannot read properties of undefined (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings 500 Cannot read properties of undefined (reading 'toString') -> Cannot read properties of undefined (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings 500 Failed to fetch bookings: Cannot read properties of undefined (reading 'toString') -> Failed to fetch bookings: Cannot read properties of undefined (reading 'toString')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

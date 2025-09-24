@@ -1,4 +1,5 @@
-import { ISubscription } from "../../interface/provider.dto";
+import { IProviderProfile, ISubscription } from "../../interface/provider.dto";
+import { RazorpayOrder } from "../../interface/razorpay.dto";
 import { AdminSubscriptionPlanDTO } from "../../interface/subscriptionPlan";
 import { ISubscriptionPlan } from "../../models/subscription";
 
@@ -7,6 +8,12 @@ export interface ISubscriptionPlanService {
     getSubscriptionPlan(): Promise<AdminSubscriptionPlanDTO[]>
     updateSubscriptionPlan(data: AdminSubscriptionPlanDTO): Promise<void>
     deleteSubscriptionPlan(id: string): Promise<void>;
-    subscribe(providerId: string, planId: string): Promise<{message: string, plan: ISubscriptionPlan}>;
     checkAndExpire(providerId: string): Promise<ISubscription>;
+    createSubscriptionOrder(providerId: string, planId: string): Promise<{ order: RazorpayOrder, plan: ISubscriptionPlan }>
+    verifySubscriptionPayment(
+        providerId: string,
+        planId: string,
+        razorpay_order_id: string,
+        razorpay_payment_id: string,
+        razorpay_signature: string): Promise<{ message: string, provider: IProviderProfile }>
 }

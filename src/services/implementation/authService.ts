@@ -21,6 +21,8 @@ import { ICategoryRepository } from '../../repositories/interface/ICategoryRepos
 import { ICategory } from '../../models/Categories';
 import { IService } from '../../models/Service';
 import { IProvider } from '../../models/Providers';
+import { Credentials } from "google-auth-library";
+
 
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
@@ -157,7 +159,7 @@ export class AuthService implements IAuthService {
         return { message: 'A new OTP has been sent to your email.' };
     }
 
-    public async login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; }; token: string; refreshToken: string }> {
+    public async login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; googleCalendar?: {tokens?: Credentials} }; token: string; refreshToken: string }> {
         const user = await this._userRepository.findByEmail(email, true);
 
         if (!user || !user.password) {
@@ -190,6 +192,7 @@ export class AuthService implements IAuthService {
                 role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
                 isVerified: Boolean(user.isVerified),
                 profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
+                googleCalendar: user.googleCalendar
             },
             token,
             refreshToken,
@@ -337,7 +340,7 @@ export class AuthService implements IAuthService {
     }
 
 
-    public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }> {
+    public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string; googleCalendar?: {tokens?: Credentials} }> {
 
         if (!token) {
             throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
@@ -363,10 +366,11 @@ export class AuthService implements IAuthService {
             role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
             isVerified: Boolean(user.isVerified),
             profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
+            googleCalendar: user.googleCalendar
         };
     }
 
-    public async updateProfile(token: string, data: { name: string; email: string; profilePicture?: string }): Promise<{ id: string; name: string; email: string; profilePicture?: string }> {
+    public async updateProfile(token: string, data: { name: string; email: string; profilePicture?: string }): Promise<{ id: string; name: string; email: string; profilePicture?: string; }> {
         if (!token) {
             throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
         }
