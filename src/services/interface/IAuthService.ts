@@ -1,5 +1,5 @@
 import { Credentials } from "google-auth-library";
-import { AuthSuccessResponse, ForgotPasswordRequestBody, RegisterRequestBody, ResendOtpRequestBody, ResetPasswordRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
+import { AuthSuccessResponse, ForgotPasswordRequestBody, IUserDetailsResponse, RegisterRequestBody, ResendOtpRequestBody, ResetPasswordRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
 import { IBooking } from "../../models/Booking";
 import { ICategory } from "../../models/Categories";
 import { IProvider } from "../../models/Providers";
@@ -33,6 +33,7 @@ export interface IAuthService {
   updateUser(id: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }>;
   getAllDataForChatBot(userId: string): Promise<{categories: ICategory[], services: IService[], providers: IProvider[], bookings: IBooking[]}>
   logout(refreshToken: string | undefined): Promise<{ message: string }>;
+  getUserDetailsForAdmin(userId: string): Promise<IUserDetailsResponse>
 
 
 }

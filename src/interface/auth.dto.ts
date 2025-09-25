@@ -1,3 +1,4 @@
+import { BookingStatus } from "../enums/booking.enum";
 import { Roles } from "../enums/userRoles";
 
 export interface ILoginResponseDTO {
@@ -49,3 +50,29 @@ export interface ForgotPasswordSuccessResponse {
   email?: string; 
 }
 
+export interface IBookingDetailsForAdmin {
+    id: string;
+    providerName: string; 
+    service: string;
+    bookingDate: string;
+    serviceDate: string;
+    status: BookingStatus;
+}
+
+export interface IUserDetailsResponse {
+    id: string;
+    name: string;
+    avatarUrl: string;
+    email: string;
+    phone: string; 
+    registrationDate: string;
+    lastLogin: string;
+    totalBookings: number;
+    isActive: boolean;
+    bookingStats: {
+        completed: number;
+        canceled: number;
+        pending: number;
+    };
+    bookingHistory: IBookingDetailsForAdmin[];
+}

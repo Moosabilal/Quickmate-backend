@@ -248,6 +248,22 @@ export class AuthController {
     }
   }
 
+  public getUserDetailsForAdmin = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const { userId } = req.params;
+
+            if (!userId) {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ message: 'User ID is required' });
+            }
+
+            const userDetails = await this._authService.getUserDetailsForAdmin(userId);
+            
+            res.status(HttpStatusCode.OK).json(userDetails);
+        } catch (error) {
+            next(error);
+        }
+    }
+
   
 
 

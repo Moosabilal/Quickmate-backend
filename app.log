@@ -3610,3 +3610,24 @@ Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 
 [ERROR  ] - GET /api/bookings 500 Failed to fetch bookings: Cannot read properties of undefined (reading 'toString') -> Failed to fetch bookings: Cannot read properties of undefined (reading 'toString')
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo ENOTFOUND cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/admin/user/68709c250c1e6697575c421d 404 Not Found - /api/auth/admin/user/68709c250c1e6697575c421d -> Not Found - /api/auth/admin/user/68709c250c1e6697575c421d
+[ERROR  ] - GET /api/auth/user/68709c250c1e6697575c421d 404 Not Found - /api/auth/user/68709c250c1e6697575c421d -> Not Found - /api/auth/user/68709c250c1e6697575c421d
+[ERROR  ] - GET /api/auth/user/68709c250c1e6697575c421d 404 Not Found - /api/auth/user/68709c250c1e6697575c421d -> Not Found - /api/auth/user/68709c250c1e6697575c421d
+[ERROR  ] - GET /api/auth/user/68709c250c1e6697575c421d 404 Not Found - /api/auth/user/68709c250c1e6697575c421d -> Not Found - /api/auth/user/68709c250c1e6697575c421d
+[ERROR  ] - GET /api/auth/user/68709c250c1e6697575c421d 404 Not Found - /api/auth/user/68709c250c1e6697575c421d -> Not Found - /api/auth/user/68709c250c1e6697575c421d
+[ERROR  ] - GET /api/auth/user/68709c250c1e6697575c421d 404 Not Found - /api/auth/user/68709c250c1e6697575c421d -> Not Found - /api/auth/user/68709c250c1e6697575c421d
+[ERROR  ] - GET /api/auth/user/68709c250c1e6697575c421d 404 Not Found - /api/auth/user/68709c250c1e6697575c421d -> Not Found - /api/auth/user/68709c250c1e6697575c421d
+[ERROR  ] - GET /api/auth/user/68709c250c1e6697575c421d 404 Not Found - /api/auth/user/68709c250c1e6697575c421d -> Not Found - /api/auth/user/68709c250c1e6697575c421d
+[ERROR  ] - GET /api/auth/user/68709c250c1e6697575c421d 404 Not Found - /api/auth/user/68709c250c1e6697575c421d -> Not Found - /api/auth/user/68709c250c1e6697575c421d
+[ERROR  ] - GET /api/auth/user/6883449d83d976fd4855c9e3 404 Not Found - /api/auth/user/6883449d83d976fd4855c9e3 -> Not Found - /api/auth/user/6883449d83d976fd4855c9e3
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

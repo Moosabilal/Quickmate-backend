@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { IUserRepository } from '../../repositories/interface/IUserRepository';
-import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody, AuthSuccessResponse } from '../../interface/auth.dto';
+import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody, AuthSuccessResponse, IUserDetailsResponse, IBookingDetailsForAdmin } from '../../interface/auth.dto';
 import { generateOTP } from '../../utils/otpGenerator';
 import { sendVerificationEmail, sendPasswordResetEmail, sendContactUsEmail } from '../../utils/emailService';
 import bcrypt from 'bcryptjs';
@@ -22,6 +22,7 @@ import { ICategory } from '../../models/Categories';
 import { IService } from '../../models/Service';
 import { IProvider } from '../../models/Providers';
 import { Credentials } from "google-auth-library";
+import { BookingStatus } from '../../enums/booking.enum';
 
 
 
@@ -159,7 +160,7 @@ export class AuthService implements IAuthService {
         return { message: 'A new OTP has been sent to your email.' };
     }
 
-    public async login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; googleCalendar?: {tokens?: Credentials} }; token: string; refreshToken: string }> {
+    public async login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; googleCalendar?: { tokens?: Credentials } }; token: string; refreshToken: string }> {
         const user = await this._userRepository.findByEmail(email, true);
 
         if (!user || !user.password) {
@@ -340,7 +341,7 @@ export class AuthService implements IAuthService {
     }
 
 
-    public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string; googleCalendar?: {tokens?: Credentials} }> {
+    public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string; googleCalendar?: { tokens?: Credentials } }> {
 
         if (!token) {
             throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
@@ -520,7 +521,65 @@ export class AuthService implements IAuthService {
         }
     }
 
-    
+    public async getUserDetailsForAdmin(userId: string): Promise<IUserDetailsResponse> {
+        const user = await this._userRepository.findById(userId);
+        if (!user) {
+            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+        }
+        const providerProfile = await this._providerRepository.findOne({ userId });
+        const bookings = await this._bookingRepository.findAll({ userId });
+
+        const serviceIds = [...new Set(bookings.map(b => b.serviceId?.toString()).filter(Boolean))];
+        const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
+
+        const [services, providers] = await Promise.all([
+            this._serviceRepository.findAll({ _id: { $in: serviceIds } }),
+            this._providerRepository.findAll({ _id: { $in: providerIds } })
+        ]);
+
+        const serviceTitleMap = new Map<string, string>();
+        services.forEach(service => serviceTitleMap.set(service._id.toString(), service.title));
+
+        const providerNameMap = new Map<string, string>();
+        providers.forEach(provider => providerNameMap.set(provider._id.toString(), provider.fullName as string));
+
+        const bookingStats = { completed: 0, canceled: 0, pending: 0 };
+
+        const bookingHistory: IBookingDetailsForAdmin[] = bookings.map(booking => {
+            switch (booking.status) {
+                case BookingStatus.COMPLETED: bookingStats.completed++; break;
+                case BookingStatus.CANCELLED: bookingStats.canceled++; break;
+                case BookingStatus.PENDING: bookingStats.pending++; break;
+            }
+
+            return {
+                id: booking._id.toString(),
+                providerName: providerNameMap.get(booking.providerId?.toString() ?? '') || 'N/A',
+                service: serviceTitleMap.get(booking.serviceId?.toString() ?? '') || 'N/A',
+                bookingDate: booking.createdAt ? new Date(booking.createdAt as Date).toISOString().split('T')[0] : 'N/A',
+                serviceDate: String(booking.scheduledDate || 'N/A'),
+                status: booking.status as IBookingDetailsForAdmin['status'],
+            };
+        });
+
+        const userDetailsResponse: IUserDetailsResponse = {
+            id: user._id.toString(),
+            name: user.name as string,
+            email: user.email as string,
+            avatarUrl: (user.profilePicture as string) || `https://i.pravatar.cc/150?u=${user.id}`,
+            phone: providerProfile?.phoneNumber || 'N/A',
+            registrationDate: (user.createdAt as Date).toISOString().split('T')[0],
+            lastLogin: (user.updatedAt as Date).toISOString().split('T')[0],
+            isActive: user.isVerified as boolean,
+            totalBookings: bookings.length,
+            bookingStats,
+            bookingHistory,
+        };
+
+        return userDetailsResponse;
+    }
+
+
 
 
 }
