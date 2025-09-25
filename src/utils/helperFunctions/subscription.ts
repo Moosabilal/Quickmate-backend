@@ -13,12 +13,10 @@ export function applySubscriptionAdjustments(
     for (const feature of plan.features) {
         const text = feature.toLowerCase();
 
-        // No commission → provider gets full amount
         if (text.includes("no commission")) {
             return 0;
         }
 
-        // Reduced commission
         if (text.includes("reduc") && text.includes("commission")) {
             const match = text.match(/-?\d+(\.\d+)?\s*(%|percent)?/);
             if (match) {

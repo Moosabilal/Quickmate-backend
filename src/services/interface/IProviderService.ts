@@ -1,6 +1,7 @@
 import { IProvider } from "../../models/Providers";
 import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../interface/provider.dto";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
+import { calendar_v3 } from 'googleapis';
 
 
 export interface IProviderService {
@@ -33,6 +34,10 @@ export interface IProviderService {
             start: Date | string;
         }
     ): Promise<void>;
-    getProviderAvailability(providerIds: string[])
+    getProviderAvailability(
+        providerIds: string[],
+        timeMin: string,
+        timeMax: string
+    ): Promise<Record<string, calendar_v3.Schema$TimePeriod[]>>
 
 }

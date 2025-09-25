@@ -4,7 +4,7 @@ const subscriptionPlanSchema = new Schema({
     name: {
         type: String,
         required: true
-    }, // e.g. "Basic", "Pro", "Premium"
+    },
     price: { 
         type: Number, 
         required: true 
@@ -12,7 +12,7 @@ const subscriptionPlanSchema = new Schema({
     durationInDays: { 
         type: Number, 
         required: true 
-    }, // e.g. 30 days, 90 days
+    },
     features: [{ 
         type: String, 
         required: true 

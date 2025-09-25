@@ -13,7 +13,6 @@ export class MessageRepository extends BaseRepository<IMessage> implements IMess
          const data = Message.find({ joiningId })
             .sort({ createdAt: 1 })
             .lean()
-            console.log('the backend data', data)
             return data
     }
 

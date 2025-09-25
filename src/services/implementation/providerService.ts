@@ -2,7 +2,6 @@ import { inject, injectable } from "inversify";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
-import { calendar_v3 } from "googleapis";
 import mongoose from "mongoose";
 import { IProvider, Provider } from "../../models/Providers";
 import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider.dto";
@@ -26,7 +25,8 @@ import { IMessageRepository } from "../../repositories/interface/IMessageReposit
 import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
 import { BookingStatus } from "../../enums/booking.enum";
 import { getAuthUrl, getOAuthClient } from "../../utils/googleCalendar";
-import { google } from "googleapis";
+import { calendar_v3, google } from 'googleapis';
+
 
 interface reviewsOfUser {
     username: string,
@@ -76,12 +76,10 @@ export class ProviderService implements IProviderService {
         }
 
         if (!provider) {
-            console.log('provieder createing')
             provider = await this._providerRepository.createProvider(data);
         } else if (provider && provider.status === ProviderStatus.REJECTED) {
             provider = await this._providerRepository.updateProvider(data)
         } else {
-            console.log('the second else condigiton')
             provider.fullName = data.fullName;
             provider.phoneNumber = data.phoneNumber;
             provider.isVerified = false;
@@ -316,7 +314,6 @@ export class ProviderService implements IProviderService {
         }
 
         const provider = await this._providerRepository.getProviderByUserId(decoded.id)
-        console.log('the bakcend rprovider ', provider)
         return {
             id: provider._id.toString(),
             userId: provider.userId.toString(),
@@ -390,155 +387,6 @@ export class ProviderService implements IProviderService {
         return { message: "provider Status updated" }
     }
 
-    // public async getProviderwithFilters(
-    //     userId: string,
-    //     subCategoryId: string,
-    //     filters: {
-    //         area?: string;
-    //         experience?: number;
-    //         day?: string;
-    //         time?: string;
-    //         price?: number;
-    //         radius?: number;
-    //         locationCoords?: string;
-    //     }
-    // ): Promise<IBackendProvider[]> {
-    //     console.log('the fitler', filters)
-    //     const serviceFilter: any = {
-    //         subCategoryId: subCategoryId,
-    //     };
-
-    //     if (filters.experience) {
-    //         serviceFilter.experience = { $gte: filters.experience };
-    //     }
-
-    //     if (filters.price) {
-    //         serviceFilter.price = { $lte: filters.price };
-    //     }
-
-    //     const services = await this._serviceRepository.findAll(serviceFilter);
-
-    //     if (!services || services.length === 0) return [];
-
-    //     const servicesByProvider = new Map<string, IService[]>();
-    //     services.forEach(service => {
-    //         const pid = service.providerId.toString();
-    //         if (!servicesByProvider.has(pid)) {
-    //             servicesByProvider.set(pid, []);
-    //         }
-    //         servicesByProvider.get(pid)!.push(service);
-    //     });
-
-
-    //     const providerIds = Array.from(servicesByProvider.keys());
-
-    //     const providerFilter: any = {
-    //         _id: { $in: providerIds.map(id => new mongoose.Types.ObjectId(id)) },
-    //         userId: { $ne: userId }
-    //     };
-
-    //     if (filters.area) {
-    //         providerFilter.serviceArea = { $regex: new RegExp(filters.area, 'i') };
-    //     }
-
-    //     if (filters.day || filters.time) {
-    //         providerFilter.availability = {
-    //             $elemMatch: {} as any
-    //         };
-
-    //         if (filters.day) {
-    //             providerFilter.availability.$elemMatch.day = filters.day;
-    //         }
-
-    //         if (filters.time) {
-    //             providerFilter.availability.$elemMatch.startTime = { $lte: filters.time };
-    //             providerFilter.availability.$elemMatch.endTime = { $gte: filters.time };
-    //         }
-    //     }
-
-
-    //     console.log('the 2 filters ', filters)
-
-
-
-    //     if (filters.locationCoords && filters.radius) {
-    //         const [lat, lng] = filters.locationCoords.split(',').map(Number);
-
-    //         let a  = providerFilter.serviceLocation = {
-    //             $near: {
-    //                 $geometry: {
-    //                     type: "Point",
-    //                     coordinates: [lng, lat], 
-    //                 },
-    //                 $maxDistance: filters.radius * 1000,
-    //             }
-    //         };
-
-    //         console.log("aaaaaaaaaaaaaaaaa", a)
-    //     }
-
-
-    //     const providers = await this._providerRepository.findAll(providerFilter);
-    //     const serviceIds = [...new Set(services.map(s => s._id.toString()))];
-    //     const reviews = await this._reviewRepository.findAll({
-    //         providerId: { $in: providerIds },
-    //         serviceId: { $in: serviceIds }
-    //     });
-
-    //     const userIds = [...new Set(reviews.map(r => r.userId.toString()))];
-    //     const users = await this._userRepository.findAll({
-    //         _id: { $in: userIds }
-    //     });
-
-    //     const userMap = new Map(
-    //         users.map(u => [u._id.toString(), { name: String(u.name), profilePicture: String(u.profilePicture || ""), }])
-    //     );
-
-    //     const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
-
-    //     reviews.forEach(review => {
-    //         const pid = review.providerId.toString();
-
-    //         if (!reviewsByProvider.has(pid)) {
-    //             reviewsByProvider.set(pid, []);
-    //         }
-
-    //         const userData = userMap.get(review.userId.toString());
-
-    //         reviewsByProvider.get(pid)!.push({
-    //             userName: userData?.name || "Unknown User",
-    //             userImg: userData?.profilePicture || "",
-    //             rating: Number(review.rating),
-    //             review: String(review.reviewText),
-    //         });
-    //     });
-
-    //     const result: IBackendProvider[] = providers.map(provider => {
-    //         const providerServices = servicesByProvider.get(provider._id.toString()) || [];
-
-    //         const primaryService = providerServices[0];
-
-    //         return {
-    //             _id: provider._id.toString(),
-    //             fullName: provider.fullName,
-    //             phoneNumber: provider.phoneNumber,
-    //             email: provider.email,
-    //             profilePhoto: provider.profilePhoto,
-    //             serviceArea: provider.serviceArea,
-    //             serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
-    //             availability: provider.availability,
-    //             status: provider.status,
-    //             earnings: provider.earnings,
-    //             totalBookings: provider.totalBookings,
-    //             experience: primaryService?.experience || 0,
-    //             price: primaryService?.price || 0,
-    //             reviews: reviewsByProvider.get(provider._id.toString()) || [],
-    //         };
-    //     });
-
-    //     return result;
-    // }
-
 
     public async getProviderwithFilters(
         userId: string,
@@ -553,7 +401,6 @@ export class ProviderService implements IProviderService {
             locationCoords?: string;
         }
     ): Promise<IBackendProvider[]> {
-        // console.log('▶ Filters received:', filters);
 
         const serviceFilter: any = {
             subCategoryId: subCategoryId,
@@ -567,13 +414,9 @@ export class ProviderService implements IProviderService {
             serviceFilter.price = { $lte: filters.price };
         }
 
-        // console.log('▶ Service filter:', serviceFilter);
-
         const services = await this._serviceRepository.findAll(serviceFilter);
-        // console.log('▶ Services found:', services?.length || 0);
 
         if (!services || services.length === 0) {
-            // console.log('⚠ No services found for filters.');
             return [];
         }
 
@@ -586,10 +429,7 @@ export class ProviderService implements IProviderService {
             servicesByProvider.get(pid)!.push(service);
         });
 
-        // console.log('▶ Services grouped by provider:', servicesByProvider.size);
-
         const providerIds = Array.from(servicesByProvider.keys());
-        // console.log('▶ Provider IDs extracted:', providerIds);
 
         const providerFilter: any = {
             _id: { $in: providerIds.map(id => new mongoose.Types.ObjectId(id)) },
@@ -613,12 +453,10 @@ export class ProviderService implements IProviderService {
             }
         }
 
-        // console.log('▶ Provider filter before location:', JSON.stringify(providerFilter, null, 2));
-
         if (filters.locationCoords && filters.radius) {
             const [lat, lng] = filters.locationCoords.split(',').map(Number);
 
-            providerFilter.serviceLocation = { // UPDATED: applied geospatial filter correctly
+            providerFilter.serviceLocation = {
                 $near: {
                     $geometry: {
                         type: "Point",
@@ -628,42 +466,33 @@ export class ProviderService implements IProviderService {
                 }
             };
 
-            // console.log("▶ Geospatial filter applied:", providerFilter.serviceLocation);
         }
 
         const providers = await this._providerRepository.findAll(providerFilter);
-        // console.log('▶ Providers found before deduplication:', providers?.length || 0);
 
-        // UPDATED: Deduplicate providers
         const uniqueProvidersMap = new Map<string, typeof providers[0]>();
         providers.forEach(provider => {
             uniqueProvidersMap.set(provider._id.toString(), provider);
         });
 
         const uniqueProviders = Array.from(uniqueProvidersMap.values());
-        // console.log('▶ Providers after deduplication:', uniqueProviders.length);
 
         const serviceIds = [...new Set(services.map(s => s._id.toString()))];
-        // console.log('▶ Service IDs for reviews:', serviceIds);
 
         const reviews = await this._reviewRepository.findAll({
             providerId: { $in: providerIds },
             serviceId: { $in: serviceIds }
         });
-        // console.log('▶ Reviews found:', reviews?.length || 0);
 
         const userIds = [...new Set(reviews.map(r => r.userId.toString()))];
-        // console.log('▶ User IDs from reviews:', userIds);
 
         const users = await this._userRepository.findAll({
             _id: { $in: userIds }
         });
-        // console.log('▶ Users fetched:', users?.length || 0);
 
         const userMap = new Map(
             users.map(u => [u._id.toString(), { name: String(u.name), profilePicture: String(u.profilePicture || ""), }])
         );
-        // console.log('▶ User map size:', userMap.size);
 
         const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
 
@@ -684,9 +513,7 @@ export class ProviderService implements IProviderService {
             });
         });
 
-        // console.log('▶ Reviews grouped by provider:', reviewsByProvider.size);
-
-        const result: IBackendProvider[] = uniqueProviders.map(provider => { // UPDATED: use deduplicated providers
+        const result: IBackendProvider[] = uniqueProviders.map(provider => {
             const providerServices = servicesByProvider.get(provider._id.toString()) || [];
             const primaryService = providerServices[0];
 
@@ -708,7 +535,6 @@ export class ProviderService implements IProviderService {
             };
         });
 
-        console.log('▶ Final result length:', result.length);
 
         return result;
     }
@@ -770,33 +596,23 @@ export class ProviderService implements IProviderService {
     }
 
     public async initiateGoogleAuth(userId: string): Promise<{ url: string }> {
-        console.log('initiating')
         const oAuth2Client = getOAuthClient();
-        console.log('the oauth cleainet', oAuth2Client)
-
-        // const scopes = [
-        //     'https://www.googleapis.com/auth/calendar' // Read/write access
-        // ];
 
         const url = getAuthUrl(userId);
-        console.log('the url sended to frontend', url)
 
         return { url };
     }
 
 
     public async googleCallback(code: string, userId: string): Promise<{ message: string }> {
-        console.log('the google callback si working')
         const oAuth2Client = getOAuthClient();
 
         const { tokens } = await oAuth2Client.getToken(code);
-        console.log('the toke for the google', tokens)
         oAuth2Client.setCredentials(tokens);
 
         const data = await this._userRepository.update(userId, {
             "googleCalendar.tokens": tokens
         });
-        console.log('the udpated provider', data)
         const user = await this._userRepository.findById(userId)
 
         const provider = await this._providerRepository.findOne({ userId: userId })
@@ -807,21 +623,16 @@ export class ProviderService implements IProviderService {
         oAuth2Client.setCredentials(user.googleCalendar.tokens);
         const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-        const eventSummary = "My Working Hours"; // Use a unique summary to identify these events
+        const eventSummary = "My Working Hours";
 
-        // --- 1. DELETE OLD SCHEDULED EVENTS ---
-        // First, find all existing "Working Hours" events we've created before.
         try {
             const { data } = await calendar.events.list({
                 calendarId: "primary",
-                q: eventSummary, // Search for events with our unique summary
+                q: eventSummary,
                 showDeleted: false,
             });
 
-            console.log(data, "data data data dtaa ")
-
             if (data.items) {
-                // Delete each old event one by one
                 for (const event of data.items) {
                     if (event.id) {
                         await calendar.events.delete({
@@ -835,8 +646,6 @@ export class ProviderService implements IProviderService {
             console.error("Could not clear old availability events, proceeding to create new ones.", error);
         }
 
-
-        // --- 2. CREATE NEW RECURRING EVENTS ---
         const weekDays: { [key: string]: number } = {
             'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
             'Thursday': 4, 'Friday': 5, 'Saturday': 6
@@ -846,14 +655,12 @@ export class ProviderService implements IProviderService {
             const dayName = slot.day;
             const dayNumber = weekDays[dayName];
 
-            if (dayNumber === undefined) continue; // Skip if day is invalid
+            if (dayNumber === undefined) continue;
 
-            // Calculate the date for the next occurrence of this weekday
             const now = new Date();
             const nextDayDate = new Date(now);
             nextDayDate.setDate(now.getDate() + (dayNumber - now.getDay() + 7) % 7);
 
-            // Set the start and end times for the event
             const [startHour, startMinute] = slot.startTime.split(':').map(Number);
             const [endHour, endMinute] = slot.endTime.split(':').map(Number);
 
@@ -865,15 +672,14 @@ export class ProviderService implements IProviderService {
                 description: "Time slot marked as available for bookings.",
                 start: {
                     dateTime: startDate.toISOString(),
-                    timeZone: "Asia/Kolkata", // Or get this from provider settings
+                    timeZone: "Asia/Kolkata",
                 },
                 end: {
                     dateTime: endDate.toISOString(),
                     timeZone: "Asia/Kolkata",
                 },
-                // This rule makes the event repeat weekly on the specified day
                 recurrence: [
-                    `RRULE:FREQ=WEEKLY;BYDAY=${dayName.substring(0, 2).toUpperCase()}` // e.g., MO, TU, WE
+                    `RRULE:FREQ=WEEKLY;BYDAY=${dayName.substring(0, 2).toUpperCase()}`
                 ],
             };
 
@@ -883,10 +689,8 @@ export class ProviderService implements IProviderService {
                     calendarId: "primary",
                     requestBody: event,
                 });
-                console.log(a, "creating the calender aaaaaaaaa")
             } catch (error) {
-                console.error(`Failed to create event for ${dayName}`, error);
-                // Decide if you want to throw an error and stop, or just log and continue
+                throw new CustomError(`Failed to create event for ${dayName} : ${error}`, HttpStatusCode.FORBIDDEN);
             }
         }
 
@@ -899,10 +703,9 @@ export class ProviderService implements IProviderService {
         booking: {
             summary: string;
             description: string;
-            start: Date | string; // allow string from controller
+            start: Date | string;
         }
     ): Promise<void> {
-        console.log("creating provider calendar in service", providerId, booking);
 
         const provider = await this._providerRepository.findById(providerId);
         const user = await this._userRepository.findById(provider._id.toString())
@@ -917,29 +720,23 @@ export class ProviderService implements IProviderService {
 
         const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-        // 🔹 Parse the service for duration
         const service = await this._serviceRepository.findOne({ subCategoryId: serviceId, providerId });
         if (!service) throw new Error("Service not found");
-        console.log("the service we got", service);
 
-        // 🔹 Normalize booking.start
         const start = new Date(booking.start);
         if (isNaN(start.getTime())) {
             throw new Error("Invalid booking start date");
         }
 
-        // 🔹 Parse service.duration ("HH:mm")
         let end = new Date(start);
         if (service.duration) {
             const [hours, minutes] = service.duration.split(":").map(Number);
             end.setHours(end.getHours() + (hours || 0));
             end.setMinutes(end.getMinutes() + (minutes || 0));
         } else {
-            // fallback: 1 hour default
             end = new Date(start.getTime() + 60 * 60000);
         }
 
-        console.log('the start and end datae', start, end)
 
         await calendar.events.insert({
             calendarId: "primary",
@@ -951,97 +748,56 @@ export class ProviderService implements IProviderService {
             },
         });
 
-        console.log("the event successfully inserted");
     }
 
 
-    // public async getProviderAvailability(providerIds: string[]) {
+    public async getProviderAvailability(
+        providerIds: string[],
+        timeMin: string,
+        timeMax: string
+    ): Promise<Record<string, calendar_v3.Schema$TimePeriod[]>> {
 
-    //     console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
-    //     const provider = await this._providerRepository.findById(providerId);
-    //     const user = await this._userRepository.findById(provider.userId.toString())
-    //     if (!user?.googleCalendar?.tokens) return [];
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
+        const userIds = providers.map(p => p.userId);
+        const users = await this._userRepository.findAll({ _id: { $in: userIds } });
 
-    //     const oAuth2Client = new google.auth.OAuth2(
-    //         process.env.GOOGLE_CLIENT_ID,
-    //         process.env.GOOGLE_CLIENT_SECRET,
-    //         process.env.GOOGLE_REDIRECT_URI
-    //     );
-    //     oAuth2Client.setCredentials(user.googleCalendar.tokens);
+        const userTokenMap = new Map(users.map(u => [u._id.toString(), u.googleCalendar?.tokens]));
 
-    //     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-    //     console.log('we are getitg the calendar in gerProviderAbailability', calendar)
+        const availabilityPromises = providers.map(async (provider) => {
+            const tokens = userTokenMap.get(provider.userId.toString());
 
-    //     const now = new Date();
-    //     const weekAhead = new Date();
-    //     weekAhead.setDate(now.getDate() + 7);
-    //     console.log('the now and weekahead', now, weekAhead)
+            if (!tokens) {
+                return { providerId: provider._id.toString(), busy: [] };
+            }
 
-    //     const freeBusy = await calendar.freebusy.query({
-    //         requestBody: {
-    //             timeMin: now.toISOString(),
-    //             timeMax: weekAhead.toISOString(),
-    //             items: [{ id: "primary" }],
-    //         },
-    //     });
+            try {
+                const oAuth2Client = getOAuthClient();
+                oAuth2Client.setCredentials(tokens);
+                const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-    //     console.log('the the a baolaksdnfkasd return ', freeBusy)
-    //     console.log('the availabitlty return ', freeBusy.data.calendars["primary"].busy)
+                const freeBusyResponse = await calendar.freebusy.query({
+                    requestBody: {
+                        timeMin,
+                        timeMax,
+                        items: [{ id: "primary" }],
+                    },
+                });
 
-    //     return freeBusy.data.calendars["primary"].busy;
-    // }
+                const busySlots = freeBusyResponse.data.calendars?.primary?.busy ?? [];
+                return { providerId: provider._id.toString(), busy: busySlots };
 
+            } catch (error) {
+                console.error(`Failed to fetch calendar for provider ${provider._id}:`, error);
+                return { providerId: provider._id.toString(), busy: [] };
+            }
+        });
 
-    public async getProviderAvailability(providerIds: string[]) {
-        console.log("Fetching availability for providerIds:", providerIds);
+        const allProvidersAvailability = await Promise.all(availabilityPromises);
 
         const results: Record<string, calendar_v3.Schema$TimePeriod[]> = {};
-
-        for (const providerId of providerIds) {
-            const provider = await this._providerRepository.findById(providerId);
-            if (!provider) {
-                results[providerId] = [];
-                continue;
-            }
-
-            const user = await this._userRepository.findById(provider.userId.toString());
-            if (!user?.googleCalendar?.tokens) {
-                results[providerId] = [];
-                continue;
-            }
-
-            const oAuth2Client = getOAuthClient()
-            oAuth2Client.setCredentials(user.googleCalendar.tokens);
-
-            const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-
-            const now = new Date();
-            const weekAhead = new Date();
-            weekAhead.setDate(now.getDate() + 7);
-
-            const freeBusy = await calendar.freebusy.query({
-                requestBody: {
-                    timeMin: now.toISOString(),
-                    timeMax: weekAhead.toISOString(),
-                    items: [{ id: "primary" }],
-                },
-            });
-
-            const busyTimes = freeBusy.data.calendars?.primary?.busy ?? [];
-
-            // ✅ Deduplicate
-            const uniqueBusy = Array.from(
-                new Map(
-                    busyTimes
-                        .filter(slot => slot.start && slot.end) // ensure not null/undefined
-                        .map(slot => [`${slot.start}-${slot.end}`, slot])
-                ).values()
-            );
-
-            console.log(`Provider ${providerId} busy slots (unique):`, uniqueBusy);
-
-            results[providerId] = uniqueBusy;
-        }
+        allProvidersAvailability.forEach(providerResult => {
+            results[providerResult.providerId] = providerResult.busy;
+        });
 
         return results;
     }

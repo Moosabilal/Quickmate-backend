@@ -240,17 +240,13 @@ export class ProviderController {
 
     public googleCallback = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log('the code in the callback', req.query)
             const code = req.query.code as string;
-            console.log('the code', code)
             const userId = req.query.state as string;
 
             if (!userId) {
                 res.status(HttpStatusCode.BAD_REQUEST).json({ message: "Invalid state: providerId is missing" });
             }
-
             await this._providerService.googleCallback(code, userId);
-            console.log('the is completed')
 
             res.redirect(`${process.env.FRONTEND_URL}/provider/providerProfile/${userId}?calendar=success`);
 
@@ -260,30 +256,35 @@ export class ProviderController {
     };
 
     public getProviderAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
-        try {
-            let providerIds: string[] = [];
-
-            // If single string -> wrap in array
-            if (typeof req.query.providerIds === "string") {
-                providerIds = [req.query.providerIds];
-            }
-            // If already array -> use as is
-            else if (Array.isArray(req.query.providerIds)) {
-                providerIds = req.query.providerIds as string[];
-            }
-            else {
-                throw new Error("Invalid providerIds parameter");
-            }
-
-            console.log("Normalized providerIds:", providerIds);
-
-            const response = await this._providerService.getProviderAvailability(providerIds);
-            console.log('the bakcne abialable response', response)
-            res.status(HttpStatusCode.OK).json(response);
-        } catch (error) {
-            next(error);
+    try {
+        let providerIds: string[] = [];
+        if (typeof req.query.providerIds === "string") {
+            providerIds = [req.query.providerIds];
+        } else if (Array.isArray(req.query.providerIds)) {
+            providerIds = req.query.providerIds as string[];
         }
-    };
+
+        if (providerIds.length === 0) {
+             throw new Error("The 'providerIds' parameter is required.");
+        }
+
+        const { timeMin, timeMax } = req.query;
+
+        if (typeof timeMin !== 'string' || typeof timeMax !== 'string') {
+            throw new Error("The 'timeMin' and 'timeMax' parameters are required.");
+        }
+
+        const response = await this._providerService.getProviderAvailability(
+            providerIds,
+            timeMin,
+            timeMax
+        );
+
+        res.status(HttpStatusCode.OK).json(response);
+    } catch (error) {
+        next(error);
+    }
+};
 
 }
 

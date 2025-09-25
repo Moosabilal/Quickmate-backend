@@ -22,7 +22,6 @@ export function chatSocket(io: any) {
     socket.on(
       "sendBookingMessage",
       async ({ joiningId, senderId, text }) => {
-        console.log('the daat of joining', joiningId, senderId, text)
         try {
           await bookingService.saveAndEmitMessage(
             io,

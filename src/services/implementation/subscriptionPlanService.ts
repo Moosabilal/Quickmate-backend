@@ -41,7 +41,6 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
 
     public async getSubscriptionPlan(): Promise<AdminSubscriptionPlanDTO[]> {
         const plans = await this._subscriptionPlanRepository.findAll()
-        console.log('the palns', plans)
         if (!plans || plans.length <= 0) {
             return []
         }
