@@ -3631,3 +3631,37 @@ Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All
+[ERROR  ] - GET /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All 404 Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All -> Not Found - /api/bookings/admin/all?page=1&limit=10&search=&bookingStatus=All

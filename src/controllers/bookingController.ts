@@ -8,6 +8,7 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import { IPaymentVerificationRequest } from "../interface/payment.dto";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth.dto";
 import { IProviderService } from "../services/interface/IProviderService";
+import { BookingStatus } from "../enums/booking.enum";
 
 @injectable()
 export class BookingController {
@@ -169,6 +170,25 @@ export class BookingController {
                 maxAge: 10 * 60 * 1000
             })
             res.status(HttpStatusCode.OK).json(response.message);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public getAllBookingsForAdmin = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const page = parseInt(req.query.page as string) || 1;
+            const limit = parseInt(req.query.limit as string) || 10;
+            const filters = {
+                search: req.query.search as string | undefined,
+                bookingStatus: req.query.bookingStatus as BookingStatus | undefined,
+                serviceType: req.query.serviceType as string | undefined,
+                dateRange: req.query.dateRange as string | undefined,
+            };
+            
+            const response = await this._bookingService.getAllBookingsForAdmin(page, limit, filters);
+
+            res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);
         }

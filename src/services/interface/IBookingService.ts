@@ -1,5 +1,5 @@
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
-import { IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
+import { IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
 import { IPaymentVerificationRequest } from "../../interface/payment.dto";
 import { RazorpayOrder } from "../../interface/razorpay.dto";
 import { BookingStatus } from "../../enums/booking.enum";
@@ -19,6 +19,11 @@ export interface IBookingService {
     saveAndEmitMessage(io: any, joiningId: string, senderId: string, text: string)
     getBookingMessages(joiningId: string): Promise<IMessage[]>;
     verifyOtp(data: VerifyOtpRequestBody, bookingToken: string): Promise<void>
-    resendOtp(data: ResendOtpRequestBody, userId?: string): Promise<{ message: string, newCompletionToken?: string }>
+    resendOtp(data: ResendOtpRequestBody, userId?: string): Promise<{ message: string, newCompletionToken?: string }>;
+    getAllBookingsForAdmin(
+        page: number,
+        limit: number,
+        filters: { search?: string; bookingStatus?: string; }
+    ): Promise<IAdminBookingsResponse>;
 
 }
