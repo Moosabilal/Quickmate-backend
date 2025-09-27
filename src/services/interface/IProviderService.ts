@@ -1,6 +1,7 @@
 import { IProvider } from "../../models/Providers";
 import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../interface/provider.dto";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
+import { calendar_v3 } from 'googleapis';
 
 
 export interface IProviderService {
@@ -19,10 +20,24 @@ export interface IProviderService {
     fetchProviderById(userId: string): Promise<IProviderProfile>;
     updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile>;
     updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
-    getProviderwithFilters(userId: string, serviceId: string, filters: {area?: string; experience?: number; day?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
+    getProviderwithFilters(userId: string, serviceId: string, filters: {area?: string; experience?: number; day?: string; time?: string; price?: number; radius: number; locationCoords: string}): Promise<IBackendProvider[]>;
     providerForChatPage(userId: string): Promise<IProviderForChatListPage[]>;
     getProviderDashboard(userId: string): Promise<{dashboardData: IDashboardResponse[], dashboardStat: IDashboardStatus}>;
-
-
+    initiateGoogleAuth(userId: string): Promise<{ url: string }>
+    googleCallback(code: string, userId: string): Promise<{message: string}>;
+    createCalendarEvent(
+        providerId: string,
+        serviceId: string,
+        booking: {
+            summary: string;
+            description: string;
+            start: Date | string;
+        }
+    ): Promise<void>;
+    getProviderAvailability(
+        providerIds: string[],
+        timeMin: string,
+        timeMax: string
+    ): Promise<Record<string, calendar_v3.Schema$TimePeriod[]>>
 
 }

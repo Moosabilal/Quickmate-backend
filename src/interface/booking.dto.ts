@@ -97,3 +97,21 @@ export interface BookingOtpPayload {
   iat: number;
   exp: number; 
 }
+
+export interface IBookingLog {
+  id: string;
+  userName: string;
+  userAvatar: string;
+  providerName: string;
+  serviceType: string;
+  dateTime: string;
+  paymentStatus: PaymentStatus;
+  bookingStatus: BookingStatus;
+}
+
+export interface IAdminBookingsResponse {
+  bookings: IBookingLog[];
+  totalPages: number;
+  currentPage: number;
+  totalBookings: number;
+}

@@ -30,8 +30,8 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
 
 
 export const authorizeRoles = (roles: string[]) => {
+
   return (req: AuthRequest, res: Response, next: NextFunction): void => { 
-    
     if (!req.user) {
       res.status(401).json({ message: 'User not authenticated for role check.' });
       return; 

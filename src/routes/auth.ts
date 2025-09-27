@@ -34,6 +34,7 @@ router.post('/logout', authController.logout )
 // admin routes
 router.put('/update-user/:userId',isAdmin,  authController.updateUser);
 router.get('/getUserWithAllDetails', authController.getUserWithRelated);
+router.get('/users/:userId', authController.getUserDetailsForAdmin);
 
 
 export default router;
