@@ -25,8 +25,8 @@ router.get('/getServicesForAddPage', providerController.getServicesForAddPage)
 router.get('/getProviderForChatPage', authenticateToken, providerController.getProviderForChatPage)
 router.get('/getProviderDashboard', isProvider, providerController.getProviderDashboard)
 
-router.get('/google/auth',isProvOrUser, providerController.initiateGoogleAuth);
-router.get('/auth/google/callback', providerController.googleCallback)
+// router.get('/google/auth',isProvOrUser, providerController.initiateGoogleAuth);
+// router.get('/auth/google/callback', providerController.googleCallback)
 router.get('/calendar/availability', providerController.getProviderAvailability)
 
 

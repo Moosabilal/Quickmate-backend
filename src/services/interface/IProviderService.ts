@@ -20,24 +20,26 @@ export interface IProviderService {
     fetchProviderById(userId: string): Promise<IProviderProfile>;
     updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile>;
     updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
-    getProviderwithFilters(userId: string, serviceId: string, filters: {area?: string; experience?: number; day?: string; time?: string; price?: number; radius: number; locationCoords: string}): Promise<IBackendProvider[]>;
+    getProviderwithFilters(userId: string, serviceId: string, filters: {area?: string; experience?: number; day?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
     providerForChatPage(userId: string): Promise<IProviderForChatListPage[]>;
     getProviderDashboard(userId: string): Promise<{dashboardData: IDashboardResponse[], dashboardStat: IDashboardStatus}>;
-    initiateGoogleAuth(userId: string): Promise<{ url: string }>
-    googleCallback(code: string, userId: string): Promise<{message: string}>;
-    createCalendarEvent(
-        providerId: string,
-        serviceId: string,
-        booking: {
-            summary: string;
-            description: string;
-            start: Date | string;
-        }
-    ): Promise<void>;
-    getProviderAvailability(
-        providerIds: string[],
+    // initiateGoogleAuth(userId: string): Promise<{ url: string }>
+    // googleCallback(code: string, userId: string): Promise<{message: string}>;
+    // createCalendarEvent(
+    //     providerId: string,
+    //     serviceId: string,
+    //     booking: {
+    //         summary: string;
+    //         description: string;
+    //         start: Date | string;
+    //     }
+    // ): Promise<void>;
+    getAvailabilityByLocation(
+        serviceSubCategoryId: string,
+        userLat: number,
+        userLng: number,
+        radiusKm: number,
         timeMin: string,
         timeMax: string
-    ): Promise<Record<string, calendar_v3.Schema$TimePeriod[]>>
-
+    ): Promise<Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }>>;
 }

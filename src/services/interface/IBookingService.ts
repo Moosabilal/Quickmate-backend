@@ -25,5 +25,6 @@ export interface IBookingService {
         limit: number,
         filters: { search?: string; bookingStatus?: string; }
     ): Promise<IAdminBookingsResponse>;
+    findProviderRange(serviceId: string, lat: number, lng: number, radius: number): Promise<boolean>;
 
 }

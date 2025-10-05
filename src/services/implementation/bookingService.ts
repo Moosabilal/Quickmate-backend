@@ -39,6 +39,7 @@ import { ISubscriptionPlanRepository } from "../../repositories/interface/ISubsc
 import { calculateCommission, calculateParentCommission } from "../../utils/helperFunctions/commissionRule";
 import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription";
 import { IBooking } from "../../models/Booking";
+import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 
 
 @injectable()
@@ -516,6 +517,16 @@ export class BookingService implements IBookingService {
             currentPage: page,
             totalPages: Math.ceil(totalBookings / limit),
         };
+    }
+
+    public async findProviderRange(serviceId: string,lat: number, lng: number, radius: number): Promise<boolean> {
+        const services = await this._serviceRepository.findAll({ subCategoryId: serviceId })
+        if (!services || services.length <= 0) {
+            throw new CustomError('Currently no service available', HttpStatusCode.NOT_FOUND);
+        }
+        const providerids = services.map(s => s.providerId.toString());
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerids } })
+        return isProviderInRange(providers, lat, lng, radius);
     }
 
 

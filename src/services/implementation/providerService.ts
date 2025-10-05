@@ -26,6 +26,7 @@ import { IReviewRepository } from "../../repositories/interface/IReviewRepositor
 import { BookingStatus } from "../../enums/booking.enum";
 import { getAuthUrl, getOAuthClient } from "../../utils/googleCalendar";
 import { calendar_v3, google } from 'googleapis';
+import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 
 
 interface reviewsOfUser {
@@ -185,6 +186,18 @@ export class ProviderService implements IProviderService {
 
     public async updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile> {
         const updatedProvider = await this._providerRepository.updateProvider(updateData)
+
+        // Check if availability was updated and update Google Calendar events
+        // if (updateData.availability && updatedProvider.userId) {
+        //     try {
+        //         await this.updateGoogleCalendarEvents(updatedProvider, updatedProvider.userId.toString());
+        //         console.log(`Google Calendar events updated for provider ${updatedProvider._id}`);
+        //     } catch (error) {
+        //         console.error(`Failed to update Google Calendar events for provider ${updatedProvider._id}:`, error);
+        //         // Don't throw error here as the provider update was successful
+        //     }
+        // }
+
         return {
             id: updatedProvider._id.toString(),
             userId: updatedProvider.userId.toString(),
@@ -397,8 +410,8 @@ export class ProviderService implements IProviderService {
             day?: string;
             time?: string;
             price?: number;
-            radius?: number;
-            locationCoords?: string;
+            // radius?: number;
+            // locationCoords?: string;
         }
     ): Promise<IBackendProvider[]> {
 
@@ -453,20 +466,20 @@ export class ProviderService implements IProviderService {
             }
         }
 
-        if (filters.locationCoords && filters.radius) {
-            const [lat, lng] = filters.locationCoords.split(',').map(Number);
+        // if (filters.locationCoords && filters.radius) {
+        //     const [lat, lng] = filters.locationCoords.split(',').map(Number);
 
-            providerFilter.serviceLocation = {
-                $near: {
-                    $geometry: {
-                        type: "Point",
-                        coordinates: [lng, lat],
-                    },
-                    $maxDistance: filters.radius * 1000,
-                }
-            };
+        //     providerFilter.serviceLocation = {
+        //         $near: {
+        //             $geometry: {
+        //                 type: "Point",
+        //                 coordinates: [lng, lat],
+        //             },
+        //             $maxDistance: filters.radius * 1000,
+        //         }
+        //     };
 
-        }
+        // }
 
         const providers = await this._providerRepository.findAll(providerFilter);
 
@@ -595,211 +608,314 @@ export class ProviderService implements IProviderService {
         return toProviderDashboardDTO(provider, bookings, services, subCategories, parentCategories, reviews);
     }
 
-    public async initiateGoogleAuth(userId: string): Promise<{ url: string }> {
-        const oAuth2Client = getOAuthClient();
+    // public async initiateGoogleAuth(userId: string): Promise<{ url: string }> {
+    //     const oAuth2Client = getOAuthClient();
 
-        const url = getAuthUrl(userId);
+    //     const url = getAuthUrl(userId);
 
-        return { url };
-    }
+    //     return { url };
+    // }
 
 
-    public async googleCallback(code: string, userId: string): Promise<{ message: string }> {
-        const oAuth2Client = getOAuthClient();
+    // private async updateGoogleCalendarEvents(provider: any, userId: string): Promise<void> {
+    //     const user = await this._userRepository.findById(userId);
 
-        const { tokens } = await oAuth2Client.getToken(code);
-        oAuth2Client.setCredentials(tokens);
+    //     if (!user?.googleCalendar?.tokens) {
+    //         console.log(`No Google Calendar tokens found for user ${userId}`);
+    //         return;
+    //     }   
 
-        const data = await this._userRepository.update(userId, {
-            "googleCalendar.tokens": tokens
-        });
-        const user = await this._userRepository.findById(userId)
+    //     const oAuth2Client = getOAuthClient();
 
-        const provider = await this._providerRepository.findOne({ userId: userId })
+    //     oAuth2Client.setCredentials(user.googleCalendar.tokens);
+    //     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-        if (!user?.googleCalendar?.tokens) {
-            throw new CustomError("Google Calendar is not connected for this provider.", HttpStatusCode.BAD_REQUEST);
+    //     const eventSummary = "My Working Hours";
+
+    //     try {
+    //         // Clear old availability events
+    //         const { data } = await calendar.events.list({
+    //             calendarId: "primary",
+    //             q: eventSummary,
+    //             showDeleted: false,
+    //         });
+
+    //         if (data.items) {
+    //             for (const event of data.items) {
+    //                 if (event.id) {
+    //                     await calendar.events.delete({
+    //                         calendarId: "primary",
+    //                         eventId: event.id,
+    //                     });
+    //                 }
+    //             }
+    //         }
+    //     } catch (error) {
+    //         console.error("Could not clear old availability events, proceeding to create new ones.", error);
+    //     }
+
+    //     // Create new events based on updated availability
+    //     const weekDays: { [key: string]: number } = {
+    //         'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
+    //         'Thursday': 4, 'Friday': 5, 'Saturday': 6
+    //     };
+
+    //     for (const slot of provider.availability) {
+    //         const dayName = slot.day;
+    //         const dayNumber = weekDays[dayName];
+
+    //         if (dayNumber === undefined) continue;
+
+    //         const now = new Date();
+    //         const nextDayDate = new Date(now);
+    //         nextDayDate.setDate(now.getDate() + (dayNumber - now.getDay() + 7) % 7);
+
+    //         const [startHour, startMinute] = slot.startTime.split(':').map(Number);
+    //         const [endHour, endMinute] = slot.endTime.split(':').map(Number);
+
+    //         const startDate = new Date(nextDayDate.setHours(startHour, startMinute, 0, 0));
+    //         const endDate = new Date(nextDayDate.setHours(endHour, endMinute, 0, 0));
+
+    //         const event = {
+    //             summary: eventSummary,
+    //             description: "Time slot marked as available for bookings.",
+    //             start: {
+    //                 dateTime: startDate.toISOString(),
+    //                 timeZone: "Asia/Kolkata",
+    //             },
+    //             end: {
+    //                 dateTime: endDate.toISOString(),
+    //                 timeZone: "Asia/Kolkata",
+    //             },
+    //             recurrence: [
+    //                 `RRULE:FREQ=WEEKLY;BYDAY=${dayName.substring(0, 2).toUpperCase()}`
+    //             ],
+    //         };
+
+    //         try {
+    //             await calendar.events.insert({
+    //                 calendarId: "primary",
+    //                 requestBody: event,
+    //             });
+    //             console.log(`Created Google Calendar event for ${dayName}`);
+    //         } catch (error) {
+    //             console.error(`Failed to create event for ${dayName}:`, error);
+    //         }
+    //     }
+    // }
+
+    // public async googleCallback(code: string, userId: string): Promise<{ message: string }> {
+    //     const oAuth2Client = getOAuthClient();
+
+    //     const { tokens } = await oAuth2Client.getToken(code);
+    //     oAuth2Client.setCredentials(tokens);
+
+    //     await this._userRepository.update(userId, {
+    //         "googleCalendar.tokens": tokens
+    //     });
+
+    //     const provider = await this._providerRepository.findOne({ userId: userId })
+
+    //     if (!provider) {
+    //         throw new CustomError("Provider not found.", HttpStatusCode.BAD_REQUEST);
+    //     }
+
+    //     // Update Google Calendar events
+    //     await this.updateGoogleCalendarEvents(provider, userId);
+
+    //     return { message: "Google Calendar connected!" }
+    // }
+
+    // public async createCalendarEvent(
+    //     providerId: string,
+    //     serviceId: string,
+    //     booking: {
+    //         summary: string;
+    //         description: string;
+    //         start: Date | string;
+    //     }
+    // ): Promise<void> {
+
+    //     const provider = await this._providerRepository.findById(providerId);
+    //     const user = await this._userRepository.findById(provider._id.toString())
+    //     if (!user?.googleCalendar?.tokens) return;
+
+    //     const oAuth2Client = new google.auth.OAuth2(
+    //         process.env.GOOGLE_CLIENT_ID,
+    //         process.env.GOOGLE_CLIENT_SECRET,
+    //         process.env.GOOGLE_REDIRECT_URI
+    //     );
+    //     oAuth2Client.setCredentials(user.googleCalendar.tokens);
+
+    //     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+
+    //     const service = await this._serviceRepository.findOne({ subCategoryId: serviceId, providerId });
+    //     if (!service) throw new Error("Service not found");
+
+    //     const start = new Date(booking.start);
+    //     if (isNaN(start.getTime())) {
+    //         throw new Error("Invalid booking start date");
+    //     }
+
+    //     let end = new Date(start);
+    //     if (service.duration) {
+    //         const [hours, minutes] = service.duration.split(":").map(Number);
+    //         end.setHours(end.getHours() + (hours || 0));
+    //         end.setMinutes(end.getMinutes() + (minutes || 0));
+    //     } else {
+    //         end = new Date(start.getTime() + 60 * 60000);
+    //     }
+
+
+    //     await calendar.events.insert({
+    //         calendarId: "primary",
+    //         requestBody: {
+    //             summary: booking.summary,
+    //             description: booking.description,
+    //             start: { dateTime: start.toISOString(), timeZone: "Asia/Kolkata" },
+    //             end: { dateTime: end.toISOString(), timeZone: "Asia/Kolkata" },
+    //         },
+    //     });
+
+    // }
+
+
+    public async getAvailabilityByLocation(
+        serviceSubCategoryId: string,
+        userLat: number,
+        userLng: number,
+        radiusKm: number,
+        timeMin: string,
+        timeMax: string
+    ): Promise<Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }>> {
+    
+        const startTime = Date.now();
+    
+        // --- Step 1: Fetch services ---
+        const services = await this._serviceRepository.findAll({ subCategoryId: serviceSubCategoryId });
+    
+        const providerIdSet = new Set<string>(
+            services.map(s => s.providerId?.toString()).filter(Boolean) as string[]
+        );
+    
+        if (providerIdSet.size === 0) {
+            return [];
         }
-        oAuth2Client.setCredentials(user.googleCalendar.tokens);
-        const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-
-        const eventSummary = "My Working Hours";
-
-        try {
-            const { data } = await calendar.events.list({
-                calendarId: "primary",
-                q: eventSummary,
-                showDeleted: false,
+    
+        // --- Step 2: Fetch providers ---
+        const providers = await this._providerRepository.findAll({
+            _id: { $in: Array.from(providerIdSet) }
+        });
+    
+        // --- Step 3: Filter by distance ---
+        const providersInRange = providers.filter(p => {
+            const coords = (p as any).serviceLocation?.coordinates as number[] | undefined;
+            if (!coords || coords.length !== 2) {
+                return false;
+            }
+            const [provLng, provLat] = coords;
+            const distKm = this._haversineKm(userLat, userLng, provLat, provLng);
+            const withinRange = distKm <= radiusKm;
+            return withinRange;
+        });
+    
+        const startISO = new Date(timeMin);
+        const endISO = new Date(timeMax);
+    
+        // --- Step 4: Map provider → service duration ---
+        const providerIdToDuration = new Map<string, string>();
+        for (const s of services) {
+            const pid = s.providerId?.toString();
+            if (pid && s.duration && !providerIdToDuration.has(pid)) {
+                providerIdToDuration.set(pid, s.duration);
+            }
+        }
+    
+        const results: Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }> = [];
+    
+        // --- Step 5: Process each provider ---
+        for (const provider of providersInRange) {
+            const providerId = (provider._id as any).toString();
+            const providerName = (provider as any).fullName || 'Provider';
+    
+            const existingBookings = await this._bookingRepository.findAll({
+                providerId: provider._id,
+                status: { $in: ['Pending', 'Confirmed', 'In_Progress'] },
+                scheduledDate: {
+                    $gte: timeMin.split('T')[0],
+                    $lte: timeMax.split('T')[0]
+                }
             });
-
-            if (data.items) {
-                for (const event of data.items) {
-                    if (event.id) {
-                        await calendar.events.delete({
-                            calendarId: "primary",
-                            eventId: event.id,
-                        });
+    
+            // Force slot duration to 1 hour (60 minutes)
+            const slotMinutes = 60;
+    
+            const slotMs = slotMinutes * 60 * 1000;
+            const availableSlots: calendar_v3.Schema$TimePeriod[] = [];
+    
+            const dayMap: { [key: string]: number } = {
+                'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
+                'Thursday': 4, 'Friday': 5, 'Saturday': 6
+            };
+    
+            for (let d = new Date(startISO); d <= endISO; d.setDate(d.getDate() + 1)) {
+                const dow = d.getDay();
+                const dayName = Object.keys(dayMap).find(k => dayMap[k] === dow);
+                if (!dayName) continue;
+    
+                const dayAvail = (provider as any).availability?.find((av: any) => av.day === dayName);
+                if (!dayAvail) continue;
+    
+                const [sh, sm] = String(dayAvail.startTime).split(':').map(Number);
+                const [eh, em] = String(dayAvail.endTime).split(':').map(Number);
+    
+                const dayStart = new Date(d);
+                dayStart.setHours(sh || 0, sm || 0, 0, 0);
+                const dayEnd = new Date(d);
+                dayEnd.setHours(eh || 0, em || 0, 0, 0);
+    
+                for (let slotStart = new Date(dayStart);
+                    slotStart.getTime() + slotMs <= dayEnd.getTime();
+                    slotStart = new Date(slotStart.getTime() + slotMs)) {
+    
+                    const slotEnd = new Date(slotStart.getTime() + slotMs);
+    
+                    const overlaps = existingBookings.some((b: any) => {
+                        if (!b.scheduledDate || !b.scheduledTime) return false;
+                        const [bh, bm] = String(b.scheduledTime).split(':').map(Number);
+                        const bStart = new Date(b.scheduledDate);
+                        bStart.setHours(bh || 0, bm || 0, 0, 0);
+                        const bEnd = new Date(bStart.getTime() + slotMs);
+                        return slotStart < bEnd && slotEnd > bStart;
+                    });
+    
+                    if (!overlaps) {
+                        availableSlots.push({ start: slotStart.toISOString(), end: slotEnd.toISOString() });
                     }
                 }
             }
-        } catch (error) {
-            console.error("Could not clear old availability events, proceeding to create new ones.", error);
+    
+            results.push({ providerId, providerName, availableSlots });
         }
-
-        const weekDays: { [key: string]: number } = {
-            'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
-            'Thursday': 4, 'Friday': 5, 'Saturday': 6
-        };
-
-        for (const slot of provider.availability) {
-            const dayName = slot.day;
-            const dayNumber = weekDays[dayName];
-
-            if (dayNumber === undefined) continue;
-
-            const now = new Date();
-            const nextDayDate = new Date(now);
-            nextDayDate.setDate(now.getDate() + (dayNumber - now.getDay() + 7) % 7);
-
-            const [startHour, startMinute] = slot.startTime.split(':').map(Number);
-            const [endHour, endMinute] = slot.endTime.split(':').map(Number);
-
-            const startDate = new Date(nextDayDate.setHours(startHour, startMinute, 0, 0));
-            const endDate = new Date(nextDayDate.setHours(endHour, endMinute, 0, 0));
-
-            const event = {
-                summary: eventSummary,
-                description: "Time slot marked as available for bookings.",
-                start: {
-                    dateTime: startDate.toISOString(),
-                    timeZone: "Asia/Kolkata",
-                },
-                end: {
-                    dateTime: endDate.toISOString(),
-                    timeZone: "Asia/Kolkata",
-                },
-                recurrence: [
-                    `RRULE:FREQ=WEEKLY;BYDAY=${dayName.substring(0, 2).toUpperCase()}`
-                ],
-            };
-
-            try {
-
-                const a = await calendar.events.insert({
-                    calendarId: "primary",
-                    requestBody: event,
-                });
-            } catch (error) {
-                throw new CustomError(`Failed to create event for ${dayName} : ${error}`, HttpStatusCode.FORBIDDEN);
-            }
-        }
-
-        return { message: "Google Calendar connected!" }
-    }
-
-    public async createCalendarEvent(
-        providerId: string,
-        serviceId: string,
-        booking: {
-            summary: string;
-            description: string;
-            start: Date | string;
-        }
-    ): Promise<void> {
-
-        const provider = await this._providerRepository.findById(providerId);
-        const user = await this._userRepository.findById(provider._id.toString())
-        if (!user?.googleCalendar?.tokens) return;
-
-        const oAuth2Client = new google.auth.OAuth2(
-            process.env.GOOGLE_CLIENT_ID,
-            process.env.GOOGLE_CLIENT_SECRET,
-            process.env.GOOGLE_REDIRECT_URI
-        );
-        oAuth2Client.setCredentials(user.googleCalendar.tokens);
-
-        const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-
-        const service = await this._serviceRepository.findOne({ subCategoryId: serviceId, providerId });
-        if (!service) throw new Error("Service not found");
-
-        const start = new Date(booking.start);
-        if (isNaN(start.getTime())) {
-            throw new Error("Invalid booking start date");
-        }
-
-        let end = new Date(start);
-        if (service.duration) {
-            const [hours, minutes] = service.duration.split(":").map(Number);
-            end.setHours(end.getHours() + (hours || 0));
-            end.setMinutes(end.getMinutes() + (minutes || 0));
-        } else {
-            end = new Date(start.getTime() + 60 * 60000);
-        }
-
-
-        await calendar.events.insert({
-            calendarId: "primary",
-            requestBody: {
-                summary: booking.summary,
-                description: booking.description,
-                start: { dateTime: start.toISOString(), timeZone: "Asia/Kolkata" },
-                end: { dateTime: end.toISOString(), timeZone: "Asia/Kolkata" },
-            },
-        });
-
-    }
-
-
-    public async getProviderAvailability(
-        providerIds: string[],
-        timeMin: string,
-        timeMax: string
-    ): Promise<Record<string, calendar_v3.Schema$TimePeriod[]>> {
-
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
-        const userIds = providers.map(p => p.userId);
-        const users = await this._userRepository.findAll({ _id: { $in: userIds } });
-
-        const userTokenMap = new Map(users.map(u => [u._id.toString(), u.googleCalendar?.tokens]));
-
-        const availabilityPromises = providers.map(async (provider) => {
-            const tokens = userTokenMap.get(provider.userId.toString());
-
-            if (!tokens) {
-                return { providerId: provider._id.toString(), busy: [] };
-            }
-
-            try {
-                const oAuth2Client = getOAuthClient();
-                oAuth2Client.setCredentials(tokens);
-                const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-
-                const freeBusyResponse = await calendar.freebusy.query({
-                    requestBody: {
-                        timeMin,
-                        timeMax,
-                        items: [{ id: "primary" }],
-                    },
-                });
-
-                const busySlots = freeBusyResponse.data.calendars?.primary?.busy ?? [];
-                return { providerId: provider._id.toString(), busy: busySlots };
-
-            } catch (error) {
-                console.error(`Failed to fetch calendar for provider ${provider._id}:`, error);
-                return { providerId: provider._id.toString(), busy: [] };
-            }
-        });
-
-        const allProvidersAvailability = await Promise.all(availabilityPromises);
-
-        const results: Record<string, calendar_v3.Schema$TimePeriod[]> = {};
-        allProvidersAvailability.forEach(providerResult => {
-            results[providerResult.providerId] = providerResult.busy;
-        });
-
+    
         return results;
+    }
+    
+    
+
+    private _haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+        const R = 6371; // km
+        const dLat = this._deg2rad(lat2 - lat1);
+        const dLon = this._deg2rad(lon2 - lon1);
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(this._deg2rad(lat1)) * Math.cos(this._deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+    }
+
+    private _deg2rad(deg: number): number {
+        return deg * (Math.PI / 180);
     }
 
 }

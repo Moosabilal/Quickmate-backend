@@ -39,12 +39,12 @@ export class BookingController {
             const startDate = formatISO(combinedDate);
 
             const response = await this._bookingService.createNewBooking(req.body)
-            await this._providerService.createCalendarEvent(providerId, serviceId, {
-                summary: "Service Booking",
-                description: `Booking by ${customerName}`,
-                start: startDate ,
-            });
-            console.log('the event created successfully in controller')
+            // await this._providerService.createCalendarEvent(providerId, serviceId, {
+            //     summary: "Service Booking",
+            //     description: `Booking by ${customerName}`,
+            //     start: startDate ,
+            // });
+            // console.log('the event created successfully in controller')
 
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -188,6 +188,16 @@ export class BookingController {
             
             const response = await this._bookingService.getAllBookingsForAdmin(page, limit, filters);
 
+            res.status(HttpStatusCode.OK).json(response);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public findProviderRange = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const { serviceId, lat, lng, radius } = req.query;
+            const response = await this._bookingService.findProviderRange(serviceId as string, Number(lat), Number(lng), Number(radius));
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);
