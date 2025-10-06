@@ -20,7 +20,7 @@ export interface IProviderService {
     fetchProviderById(userId: string): Promise<IProviderProfile>;
     updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile>;
     updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
-    getProviderwithFilters(userId: string, serviceId: string, filters: {area?: string; experience?: number; day?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
+    getProviderwithFilters(userId: string, serviceId: string, filters: {radiusKm?: number, lat?: number, long?: number, experience?: number; date?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
     providerForChatPage(userId: string): Promise<IProviderForChatListPage[]>;
     getProviderDashboard(userId: string): Promise<{dashboardData: IDashboardResponse[], dashboardStat: IDashboardStatus}>;
     // initiateGoogleAuth(userId: string): Promise<{ url: string }>

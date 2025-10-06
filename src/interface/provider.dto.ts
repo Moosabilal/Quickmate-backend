@@ -123,7 +123,7 @@ export interface IBackendProvider {
   earnings: number;
   price: number;
   totalBookings: number;
-  rating?: number;
+  distanceKm?: number; 
   reviews?: IReviewsOfUser[];
 }
 

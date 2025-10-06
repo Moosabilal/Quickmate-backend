@@ -88,6 +88,43 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return result;
     }
 
+    public async findFilteredProviders(criteria: {
+        providerIds: string[];
+        userIdToExclude: string;
+        lat?: number;
+        long?: number;
+        radius?: number;
+        date?: string;
+        time?: string;
+    }): Promise<IProvider[]> {
+        const filter: mongoose.FilterQuery<IProvider> = {
+            _id: { $in: criteria.providerIds.map(id => new mongoose.Types.ObjectId(id)) },
+            userId: { $ne: new mongoose.Types.ObjectId(criteria.userIdToExclude) },
+        };
 
+        if (criteria.lat && criteria.long && criteria.radius) {
+            filter.serviceLocation = {
+                $geoWithin: {
+                    $centerSphere: [
+                        [criteria.long, criteria.lat],
+                        criteria.radius / 6378.1, // Convert km to radians
+                    ],
+                },
+            };
+        }
+
+        if (criteria.date || criteria.time) {
+            filter.availability = { $elemMatch: {} as any };
+            if (criteria.date) {
+                filter.availability.$elemMatch.day = criteria.date;
+            }
+            if (criteria.time) {
+                filter.availability.$elemMatch.startTime = { $lte: criteria.time };
+                filter.availability.$elemMatch.endTime = { $gte: criteria.time };
+            }
+        }
+
+        return this.findAll(filter);
+    }
 
 }

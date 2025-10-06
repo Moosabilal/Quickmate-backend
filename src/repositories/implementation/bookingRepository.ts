@@ -47,4 +47,22 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         }));
     }
 
+    async findByProviderAndDateRange(
+        providerId: string,
+        startDate: string,
+        endDate: string,
+        statuses: string[] = ['Pending', 'Confirmed', 'In_Progress']
+    ) {
+        return await Booking.find({
+            providerId,
+            status: { $in: statuses },
+            scheduledDate: {
+                $gte: startDate,
+                $lte: endDate
+            }
+        }).lean();
+    }
+
+
+
 }

@@ -197,14 +197,16 @@ export class ProviderController {
     public getServiceProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const serviceId = req.query.serviceId as string;
-            const area = req.query.area as string;
             const experience = req.query.experience ? Number(req.query.experience) : undefined;
-            const day = req.query.day as string;
+            const radiusKm = req.query.radius ? Number(req.query.radius) : undefined;
+            const lat = req.query.latitude ? parseFloat(req.query.latitude as string) : undefined;
+            const long = req.query.longitude ? parseFloat(req.query.longitude as string) : undefined;
+            const date = req.query.date as string;
             const time = req.query.time as string;
             const price = req.query.price ? Number(req.query.price) : undefined;
             const userId = req.user.id
 
-            const filters = { area, experience, day, time, price };
+            const filters = { radiusKm, lat, long, experience, date, time, price };
             const response = await this._providerService.getProviderwithFilters(userId, serviceId, filters)
             res.status(200).json(response)
         } catch (error) {

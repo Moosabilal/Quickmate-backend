@@ -2,6 +2,7 @@ import { injectable } from "inversify";
 import Review, { IReview } from "../../models/Review";
 import { IReviewRepository } from "../interface/IReviewRepository";
 import { BaseRepository } from "./base/BaseRepository";
+import { Types } from "mongoose";
 
 @injectable()
 export class ReviewRepository extends BaseRepository<IReview> implements IReviewRepository {
@@ -29,4 +30,9 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
 
         return result;
     }
+
+    public async findReviewsByProviderIds(providerIds: string[]): Promise<IReview[]> {
+    const filter = { providerId: { $in: providerIds.map(id => new Types.ObjectId(id)) } };
+    return this.findAll(filter);
+  }
 }
