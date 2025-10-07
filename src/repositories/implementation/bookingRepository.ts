@@ -3,7 +3,7 @@ import { IBookingRequest } from "../../interface/booking.dto";
 import Booking, { IBooking } from "../../models/Booking";
 import { IBookingRepository } from "../interface/IBookingRepository";
 import { BaseRepository } from "./base/BaseRepository";
-import { FilterQuery } from "mongoose";
+import { FilterQuery, Types } from "mongoose";
 import { BookingStatus } from "../../enums/booking.enum";
 
 @injectable()
@@ -61,6 +61,27 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 $lte: endDate
             }
         }).lean();
+    }
+
+    public async findActiveBookingsAtSlot(
+        providerIds: string[],
+        date: string,
+        time: string
+    ): Promise<IBooking[]> {
+        const activeStatuses = [
+            BookingStatus.PENDING,
+            BookingStatus.CONFIRMED,
+            BookingStatus.IN_PROGRESS,
+        ];
+
+        const filter: FilterQuery<IBooking> = {
+            providerId: { $in: providerIds.map(id => new Types.ObjectId(id)) },
+            scheduledDate: date,
+            scheduledTime: time,
+            status: { $in: activeStatuses },
+        };
+
+        return this.findAll(filter);
     }
 
 

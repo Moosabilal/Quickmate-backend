@@ -27,6 +27,7 @@ import { BookingStatus } from "../../enums/booking.enum";
 import { getAuthUrl, getOAuthClient } from "../../utils/googleCalendar";
 import { calendar_v3, google } from 'googleapis';
 import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
+import { convertTo24Hour } from "../../utils/helperFunctions/convertTo24hrs";
 
 
 interface reviewsOfUser {
@@ -401,6 +402,7 @@ export class ProviderService implements IProviderService {
     }
 
 
+
     public async getProviderwithFilters(
         userId: string,
         subCategoryId: string,
@@ -410,65 +412,65 @@ export class ProviderService implements IProviderService {
             long: number;
             experience?: number;
             date?: string;
-            time?: string;
+            time?: string; 
             price?: number;
         }
     ): Promise<IBackendProvider[]> {
 
-        console.log('🟦 [getProviderwithFilters] Starting provider filter process...');
-        console.log('📍 Received filters:', JSON.stringify(filters, null, 2));
-        console.log('👤 User ID:', userId);
-        console.log('📦 SubCategory ID:', subCategoryId);
-
-        // --- Step 1: Find services matching the criteria ---
-        console.log('🔍 Step 1: Fetching services matching criteria...');
         const services = await this._serviceRepository.findServicesByCriteria({
             subCategoryId,
             minExperience: filters.experience,
             maxPrice: filters.price,
         });
-        console.log(`✅ Services fetched: ${services?.length || 0}`);
 
         if (!services || services.length === 0) {
-            console.warn('⚠️ No services found matching filters.');
             return [];
         }
-
-        // --- Step 2: Find available providers for these services ---
         const providerIdsFromServices = [...new Set(services.map(s => s.providerId.toString()))];
-        console.log(`🧩 Providers extracted from services: ${providerIdsFromServices.length}`);
 
-        console.log('🔍 Step 2: Fetching filtered providers...');
-        const providers = await this._providerRepository.findFilteredProviders({
+        const time24h = filters.time ? convertTo24Hour(filters.time) : undefined;
+
+        const potentialProviders = await this._providerRepository.findFilteredProviders({
             providerIds: providerIdsFromServices,
             userIdToExclude: userId,
             lat: filters.lat,
             long: filters.long,
             radius: filters.radius,
             date: filters.date,
-            time: filters.time,
+            time: time24h, 
         });
-        console.log(`✅ Providers fetched: ${providers?.length || 0}`);
 
-        if (!providers || providers.length === 0) {
-            console.warn('⚠️ No providers found after applying filters.');
+        if (!potentialProviders || potentialProviders.length === 0) {
             return [];
         }
 
-        // --- Step 3: Fetch associated data (reviews and user details) ---
-        console.log('🔍 Step 3: Fetching reviews and user details...');
-        const finalProviderIds = providers.map(p => p._id.toString());
+        let availableProviders = [...potentialProviders];
+        if (filters.date && time24h && potentialProviders.length > 0) {
+            const potentialProviderIds = potentialProviders.map(p => p._id.toString());
+
+            const conflictingBookings = await this._bookingRepository.findActiveBookingsAtSlot(
+                potentialProviderIds,
+                filters.date,
+                time24h 
+            );
+
+            if (conflictingBookings.length > 0) {
+                const busyProviderIds = new Set(conflictingBookings.map(b => b.providerId.toString()));
+                availableProviders = potentialProviders.filter(
+                    provider => !busyProviderIds.has(provider._id.toString())
+                );
+            }
+        }
+
+        if (availableProviders.length === 0) {
+            return [];
+        }
+
+        const finalProviderIds = availableProviders.map(p => p._id.toString());
         const reviews = await this._reviewRepository.findReviewsByProviderIds(finalProviderIds);
-        console.log(`📝 Reviews fetched: ${reviews?.length || 0}`);
-
         const userIdsForReviews = [...new Set(reviews.map(r => r.userId.toString()))];
-        console.log(`👥 Unique users in reviews: ${userIdsForReviews.length}`);
-
         const users = await this._userRepository.findUsersByIds(userIdsForReviews);
-        console.log(`✅ Users fetched: ${users?.length || 0}`);
 
-        // --- Step 4: Map all data together in memory (Business Logic) ---
-        console.log('🧠 Step 4: Mapping data (users, services, reviews)...');
         const userMap = new Map(users.map(u => [u._id.toString(), { name: u.name, profilePicture: u.profilePicture || "" }]));
 
         const servicesByProvider = new Map<string, IService[]>();
@@ -477,7 +479,6 @@ export class ProviderService implements IProviderService {
             if (!servicesByProvider.has(pid)) servicesByProvider.set(pid, []);
             servicesByProvider.get(pid)!.push(service);
         });
-        console.log(`🗂 Services grouped by provider: ${servicesByProvider.size}`);
 
         const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
         reviews.forEach(review => {
@@ -491,11 +492,8 @@ export class ProviderService implements IProviderService {
                 review: review.reviewText as string,
             });
         });
-        console.log(`💬 Reviews grouped by provider: ${reviewsByProvider.size}`);
 
-        // --- Step 5: Construct the final response object ---
-        console.log('🏗 Step 5: Constructing final response object...');
-        const result: IBackendProvider[] = providers.map(provider => {
+        const result: IBackendProvider[] = availableProviders.map(provider => {
             const providerIdStr = provider._id.toString();
             const providerServices = servicesByProvider.get(providerIdStr) || [];
             const primaryService = providerServices.find(s => s.subCategoryId.toString() === subCategoryId) || providerServices[0];
@@ -521,15 +519,10 @@ export class ProviderService implements IProviderService {
             };
         });
 
-        console.log(`📊 Total providers after aggregation: ${result.length}`);
-        console.log('📏 Sorting providers by distance (ascending)...');
         result.sort((a, b) => a.distanceKm - b.distanceKm);
 
-        console.log('✅ [getProviderwithFilters] Completed successfully.');
         return result;
     }
-
-
 
 
     public async providerForChatPage(userId: string): Promise<IProviderForChatListPage[]> {

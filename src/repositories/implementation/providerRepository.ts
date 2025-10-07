@@ -1,5 +1,5 @@
 import { Category } from "../../models/Categories";
-import mongoose from 'mongoose';
+import mongoose, { FilterQuery, Types } from 'mongoose';
 
 import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
@@ -94,8 +94,8 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         lat?: number;
         long?: number;
         radius?: number;
-        date?: string;
-        time?: string;
+        date?: string; 
+        time?: string; 
     }): Promise<IProvider[]> {
         const filter: mongoose.FilterQuery<IProvider> = {
             _id: { $in: criteria.providerIds.map(id => new mongoose.Types.ObjectId(id)) },
@@ -107,7 +107,7 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
                 $geoWithin: {
                     $centerSphere: [
                         [criteria.long, criteria.lat],
-                        criteria.radius / 6378.1, // Convert km to radians
+                        criteria.radius / 6378.1, 
                     ],
                 },
             };
@@ -115,9 +115,13 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
 
         if (criteria.date || criteria.time) {
             filter.availability = { $elemMatch: {} as any };
+
             if (criteria.date) {
-                filter.availability.$elemMatch.day = criteria.date;
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                const dayOfWeek = days[new Date(criteria.date).getDay()];
+                filter.availability.$elemMatch.day = dayOfWeek;
             }
+
             if (criteria.time) {
                 filter.availability.$elemMatch.startTime = { $lte: criteria.time };
                 filter.availability.$elemMatch.endTime = { $gte: criteria.time };
@@ -126,5 +130,6 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
 
         return this.findAll(filter);
     }
+
 
 }
