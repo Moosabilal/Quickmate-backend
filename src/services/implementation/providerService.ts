@@ -404,125 +404,147 @@ export class ProviderService implements IProviderService {
 
 
     public async getProviderwithFilters(
-        userId: string,
-        subCategoryId: string,
-        filters: {
-            radius: number;
-            lat: number;
-            long: number;
-            experience?: number;
-            date?: string;
-            time?: string; 
-            price?: number;
-        }
-    ): Promise<IBackendProvider[]> {
+    userId: string,
+    subCategoryId: string,
+    filters: {
+        radius: number;
+        lat: number;
+        long: number;
+        experience?: number;
+        date?: string;
+        time?: string;
+        price?: number;
+    }
+): Promise<IBackendProvider[]> {
 
-        const services = await this._serviceRepository.findServicesByCriteria({
-            subCategoryId,
-            minExperience: filters.experience,
-            maxPrice: filters.price,
-        });
+    const services = await this._serviceRepository.findServicesByCriteria({
+        subCategoryId,
+        minExperience: filters.experience,
+        maxPrice: filters.price,
+    });
 
-        if (!services || services.length === 0) {
-            return [];
-        }
-        const providerIdsFromServices = [...new Set(services.map(s => s.providerId.toString()))];
+    if (!services || services.length === 0) {
+        return [];
+    }
+    const providerIdsFromServices = [...new Set(services.map(s => s.providerId.toString()))];
 
-        const time24h = filters.time ? convertTo24Hour(filters.time) : undefined;
+    const time24h = filters.time ? convertTo24Hour(filters.time) : undefined;
 
-        const potentialProviders = await this._providerRepository.findFilteredProviders({
-            providerIds: providerIdsFromServices,
-            userIdToExclude: userId,
-            lat: filters.lat,
-            long: filters.long,
-            radius: filters.radius,
-            date: filters.date,
-            time: time24h, 
-        });
+    const potentialProviders = await this._providerRepository.findFilteredProviders({
+        providerIds: providerIdsFromServices,
+        userIdToExclude: userId,
+        lat: filters.lat,
+        long: filters.long,
+        radius: filters.radius,
+        date: filters.date,
+        time: time24h,
+    });
 
-        if (!potentialProviders || potentialProviders.length === 0) {
-            return [];
-        }
+    if (!potentialProviders || potentialProviders.length === 0) {
+        return [];
+    }
 
-        let availableProviders = [...potentialProviders];
-        if (filters.date && time24h && potentialProviders.length > 0) {
-            const potentialProviderIds = potentialProviders.map(p => p._id.toString());
+    let availableProviders = [...potentialProviders];
+    if (filters.date && time24h && potentialProviders.length > 0) {
+        const potentialProviderIds = potentialProviders.map(p => p._id.toString());
 
-            const conflictingBookings = await this._bookingRepository.findActiveBookingsAtSlot(
-                potentialProviderIds,
-                filters.date,
-                time24h 
-            );
+        const allBookingsForDay = await this._bookingRepository.findByProviderAndDateRange(
+            potentialProviderIds,
+            filters.date,
+            filters.date 
+        );
 
-            if (conflictingBookings.length > 0) {
-                const busyProviderIds = new Set(conflictingBookings.map(b => b.providerId.toString()));
+        if (allBookingsForDay.length > 0) {
+            const busyProviderIds = new Set<string>();
+
+            const [searchHours, searchMinutes] = time24h.split(':').map(Number);
+            const searchSlotStart = new Date(filters.date);
+            searchSlotStart.setHours(searchHours, searchMinutes, 0, 0);
+            const searchSlotEnd = new Date(searchSlotStart.getTime() + 60 * 60 * 1000); // Assumes user is searching for a 1-hour slot
+
+            allBookingsForDay.forEach(booking => {
+                const bookingTime24h = convertTo24Hour(booking.scheduledTime as string);
+                const [bookHours, bookMinutes] = bookingTime24h.split(':').map(Number);
+                const bookingStart = new Date(booking.scheduledDate as string);
+                bookingStart.setHours(bookHours, bookMinutes, 0, 0);
+
+                const bookingDurationMs = ((booking.duration as number) || 60) * 60 * 1000;
+                const bookingEnd = new Date(bookingStart.getTime() + bookingDurationMs);
+
+                if (searchSlotStart < bookingEnd && searchSlotEnd > bookingStart) {
+                    busyProviderIds.add(booking.providerId.toString());
+                }
+            });
+
+            if (busyProviderIds.size > 0) {
                 availableProviders = potentialProviders.filter(
                     provider => !busyProviderIds.has(provider._id.toString())
                 );
             }
         }
-
-        if (availableProviders.length === 0) {
-            return [];
-        }
-
-        const finalProviderIds = availableProviders.map(p => p._id.toString());
-        const reviews = await this._reviewRepository.findReviewsByProviderIds(finalProviderIds);
-        const userIdsForReviews = [...new Set(reviews.map(r => r.userId.toString()))];
-        const users = await this._userRepository.findUsersByIds(userIdsForReviews);
-
-        const userMap = new Map(users.map(u => [u._id.toString(), { name: u.name, profilePicture: u.profilePicture || "" }]));
-
-        const servicesByProvider = new Map<string, IService[]>();
-        services.forEach(service => {
-            const pid = service.providerId.toString();
-            if (!servicesByProvider.has(pid)) servicesByProvider.set(pid, []);
-            servicesByProvider.get(pid)!.push(service);
-        });
-
-        const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
-        reviews.forEach(review => {
-            const pid = review.providerId.toString();
-            if (!reviewsByProvider.has(pid)) reviewsByProvider.set(pid, []);
-            const userData = userMap.get(review.userId.toString());
-            reviewsByProvider.get(pid)!.push({
-                userName: (userData?.name as string) || "Anonymous",
-                userImg: (userData?.profilePicture as string) || "",
-                rating: review.rating as number,
-                review: review.reviewText as string,
-            });
-        });
-
-        const result: IBackendProvider[] = availableProviders.map(provider => {
-            const providerIdStr = provider._id.toString();
-            const providerServices = servicesByProvider.get(providerIdStr) || [];
-            const primaryService = providerServices.find(s => s.subCategoryId.toString() === subCategoryId) || providerServices[0];
-            const [provLng, provLat] = provider.serviceLocation.coordinates;
-            const distanceKm = this._haversineKm(filters.lat, filters.long, provLat, provLng);
-
-            return {
-                _id: providerIdStr,
-                fullName: provider.fullName,
-                phoneNumber: provider.phoneNumber,
-                email: provider.email,
-                profilePhoto: provider.profilePhoto,
-                serviceArea: provider.serviceArea,
-                serviceLocation: `${provLat},${provLng}`,
-                availability: provider.availability as any[],
-                status: provider.status,
-                earnings: provider.earnings,
-                totalBookings: provider.totalBookings,
-                experience: primaryService?.experience || 0,
-                price: primaryService?.price || 0,
-                distanceKm: parseFloat(distanceKm.toFixed(2)),
-                reviews: reviewsByProvider.get(providerIdStr) || [],
-            };
-        });
-
-        result.sort((a, b) => a.distanceKm - b.distanceKm);
-
-        return result;
     }
+
+    if (availableProviders.length === 0) {
+        return [];
+    }
+
+    const finalProviderIds = availableProviders.map(p => p._id.toString());
+    const reviews = await this._reviewRepository.findReviewsByProviderIds(finalProviderIds);
+    const userIdsForReviews = [...new Set(reviews.map(r => r.userId.toString()))];
+    const users = await this._userRepository.findUsersByIds(userIdsForReviews);
+
+    const userMap = new Map(users.map(u => [u._id.toString(), { name: u.name, profilePicture: u.profilePicture || "" }]));
+
+    const servicesByProvider = new Map<string, IService[]>();
+    services.forEach(service => {
+        const pid = service.providerId.toString();
+        if (!servicesByProvider.has(pid)) servicesByProvider.set(pid, []);
+        servicesByProvider.get(pid)!.push(service);
+    });
+
+    const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
+    reviews.forEach(review => {
+        const pid = review.providerId.toString();
+        if (!reviewsByProvider.has(pid)) reviewsByProvider.set(pid, []);
+        const userData = userMap.get(review.userId.toString());
+        reviewsByProvider.get(pid)!.push({
+            userName: (userData?.name as string) || "Anonymous",
+            userImg: (userData?.profilePicture as string) || "",
+            rating: review.rating as number,
+            review: review.reviewText as string,
+        });
+    });
+
+    const result: IBackendProvider[] = availableProviders.map(provider => {
+        const providerIdStr = provider._id.toString();
+        const providerServices = servicesByProvider.get(providerIdStr) || [];
+        const primaryService = providerServices.find(s => s.subCategoryId.toString() === subCategoryId) || providerServices[0];
+        const [provLng, provLat] = provider.serviceLocation.coordinates;
+        const distanceKm = this._haversineKm(filters.lat, filters.long, provLat, provLng);
+
+        return {
+            _id: providerIdStr,
+            fullName: provider.fullName,
+            phoneNumber: provider.phoneNumber,
+            email: provider.email,
+            profilePhoto: provider.profilePhoto,
+            serviceArea: provider.serviceArea,
+            serviceLocation: `${provLat},${provLng}`,
+            availability: provider.availability as any[],
+            status: provider.status,
+            earnings: provider.earnings,
+            totalBookings: provider.totalBookings,
+            experience: primaryService?.experience || 0,
+            price: primaryService?.price || 0,
+            distanceKm: parseFloat(distanceKm.toFixed(2)),
+            reviews: reviewsByProvider.get(providerIdStr) || [],
+        };
+    });
+
+    result.sort((a, b) => a.distanceKm - b.distanceKm);
+
+    return result;
+}
 
 
     public async providerForChatPage(userId: string): Promise<IProviderForChatListPage[]> {
@@ -751,118 +773,115 @@ export class ProviderService implements IProviderService {
     // }
 
 
-    public async getAvailabilityByLocation(
-        serviceSubCategoryId: string,
-        userLat: number,
-        userLng: number,
-        radiusKm: number,
-        timeMin: string,
-        timeMax: string
-    ): Promise<Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }>> {
+public async getAvailabilityByLocation(
+    serviceSubCategoryId: string,
+    userLat: number,
+    userLng: number,
+    radiusKm: number,
+    timeMin: string,
+    timeMax: string
+): Promise<Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }>> {
 
-        const startTime = Date.now();
+    const services = await this._serviceRepository.findAll({ subCategoryId: serviceSubCategoryId });
+    const providerIdSet = new Set<string>(
+        services.map(s => s.providerId?.toString()).filter(Boolean) as string[]
+    );
 
-        const services = await this._serviceRepository.findAll({ subCategoryId: serviceSubCategoryId });
-
-        const providerIdSet = new Set<string>(
-            services.map(s => s.providerId?.toString()).filter(Boolean) as string[]
-        );
-
-        if (providerIdSet.size === 0) {
-            return [];
-        }
-
-        const providers = await this._providerRepository.findAll({
-            _id: { $in: Array.from(providerIdSet) }
-        });
-
-        const providersInRange = providers.filter(p => {
-            const coords = (p as any).serviceLocation?.coordinates as number[] | undefined;
-            if (!coords || coords.length !== 2) {
-                return false;
-            }
-            const [provLng, provLat] = coords;
-            const distKm = this._haversineKm(userLat, userLng, provLat, provLng);
-            const withinRange = distKm <= radiusKm;
-            return withinRange;
-        });
-
-        const startISO = new Date(timeMin);
-        const endISO = new Date(timeMax);
-
-        // --- Step 4: Map provider → service duration ---
-        const providerIdToDuration = new Map<string, string>();
-        for (const s of services) {
-            const pid = s.providerId?.toString();
-            if (pid && s.duration && !providerIdToDuration.has(pid)) {
-                providerIdToDuration.set(pid, s.duration);
-            }
-        }
-
-        const results: Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }> = [];
-
-        for (const provider of providersInRange) {
-            const providerId = (provider._id as any).toString();
-            const providerName = (provider as any).fullName || 'Provider';
-
-            const existingBookings = await this._bookingRepository.findByProviderAndDateRange(
-                provider._id.toString(),
-                timeMin.split('T')[0],
-                timeMax.split('T')[0]
-            );
-
-            const slotMinutes = 60;
-            const slotMs = slotMinutes * 60 * 1000;
-            const availableSlots: calendar_v3.Schema$TimePeriod[] = [];
-
-            const dayMap: { [key: string]: number } = {
-                'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
-                'Thursday': 4, 'Friday': 5, 'Saturday': 6
-            };
-
-            for (let d = new Date(startISO); d <= endISO; d.setDate(d.getDate() + 1)) {
-                const dow = d.getDay();
-                const dayName = Object.keys(dayMap).find(k => dayMap[k] === dow);
-                if (!dayName) continue;
-
-                const dayAvail = (provider as any).availability?.find((av: any) => av.day === dayName);
-                if (!dayAvail) continue;
-
-                const [sh, sm] = String(dayAvail.startTime).split(':').map(Number);
-                const [eh, em] = String(dayAvail.endTime).split(':').map(Number);
-
-                const dayStart = new Date(d);
-                dayStart.setHours(sh || 0, sm || 0, 0, 0);
-                const dayEnd = new Date(d);
-                dayEnd.setHours(eh || 0, em || 0, 0, 0);
-
-                for (let slotStart = new Date(dayStart);
-                    slotStart.getTime() + slotMs <= dayEnd.getTime();
-                    slotStart = new Date(slotStart.getTime() + slotMs)) {
-
-                    const slotEnd = new Date(slotStart.getTime() + slotMs);
-
-                    const overlaps = existingBookings.some((b: any) => {
-                        if (!b.scheduledDate || !b.scheduledTime) return false;
-                        const [bh, bm] = String(b.scheduledTime).split(':').map(Number);
-                        const bStart = new Date(b.scheduledDate);
-                        bStart.setHours(bh || 0, bm || 0, 0, 0);
-                        const bEnd = new Date(bStart.getTime() + slotMs);
-                        return slotStart < bEnd && slotEnd > bStart;
-                    });
-
-                    if (!overlaps) {
-                        availableSlots.push({ start: slotStart.toISOString(), end: slotEnd.toISOString() });
-                    }
-                }
-            }
-
-            results.push({ providerId, providerName, availableSlots });
-        }
-
-        return results;
+    if (providerIdSet.size === 0) {
+        return [];
     }
 
+    const providers = await this._providerRepository.findAll({
+        _id: { $in: Array.from(providerIdSet) }
+    });
+
+    const providersInRange = providers.filter(p => {
+        const coords = (p as any).serviceLocation?.coordinates as number[] | undefined;
+        if (!coords || coords.length !== 2) return false;
+        
+        const [provLng, provLat] = coords;
+        const distKm = this._haversineKm(userLat, userLng, provLat, provLng);
+        return distKm <= radiusKm;
+    });
+
+    const startISO = new Date(timeMin);
+    const endISO = new Date(timeMax);
+    const results: Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }> = [];
+
+    for (const provider of providersInRange) {
+        const providerId = (provider._id as any).toString();
+        const providerName = (provider as any).fullName || 'Provider';
+
+        const existingBookings = await this._bookingRepository.findByProviderByTime(
+            providerId,
+            timeMin.split('T')[0],
+            timeMax.split('T')[0]
+        );
+
+        const slotMinutes = 60;
+        const slotMs = slotMinutes * 60 * 1000;
+        const availableSlots: calendar_v3.Schema$TimePeriod[] = [];
+
+        const dayMap: { [key: string]: number } = {
+            'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
+            'Thursday': 4, 'Friday': 5, 'Saturday': 6
+        };
+
+        for (let d = new Date(startISO); d <= endISO; d.setDate(d.getDate() + 1)) {
+            const dayName = Object.keys(dayMap).find(k => dayMap[k] === d.getDay());
+            if (!dayName) continue;
+
+            const dayAvail = (provider as any).availability?.find((av: any) => av.day === dayName);
+            if (!dayAvail) continue;
+
+            const [sh, sm] = String(dayAvail.startTime).split(':').map(Number);
+            const [eh, em] = String(dayAvail.endTime).split(':').map(Number);
+
+            const dayStart = new Date(d);
+            dayStart.setHours(sh || 0, sm || 0, 0, 0);
+            const dayEnd = new Date(d);
+            dayEnd.setHours(eh || 0, em || 0, 0, 0);
+
+            for (let slotStart = new Date(dayStart);
+                slotStart.getTime() + slotMs <= dayEnd.getTime();
+                slotStart = new Date(slotStart.getTime() + slotMs)) {
+
+                const slotEnd = new Date(slotStart.getTime() + slotMs);
+
+                const overlaps = existingBookings.some((booking: any) => {
+                    if (!booking.scheduledDate || !booking.scheduledTime) {
+                        return false;
+                    }
+
+                    const time24h = convertTo24Hour(booking.scheduledTime);
+                    const [hours, minutes] = time24h.split(':').map(Number);
+
+                    if (isNaN(hours) || isNaN(minutes)) {
+                        return false;
+                    }
+
+                    const bookingStart = new Date(booking.scheduledDate);
+                    bookingStart.setHours(hours, minutes, 0, 0);
+
+                    const bookingDurationMinutes = booking.duration > 0 ? booking.duration : slotMinutes;
+
+                    const bookingDurationMs = bookingDurationMinutes * 60 * 1000;
+
+                    const bookingEnd = new Date(bookingStart.getTime() + bookingDurationMs);
+                    return slotStart < bookingEnd && slotEnd > bookingStart;
+                });
+
+                if (!overlaps) {
+                    availableSlots.push({ start: slotStart.toISOString(), end: slotEnd.toISOString() });
+                }
+            }
+        }
+
+        results.push({ providerId, providerName, availableSlots });
+    }
+
+    return results;
+}
 
 
     private _haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {

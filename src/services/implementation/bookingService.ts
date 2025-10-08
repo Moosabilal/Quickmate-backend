@@ -40,6 +40,7 @@ import { calculateCommission, calculateParentCommission } from "../../utils/help
 import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription";
 import { IBooking } from "../../models/Booking";
 import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
+import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
 
 
 @injectable()
@@ -86,7 +87,10 @@ export class BookingService implements IBookingService {
     async createNewBooking(data: Partial<IBookingRequest>): Promise<{ bookingId: string, message: string }> {
 
         const subCategoryId = data.serviceId
-        const findServiceId = await this._serviceRepository.findOne({ subCategoryId })
+        const providerId = data.providerId
+        console.log('the sub category id in creation is:', subCategoryId)
+        const findServiceId = await this._serviceRepository.findOne({ subCategoryId, providerId })
+        console.log('the service id in creation is:', findServiceId)
 
         data.serviceId = findServiceId._id.toString()
         const bookings = await this._bookingRepository.create(data)
@@ -118,7 +122,9 @@ export class BookingService implements IBookingService {
         }
 
         const booking = await this._bookingRepository.findById(verifyPayment.bookingId);
+        console.log('the booking details are:', booking)
         const service = await this._serviceRepository.findById(booking.serviceId.toString());
+        console.log('the services', service)
         const subCategory = await this._categoryRepository.findById(service.subCategoryId.toString());
         const commissionRule = await this._commissionRuleRepository.findOne({ categoryId: subCategory._id.toString() });
 
@@ -158,9 +164,14 @@ export class BookingService implements IBookingService {
             });
         }
 
+        const durationInMinutes = convertDurationToMinutes(service.duration);
+
+        console.log('the service duration is:',typeof service.duration, service.duration)
+
         const udpatedpayment123 = await this._bookingRepository.update(verifyPayment.bookingId, {
             paymentId: createdPayment._id,
             paymentStatus: PaymentStatus.PAID,
+            duration: durationInMinutes
         });
 
         return {

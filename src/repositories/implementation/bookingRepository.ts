@@ -48,6 +48,22 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
     }
 
     async findByProviderAndDateRange(
+        providerIds: string[],
+        startDate: string,
+        endDate: string,
+        statuses: string[] = ['Pending', 'Confirmed', 'In_Progress']
+    ): Promise<IBooking[]> {
+        return await Booking.find({
+            providerId: { $in: providerIds },
+            status: { $in: statuses },
+            scheduledDate: {
+                $gte: startDate,
+                $lte: endDate
+            }
+        }).lean();
+    }
+
+    async findByProviderByTime(
         providerId: string,
         startDate: string,
         endDate: string,
@@ -63,26 +79,6 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         }).lean();
     }
 
-    public async findActiveBookingsAtSlot(
-        providerIds: string[],
-        date: string,
-        time: string
-    ): Promise<IBooking[]> {
-        const activeStatuses = [
-            BookingStatus.PENDING,
-            BookingStatus.CONFIRMED,
-            BookingStatus.IN_PROGRESS,
-        ];
-
-        const filter: FilterQuery<IBooking> = {
-            providerId: { $in: providerIds.map(id => new Types.ObjectId(id)) },
-            scheduledDate: date,
-            scheduledTime: time,
-            status: { $in: activeStatuses },
-        };
-
-        return this.findAll(filter);
-    }
 
 
 
