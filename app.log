@@ -1,517 +1,138 @@
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/provider/updateProvider 500 Plan executor error during findAndModify :: caused by :: Can't extract geo keys: { _id: ObjectId('68d39f464ff443368da2ecf7'), userId: ObjectId('68d39e8c4ff443368da2ecd6'), fullName: "moosaProvider", phoneNumber: "9877654952", email: "moosabilal75608@gmail.com", serviceId: [], serviceLocation: { type: "Point", coordinates: [ null, null ] }, serviceArea: "Kottappuram", availability: [ { day: "Monday", startTime: "09:00", endTime: "22:00", _id: ObjectId('68d39f464ff443368da2ecf8') }, { day: "Tuesday", startTime: "09:00", endTime: "20:00", _id: ObjectId('68d39f464ff443368da2ecf9') }, { day: "Wednesday", startTime: "10:00", endTime: "21:00", _id: ObjectId('68d39f464ff443368da2ecfa') } ], aadhaarIdProof: "v1758699329/quickmate_images/vshtvleyxp80u12midtk.png", profilePhoto: "v1758699334/quickmate_images/o2luselwmfd6g01wsnpm.png", earnings: 0, status: "Approved", totalBookings: 0, payoutPending: 0, rating: 0, isVerified: true, subscription: "{}", registrationOtpAttempts: 0, createdAt: new Date(1758699334993), updatedAt: new Date(1759554016835), __v: 0, registrationOtp: "909834", registrationOtpExpires: new Date(1758699635071) }  Point must only contain numeric elements, instead got type null -> Plan executor error during findAndModify :: caused by :: Can't extract geo keys: { _id: ObjectId('68d39f464ff443368da2ecf7'), userId: ObjectId('68d39e8c4ff443368da2ecd6'), fullName: "moosaProvider", phoneNumber: "9877654952", email: "moosabilal75608@gmail.com", serviceId: [], serviceLocation: { type: "Point", coordinates: [ null, null ] }, serviceArea: "Kottappuram", availability: [ { day: "Monday", startTime: "09:00", endTime: "22:00", _id: ObjectId('68d39f464ff443368da2ecf8') }, { day: "Tuesday", startTime: "09:00", endTime: "20:00", _id: ObjectId('68d39f464ff443368da2ecf9') }, { day: "Wednesday", startTime: "10:00", endTime: "21:00", _id: ObjectId('68d39f464ff443368da2ecfa') } ], aadhaarIdProof: "v1758699329/quickmate_images/vshtvleyxp80u12midtk.png", profilePhoto: "v1758699334/quickmate_images/o2luselwmfd6g01wsnpm.png", earnings: 0, status: "Approved", totalBookings: 0, payoutPending: 0, rating: 0, isVerified: true, subscription: "{}", registrationOtpAttempts: 0, createdAt: new Date(1758699334993), updatedAt: new Date(1759554016835), __v: 0, registrationOtp: "909834", registrationOtpExpires: new Date(1758699635071) }  Point must only contain numeric elements, instead got type null
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/provider/updateProvider 500 Plan executor error during findAndModify :: caused by :: Can't extract geo keys: { _id: ObjectId('68d39f464ff443368da2ecf7'), userId: ObjectId('68d39e8c4ff443368da2ecd6'), fullName: "moosaProvider", phoneNumber: "9877654952", email: "moosabilal75608@gmail.com", serviceId: [], serviceLocation: { type: "Point", coordinates: [ null, null ] }, serviceArea: "Kottappuram", availability: [ { day: "Monday", startTime: "09:00", endTime: "22:00", _id: ObjectId('68d39f464ff443368da2ecf8') }, { day: "Tuesday", startTime: "09:00", endTime: "20:00", _id: ObjectId('68d39f464ff443368da2ecf9') }, { day: "Wednesday", startTime: "10:00", endTime: "21:00", _id: ObjectId('68d39f464ff443368da2ecfa') } ], aadhaarIdProof: "v1758699329/quickmate_images/vshtvleyxp80u12midtk.png", profilePhoto: "v1758699334/quickmate_images/o2luselwmfd6g01wsnpm.png", earnings: 0, status: "Approved", totalBookings: 0, payoutPending: 0, rating: 0, isVerified: true, subscription: "{}", registrationOtpAttempts: 0, createdAt: new Date(1758699334993), updatedAt: new Date(1759554290060), __v: 0, registrationOtp: "909834", registrationOtpExpires: new Date(1758699635071) }  Point must only contain numeric elements, instead got type null -> Plan executor error during findAndModify :: caused by :: Can't extract geo keys: { _id: ObjectId('68d39f464ff443368da2ecf7'), userId: ObjectId('68d39e8c4ff443368da2ecd6'), fullName: "moosaProvider", phoneNumber: "9877654952", email: "moosabilal75608@gmail.com", serviceId: [], serviceLocation: { type: "Point", coordinates: [ null, null ] }, serviceArea: "Kottappuram", availability: [ { day: "Monday", startTime: "09:00", endTime: "22:00", _id: ObjectId('68d39f464ff443368da2ecf8') }, { day: "Tuesday", startTime: "09:00", endTime: "20:00", _id: ObjectId('68d39f464ff443368da2ecf9') }, { day: "Wednesday", startTime: "10:00", endTime: "21:00", _id: ObjectId('68d39f464ff443368da2ecfa') } ], aadhaarIdProof: "v1758699329/quickmate_images/vshtvleyxp80u12midtk.png", profilePhoto: "v1758699334/quickmate_images/o2luselwmfd6g01wsnpm.png", earnings: 0, status: "Approved", totalBookings: 0, payoutPending: 0, rating: 0, isVerified: true, subscription: "{}", registrationOtpAttempts: 0, createdAt: new Date(1758699334993), updatedAt: new Date(1759554290060), __v: 0, registrationOtp: "909834", registrationOtpExpires: new Date(1758699635071) }  Point must only contain numeric elements, instead got type null
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/bookings/findProviderRange?lat=12.7209167&lng=74.9137113&radius=10 500 error processing query: ns=QuickMate.providersTree: GEONEAR  field=locationCoords maxdist=10 isNearSphere=0
-Sort: {}
-Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
- planner returned error :: caused by :: unable to find index for $geoNear query -> error processing query: ns=QuickMate.providersTree: GEONEAR  field=locationCoords maxdist=10 isNearSphere=0
-Sort: {}
-Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
- planner returned error :: caused by :: unable to find index for $geoNear query
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/bookings/findProviderRange?lat=11.1442071&lng=75.88204&radius=10 500 error processing query: ns=QuickMate.providersTree: GEONEAR  field=locationCoords maxdist=10000 isNearSphere=0
-Sort: {}
-Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
- planner returned error :: caused by :: unable to find index for $geoNear query -> error processing query: ns=QuickMate.providersTree: GEONEAR  field=locationCoords maxdist=10000 isNearSphere=0
-Sort: {}
-Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
- planner returned error :: caused by :: unable to find index for $geoNear query
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=6890525c8e590753867b2bd6&lat=11.1442071&lng=75.88204&radius=10 500 error processing query: ns=QuickMate.providersTree: GEONEAR  field=locationCoords maxdist=10000 isNearSphere=0
-Sort: {}
-Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
- planner returned error :: caused by :: unable to find index for $geoNear query -> error processing query: ns=QuickMate.providersTree: GEONEAR  field=locationCoords maxdist=10000 isNearSphere=0
-Sort: {}
-Proj: { registrationOtp: 0, registrationOtpExpires: 0, registrationOtpAttempts: 0 }
- planner returned error :: caused by :: unable to find index for $geoNear query
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=689428be0e204569ec82363a&lat=11.0467518&lng=75.9811564&radius=10 404 No service found -> No service found
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=1 404 No service found -> No service found
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 No service found -> No service found
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=12.7209167&lng=74.9137113&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=1 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=1 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=1 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=1 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=1 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
-[ERROR  ] - GET /api/categories/68c50df87f3b81f6deb79174 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
-[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=10 404 Currently no service available -> Currently no service available
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=1 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=20 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=20 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=20 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=20 404 Currently no service available -> Currently no service available
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.1442071&lng=75.88204&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=10 404 Currently no service available -> Currently no service available
-[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=68c50df87f3b81f6deb79174&lat=11.0467518&lng=75.9811564&radius=25 404 Currently no service available -> Currently no service available
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&experience=2&price=300&radius=10&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 Socket 'secureConnect' timed out after 30004ms (connectTimeoutMS: 30000) -> Socket 'secureConnect' timed out after 30004ms (connectTimeoutMS: 30000)
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 Socket 'secureConnect' timed out after 30004ms (connectTimeoutMS: 30000) -> Socket 'secureConnect' timed out after 30004ms (connectTimeoutMS: 30000)
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&experience=2&price=300&radius=10&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 connect ECONNREFUSED 159.41.192.101:27017 -> connect ECONNREFUSED 159.41.192.101:27017
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 read ECONNRESET -> read ECONNRESET
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 read ECONNRESET -> read ECONNRESET
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&experience=3&price=0&radius=15&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 read ECONNRESET -> read ECONNRESET
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&experience=3&price=0&radius=15&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 read ECONNRESET -> read ECONNRESET
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&experience=5&price=0&radius=15&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 read ECONNRESET -> read ECONNRESET
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&experience=5&price=0&radius=15&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 connect ECONNREFUSED 159.41.192.101:27017 -> connect ECONNREFUSED 159.41.192.101:27017
-[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&experience=0&price=0&radius=4&latitude=11.1442071&longitude=75.88204&date=2025-10-10&time=09:00+PM 500 read ECONNRESET -> read ECONNRESET
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[ERROR  ] - MongoDB connection error:
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/bookings/verifyPayment 500 Cast to Number failed for value "0:0" (type string) at path "duration" -> Cast to Number failed for value "0:0" (type string) at path "duration"
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/bookings/verifyPayment 500 Cast to Number failed for value "NaN" (type number) at path "duration" -> Cast to Number failed for value "NaN" (type number) at path "duration"
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/bookings/verifyPayment 500 Cast to Number failed for value "NaN" (type number) at path "duration" -> Cast to Number failed for value "NaN" (type number) at path "duration"
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/bookings/verifyPayment 500 Cast to Number failed for value "NaN" (type number) at path "duration" -> Cast to Number failed for value "NaN" (type number) at path "duration"
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[ERROR  ] - POST /api/bookings/verifyPayment 500 Cast to Number failed for value "NaN" (type number) at path "duration" -> Cast to Number failed for value "NaN" (type number) at path "duration"
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
-[INFO   ] - Server running on port 5000
-[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - the email
+[INFO   ] - Sending verification email to mishabprovider@gmail.com with OTP: 526988 mail
+[ERROR  ] - Error sending booking completion email to mishabprovider@gmail.com: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-29034de56desm37446125ad.19 - gsmtp
+[ERROR  ] - PATCH /api/bookings/updateBookingStatus/68e5f1c628516af360531e98 500 Failed to send booking completion email. -> Failed to send booking completion email.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - the email
+[INFO   ] - Sending verification email to mishabprovider@gmail.com with OTP: 539781 mail
+[ERROR  ] - Error sending booking completion email to mishabprovider@gmail.com: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-33b529e0e9asm3592236a91.4 - gsmtp
+[ERROR  ] - PATCH /api/bookings/updateBookingStatus/68e5f1c628516af360531e98 500 Failed to send booking completion email. -> Failed to send booking completion email.
+[ERROR  ] - POST /api/bookings/verify-bookingCompletion-otp 403 OTP Verification Failed. Please try again later. -> OTP Verification Failed. Please try again later.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - New client connected:
+[INFO   ] - Server running on port 5000
+[INFO   ] - New client connected:
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - the email
+[INFO   ] - Sending verification email to mishabprovider@gmail.com with OTP: 180503 mail
+[ERROR  ] - Error sending booking completion email to mishabprovider@gmail.com: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-799283c1a14sm698302b3a.0 - gsmtp
+[ERROR  ] - PATCH /api/bookings/updateBookingStatus/68e5f1c628516af360531e98 500 Failed to send booking completion email. -> Failed to send booking completion email.
+[INFO   ] - the email
+[INFO   ] - Sending verification email to moosabilal75608@gmail.com with OTP: 166110 mail
+[ERROR  ] - Error sending booking completion email to moosabilal75608@gmail.com: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 41be03b00d2f7-b678df233cfsm497049a12.28 - gsmtp
+[ERROR  ] - PATCH /api/bookings/updateBookingStatus/68e600a79fad98c9b09f8184 500 Failed to send booking completion email. -> Failed to send booking completion email.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - the email
+[INFO   ] - Sending verification email to mishabprovider@gmail.com with OTP: 550222 mail
+[INFO   ] - Verification OTP sent to mishabprovider@gmail.com
+[INFO   ] - the email
+[INFO   ] - Sending verification email to mishabprovider@gmail.com with OTP: 910498 mail
+[INFO   ] - Verification OTP sent to mishabprovider@gmail.com
+[ERROR  ] - POST /api/bookings/verify-bookingCompletion-otp 403 OTP Verification Failed. Please try again later. -> OTP Verification Failed. Please try again later.
+[ERROR  ] - POST /api/bookings/verify-bookingCompletion-otp 403 OTP Verification Failed. Please try again later. -> OTP Verification Failed. Please try again later.
+[INFO   ] - Client disconnected: qJ1iTiYt2zz9S5PKAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 21BJPyF-B_FfTokeAAAB
+[INFO   ] - Client disconnected: Rne5NVUkjNY56GOPAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: ad2xbLT-X45E4x9fAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 7pG3Kbk_iKMVLJS7AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: jQAr7R61B1f-miK-AAAB
+[INFO   ] - Client disconnected: 8GWOOWsWWXDJeAW7AAAD
+[INFO   ] - Client disconnected: 0fgbyYiGu5Fk_B7dAAAF
+[INFO   ] - Client disconnected: P5VieaYlM-GPjjhkAAAH
+[INFO   ] - Client disconnected: dlfODt4lxePRJXp1AAAJ
+[INFO   ] - Client disconnected: 9mRIzio6igOirHI9AAAL
+[INFO   ] - Client disconnected: meKrzQD8_qv3GyMvAAAN
+[INFO   ] - Client disconnected: WyC9b9fIu04apZVPAAAP
+[INFO   ] - Client disconnected: AA49ZYPxgli-NQvmAAAR
+[INFO   ] - Client disconnected: wiXXznT5yVUl899jAAAT
+[INFO   ] - Client disconnected: 2L9dqTLfPhiLdL-TAAAV
+[INFO   ] - Client disconnected: WLXPo0HwF3f9yqgUAAAX
+[INFO   ] - Client disconnected: LUiIz1hjkXmBalnnAAAZ
+[INFO   ] - Client disconnected: n02cNG-BrYatCMASAAAb
+[INFO   ] - Client disconnected: Byze3x7iMQAPr4udAAAd
+[INFO   ] - Client disconnected: rnjD7xQjM9nJNK--AAAf
+[INFO   ] - Client disconnected: gg1my_vrYgOrOr2kAAAh
+[ERROR  ] - GET /api/provider/earnings?period=week 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: l_8p60KibqTTdNOFAAAj
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/earnings?period=week 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: V8leJ9oIGXx_qrR9AAAl
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: 5KFas2FD1DtZA7RIAAAn
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: jYReBzcZpFhO4ElyAAAp
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: TNWcGrJoVWRNmvFzAAAr
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: 1aBCm8rVL7IwGSYtAAAt
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: bZ0fMmIH9NGTUpcMAAAv
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: ZYyLmlPc_Q4jwWCbAAAx
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: nEZzfFz6e_XkNm7hAAAz
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: ga5U9p_NBxIYnSZbAAA1
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: aFJfWP_cdp1dF4vtAAA3
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: _0Y9U4WA7nltdvZCAAA5
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: mgAY-NqHa7NNQs26AAA7

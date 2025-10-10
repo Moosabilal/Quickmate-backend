@@ -79,6 +79,44 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         }).lean();
     }
 
+    async findByProviderAndDateRangeForEarnings(
+        providerId: string,
+        startDate: Date,
+        endDate: Date
+    ): Promise<IBooking[]> {
+        console.log('[DEBUG] Querying earnings with updatedAt field...'); // Added for confirmation
+        return Booking.find({
+            providerId: new Types.ObjectId(providerId),
+            status: BookingStatus.COMPLETED,
+            updatedAt: {
+                $gte: startDate,
+                $lte: endDate,
+            },
+        })
+            .populate('userId', 'name')
+            .populate('serviceId', 'title')
+            .sort({ updatedAt: -1 }) 
+            .lean();
+    }
+    async countUniqueClientsBeforeDate(providerId: string, date: Date): Promise<number> {
+        const distinctClients = await Booking.distinct('userId', {
+            providerId: new Types.ObjectId(providerId),
+            status: BookingStatus.COMPLETED,
+            updatedAt: { $lt: date },
+        });
+        return distinctClients.length;
+    }
+
+    public async hasPriorBooking(userId: string, providerId: string, beforeDate: Date): Promise<boolean> {
+        const bookingExists = await Booking.exists({
+            userId: userId,
+            providerId: providerId,
+            status: BookingStatus.COMPLETED,
+            updatedAt: { $lt: beforeDate }
+        });
+        return !!bookingExists;
+    }
+
 
 
 

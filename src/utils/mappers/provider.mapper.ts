@@ -6,6 +6,7 @@ import { IService } from '../../models/Service';
 import { IDashboardResponse, IDashboardStatus } from "../../interface/provider.dto";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IReview } from '../../models/Review';
+import { IUser } from '../../models/User';
 
 
 export function toProviderDTO(provider: IProvider): IProviderProfile {
@@ -61,7 +62,7 @@ export function toProviderForChatListPage(
     )
 
     return {
-      id: provider._id.toString(),
+      id: provider.userId.toString(),
       bookingId: booking?._id.toString(),
       name: provider.fullName,
       profilePicture: provider.profilePhoto || "",
@@ -73,6 +74,51 @@ export function toProviderForChatListPage(
     };
   });
 }
+
+
+
+
+
+export function toClientForChatListPage(
+  bookings: IBooking[],
+  clients: IUser[],
+  services: IService[],
+  messages: { bookingId: string; lastMessage: string; createdAt: Date }[]
+): IProviderForChatListPage[] {
+
+  return clients.map((client) => {
+    const clientBooking = bookings
+      .filter((b) => b.userId?.toString() === client._id.toString())
+      .sort((a, b) => new Date(b.createdAt as Date).getTime() - new Date(a.createdAt as Date).getTime())[0];
+
+    if (!clientBooking) return null;
+
+    const service = services.find(
+      (s) => s._id.toString() === clientBooking.serviceId?.toString()
+    );
+    const lastMessageData = messages.find(
+      (m) => m.bookingId === clientBooking._id.toString()
+    );
+
+    return {
+      id: client._id.toString(),
+      bookingId: clientBooking._id.toString(),
+      name: client.name as string,
+      profilePicture: (client.profilePicture as string) || "",
+      location: "",
+      isOnline: true, 
+      services: service?.title || "",
+      lastMessage: lastMessageData?.lastMessage || "",
+      lastMessageAt: lastMessageData?.createdAt || null,
+    } as IProviderForChatListPage
+  }).filter((item): item is IProviderForChatListPage => item !== null);
+}
+
+
+
+
+
+
 
 function buildRatingHistory(reviews: IReview[]) {
   const monthMap = new Map<string, { total: number; count: number }>();

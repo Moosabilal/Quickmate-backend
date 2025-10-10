@@ -7,4 +7,7 @@ export interface IBookingRepository extends IBaseRepository<IBooking> {
     getDailyBookingCount(filter?: FilterQuery<IBooking>): Promise<{ date: string; total: number }[]>;
     findByProviderAndDateRange(providerIds: string[],startDate: string,endDate: string,statuses?: string[]): Promise<IBooking[]>
     findByProviderByTime(providerId: string, startDate: string, endDate: string, statuses?: string[]): Promise<IBooking[]>;
+    findByProviderAndDateRangeForEarnings(providerId: string,startDate: Date,endDate: Date): Promise<IBooking[]>
+    countUniqueClientsBeforeDate(providerId: string, date: Date): Promise<number>
+    hasPriorBooking(userId: string, providerId: string, beforeDate: Date): Promise<boolean>; 
 }

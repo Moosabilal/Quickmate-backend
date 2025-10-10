@@ -186,3 +186,18 @@ export interface IProviderDashboardRes {
   }[];
   topActiveProviders: ITopActiveProviders[];
 }
+
+export interface EarningsAnalyticsData {
+  totalEarnings: number;
+  earningsChangePercentage: number;
+  totalClients: number;
+  newClients: number;
+  topService: { name: string; earnings: number };
+  breakdown: Array<{
+    date: Date;
+    service: string;
+    client: string;
+    amount: number;
+    status: string;
+  }>;
+}

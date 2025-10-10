@@ -216,6 +216,7 @@ export class ProviderController {
 
     public getProviderForChatPage = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+
             const userId = req.user.id
             const response = await this._providerService.providerForChatPage(userId)
             res.status(HttpStatusCode.OK).json(response)
@@ -287,6 +288,21 @@ export class ProviderController {
             next(error);
         }
     };
+
+    public getEarningsAnalytics = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id;
+            const period = req.query.period === 'month' ? 'month' : 'week';
+            
+            const analyticsData = await this._providerService.getEarningsAnalytics(userId, period);
+            
+            res.status(HttpStatusCode.OK).json({ success: true, data: analyticsData });
+            console.log('the earnings', analyticsData);
+        } catch (error) {
+            next(error);
+        }
+    }
+
 
 }
 

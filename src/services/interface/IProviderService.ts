@@ -1,5 +1,5 @@
 import { IProvider } from "../../models/Providers";
-import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../interface/provider.dto";
+import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../interface/provider.dto";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
 import { calendar_v3 } from 'googleapis';
 
@@ -42,4 +42,6 @@ export interface IProviderService {
         timeMin: string,
         timeMax: string
     ): Promise<Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }>>;
+    getEarningsAnalytics(userId: string, period: 'week' | 'month'): Promise<EarningsAnalyticsData>;
+
 }
