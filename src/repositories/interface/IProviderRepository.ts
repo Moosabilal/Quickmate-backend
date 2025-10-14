@@ -23,6 +23,7 @@ export interface IProviderRepository extends IBaseRepository<IProvider> {
             radius?: number;
             date?: string;
             time?: string;
-        }): Promise<IProvider[]>
+        }): Promise<IProvider[]>;
+    getTopProvidersByEarnings(limit?: number): Promise<{ name: string; earnings: number }[]>;    
 
 }

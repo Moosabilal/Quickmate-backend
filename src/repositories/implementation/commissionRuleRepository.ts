@@ -16,11 +16,6 @@ export class CommissionRuleRepository extends BaseRepository<ICommissionRule> im
     return CommissionRule.find()
   }
 
-
-  // async findAll(filter: any): Promise<ICommissionRule[]> {
-  //   return CommissionRule.find(filter).exec();
-  // }
-
   async delete(id: string | Types.ObjectId): Promise<ICommissionRule | null> {
     return CommissionRule.findByIdAndDelete(id).exec();
   }

@@ -35,4 +35,8 @@ export class BaseRepository<T extends Document> implements IBaseRepository<T> {
         return await this.model.findByIdAndDelete(id);
     }
 
+    async count(filter: FilterQuery<T> = {}): Promise<number> {
+        return await this.model.countDocuments(filter);
+    }
+
 }

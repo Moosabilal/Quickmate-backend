@@ -7,4 +7,5 @@ export interface IBaseRepository<T> {
     findAll(filter?: FilterQuery<T>,  sort?: Record<string, 1 | -1>): Promise<T[]>;
     update(id: string, updateData: UpdateQuery<T>): Promise<T | null>;
     delete(id: string): Promise<T | null>;
+    count(filter?: FilterQuery<T>): Promise<number>;
 }

@@ -52,4 +52,13 @@ export class PaymentRepository extends BaseRepository<IPayment> implements IPaym
             total: r.total
         }));
     }
+
+    public async getTotalRevenue(): Promise<number> {
+        const result = await this.model.aggregate([
+            { $match: { adminCommission: { $exists: true, $ne: null } } },
+            { $group: { _id: null, totalRevenue: { $sum: '$adminCommission' } } }
+        ]);
+        return result[0]?.totalRevenue || 0;
+    }
+
 }

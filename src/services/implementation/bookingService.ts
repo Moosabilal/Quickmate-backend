@@ -268,8 +268,17 @@ export class BookingService implements IBookingService {
     }
 
 
-    async getBookingFor_Prov_mngmnt(userId: string, providerId: string): Promise<IProviderBookingManagement[]> {
+    async getBookingFor_Prov_mngmnt(userId: string, providerId: string,search: string): Promise<IProviderBookingManagement[]> {
         const bookings = await this._bookingRepository.findAll({ providerId, userId: { $ne: userId } });
+
+        let filteredBookings = bookings;
+        if(search){
+            const searchRegex = { $regex: search, $options: 'i' };
+            const matchedUsers = await this._userRepository.findAll({ name: searchRegex });
+            const userIds = matchedUsers.map(u => u._id.toString());
+            filteredBookings = bookings.filter(b => userIds.includes(b.userId?.toString() || ''));
+        }
+        
 
         const userIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
         const users = await this._userRepository.findAll({ _id: { $in: userIds } });

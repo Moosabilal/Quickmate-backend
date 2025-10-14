@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider, Provider } from "../../models/Providers";
-import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider.dto";
+import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider.dto";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -188,17 +188,6 @@ export class ProviderService implements IProviderService {
 
     public async updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile> {
         const updatedProvider = await this._providerRepository.updateProvider(updateData)
-
-        // Check if availability was updated and update Google Calendar events
-        // if (updateData.availability && updatedProvider.userId) {
-        //     try {
-        //         await this.updateGoogleCalendarEvents(updatedProvider, updatedProvider.userId.toString());
-        //         console.log(`Google Calendar events updated for provider ${updatedProvider._id}`);
-        //     } catch (error) {
-        //         console.error(`Failed to update Google Calendar events for provider ${updatedProvider._id}:`, error);
-        //         // Don't throw error here as the provider update was successful
-        //     }
-        // }
 
         return {
             id: updatedProvider._id.toString(),
@@ -461,7 +450,7 @@ export class ProviderService implements IProviderService {
                 const [searchHours, searchMinutes] = time24h.split(':').map(Number);
                 const searchSlotStart = new Date(filters.date);
                 searchSlotStart.setHours(searchHours, searchMinutes, 0, 0);
-                const searchSlotEnd = new Date(searchSlotStart.getTime() + 60 * 60 * 1000); // Assumes user is searching for a 1-hour slot
+                const searchSlotEnd = new Date(searchSlotStart.getTime() + 60 * 60 * 1000);
 
                 allBookingsForDay.forEach(booking => {
                     const bookingTime24h = convertTo24Hour(booking.scheduledTime as string);
@@ -626,178 +615,6 @@ export class ProviderService implements IProviderService {
         return toProviderDashboardDTO(provider, bookings, services, subCategories, parentCategories, reviews);
     }
 
-    // public async initiateGoogleAuth(userId: string): Promise<{ url: string }> {
-    //     const oAuth2Client = getOAuthClient();
-
-    //     const url = getAuthUrl(userId);
-
-    //     return { url };
-    // }
-
-
-    // private async updateGoogleCalendarEvents(provider: any, userId: string): Promise<void> {
-    //     const user = await this._userRepository.findById(userId);
-
-    //     if (!user?.googleCalendar?.tokens) {
-    //         console.log(`No Google Calendar tokens found for user ${userId}`);
-    //         return;
-    //     }   
-
-    //     const oAuth2Client = getOAuthClient();
-
-    //     oAuth2Client.setCredentials(user.googleCalendar.tokens);
-    //     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-
-    //     const eventSummary = "My Working Hours";
-
-    //     try {
-    //         // Clear old availability events
-    //         const { data } = await calendar.events.list({
-    //             calendarId: "primary",
-    //             q: eventSummary,
-    //             showDeleted: false,
-    //         });
-
-    //         if (data.items) {
-    //             for (const event of data.items) {
-    //                 if (event.id) {
-    //                     await calendar.events.delete({
-    //                         calendarId: "primary",
-    //                         eventId: event.id,
-    //                     });
-    //                 }
-    //             }
-    //         }
-    //     } catch (error) {
-    //         console.error("Could not clear old availability events, proceeding to create new ones.", error);
-    //     }
-
-    //     // Create new events based on updated availability
-    //     const weekDays: { [key: string]: number } = {
-    //         'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
-    //         'Thursday': 4, 'Friday': 5, 'Saturday': 6
-    //     };
-
-    //     for (const slot of provider.availability) {
-    //         const dayName = slot.day;
-    //         const dayNumber = weekDays[dayName];
-
-    //         if (dayNumber === undefined) continue;
-
-    //         const now = new Date();
-    //         const nextDayDate = new Date(now);
-    //         nextDayDate.setDate(now.getDate() + (dayNumber - now.getDay() + 7) % 7);
-
-    //         const [startHour, startMinute] = slot.startTime.split(':').map(Number);
-    //         const [endHour, endMinute] = slot.endTime.split(':').map(Number);
-
-    //         const startDate = new Date(nextDayDate.setHours(startHour, startMinute, 0, 0));
-    //         const endDate = new Date(nextDayDate.setHours(endHour, endMinute, 0, 0));
-
-    //         const event = {
-    //             summary: eventSummary,
-    //             description: "Time slot marked as available for bookings.",
-    //             start: {
-    //                 dateTime: startDate.toISOString(),
-    //                 timeZone: "Asia/Kolkata",
-    //             },
-    //             end: {
-    //                 dateTime: endDate.toISOString(),
-    //                 timeZone: "Asia/Kolkata",
-    //             },
-    //             recurrence: [
-    //                 `RRULE:FREQ=WEEKLY;BYDAY=${dayName.substring(0, 2).toUpperCase()}`
-    //             ],
-    //         };
-
-    //         try {
-    //             await calendar.events.insert({
-    //                 calendarId: "primary",
-    //                 requestBody: event,
-    //             });
-    //             console.log(`Created Google Calendar event for ${dayName}`);
-    //         } catch (error) {
-    //             console.error(`Failed to create event for ${dayName}:`, error);
-    //         }
-    //     }
-    // }
-
-    // public async googleCallback(code: string, userId: string): Promise<{ message: string }> {
-    //     const oAuth2Client = getOAuthClient();
-
-    //     const { tokens } = await oAuth2Client.getToken(code);
-    //     oAuth2Client.setCredentials(tokens);
-
-    //     await this._userRepository.update(userId, {
-    //         "googleCalendar.tokens": tokens
-    //     });
-
-    //     const provider = await this._providerRepository.findOne({ userId: userId })
-
-    //     if (!provider) {
-    //         throw new CustomError("Provider not found.", HttpStatusCode.BAD_REQUEST);
-    //     }
-
-    //     // Update Google Calendar events
-    //     await this.updateGoogleCalendarEvents(provider, userId);
-
-    //     return { message: "Google Calendar connected!" }
-    // }
-
-    // public async createCalendarEvent(
-    //     providerId: string,
-    //     serviceId: string,
-    //     booking: {
-    //         summary: string;
-    //         description: string;
-    //         start: Date | string;
-    //     }
-    // ): Promise<void> {
-
-    //     const provider = await this._providerRepository.findById(providerId);
-    //     const user = await this._userRepository.findById(provider._id.toString())
-    //     if (!user?.googleCalendar?.tokens) return;
-
-    //     const oAuth2Client = new google.auth.OAuth2(
-    //         process.env.GOOGLE_CLIENT_ID,
-    //         process.env.GOOGLE_CLIENT_SECRET,
-    //         process.env.GOOGLE_REDIRECT_URI
-    //     );
-    //     oAuth2Client.setCredentials(user.googleCalendar.tokens);
-
-    //     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-
-    //     const service = await this._serviceRepository.findOne({ subCategoryId: serviceId, providerId });
-    //     if (!service) throw new Error("Service not found");
-
-    //     const start = new Date(booking.start);
-    //     if (isNaN(start.getTime())) {
-    //         throw new Error("Invalid booking start date");
-    //     }
-
-    //     let end = new Date(start);
-    //     if (service.duration) {
-    //         const [hours, minutes] = service.duration.split(":").map(Number);
-    //         end.setHours(end.getHours() + (hours || 0));
-    //         end.setMinutes(end.getMinutes() + (minutes || 0));
-    //     } else {
-    //         end = new Date(start.getTime() + 60 * 60000);
-    //     }
-
-
-    //     await calendar.events.insert({
-    //         calendarId: "primary",
-    //         requestBody: {
-    //             summary: booking.summary,
-    //             description: booking.description,
-    //             start: { dateTime: start.toISOString(), timeZone: "Asia/Kolkata" },
-    //             end: { dateTime: end.toISOString(), timeZone: "Asia/Kolkata" },
-    //         },
-    //     });
-
-    // }
-
-
     public async getAvailabilityByLocation(
         serviceSubCategoryId: string,
         userLat: number,
@@ -934,11 +751,11 @@ export class ProviderService implements IProviderService {
         let currentStartDate: Date, currentEndDate: Date, prevStartDate: Date, prevEndDate: Date;
 
         if (period === 'week') {
-            currentStartDate = startOfWeek(now, { weekStartsOn: 1 }); 
+            currentStartDate = startOfWeek(now, { weekStartsOn: 1 });
             currentEndDate = endOfWeek(now, { weekStartsOn: 1 });
             prevStartDate = startOfWeek(sub(now, { weeks: 1 }), { weekStartsOn: 1 });
             prevEndDate = endOfWeek(sub(now, { weeks: 1 }), { weekStartsOn: 1 });
-        } else { 
+        } else {
             currentStartDate = startOfMonth(now);
             currentEndDate = endOfMonth(now);
             prevStartDate = startOfMonth(sub(now, { months: 1 }));
@@ -990,6 +807,122 @@ export class ProviderService implements IProviderService {
         };
     }
 
+
+
+    public async getProviderPerformance(userId: string): Promise<IProviderPerformance> {
+        const providerId = await this._providerRepository.getProviderId(userId);
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) {
+            throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
+        }
+
+        // Fetch all necessary data in parallel, now including the service breakdown
+        const [bookings, reviewsFromDb, activeServicesCount, serviceBreakdown] = await Promise.all([
+            this._bookingRepository.findAll({ providerId }),
+            this._reviewRepository.findAll({ providerId }),
+            this._serviceRepository.findServiceCount(providerId),
+            this._bookingRepository.getBookingStatsByService(providerId) // Using the new efficient method
+        ]);
+
+        // --- Basic Calculations ---
+        const totalBookings = bookings.length;
+        const completedBookings = bookings.filter(b => b.status === BookingStatus.COMPLETED).length;
+        const cancelledBookings = bookings.filter(b => b.status === BookingStatus.CANCELLED).length;
+
+        const totalEarnings = bookings
+            .filter(b => b.status === BookingStatus.COMPLETED)
+            .reduce((sum, b) => sum + (Number(b.amount) ?? 0), 0);
+
+        const avgRating = reviewsFromDb.length
+            ? reviewsFromDb.reduce((sum, r) => sum + (Number(r.rating) ?? 0), 0) / reviewsFromDb.length
+            : 0;
+
+        // --- Format Reviews with User Info ---
+        const userIds = reviewsFromDb.map(r => r.userId?.toString()).filter(id => id);
+        const users = await this._userRepository.findAll({ _id: { $in: userIds } });
+        const reviews: IReview[] = reviewsFromDb.map(r => {
+            const user = users.find(u => u._id.toString() === r.userId?.toString());
+
+            return {
+                name: (user?.name as string) ?? "Anonymous",
+                time: r.createdAt
+                    ? new Date(r.createdAt as string | number | Date).toLocaleDateString()
+                    : "N/A",
+                rating: Number(r.rating) ?? 0,
+                comment: (r.comment as string ?? r.reviewText as string ?? "") as string,
+                avatar: (user?.profilePicture as string) ?? "default_avatar.png"
+            };
+        });
+
+        // --- Rating Distribution Calculation ---
+        const ratingCounts = new Map<number, number>([[5, 0], [4, 0], [3, 0], [2, 0], [1, 0]]);
+        for (const review of reviewsFromDb) {
+            const rating = Math.round(Number(review.rating));
+            if (ratingCounts.has(rating)) {
+                ratingCounts.set(rating, ratingCounts.get(rating)! + 1);
+            }
+        }
+        const totalReviews = reviewsFromDb.length;
+        const ratingDistribution: IRatingDistribution[] = Array.from(ratingCounts.entries()).map(([stars, count]) => ({
+            stars,
+            count,
+            percentage: totalReviews > 0 ? parseFloat(((count / totalReviews) * 100).toFixed(1)) : 0
+        })).sort((a, b) => b.stars - a.stars);
+
+        // --- Star Rating Trend (Last 6 Months) ---
+        const monthlyRatingData: { [key: string]: { sum: number, count: number } } = {};
+        const sixMonthsAgo = new Date();
+        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
+        for (const review of reviewsFromDb) {
+            const reviewDate = new Date(review.createdAt as string | Date);
+            if (reviewDate >= sixMonthsAgo) {
+                const monthKey = `${reviewDate.getFullYear()}-${reviewDate.getMonth()}`;
+                if (!monthlyRatingData[monthKey]) {
+                    monthlyRatingData[monthKey] = { sum: 0, count: 0 };
+                }
+                monthlyRatingData[monthKey].sum += Number(review.rating);
+                monthlyRatingData[monthKey].count++;
+            }
+        }
+        const starRatingTrend: IMonthlyTrend[] = [];
+        const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'short' });
+        for (let i = 5; i >= 0; i--) {
+            const date = new Date();
+            date.setMonth(date.getMonth() - i);
+            const monthKey = `${date.getFullYear()}-${date.getMonth()}`;
+            const monthName = monthFormatter.format(date);
+
+            const data = monthlyRatingData[monthKey];
+            starRatingTrend.push({
+                month: monthName,
+                value: data && data.count > 0 ? parseFloat((data.sum / data.count).toFixed(1)) : 0
+            });
+        }
+
+        // --- Final Assembly ---
+        const completionRate = totalBookings > 0 ? ((completedBookings / totalBookings) * 100).toFixed(1) : "0";
+        const cancellationRate = totalBookings > 0 ? ((cancelledBookings / totalBookings) * 100).toFixed(1) : "0";
+
+        const result: IProviderPerformance = {
+            providerId: provider._id.toString(),
+            providerName: provider.fullName,
+            totalBookings,
+            completedBookings,
+            cancelledBookings,
+            totalEarnings,
+            avgRating: parseFloat(avgRating.toFixed(1)),
+            activeServices: activeServicesCount ?? 0,
+            completionRate: `${completionRate}%`,
+            cancellationRate: `${cancellationRate}%`,
+            reviews,
+            ratingDistribution,
+            starRatingTrend,
+            serviceBreakdown
+        };
+
+        return result;
+    }
 
 
 }

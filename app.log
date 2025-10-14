@@ -136,3 +136,424 @@
 [ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
 [ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
 [INFO   ] - Client disconnected: mgAY-NqHa7NNQs26AAA7
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket 4NLoyr5_jjcvhUFXAAAB joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/categories 500 ENOENT: no such file or directory, open 'src/uploads/1760068634548-Screenshot_20251009_212734.png' -> ENOENT: no such file or directory, open 'src/uploads/1760068634548-Screenshot_20251009_212734.png'
+[ERROR  ] - POST /api/categories 500 ENOENT: no such file or directory, open 'src/uploads/1760068642770-Screenshot_20251009_212734.png' -> ENOENT: no such file or directory, open 'src/uploads/1760068642770-Screenshot_20251009_212734.png'
+[INFO   ] - Client disconnected: WKvMVknfcbZdgsoYAAAB
+[ERROR  ] - POST /api/categories 500 ENOENT: no such file or directory, open 'src/uploads/1760068671866-Screenshot_20251009_212734.png' -> ENOENT: no such file or directory, open 'src/uploads/1760068671866-Screenshot_20251009_212734.png'
+[ERROR  ] - POST /api/categories 500 ENOENT: no such file or directory, open 'src/uploads/1760068673070-Screenshot_20251009_212734.png' -> ENOENT: no such file or directory, open 'src/uploads/1760068673070-Screenshot_20251009_212734.png'
+[ERROR  ] - POST /api/provider/register 500 ENOENT: no such file or directory, open 'src/uploads/1760069314562-Screenshot_20251009_212734.png' -> ENOENT: no such file or directory, open 'src/uploads/1760069314562-Screenshot_20251009_212734.png'
+[INFO   ] - Socket rxyJxhsbKisacej4AAAD joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Client disconnected: rxyJxhsbKisacej4AAAD
+[INFO   ] - Client disconnected: isH34BqouQVR4sA1AAAF
+[INFO   ] - Client disconnected: aUD1I4jFEP_wue_0AAAH
+[INFO   ] - Socket Jl7SNW0YLb4M9LPQAAAJ joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Client disconnected: Jl7SNW0YLb4M9LPQAAAJ
+[INFO   ] - Client disconnected: AoKlXUqu8PDoXs3BAAAN
+[INFO   ] - Socket PanV9OBIRY8N-QreAAAL joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket PanV9OBIRY8N-QreAAAL joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:offer from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:hangup from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket PanV9OBIRY8N-QreAAAL joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:offer from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Client disconnected: PanV9OBIRY8N-QreAAAL
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: W7xoRvq0rkE5szPVAAAB
+[INFO   ] - Client disconnected: kjwS2gB3P50cDUv7AAAF
+[INFO   ] - Client disconnected: 7t7KjSPv5fAWEneeAAAD
+[INFO   ] - Client disconnected: zvT3gpEE_LRm1P55AAAH
+[INFO   ] - Client disconnected: kXfTtnqyhlTtkpShAAAJ
+[INFO   ] - Client disconnected: YYc1HVUWTu0vjStXAAAL
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/auth/getUser 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/categories 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[INFO   ] - Client disconnected: q5rLzeJMCL8xfkLrAAAN
+[ERROR  ] - GET /api/auth/getUser 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/categories 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[INFO   ] - Client disconnected: YSAXp_RNOKv2V2ALAAAP
+[INFO   ] - Client disconnected: wjDMLfGZ6Hq87K-tAAAR
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: l5nAwfz4eqYkWogMAAAT
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: YB-DbtmYQZvKh_43AAAV
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: yn3tYDQhM4dWgSalAAAX
+[INFO   ] - Client disconnected: RB3po6Kjx4BXracmAAAZ
+[INFO   ] - Client disconnected: JCtl1zhqL4SBRHFMAAAb
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: Ns4spjDPXkFTjq9XAAAd
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: PbHjx3mMN0cyLipjAAAf
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[INFO   ] - Client disconnected: nbo4PBoN-pUXTF9pAAAh
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Client disconnected: U_GBc382yLCvN7mqAAAj
+[INFO   ] - Client disconnected: VyaGXheASDoJq_iiAAAl
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 13r0GSIiRGm9FDKjAAAn
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 98gef6pevxAFNYIkAAAp
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/categories 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/auth/getUser 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[INFO   ] - Client disconnected: Ja-L5bIgT20Zp65_AAAr
+[INFO   ] - Client disconnected: Bz7Q0XcQ49JC4H3UAAAt
+[INFO   ] - Client disconnected: qhHkmSpJ9g_gzAgXAAAv
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: gJGaLiiUdIrDGjgQAAAB
+[INFO   ] - Client disconnected: WaPfSvwEQkW-ZbChAAAD
+[INFO   ] - Client disconnected: 8f69Py5w9AZquuZCAAAF
+[INFO   ] - Client disconnected: 7Zam77xsuEW1kv_eAAAH
+[INFO   ] - Client disconnected: _WnY0zbUhM1fEZxLAAAJ
+[INFO   ] - Client disconnected: HgbAAa6cuZJmFjJEAAAL
+[INFO   ] - Client disconnected: K1GPvuwBiCDdTJV0AAAN
+[INFO   ] - Client disconnected: FgimxjjPiEO4nH6xAAAP
+[INFO   ] - Client disconnected: k5odJoqAV5DAV2-NAAAR
+[INFO   ] - Client disconnected: 0gn1c7in_zWYH5oZAAAT
+[INFO   ] - Client disconnected: TVsVJuaQWFDpgLKxAAAV
+[INFO   ] - Client disconnected: Y_mQWliF6QfBVjTtAAAX
+[INFO   ] - Client disconnected: ZmflNosXoS_JOqZJAAAZ
+[INFO   ] - Client disconnected: pBpls0V2iJJQBIG0AAAb
+[INFO   ] - Client disconnected: OdFcwVZ3rvASMrvAAAAd
+[INFO   ] - Client disconnected: O6jNWFK1gEmSI31FAAAf
+[INFO   ] - Client disconnected: aoJzIG0JBJGFTH7wAAAh
+[INFO   ] - Client disconnected: QbyMT-Ay6vixf0cWAAAj
+[INFO   ] - Client disconnected: cDvURclHcB8Uy93NAAAl
+[INFO   ] - Client disconnected: cQi07W_IhjW5bZKJAAAn
+[INFO   ] - Client disconnected: OIcmQAFbvq8vfEcqAAAp
+[INFO   ] - Client disconnected: 2WOobG_hx7KjIDFIAAAr
+[INFO   ] - Client disconnected: CtgBoWq54NZ14DiYAAAt
+[INFO   ] - Client disconnected: jZLQPT4oq1FtX-0eAAAv
+[INFO   ] - Client disconnected: trrO54PG4khKP4LzAAAx
+[INFO   ] - Client disconnected: -ZvqmHtULFWCsdbqAAAz
+[INFO   ] - Client disconnected: -HibijqouozaWUgiAAA1
+[INFO   ] - Client disconnected: 3SuRzfXXMWjAceDQAAA3
+[INFO   ] - Client disconnected: H5imdSbmLdQSpV9pAAA5
+[INFO   ] - Client disconnected: lj9Mp47RCrxzjSOnAAA7
+[INFO   ] - Client disconnected: DizfvhypyH_AHq1bAAA9
+[INFO   ] - Client disconnected: HuR0ud7xNOz6BIS6AAA_
+[INFO   ] - Client disconnected: VW6rsT-KQt0dZOMyAABB
+[INFO   ] - Client disconnected: gyGbsIKKYVFup9PKAABD
+[INFO   ] - Client disconnected: lJ36QV4-Ux3EtT94AABF
+[INFO   ] - Client disconnected: BTZOLAxzOXJh1b2qAABH
+[INFO   ] - Client disconnected: SIVJsapfRXY46Q3uAABJ
+[INFO   ] - Client disconnected: 9-SxUYTpUR1PhBSTAABL
+[INFO   ] - Client disconnected: 8qRCeccp30THR9MqAABN
+[INFO   ] - Client disconnected: 8vwnwrf9MmWfRMtxAABP
+[INFO   ] - Client disconnected: rt8PUKhwrOHBVdceAABR
+[INFO   ] - Client disconnected: w7yQ69O5HWJHhvqYAABT
+[INFO   ] - Client disconnected: eCjv8iBR1jesJOxZAABV
+[INFO   ] - Client disconnected: t3dslh3K5MFYjFyIAABX
+[INFO   ] - Client disconnected: jRtdJwQdPQX2O2sAAABZ
+[INFO   ] - Client disconnected: HCLOMVNl0vI5thJdAABb
+[INFO   ] - Client disconnected: mmFNDwK9x7piknG8AABd
+[INFO   ] - Client disconnected: V_4kZoJhwcz7oUZ1AABf
+[INFO   ] - Client disconnected: NV4nGkJQUZMpWA3GAABh
+[INFO   ] - Client disconnected: JmxTiPIBwlN_T0QdAABj
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: gneQl6qu9HrWthdUAAAB
+[INFO   ] - Client disconnected: 1KdA8FxXyN12kV16AAAD
+[INFO   ] - Client disconnected: hEmGrEOWgBihkj6qAAAF
+[INFO   ] - Client disconnected: BSv2XH8lsieervimAAAH
+[INFO   ] - Client disconnected: JLVkOnVMYVVnPsRkAAAJ
+[INFO   ] - Client disconnected: dLuftSCHz6qzOFguAAAL
+[INFO   ] - Client disconnected: jgBosI_JPw1MmdGUAAAN
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/ 404 Not Found - /api/provider/performance/ -> Not Found - /api/provider/performance/
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[ERROR  ] - GET /api/provider/performance/undefined 500 Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider" -> Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Provider"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/performance 500 Cannot read properties of null (reading '_id') -> Cannot read properties of null (reading '_id')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 9muIGHMa2W3FC3lVAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Client disconnected: PH6ffHpFQZKzwo6ZAAAB
+[INFO   ] - Client disconnected: nPXVQRyYQvoEh-syAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: EU1DVNJ6V54Wl79wAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: hxUX4l7wxjD1hKNOAAAB
+[INFO   ] - Client disconnected: z3epVXjTEHRkkpEGAAAD
+[INFO   ] - Client disconnected: owkeWYXARkn6cdqKAAAF
+[INFO   ] - Client disconnected: yP1MmhH-cdMI6aDeAAAH
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Qh5xFGdj-UBqfTuxAAAB
+[INFO   ] - Client disconnected: dmqFbGJ9TTekF3sHAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 8Zi7dpbyfPBj3mOeAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 2EQZTbETVJ01zuQkAAAB
+[INFO   ] - Client disconnected: 5V7JZrd5s0koMoYxAAAD
+[INFO   ] - Client disconnected: wB67-c0mLPrMMUzdAAAF
+[INFO   ] - Client disconnected: a1oDDSHW7N40yMoKAAAH
+[INFO   ] - Client disconnected: l4XIyuvP2cYx2PyIAAAJ
+[INFO   ] - Client disconnected: kgH2bkf-CKpmbB3lAAAL
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Client disconnected: WV9wvpav2bp1Z7czAAAN
+[INFO   ] - Client disconnected: zl7OymIyJ3Nf0bmfAAAP
+[INFO   ] - Client disconnected: yo3Ar7CyVqwtB_x3AAAR
+[INFO   ] - Client disconnected: mMCy1qsw09_SVxxUAAAT
+[INFO   ] - Client disconnected: T_dtu6M27a-F18v-AAAV
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: 0k8z-on7wZxFPi57AAAB
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: TuZQavTVTDm3BRfHAAAD
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: 8ob0wx1-5SKaq_ZeAAAF
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: n614B0XuAVGYIBdbAAAH
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: lcwoHhGYboJpjcfAAAAJ
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: Nv9VcO76bAw7VnxjAAAL
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: qLQIp4a6bGN3Zx05AAAN
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: A-SlPfdiuWCGdp0YAAAP
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: 2tGwKxNCN9imcmb2AAAR
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Client disconnected: QmXhUI-msQVlAIslAAAT
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: QH9d2dHQAaCLI18zAAAV
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: Bc7ThfoZzI2qrwS2AAAX
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest 404 Not Found - /api/review/reviews?page=1&limit=10&sort=newest -> Not Found - /api/review/reviews?page=1&limit=10&sort=newest
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: _m20Sf9biHlza8p-AAAB
+[ERROR  ] - GET /api/categories 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/categories 500 connection <monitor> to 159.41.192.59:27017 timed out -> connection <monitor> to 159.41.192.59:27017 timed out
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=5&limit=6&search=&status=All 404 User not found. -> User not found.
+[INFO   ] - Client disconnected: 6GB2jffRXBCQ89LXAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

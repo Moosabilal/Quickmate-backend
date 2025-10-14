@@ -1,5 +1,5 @@
 import { IProvider } from "../../models/Providers";
-import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from "../../interface/provider.dto";
+import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IServiceAddPageResponse } from "../../interface/provider.dto";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
 import { calendar_v3 } from 'googleapis';
 
@@ -23,17 +23,6 @@ export interface IProviderService {
     getProviderwithFilters(userId: string, serviceId: string, filters: {radiusKm?: number, lat?: number, long?: number, experience?: number; date?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
     providerForChatPage(userId: string): Promise<IProviderForChatListPage[]>;
     getProviderDashboard(userId: string): Promise<{dashboardData: IDashboardResponse[], dashboardStat: IDashboardStatus}>;
-    // initiateGoogleAuth(userId: string): Promise<{ url: string }>
-    // googleCallback(code: string, userId: string): Promise<{message: string}>;
-    // createCalendarEvent(
-    //     providerId: string,
-    //     serviceId: string,
-    //     booking: {
-    //         summary: string;
-    //         description: string;
-    //         start: Date | string;
-    //     }
-    // ): Promise<void>;
     getAvailabilityByLocation(
         serviceSubCategoryId: string,
         userLat: number,
@@ -43,5 +32,6 @@ export interface IProviderService {
         timeMax: string
     ): Promise<Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }>>;
     getEarningsAnalytics(userId: string, period: 'week' | 'month'): Promise<EarningsAnalyticsData>;
+    getProviderPerformance(userId: string): Promise<IProviderPerformance>;
 
 }

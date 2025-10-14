@@ -235,36 +235,9 @@ export class ProviderController {
         }
     }
 
-    // public initiateGoogleAuth = async (req: AuthRequest, res: Response, next: NextFunction) => {
-    //     try {
-    //         const userId = req.user.id
-    //         const response = await this._providerService.initiateGoogleAuth(userId);
-    //         res.status(HttpStatusCode.OK).json(response);
-    //     } catch (error) {
-    //         next(error);
-    //     }
-    // };
-
-    // public googleCallback = async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //         const code = req.query.code as string;
-    //         const userId = req.query.state as string;
-
-    //         if (!userId) {
-    //             res.status(HttpStatusCode.BAD_REQUEST).json({ message: "Invalid state: providerId is missing" });
-    //         }
-    //         await this._providerService.googleCallback(code, userId);
-
-    //         res.redirect(`${process.env.FRONTEND_URL}/provider/providerProfile/${userId}?calendar=success`);
-
-    //     } catch (error) {
-    //         next(error);
-    //     }
-    // };
-
     public getProviderAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const {timeMin, timeMax } = req.query;
+            const { timeMin, timeMax } = req.query;
             const serviceId = req.query.serviceId as string;
             const latitude = parseFloat(req.query.latitude as string);
             const longitude = parseFloat(req.query.longitude as string);
@@ -293,15 +266,32 @@ export class ProviderController {
         try {
             const userId = req.user.id;
             const period = req.query.period === 'month' ? 'month' : 'week';
-            
+
             const analyticsData = await this._providerService.getEarningsAnalytics(userId, period);
-            
+
             res.status(HttpStatusCode.OK).json({ success: true, data: analyticsData });
             console.log('the earnings', analyticsData);
         } catch (error) {
             next(error);
         }
     }
+
+    public getPerformance = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id;
+
+            const performanceData = await this._providerService.getProviderPerformance(userId);
+            console.log('th rgggg', performanceData);
+
+            res.status(HttpStatusCode.OK).json({
+                success: true,
+                message: "Provider performance fetched successfully",
+                data: performanceData
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
 
 
 }

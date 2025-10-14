@@ -123,7 +123,7 @@ export interface IBackendProvider {
   earnings: number;
   price: number;
   totalBookings: number;
-  distanceKm?: number; 
+  distanceKm?: number;
   reviews?: IReviewsOfUser[];
 }
 
@@ -201,3 +201,55 @@ export interface EarningsAnalyticsData {
     status: string;
   }>;
 }
+
+// src/interface/performance.dto.ts
+
+// Represents a single user review
+export interface IReview {
+    name: string;
+    time: string;
+    rating: number;
+    comment: string;
+    avatar: string;
+}
+
+// Data for the rating distribution chart
+export interface IRatingDistribution {
+    stars: number;
+    count: number;
+    percentage: number;
+}
+
+// Data for the monthly trend charts
+export interface IMonthlyTrend {
+    month: string;
+    value: number; // The average rating for that month
+}
+
+// Data for the service breakdown view
+export interface IServiceBreakdown {
+    serviceName: string;
+    completed: number;
+    total: number;
+    completionRate: number;
+}
+
+// The final, complete data structure for the performance dashboard
+export interface IProviderPerformance {
+    providerId: string;
+    providerName: string;
+    totalBookings: number;
+    completedBookings: number;
+    cancelledBookings: number;
+    totalEarnings: number;
+    avgRating: number;
+    activeServices: number;
+    completionRate: string;
+    cancellationRate: string;
+    reviews: IReview[];
+    // --- NEW FIELDS ---
+    ratingDistribution: IRatingDistribution[];
+    starRatingTrend: IMonthlyTrend[];
+    serviceBreakdown: IServiceBreakdown[];
+}
+

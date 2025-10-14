@@ -23,6 +23,10 @@ export class ServiceRepository extends BaseRepository<IService> implements IServ
         return services
     }
 
+    async findServiceCount(providerId: string): Promise<number> {
+        return await Service.countDocuments({ providerId });
+    }
+
     async findById(serviceId: string): Promise<IService> {
         return await Service.findOne({ _id: serviceId })
     }

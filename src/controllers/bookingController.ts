@@ -39,12 +39,6 @@ export class BookingController {
             const startDate = formatISO(combinedDate);
 
             const response = await this._bookingService.createNewBooking(req.body)
-            // await this._providerService.createCalendarEvent(providerId, serviceId, {
-            //     summary: "Service Booking",
-            //     description: `Booking by ${customerName}`,
-            //     start: startDate ,
-            // });
-            // console.log('the event created successfully in controller')
 
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -100,8 +94,9 @@ export class BookingController {
     public getBookingFor_Prov_mngmnt = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const providerId = req.params.id
+            const search = req.query.search as string
             const userId = req.user.id
-            const response = await this._bookingService.getBookingFor_Prov_mngmnt(userId, providerId)
+            const response = await this._bookingService.getBookingFor_Prov_mngmnt(userId, providerId, search)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

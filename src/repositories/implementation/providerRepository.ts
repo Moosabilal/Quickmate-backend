@@ -131,5 +131,13 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return this.findAll(filter);
     }
 
+    public async getTopProvidersByEarnings(limit: number = 5): Promise<{ name: string; earnings: number }[]> {
+        return this.model.find({}, 'fullName earnings')
+            .sort({ earnings: -1 })
+            .limit(limit)
+            .lean()
+            .then(providers => providers.map(p => ({ name: p.fullName, earnings: p.earnings || 0 })));
+    }
+
 
 }

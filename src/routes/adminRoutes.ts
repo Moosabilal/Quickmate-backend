@@ -10,6 +10,8 @@ const adminController = container.get<AdminController>(TYPES.AdminController)
 const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
 
 router.get('/getAdminDashboard', adminController.getAdminDashboard)
+router.get('/analytics/dashboard', isAdmin, adminController.getDashboardAnalytics);
+
 
 
 export default router;
