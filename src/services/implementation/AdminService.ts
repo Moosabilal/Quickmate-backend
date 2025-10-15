@@ -9,7 +9,7 @@ import { IPaymentRepository } from "../../repositories/interface/IPaymentReposit
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
 import { toAdminDashboardDTO } from "../../utils/mappers/admin.mapper";
-import { IProviderDashboardRes } from "../../interface/provider.dto";
+import { IProviderDashboardRes } from "../../interface/provider";
 import { IAnalyticsData } from "../../interface/admin";
 
 @injectable()

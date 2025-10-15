@@ -1,5 +1,5 @@
 import { timeStamp } from "console";
-import { IBookingConfirmationRes, IBookingHistoryPage, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
+import { IBookingConfirmationRes, IBookingHistoryPage, IGetMessages, IProviderBookingManagement } from "../../interface/booking";
 import { BookingStatus } from "../../enums/booking.enum";
 import { PaymentStatus } from "../../enums/userRoles";
 import { IAddress } from "../../models/address";

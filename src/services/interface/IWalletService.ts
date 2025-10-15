@@ -1,5 +1,5 @@
-import { WalletFilter } from "../../interface/payment.dto";
-import { IDepositVerification, IGetWalletRes, IInitiateDepositRes } from "../../interface/wallet.dto";
+import { WalletFilter } from "../../interface/payment";
+import { IDepositVerification, IGetWalletRes, IInitiateDepositRes } from "../../interface/wallet";
 import { Roles } from "../../enums/userRoles";
 import { ITransaction } from "../../models/transaction";
 import { IWallet } from "../../models/wallet";

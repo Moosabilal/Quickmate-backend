@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { CategoryService } from '../services/implementation/categoryService';
-import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../interface/category.dto';
+import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../interface/category';
 import { ICategory } from '../models/Categories';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import { validationResult } from 'express-validator';

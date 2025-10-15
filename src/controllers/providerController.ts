@@ -3,10 +3,10 @@ import { Request, Response, NextFunction } from 'express';
 import { IProviderService } from "../services/interface/IProviderService";
 import TYPES from "../di/type";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { IProviderProfile, IProviderRegisterRequest } from "../interface/provider.dto";
+import { IProviderProfile, IProviderRegisterRequest } from "../interface/provider";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth";
 import { IProvider } from "../models/Providers";
 import { getOAuthClient } from "../utils/googleCalendar";
 

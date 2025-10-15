@@ -1,5 +1,5 @@
 import { CommissionRule, ICommissionRule } from '../../models/Commission';
-import { ICommissionRuleInput } from '../../interface/category.dto'; 
+import { ICommissionRuleInput } from '../../interface/category'; 
 import { Types } from 'mongoose';
 import { ICommissionRuleRepository } from '../interface/ICommissonRuleRepository';
 import { injectable } from 'inversify';

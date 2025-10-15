@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider, Provider } from "../../models/Providers";
-import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider.dto";
+import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -12,7 +12,7 @@ import { ErrorMessage } from "../../enums/ErrorMessage";
 import { CustomError } from "../../utils/CustomError";
 import { generateOTP } from "../../utils/otpGenerator";
 import { sendVerificationEmail } from "../../utils/emailService";
-import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
+import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
 import { toClientForChatListPage, toProviderDashboardDTO, toProviderDTO, toProviderForChatListPage, toServiceAddPage } from "../../utils/mappers/provider.mapper";
@@ -195,7 +195,6 @@ export class ProviderService implements IProviderService {
             fullName: updatedProvider.fullName,
             phoneNumber: updatedProvider.phoneNumber,
             email: updatedProvider.email,
-            serviceId: updatedProvider.serviceId.map(id => id.toString()),
             serviceLocation: `${updatedProvider.serviceLocation.coordinates[1]},${updatedProvider.serviceLocation.coordinates[0]}`,
             serviceArea: updatedProvider.serviceArea,
             profilePhoto: updatedProvider.profilePhoto,
@@ -324,7 +323,6 @@ export class ProviderService implements IProviderService {
             fullName: provider.fullName,
             phoneNumber: provider.phoneNumber,
             email: provider.email,
-            serviceId: provider.serviceId.map(id => id.toString()),
             serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
             serviceArea: provider.serviceArea,
             profilePhoto: provider.profilePhoto,

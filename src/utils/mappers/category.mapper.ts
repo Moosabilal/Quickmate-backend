@@ -1,4 +1,4 @@
-import { ICategoryFormCombinedData, IserviceResponse } from "../../interface/category.dto";
+import { ICategoryFormCombinedData, IserviceResponse } from "../../interface/category";
 import { CommissionTypes } from "../../enums/CommissionType.enum";
 import { ICategory } from "../../models/Categories";
 import { ICommissionRule } from "../../models/Commission";

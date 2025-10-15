@@ -72,7 +72,6 @@ export interface IProviderProfile {
   fullName: string;
   phoneNumber: string;
   email: string;
-  serviceId: string[];
   serviceLocation: string;
   serviceArea: string;
   profilePhoto: string;

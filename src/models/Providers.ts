@@ -23,11 +23,6 @@ const ProviderSchema = new Schema({
         required: true,
         trim: true,
     },
-    serviceId: {
-        type: [Types.ObjectId],
-        ref: 'Category',
-        required: true,
-    },
     serviceLocation: {
         type: {
             type: String,

@@ -5,8 +5,8 @@ import TYPES from "../di/type";
 import { NextFunction, Request, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { AuthRequest } from "../middleware/authMiddleware";
-import { IPaymentVerificationRequest } from "../interface/payment.dto";
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth.dto";
+import { IPaymentVerificationRequest } from "../interface/payment";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth";
 import { IProviderService } from "../services/interface/IProviderService";
 import { BookingStatus } from "../enums/booking.enum";
 

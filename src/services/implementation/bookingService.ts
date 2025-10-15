@@ -2,14 +2,14 @@ import { inject, injectable } from "inversify";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IBookingService } from "../interface/IBookingService";
 import TYPES from "../../di/type";
-import { BookingOtpPayload, IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingLog, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
+import { BookingOtpPayload, IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingLog, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking";
 import { paymentCreation, razorpay, verifyPaymentSignature } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import { RazorpayOrder } from "../../interface/razorpay.dto";
+import { RazorpayOrder } from "../../interface/razorpay";
 import { createHmac } from "crypto";
-import { IPaymentVerificationRequest } from "../../interface/payment.dto";
+import { IPaymentVerificationRequest } from "../../interface/payment";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import { ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
 import { CommissionTypes } from "../../enums/CommissionType.enum";
@@ -29,7 +29,7 @@ import { IWalletRepository } from "../../repositories/interface/IWalletRepositor
 import { WalletRepository } from "../../repositories/implementation/WalletRepository";
 import { TransactionStatus } from "../../enums/payment&wallet.enum";
 import { IWallet } from "../../models/wallet";
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { generateOTP } from "../../utils/otpGenerator";
 import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils/emailService";
 import jwt from 'jsonwebtoken'
@@ -166,7 +166,7 @@ export class BookingService implements IBookingService {
 
         const durationInMinutes = convertDurationToMinutes(service.duration);
 
-        console.log('the service duration is:',typeof service.duration, service.duration)
+        console.log('the service duration is:', typeof service.duration, service.duration)
 
         const udpatedpayment123 = await this._bookingRepository.update(verifyPayment.bookingId, {
             paymentId: createdPayment._id,
@@ -268,31 +268,42 @@ export class BookingService implements IBookingService {
     }
 
 
-    async getBookingFor_Prov_mngmnt(userId: string, providerId: string,search: string): Promise<IProviderBookingManagement[]> {
+    async getBookingFor_Prov_mngmnt(
+        userId: string,
+        providerId: string,
+        search: string
+    ): Promise<{ earnings: number; bookings: IProviderBookingManagement[] }> {
+
+        const provider = await this._providerRepository.findById(providerId);
+
         const bookings = await this._bookingRepository.findAll({ providerId, userId: { $ne: userId } });
 
         let filteredBookings = bookings;
-        if(search){
+        if (search) {
             const searchRegex = { $regex: search, $options: 'i' };
             const matchedUsers = await this._userRepository.findAll({ name: searchRegex });
             const userIds = matchedUsers.map(u => u._id.toString());
             filteredBookings = bookings.filter(b => userIds.includes(b.userId?.toString() || ''));
         }
-        
 
-        const userIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
-        const users = await this._userRepository.findAll({ _id: { $in: userIds } });
+        const userIds = [...new Set(filteredBookings.map(b => b.userId?.toString()).filter(Boolean))];
+        const serviceIds = [...new Set(filteredBookings.map(b => b.serviceId?.toString()).filter(Boolean))];
+        const addressIds = [...new Set(filteredBookings.map(b => b.addressId?.toString()).filter(Boolean))];
+        const paymentIds = [...new Set(filteredBookings.map(b => b.paymentId?.toString()).filter(Boolean))];
 
-        const serviceIds = [...new Set(bookings.map(b => b.serviceId?.toString()).filter(Boolean))];
-        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+        const [users, services, addresses, payments] = await Promise.all([
+            this._userRepository.findAll({ _id: { $in: userIds } }),
+            this._serviceRepository.findAll({ _id: { $in: serviceIds } }),
+            this._addressRepository.findAll({ _id: { $in: addressIds } }),
+            this._paymentRepository.findAll({ _id: { $in: paymentIds } })
+        ]);
 
-        const addressIds = [...new Set(bookings.map(b => b.addressId?.toString()).filter(Boolean))];
-        const addresses = await this._addressRepository.findAll({ _id: { $in: addressIds } });
+        const mappedBookings = toProviderBookingManagement(filteredBookings, users, services, addresses, payments);
 
-        const paymentIds = [...new Set(bookings.map(b => b.paymentId?.toString()).filter(Boolean))];
-        const payments = await this._paymentRepository.findAll({ _id: { $in: paymentIds } });
-
-        return toProviderBookingManagement(bookings, users, services, addresses, payments);
+        return {
+            earnings: Number(provider?.earnings || 0),
+            bookings: mappedBookings
+        };
     }
 
     async saveAndEmitMessage(io: any, joiningId: string, senderId: string, text: string) {
@@ -409,9 +420,13 @@ export class BookingService implements IBookingService {
             booking.status = BookingStatus.COMPLETED
             await this._bookingRepository.update(booking._id.toString(), booking)
 
-            const provider = await this._providerRepository.findOne({ userId: user._id.toString() })
-            const payment = await this._paymentRepository.findById(booking.paymentId.toString())
-            const service = await this._serviceRepository.findById(booking.serviceId.toString())
+            const [provider, payment, service] = await Promise.all([
+                this._providerRepository.findOne({ userId: user._id.toString() }),
+                this._paymentRepository.findById(booking.paymentId.toString()),
+                this._serviceRepository.findById(booking.serviceId.toString())
+            ]);
+
+            console.log('the payment details are:', payment)
 
             const wallet = await this._walletRepository.findOne({ ownerId: user._id.toString() })
             if (!wallet) {
@@ -421,6 +436,7 @@ export class BookingService implements IBookingService {
                     ownerType: Roles.PROVIDER,
                 })
             } else {
+                console.log('the payment amount is:', payment.providerAmount)
                 wallet.balance += payment.providerAmount
                 provider.earnings += payment.providerAmount;
                 provider.totalBookings += 1
@@ -539,7 +555,7 @@ export class BookingService implements IBookingService {
         };
     }
 
-    public async findProviderRange(serviceId: string,lat: number, lng: number, radius: number): Promise<boolean> {
+    public async findProviderRange(serviceId: string, lat: number, lng: number, radius: number): Promise<boolean> {
         const services = await this._serviceRepository.findAll({ subCategoryId: serviceId })
         if (!services || services.length <= 0) {
             throw new CustomError('Currently no service available', HttpStatusCode.NOT_FOUND);

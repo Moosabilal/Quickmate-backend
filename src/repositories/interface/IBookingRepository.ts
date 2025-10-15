@@ -1,8 +1,8 @@
 import { FilterQuery } from "mongoose";
-import { IBookingRequest } from "../../interface/booking.dto";
+import { IBookingRequest } from "../../interface/booking";
 import { IBooking } from "../../models/Booking";
 import { IBaseRepository } from "./base/IBaseRepository";
-import { IServiceBreakdown } from "../../interface/provider.dto";
+import { IServiceBreakdown } from "../../interface/provider";
 
 export interface IBookingRepository extends IBaseRepository<IBooking> {
     getDailyBookingCount(filter?: FilterQuery<IBooking>): Promise<{ date: string; total: number }[]>;

@@ -1,5 +1,5 @@
 import { IProvider } from "../../models/Providers";
-import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../interface/provider.dto";
+import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../interface/provider";
 import { IBaseRepository } from "./base/IBaseRepository";
 
 

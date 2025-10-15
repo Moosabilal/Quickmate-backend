@@ -1,5 +1,5 @@
 import { Credentials } from "google-auth-library";
-import { AuthSuccessResponse, ForgotPasswordRequestBody, IUserDetailsResponse, RegisterRequestBody, ResendOtpRequestBody, ResetPasswordRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
+import { AuthSuccessResponse, ForgotPasswordRequestBody, IUserDetailsResponse, RegisterRequestBody, ResendOtpRequestBody, ResetPasswordRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { IBooking } from "../../models/Booking";
 import { ICategory } from "../../models/Categories";
 import { IProvider } from "../../models/Providers";

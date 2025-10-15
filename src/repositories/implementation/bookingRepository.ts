@@ -1,11 +1,11 @@
 import { injectable } from "inversify";
-import { IBookingRequest } from "../../interface/booking.dto";
+import { IBookingRequest } from "../../interface/booking";
 import Booking, { IBooking } from "../../models/Booking";
 import { IBookingRepository } from "../interface/IBookingRepository";
 import { BaseRepository } from "./base/BaseRepository";
 import { FilterQuery, Types } from "mongoose";
 import { BookingStatus } from "../../enums/booking.enum";
-import { IServiceBreakdown } from "../../interface/provider.dto";
+import { IServiceBreakdown } from "../../interface/provider";
 
 @injectable()
 export class BookingRepository extends BaseRepository<IBooking> implements IBookingRepository {

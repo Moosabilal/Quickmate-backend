@@ -557,3 +557,51 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: laAsLH4_d7uhT_wmAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - the email
+[INFO   ] - Sending verification email to mishabprovider@gmail.com with OTP: 896594 mail
+[INFO   ] - Verification OTP sent to mishabprovider@gmail.com
+[INFO   ] - Client disconnected: uGcGVeFfinLgN1H6AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - the email
+[INFO   ] - Sending verification email to mishabprovider@gmail.com with OTP: 396485 mail
+[INFO   ] - Verification OTP sent to mishabprovider@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[INFO   ] - Client disconnected: lPa2Xr8UtcHFR4wJAAAB
+[INFO   ] - Client disconnected: TOCr-uYcp7b95kvBAAAD
+[INFO   ] - Client disconnected: -vxaYCf_Ni0XPukbAAAF
+[INFO   ] - Client disconnected: Co1nZyeqD_F6g5pSAAAH
+[INFO   ] - Client disconnected: bG8z46MhaZfP7aoqAAAJ
+[INFO   ] - Client disconnected: siUTOouDXREr45fjAAAL
+[INFO   ] - Client disconnected: -8iybQtMQUxOmj9XAAAN
+[INFO   ] - Client disconnected: 7ZC1qaEXnSQRvjHuAAAP
+[INFO   ] - Client disconnected: qqAkkeN6oYWDKTXWAAAR
+[INFO   ] - Client disconnected: Is74IKe4UcZeNEM4AAAT

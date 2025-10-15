@@ -1,9 +1,9 @@
 import { IProvider } from '../../models/Providers';
-import { IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from '../../interface/provider.dto';
+import { IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from '../../interface/provider';
 import { ICategory } from '../../models/Categories';
 import { IBooking } from '../../models/Booking';
 import { IService } from '../../models/Service';
-import { IDashboardResponse, IDashboardStatus } from "../../interface/provider.dto";
+import { IDashboardResponse, IDashboardStatus } from "../../interface/provider";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IReview } from '../../models/Review';
 import { IUser } from '../../models/User';
@@ -16,7 +16,6 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     fullName: provider.fullName,
     phoneNumber: provider.phoneNumber,
     email: provider.email,
-    serviceId: provider.serviceId.map(id => id.toString()),
     serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
     serviceArea: provider.serviceArea,
     availability: provider.availability.map(a => ({

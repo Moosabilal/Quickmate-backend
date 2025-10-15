@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
 import { IServiceService } from "../interface/IServiceService";
 import TYPES from "../../di/type";
-import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../interface/service.dto";
+import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../interface/service";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import { toProviderServicePage, toServiceEditPage } from "../../utils/mappers/service.mapper";

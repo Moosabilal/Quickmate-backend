@@ -1,4 +1,4 @@
-import { ISubscription } from "../../interface/provider.dto"
+import { ISubscription } from "../../interface/provider"
 import { AdminSubscriptionPlanDTO } from "../../interface/subscriptionPlan"
 import { IProvider } from "../../models/Providers"
 import { ISubscriptionPlan } from "../../models/subscription"

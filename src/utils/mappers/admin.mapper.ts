@@ -1,4 +1,4 @@
-import { IProviderDashboardRes, ITopActiveProviders } from "../../interface/provider.dto";
+import { IProviderDashboardRes, ITopActiveProviders } from "../../interface/provider";
 import { BookingService } from "../../services/implementation/bookingService";
 
 export const toAdminDashboardDTO = (
