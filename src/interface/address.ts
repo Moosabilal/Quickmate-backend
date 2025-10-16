@@ -1,6 +1,8 @@
+import { Types } from "mongoose";
+
 export interface IAddressRequest {
     id?: string
-    userId: string;
+    userId: string | Types.ObjectId;
     label: string;
     street: string;
     city: string;

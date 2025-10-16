@@ -4,6 +4,12 @@ import TYPES from "../di/type";
 import { Request, NextFunction, Response } from "express";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
+import { ZodError } from 'zod';
+import {
+    createAddressSchema,
+    updateAddressSchema,
+    mongoIdSchema
+} from '../utils/validations/address.validation';
 
 
 injectable()
@@ -15,15 +21,9 @@ export class AddressController {
 
     public createAddress = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const locationString = req.body.locationCoords;
-            const [lat, lon] = locationString.split(",").map(Number);
-            const data = {
-                ...req.body,
-                userId: req.user.id,
-                locationCoords: { type: "Point", coordinates: [lon, lat] }
-            }
+            const validatedBody = createAddressSchema.parse(req.body);
             const userId = req.user.id
-            const updatedAddress = await this._addressService.addAddress(userId, data)
+            const updatedAddress = await this._addressService.addAddress(userId, validatedBody)
             res.status(HttpStatusCode.OK).json(updatedAddress)
         } catch (error) {
             next(error)
@@ -42,10 +42,15 @@ export class AddressController {
 
     public updateAddress = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const locationString = req.body.locationCoords;
-            const [lat, lon] = locationString.split(",").map(Number);
-            req.body.locationCoords = { type: "Point", coordinates: [lon, lat] }
-            const updateAddress = await this._addressService.updateAddressById(req.params.id, req.body)
+            const { id } = mongoIdSchema.parse(req.params);
+            const validatedBody = updateAddressSchema.parse(req.body);
+            const updateData: any = { ...validatedBody };
+            const locationString = validatedBody.locationCoords;
+            if (validatedBody.locationCoords) {
+                const [lat, lon] = validatedBody.locationCoords.split(",").map(Number);
+                updateData.locationCoords = { type: "Point", coordinates: [lon, lat] };
+            }
+            const updateAddress = await this._addressService.updateAddressById(id, updateData)
             res.status(HttpStatusCode.OK).json(updateAddress)
         } catch (error) {
             next(error)
@@ -55,7 +60,8 @@ export class AddressController {
 
     public deleteAddress = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const response = await this._addressService.delete_Address(req.params.id)
+            const { id } = mongoIdSchema.parse(req.params);
+            const response = await this._addressService.delete_Address(id)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

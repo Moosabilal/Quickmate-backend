@@ -1,7 +1,6 @@
 import { injectable } from "inversify";
 import { IAddressRepository } from "../interface/IAddressRepository";
 import { Address, IAddress } from "../../models/address";
-import { IAddressRequest } from "../../interface/address";
 import { BaseRepository } from "./base/BaseRepository";
 
 

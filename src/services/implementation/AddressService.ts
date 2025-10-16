@@ -4,44 +4,35 @@ import { IAddressRepository } from "../../repositories/interface/IAddressReposit
 import TYPES from "../../di/type";
 import { IAddress } from "../../models/address";
 import { IAddressRequest } from "../../interface/address";
+import { toAddressRequestDTO } from "../../utils/mappers/address.mapper";
+import { toAddressModel } from "../../utils/reverseMapper/address.rMapper";
 
 injectable()
 export class AddressService implements IAddressService {
-    private _addressRepsitory: IAddressRepository
+    private _addressRepository: IAddressRepository
     constructor(@inject(TYPES.AddressRepository) addressRepsitory: IAddressRepository) {
-        this._addressRepsitory = addressRepsitory
+        this._addressRepository = addressRepsitory
     }
 
-    public async addAddress(userId: string, data: Partial<IAddress>): Promise<IAddressRequest> {
-        const address = await this._addressRepsitory.findOne({
-            userId,
-            label: data.label,
-            street: data.street,
-            city: data.city,
-            zip: data.zip,
+    public async addAddress(userId: string, data: Partial<IAddressRequest>): Promise<IAddressRequest> {
+        const dataForDb = toAddressModel(userId, data);
+
+        const existingAddress = await this._addressRepository.findOne({
+            userId: dataForDb.userId,
+            label: dataForDb.label,
+            street: dataForDb.street,
+            zip: dataForDb.zip,
         });
 
-        let createdAddress: IAddress;
-
-        if (address) {
-            createdAddress = address;
-        } else {
-            createdAddress = await this._addressRepsitory.create(data);
+        if (existingAddress) {
+            return toAddressRequestDTO(existingAddress);
         }
-        return {
-            id: createdAddress._id.toString(),
-            userId: createdAddress.userId.toString(),
-            label: createdAddress.label,
-            street: createdAddress.street,
-            city: createdAddress.city,
-            state: createdAddress.state,
-            zip: createdAddress.zip,
-            locationCoords: `${createdAddress.locationCoords.coordinates[1]},${createdAddress.locationCoords.coordinates[0]}` || "",
-        }
+        const createdAddress = await this._addressRepository.create(dataForDb);
+        return toAddressRequestDTO(createdAddress);
     }
 
     public async getAllAddress(userId: string): Promise<IAddressRequest[]> {
-        const allAddress = await this._addressRepsitory.findAll({ userId: userId })
+        const allAddress = await this._addressRepository.findAll({ userId: userId })
         return allAddress.filter((adr => adr.label !== "Current Location")).map((adr) => ({
             id: adr._id.toString(),
             userId: adr.userId.toString(),
@@ -55,7 +46,7 @@ export class AddressService implements IAddressService {
     }
 
     public async updateAddressById(id: string, data: IAddressRequest): Promise<IAddressRequest> {
-        const updatedAddress = await this._addressRepsitory.update(id, data)
+        const updatedAddress = await this._addressRepository.update(id, data)
         return {
             id: updatedAddress._id.toString(),
             userId: updatedAddress.userId.toString(),
@@ -69,7 +60,7 @@ export class AddressService implements IAddressService {
     }
 
     public async delete_Address(id: string): Promise<{ message: string }> {
-        await this._addressRepsitory.delete(id)
+        await this._addressRepository.delete(id)
         return {
             message: "Address Deleted"
         }

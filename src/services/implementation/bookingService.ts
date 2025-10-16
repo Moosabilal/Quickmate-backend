@@ -9,7 +9,7 @@ import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
 import { RazorpayOrder } from "../../interface/razorpay";
 import { createHmac } from "crypto";
-import { IPaymentVerificationRequest } from "../../interface/payment";
+import { IPaymentVerificationPayload, IPaymentVerificationRequest } from "../../interface/payment";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import { ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
 import { CommissionTypes } from "../../enums/CommissionType.enum";
@@ -88,9 +88,7 @@ export class BookingService implements IBookingService {
 
         const subCategoryId = data.serviceId
         const providerId = data.providerId
-        console.log('the sub category id in creation is:', subCategoryId)
         const findServiceId = await this._serviceRepository.findOne({ subCategoryId, providerId })
-        console.log('the service id in creation is:', findServiceId)
 
         data.serviceId = findServiceId._id.toString()
         const bookings = await this._bookingRepository.create(data)
@@ -122,9 +120,7 @@ export class BookingService implements IBookingService {
         }
 
         const booking = await this._bookingRepository.findById(verifyPayment.bookingId);
-        console.log('the booking details are:', booking)
         const service = await this._serviceRepository.findById(booking.serviceId.toString());
-        console.log('the services', service)
         const subCategory = await this._categoryRepository.findById(service.subCategoryId.toString());
         const commissionRule = await this._commissionRuleRepository.findOne({ categoryId: subCategory._id.toString() });
 
@@ -233,6 +229,7 @@ export class BookingService implements IBookingService {
 
     async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
         const bookings = await this._bookingRepository.findAll({ userId }, { createdAt: -1 });
+        console.log('the bookings in service are:', bookings)
 
         const providerIds = [...new Set(bookings.map(s => {
             return s.providerId?.toString();

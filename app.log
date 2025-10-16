@@ -605,3 +605,257 @@
 [INFO   ] - Client disconnected: 7ZC1qaEXnSQRvjHuAAAP
 [INFO   ] - Client disconnected: qqAkkeN6oYWDKTXWAAAR
 [INFO   ] - Client disconnected: Is74IKe4UcZeNEM4AAAT
+[INFO   ] - Server running on port 5000
+[ERROR  ] - POST /api/auth/login 500 Operation `users.findOne()` buffering timed out after 10000ms -> Operation `users.findOne()` buffering timed out after 10000ms
+[INFO   ] - Client disconnected: wfMbWF4x2rSka6etAAAB
+[INFO   ] - Client disconnected: D82cfEQHNU1MYrsZAAAD
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: SBWuoxP_3elgvqYEAAAF
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: 2CHk8F7n52MPWpAlAAAH
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Client disconnected: vKdxQUR3Kb3bbNOAAAAJ
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 connection <monitor> to 159.41.192.77:27017 closed -> connection <monitor> to 159.41.192.77:27017 closed
+[INFO   ] - Client disconnected: 49WeWix_yuvdKX1eAAAL
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 1UpyqvGWUvgSYimhAAAN
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: o-sbwk-rWn7h9E5qAAAP
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 Socket 'secureConnect' timed out after 30001ms (connectTimeoutMS: 30000) -> Socket 'secureConnect' timed out after 30001ms (connectTimeoutMS: 30000)
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 Socket 'secureConnect' timed out after 30001ms (connectTimeoutMS: 30000) -> Socket 'secureConnect' timed out after 30001ms (connectTimeoutMS: 30000)
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: Tsae6TAEUf-l0WH-AAAR
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: kupgwi0oSbjNC4g8AAAT
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: eaerZXX6-Dxq_IjUAAAV
+[ERROR  ] - GET /api/auth/getUser 500 Socket 'secureConnect' timed out after 30005ms (connectTimeoutMS: 30000) -> Socket 'secureConnect' timed out after 30005ms (connectTimeoutMS: 30000)
+[INFO   ] - Client disconnected: H-OBcYn2ewjWG-yxAAAX
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 read ECONNRESET -> read ECONNRESET
+[INFO   ] - Client disconnected: r7XDPXQt9hlJehEQAAAZ
+[INFO   ] - Client disconnected: RtRAubXLZrRGTM2pAAAb
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Client disconnected: QWSvnTtXiAdppPqnAAAd
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: ktO2MhwmssdJlfTDAAAf
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Client disconnected: Gh0-dzsvcexdUOdCAAAh
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: mpmQm2Rk9uNS5-j3AAAj
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: zbGHpnKnfX82qQ6MAAAl
+[INFO   ] - Client disconnected: Hh9LYffOI9Qxc44ZAAAn
+[ERROR  ] - GET /api/categories 500 connection <monitor> to 159.41.192.77:27017 closed -> connection <monitor> to 159.41.192.77:27017 closed
+[INFO   ] - Client disconnected: PeRQelyFY5-ytO7VAAAp
+[INFO   ] - Client disconnected: ghonGA9-uj77lX-TAAAr
+[INFO   ] - Client disconnected: s_P8JIJDPN9-I1FOAAAt
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: OWoRiEeT0FAB-40TAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: ET5qL6axp9h2yibxAAAB
+[ERROR  ] - POST /api/bookings/createBooking 500 [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "amount"
+    ],
+    "message": "Invalid input: expected string, received number"
+  }
+] -> [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "amount"
+    ],
+    "message": "Invalid input: expected string, received number"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: kGENtDLrbqo3k4XBAAAB
+[INFO   ] - Client disconnected: -cgIyRmN7UvF_SSBAAAD
+[INFO   ] - Client disconnected: AG8mmr-lx2SPwSSaAAAF
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: _AGhwBxf1-oqRaF6AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: hcpxdK5DNXPwVxlXAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: iAaIiKD2jAY41jg9AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 5Of0I2UTL9HuuzcoAAAB
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - the email
+[INFO   ] - Sending verification email to mishabprovider@gmail.com with OTP: 600449 mail
+[INFO   ] - Verification OTP sent to mishabprovider@gmail.com
+[ERROR  ] - GET /api/bookings/admin/bookings?page=1&limit=10&search=&bookingStatus=All 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Pending",
+      "Confirmed",
+      "Cancelled",
+      "Completed",
+      "In-Progress"
+    ],
+    "path": [
+      "bookingStatus"
+    ],
+    "message": "Invalid option: expected one of \"Pending\"|\"Confirmed\"|\"Cancelled\"|\"Completed\"|\"In-Progress\""
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Pending",
+      "Confirmed",
+      "Cancelled",
+      "Completed",
+      "In-Progress"
+    ],
+    "path": [
+      "bookingStatus"
+    ],
+    "message": "Invalid option: expected one of \"Pending\"|\"Confirmed\"|\"Cancelled\"|\"Completed\"|\"In-Progress\""
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: CNqbupJIBk1hMtzrAAAB
+[ERROR  ] - GET /api/bookings/admin/bookings?page=1&limit=10&search=&bookingStatus=All 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Pending",
+      "Confirmed",
+      "Cancelled",
+      "Completed",
+      "In-Progress"
+    ],
+    "path": [
+      "bookingStatus"
+    ],
+    "message": "Invalid option: expected one of \"Pending\"|\"Confirmed\"|\"Cancelled\"|\"Completed\"|\"In-Progress\""
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Pending",
+      "Confirmed",
+      "Cancelled",
+      "Completed",
+      "In-Progress"
+    ],
+    "path": [
+      "bookingStatus"
+    ],
+    "message": "Invalid option: expected one of \"Pending\"|\"Confirmed\"|\"Cancelled\"|\"Completed\"|\"In-Progress\""
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 3PUIhY-Bfo3s1X-GAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

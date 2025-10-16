@@ -1,6 +1,6 @@
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking";
-import { IPaymentVerificationRequest } from "../../interface/payment";
+import { IPaymentVerificationPayload, IPaymentVerificationRequest } from "../../interface/payment";
 import { RazorpayOrder } from "../../interface/razorpay";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IMessage } from "../../models/message";

@@ -61,4 +61,14 @@ export class PaymentRepository extends BaseRepository<IPayment> implements IPaym
         return result[0]?.totalRevenue || 0;
     }
 
+    // async createPayment(data: IPaymentCreationData): Promise<IPayment> {
+    //     const dataForDb = {
+    //         ...data,
+    //         userId: data.userId,
+    //         providerId: data.providerId,
+    //         bookingId: data.bookingId,
+    //     };
+    //     return await this.create(dataForDb); // Calls the base repository's create method
+    // }
+
 }
