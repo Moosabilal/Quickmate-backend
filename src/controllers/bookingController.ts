@@ -21,6 +21,7 @@ import {
     adminBookingsQuerySchema,
     findProviderRangeSchema,
 } from "../utils/validations/booking.validation";
+import User from "../models/User";
 
 @injectable()
 export class BookingController {
@@ -187,10 +188,11 @@ export class BookingController {
         }
     }
 
-    public findProviderRange = async (req: Request, res: Response, next: NextFunction) => {
+    public findProviderRange = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const { serviceId, lat, lng, radius } = findProviderRangeSchema.parse(req.query);
-            const response = await this._bookingService.findProviderRange(serviceId as string, Number(lat), Number(lng), Number(radius));
+            const userId = req.user.id
+            const response = await this._bookingService.findProviderRange(userId, serviceId as string, Number(lat), Number(lng), Number(radius));
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);

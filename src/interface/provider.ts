@@ -9,31 +9,23 @@ export interface Availability {
   endTime: string;
 }
 
-export interface IProviderRegisterRequest {
-  fullName: string;
-  phoneNumber: string;
-  email: string;
-
-  categoryId: string;
-  serviceId: string;
-
-  serviceLocation: string;
-  serviceArea: string;
-  experience: number;
-
-  availability: Availability[];
-
-  timeSlot: {
-    startTime: string;
-    endTime: string;
-  };
-  aadhaarIdProof: string;
-
-  profilePhoto: string;
-
-  userId: string;
-
-  averageChargeRange?: string;
+export interface IProviderRegistrationData {
+    fullName: string;
+    phoneNumber: string;
+    email: string;
+    serviceArea: string;
+    serviceLocation: { 
+        type: "Point";
+        coordinates: number[];
+    };
+    availability?: {
+        day: string;
+        startTime: string;
+        endTime: string;
+    }[];
+    aadhaarIdProof: string;
+    profilePhoto: string;
+    userId: string;
 }
 
 export interface IProviderForAdminResponce {

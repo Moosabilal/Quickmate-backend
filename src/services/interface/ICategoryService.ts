@@ -12,11 +12,10 @@ export interface ICategoryService {
         commissionRuleInput?: ICommissionRuleInput
     ): Promise<{ category: ICategoryResponse | null; commissionRule?: ICommissionRuleResponse | null }>
     updateManySubcategoriesStatus(parentCategoryId: string, status: boolean): Promise<void>
-    getCategoryById(categoryId: string): Promise<{ category: ICategoryResponse; commissionRule?: ICommissionRuleResponse | null }>
-    getAllTopCategories(): Promise<IserviceResponse[]>
+    getCategoryById(categoryId: string): Promise<{ categoryDetails: ICategoryFormCombinedData; subCategories: ICategoryFormCombinedData[] }>;
+    getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
     getAllCategoriesWithDetails(): Promise<Array<ICategoryResponse>>
     getAllSubcategories(parentId: string): Promise<ICategoryFormCombinedData[]>
-    deleteCategory(categoryId: string): Promise<ICategoryResponse>;
     getSubcategories(page: number, limit: number, search: string): Promise<{
         allServices:IserviceResponse[],
         total: number,

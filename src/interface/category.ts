@@ -48,14 +48,6 @@ export interface ICategoryFormCombinedData {
     commissionValue: number | ''; 
     commissionStatus: boolean; 
 }
-export interface ISubcategoryFormFetchData {
-    _id: string;
-    name: string;
-    description: string;
-    iconUrl?: string | null;
-    status: boolean;
-    parentId?: string | null;
-}
 
 export interface IserviceResponse {
     id: string;

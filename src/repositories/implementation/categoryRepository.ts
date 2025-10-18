@@ -26,10 +26,6 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         return await Category.findOne({ name, parentId: parentObjectId }).exec();
     }
 
-    async getAllMainCategories(): Promise<ICategory[]> {
-        return await Category.find()
-    }
-
     async findAll(filter: any = {}): Promise<ICategory[]> {
     const queryFilter = { ...filter };
 
@@ -71,12 +67,6 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         return await Category.findByIdAndUpdate(id, dataToUpdate, { new: true }).exec();
     }
 
-
-    async delete(id: string | Types.ObjectId): Promise<ICategory | null> {
-        return await Category.findByIdAndDelete(id).exec();
-    }
-
-
     async countSubcategories(parentId: string | Types.ObjectId): Promise<number> {
         return await Category.countDocuments({ parentId: new Types.ObjectId(parentId) }).exec();
     }
@@ -96,6 +86,15 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
 
     async findByIds(ids: string[]): Promise<ICategory[]> {
         return Category.find({ _id: { $in: ids } });
+    }
+
+    async findSubcategoryIds(parentId: string): Promise<Types.ObjectId[]> {
+        const subcategories = await this.model.find({ parentId: new Types.ObjectId(parentId) }).select('_id');
+        return subcategories.map(sub => sub._id);
+    }
+
+    async updateStatusForIds(ids: Types.ObjectId[], status: boolean): Promise<void> {
+        await this.model.updateMany({ _id: { $in: ids } }, { $set: { status } });
     }
 
 

@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider, Provider } from "../../models/Providers";
-import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider";
+import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -69,7 +69,7 @@ export class ProviderService implements IProviderService {
         this._reviewRepository = reviewRepository;
     }
 
-    public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
+    public async registerProvider(data: IProviderRegistrationData): Promise<{ message: string, email: string }> {
 
         let provider = await this._providerRepository.findByEmail(data.email);
 
@@ -186,7 +186,7 @@ export class ProviderService implements IProviderService {
         return { message: 'A new OTP has been sent to your email.' };
     }
 
-    public async updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile> {
+    public async updateProviderDetails(updateData: IProviderRegistrationData): Promise<IProviderProfile> {
         const updatedProvider = await this._providerRepository.updateProvider(updateData)
 
         return {
@@ -237,8 +237,8 @@ export class ProviderService implements IProviderService {
         };
 
         if (status && status !== 'All') {
-            if (status === 'Active') {
-                filter.status = "Active";
+            if (status === 'Approved') {
+                filter.status = "Approved";
             } else if (status === 'Rejected') {
                 filter.status = "Rejected";
             } else if (status === "Suspended") {
@@ -614,6 +614,7 @@ export class ProviderService implements IProviderService {
     }
 
     public async getAvailabilityByLocation(
+        userId: string,
         serviceSubCategoryId: string,
         userLat: number,
         userLng: number,
@@ -632,7 +633,7 @@ export class ProviderService implements IProviderService {
         }
 
         const providers = await this._providerRepository.findAll({
-            _id: { $in: Array.from(providerIdSet) }
+            _id: { $in: Array.from(providerIdSet) }, userId: { $ne: userId } 
         });
 
         const providersInRange = providers.filter(p => {

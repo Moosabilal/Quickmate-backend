@@ -859,3 +859,1840 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: zBumG-JQQFP6VJ30AAAB
+[ERROR  ] - POST /api/categories 500 ENOENT: no such file or directory, open 'src/uploads/1760675101710-bedroom-cleaning.jpg' -> ENOENT: no such file or directory, open 'src/uploads/1760675101710-bedroom-cleaning.jpg'
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: UUf7ISK5zVoglysJAAAB
+[ERROR  ] - POST /api/categories 500 ENOENT: no such file or directory, open 'src/uploads/1760675376847-bedroom-cleaning.jpg' -> ENOENT: no such file or directory, open 'src/uploads/1760675376847-bedroom-cleaning.jpg'
+[ERROR  ] - POST /api/categories 500 ENOENT: no such file or directory, open 'src/uploads/1760675882105-Gemini_Generated_Image_5bdyyb5bdyyb5bdy.png' -> ENOENT: no such file or directory, open 'src/uploads/1760675882105-Gemini_Generated_Image_5bdyyb5bdyyb5bdy.png'
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/categories 500 ENOENT: no such file or directory, open 'src/uploads/1760675977080-Gemini_Generated_Image_5bdyyb5bdyyb5bdy.png' -> ENOENT: no such file or directory, open 'src/uploads/1760675977080-Gemini_Generated_Image_5bdyyb5bdyyb5bdy.png'
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/categories 500 ENOENT: no such file or directory, open 'src/uploads/1760676072812-Gemini_Generated_Image_5bdyyb5bdyyb5bdy.png' -> ENOENT: no such file or directory, open 'src/uploads/1760676072812-Gemini_Generated_Image_5bdyyb5bdyyb5bdy.png'
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689051f98e590753867b2bc5') } -> E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689051f98e590753867b2bc5') }
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689051f98e590753867b2bc5') } -> E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689051f98e590753867b2bc5') }
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689051f98e590753867b2bc5') } -> E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689051f98e590753867b2bc5') }
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/689051f98e590753867b2bc5 500 E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689051f98e590753867b2bc5') } -> E11000 duplicate key error collection: QuickMate.commissionrules index: categoryId_1 dup key: { categoryId: ObjectId('689051f98e590753867b2bc5') }
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: IIL3Offe3pgEN05kAAAB
+[INFO   ] - Client disconnected: wvGdYkI457EyJaTJAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: EL0m-NmwLln3qHtOAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: x8he_CnHnRrrFAQYAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 4uw2bALBM7OO2Ht4AAAB
+[INFO   ] - Client disconnected: 3VLMA4YBWnCuRYaaAAAD
+[INFO   ] - Client disconnected: iFc86vLRWN4TI-ouAAAF
+[INFO   ] - Client disconnected: dH9ZnSRPnYc7CErjAAAH
+[INFO   ] - Client disconnected: PSlXs8uXTKjC9YvIAAAJ
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: oj6IrLdwO0Ze97PVAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: EbQbxf7PmOW2OEAmAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: d7Cv6b9BrvR8TiJIAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[ERROR  ] - GET /api/categories/689051f98e590753867b2bc5 500 Operation `categories.find()` buffering timed out after 10000ms -> Operation `categories.find()` buffering timed out after 10000ms
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/689052218e590753867b2bcb 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/689052218e590753867b2bcb 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+]
+[INFO   ] - Client disconnected: c5IcJm0jmg1p26PDAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - PUT /api/categories/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: vWL7Ggtjau1qnel-AAAB
+[INFO   ] - Client disconnected: Kid_JmpEf19yg-pKAAAD
+[INFO   ] - Client disconnected: JyxT9kqpiVL3Q1c3AAAF
+[INFO   ] - Client disconnected: TqqlvgXsynnBfcAWAAAH
+[INFO   ] - Client disconnected: wE2gu9chQ8ErTGQZAAAJ
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - PUT /api/categories/689052a38e590753867b2be5 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+]
+[ERROR  ] - PUT /api/categories/689052a38e590753867b2be5 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+]
+[ERROR  ] - PUT /api/categories/689052a38e590753867b2be5 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Percentage",
+      "FlatFee",
+      "None"
+    ],
+    "path": [
+      "commissionType"
+    ],
+    "message": "Invalid option: expected one of \"Percentage\"|\"FlatFee\"|\"None\""
+  }
+]
+[INFO   ] - Client disconnected: 48vyzCmexuSz912mAAAB
+[INFO   ] - Client disconnected: HKRQMLelLSzNlIEeAAAD
+[INFO   ] - Client disconnected: 6gTT5y2ean1c9RUIAAAF
+[INFO   ] - Client disconnected: aCqQ3lsa9jlagpsGAAAH
+[INFO   ] - Client disconnected: -X1JFggSb-c4Ucl2AAAJ
+[INFO   ] - Client disconnected: EGIhegmx5gddCXfIAAAL
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=Pending&verification=undefined&rating=undefined&page=1&limit=2 404 No providers found. -> No providers found.
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=Suspended&verification=undefined&rating=undefined&page=1&limit=2 404 No providers found. -> No providers found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=Pending&verification=undefined&rating=undefined&page=1&limit=2 404 No providers found. -> No providers found.
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=Suspended&verification=undefined&rating=undefined&page=1&limit=2 404 No providers found. -> No providers found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/categories/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/c6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/ca6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat46890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat4eg6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat4ego6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat4egor6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat4egory6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat4egor6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat4ego6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat4eg6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat4e6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat46890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cat6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/cate6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categ6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/catego6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/category6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryF6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryFo6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryFor6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForB6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBo6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBoo6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBook6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooki6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBookin6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/categoryForBooking6890525c8e590753867b2bd6 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: w8Vbyijt4uNI4KPOAAAB
+[INFO   ] - Client disconnected: bIwN4P8U2foh-GVZAAAD
+[INFO   ] - Client disconnected: APtdX-VBf0yXSaxkAAAF
+[INFO   ] - Client disconnected: dlCB7W9gqgCi0DM7AAAH
+[INFO   ] - Client disconnected: 0OdfumFzIZkaQCmSAAAJ
+[INFO   ] - Client disconnected: kuoD6pMRP2cNgny_AAAL
+[ERROR  ] - GET /api/categories/edit/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: N-yF9W6BoXiPcrZlAAAN
+[INFO   ] - Client disconnected: UnuQXDPzPiWq4L-uAAAP
+[INFO   ] - Client disconnected: wx3BuXoA3BRum5vSAAAR
+[INFO   ] - Client disconnected: fneYM12VxUHAWyDZAAAT
+[INFO   ] - Client disconnected: YC17oHMQA71b7UiwAAAV
+[INFO   ] - Client disconnected: ZZNZDS5LrEVaFDqdAAAX
+[INFO   ] - Client disconnected: wvOk2S-iocQgVN75AAAZ
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: w91rebm0HmdR-kxzAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: OnbGMHhXXvgA2pF4AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?latitude=11.151925&longitude=75.8933409&serviceId=6890525c8e590753867b2bd6&radius=14&timeMin=2025-09-30T18:30:00.000Z&timeMax=2025-10-30T18:30:00.000Z 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[ERROR  ] - GET /api/provider/calendar/availability?latitude=11.151925&longitude=75.8933409&serviceId=6890525c8e590753867b2bd6&radius=14&timeMin=2025-10-31T18:30:00.000Z&timeMax=2025-11-29T18:30:00.000Z 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: gNl5hdX6uICiyxfaAAAB
+[ERROR  ] - GET /api/provider/calendar/availability?latitude=11.151925&longitude=75.8933409&serviceId=6890525c8e590753867b2bd6&radius=10&timeMin=2025-09-30T18:30:00.000Z&timeMax=2025-10-30T18:30:00.000Z 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?latitude=11.151925&longitude=75.8933409&serviceId=6890525c8e590753867b2bd6&radius=10&timeMin=2025-09-30T18:30:00.000Z&timeMax=2025-10-30T18:30:00.000Z 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/provider/updateProvider 500 "undefined" is not valid JSON -> "undefined" is not valid JSON
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/provider/updateProvider 500 "undefined" is not valid JSON -> "undefined" is not valid JSON
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/provider/updateProvider 500 Failed to upload image to Cloudinary. -> Failed to upload image to Cloudinary.
+[ERROR  ] - POST /api/provider/updateProvider 500 "undefined" is not valid JSON -> "undefined" is not valid JSON
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/provider/updateProvider 500 "undefined" is not valid JSON -> "undefined" is not valid JSON
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: oo0qdEHSIhRr0uzBAAAB
+[ERROR  ] - POST /api/provider/register 500 [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "serviceId"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+] -> [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "serviceId"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Sending verification email to asdfProvider@gmail.com with OTP: 673078 mail
+[INFO   ] - Verification OTP sent to asdfProvider@gmail.com

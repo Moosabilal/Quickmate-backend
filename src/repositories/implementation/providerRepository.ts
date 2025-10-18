@@ -3,7 +3,7 @@ import mongoose, { FilterQuery, Types } from 'mongoose';
 
 import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
-import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../interface/provider";
+import { IProviderForAdminResponce, IProviderProfile, IProviderRegistrationData, ProviderFilterQuery } from "../../interface/provider";
 import { IProviderRepository } from "../interface/IProviderRepository";
 import { injectable } from "inversify";
 import { BaseRepository } from "./base/BaseRepository";
@@ -15,7 +15,7 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         super(Provider)
     }
 
-    async createProvider(data: Partial<IProvider>): Promise<IProvider> {
+    async createProvider(data: IProviderRegistrationData): Promise<IProvider> {
         const provider = new Provider(data);
         await provider.save();
         return provider;
@@ -30,7 +30,7 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return await query.exec();
     }
 
-    async updateProvider(updateData: Partial<IProvider>): Promise<IProvider | null> {
+    async updateProvider(updateData: IProviderRegistrationData): Promise<IProvider | null> {
         const data = await Provider.findOneAndUpdate({ userId: updateData.userId }, updateData, { new: true });
         return data
 
