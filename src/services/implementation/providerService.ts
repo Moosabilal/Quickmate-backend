@@ -30,16 +30,8 @@ import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 import { convertTo24Hour } from "../../utils/helperFunctions/convertTo24hrs";
 import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, sub } from "date-fns";
 
-
-interface reviewsOfUser {
-    username: string,
-    rating: number
-    review: string,
-}
-
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
-const MAX_OTP_ATTEMPTS = 5;
-const RESEND_COOLDOWN_SECONDS = 30;
+const RESEND_COOLDOWN_SECONDS = parseInt(process.env.RESEND_COOLDOWN_SECONDS, 10) || 30;
 
 
 @injectable()
@@ -114,7 +106,7 @@ export class ProviderService implements IProviderService {
         if (provider.isVerified && provider.status !== ProviderStatus.REJECTED) {
             return { message: 'Account already verified.' };
         }
-        if (typeof provider.registrationOtpAttempts === 'number' && provider.registrationOtpAttempts >= MAX_OTP_ATTEMPTS) {
+        if (typeof provider.registrationOtpAttempts === 'number' && provider.registrationOtpAttempts >= parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5) {
             throw new CustomError(`Too many failed OTP attempts. Please request a new OTP.`, HttpStatusCode.FORBIDDEN);
         }
         if (!provider.registrationOtp || provider.registrationOtp !== otp) {

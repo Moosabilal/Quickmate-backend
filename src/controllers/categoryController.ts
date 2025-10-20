@@ -25,12 +25,6 @@ interface AuthRequest extends Request {
   file?: Express.Multer.File;
 }
 
-type CommissionRuleInputController = {
-  commissionType: CommissionTypes;
-  commissionValue: number;
-  status?: boolean;
-};
-
 @injectable()
 export class CategoryController {
   private _categoryService: ICategoryService;

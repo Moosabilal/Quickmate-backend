@@ -229,7 +229,6 @@ export class BookingService implements IBookingService {
 
     async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
         const bookings = await this._bookingRepository.findAll({ userId }, { createdAt: -1 });
-        console.log('the bookings in service are:', bookings)
 
         const providerIds = [...new Set(bookings.map(s => {
             return s.providerId?.toString();

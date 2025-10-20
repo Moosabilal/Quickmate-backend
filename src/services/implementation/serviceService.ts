@@ -73,7 +73,7 @@ export class ServiceService implements IServiceService {
         return toServiceEditPage(service, category)
     }
 
-    public async updateService(id: string, serviceData: IAddAndEditServiceForm): Promise<{message: string, success: boolean}> {
+    public async updateService(id: string, serviceData: Partial<IAddAndEditServiceForm>): Promise<{message: string, success: boolean}> {
         const service = await this._serviceRepository.findById(id)
         if(!service) {
             throw new CustomError('No service found, Unable to update', HttpStatusCode.NOT_FOUND)

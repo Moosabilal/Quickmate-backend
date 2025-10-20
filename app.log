@@ -2696,3 +2696,122 @@
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Sending verification email to asdfProvider@gmail.com with OTP: 673078 mail
 [INFO   ] - Verification OTP sent to asdfProvider@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: RgLnfCsePhpmbfjvAAAB
+[INFO   ] - Client disconnected: 8bkuRb0dMB5_B47oAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/addService 500 Failed to upload image to Cloudinary. -> Failed to upload image to Cloudinary.
+[ERROR  ] - POST /api/services/addService 500 Failed to upload image to Cloudinary. -> Failed to upload image to Cloudinary.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/wallet/deposit/verify 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "credit"
+    ],
+    "path": [
+      "transactionType"
+    ],
+    "message": "Invalid input: expected \"credit\""
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "credit"
+    ],
+    "path": [
+      "transactionType"
+    ],
+    "message": "Invalid input: expected \"credit\""
+  }
+]
+[INFO   ] - Client disconnected: im59DFqJk79BCrJUAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/wallet/deposit/verify 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "credit"
+    ],
+    "path": [
+      "transactionType"
+    ],
+    "message": "Invalid input: expected \"credit\""
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "credit"
+    ],
+    "path": [
+      "transactionType"
+    ],
+    "message": "Invalid input: expected \"credit\""
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 0ZVNKeftDnUTCnu8AAAB
+[INFO   ] - Client disconnected: TAtKx3LDkXQ06zuzAAAD
+[INFO   ] - Client disconnected: XDKyibVycEWHnpUiAAAF
+[INFO   ] - Server running on port 5000
+[INFO   ] - Client disconnected: qxkrJ6VJ4sI9vKNtAAAB
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: jEbtdj6VHbxlpTKcAAAD
+[INFO   ] - Client disconnected: qdKqIxKt7-wrVJMwAAAF
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: UOwq428MDC5MasARAAAB
+[INFO   ] - Client disconnected: sFiy1FCE3Zp-J46aAAAD
+[INFO   ] - Client disconnected: xs-yiktNEawRTdKkAAAF
+[INFO   ] - Client disconnected: YscK-Hx_cpKBHcSfAAAH
+[INFO   ] - Client disconnected: 2U1sOStz_cr7EDmHAAAJ
+[INFO   ] - Client disconnected: 2SWaaggGpV-ooadNAAAL
+[INFO   ] - Client disconnected: ZkPnPmtazONY1x9aAAAN
+[INFO   ] - Client disconnected: rMEd2VIOl_Yo2FhSAAAP
+[INFO   ] - Client disconnected: d3r6fRQDndgG163KAAAR
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 8Lx76Lr9VK26cytFAAAB
+[INFO   ] - Client disconnected: OlYC9xxq35vRth4fAAAD
+[INFO   ] - Client disconnected: VQ7Cwmk82ECsHzvRAAAF
+[INFO   ] - Client disconnected: oJR5IgO7skjDh1MLAAAH
+[INFO   ] - Client disconnected: l3Mb-FAhLix0dIoRAAAJ

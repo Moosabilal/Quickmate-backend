@@ -16,7 +16,7 @@ export const uploadToCloudinary = async (filePath: string): Promise<string> => {
     const result = await cloudinary.uploader.upload(filePath, {
       folder: 'quickmate_images', 
       resource_type: 'auto',
-      // timeout: 60000,
+      timeout: 60000,
     });
 
     fs.unlinkSync(filePath);

@@ -278,7 +278,6 @@ export class ProviderController {
             const userId = req.user.id;
 
             const performanceData = await this._providerService.getProviderPerformance(userId);
-            console.log('th rgggg', performanceData);
 
             res.status(HttpStatusCode.OK).json({
                 success: true,

@@ -11,14 +11,14 @@ export interface IInitiateDepositRes {
 
 export interface IDepositVerification {
     razorpay_order_id: string;
-     razorpay_payment_id: string;
-     razorpay_signature: string;
-     amount: number;
-     description: string
-     userId: string
-     transactionType: "credit" | "debit";
-     status: TransactionStatus
-     ownerType: Roles
+    razorpay_payment_id: string;
+    razorpay_signature: string;
+    amount: number;
+    description: string
+    userId: string
+    transactionType: "credit" | "debit";
+    status: TransactionStatus
+    ownerType: Roles
 }
 
 export interface IGetWalletRes {

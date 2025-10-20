@@ -87,38 +87,29 @@ export class CategoryService implements ICategoryService {
             throw new Error('Category not found.');
         }
 
-        // --- 1. Perform Validations ---
         await this._validateParentCategory(categoryId, updateData.parentId);
         await this._validateNameUniqueness(categoryId, updateData, existingCategory);
 
-        // --- 2. Update the Core Category Document ---
         const updatedCategoryDoc = await this._categoryRepository.update(categoryId, updateData);
         const updatedCategory = updatedCategoryDoc ? toCategoryResponseDTO(updatedCategoryDoc) : null;
 
-        // --- 3. Handle Commission Rule ---
         let updatedCommissionRule = await this._handleCommissionRuleUpdate(categoryId, commissionRuleData);
 
-        // --- 4. Handle Hierarchical Status Propagation ---
         if (updateData.status !== undefined) {
         const newStatus = updateData.status;
 
-        // a) For ANY category (parent or sub), update its own commission rule status to match.
         await this._commissionRuleRepository.updateStatusForCategoryIds([existingCategory._id], newStatus);
 
-        // b) If it's a PARENT category, propagate the status change downwards to all children.
         if (!existingCategory.parentId) {
             const subcategoryIds = await this._categoryRepository.findSubcategoryIds(categoryId.toString());
             
             if (subcategoryIds.length > 0) {
-                // Update all subcategories' status
                 await this._categoryRepository.updateStatusForIds(subcategoryIds, newStatus);
                 
-                // Update all subcategories' commission rule statuses
                 await this._commissionRuleRepository.updateStatusForCategoryIds(subcategoryIds, newStatus);
             }
         }
         
-        // Re-fetch the commission rule to ensure the returned data is fresh after propagation.
         const rule = await this._commissionRuleRepository.findOne({ categoryId });
         updatedCommissionRule = rule ? toCommissionRuleResponseDTO(rule) : null;
     }
@@ -126,9 +117,6 @@ export class CategoryService implements ICategoryService {
         return { category: updatedCategory, commissionRule: updatedCommissionRule };
     }
 
-    // ===========================================
-    // 🔹 PRIVATE HELPER METHODS (Single Responsibility)
-    // ====================================
 
     /**
      * RESPONSIBILITY: Creates, updates, or deletes a commission rule for a category.
@@ -142,7 +130,6 @@ export class CategoryService implements ICategoryService {
 
 
     async getCategoryById(categoryId: string): Promise<{ categoryDetails: ICategoryFormCombinedData; subCategories: ICategoryFormCombinedData[] }> {
-    // 1. Fetch main category, its rule, and all its subcategories concurrently
     const [categoryDoc, commissionRuleDoc, subCategoryDocs] = await Promise.all([
         this._categoryRepository.findById(categoryId),
         this._commissionRuleRepository.findOne({ categoryId: categoryId }),
@@ -153,7 +140,6 @@ export class CategoryService implements ICategoryService {
         throw new Error('Category not found.');
     }
 
-    // 2. Map the main category to the ICategoryFormCombinedData format
     const categoryDetails: ICategoryFormCombinedData = {
         id: categoryDoc._id.toString(),
         name: categoryDoc.name,
@@ -166,7 +152,6 @@ export class CategoryService implements ICategoryService {
         commissionStatus: commissionRuleDoc?.status ?? false,
     };
 
-    // 3. Fetch all commission rules for all subcategories in a single efficient query
     const subCategoryIds = subCategoryDocs.map(sub => sub._id);
     let allSubCategoryRules: ICommissionRule[] = [];
     if (subCategoryIds.length > 0) {
@@ -175,12 +160,10 @@ export class CategoryService implements ICategoryService {
         });
     }
 
-    // 4. Create a Map for quick lookups
     const commissionRulesMap = new Map(
         allSubCategoryRules.map(rule => [rule.categoryId.toString(), rule])
     );
 
-    // 5. Map subcategories to the ICategoryFormCombinedData format, flattening commission rules
     const subCategories = subCategoryDocs.map((sub): ICategoryFormCombinedData => {
         const subRule = commissionRulesMap.get(sub._id.toString());
         
@@ -197,7 +180,6 @@ export class CategoryService implements ICategoryService {
         };
     });
 
-    // 6. Return the final, correctly typed object
     return {
         categoryDetails,
         subCategories
@@ -205,7 +187,6 @@ export class CategoryService implements ICategoryService {
 }
 
 async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData> {
-    // 1. Fetch the category and its commission rule at the same time
     const [categoryDoc, commissionRuleDoc] = await Promise.all([
         this._categoryRepository.findById(categoryId),
         this._commissionRuleRepository.findOne({ categoryId: categoryId })
@@ -215,7 +196,6 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
         throw new Error('Category not found.');
     }
 
-    // 2. Map the fetched data into the exact ICategoryFormCombinedData shape
     const categoryDetails: ICategoryFormCombinedData = {
         id: categoryDoc._id.toString(),
         name: categoryDoc.name,
@@ -223,7 +203,6 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
         iconUrl: categoryDoc.iconUrl || null,
         status: categoryDoc.status ?? false,
         parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
-        // Set default commission values first
         commissionType: CommissionTypes.NONE,
         commissionValue: '',
         commissionStatus: false,
@@ -235,7 +214,6 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
         categoryDetails.commissionStatus = commissionRuleDoc.status ?? false;
     }
 
-    // 3. Return the single, flat object
     return categoryDetails;
 }
 
@@ -341,7 +319,6 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
     ): Promise<ICommissionRuleResponse | null> {
 
         if (commissionRuleInput === undefined) {
-            // No changes to make, just return the existing rule if there is one
             const existingRule = await this._commissionRuleRepository.findOne({ categoryId });
             return existingRule ? toCommissionRuleResponseDTO(existingRule) : null;
         }
@@ -355,17 +332,13 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
             return null;
         }
 
-        // The service no longer creates ObjectIds. It just passes the data along.
         const resultDoc = await this._commissionRuleRepository.createOrUpdate(categoryId, commissionRuleInput);
 
         return resultDoc ? toCommissionRuleResponseDTO(resultDoc) : null;
     }
 
-    /**
-     * RESPONSIBILITY: Validates the parentId for an update operation.
-     */
     private async _validateParentCategory(categoryId: string, newParentId?: string | null): Promise<void> {
-        if (newParentId === undefined) return; // Not being updated.
+        if (newParentId === undefined) return; 
 
         if (newParentId !== null) {
             if (!Types.ObjectId.isValid(newParentId)) {
@@ -381,16 +354,13 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
         }
     }
 
-    /**
-     * RESPONSIBILITY: Validates that the new name is unique for the given scope (parent or top-level).
-     */
     private async _validateNameUniqueness(
         categoryId: string,
         updateData: Partial<ICategoryInput>,
         existingCategory: ICategory
     ): Promise<void> {
         if (!updateData.name || updateData.name === existingCategory.name) {
-            return; // Name is not being changed.
+            return;
         }
 
         const targetParentId = updateData.parentId !== undefined ? updateData.parentId : existingCategory.parentId;
