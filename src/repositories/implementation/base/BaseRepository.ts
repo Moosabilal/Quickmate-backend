@@ -1,4 +1,4 @@
-import { Model, Document, FilterQuery, UpdateQuery } from 'mongoose';
+import { Model, Document, FilterQuery, UpdateQuery, QueryOptions } from 'mongoose';
 import { IBaseRepository } from '../../interface/base/IBaseRepository';
 import { injectable } from 'inversify';
 
@@ -27,8 +27,9 @@ export class BaseRepository<T extends Document> implements IBaseRepository<T> {
         return await this.model.find(filter).sort(sort);
     }
 
-    async update(id: string, updateData: UpdateQuery<T>): Promise<T | null> {
-        return await this.model.findByIdAndUpdate(id, updateData, { new: true });
+    async update(id: string, updateData: UpdateQuery<T>, options: QueryOptions = {}): Promise<T | null> {
+        const updateOptions = { new: true, ...options };
+        return await this.model.findByIdAndUpdate(id, updateData, updateOptions);
     }
 
     async delete(id: string): Promise<T | null> {

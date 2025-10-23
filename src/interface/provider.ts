@@ -10,22 +10,22 @@ export interface Availability {
 }
 
 export interface IProviderRegistrationData {
-    fullName: string;
-    phoneNumber: string;
-    email: string;
-    serviceArea: string;
-    serviceLocation: { 
-        type: "Point";
-        coordinates: number[];
-    };
-    availability?: {
-        day: string;
-        startTime: string;
-        endTime: string;
-    }[];
-    aadhaarIdProof: string;
-    profilePhoto: string;
-    userId: string;
+  fullName: string;
+  phoneNumber: string;
+  email: string;
+  serviceArea: string;
+  serviceLocation: {
+    type: "Point";
+    coordinates: number[];
+  };
+  availability?: {
+    day: string;
+    startTime: string;
+    endTime: string;
+  }[];
+  aadhaarIdProof: string;
+  profilePhoto: string;
+  userId: string;
 }
 
 export interface IProviderForAdminResponce {
@@ -57,6 +57,30 @@ export interface ISubscription {
   status: SubscriptionStatus
 }
 
+export interface TimeSlot {
+  start: string;
+  end: string;
+}
+
+export interface DaySchedule {
+  day: string;
+  active: boolean;
+  slots: TimeSlot[];
+}
+
+export interface DateOverride {
+  date: string;
+  isUnavailable: boolean;
+  busySlots: TimeSlot[];
+  reason?: string;
+}
+
+export interface LeavePeriod {
+  from: string;
+  to: string;
+  reason?: string;
+}
+
 export interface IProviderProfile {
   aadhaarIdProof?: string;
   id: string;
@@ -68,7 +92,11 @@ export interface IProviderProfile {
   serviceArea: string;
   profilePhoto: string;
   status: ProviderStatus;
-  availability: Availability[];
+  availability: {
+    weeklySchedule: DaySchedule[];
+    dateOverrides: DateOverride[];
+    leavePeriods: LeavePeriod[];
+  };
   earnings: number;
   totalBookings: number;
   payoutPending: number;
@@ -108,6 +136,7 @@ export interface IBackendProvider {
   profilePhoto: string;
   serviceName?: string;
   serviceArea: string;
+  serviceLocation?: string;
   experience: number;
   availability: Availability[];
   status: string;
@@ -197,50 +226,50 @@ export interface EarningsAnalyticsData {
 
 // Represents a single user review
 export interface IReview {
-    name: string;
-    time: string;
-    rating: number;
-    comment: string;
-    avatar: string;
+  name: string;
+  time: string;
+  rating: number;
+  comment: string;
+  avatar: string;
 }
 
 // Data for the rating distribution chart
 export interface IRatingDistribution {
-    stars: number;
-    count: number;
-    percentage: number;
+  stars: number;
+  count: number;
+  percentage: number;
 }
 
 // Data for the monthly trend charts
 export interface IMonthlyTrend {
-    month: string;
-    value: number; // The average rating for that month
+  month: string;
+  value: number; // The average rating for that month
 }
 
 // Data for the service breakdown view
 export interface IServiceBreakdown {
-    serviceName: string;
-    completed: number;
-    total: number;
-    completionRate: number;
+  serviceName: string;
+  completed: number;
+  total: number;
+  completionRate: number;
 }
 
 // The final, complete data structure for the performance dashboard
 export interface IProviderPerformance {
-    providerId: string;
-    providerName: string;
-    totalBookings: number;
-    completedBookings: number;
-    cancelledBookings: number;
-    totalEarnings: number;
-    avgRating: number;
-    activeServices: number;
-    completionRate: string;
-    cancellationRate: string;
-    reviews: IReview[];
-    // --- NEW FIELDS ---
-    ratingDistribution: IRatingDistribution[];
-    starRatingTrend: IMonthlyTrend[];
-    serviceBreakdown: IServiceBreakdown[];
+  providerId: string;
+  providerName: string;
+  totalBookings: number;
+  completedBookings: number;
+  cancelledBookings: number;
+  totalEarnings: number;
+  avgRating: number;
+  activeServices: number;
+  completionRate: string;
+  cancellationRate: string;
+  reviews: IReview[];
+  // --- NEW FIELDS ---
+  ratingDistribution: IRatingDistribution[];
+  starRatingTrend: IMonthlyTrend[];
+  serviceBreakdown: IServiceBreakdown[];
 }
 

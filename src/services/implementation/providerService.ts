@@ -15,7 +15,7 @@ import { sendVerificationEmail } from "../../utils/emailService";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
-import { toClientForChatListPage, toProviderDashboardDTO, toProviderDTO, toProviderForChatListPage, toServiceAddPage } from "../../utils/mappers/provider.mapper";
+import { toBackendProviderDTO, toClientForChatListPage, toEarningsAnalyticsDTO, toProviderDashboardDTO, toProviderDTO, toProviderForAdminResponseDTO, toProviderForChatListPage, toProviderPerformanceDTO, toServiceAddPage } from "../../utils/mappers/provider.mapper";
 import { toLoginResponseDTO } from "../../utils/mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
@@ -29,8 +29,10 @@ import { calendar_v3, google } from 'googleapis';
 import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 import { convertTo24Hour } from "../../utils/helperFunctions/convertTo24hrs";
 import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, sub } from "date-fns";
+import { _haversineKm } from "../../utils/helperFunctions/haversineKm";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
+const MAX_OTP_ATTEMPTS = parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5;
 const RESEND_COOLDOWN_SECONDS = parseInt(process.env.RESEND_COOLDOWN_SECONDS, 10) || 30;
 
 
@@ -85,7 +87,7 @@ export class ProviderService implements IProviderService {
         provider.registrationOtp = otp;
         provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         provider.registrationOtpAttempts = 0;
-        const updatedProvider = await this._providerRepository.update(provider.id, provider);
+        await this._providerRepository.update(provider.id, provider);
         await sendVerificationEmail(provider.email, otp);
 
 
@@ -103,45 +105,64 @@ export class ProviderService implements IProviderService {
         if (!provider) {
             throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
-        if (provider.isVerified && provider.status !== ProviderStatus.REJECTED) {
-            return { message: 'Account already verified.' };
+        if (provider.isVerified) {
+            throw new CustomError('Account already verified.', HttpStatusCode.CONFLICT);
         }
-        if (typeof provider.registrationOtpAttempts === 'number' && provider.registrationOtpAttempts >= parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5) {
+        if (typeof provider.registrationOtpAttempts === 'number' && provider.registrationOtpAttempts >= MAX_OTP_ATTEMPTS) {
             throw new CustomError(`Too many failed OTP attempts. Please request a new OTP.`, HttpStatusCode.FORBIDDEN);
         }
         if (!provider.registrationOtp || provider.registrationOtp !== otp) {
-            provider.registrationOtpAttempts = (typeof provider.registrationOtpAttempts === 'number' ? provider.registrationOtpAttempts : 0) + 1;
-            await this._providerRepository.update(provider.id, provider);
+            await this._providerRepository.update(provider.id, { $inc: { registrationOtpAttempts: 1 } });
             throw new CustomError('Invalid OTP. Please try again.', HttpStatusCode.BAD_REQUEST);
         }
-
         if (!provider.registrationOtpExpires || new Date() > provider.registrationOtpExpires) {
-            provider.registrationOtp = undefined;
-            provider.registrationOtpExpires = undefined;
-            provider.registrationOtpAttempts = 0;
-            await this._providerRepository.update(provider.id, provider);
             throw new CustomError('OTP has expired. Please request a new one.', HttpStatusCode.BAD_REQUEST);
         }
 
-        provider.isVerified = true;
-        provider.registrationOtp = undefined;
-        provider.registrationOtpExpires = undefined;
-        provider.registrationOtpAttempts = 0;
-        provider.status = ProviderStatus.PENDING
-        const updatedProvider = await this._providerRepository.update(provider.id, provider);
+        // --- REFACTOR: Use a Transaction for data consistency ---
+        const session = await mongoose.startSession();
+        session.startTransaction();
 
-        const userId = provider.userId.toString()
-        const user = await this._userRepository.findById(userId)
-        if (!user) {
-            throw new CustomError("Something went wrong, Please contact admin", HttpStatusCode.FORBIDDEN)
+        try {
+            // --- REFACTOR: Use Atomic Updates for safety and performance ---
+            const providerUpdatePayload = {
+                isVerified: true,
+                status: ProviderStatus.PENDING,
+                registrationOtp: undefined, // Mongoose will $unset this field
+                registrationOtpExpires: undefined, // Mongoose will $unset this field
+                registrationOtpAttempts: 0,
+            };
+            const updatedProvider = await this._providerRepository.update(provider.id, providerUpdatePayload, { session });
+
+            if (!updatedProvider) {
+                throw new CustomError("Failed to update provider record.", HttpStatusCode.INTERNAL_SERVER_ERROR);
+            }
+
+            const userUpdatePayload = {
+                role: Roles.PROVIDER
+            };
+            const updatedUser = await this._userRepository.update(provider.userId.toString(), userUpdatePayload, { session });
+
+            if (!updatedUser) {
+                throw new CustomError("Failed to update user role.", HttpStatusCode.INTERNAL_SERVER_ERROR);
+            }
+
+            // If both updates succeed, commit the transaction
+            await session.commitTransaction();
+
+            return {
+                provider: toProviderDTO(updatedProvider),
+                user: toLoginResponseDTO(updatedUser)
+            };
+
+        } catch (error) {
+            // If anything fails, abort the transaction
+            await session.abortTransaction();
+            throw error; // Re-throw the error to be handled by the controller
+        } finally {
+            // Always end the session
+            session.endSession();
         }
-        user.role = Roles.PROVIDER
-        const updatedUser = await this._userRepository.update(userId, user)
-
-        return {
-            provider: toProviderDTO(updatedProvider),
-            user: toLoginResponseDTO(updatedUser)
-        };
     }
 
     public async resendOtp(data: ResendOtpRequestBody): Promise<{ message: string }> {
@@ -179,27 +200,15 @@ export class ProviderService implements IProviderService {
     }
 
     public async updateProviderDetails(updateData: IProviderRegistrationData): Promise<IProviderProfile> {
-        const updatedProvider = await this._providerRepository.updateProvider(updateData)
+        const updatedProvider = await this._providerRepository.updateProvider(updateData);
 
-        return {
-            id: updatedProvider._id.toString(),
-            userId: updatedProvider.userId.toString(),
-            fullName: updatedProvider.fullName,
-            phoneNumber: updatedProvider.phoneNumber,
-            email: updatedProvider.email,
-            serviceLocation: `${updatedProvider.serviceLocation.coordinates[1]},${updatedProvider.serviceLocation.coordinates[0]}`,
-            serviceArea: updatedProvider.serviceArea,
-            profilePhoto: updatedProvider.profilePhoto,
-            status: updatedProvider.status,
-            availability: updatedProvider.availability,
-            earnings: updatedProvider.earnings,
-            totalBookings: updatedProvider.totalBookings,
-            payoutPending: updatedProvider.payoutPending,
-            rating: updatedProvider.rating,
-            isVerified: updatedProvider.isVerified,
-
+        // 2. Add a safety check in case the provider is not found
+        if (!updatedProvider) {
+            throw new CustomError("Provider not found or failed to update.", HttpStatusCode.NOT_FOUND);
         }
 
+        // 3. Use your existing mapper function to format the response
+        return toProviderDTO(updatedProvider);
     }
 
 
@@ -220,7 +229,7 @@ export class ProviderService implements IProviderService {
     }> {
         const skip = (page - 1) * limit;
 
-
+        // --- 1. Data Fetching and Preparation (Unchanged) ---
         const filter: any = {
             $or: [
                 { fullName: { $regex: search, $options: 'i' } },
@@ -229,15 +238,7 @@ export class ProviderService implements IProviderService {
         };
 
         if (status && status !== 'All') {
-            if (status === 'Approved') {
-                filter.status = "Approved";
-            } else if (status === 'Rejected') {
-                filter.status = "Rejected";
-            } else if (status === "Suspended") {
-                filter.status = "Suspended";
-            } else if (status === "Pending") {
-                filter.status = "Pending"
-            }
+            filter.status = status;
         }
 
         const [providers, total] = await Promise.all([
@@ -246,9 +247,7 @@ export class ProviderService implements IProviderService {
         ]);
 
         if (!providers || providers.length === 0) {
-            const error = new Error('No providers found.');
-            (error as any).statusCode = 404;
-            throw error;
+            throw new CustomError('No providers found.', HttpStatusCode.NOT_FOUND);
         }
 
         const providerIds = providers.map(p => p._id);
@@ -263,22 +262,11 @@ export class ProviderService implements IProviderService {
             serviceMap.get(key)!.push(service.title);
         }
 
-        const data = providers.map(provider => {
-            const providerIdStr = provider._id.toString();
-            return {
-                id: providerIdStr,
-                userId: provider.userId.toString(),
-                fullName: provider.fullName,
-                phoneNumber: provider.phoneNumber,
-                email: provider.email,
-                serviceArea: provider.serviceArea,
-                profilePhoto: provider.profilePhoto,
-                status: provider.status,
-                serviceOffered: serviceMap.get(providerIdStr) || [],
-            };
-        });
+        // --- 2. Use the Mapper for Data Formatting ---
+        // The entire providers.map(...) block is replaced with this single line.
+        const data = toProviderForAdminResponseDTO(providers, serviceMap);
 
-
+        // --- 3. Return the Final Response (Unchanged) ---
         return {
             data,
             total,
@@ -305,39 +293,18 @@ export class ProviderService implements IProviderService {
         try {
             decoded = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
         } catch (error) {
-            throw new Error('Invalid token.');
+            throw new CustomError('Invalid or expired token.', HttpStatusCode.UNAUTHORIZED);
         }
 
-        const provider = await this._providerRepository.getProviderByUserId(decoded.id)
-        return {
-            id: provider._id.toString(),
-            userId: provider.userId.toString(),
-            fullName: provider.fullName,
-            phoneNumber: provider.phoneNumber,
-            email: provider.email,
-            serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
-            serviceArea: provider.serviceArea,
-            profilePhoto: provider.profilePhoto,
-            status: provider.status,
-            subscription: provider.subscription
-                ? {
-                    planId: provider.subscription.planId
-                        ? provider.subscription.planId.toString()
-                        : undefined,
-                    startDate: provider.subscription.startDate,
-                    endDate: provider.subscription.endDate,
-                    status: provider.subscription.status
-                }
-                : undefined,
-            aadhaarIdProof: provider.aadhaarIdProof,
-            availability: provider.availability,
-            earnings: provider.earnings,
-            totalBookings: provider.totalBookings,
-            payoutPending: provider.payoutPending,
-            rating: provider.rating,
-            isVerified: provider.isVerified,
+        const provider = await this._providerRepository.getProviderByUserId(decoded.id);
 
+        // 2. Add a safety check in case the provider is not found
+        if (!provider) {
+            throw new CustomError("Provider profile not found for this user.", HttpStatusCode.NOT_FOUND);
         }
+
+        // 3. Use your existing mapper function to format the response
+        return toProviderDTO(provider);
     }
 
     public async getFeaturedProviders(page: number, limit: number, search: string): Promise<{ providers: IFeaturedProviders[], total: number, totalPages: number, currentPage: number }> {
@@ -397,133 +364,21 @@ export class ProviderService implements IProviderService {
         }
     ): Promise<IBackendProvider[]> {
 
-        const services = await this._serviceRepository.findServicesByCriteria({
-            subCategoryId,
-            minExperience: filters.experience,
-            maxPrice: filters.price,
-        });
+        // Step 1: Get providers who offer the service and match basic filters
+        const initialProviders = await this._getProvidersByInitialCriteria(subCategoryId, userId, filters);
+        if (initialProviders.length === 0) return [];
 
-        if (!services || services.length === 0) {
-            return [];
-        }
-        const providerIdsFromServices = [...new Set(services.map(s => s.providerId.toString()))];
+        // Step 2: Filter out providers who are busy at the requested time
+        const availableProviders = await this._filterProvidersByBookingConflicts(initialProviders, filters);
+        if (availableProviders.length === 0) return [];
 
-        const time24h = filters.time ? convertTo24Hour(filters.time) : undefined;
+        // Step 3: Enrich the final list of providers with all necessary details (reviews, etc.)
+        const enrichedProviders = await this._enrichProvidersWithDetails(availableProviders, subCategoryId, filters);
 
-        const potentialProviders = await this._providerRepository.findFilteredProviders({
-            providerIds: providerIdsFromServices,
-            userIdToExclude: userId,
-            lat: filters.lat,
-            long: filters.long,
-            radius: filters.radius,
-            date: filters.date,
-            time: time24h,
-        });
+        // Step 4: Sort the final result by distance
+        enrichedProviders.sort((a, b) => a.distanceKm - b.distanceKm);
 
-        if (!potentialProviders || potentialProviders.length === 0) {
-            return [];
-        }
-
-        let availableProviders = [...potentialProviders];
-        if (filters.date && time24h && potentialProviders.length > 0) {
-            const potentialProviderIds = potentialProviders.map(p => p._id.toString());
-
-            const allBookingsForDay = await this._bookingRepository.findByProviderAndDateRange(
-                potentialProviderIds,
-                filters.date,
-                filters.date
-            );
-
-            if (allBookingsForDay.length > 0) {
-                const busyProviderIds = new Set<string>();
-
-                const [searchHours, searchMinutes] = time24h.split(':').map(Number);
-                const searchSlotStart = new Date(filters.date);
-                searchSlotStart.setHours(searchHours, searchMinutes, 0, 0);
-                const searchSlotEnd = new Date(searchSlotStart.getTime() + 60 * 60 * 1000);
-
-                allBookingsForDay.forEach(booking => {
-                    const bookingTime24h = convertTo24Hour(booking.scheduledTime as string);
-                    const [bookHours, bookMinutes] = bookingTime24h.split(':').map(Number);
-                    const bookingStart = new Date(booking.scheduledDate as string);
-                    bookingStart.setHours(bookHours, bookMinutes, 0, 0);
-
-                    const bookingDurationMs = ((booking.duration as number) || 60) * 60 * 1000;
-                    const bookingEnd = new Date(bookingStart.getTime() + bookingDurationMs);
-
-                    if (searchSlotStart < bookingEnd && searchSlotEnd > bookingStart) {
-                        busyProviderIds.add(booking.providerId.toString());
-                    }
-                });
-
-                if (busyProviderIds.size > 0) {
-                    availableProviders = potentialProviders.filter(
-                        provider => !busyProviderIds.has(provider._id.toString())
-                    );
-                }
-            }
-        }
-
-        if (availableProviders.length === 0) {
-            return [];
-        }
-
-        const finalProviderIds = availableProviders.map(p => p._id.toString());
-        const reviews = await this._reviewRepository.findReviewsByProviderIds(finalProviderIds);
-        const userIdsForReviews = [...new Set(reviews.map(r => r.userId.toString()))];
-        const users = await this._userRepository.findUsersByIds(userIdsForReviews);
-
-        const userMap = new Map(users.map(u => [u._id.toString(), { name: u.name, profilePicture: u.profilePicture || "" }]));
-
-        const servicesByProvider = new Map<string, IService[]>();
-        services.forEach(service => {
-            const pid = service.providerId.toString();
-            if (!servicesByProvider.has(pid)) servicesByProvider.set(pid, []);
-            servicesByProvider.get(pid)!.push(service);
-        });
-
-        const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
-        reviews.forEach(review => {
-            const pid = review.providerId.toString();
-            if (!reviewsByProvider.has(pid)) reviewsByProvider.set(pid, []);
-            const userData = userMap.get(review.userId.toString());
-            reviewsByProvider.get(pid)!.push({
-                userName: (userData?.name as string) || "Anonymous",
-                userImg: (userData?.profilePicture as string) || "",
-                rating: review.rating as number,
-                review: review.reviewText as string,
-            });
-        });
-
-        const result: IBackendProvider[] = availableProviders.map(provider => {
-            const providerIdStr = provider._id.toString();
-            const providerServices = servicesByProvider.get(providerIdStr) || [];
-            const primaryService = providerServices.find(s => s.subCategoryId.toString() === subCategoryId) || providerServices[0];
-            const [provLng, provLat] = provider.serviceLocation.coordinates;
-            const distanceKm = this._haversineKm(filters.lat, filters.long, provLat, provLng);
-
-            return {
-                _id: providerIdStr,
-                fullName: provider.fullName,
-                phoneNumber: provider.phoneNumber,
-                email: provider.email,
-                profilePhoto: provider.profilePhoto,
-                serviceArea: provider.serviceArea,
-                serviceLocation: `${provLat},${provLng}`,
-                availability: provider.availability as any[],
-                status: provider.status,
-                earnings: provider.earnings,
-                totalBookings: provider.totalBookings,
-                experience: primaryService?.experience || 0,
-                price: primaryService?.price || 0,
-                distanceKm: parseFloat(distanceKm.toFixed(2)),
-                reviews: reviewsByProvider.get(providerIdStr) || [],
-            };
-        });
-
-        result.sort((a, b) => a.distanceKm - b.distanceKm);
-
-        return result;
+        return enrichedProviders;
     }
 
 
@@ -625,7 +480,7 @@ export class ProviderService implements IProviderService {
         }
 
         const providers = await this._providerRepository.findAll({
-            _id: { $in: Array.from(providerIdSet) }, userId: { $ne: userId } 
+            _id: { $in: Array.from(providerIdSet) }, userId: { $ne: userId }
         });
 
         const providersInRange = providers.filter(p => {
@@ -633,7 +488,7 @@ export class ProviderService implements IProviderService {
             if (!coords || coords.length !== 2) return false;
 
             const [provLng, provLat] = coords;
-            const distKm = this._haversineKm(userLat, userLng, provLat, provLng);
+            const distKm = _haversineKm(userLat, userLng, provLat, provLng);
             return distKm <= radiusKm;
         });
 
@@ -716,28 +571,14 @@ export class ProviderService implements IProviderService {
         return results;
     }
 
-
-    private _haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
-        const R = 6371; // km
-        const dLat = this._deg2rad(lat2 - lat1);
-        const dLon = this._deg2rad(lon2 - lon1);
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(this._deg2rad(lat1)) * Math.cos(this._deg2rad(lat2)) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c;
-    }
-
-    private _deg2rad(deg: number): number {
-        return deg * (Math.PI / 180);
-    }
-
     public async getEarningsAnalytics(userId: string, period: 'week' | 'month'): Promise<EarningsAnalyticsData> {
         const provider = await this._providerRepository.findOne({ userId });
         if (!provider) {
             throw new CustomError("Provider profile not found", HttpStatusCode.NOT_FOUND);
         }
         const providerId = provider._id.toString();
+
+        // --- 1. Date Range Calculation (Service Logic) ---
         const now = new Date();
         let currentStartDate: Date, currentEndDate: Date, prevStartDate: Date, prevEndDate: Date;
 
@@ -753,9 +594,12 @@ export class ProviderService implements IProviderService {
             prevEndDate = endOfMonth(sub(now, { months: 1 }));
         }
 
-        const currentBookings = await this._bookingRepository.findByProviderAndDateRangeForEarnings(providerId, currentStartDate, currentEndDate);
-        const prevBookings = await this._bookingRepository.findByProviderAndDateRangeForEarnings(providerId, prevStartDate, prevEndDate);
+        const [currentBookings, prevBookings] = await Promise.all([
+            this._bookingRepository.findByProviderAndDateRangeForEarnings(providerId, currentStartDate, currentEndDate),
+            this._bookingRepository.findByProviderAndDateRangeForEarnings(providerId, prevStartDate, prevEndDate)
+        ]);
 
+        // --- 3. Business Logic & Calculations (Service Logic) ---
         const totalEarnings = currentBookings.reduce((sum, b) => sum + (Number(b.amount) || 0), 0);
         const prevTotalEarnings = prevBookings.reduce((sum, b) => sum + (Number(b.amount) || 0), 0);
         const earningsChangePercentage = prevTotalEarnings > 0
@@ -768,9 +612,7 @@ export class ProviderService implements IProviderService {
         let newClients = 0;
         for (const userId of currentClients) {
             const hadPriorBooking = await this._bookingRepository.hasPriorBooking(userId, providerId, currentStartDate);
-            if (!hadPriorBooking) {
-                newClients++;
-            }
+            if (!hadPriorBooking) newClients++;
         }
 
         const serviceEarnings: { [key: string]: number } = {};
@@ -778,24 +620,19 @@ export class ProviderService implements IProviderService {
             const serviceName = (b.serviceId as any)?.title || 'Unknown Service';
             serviceEarnings[serviceName] = (serviceEarnings[serviceName] || 0) + (Number(b.amount) || 0);
         });
+        const topServiceEntry = Object.entries(serviceEarnings).sort((a, b) => b[1] - a[1])[0] || ['N/A', 0];
+        const topService = { name: topServiceEntry[0], earnings: topServiceEntry[1] };
 
-        const topService = Object.entries(serviceEarnings).sort((a, b) => b[1] - a[1])[0] || ['N/A', 0];
-
-        const breakdown = currentBookings.map(b => ({
-            date: new Date(b.bookingDate as string | number | Date),
-            service: (b.serviceId as any)?.title || 'Unknown Service',
-            client: (b.userId as any)?.name || 'Unknown Client',
-            amount: Number(b.amount) || 0,
-            status: String(b.status || 'Unknown'),
-        }));
-        return {
+        // --- 4. Mapping (Delegated to Mapper) ---
+        // The 'breakdown' array and final object are now created by the mapper.
+        return toEarningsAnalyticsDTO(
             totalEarnings,
             earningsChangePercentage,
             totalClients,
             newClients,
-            topService: { name: topService[0], earnings: topService[1] },
-            breakdown,
-        };
+            topService,
+            currentBookings
+        );
     }
 
 
@@ -807,112 +644,159 @@ export class ProviderService implements IProviderService {
             throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
         }
 
-        // Fetch all necessary data in parallel, now including the service breakdown
+        // --- 1. DATA FETCHING ---
+        // Fetch all raw data required for the DTO
         const [bookings, reviewsFromDb, activeServicesCount, serviceBreakdown] = await Promise.all([
             this._bookingRepository.findAll({ providerId }),
             this._reviewRepository.findAll({ providerId }),
             this._serviceRepository.findServiceCount(providerId),
-            this._bookingRepository.getBookingStatsByService(providerId) // Using the new efficient method
+            this._bookingRepository.getBookingStatsByService(providerId)
         ]);
 
-        // --- Basic Calculations ---
-        const totalBookings = bookings.length;
-        const completedBookings = bookings.filter(b => b.status === BookingStatus.COMPLETED).length;
-        const cancelledBookings = bookings.filter(b => b.status === BookingStatus.CANCELLED).length;
-
-        const totalEarnings = bookings
-            .filter(b => b.status === BookingStatus.COMPLETED)
-            .reduce((sum, b) => sum + (Number(b.amount) ?? 0), 0);
-
-        const avgRating = reviewsFromDb.length
-            ? reviewsFromDb.reduce((sum, r) => sum + (Number(r.rating) ?? 0), 0) / reviewsFromDb.length
-            : 0;
-
-        // --- Format Reviews with User Info ---
         const userIds = reviewsFromDb.map(r => r.userId?.toString()).filter(id => id);
         const users = await this._userRepository.findAll({ _id: { $in: userIds } });
-        const reviews: IReview[] = reviewsFromDb.map(r => {
-            const user = users.find(u => u._id.toString() === r.userId?.toString());
 
-            return {
-                name: (user?.name as string) ?? "Anonymous",
-                time: r.createdAt
-                    ? new Date(r.createdAt as string | number | Date).toLocaleDateString()
-                    : "N/A",
-                rating: Number(r.rating) ?? 0,
-                comment: (r.comment as string ?? r.reviewText as string ?? "") as string,
-                avatar: (user?.profilePicture as string) ?? "default_avatar.png"
-            };
+        // --- 2. MAPPING ---
+        // Delegate all calculation and formatting to the mapper function
+        return toProviderPerformanceDTO(
+            provider,
+            bookings,
+            reviewsFromDb,
+            users,
+            activeServicesCount,
+            serviceBreakdown
+        );
+    }
+
+
+
+
+
+
+
+    private async _getProvidersByInitialCriteria(
+        subCategoryId: string,
+        userIdToExclude: string,
+        filters: {
+            radius: number;
+            lat: number;
+            long: number;
+            experience?: number;
+            date?: string;
+            time?: string;
+            price?: number;
+        }
+    ): Promise<IProvider[]> {
+        const services = await this._serviceRepository.findServicesByCriteria({
+            subCategoryId,
+            minExperience: filters.experience,
+            maxPrice: filters.price,
         });
 
-        // --- Rating Distribution Calculation ---
-        const ratingCounts = new Map<number, number>([[5, 0], [4, 0], [3, 0], [2, 0], [1, 0]]);
-        for (const review of reviewsFromDb) {
-            const rating = Math.round(Number(review.rating));
-            if (ratingCounts.has(rating)) {
-                ratingCounts.set(rating, ratingCounts.get(rating)! + 1);
-            }
+        if (!services.length) return [];
+        const providerIdsFromServices = [...new Set(services.map(s => s.providerId.toString()))];
+        const time24h = filters.time ? convertTo24Hour(filters.time) : undefined;
+
+        return this._providerRepository.findFilteredProviders({
+            providerIds: providerIdsFromServices,
+            userIdToExclude,
+            lat: filters.lat,
+            long: filters.long,
+            radius: filters.radius,
+            date: filters.date,
+            time: time24h,
+        });
+    }
+
+    /**
+     * RESPONSIBILITY: Takes a list of providers and removes any that have conflicting bookings.
+     */
+    private async _filterProvidersByBookingConflicts(
+        potentialProviders: IProvider[],
+        filters: { date?: string; time?: string }
+    ): Promise<IProvider[]> {
+        if (!filters.date || !filters.time) {
+            return potentialProviders; // If no date/time is specified, all are available
         }
-        const totalReviews = reviewsFromDb.length;
-        const ratingDistribution: IRatingDistribution[] = Array.from(ratingCounts.entries()).map(([stars, count]) => ({
-            stars,
-            count,
-            percentage: totalReviews > 0 ? parseFloat(((count / totalReviews) * 100).toFixed(1)) : 0
-        })).sort((a, b) => b.stars - a.stars);
 
-        // --- Star Rating Trend (Last 6 Months) ---
-        const monthlyRatingData: { [key: string]: { sum: number, count: number } } = {};
-        const sixMonthsAgo = new Date();
-        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+        const potentialProviderIds = potentialProviders.map(p => p._id.toString());
+        const allBookingsForDay = await this._bookingRepository.findByProviderAndDateRange(
+            potentialProviderIds,
+            filters.date,
+            filters.date
+        );
 
-        for (const review of reviewsFromDb) {
-            const reviewDate = new Date(review.createdAt as string | Date);
-            if (reviewDate >= sixMonthsAgo) {
-                const monthKey = `${reviewDate.getFullYear()}-${reviewDate.getMonth()}`;
-                if (!monthlyRatingData[monthKey]) {
-                    monthlyRatingData[monthKey] = { sum: 0, count: 0 };
-                }
-                monthlyRatingData[monthKey].sum += Number(review.rating);
-                monthlyRatingData[monthKey].count++;
+        if (!allBookingsForDay.length) return potentialProviders;
+
+        const busyProviderIds = new Set<string>();
+        const time24h = convertTo24Hour(filters.time);
+        const [searchHours, searchMinutes] = time24h.split(':').map(Number);
+        const searchSlotStart = new Date(filters.date);
+        searchSlotStart.setHours(searchHours, searchMinutes, 0, 0);
+        const searchSlotEnd = new Date(searchSlotStart.getTime() + 60 * 60 * 1000); // Assuming 1-hour slots
+
+        allBookingsForDay.forEach(booking => {
+            const bookingTime24h = convertTo24Hour(booking.scheduledTime as string);
+            const [bookHours, bookMinutes] = bookingTime24h.split(':').map(Number);
+            const bookingStart = new Date(booking.scheduledDate as string);
+            bookingStart.setHours(bookHours, bookMinutes, 0, 0);
+            const bookingEnd = new Date(bookingStart.getTime() + ((booking.duration as number) || 60) * 60 * 1000);
+
+            if (searchSlotStart < bookingEnd && searchSlotEnd > bookingStart) {
+                busyProviderIds.add(booking.providerId.toString());
             }
-        }
-        const starRatingTrend: IMonthlyTrend[] = [];
-        const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'short' });
-        for (let i = 5; i >= 0; i--) {
-            const date = new Date();
-            date.setMonth(date.getMonth() - i);
-            const monthKey = `${date.getFullYear()}-${date.getMonth()}`;
-            const monthName = monthFormatter.format(date);
+        });
 
-            const data = monthlyRatingData[monthKey];
-            starRatingTrend.push({
-                month: monthName,
-                value: data && data.count > 0 ? parseFloat((data.sum / data.count).toFixed(1)) : 0
+        if (busyProviderIds.size === 0) return potentialProviders;
+
+        return potentialProviders.filter(
+            provider => !busyProviderIds.has(provider._id.toString())
+        );
+    }
+
+    /**
+     * RESPONSIBILITY: Gathers all supplementary data (reviews, users, services) and maps the final provider list.
+     */
+    private async _enrichProvidersWithDetails(
+        availableProviders: IProvider[],
+        subCategoryId: string,
+        filters: { lat: number; long: number }
+    ): Promise<IBackendProvider[]> {
+        const finalProviderIds = availableProviders.map(p => p._id.toString());
+
+        // Fetch reviews and all services for these providers concurrently
+        const [reviews, services] = await Promise.all([
+            this._reviewRepository.findReviewsByProviderIds(finalProviderIds),
+            this._serviceRepository.findAll({ providerId: { $in: finalProviderIds } })
+        ]);
+
+        const userIdsForReviews = [...new Set(reviews.map(r => r.userId.toString()))];
+        const users = userIdsForReviews.length > 0 ? await this._userRepository.findUsersByIds(userIdsForReviews) : [];
+        const userMap = new Map(users.map(u => [u._id.toString(), { name: u.name, profilePicture: u.profilePicture || "" }]));
+
+        const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
+        reviews.forEach(review => {
+            const pid = review.providerId.toString();
+            if (!reviewsByProvider.has(pid)) reviewsByProvider.set(pid, []);
+            const userData = userMap.get(review.userId.toString());
+            reviewsByProvider.get(pid)!.push({
+                userName: (userData?.name as string) || "Anonymous",
+                userImg: (userData?.profilePicture as string) || "",
+                rating: review.rating as number,
+                review: (review.reviewText as string) || "",
             });
-        }
+        });
 
-        // --- Final Assembly ---
-        const completionRate = totalBookings > 0 ? ((completedBookings / totalBookings) * 100).toFixed(1) : "0";
-        const cancellationRate = totalBookings > 0 ? ((cancelledBookings / totalBookings) * 100).toFixed(1) : "0";
-
-        const result: IProviderPerformance = {
-            providerId: provider._id.toString(),
-            providerName: provider.fullName,
-            totalBookings,
-            completedBookings,
-            cancelledBookings,
-            totalEarnings,
-            avgRating: parseFloat(avgRating.toFixed(1)),
-            activeServices: activeServicesCount ?? 0,
-            completionRate: `${completionRate}%`,
-            cancellationRate: `${cancellationRate}%`,
-            reviews,
-            ratingDistribution,
-            starRatingTrend,
-            serviceBreakdown
-        };
-
-        return result;
+        return availableProviders.map(provider =>
+            toBackendProviderDTO(
+                provider,
+                services,
+                reviewsByProvider.get(provider._id.toString()) || [],
+                subCategoryId,
+                filters.lat,
+                filters.long
+            )
+        );
     }
 
 

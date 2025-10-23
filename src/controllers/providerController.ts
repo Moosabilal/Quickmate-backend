@@ -114,7 +114,6 @@ export class ProviderController {
 
             const updateData: IProviderRegistrationData = {
                 ...req.body,
-                availability: JSON.parse(req.body.availability || '[]'),
                 userId: req.user.id,
                 serviceLocation: { type: "Point", coordinates: [lon, lat] }
             };
@@ -124,7 +123,6 @@ export class ProviderController {
             } else {
                 updateData.serviceLocation = undefined;
             }
-
 
             if (profileUrl) {
                 updateData.profilePhoto = profileUrl;
@@ -241,6 +239,7 @@ export class ProviderController {
 
     public getProviderAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+
             const query = getAvailabilityQuerySchema.parse(req.query);
             const userId = req.user.id;
             

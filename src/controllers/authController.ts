@@ -16,7 +16,7 @@ import {
     googleLoginSchema,
     contactUsSchema,
     updateProfileSchema
-} from '../utils/validations/auth.validation'; // Adjust path if needed
+} from '../utils/validations/auth.validation';
 import { ZodError } from 'zod';
 
 @injectable()

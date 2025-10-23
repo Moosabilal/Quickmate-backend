@@ -5,13 +5,6 @@ import { ProviderStatus } from '../../enums/provider.enum'; // Adjust import pat
 const mongoIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format');
 export const mongoIdParamSchema = z.object({ id: mongoIdSchema });
 
-// A schema for a single availability slot
-const availabilitySchema = z.object({
-    day: z.string(),
-    startTime: z.string(),
-    endTime: z.string(),
-});
-
 // --- Body Schemas ---
 
 // Schema for Provider Registration (handles JSON strings in form-data)
@@ -21,8 +14,6 @@ export const registerProviderSchema = z.object({
     email: z.string().email(),
     serviceArea: z.string().min(3, "Service area is required."),
     serviceLocation: z.string().regex(/^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/, "Invalid location format."),
-    // Use .transform() to parse JSON strings from FormData
-    availability: z.string().transform((val) => JSON.parse(val)).pipe(z.array(availabilitySchema)),
 });
 
 // Schema for Provider Updates (.partial() makes all fields optional)
