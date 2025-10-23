@@ -9,7 +9,8 @@ import { IPaymentRepository } from "../../repositories/interface/IPaymentReposit
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
 import { toAdminDashboardDTO } from "../../utils/mappers/admin.mapper";
-import { IProviderDashboardRes } from "../../interface/provider.dto";
+import { IProviderDashboardRes } from "../../interface/provider";
+import { IAnalyticsData } from "../../interface/admin";
 
 @injectable()
 export class AdminService implements IAdminService {
@@ -43,5 +44,49 @@ export class AdminService implements IAdminService {
 
         return toAdminDashboardDTO(totalUsers, totalProviders, totalBookings, dailyBookings, monthlyRevenue, topActiveProviders, providerReviewCounts)
 
+    }
+
+    public async getDashboardAnalytics(): Promise<IAnalyticsData> {
+        // Fetch all data points in parallel for maximum efficiency
+        const [
+            topServiceCategoriesRaw,
+            bookingTrends,
+            weeklyPattern,
+            topProviders,
+            totalBookings,
+            activeUsers,
+            totalRevenue,
+            averageRating
+        ] = await Promise.all([
+            this._bookingRepository.getTopServiceCategories(),
+            this._bookingRepository.getBookingTrendsByMonth(),
+            this._bookingRepository.getBookingPatternsByDayOfWeek(),
+            this._providerRepository.getTopProvidersByEarnings(),
+            this._bookingRepository.count({}),
+            this._userRepository.getActiveUserCount(),
+            this._paymentRepository.getTotalRevenue(),
+            this._reviewRepository.getAverageRating()
+        ]);
+
+        // Calculate percentages for service categories based on the total of the top categories
+        const totalTopCategoryBookings = topServiceCategoriesRaw.reduce((sum, cat) => sum + cat.value, 0);
+        const topServiceCategories = topServiceCategoriesRaw.map(cat => ({
+            ...cat,
+            value: totalTopCategoryBookings > 0 ? parseFloat(((cat.value / totalTopCategoryBookings) * 100).toFixed(1)) : 0
+        }));
+
+        // Assemble the final response object in the required structure
+        return {
+            topServiceCategories,
+            bookingTrends,
+            weeklyPattern,
+            topProviders,
+            kpi: {
+                totalBookings,
+                activeUsers,
+                revenue: totalRevenue,
+                avgRating: parseFloat(averageRating.toFixed(1))
+            }
+        };
     }
 }

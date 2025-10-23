@@ -8,8 +8,10 @@ const router = express.Router()
 const reviewController = container.get<ReviewController>(TYPES.ReviewController)
 
 const isProvOrUser = [authenticateToken, authorizeRoles(['Customer','ServieProvider'])]
+const isAdmin = [authenticateToken, authorizeRoles(['Admin'])]
 
 router.post('/addReview', isProvOrUser, reviewController.addReview)
+router.get('/reviews', isAdmin, reviewController.getAllReviewsForAdmin)
 
 
 export default router

@@ -1,11 +1,13 @@
 import { IProvider } from '../../models/Providers';
-import { IProviderForChatListPage, IProviderProfile, IServiceAddPageResponse } from '../../interface/provider.dto';
+import { EarningsAnalyticsData, IBackendProvider, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse, IServiceBreakdown } from '../../interface/provider';
 import { ICategory } from '../../models/Categories';
 import { IBooking } from '../../models/Booking';
 import { IService } from '../../models/Service';
-import { IDashboardResponse, IDashboardStatus } from "../../interface/provider.dto";
+import { IDashboardResponse, IDashboardStatus } from "../../interface/provider";
 import { BookingStatus } from "../../enums/booking.enum";
-import { IReview } from '../../models/Review';
+import { IReview as IReviewModel } from '../../models/Review';
+import { IUser } from '../../models/User';
+import { _haversineKm } from '../helperFunctions/haversineKm';
 
 
 export function toProviderDTO(provider: IProvider): IProviderProfile {
@@ -15,14 +17,9 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     fullName: provider.fullName,
     phoneNumber: provider.phoneNumber,
     email: provider.email,
-    serviceId: provider.serviceId.map(id => id.toString()),
     serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
     serviceArea: provider.serviceArea,
-    availability: provider.availability.map(a => ({
-      day: a.day,
-      startTime: a.startTime,
-      endTime: a.endTime,
-    })),
+    availability: provider.availability,
     profilePhoto: provider.profilePhoto,
     earnings: provider.earnings,
     status: provider.status,
@@ -34,12 +31,65 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
   };
 }
 
+export function toProviderForAdminResponseDTO(
+  providers: IProvider[],
+  serviceMap: Map<string, string[]>
+): IProviderForAdminResponce[] {
+  return providers.map(provider => {
+    const providerIdStr = provider._id.toString();
+    return {
+      id: providerIdStr,
+      userId: provider.userId.toString(),
+      fullName: provider.fullName,
+      phoneNumber: provider.phoneNumber,
+      email: provider.email,
+      serviceArea: provider.serviceArea,
+      profilePhoto: provider.profilePhoto,
+      status: provider.status,
+      serviceOffered: serviceMap.get(providerIdStr) || [],
+    };
+  });
+}
+
 export function toServiceAddPage(category: ICategory): IServiceAddPageResponse {
   return {
     id: category._id.toString(),
     name: category.name,
     parentId: category.parentId ? category.parentId.toString() : null
   }
+}
+
+export function toBackendProviderDTO(
+  provider: IProvider,
+  services: IService[],
+  reviews: IReviewsOfUser[],
+  subCategoryId: string,
+  userLat: number,
+  userLng: number
+): IBackendProvider {
+  const providerServices = services.filter(s => s.providerId.toString() === provider._id.toString());
+  const primaryService = providerServices.find(s => s.subCategoryId.toString() === subCategoryId) || providerServices[0];
+
+  const [provLng, provLat] = provider.serviceLocation.coordinates;
+  const distanceKm = _haversineKm(userLat, userLng, provLat, provLng); // Assume _haversineKm is a local or imported helper
+
+  return {
+    _id: provider._id.toString(),
+    fullName: provider.fullName,
+    phoneNumber: provider.phoneNumber,
+    email: provider.email,
+    profilePhoto: provider.profilePhoto,
+    serviceArea: provider.serviceArea,
+    serviceLocation: `${provLat},${provLng}`,
+    availability: provider.availability as any,
+    status: provider.status,
+    earnings: provider.earnings,
+    totalBookings: provider.totalBookings,
+    experience: primaryService?.experience || 0,
+    price: primaryService?.price || 0,
+    distanceKm: parseFloat(distanceKm.toFixed(2)),
+    reviews: reviews,
+  };
 }
 
 export function toProviderForChatListPage(
@@ -61,7 +111,7 @@ export function toProviderForChatListPage(
     )
 
     return {
-      id: provider._id.toString(),
+      id: provider.userId.toString(),
       bookingId: booking?._id.toString(),
       name: provider.fullName,
       profilePicture: provider.profilePhoto || "",
@@ -74,7 +124,52 @@ export function toProviderForChatListPage(
   });
 }
 
-function buildRatingHistory(reviews: IReview[]) {
+
+
+
+
+export function toClientForChatListPage(
+  bookings: IBooking[],
+  clients: IUser[],
+  services: IService[],
+  messages: { bookingId: string; lastMessage: string; createdAt: Date }[]
+): IProviderForChatListPage[] {
+
+  return clients.map((client) => {
+    const clientBooking = bookings
+      .filter((b) => b.userId?.toString() === client._id.toString())
+      .sort((a, b) => new Date(b.createdAt as Date).getTime() - new Date(a.createdAt as Date).getTime())[0];
+
+    if (!clientBooking) return null;
+
+    const service = services.find(
+      (s) => s._id.toString() === clientBooking.serviceId?.toString()
+    );
+    const lastMessageData = messages.find(
+      (m) => m.bookingId === clientBooking._id.toString()
+    );
+
+    return {
+      id: client._id.toString(),
+      bookingId: clientBooking._id.toString(),
+      name: client.name as string,
+      profilePicture: (client.profilePicture as string) || "",
+      location: "",
+      isOnline: true,
+      services: service?.title || "",
+      lastMessage: lastMessageData?.lastMessage || "",
+      lastMessageAt: lastMessageData?.createdAt || null,
+    } as IProviderForChatListPage
+  }).filter((item): item is IProviderForChatListPage => item !== null);
+}
+
+
+
+
+
+
+
+function buildRatingHistory(reviews: IReviewModel[]) {
   const monthMap = new Map<string, { total: number; count: number }>();
 
   reviews.forEach((r) => {
@@ -97,13 +192,43 @@ function buildRatingHistory(reviews: IReview[]) {
 }
 
 
+export function toEarningsAnalyticsDTO(
+  totalEarnings: number,
+  earningsChangePercentage: number,
+  totalClients: number,
+  newClients: number,
+  topService: { name: string, earnings: number },
+  currentBookings: IBooking[]
+): EarningsAnalyticsData {
+
+  // The mapping logic for the 'breakdown' array lives here
+  const breakdown = currentBookings.map(b => ({
+    date: new Date(b.bookingDate as string | number | Date),
+    service: (b.serviceId as any)?.title || 'Unknown Service',
+    client: (b.userId as any)?.name || 'Unknown Client',
+    amount: Number(b.amount) || 0,
+    status: String(b.status || 'Unknown'),
+  }));
+
+  // Assemble the final DTO
+  return {
+    totalEarnings,
+    earningsChangePercentage,
+    totalClients,
+    newClients,
+    topService,
+    breakdown,
+  };
+}
+
+
 export function toProviderDashboardDTO(
   provider: IProvider,
   bookings: IBooking[],
   services: IService[],
   subCategories: ICategory[],
   parentCategories: ICategory[],
-  reviews: IReview[]
+  reviews: IReviewModel[]
 ): { dashboardData: IDashboardResponse[]; dashboardStat: IDashboardStatus } {
   const serviceMap = new Map(services.map((s) => [s._id.toString(), s]));
   const subCategoryMap = new Map(
@@ -163,3 +288,102 @@ export function toProviderDashboardDTO(
 }
 
 
+export function toProviderPerformanceDTO(
+  provider: IProvider,
+  bookings: IBooking[],
+  reviewsFromDb: IReviewModel[],
+  users: IUser[],
+  activeServicesCount: number,
+  serviceBreakdown: IServiceBreakdown[]
+): IProviderPerformance {
+
+  // --- Basic Calculations ---
+  const totalBookings = bookings.length;
+  const completedBookings = bookings.filter(b => b.status === BookingStatus.COMPLETED).length;
+  const cancelledBookings = bookings.filter(b => b.status === BookingStatus.CANCELLED).length;
+
+  const totalEarnings = bookings
+    .filter(b => b.status === BookingStatus.COMPLETED)
+    .reduce((sum, b) => sum + (Number(b.amount) ?? 0), 0);
+
+  const avgRating = reviewsFromDb.length
+    ? reviewsFromDb.reduce((sum, r) => sum + (Number(r.rating) ?? 0), 0) / reviewsFromDb.length
+    : 0;
+
+  // --- Format Reviews with User Info ---
+  const reviews: IReview[] = reviewsFromDb.map(r => {
+    const user = users.find(u => u._id.toString() === r.userId?.toString());
+    return {
+      name: (user?.name as string) ?? "Anonymous",
+      time: r.createdAt ? new Date(r.createdAt as string | Date).toLocaleDateString() : "N/A",
+      rating: Number(r.rating) ?? 0,
+      comment: (r.reviewText as string) || "",
+      avatar: (user?.profilePicture as string) ?? "default_avatar.png"
+    };
+  });
+
+  // --- Rating Distribution Calculation ---
+  const ratingCounts = new Map<number, number>([[5, 0], [4, 0], [3, 0], [2, 0], [1, 0]]);
+  reviewsFromDb.forEach(review => {
+    const rating = Math.round(Number(review.rating));
+    if (ratingCounts.has(rating)) {
+      ratingCounts.set(rating, ratingCounts.get(rating)! + 1);
+    }
+  });
+  const totalReviews = reviewsFromDb.length;
+  const ratingDistribution: IRatingDistribution[] = Array.from(ratingCounts.entries()).map(([stars, count]) => ({
+    stars,
+    count,
+    percentage: totalReviews > 0 ? parseFloat(((count / totalReviews) * 100).toFixed(1)) : 0
+  })).sort((a, b) => b.stars - a.stars);
+
+  // --- Star Rating Trend (Last 6 Months) ---
+  const monthlyRatingData: { [key: string]: { sum: number, count: number } } = {};
+  const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
+  reviewsFromDb.forEach(review => {
+    const reviewDate = new Date(review.createdAt as string | Date);
+    if (reviewDate >= sixMonthsAgo) {
+      const monthKey = `${reviewDate.getFullYear()}-${reviewDate.getMonth()}`;
+      if (!monthlyRatingData[monthKey]) monthlyRatingData[monthKey] = { sum: 0, count: 0 };
+      monthlyRatingData[monthKey].sum += Number(review.rating);
+      monthlyRatingData[monthKey].count++;
+    }
+  });
+
+  const starRatingTrend: IMonthlyTrend[] = [];
+  const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'short' });
+  for (let i = 5; i >= 0; i--) {
+    const date = new Date();
+    date.setMonth(date.getMonth() - i);
+    const monthKey = `${date.getFullYear()}-${date.getMonth()}`;
+    const monthName = monthFormatter.format(date);
+    const data = monthlyRatingData[monthKey];
+    starRatingTrend.push({
+      month: monthName,
+      value: data && data.count > 0 ? parseFloat((data.sum / data.count).toFixed(1)) : 0
+    });
+  }
+
+  // --- Final Assembly ---
+  const completionRate = totalBookings > 0 ? ((completedBookings / totalBookings) * 100).toFixed(1) : "0";
+  const cancellationRate = totalBookings > 0 ? ((cancelledBookings / totalBookings) * 100).toFixed(1) : "0";
+
+  return {
+    providerId: provider._id.toString(),
+    providerName: provider.fullName,
+    totalBookings,
+    completedBookings,
+    cancelledBookings,
+    totalEarnings,
+    avgRating: parseFloat(avgRating.toFixed(1)),
+    activeServices: activeServicesCount ?? 0,
+    completionRate: `${completionRate}%`,
+    cancellationRate: `${cancellationRate}%`,
+    reviews,
+    ratingDistribution,
+    starRatingTrend,
+    serviceBreakdown
+  };
+}

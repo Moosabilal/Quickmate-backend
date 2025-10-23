@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
 import { IServiceService } from "../interface/IServiceService";
 import TYPES from "../../di/type";
-import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../interface/service.dto";
+import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../interface/service";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import { toProviderServicePage, toServiceEditPage } from "../../utils/mappers/service.mapper";
@@ -73,7 +73,7 @@ export class ServiceService implements IServiceService {
         return toServiceEditPage(service, category)
     }
 
-    public async updateService(id: string, serviceData: IAddAndEditServiceForm): Promise<{message: string, success: boolean}> {
+    public async updateService(id: string, serviceData: Partial<IAddAndEditServiceForm>): Promise<{message: string, success: boolean}> {
         const service = await this._serviceRepository.findById(id)
         if(!service) {
             throw new CustomError('No service found, Unable to update', HttpStatusCode.NOT_FOUND)

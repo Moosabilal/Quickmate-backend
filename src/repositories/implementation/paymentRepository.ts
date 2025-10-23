@@ -52,4 +52,23 @@ export class PaymentRepository extends BaseRepository<IPayment> implements IPaym
             total: r.total
         }));
     }
+
+    public async getTotalRevenue(): Promise<number> {
+        const result = await this.model.aggregate([
+            { $match: { adminCommission: { $exists: true, $ne: null } } },
+            { $group: { _id: null, totalRevenue: { $sum: '$adminCommission' } } }
+        ]);
+        return result[0]?.totalRevenue || 0;
+    }
+
+    // async createPayment(data: IPaymentCreationData): Promise<IPayment> {
+    //     const dataForDb = {
+    //         ...data,
+    //         userId: data.userId,
+    //         providerId: data.providerId,
+    //         bookingId: data.bookingId,
+    //     };
+    //     return await this.create(dataForDb); // Calls the base repository's create method
+    // }
+
 }

@@ -1,4 +1,4 @@
-import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../interface/service.dto";
+import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../interface/service";
 import { ServicesPriceUnit } from "../../enums/Services.enum";
 import { ICategory } from "../../models/Categories";
 import { IService } from "../../models/Service";

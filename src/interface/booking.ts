@@ -1,5 +1,6 @@
 import { BookingStatus } from "../enums/booking.enum";
 import { PaymentStatus } from "../enums/userRoles";
+import { DaySchedule } from "./provider";
 
 export interface IBookingRequest {
   userId?: string
@@ -37,7 +38,7 @@ export interface IBookingConfirmationRes {
   status: BookingStatus;
   paymentStatus: PaymentStatus;
   specialInstruction: string;
-  providerTimings?: { day: string; startTime: string; endTime: string }[];
+  providerTimings?: DaySchedule[];
   createdAt: Date;
   reviewed?: Boolean;
   rating?: number;

@@ -10,9 +10,9 @@ import { toAdminSubscriptionPlanList } from "../../utils/mappers/subscription.ma
 import { AdminSubscriptionPlanDTO } from "../../interface/subscriptionPlan";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { SubscriptionStatus } from "../../enums/subscription.enum";
-import { IProviderProfile, ISubscription } from "../../interface/provider.dto";
+import { IProviderProfile, ISubscription } from "../../interface/provider";
 import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
-import { RazorpayOrder } from "../../interface/razorpay.dto";
+import { RazorpayOrder } from "../../interface/razorpay";
 import { toProviderDTO } from "../../utils/mappers/provider.mapper";
 
 @injectable()

@@ -60,6 +60,10 @@ const BookingSchema: Schema = new Schema(
       type: String,
       required: false
     },
+    duration: {
+      type: Number, // in minutes
+      required: false,
+    },
     bookingDate: {
       type: Date,
       required: false,

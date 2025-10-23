@@ -1,4 +1,4 @@
-import { ILoginResponseDTO } from "../../interface/auth.dto";
+import { ILoginResponseDTO } from "../../interface/auth";
 import { Roles } from "../../enums/userRoles";
 import { IUser } from "../../models/User";
 

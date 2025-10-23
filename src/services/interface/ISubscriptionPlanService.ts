@@ -1,5 +1,5 @@
-import { IProviderProfile, ISubscription } from "../../interface/provider.dto";
-import { RazorpayOrder } from "../../interface/razorpay.dto";
+import { IProviderProfile, ISubscription } from "../../interface/provider";
+import { RazorpayOrder } from "../../interface/razorpay";
 import { AdminSubscriptionPlanDTO } from "../../interface/subscriptionPlan";
 import { ISubscriptionPlan } from "../../models/subscription";
 

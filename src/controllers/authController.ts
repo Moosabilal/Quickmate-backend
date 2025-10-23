@@ -2,11 +2,22 @@
 import { inject, injectable } from 'inversify';
 import { Request, Response, NextFunction } from 'express';
 import { IAuthService } from '../services/interface/IAuthService';
-import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../interface/auth.dto';
+import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody } from '../interface/auth';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import TYPES from '../di/type';
 import { AuthRequest } from '../middleware/authMiddleware';
 import { HttpStatusCode } from '../enums/HttpStatusCode';
+import {
+    registerSchema,
+    loginSchema,
+    verifyOtpSchema,
+    emailOnlySchema,
+    resetPasswordSchema,
+    googleLoginSchema,
+    contactUsSchema,
+    updateProfileSchema
+} from '../utils/validations/auth.validation';
+import { ZodError } from 'zod';
 
 @injectable()
 export class AuthController {
@@ -18,7 +29,8 @@ export class AuthController {
 
   public register = async (req: Request<{}, {}, RegisterRequestBody>, res: Response, next: NextFunction) => {
     try {
-      const response = await this._authService.registerUser(req.body);
+      const validatedBody = registerSchema.parse(req.body);
+      const response = await this._authService.registerUser(validatedBody);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -28,7 +40,7 @@ export class AuthController {
 
   public login = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { email, password } = req.body;
+      const { email, password } = loginSchema.parse(req.body);
       const result = await this._authService.login(email, password);
 
       let token = result.token
@@ -55,7 +67,8 @@ export class AuthController {
 
   public verifyOtp = async (req: Request<{}, {}, VerifyOtpRequestBody>, res: Response, next: NextFunction) => {
     try {
-      const response = await this._authService.verifyOtp(req.body);
+      const validatedBody = verifyOtpSchema.parse(req.body);
+      const response = await this._authService.verifyOtp(validatedBody);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -65,7 +78,8 @@ export class AuthController {
 
   public resendOtp = async (req: Request<{}, {}, ResendOtpRequestBody>, res: Response, next: NextFunction) => {
     try {
-      const response = await this._authService.resendOtp(req.body);
+      const validatedBody = emailOnlySchema.parse(req.body);
+      const response = await this._authService.resendOtp(validatedBody);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -74,7 +88,8 @@ export class AuthController {
 
   public forgotPassword = async (req: Request<{}, {}, ForgotPasswordRequestBody>, res: Response, next: NextFunction) => {
     try {
-      const response = await this._authService.requestPasswordReset(req.body);
+      const validatedBody = emailOnlySchema.parse(req.body);
+      const response = await this._authService.requestPasswordReset(validatedBody);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);
@@ -84,6 +99,7 @@ export class AuthController {
 
   public resetPassword = async (req: Request<{}, {}, ResetPasswordRequestBody>, res: Response, next: NextFunction) => {
     try {
+      const validatedBody = resetPasswordSchema.parse(req.body);
       const response = await this._authService.resetPassword(req.body);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
@@ -94,7 +110,7 @@ export class AuthController {
 
   public googleLogin = async (req: Request<{}, {}, { token: string }>, res: Response, next: NextFunction) => {
     try {
-      const { token } = req.body;
+      const { token } = googleLoginSchema.parse(req.body);
       const response = await this._authService.googleAuthLogin(token);
       let jwtToken = response.token
       res.cookie('token', jwtToken, {
@@ -141,7 +157,7 @@ export class AuthController {
 
   public contactUsEmail = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
-      const {name, email, message} = req.body
+      const { name, email, message } = contactUsSchema.parse(req.body);
       const response = await this._authService.sendSubmissionEmail(name, email, message);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
@@ -163,6 +179,7 @@ export class AuthController {
 
   public updateProfile = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const { name, email } = updateProfileSchema.parse(req.body);
       const token = req.cookies.token
       const profilePicturePath = req.file?.path;
       let profilePicture: string | undefined | null;
@@ -176,7 +193,7 @@ export class AuthController {
       } else if (req.body.iconUrl !== undefined) {
         profilePicture = req.body.iconUrl;
       }
-      const { name, email } = req.body;
+      
       const updatedUser = await this._authService.updateProfile(token, { name, email, profilePicture });
       res.status(HttpStatusCode.OK).json(updatedUser);
     } catch (error) {

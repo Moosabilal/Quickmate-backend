@@ -8,6 +8,7 @@ import { ReviewStatus } from "../../enums/review.enum";
 import message from "../../models/message";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IBooking } from "../../models/Booking";
+import { IReviewFilters, PopulatedReview } from "../../interface/review";
 
 @injectable()
 export class ReviewService implements IReviewService {
@@ -66,6 +67,12 @@ export class ReviewService implements IReviewService {
         return {
             message: "Your Review Submitted",
         };
+    }
+
+    public async getPaginatedReviews(
+        filters: IReviewFilters
+    ): Promise<{ reviews: PopulatedReview[]; total: number }> {
+        return this._reviewRepository.findReviewsWithDetails(filters);
     }
 
 }

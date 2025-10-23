@@ -1,9 +1,9 @@
 import { Category } from "../../models/Categories";
-import mongoose from 'mongoose';
+import mongoose, { FilterQuery, Types } from 'mongoose';
 
 import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
-import { IProviderForAdminResponce, IProviderProfile, ProviderFilterQuery } from "../../interface/provider.dto";
+import { IProviderForAdminResponce, IProviderProfile, IProviderRegistrationData, ProviderFilterQuery } from "../../interface/provider";
 import { IProviderRepository } from "../interface/IProviderRepository";
 import { injectable } from "inversify";
 import { BaseRepository } from "./base/BaseRepository";
@@ -15,7 +15,7 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         super(Provider)
     }
 
-    async createProvider(data: Partial<IProvider>): Promise<IProvider> {
+    async createProvider(data: IProviderRegistrationData): Promise<IProvider> {
         const provider = new Provider(data);
         await provider.save();
         return provider;
@@ -30,7 +30,7 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return await query.exec();
     }
 
-    async updateProvider(updateData: Partial<IProvider>): Promise<IProvider | null> {
+    async updateProvider(updateData: IProviderRegistrationData): Promise<IProvider | null> {
         const data = await Provider.findOneAndUpdate({ userId: updateData.userId }, updateData, { new: true });
         return data
 
@@ -88,6 +88,56 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return result;
     }
 
+    public async findFilteredProviders(criteria: {
+        providerIds: string[];
+        userIdToExclude: string;
+        lat?: number;
+        long?: number;
+        radius?: number;
+        date?: string; 
+        time?: string; 
+    }): Promise<IProvider[]> {
+        const filter: mongoose.FilterQuery<IProvider> = {
+            _id: { $in: criteria.providerIds.map(id => new mongoose.Types.ObjectId(id)) },
+            userId: { $ne: new mongoose.Types.ObjectId(criteria.userIdToExclude) },
+        };
+
+        if (criteria.lat && criteria.long && criteria.radius) {
+            filter.serviceLocation = {
+                $geoWithin: {
+                    $centerSphere: [
+                        [criteria.long, criteria.lat],
+                        criteria.radius / 6378.1, 
+                    ],
+                },
+            };
+        }
+
+        if (criteria.date || criteria.time) {
+            filter.availability = { $elemMatch: {} as any };
+
+            if (criteria.date) {
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                const dayOfWeek = days[new Date(criteria.date).getDay()];
+                filter.availability.$elemMatch.day = dayOfWeek;
+            }
+
+            if (criteria.time) {
+                filter.availability.$elemMatch.startTime = { $lte: criteria.time };
+                filter.availability.$elemMatch.endTime = { $gte: criteria.time };
+            }
+        }
+
+        return this.findAll(filter);
+    }
+
+    public async getTopProvidersByEarnings(limit: number = 5): Promise<{ name: string; earnings: number }[]> {
+        return this.model.find({}, 'fullName earnings')
+            .sort({ earnings: -1 })
+            .limit(limit)
+            .lean()
+            .then(providers => providers.map(p => ({ name: p.fullName, earnings: p.earnings || 0 })));
+    }
 
 
 }

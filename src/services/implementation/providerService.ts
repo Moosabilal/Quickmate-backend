@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider, Provider } from "../../models/Providers";
-import { IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderProfile, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider.dto";
+import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse } from "../../interface/provider";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -12,10 +12,10 @@ import { ErrorMessage } from "../../enums/ErrorMessage";
 import { CustomError } from "../../utils/CustomError";
 import { generateOTP } from "../../utils/otpGenerator";
 import { sendVerificationEmail } from "../../utils/emailService";
-import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
+import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
-import { toProviderDashboardDTO, toProviderDTO, toProviderForChatListPage, toServiceAddPage } from "../../utils/mappers/provider.mapper";
+import { toBackendProviderDTO, toClientForChatListPage, toEarningsAnalyticsDTO, toProviderDashboardDTO, toProviderDTO, toProviderForAdminResponseDTO, toProviderForChatListPage, toProviderPerformanceDTO, toServiceAddPage } from "../../utils/mappers/provider.mapper";
 import { toLoginResponseDTO } from "../../utils/mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
@@ -26,17 +26,14 @@ import { IReviewRepository } from "../../repositories/interface/IReviewRepositor
 import { BookingStatus } from "../../enums/booking.enum";
 import { getAuthUrl, getOAuthClient } from "../../utils/googleCalendar";
 import { calendar_v3, google } from 'googleapis';
-
-
-interface reviewsOfUser {
-    username: string,
-    rating: number
-    review: string,
-}
+import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
+import { convertTo24Hour } from "../../utils/helperFunctions/convertTo24hrs";
+import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, sub } from "date-fns";
+import { _haversineKm } from "../../utils/helperFunctions/haversineKm";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
-const MAX_OTP_ATTEMPTS = 5;
-const RESEND_COOLDOWN_SECONDS = 30;
+const MAX_OTP_ATTEMPTS = parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5;
+const RESEND_COOLDOWN_SECONDS = parseInt(process.env.RESEND_COOLDOWN_SECONDS, 10) || 30;
 
 
 @injectable()
@@ -66,7 +63,7 @@ export class ProviderService implements IProviderService {
         this._reviewRepository = reviewRepository;
     }
 
-    public async registerProvider(data: IProvider): Promise<{ message: string, email: string }> {
+    public async registerProvider(data: IProviderRegistrationData): Promise<{ message: string, email: string }> {
 
         let provider = await this._providerRepository.findByEmail(data.email);
 
@@ -90,7 +87,7 @@ export class ProviderService implements IProviderService {
         provider.registrationOtp = otp;
         provider.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
         provider.registrationOtpAttempts = 0;
-        const updatedProvider = await this._providerRepository.update(provider.id, provider);
+        await this._providerRepository.update(provider.id, provider);
         await sendVerificationEmail(provider.email, otp);
 
 
@@ -108,45 +105,64 @@ export class ProviderService implements IProviderService {
         if (!provider) {
             throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
-        if (provider.isVerified && provider.status !== ProviderStatus.REJECTED) {
-            return { message: 'Account already verified.' };
+        if (provider.isVerified) {
+            throw new CustomError('Account already verified.', HttpStatusCode.CONFLICT);
         }
         if (typeof provider.registrationOtpAttempts === 'number' && provider.registrationOtpAttempts >= MAX_OTP_ATTEMPTS) {
             throw new CustomError(`Too many failed OTP attempts. Please request a new OTP.`, HttpStatusCode.FORBIDDEN);
         }
         if (!provider.registrationOtp || provider.registrationOtp !== otp) {
-            provider.registrationOtpAttempts = (typeof provider.registrationOtpAttempts === 'number' ? provider.registrationOtpAttempts : 0) + 1;
-            await this._providerRepository.update(provider.id, provider);
+            await this._providerRepository.update(provider.id, { $inc: { registrationOtpAttempts: 1 } });
             throw new CustomError('Invalid OTP. Please try again.', HttpStatusCode.BAD_REQUEST);
         }
-
         if (!provider.registrationOtpExpires || new Date() > provider.registrationOtpExpires) {
-            provider.registrationOtp = undefined;
-            provider.registrationOtpExpires = undefined;
-            provider.registrationOtpAttempts = 0;
-            await this._providerRepository.update(provider.id, provider);
             throw new CustomError('OTP has expired. Please request a new one.', HttpStatusCode.BAD_REQUEST);
         }
 
-        provider.isVerified = true;
-        provider.registrationOtp = undefined;
-        provider.registrationOtpExpires = undefined;
-        provider.registrationOtpAttempts = 0;
-        provider.status = ProviderStatus.PENDING
-        const updatedProvider = await this._providerRepository.update(provider.id, provider);
+        // --- REFACTOR: Use a Transaction for data consistency ---
+        const session = await mongoose.startSession();
+        session.startTransaction();
 
-        const userId = provider.userId.toString()
-        const user = await this._userRepository.findById(userId)
-        if (!user) {
-            throw new CustomError("Something went wrong, Please contact admin", HttpStatusCode.FORBIDDEN)
+        try {
+            // --- REFACTOR: Use Atomic Updates for safety and performance ---
+            const providerUpdatePayload = {
+                isVerified: true,
+                status: ProviderStatus.PENDING,
+                registrationOtp: undefined, // Mongoose will $unset this field
+                registrationOtpExpires: undefined, // Mongoose will $unset this field
+                registrationOtpAttempts: 0,
+            };
+            const updatedProvider = await this._providerRepository.update(provider.id, providerUpdatePayload, { session });
+
+            if (!updatedProvider) {
+                throw new CustomError("Failed to update provider record.", HttpStatusCode.INTERNAL_SERVER_ERROR);
+            }
+
+            const userUpdatePayload = {
+                role: Roles.PROVIDER
+            };
+            const updatedUser = await this._userRepository.update(provider.userId.toString(), userUpdatePayload, { session });
+
+            if (!updatedUser) {
+                throw new CustomError("Failed to update user role.", HttpStatusCode.INTERNAL_SERVER_ERROR);
+            }
+
+            // If both updates succeed, commit the transaction
+            await session.commitTransaction();
+
+            return {
+                provider: toProviderDTO(updatedProvider),
+                user: toLoginResponseDTO(updatedUser)
+            };
+
+        } catch (error) {
+            // If anything fails, abort the transaction
+            await session.abortTransaction();
+            throw error; // Re-throw the error to be handled by the controller
+        } finally {
+            // Always end the session
+            session.endSession();
         }
-        user.role = Roles.PROVIDER
-        const updatedUser = await this._userRepository.update(userId, user)
-
-        return {
-            provider: toProviderDTO(updatedProvider),
-            user: toLoginResponseDTO(updatedUser)
-        };
     }
 
     public async resendOtp(data: ResendOtpRequestBody): Promise<{ message: string }> {
@@ -183,28 +199,16 @@ export class ProviderService implements IProviderService {
         return { message: 'A new OTP has been sent to your email.' };
     }
 
-    public async updateProviderDetails(updateData: Partial<IProvider>): Promise<IProviderProfile> {
-        const updatedProvider = await this._providerRepository.updateProvider(updateData)
-        return {
-            id: updatedProvider._id.toString(),
-            userId: updatedProvider.userId.toString(),
-            fullName: updatedProvider.fullName,
-            phoneNumber: updatedProvider.phoneNumber,
-            email: updatedProvider.email,
-            serviceId: updatedProvider.serviceId.map(id => id.toString()),
-            serviceLocation: `${updatedProvider.serviceLocation.coordinates[1]},${updatedProvider.serviceLocation.coordinates[0]}`,
-            serviceArea: updatedProvider.serviceArea,
-            profilePhoto: updatedProvider.profilePhoto,
-            status: updatedProvider.status,
-            availability: updatedProvider.availability,
-            earnings: updatedProvider.earnings,
-            totalBookings: updatedProvider.totalBookings,
-            payoutPending: updatedProvider.payoutPending,
-            rating: updatedProvider.rating,
-            isVerified: updatedProvider.isVerified,
+    public async updateProviderDetails(updateData: IProviderRegistrationData): Promise<IProviderProfile> {
+        const updatedProvider = await this._providerRepository.updateProvider(updateData);
 
+        // 2. Add a safety check in case the provider is not found
+        if (!updatedProvider) {
+            throw new CustomError("Provider not found or failed to update.", HttpStatusCode.NOT_FOUND);
         }
 
+        // 3. Use your existing mapper function to format the response
+        return toProviderDTO(updatedProvider);
     }
 
 
@@ -225,7 +229,7 @@ export class ProviderService implements IProviderService {
     }> {
         const skip = (page - 1) * limit;
 
-
+        // --- 1. Data Fetching and Preparation (Unchanged) ---
         const filter: any = {
             $or: [
                 { fullName: { $regex: search, $options: 'i' } },
@@ -234,15 +238,7 @@ export class ProviderService implements IProviderService {
         };
 
         if (status && status !== 'All') {
-            if (status === 'Active') {
-                filter.status = "Active";
-            } else if (status === 'Rejected') {
-                filter.status = "Rejected";
-            } else if (status === "Suspended") {
-                filter.status = "Suspended";
-            } else if (status === "Pending") {
-                filter.status = "Pending"
-            }
+            filter.status = status;
         }
 
         const [providers, total] = await Promise.all([
@@ -251,9 +247,7 @@ export class ProviderService implements IProviderService {
         ]);
 
         if (!providers || providers.length === 0) {
-            const error = new Error('No providers found.');
-            (error as any).statusCode = 404;
-            throw error;
+            throw new CustomError('No providers found.', HttpStatusCode.NOT_FOUND);
         }
 
         const providerIds = providers.map(p => p._id);
@@ -268,22 +262,11 @@ export class ProviderService implements IProviderService {
             serviceMap.get(key)!.push(service.title);
         }
 
-        const data = providers.map(provider => {
-            const providerIdStr = provider._id.toString();
-            return {
-                id: providerIdStr,
-                userId: provider.userId.toString(),
-                fullName: provider.fullName,
-                phoneNumber: provider.phoneNumber,
-                email: provider.email,
-                serviceArea: provider.serviceArea,
-                profilePhoto: provider.profilePhoto,
-                status: provider.status,
-                serviceOffered: serviceMap.get(providerIdStr) || [],
-            };
-        });
+        // --- 2. Use the Mapper for Data Formatting ---
+        // The entire providers.map(...) block is replaced with this single line.
+        const data = toProviderForAdminResponseDTO(providers, serviceMap);
 
-
+        // --- 3. Return the Final Response (Unchanged) ---
         return {
             data,
             total,
@@ -310,40 +293,18 @@ export class ProviderService implements IProviderService {
         try {
             decoded = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
         } catch (error) {
-            throw new Error('Invalid token.');
+            throw new CustomError('Invalid or expired token.', HttpStatusCode.UNAUTHORIZED);
         }
 
-        const provider = await this._providerRepository.getProviderByUserId(decoded.id)
-        return {
-            id: provider._id.toString(),
-            userId: provider.userId.toString(),
-            fullName: provider.fullName,
-            phoneNumber: provider.phoneNumber,
-            email: provider.email,
-            serviceId: provider.serviceId.map(id => id.toString()),
-            serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
-            serviceArea: provider.serviceArea,
-            profilePhoto: provider.profilePhoto,
-            status: provider.status,
-            subscription: provider.subscription
-                ? {
-                    planId: provider.subscription.planId
-                        ? provider.subscription.planId.toString()
-                        : undefined,
-                    startDate: provider.subscription.startDate,
-                    endDate: provider.subscription.endDate,
-                    status: provider.subscription.status
-                }
-                : undefined,
-            aadhaarIdProof: provider.aadhaarIdProof,
-            availability: provider.availability,
-            earnings: provider.earnings,
-            totalBookings: provider.totalBookings,
-            payoutPending: provider.payoutPending,
-            rating: provider.rating,
-            isVerified: provider.isVerified,
+        const provider = await this._providerRepository.getProviderByUserId(decoded.id);
 
+        // 2. Add a safety check in case the provider is not found
+        if (!provider) {
+            throw new CustomError("Provider profile not found for this user.", HttpStatusCode.NOT_FOUND);
         }
+
+        // 3. Use your existing mapper function to format the response
+        return toProviderDTO(provider);
     }
 
     public async getFeaturedProviders(page: number, limit: number, search: string): Promise<{ providers: IFeaturedProviders[], total: number, totalPages: number, currentPage: number }> {
@@ -388,178 +349,82 @@ export class ProviderService implements IProviderService {
     }
 
 
+
     public async getProviderwithFilters(
         userId: string,
         subCategoryId: string,
         filters: {
-            area?: string;
+            radius: number;
+            lat: number;
+            long: number;
             experience?: number;
-            day?: string;
+            date?: string;
             time?: string;
             price?: number;
-            radius?: number;
-            locationCoords?: string;
         }
     ): Promise<IBackendProvider[]> {
 
-        const serviceFilter: any = {
-            subCategoryId: subCategoryId,
-        };
+        // Step 1: Get providers who offer the service and match basic filters
+        const initialProviders = await this._getProvidersByInitialCriteria(subCategoryId, userId, filters);
+        if (initialProviders.length === 0) return [];
 
-        if (filters.experience) {
-            serviceFilter.experience = { $gte: filters.experience };
-        }
+        // Step 2: Filter out providers who are busy at the requested time
+        const availableProviders = await this._filterProvidersByBookingConflicts(initialProviders, filters);
+        if (availableProviders.length === 0) return [];
 
-        if (filters.price) {
-            serviceFilter.price = { $lte: filters.price };
-        }
+        // Step 3: Enrich the final list of providers with all necessary details (reviews, etc.)
+        const enrichedProviders = await this._enrichProvidersWithDetails(availableProviders, subCategoryId, filters);
 
-        const services = await this._serviceRepository.findAll(serviceFilter);
+        // Step 4: Sort the final result by distance
+        enrichedProviders.sort((a, b) => a.distanceKm - b.distanceKm);
 
-        if (!services || services.length === 0) {
-            return [];
-        }
-
-        const servicesByProvider = new Map<string, IService[]>();
-        services.forEach(service => {
-            const pid = service.providerId.toString();
-            if (!servicesByProvider.has(pid)) {
-                servicesByProvider.set(pid, []);
-            }
-            servicesByProvider.get(pid)!.push(service);
-        });
-
-        const providerIds = Array.from(servicesByProvider.keys());
-
-        const providerFilter: any = {
-            _id: { $in: providerIds.map(id => new mongoose.Types.ObjectId(id)) },
-            userId: { $ne: userId }
-        };
-
-        if (filters.area) {
-            providerFilter.serviceArea = { $regex: new RegExp(filters.area, 'i') };
-        }
-
-        if (filters.day || filters.time) {
-            providerFilter.availability = { $elemMatch: {} as any };
-
-            if (filters.day) {
-                providerFilter.availability.$elemMatch.day = filters.day;
-            }
-
-            if (filters.time) {
-                providerFilter.availability.$elemMatch.startTime = { $lte: filters.time };
-                providerFilter.availability.$elemMatch.endTime = { $gte: filters.time };
-            }
-        }
-
-        if (filters.locationCoords && filters.radius) {
-            const [lat, lng] = filters.locationCoords.split(',').map(Number);
-
-            providerFilter.serviceLocation = {
-                $near: {
-                    $geometry: {
-                        type: "Point",
-                        coordinates: [lng, lat],
-                    },
-                    $maxDistance: filters.radius * 1000,
-                }
-            };
-
-        }
-
-        const providers = await this._providerRepository.findAll(providerFilter);
-
-        const uniqueProvidersMap = new Map<string, typeof providers[0]>();
-        providers.forEach(provider => {
-            uniqueProvidersMap.set(provider._id.toString(), provider);
-        });
-
-        const uniqueProviders = Array.from(uniqueProvidersMap.values());
-
-        const serviceIds = [...new Set(services.map(s => s._id.toString()))];
-
-        const reviews = await this._reviewRepository.findAll({
-            providerId: { $in: providerIds },
-            serviceId: { $in: serviceIds }
-        });
-
-        const userIds = [...new Set(reviews.map(r => r.userId.toString()))];
-
-        const users = await this._userRepository.findAll({
-            _id: { $in: userIds }
-        });
-
-        const userMap = new Map(
-            users.map(u => [u._id.toString(), { name: String(u.name), profilePicture: String(u.profilePicture || ""), }])
-        );
-
-        const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
-
-        reviews.forEach(review => {
-            const pid = review.providerId.toString();
-
-            if (!reviewsByProvider.has(pid)) {
-                reviewsByProvider.set(pid, []);
-            }
-
-            const userData = userMap.get(review.userId.toString());
-
-            reviewsByProvider.get(pid)!.push({
-                userName: userData?.name || "Unknown User",
-                userImg: userData?.profilePicture || "",
-                rating: Number(review.rating),
-                review: String(review.reviewText),
-            });
-        });
-
-        const result: IBackendProvider[] = uniqueProviders.map(provider => {
-            const providerServices = servicesByProvider.get(provider._id.toString()) || [];
-            const primaryService = providerServices[0];
-
-            return {
-                _id: provider._id.toString(),
-                fullName: provider.fullName,
-                phoneNumber: provider.phoneNumber,
-                email: provider.email,
-                profilePhoto: provider.profilePhoto,
-                serviceArea: provider.serviceArea,
-                serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
-                availability: provider.availability,
-                status: provider.status,
-                earnings: provider.earnings,
-                totalBookings: provider.totalBookings,
-                experience: primaryService?.experience || 0,
-                price: primaryService?.price || 0,
-                reviews: reviewsByProvider.get(provider._id.toString()) || [],
-            };
-        });
-
-
-        return result;
+        return enrichedProviders;
     }
-
 
 
     public async providerForChatPage(userId: string): Promise<IProviderForChatListPage[]> {
         if (!userId) {
-            throw new CustomError("Sorry UserId not found", HttpStatusCode.NOT_FOUND);
+            throw new CustomError("Sorry, UserId not found", HttpStatusCode.NOT_FOUND);
         }
 
-        const bookings = await this._bookingRepository.findAll({ userId });
-        if (!bookings.length) return [];
+        const user = await this._userRepository.findById(userId);
+        if (!user) {
+            throw new CustomError("User not found", HttpStatusCode.NOT_FOUND);
+        }
 
-        const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
+        if (user.role === Roles.PROVIDER) {
 
-        const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
-        if (!serviceIds.length) return [];
-        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+            const providerProfile = await this._providerRepository.findOne({ userId });
+            if (!providerProfile) return [];
 
-        const bookingIds = bookings.map(b => b._id.toString());
-        const messages = await this._messageRepository.findLastMessagesByBookingIds(bookingIds)
+            const bookings = await this._bookingRepository.findAll({ providerId: providerProfile._id });
+            if (!bookings.length) return [];
 
-        return toProviderForChatListPage(bookings, providers, services, messages);
+            const clientIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
+            const clients = await this._userRepository.findAll({ _id: { $in: clientIds } });
+
+            const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
+            const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+            const bookingIds = bookings.map(b => b._id.toString());
+            const messages = await this._messageRepository.findLastMessagesByBookingIds(bookingIds);
+
+            return toClientForChatListPage(bookings, clients, services, messages);
+
+        } else {
+
+            const bookings = await this._bookingRepository.findAll({ userId });
+            if (!bookings.length) return [];
+
+            const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
+            const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
+
+            const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
+            const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+            const bookingIds = bookings.map(b => b._id.toString());
+            const messages = await this._messageRepository.findLastMessagesByBookingIds(bookingIds);
+
+            return toProviderForChatListPage(bookings, providers, services, messages);
+        }
     }
 
 
@@ -595,211 +460,344 @@ export class ProviderService implements IProviderService {
         return toProviderDashboardDTO(provider, bookings, services, subCategories, parentCategories, reviews);
     }
 
-    public async initiateGoogleAuth(userId: string): Promise<{ url: string }> {
-        const oAuth2Client = getOAuthClient();
+    public async getAvailabilityByLocation(
+        userId: string,
+        serviceSubCategoryId: string,
+        userLat: number,
+        userLng: number,
+        radiusKm: number,
+        timeMin: string,
+        timeMax: string
+    ): Promise<Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }>> {
 
-        const url = getAuthUrl(userId);
+        const services = await this._serviceRepository.findAll({ subCategoryId: serviceSubCategoryId });
+        const providerIdSet = new Set<string>(
+            services.map(s => s.providerId?.toString()).filter(Boolean) as string[]
+        );
 
-        return { url };
-    }
-
-
-    public async googleCallback(code: string, userId: string): Promise<{ message: string }> {
-        const oAuth2Client = getOAuthClient();
-
-        const { tokens } = await oAuth2Client.getToken(code);
-        oAuth2Client.setCredentials(tokens);
-
-        const data = await this._userRepository.update(userId, {
-            "googleCalendar.tokens": tokens
-        });
-        const user = await this._userRepository.findById(userId)
-
-        const provider = await this._providerRepository.findOne({ userId: userId })
-
-        if (!user?.googleCalendar?.tokens) {
-            throw new CustomError("Google Calendar is not connected for this provider.", HttpStatusCode.BAD_REQUEST);
+        if (providerIdSet.size === 0) {
+            return [];
         }
-        oAuth2Client.setCredentials(user.googleCalendar.tokens);
-        const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-        const eventSummary = "My Working Hours";
+        const providers = await this._providerRepository.findAll({
+            _id: { $in: Array.from(providerIdSet) }, userId: { $ne: userId }
+        });
 
-        try {
-            const { data } = await calendar.events.list({
-                calendarId: "primary",
-                q: eventSummary,
-                showDeleted: false,
-            });
+        const providersInRange = providers.filter(p => {
+            const coords = (p as any).serviceLocation?.coordinates as number[] | undefined;
+            if (!coords || coords.length !== 2) return false;
 
-            if (data.items) {
-                for (const event of data.items) {
-                    if (event.id) {
-                        await calendar.events.delete({
-                            calendarId: "primary",
-                            eventId: event.id,
-                        });
+            const [provLng, provLat] = coords;
+            const distKm = _haversineKm(userLat, userLng, provLat, provLng);
+            return distKm <= radiusKm;
+        });
+
+        const startISO = new Date(timeMin);
+        const endISO = new Date(timeMax);
+        const results: Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }> = [];
+
+        for (const provider of providersInRange) {
+            const providerId = (provider._id as any).toString();
+            const providerName = (provider as any).fullName || 'Provider';
+
+            const existingBookings = await this._bookingRepository.findByProviderByTime(
+                providerId,
+                timeMin.split('T')[0],
+                timeMax.split('T')[0]
+            );
+
+            const slotMinutes = 60;
+            const slotMs = slotMinutes * 60 * 1000;
+            const availableSlots: calendar_v3.Schema$TimePeriod[] = [];
+
+            const dayMap: { [key: string]: number } = {
+                'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
+                'Thursday': 4, 'Friday': 5, 'Saturday': 6
+            };
+
+            for (let d = new Date(startISO); d <= endISO; d.setDate(d.getDate() + 1)) {
+                const dayName = Object.keys(dayMap).find(k => dayMap[k] === d.getDay());
+                if (!dayName) continue;
+
+                const dayAvail = (provider as any).availability?.find((av: any) => av.day === dayName);
+                if (!dayAvail) continue;
+
+                const [sh, sm] = String(dayAvail.startTime).split(':').map(Number);
+                const [eh, em] = String(dayAvail.endTime).split(':').map(Number);
+
+                const dayStart = new Date(d);
+                dayStart.setHours(sh || 0, sm || 0, 0, 0);
+                const dayEnd = new Date(d);
+                dayEnd.setHours(eh || 0, em || 0, 0, 0);
+
+                for (let slotStart = new Date(dayStart);
+                    slotStart.getTime() + slotMs <= dayEnd.getTime();
+                    slotStart = new Date(slotStart.getTime() + slotMs)) {
+
+                    const slotEnd = new Date(slotStart.getTime() + slotMs);
+
+                    const overlaps = existingBookings.some((booking: any) => {
+                        if (!booking.scheduledDate || !booking.scheduledTime) {
+                            return false;
+                        }
+
+                        const time24h = convertTo24Hour(booking.scheduledTime);
+                        const [hours, minutes] = time24h.split(':').map(Number);
+
+                        if (isNaN(hours) || isNaN(minutes)) {
+                            return false;
+                        }
+
+                        const bookingStart = new Date(booking.scheduledDate);
+                        bookingStart.setHours(hours, minutes, 0, 0);
+
+                        const bookingDurationMinutes = booking.duration > 0 ? booking.duration : slotMinutes;
+
+                        const bookingDurationMs = bookingDurationMinutes * 60 * 1000;
+
+                        const bookingEnd = new Date(bookingStart.getTime() + bookingDurationMs);
+                        return slotStart < bookingEnd && slotEnd > bookingStart;
+                    });
+
+                    if (!overlaps) {
+                        availableSlots.push({ start: slotStart.toISOString(), end: slotEnd.toISOString() });
                     }
                 }
             }
-        } catch (error) {
-            console.error("Could not clear old availability events, proceeding to create new ones.", error);
+
+            results.push({ providerId, providerName, availableSlots });
         }
-
-        const weekDays: { [key: string]: number } = {
-            'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
-            'Thursday': 4, 'Friday': 5, 'Saturday': 6
-        };
-
-        for (const slot of provider.availability) {
-            const dayName = slot.day;
-            const dayNumber = weekDays[dayName];
-
-            if (dayNumber === undefined) continue;
-
-            const now = new Date();
-            const nextDayDate = new Date(now);
-            nextDayDate.setDate(now.getDate() + (dayNumber - now.getDay() + 7) % 7);
-
-            const [startHour, startMinute] = slot.startTime.split(':').map(Number);
-            const [endHour, endMinute] = slot.endTime.split(':').map(Number);
-
-            const startDate = new Date(nextDayDate.setHours(startHour, startMinute, 0, 0));
-            const endDate = new Date(nextDayDate.setHours(endHour, endMinute, 0, 0));
-
-            const event = {
-                summary: eventSummary,
-                description: "Time slot marked as available for bookings.",
-                start: {
-                    dateTime: startDate.toISOString(),
-                    timeZone: "Asia/Kolkata",
-                },
-                end: {
-                    dateTime: endDate.toISOString(),
-                    timeZone: "Asia/Kolkata",
-                },
-                recurrence: [
-                    `RRULE:FREQ=WEEKLY;BYDAY=${dayName.substring(0, 2).toUpperCase()}`
-                ],
-            };
-
-            try {
-
-                const a = await calendar.events.insert({
-                    calendarId: "primary",
-                    requestBody: event,
-                });
-            } catch (error) {
-                throw new CustomError(`Failed to create event for ${dayName} : ${error}`, HttpStatusCode.FORBIDDEN);
-            }
-        }
-
-        return { message: "Google Calendar connected!" }
-    }
-
-    public async createCalendarEvent(
-        providerId: string,
-        serviceId: string,
-        booking: {
-            summary: string;
-            description: string;
-            start: Date | string;
-        }
-    ): Promise<void> {
-
-        const provider = await this._providerRepository.findById(providerId);
-        const user = await this._userRepository.findById(provider._id.toString())
-        if (!user?.googleCalendar?.tokens) return;
-
-        const oAuth2Client = new google.auth.OAuth2(
-            process.env.GOOGLE_CLIENT_ID,
-            process.env.GOOGLE_CLIENT_SECRET,
-            process.env.GOOGLE_REDIRECT_URI
-        );
-        oAuth2Client.setCredentials(user.googleCalendar.tokens);
-
-        const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-
-        const service = await this._serviceRepository.findOne({ subCategoryId: serviceId, providerId });
-        if (!service) throw new Error("Service not found");
-
-        const start = new Date(booking.start);
-        if (isNaN(start.getTime())) {
-            throw new Error("Invalid booking start date");
-        }
-
-        let end = new Date(start);
-        if (service.duration) {
-            const [hours, minutes] = service.duration.split(":").map(Number);
-            end.setHours(end.getHours() + (hours || 0));
-            end.setMinutes(end.getMinutes() + (minutes || 0));
-        } else {
-            end = new Date(start.getTime() + 60 * 60000);
-        }
-
-
-        await calendar.events.insert({
-            calendarId: "primary",
-            requestBody: {
-                summary: booking.summary,
-                description: booking.description,
-                start: { dateTime: start.toISOString(), timeZone: "Asia/Kolkata" },
-                end: { dateTime: end.toISOString(), timeZone: "Asia/Kolkata" },
-            },
-        });
-
-    }
-
-
-    public async getProviderAvailability(
-        providerIds: string[],
-        timeMin: string,
-        timeMax: string
-    ): Promise<Record<string, calendar_v3.Schema$TimePeriod[]>> {
-
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
-        const userIds = providers.map(p => p.userId);
-        const users = await this._userRepository.findAll({ _id: { $in: userIds } });
-
-        const userTokenMap = new Map(users.map(u => [u._id.toString(), u.googleCalendar?.tokens]));
-
-        const availabilityPromises = providers.map(async (provider) => {
-            const tokens = userTokenMap.get(provider.userId.toString());
-
-            if (!tokens) {
-                return { providerId: provider._id.toString(), busy: [] };
-            }
-
-            try {
-                const oAuth2Client = getOAuthClient();
-                oAuth2Client.setCredentials(tokens);
-                const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-
-                const freeBusyResponse = await calendar.freebusy.query({
-                    requestBody: {
-                        timeMin,
-                        timeMax,
-                        items: [{ id: "primary" }],
-                    },
-                });
-
-                const busySlots = freeBusyResponse.data.calendars?.primary?.busy ?? [];
-                return { providerId: provider._id.toString(), busy: busySlots };
-
-            } catch (error) {
-                console.error(`Failed to fetch calendar for provider ${provider._id}:`, error);
-                return { providerId: provider._id.toString(), busy: [] };
-            }
-        });
-
-        const allProvidersAvailability = await Promise.all(availabilityPromises);
-
-        const results: Record<string, calendar_v3.Schema$TimePeriod[]> = {};
-        allProvidersAvailability.forEach(providerResult => {
-            results[providerResult.providerId] = providerResult.busy;
-        });
 
         return results;
     }
+
+    public async getEarningsAnalytics(userId: string, period: 'week' | 'month'): Promise<EarningsAnalyticsData> {
+        const provider = await this._providerRepository.findOne({ userId });
+        if (!provider) {
+            throw new CustomError("Provider profile not found", HttpStatusCode.NOT_FOUND);
+        }
+        const providerId = provider._id.toString();
+
+        // --- 1. Date Range Calculation (Service Logic) ---
+        const now = new Date();
+        let currentStartDate: Date, currentEndDate: Date, prevStartDate: Date, prevEndDate: Date;
+
+        if (period === 'week') {
+            currentStartDate = startOfWeek(now, { weekStartsOn: 1 });
+            currentEndDate = endOfWeek(now, { weekStartsOn: 1 });
+            prevStartDate = startOfWeek(sub(now, { weeks: 1 }), { weekStartsOn: 1 });
+            prevEndDate = endOfWeek(sub(now, { weeks: 1 }), { weekStartsOn: 1 });
+        } else {
+            currentStartDate = startOfMonth(now);
+            currentEndDate = endOfMonth(now);
+            prevStartDate = startOfMonth(sub(now, { months: 1 }));
+            prevEndDate = endOfMonth(sub(now, { months: 1 }));
+        }
+
+        const [currentBookings, prevBookings] = await Promise.all([
+            this._bookingRepository.findByProviderAndDateRangeForEarnings(providerId, currentStartDate, currentEndDate),
+            this._bookingRepository.findByProviderAndDateRangeForEarnings(providerId, prevStartDate, prevEndDate)
+        ]);
+
+        // --- 3. Business Logic & Calculations (Service Logic) ---
+        const totalEarnings = currentBookings.reduce((sum, b) => sum + (Number(b.amount) || 0), 0);
+        const prevTotalEarnings = prevBookings.reduce((sum, b) => sum + (Number(b.amount) || 0), 0);
+        const earningsChangePercentage = prevTotalEarnings > 0
+            ? ((totalEarnings - prevTotalEarnings) / prevTotalEarnings) * 100
+            : totalEarnings > 0 ? 100 : 0;
+
+        const currentClients = [...new Set(currentBookings.map(b => (b.userId as { _id: mongoose.Types.ObjectId })._id.toString()))];
+        const totalClients = currentClients.length;
+
+        let newClients = 0;
+        for (const userId of currentClients) {
+            const hadPriorBooking = await this._bookingRepository.hasPriorBooking(userId, providerId, currentStartDate);
+            if (!hadPriorBooking) newClients++;
+        }
+
+        const serviceEarnings: { [key: string]: number } = {};
+        currentBookings.forEach(b => {
+            const serviceName = (b.serviceId as any)?.title || 'Unknown Service';
+            serviceEarnings[serviceName] = (serviceEarnings[serviceName] || 0) + (Number(b.amount) || 0);
+        });
+        const topServiceEntry = Object.entries(serviceEarnings).sort((a, b) => b[1] - a[1])[0] || ['N/A', 0];
+        const topService = { name: topServiceEntry[0], earnings: topServiceEntry[1] };
+
+        // --- 4. Mapping (Delegated to Mapper) ---
+        // The 'breakdown' array and final object are now created by the mapper.
+        return toEarningsAnalyticsDTO(
+            totalEarnings,
+            earningsChangePercentage,
+            totalClients,
+            newClients,
+            topService,
+            currentBookings
+        );
+    }
+
+
+
+    public async getProviderPerformance(userId: string): Promise<IProviderPerformance> {
+        const providerId = await this._providerRepository.getProviderId(userId);
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) {
+            throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
+        }
+
+        // --- 1. DATA FETCHING ---
+        // Fetch all raw data required for the DTO
+        const [bookings, reviewsFromDb, activeServicesCount, serviceBreakdown] = await Promise.all([
+            this._bookingRepository.findAll({ providerId }),
+            this._reviewRepository.findAll({ providerId }),
+            this._serviceRepository.findServiceCount(providerId),
+            this._bookingRepository.getBookingStatsByService(providerId)
+        ]);
+
+        const userIds = reviewsFromDb.map(r => r.userId?.toString()).filter(id => id);
+        const users = await this._userRepository.findAll({ _id: { $in: userIds } });
+
+        // --- 2. MAPPING ---
+        // Delegate all calculation and formatting to the mapper function
+        return toProviderPerformanceDTO(
+            provider,
+            bookings,
+            reviewsFromDb,
+            users,
+            activeServicesCount,
+            serviceBreakdown
+        );
+    }
+
+
+
+
+
+
+
+    private async _getProvidersByInitialCriteria(
+        subCategoryId: string,
+        userIdToExclude: string,
+        filters: {
+            radius: number;
+            lat: number;
+            long: number;
+            experience?: number;
+            date?: string;
+            time?: string;
+            price?: number;
+        }
+    ): Promise<IProvider[]> {
+        const services = await this._serviceRepository.findServicesByCriteria({
+            subCategoryId,
+            minExperience: filters.experience,
+            maxPrice: filters.price,
+        });
+
+        if (!services.length) return [];
+        const providerIdsFromServices = [...new Set(services.map(s => s.providerId.toString()))];
+        const time24h = filters.time ? convertTo24Hour(filters.time) : undefined;
+
+        return this._providerRepository.findFilteredProviders({
+            providerIds: providerIdsFromServices,
+            userIdToExclude,
+            lat: filters.lat,
+            long: filters.long,
+            radius: filters.radius,
+            date: filters.date,
+            time: time24h,
+        });
+    }
+
+    /**
+     * RESPONSIBILITY: Takes a list of providers and removes any that have conflicting bookings.
+     */
+    private async _filterProvidersByBookingConflicts(
+        potentialProviders: IProvider[],
+        filters: { date?: string; time?: string }
+    ): Promise<IProvider[]> {
+        if (!filters.date || !filters.time) {
+            return potentialProviders; // If no date/time is specified, all are available
+        }
+
+        const potentialProviderIds = potentialProviders.map(p => p._id.toString());
+        const allBookingsForDay = await this._bookingRepository.findByProviderAndDateRange(
+            potentialProviderIds,
+            filters.date,
+            filters.date
+        );
+
+        if (!allBookingsForDay.length) return potentialProviders;
+
+        const busyProviderIds = new Set<string>();
+        const time24h = convertTo24Hour(filters.time);
+        const [searchHours, searchMinutes] = time24h.split(':').map(Number);
+        const searchSlotStart = new Date(filters.date);
+        searchSlotStart.setHours(searchHours, searchMinutes, 0, 0);
+        const searchSlotEnd = new Date(searchSlotStart.getTime() + 60 * 60 * 1000); // Assuming 1-hour slots
+
+        allBookingsForDay.forEach(booking => {
+            const bookingTime24h = convertTo24Hour(booking.scheduledTime as string);
+            const [bookHours, bookMinutes] = bookingTime24h.split(':').map(Number);
+            const bookingStart = new Date(booking.scheduledDate as string);
+            bookingStart.setHours(bookHours, bookMinutes, 0, 0);
+            const bookingEnd = new Date(bookingStart.getTime() + ((booking.duration as number) || 60) * 60 * 1000);
+
+            if (searchSlotStart < bookingEnd && searchSlotEnd > bookingStart) {
+                busyProviderIds.add(booking.providerId.toString());
+            }
+        });
+
+        if (busyProviderIds.size === 0) return potentialProviders;
+
+        return potentialProviders.filter(
+            provider => !busyProviderIds.has(provider._id.toString())
+        );
+    }
+
+    /**
+     * RESPONSIBILITY: Gathers all supplementary data (reviews, users, services) and maps the final provider list.
+     */
+    private async _enrichProvidersWithDetails(
+        availableProviders: IProvider[],
+        subCategoryId: string,
+        filters: { lat: number; long: number }
+    ): Promise<IBackendProvider[]> {
+        const finalProviderIds = availableProviders.map(p => p._id.toString());
+
+        // Fetch reviews and all services for these providers concurrently
+        const [reviews, services] = await Promise.all([
+            this._reviewRepository.findReviewsByProviderIds(finalProviderIds),
+            this._serviceRepository.findAll({ providerId: { $in: finalProviderIds } })
+        ]);
+
+        const userIdsForReviews = [...new Set(reviews.map(r => r.userId.toString()))];
+        const users = userIdsForReviews.length > 0 ? await this._userRepository.findUsersByIds(userIdsForReviews) : [];
+        const userMap = new Map(users.map(u => [u._id.toString(), { name: u.name, profilePicture: u.profilePicture || "" }]));
+
+        const reviewsByProvider = new Map<string, IReviewsOfUser[]>();
+        reviews.forEach(review => {
+            const pid = review.providerId.toString();
+            if (!reviewsByProvider.has(pid)) reviewsByProvider.set(pid, []);
+            const userData = userMap.get(review.userId.toString());
+            reviewsByProvider.get(pid)!.push({
+                userName: (userData?.name as string) || "Anonymous",
+                userImg: (userData?.profilePicture as string) || "",
+                rating: review.rating as number,
+                review: (review.reviewText as string) || "",
+            });
+        });
+
+        return availableProviders.map(provider =>
+            toBackendProviderDTO(
+                provider,
+                services,
+                reviewsByProvider.get(provider._id.toString()) || [],
+                subCategoryId,
+                filters.lat,
+                filters.long
+            )
+        );
+    }
+
 
 }

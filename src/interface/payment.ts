@@ -9,14 +9,14 @@ export interface IOrder {
 }
 
 export interface IPaymentVerificationRequest {
-    userId: string,
+    userId?: string,
     providerId: string,
     bookingId: string,
     paymentMethod: PaymentMethod,
     paymentDate: Date,
     amount: number,
-    adminCommission: number,
-    providerAmount: number,
+    adminCommission?: number,
+    providerAmount?: number,
     razorpay_order_id?: string, 
     razorpay_payment_id?: string, 
     razorpay_signature?: string,
@@ -26,4 +26,12 @@ export interface WalletFilter {
     status?: TransactionStatus | '',
     startDate?: string;
     transactionType?: "credit" | "debit" | "",
+}
+
+export interface IPaymentVerificationPayload {
+    userId: string;
+    bookingId: string;
+    razorpay_order_id: string;
+    razorpay_payment_id: string;
+    razorpay_signature: string;
 }

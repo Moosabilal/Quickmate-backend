@@ -3,13 +3,26 @@ import { Request, Response, NextFunction } from 'express';
 import { IProviderService } from "../services/interface/IProviderService";
 import TYPES from "../di/type";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { IProviderProfile, IProviderRegisterRequest } from "../interface/provider.dto";
+import { IProviderRegistrationData } from "../interface/provider";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth";
 import { IProvider } from "../models/Providers";
 import { getOAuthClient } from "../utils/googleCalendar";
+import { ZodError } from "zod";
 
+// --- Import all the new Zod schemas ---
+import {
+    registerProviderSchema,
+    updateProviderSchema,
+    providersForAdminQuerySchema,
+    updateProviderStatusSchema,
+    mongoIdParamSchema,
+    getServiceProviderQuerySchema,
+    getAvailabilityQuerySchema,
+    getEarningsQuerySchema
+} from '../utils/validations/provider.validation';
+import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation";
 @injectable()
 export class ProviderController {
     private _providerService: IProviderService
@@ -19,6 +32,8 @@ export class ProviderController {
 
     public register = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+
+            const validatedBody = registerProviderSchema.parse(req.body);
 
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
@@ -33,19 +48,16 @@ export class ProviderController {
             const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '') : '';
             const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '') : '';
 
+            const [lat, lon] = validatedBody.serviceLocation.split(",").map(Number);
 
-
-            const formData = {
-                ...req.body,
+            const formData: IProviderRegistrationData = {
+                ...validatedBody,
                 aadhaarIdProof: aadhaarUrl,
-                availability: JSON.parse(req.body.availability || '[]'),
                 profilePhoto: profileUrl,
-                userId: req.user?.id
+                userId: req.user?.id,
+                serviceLocation: { type: "Point" as const, coordinates: [lon, lat] }
 
             };
-            const [lat, lon] = req.body.serviceLocation.split(",").map(Number);
-            formData.serviceLocation = { type: "Point", coordinates: [lon, lat] };
-
 
             const response = await this._providerService.registerProvider(formData);
             res.status(HttpStatusCode.OK).json(response);
@@ -56,7 +68,8 @@ export class ProviderController {
 
     public verifyOtp = async (req: Request<{}, {}, VerifyOtpRequestBody>, res: Response, next: NextFunction) => {
         try {
-            const response = await this._providerService.verifyOtp(req.body);
+            const validatedBody = verifyOtpSchema.parse(req.body);
+            const response = await this._providerService.verifyOtp(validatedBody);
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);
@@ -65,7 +78,8 @@ export class ProviderController {
 
     public resendOtp = async (req: Request<{}, {}, ResendOtpRequestBody>, res: Response, next: NextFunction) => {
         try {
-            const response = await this._providerService.resendOtp(req.body);
+            const validatedBody = emailOnlySchema.parse(req.body);
+            const response = await this._providerService.resendOtp(validatedBody);
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);
@@ -98,14 +112,17 @@ export class ProviderController {
                 [lat, lon] = req.body.serviceLocation.split(",").map(Number);
             }
 
-            const updateData: Partial<IProvider> = {
+            const updateData: IProviderRegistrationData = {
                 ...req.body,
-                serviceId: JSON.parse(req.body.serviceId),
-                availability: JSON.parse(req.body.availability || '[]'),
                 userId: req.user.id,
                 serviceLocation: { type: "Point", coordinates: [lon, lat] }
             };
 
+            if (lat !== undefined && lon !== undefined && !isNaN(lat) && !isNaN(lon)) {
+                updateData.serviceLocation = { type: "Point", coordinates: [lon, lat] };
+            } else {
+                updateData.serviceLocation = undefined;
+            }
 
             if (profileUrl) {
                 updateData.profilePhoto = profileUrl;
@@ -155,10 +172,7 @@ export class ProviderController {
 
     public getProvidersforAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const page = parseInt(req.query.page as string) || 1;
-            const limit = parseInt(req.query.limit as string) || 10;
-            const search = (req.query.search as string) || '';
-            const status = req.query.status as string || "All"
+            const { page, limit, search, status } = providersForAdminQuerySchema.parse(req.query);
             const providersDetails = await this._providerService.providersForAdmin(page, limit, search, status);
             res.status(HttpStatusCode.OK).json(providersDetails);
         } catch (error) {
@@ -181,7 +195,9 @@ export class ProviderController {
 
     public updateProviderStatus = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const response = await this._providerService.updateProviderStat(req.params.id, req.body.newStatus)
+            const { id } = mongoIdParamSchema.parse(req.params);
+            const { newStatus } = updateProviderStatusSchema.parse(req.body);
+            const response = await this._providerService.updateProviderStat(id, newStatus)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -190,18 +206,10 @@ export class ProviderController {
 
     public getServiceProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const serviceId = req.query.serviceId as string;
-            const area = req.query.area as string;
-            const experience = req.query.experience ? Number(req.query.experience) : undefined;
-            const day = req.query.day as string;
-            const time = req.query.time as string;
-            const price = req.query.price ? Number(req.query.price) : undefined;
-            const radius = req.query.radius ? Number(req.query.radius) : 10;
-            const locationCoords = req.query.locationCoords as string;
-            const userId = req.user.id
+            const filters = getServiceProviderQuerySchema.parse(req.query);
+            const userId = req.user.id;
 
-            const filters = { area, experience, day, time, price, radius, locationCoords };
-            const response = await this._providerService.getProviderwithFilters(userId, serviceId, filters)
+            const response = await this._providerService.getProviderwithFilters(userId, filters.serviceId, filters)
             res.status(200).json(response)
         } catch (error) {
             next(error)
@@ -210,6 +218,7 @@ export class ProviderController {
 
     public getProviderForChatPage = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+
             const userId = req.user.id
             const response = await this._providerService.providerForChatPage(userId)
             res.status(HttpStatusCode.OK).json(response)
@@ -228,63 +237,57 @@ export class ProviderController {
         }
     }
 
-    public initiateGoogleAuth = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    public getProviderAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const userId = req.user.id
-            const response = await this._providerService.initiateGoogleAuth(userId);
+
+            const query = getAvailabilityQuerySchema.parse(req.query);
+            const userId = req.user.id;
+            
+            const response = await this._providerService.getAvailabilityByLocation(
+                userId,
+                query.serviceId,
+                query.latitude,
+                query.longitude,
+                query.radius ?? 10,
+                query.timeMin,
+                query.timeMax
+            );
+
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);
         }
     };
 
-    public googleCallback = async (req: Request, res: Response, next: NextFunction) => {
+    public getEarningsAnalytics = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const code = req.query.code as string;
-            const userId = req.query.state as string;
+            const { period } = getEarningsQuerySchema.parse(req.query);
+            const userId = req.user.id;
 
-            if (!userId) {
-                res.status(HttpStatusCode.BAD_REQUEST).json({ message: "Invalid state: providerId is missing" });
-            }
-            await this._providerService.googleCallback(code, userId);
+            const analyticsData = await this._providerService.getEarningsAnalytics(userId, period);
 
-            res.redirect(`${process.env.FRONTEND_URL}/provider/providerProfile/${userId}?calendar=success`);
+            res.status(HttpStatusCode.OK).json({ success: true, data: analyticsData });
+        } catch (error) {
+            next(error);
+        }
+    }
 
+    public getPerformance = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id;
+
+            const performanceData = await this._providerService.getProviderPerformance(userId);
+
+            res.status(HttpStatusCode.OK).json({
+                success: true,
+                message: "Provider performance fetched successfully",
+                data: performanceData
+            });
         } catch (error) {
             next(error);
         }
     };
 
-    public getProviderAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
-    try {
-        let providerIds: string[] = [];
-        if (typeof req.query.providerIds === "string") {
-            providerIds = [req.query.providerIds];
-        } else if (Array.isArray(req.query.providerIds)) {
-            providerIds = req.query.providerIds as string[];
-        }
-
-        if (providerIds.length === 0) {
-             throw new Error("The 'providerIds' parameter is required.");
-        }
-
-        const { timeMin, timeMax } = req.query;
-
-        if (typeof timeMin !== 'string' || typeof timeMax !== 'string') {
-            throw new Error("The 'timeMin' and 'timeMax' parameters are required.");
-        }
-
-        const response = await this._providerService.getProviderAvailability(
-            providerIds,
-            timeMin,
-            timeMax
-        );
-
-        res.status(HttpStatusCode.OK).json(response);
-    } catch (error) {
-        next(error);
-    }
-};
 
 }
 

@@ -1,5 +1,5 @@
 import { timeStamp } from "console";
-import { IBookingConfirmationRes, IBookingHistoryPage, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
+import { IBookingConfirmationRes, IBookingHistoryPage, IGetMessages, IProviderBookingManagement } from "../../interface/booking";
 import { BookingStatus } from "../../enums/booking.enum";
 import { PaymentStatus } from "../../enums/userRoles";
 import { IAddress } from "../../models/address";
@@ -37,7 +37,7 @@ export function toBookingConfirmationPage(booking: IBooking, address: IAddress, 
         status: booking.status as BookingStatus,
         paymentStatus: booking.paymentStatus as PaymentStatus,
         specialInstruction: booking.instructions as string,
-        providerTimings: provider.availability || [],
+        providerTimings: provider.availability?.weeklySchedule || [],
         createdAt: booking.createdAt as Date,
         reviewed: (booking.reviewed as boolean) || false,
         rating: (review && review.rating as number) || 0,

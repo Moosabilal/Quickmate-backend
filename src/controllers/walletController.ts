@@ -6,6 +6,12 @@ import { NextFunction, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { Roles } from "../enums/userRoles";
 import { TransactionStatus } from "../enums/payment&wallet.enum";
+import { ZodError } from "zod";
+import {
+    getWalletQuerySchema,
+    initiateDepositSchema,
+    verifyDepositSchema
+} from "../utils/validations/wallet.validation";
 
 @injectable()
 export class WalletController {
@@ -15,39 +21,43 @@ export class WalletController {
     }
 
     public getWallet = async (req: AuthRequest, res: Response, next: NextFunction) => {
-        const userId = req.user.id as string;
-        const ownerType = req.user.role as Roles;
-        const status = req.query.status as TransactionStatus;
-        const startDate = req.query.startDate as string;
-        const transactionType = req.query.transactionType as "credit" | "debit" | "";
-        const page = parseInt(req.query.page as string) || 1;
-        const limit = parseInt(req.query.limit as string) || 10;
-        const filters = { status, startDate, transactionType }
-        const data = await this._walletService.getSummary(userId, ownerType, filters, page, limit);
-        res.json({ success: true, data });
+        try {
+            const { page = 1, limit = 10, ...filters } = getWalletQuerySchema.parse(req.query);
+            const userId = req.user.id as string;
+            const ownerType = req.user.role as Roles;
+
+            const data = await this._walletService.getSummary(userId, ownerType, filters, page, limit);
+            res.json({ success: true, data });
+        } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
+        }
     };
 
     public initiateDeposit = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { amount } = req.body
+            const { amount } = initiateDepositSchema.parse(req.body);
             const response = await this._walletService.initiateDeposit(amount)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             next(error)
         }
     }
 
     public verifyDeposit = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+            const validatedBody = verifyDepositSchema.parse(req.body);
             const data = {
-                ...req.body,
+                ...validatedBody,
                 userId: req.user.id,
-                ownerType: req.user.role
+                ownerType: req.user.role as Roles
             }
             const response = await this._walletService.verifyDeposit(data)
             res.status(HttpStatusCode.OK).json(response)
 
         } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             next(error)
         }
     }

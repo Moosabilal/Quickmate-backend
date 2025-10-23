@@ -1,7 +1,7 @@
-import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth.dto";
-import { IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking.dto";
-import { IPaymentVerificationRequest } from "../../interface/payment.dto";
-import { RazorpayOrder } from "../../interface/razorpay.dto";
+import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
+import { IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking";
+import { IPaymentVerificationPayload, IPaymentVerificationRequest } from "../../interface/payment";
+import { RazorpayOrder } from "../../interface/razorpay";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IMessage } from "../../models/message";
 
@@ -15,7 +15,7 @@ export interface IBookingService {
     updateBookingDateTime(bookingId: string, date: string, time: string): Promise<void>;
 
     //provider
-    getBookingFor_Prov_mngmnt(userId: string, providerId: string): Promise<IProviderBookingManagement[]>;
+    getBookingFor_Prov_mngmnt(userId: string, providerId: string, search: string): Promise<{ earnings: number, bookings: IProviderBookingManagement[] }>;
     saveAndEmitMessage(io: any, joiningId: string, senderId: string, text: string)
     getBookingMessages(joiningId: string): Promise<IMessage[]>;
     verifyOtp(data: VerifyOtpRequestBody, bookingToken: string): Promise<void>
@@ -25,5 +25,6 @@ export interface IBookingService {
         limit: number,
         filters: { search?: string; bookingStatus?: string; }
     ): Promise<IAdminBookingsResponse>;
+    findProviderRange(userId: string, serviceId: string, lat: number, lng: number, radius: number): Promise<boolean>;
 
 }

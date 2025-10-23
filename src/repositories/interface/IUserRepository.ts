@@ -9,6 +9,8 @@ export interface IUserRepository extends IBaseRepository<IUser> {
 
   findByPasswordResetToken(token: string): Promise<IUser | null>;
   findUsersWithFilter(filter: any, skip: number, limit: number): Promise<IUser[]>
-  countUsers(filter?: FilterQuery<IUser>): Promise<number>
+  countUsers(filter?: FilterQuery<IUser>): Promise<number>;
+  findUsersByIds(userIds: string[]): Promise<IUser[]>;
+  getActiveUserCount(): Promise<number>;
 
 }

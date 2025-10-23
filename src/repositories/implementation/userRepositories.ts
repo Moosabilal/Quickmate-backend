@@ -4,7 +4,7 @@ import { IUser } from '../../models/User';
 import { injectable } from 'inversify';
 import User from '../../models/User';
 import { BaseRepository } from './base/BaseRepository';
-import { FilterQuery } from 'mongoose';
+import { FilterQuery, Types } from 'mongoose';
 
 @injectable()
 export class UserRepository extends BaseRepository<IUser> implements IUserRepository {
@@ -48,5 +48,15 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
   public async countUsers(filter: FilterQuery<IUser>): Promise<number> {
     return await User.countDocuments(filter).exec();
   }
+
+  public async findUsersByIds(userIds: string[]): Promise<IUser[]> {
+    const filter = { _id: { $in: userIds.map(id => new Types.ObjectId(id)) } };
+    return this.findAll(filter);
+  }
+
+  public async getActiveUserCount(): Promise<number> {
+        // Assuming 'active' means the user's account is verified
+        return this.model.countDocuments({ isVerified: true });
+    }
 
 }
