@@ -1,14 +1,12 @@
 import { inject, injectable } from "inversify";
-import { parse, formatISO } from "date-fns";
 import { IBookingService } from "../services/interface/IBookingService";
 import TYPES from "../di/type";
 import { NextFunction, Request, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { AuthRequest } from "../middleware/authMiddleware";
-import { IPaymentVerificationPayload, IPaymentVerificationRequest } from "../interface/payment";
+import { IPaymentVerificationRequest } from "../interface/payment";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth";
 import { IProviderService } from "../services/interface/IProviderService";
-import { BookingStatus } from "../enums/booking.enum";
 import { ZodError } from "zod";
 import {
     createBookingSchema,
@@ -21,7 +19,6 @@ import {
     adminBookingsQuerySchema,
     findProviderRangeSchema,
 } from "../utils/validations/booking.validation";
-import User from "../models/User";
 
 @injectable()
 export class BookingController {

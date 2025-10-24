@@ -61,7 +61,7 @@ const BookingSchema: Schema = new Schema(
       required: false
     },
     duration: {
-      type: Number, // in minutes
+      type: Number,
       required: false,
     },
     bookingDate: {

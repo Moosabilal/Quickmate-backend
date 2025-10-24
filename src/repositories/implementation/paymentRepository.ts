@@ -68,7 +68,7 @@ export class PaymentRepository extends BaseRepository<IPayment> implements IPaym
     //         providerId: data.providerId,
     //         bookingId: data.bookingId,
     //     };
-    //     return await this.create(dataForDb); // Calls the base repository's create method
+    //     return await this.create(dataForDb);
     // }
 
 }

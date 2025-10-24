@@ -9,3 +9,314 @@
 [ERROR  ] - GET /api/provider/calendar/availability?latitude=11.0467518&longitude=75.9811564&serviceId=6890525c8e590753867b2bd6&radius=25&timeMin=2025-09-30T18:30:00.000Z&timeMax=2025-10-30T18:30:00.000Z 500 _a.find is not a function -> _a.find is not a function
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: JXdtA6FKd_dSg0YpAAAB
+[INFO   ] - Client disconnected: Xj_MXX59V-_IEWQYAAAD
+[INFO   ] - Client disconnected: raZJ1QIK5iVJEn-HAAAF
+[INFO   ] - Client disconnected: GK7te8rgMvH7817FAAAH
+[INFO   ] - Client disconnected: yJf8CCOkWpxw7gEDAAAJ
+[INFO   ] - Client disconnected: H1eUJsvmwRiLvbImAAAL
+[INFO   ] - Client disconnected: jxQE0nkGMqEqEjzgAAAN
+[INFO   ] - Client disconnected: X7zZE5Fc2L6ZRcAqAAAP
+[INFO   ] - Client disconnected: VCpBIUThDWCxXg3vAAAR
+[INFO   ] - Client disconnected: RirqjjHeDaM2njVrAAAT
+[INFO   ] - Client disconnected: efxs8cYLC0J0nS5UAAAV
+[INFO   ] - Client disconnected: 3aEmS_rLhTO2cyK7AAAX
+[INFO   ] - Client disconnected: K_hVa_zH2g107vuPAAAZ
+[INFO   ] - Client disconnected: TRadBU92rZMtX0-vAAAb
+[INFO   ] - Client disconnected: vzRF571f6y5B-iJ8AAAd
+[INFO   ] - Client disconnected: I34MGXWVQDPYcA2JAAAf
+[INFO   ] - Client disconnected: 75nNX8QvK-E4qzKsAAAh
+[INFO   ] - Client disconnected: qcDtJt7kr1GdFyDtAAAj
+[INFO   ] - Client disconnected: aKMb6XwvXb_J7IPQAAAl
+[INFO   ] - Client disconnected: l2EJF6j79RrJM5w2AAAn
+[INFO   ] - Client disconnected: PG7o67o9NZnUb86uAAAp
+[INFO   ] - Client disconnected: qN8D9kYqUFMeuN6ZAAAr
+[INFO   ] - Client disconnected: clgOK4cCd_CzQOrzAAAt
+[INFO   ] - Client disconnected: 66YTzl7C_6kp3YFKAAAv
+[INFO   ] - Client disconnected: _s7ZkV-nDQv77c7AAAAx
+[INFO   ] - Client disconnected: RxHUmXapmzCk5witAAAz
+[INFO   ] - Client disconnected: YlYK8MTR-bAc9yR1AAA1
+[INFO   ] - Client disconnected: dUPDq1TOM-LDB3_4AAA3
+[INFO   ] - Client disconnected: vYzyDBN64LH4zPlHAAA5
+[INFO   ] - Client disconnected: I1PeCbNsD3ypSVsrAAA7
+[INFO   ] - Client disconnected: tJiNKDF4JMLsaeCoAAA9
+[INFO   ] - Client disconnected: LV9ja3MZz6t72hi3AAA_
+[INFO   ] - Client disconnected: XjH8z5avdgtWcNvXAABB
+[INFO   ] - Client disconnected: iKg1o90UfyFQ2DQUAABD
+[INFO   ] - Client disconnected: jsINyM8mFtTafbH-AABF
+[INFO   ] - Client disconnected: 2RhXe53USewTaqnTAABH
+[INFO   ] - Client disconnected: TMH4zQkqp0pIOlLLAABJ
+[INFO   ] - Client disconnected: Cq0l3Nnee_Ns3Fh3AABL
+[INFO   ] - Client disconnected: IPq3uqme_347u6Z1AABN
+[INFO   ] - Client disconnected: e9cMp5KJI_PyaRsnAABP
+[INFO   ] - Client disconnected: 28hsiupPQ_UxXzfMAABR
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 0JM8ovwmNpWCQK0WAAAB
+[INFO   ] - Client disconnected: 9ejFXiYD7MpNcUOYAAAD
+[INFO   ] - Client disconnected: NrzBIsqAJfzGDIRKAAAF
+[INFO   ] - Client disconnected: gp8VMEgTVaP327PqAAAH
+[INFO   ] - Client disconnected: OdbRU1_KPdQaNrIgAAAJ
+[INFO   ] - Client disconnected: TfJUX77iz3j3sFhCAAAL
+[INFO   ] - Client disconnected: BL5T9Yrv5ql8b6gWAAAN
+[INFO   ] - Client disconnected: FlixmMn-eb3PbVulAAAP
+[INFO   ] - Client disconnected: k568HZFIH-sFcLN6AAAR
+[INFO   ] - Client disconnected: VCVcGCEE_QGcPm4IAAAT
+[INFO   ] - Client disconnected: 6si2QoeEsKQ9rC3OAAAV
+[INFO   ] - Client disconnected: N56WFrSdppps9j15AAAX
+[INFO   ] - Client disconnected: SeYAtHfR5qjvUbx5AAAZ
+[INFO   ] - Client disconnected: w1CZKHD0YsZQ6yxFAAAb
+[INFO   ] - Client disconnected: 2S6DxI2XvUIbuOjZAAAd
+[INFO   ] - Client disconnected: _ArIDIQ96oHi_r9EAAAf
+[INFO   ] - Client disconnected: A0FI-8_bJAMa0i1ZAAAh
+[INFO   ] - Client disconnected: Z2LSzhC7o12x8nWmAAAj
+[INFO   ] - Client disconnected: 9Z8NKolslTvSGOYgAAAl
+[INFO   ] - Client disconnected: qWWCFJm-YPImyOIVAAAn
+[INFO   ] - Client disconnected: vG63Qd50sJdiSeqeAAAp
+[INFO   ] - Client disconnected: NeCtU2qxXNVZ7erdAAAr
+[INFO   ] - Client disconnected: PmOgT_qpRn3lnVrgAAAt
+[INFO   ] - Client disconnected: ltq5fhyAFZRECFRyAAAv
+[INFO   ] - Client disconnected: C8mNAa527MSCva1PAAAx
+[INFO   ] - Client disconnected: eXbN_wBAahu6ChRMAAAz
+[INFO   ] - Client disconnected: as7i0MSW5Vqw79X5AAA1
+[INFO   ] - Client disconnected: bEkYfEhWXjK6gE73AAA3
+[INFO   ] - Client disconnected: CDX4lAH-qEIiSIhIAAA5
+[INFO   ] - Client disconnected: TFV3c9C8J9xNEFhTAAA7
+[INFO   ] - Client disconnected: BjeoQZitJhJUF9SrAAA9
+[INFO   ] - Client disconnected: VM4b71_x0jDxEi3HAAA_
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?latitude=11.0467518&longitude=75.9811564&serviceId=6890525c8e590753867b2bd6&radius=25&timeMin=2025-09-30T18:30:00.000Z&timeMax=2025-10-30T18:30:00.000Z 500 _a.find is not a function -> _a.find is not a function
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?latitude=11.0467518&longitude=75.9811564&serviceId=6890525c8e590753867b2bd6&radius=25&timeMin=2025-09-30T18:30:00.000Z&timeMax=2025-10-30T18:30:00.000Z 500 _a.find is not a function -> _a.find is not a function
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?latitude=11.0467518&longitude=75.9811564&serviceId=6890525c8e590753867b2bd6&radius=25&timeMin=2025-09-30T18:30:00.000Z&timeMax=2025-10-30T18:30:00.000Z 500 _a.find is not a function -> _a.find is not a function
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?latitude=11.0467518&longitude=75.9811564&serviceId=6890525c8e590753867b2bd6&radius=25&timeMin=2025-09-30T18:30:00.000Z&timeMax=2025-10-30T18:30:00.000Z 500 Cannot read properties of undefined (reading 'from') -> Cannot read properties of undefined (reading 'from')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/calendar/availability?latitude=11.0467518&longitude=75.9811564&serviceId=6890525c8e590753867b2bd6&radius=25&timeMin=2025-09-30T18:30:00.000Z&timeMax=2025-10-30T18:30:00.000Z 500 Cannot read properties of undefined (reading 'from') -> Cannot read properties of undefined (reading 'from')
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[ERROR  ] - GET /api/provider/availability 404 Provider not found -> Provider not found
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: e3bb00Ruijio55HVAAAB
+[INFO   ] - the reset link
+[INFO   ] - Password reset email sent to moosabilal75608@gmail.com
+[INFO   ] - Client disconnected: DiXUZeKVMrIeMLA_AAAF
+[INFO   ] - Client disconnected: jEhbBZiZf_En_81qAAAD
+[INFO   ] - Client disconnected: PZPOuQOus2wyFqBgAAAH
+[INFO   ] - Client disconnected: eHFYopbB0_RvMBTDAAAL
+[INFO   ] - Client disconnected: VgYiEI_R_NqmswpZAAAJ
+[ERROR  ] - POST /api/auth/reset-password 500 [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "email"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  },
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+] -> [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "email"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  },
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+[ERROR  ] - POST /api/auth/reset-password 500 [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "email"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  },
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+] -> [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "email"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  },
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: eAdPzjQZWnz9b-cpAAAD
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[INFO   ] - Client disconnected: j7Kwke-TWHnWJXgJAAAF
+[INFO   ] - the reset link
+[INFO   ] - Password reset email sent to moosabilal75608@gmail.com
+[INFO   ] - the reset link
+[INFO   ] - Password reset email sent to sojil@gmail.com
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - the reset link
+[INFO   ] - Password reset email sent to moosabilal75608@gmail.com
+[INFO   ] - Client disconnected: 9uFQ2blCjYVJdQwcAAAH
+[INFO   ] - Client disconnected: OtXndXMzYVarEnkLAAAJ
+[INFO   ] - the reset link
+[INFO   ] - Password reset email sent to sojil@gmail.com
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/register 500 [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Customer",
+      "ServiceProvider",
+      "Admin"
+    ],
+    "path": [
+      "role"
+    ],
+    "message": "Invalid role specified."
+  }
+] -> [
+  {
+    "code": "invalid_value",
+    "values": [
+      "Customer",
+      "ServiceProvider",
+      "Admin"
+    ],
+    "path": [
+      "role"
+    ],
+    "message": "Invalid role specified."
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Sending verification email to sojil@gmail.com with OTP: 825390 mail
+[INFO   ] - Verification OTP sent to sojil@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: dC3_l4Xhk2mKFFiOAAAB
+[INFO   ] - Sending verification email to sojil@gmail.com with OTP: 493672 mail
+[INFO   ] - Verification OTP sent to sojil@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: NxACJ8iM9XSlZwF3AAAB
+[INFO   ] - Client disconnected: rvtB8nbV7UQhX8fZAAAD
+[INFO   ] - Client disconnected: V9hAQg64uaG3g4ZRAAAF
+[INFO   ] - Client disconnected: kwPAprAZoAohzB4LAAAH
+[INFO   ] - Client disconnected: tSk8GR9ZmZCNG-o8AAAJ
+[INFO   ] - Client disconnected: ONFK9ui6oqZTu2ZUAAAL
+[INFO   ] - Client disconnected: _TVKkBvxDd-RRqTVAAAN
+[INFO   ] - Client disconnected: OmmUZv_FaJKaIKS2AAAP
+[INFO   ] - Sending verification email to sojilProvider@gmail.com with OTP: 676584 mail
+[INFO   ] - Verification OTP sent to sojilProvider@gmail.com
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&verification=undefined&rating=undefined&page=1&limit=2 404 No providers found. -> No providers found.
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&verification=undefined&rating=undefined&page=1&limit=2 404 No providers found. -> No providers found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: x8fc9gv9wDXQRGpvAAAD
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&verification=undefined&rating=undefined&page=1&limit=2 404 No providers found. -> No providers found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: LOZKKnHk8GBWLhGLAAAB
+[INFO   ] - Client disconnected: dcSz4jr9Abf_DX8xAAAF
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
