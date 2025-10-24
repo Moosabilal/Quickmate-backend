@@ -3,8 +3,8 @@ import { IProviderRepository } from "../../repositories/interface/IProviderRepos
 import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
-import { IProvider, Provider } from "../../models/Providers";
-import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse, TimeSlot } from "../../interface/provider";
+import { IProvider } from "../../models/Providers";
+import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IReviewsOfUser, IServiceAddPageResponse, TimeSlot } from "../../interface/provider";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -19,14 +19,10 @@ import { toBackendProviderDTO, toClientForChatListPage, toEarningsAnalyticsDTO, 
 import { toLoginResponseDTO } from "../../utils/mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
-import { IService } from "../../models/Service";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IMessageRepository } from "../../repositories/interface/IMessageRepository";
 import { IReviewRepository } from "../../repositories/interface/IReviewRepository";
-import { BookingStatus } from "../../enums/booking.enum";
-import { getAuthUrl, getOAuthClient } from "../../utils/googleCalendar";
-import { calendar_v3, google } from 'googleapis';
-import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
+import { calendar_v3 } from 'googleapis';
 import { convertTo24Hour } from "../../utils/helperFunctions/convertTo24hrs";
 import { endOfMonth } from "date-fns/endOfMonth";
 import { endOfWeek } from "date-fns/endOfWeek";
@@ -133,8 +129,8 @@ export class ProviderService implements IProviderService {
             const providerUpdatePayload = {
                 isVerified: true,
                 status: ProviderStatus.PENDING,
-                registrationOtp: undefined, 
-                registrationOtpExpires: undefined, 
+                registrationOtp: undefined,
+                registrationOtpExpires: undefined,
                 registrationOtpAttempts: 0,
             };
             const updatedProvider = await this._providerRepository.update(provider.id, providerUpdatePayload, { session });
@@ -367,8 +363,26 @@ export class ProviderService implements IProviderService {
 
         enrichedProviders.sort((a, b) => a.distanceKm - b.distanceKm);
 
+        const enrichedMap = enrichedProviders.map(p => ({
+            id: p._id,
+            name: p.fullName,
+            phone: p.phoneNumber,
+            email: p.email,
+            experience: p.experience,
+            price: p.price,
+            distanceKm: p.distanceKm,
+            totalBookings: p.totalBookings,
+            earnings: p.earnings,
+            reviewsCount: p.reviews?.length || 0,
+            serviceName: p.serviceName,
+            status: p.status,
+            availability: p.availability?.length || 0,
+        }));
+        console.table(enrichedMap);
+
         return enrichedProviders;
     }
+
 
 
     public async providerForChatPage(userId: string): Promise<IProviderForChatListPage[]> {
@@ -490,37 +504,30 @@ export class ProviderService implements IProviderService {
             );
 
             for (let d = new Date(startISO); d <= endISO; d.setDate(d.getDate() + 1)) {
-                
+
                 const dateStr = format(d, 'yyyy-MM-dd');
-                const dayName = format(d, 'EEEE'); // 'EEEE' gives full day name, e.g., "Monday"
+                const dayName = format(d, 'EEEE');
 
-                // --- 3. Check Availability Logic (using new private helpers) ---
 
-                // Level 1: Is the provider on leave?
                 if (this._isProviderOnLeave(provider, dateStr)) {
-                    continue; // Skip this day entirely
+                    continue;
                 }
 
-                // Level 2: Is there a specific override for this date?
                 const override = this._getDateOverride(provider, dateStr);
                 if (override?.isUnavailable) {
-                    continue; // Provider is unavailable all day
+                    continue;
                 }
 
-                // Level 3: Get the standard weekly schedule
                 const weeklySlots = this._getWeeklySlots(provider, dayName);
                 if (weeklySlots.length === 0) {
-                    continue; // Provider is not active on this day of the week
+                    continue;
                 }
 
-                // Get any specific busy slots for this day from the override
                 const busySlots = override ? override.busySlots : [];
 
-                // --- 4. Generate and Check 60-Minute Slots ---
                 const slotMinutes = 60;
                 const slotMs = slotMinutes * 60 * 1000;
 
-                // Check against each slot in their weekly schedule (e.g., 9-12 and 13-17)
                 for (const timeSlot of weeklySlots) {
                     const [sh, sm] = String(timeSlot.start).split(':').map(Number);
                     const [eh, em] = String(timeSlot.end).split(':').map(Number);
@@ -528,11 +535,9 @@ export class ProviderService implements IProviderService {
                     const dayStart = new Date(d); dayStart.setHours(sh || 0, sm || 0, 0, 0);
                     const dayEnd = new Date(d); dayEnd.setHours(eh || 0, em || 0, 0, 0);
 
-                    // Iterate through each 60-minute slot within this time block
                     for (let slotStart = new Date(dayStart); slotStart.getTime() + slotMs <= dayEnd.getTime(); slotStart = new Date(slotStart.getTime() + slotMs)) {
                         const slotEnd = new Date(slotStart.getTime() + slotMs);
 
-                        // Check for conflicts with bookings AND busy overrides
                         const isAvailable = this._isSlotAvailable(slotStart, slotEnd, existingBookings, busySlots);
 
                         if (isAvailable) {
@@ -638,8 +643,7 @@ export class ProviderService implements IProviderService {
     }
 
     public async getAvailability(userId: string): Promise<IProvider['availability']> {
-        console.log('the userId', userId)
-        const provider = await this._providerRepository.findOne({userId: userId});
+        const provider = await this._providerRepository.findOne({ userId: userId });
         if (!provider) {
             throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
         }
@@ -650,7 +654,7 @@ export class ProviderService implements IProviderService {
         userId: string,
         data: IAvailabilityUpdateData
     ): Promise<IProvider['availability']> {
-        const provider = await this._providerRepository.findOne( {userId: userId} );
+        const provider = await this._providerRepository.findOne({ userId: userId });
         if (!provider) {
             throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
         }
@@ -662,7 +666,7 @@ export class ProviderService implements IProviderService {
         if (!updatedProvider) {
             throw new CustomError("Failed to update availability", HttpStatusCode.INTERNAL_SERVER_ERROR);
         }
-        
+
         return updatedProvider.availability;
     }
 
@@ -685,6 +689,7 @@ export class ProviderService implements IProviderService {
             price?: number;
         }
     ): Promise<IProvider[]> {
+
         const services = await this._serviceRepository.findServicesByCriteria({
             subCategoryId,
             minExperience: filters.experience,
@@ -692,10 +697,11 @@ export class ProviderService implements IProviderService {
         });
 
         if (!services.length) return [];
-        const providerIdsFromServices = [...new Set(services.map(s => s.providerId.toString()))];
-        const time24h = filters.time ? convertTo24Hour(filters.time) : undefined;
 
-        return this._providerRepository.findFilteredProviders({
+        const providerIdsFromServices = [...new Set(services.map(s => s.providerId.toString()))];
+
+        const time24h = filters.time ? convertTo24Hour(filters.time) : undefined;
+        const filteredProviders = await this._providerRepository.findFilteredProviders({
             providerIds: providerIdsFromServices,
             userIdToExclude,
             lat: filters.lat,
@@ -704,7 +710,10 @@ export class ProviderService implements IProviderService {
             date: filters.date,
             time: time24h,
         });
+
+        return filteredProviders;
     }
+
 
     private async _filterProvidersByBookingConflicts(
         potentialProviders: IProvider[],
@@ -817,7 +826,7 @@ export class ProviderService implements IProviderService {
         const bookingConflict = existingBookings.some(booking => {
             const bookingTime24h = convertTo24Hour(booking.scheduledTime as string);
             const [hours, minutes] = bookingTime24h.split(':').map(Number);
-            
+
             const bookingStart = new Date(booking.scheduledDate as string);
             bookingStart.setHours(hours, minutes, 0, 0);
 

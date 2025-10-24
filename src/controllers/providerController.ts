@@ -3,12 +3,10 @@ import { Request, Response, NextFunction } from 'express';
 import { IProviderService } from "../services/interface/IProviderService";
 import TYPES from "../di/type";
 import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { IAvailabilityUpdateData, IProviderRegistrationData } from "../interface/provider";
+import { IProviderRegistrationData } from "../interface/provider";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth";
-import { IProvider } from "../models/Providers";
-import { getOAuthClient } from "../utils/googleCalendar";
 import { ZodError } from "zod";
 
 import {
@@ -20,7 +18,7 @@ import {
     getServiceProviderQuerySchema,
     getAvailabilityQuerySchema,
     getEarningsQuerySchema,
-    featuredProvidersQuerySchema, 
+    featuredProvidersQuerySchema,
     updateAvailabilitySchema
 } from '../utils/validations/provider.validation';
 import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation";
@@ -186,8 +184,8 @@ export class ProviderController {
 
     public featuredProviders = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-const { page = 1, limit = 10, search = '' } = featuredProvidersQuerySchema.parse(req.query);            
-const getFeaturedProviders = await this._providerService.getFeaturedProviders(page, limit, search)
+            const { page = 1, limit = 10, search = '' } = featuredProvidersQuerySchema.parse(req.query);
+            const getFeaturedProviders = await this._providerService.getFeaturedProviders(page, limit, search)
             res.status(HttpStatusCode.OK).json(getFeaturedProviders)
         } catch (error) {
             if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
@@ -209,10 +207,22 @@ const getFeaturedProviders = await this._providerService.getFeaturedProviders(pa
 
     public getServiceProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const filters = getServiceProviderQuerySchema.parse(req.query);
+            const validatedQuery = getServiceProviderQuerySchema.parse(req.query);
             const userId = req.user.id;
 
-            const response = await this._providerService.getProviderwithFilters(userId, filters.serviceId, filters)
+            const filtersForService = {
+                lat: validatedQuery.latitude,
+                long: validatedQuery.longitude,
+                radius: validatedQuery.radius ?? 10, // Use parsed radius, or a default
+                experience: validatedQuery.experience,
+                date: validatedQuery.date,
+                time: validatedQuery.time,
+                price: validatedQuery.price
+            };
+
+            console.log('tbe faksdfbalsdfas', filtersForService)
+
+            const response = await this._providerService.getProviderwithFilters(userId, validatedQuery.serviceId, filtersForService)
             res.status(200).json(response)
         } catch (error) {
             next(error)
@@ -245,8 +255,7 @@ const getFeaturedProviders = await this._providerService.getFeaturedProviders(pa
 
             const query = getAvailabilityQuerySchema.parse(req.query);
             const userId = req.user.id;
-            console.log('the service idand query', userId, query)
-            
+
             const response = await this._providerService.getAvailabilityByLocation(
                 userId,
                 query.serviceId,
@@ -256,7 +265,6 @@ const getFeaturedProviders = await this._providerService.getFeaturedProviders(pa
                 query.timeMin,
                 query.timeMax
             );
-            console.log('the response', response)
 
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
@@ -306,14 +314,14 @@ const getFeaturedProviders = await this._providerService.getFeaturedProviders(pa
     public updateAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const userId = req.user.id;
-            
-            const data = updateAvailabilitySchema.parse(req.body); 
-            
+
+            const data = updateAvailabilitySchema.parse(req.body);
+
             const availability = await this._providerService.updateAvailability(userId, data);
-            res.status(HttpStatusCode.OK).json({ 
-                success: true, 
+            res.status(HttpStatusCode.OK).json({
+                success: true,
                 message: "Availability updated successfully",
-                data: availability 
+                data: availability
             });
         } catch (error) {
             if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });

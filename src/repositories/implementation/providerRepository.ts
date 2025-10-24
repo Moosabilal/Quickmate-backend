@@ -88,22 +88,74 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return result;
     }
 
+    //     public async findFilteredProviders(criteria: {
+    //     providerIds: string[];
+    //     userIdToExclude: string;
+    //     lat?: number;
+    //     long?: number;
+    //     radius?: number;
+    //     date?: string; 
+    //     time?: string; 
+    // }): Promise<IProvider[]> {
+    //     console.log('\n[DEBUG][findFilteredProviders] ▶️ Start');
+
+    //     const filter: mongoose.FilterQuery<IProvider> = {
+    //         _id: { $in: criteria.providerIds },
+    //         userId: { $ne: criteria.userIdToExclude},
+    //     };
+
+    //     const testData = await this.findAll(filter)
+    // console.log('Full data:', JSON.stringify(testData, null, 2));
+
+
+    //     if (criteria.lat && criteria.long && criteria.radius) {
+    //         filter.serviceLocation = {
+    //             $geoWithin: {
+    //                 $centerSphere: [
+    //                     [criteria.long, criteria.lat],
+    //                     criteria.radius / 6378.1, // Earth radius in km
+    //                 ],
+    //             },
+    //         };
+    //     }
+
+    //     if (criteria.date || criteria.time) {
+    //         filter.availability = { $elemMatch: {} as any };
+
+    //         if (criteria.date) {
+    //             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    //             const dayOfWeek = days[new Date(criteria.date).getDay()];
+    //             filter.availability.$elemMatch.day = dayOfWeek;
+    //         }
+
+    //         if (criteria.time) {
+    //             filter.availability.$elemMatch.startTime = { $lte: criteria.time };
+    //             filter.availability.$elemMatch.endTime = { $gte: criteria.time };
+    //         }
+    //     }
+
+    //     const result = await this.findAll(filter);
+    //     return result;
+    // }
+
     public async findFilteredProviders(criteria: {
         providerIds: string[];
         userIdToExclude: string;
         lat?: number;
         long?: number;
         radius?: number;
-        date?: string; 
+        date?: string;  
         time?: string; 
     }): Promise<IProvider[]> {
-        const filter: mongoose.FilterQuery<IProvider> = {
-            _id: { $in: criteria.providerIds.map(id => new mongoose.Types.ObjectId(id)) },
-            userId: { $ne: new mongoose.Types.ObjectId(criteria.userIdToExclude) },
+
+        const baseFilter: mongoose.FilterQuery<IProvider> = {
+            _id: { $in: criteria.providerIds },
+            userId: { $ne: criteria.userIdToExclude },
         };
 
+
         if (criteria.lat && criteria.long && criteria.radius) {
-            filter.serviceLocation = {
+            baseFilter['serviceLocation'] = {
                 $geoWithin: {
                     $centerSphere: [
                         [criteria.long, criteria.lat],
@@ -113,22 +165,42 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
             };
         }
 
+        let providers = await this.findAll(baseFilter);
+
         if (criteria.date || criteria.time) {
-            filter.availability = { $elemMatch: {} as any };
+            const targetDate = criteria.date ? new Date(criteria.date) : new Date();
+            const targetDay = targetDate.toLocaleDateString('en-US', { weekday: 'long' });
+            const targetTime = criteria.time;
 
-            if (criteria.date) {
-                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                const dayOfWeek = days[new Date(criteria.date).getDay()];
-                filter.availability.$elemMatch.day = dayOfWeek;
-            }
+            providers = providers.filter((provider) => {
+                const { availability } = provider;
+                if (!availability || !availability.weeklySchedule) return false;
 
-            if (criteria.time) {
-                filter.availability.$elemMatch.startTime = { $lte: criteria.time };
-                filter.availability.$elemMatch.endTime = { $gte: criteria.time };
-            }
+                const isOnLeave = availability.leavePeriods?.some(
+                    (period: any) => criteria.date >= period.from && criteria.date <= period.to
+                );
+                if (isOnLeave) return false;
+
+                const override = availability.dateOverrides?.find(
+                    (o: any) => o.date === criteria.date
+                );
+                if (override?.isUnavailable) return false;
+
+                const daySchedule = availability.weeklySchedule.find((d: any) => d.day === targetDay && d.active);
+                if (!daySchedule) return false;
+
+                if (targetTime && daySchedule.slots?.length) {
+                    return daySchedule.slots.some(
+                        (slot: any) => targetTime >= slot.start && targetTime <= slot.end
+                    );
+                }
+
+                return true;
+            });
+
         }
 
-        return this.findAll(filter);
+        return providers;
     }
 
     public async getTopProvidersByEarnings(limit: number = 5): Promise<{ name: string; earnings: number }[]> {

@@ -32,7 +32,10 @@ export const providersForAdminQuerySchema = z.object({
 export const getServiceProviderQuerySchema = z.object({
     serviceId: mongoIdSchema,
     experience: z.coerce.number().positive().optional(),
-    radiusKm: z.coerce.number().positive().optional(),
+    
+    // --- FIX 1: Rename 'radiusKm' to 'radius' ---
+    radius: z.coerce.number().positive().optional(),
+    
     price: z.coerce.number().positive().optional(),
     latitude: z.coerce.number(),
     longitude: z.coerce.number(),
