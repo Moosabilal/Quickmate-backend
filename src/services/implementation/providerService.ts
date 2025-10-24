@@ -459,7 +459,6 @@ export class ProviderService implements IProviderService {
         timeMax: string
     ): Promise<Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }>> {
 
-        // --- 1. Find Providers by Service and Location ---
         const services = await this._serviceRepository.findAll({ subCategoryId: serviceSubCategoryId });
         const providerIdSet = new Set<string>(services.map(s => s.providerId?.toString()).filter(Boolean) as string[]);
         if (providerIdSet.size === 0) return [];
@@ -475,7 +474,6 @@ export class ProviderService implements IProviderService {
             return _haversineKm(userLat, userLng, provLat, provLng) <= radiusKm;
         });
 
-        // --- 2. Iterate Through Each Provider and Date to Find Slots ---
         const startISO = new Date(timeMin);
         const endISO = new Date(timeMax);
         const results: Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }> = [];
@@ -485,14 +483,12 @@ export class ProviderService implements IProviderService {
             const providerName = provider.fullName;
             const availableSlots: calendar_v3.Schema$TimePeriod[] = [];
 
-            // Get all bookings for this provider in the given range for conflict checking
             const existingBookings = await this._bookingRepository.findByProviderByTime(
                 providerId,
                 timeMin.split('T')[0],
                 timeMax.split('T')[0]
             );
 
-            // Loop through each day from timeMin to timeMax
             for (let d = new Date(startISO); d <= endISO; d.setDate(d.getDate() + 1)) {
                 
                 const dateStr = format(d, 'yyyy-MM-dd');
@@ -650,9 +646,6 @@ export class ProviderService implements IProviderService {
         return provider.availability;
     }
 
-    /**
-     * @description Updates the entire availability object for a provider.
-     */
     public async updateAvailability(
         userId: string,
         data: IAvailabilityUpdateData
@@ -662,7 +655,6 @@ export class ProviderService implements IProviderService {
             throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
         }
 
-        // This single update call replaces the entire availability object
         const updatedProvider = await this._providerRepository.update(provider._id.toString(), {
             availability: data
         });
@@ -807,31 +799,21 @@ export class ProviderService implements IProviderService {
         });
     }
 
-    /**
-     * Gets the date override for a specific date, if one exists.
-     */
     private _getDateOverride(provider: IProvider, dateStr: string) {
         return provider.availability.dateOverrides.find(o => o.date === dateStr);
     }
 
-    /**
-     * Gets the active weekly slots for a given day name (e.g., "Monday").
-     */
     private _getWeeklySlots(provider: IProvider, dayName: string): TimeSlot[] {
         const daySchedule = provider.availability.weeklySchedule.find(d => d.day === dayName);
         return (daySchedule && daySchedule.active) ? daySchedule.slots : [];
     }
 
-    /**
-     * Checks a 60-minute slot against existing bookings and manual busy slots.
-     */
     private _isSlotAvailable(
         slotStart: Date,
         slotEnd: Date,
         existingBookings: IBooking[],
         busySlots: TimeSlot[]
     ): boolean {
-        // Check against existing bookings
         const bookingConflict = existingBookings.some(booking => {
             const bookingTime24h = convertTo24Hour(booking.scheduledTime as string);
             const [hours, minutes] = bookingTime24h.split(':').map(Number);
@@ -842,14 +824,11 @@ export class ProviderService implements IProviderService {
             const durationMs = ((booking.duration as number) || 60) * 60 * 1000;
             const bookingEnd = new Date(bookingStart.getTime() + durationMs);
 
-            // Check for overlap:
-            // Slot starts before booking ends AND slot ends after booking starts
             return slotStart < bookingEnd && slotEnd > bookingStart;
         });
 
         if (bookingConflict) return false;
 
-        // Check against manual busy slots from date override
         const busySlotConflict = busySlots.some(busySlot => {
             const [sh, sm] = busySlot.start.split(':').map(Number);
             const [eh, em] = busySlot.end.split(':').map(Number);
@@ -862,7 +841,6 @@ export class ProviderService implements IProviderService {
 
         if (busySlotConflict) return false;
 
-        // If no conflicts, the slot is available
         return true;
     }
 

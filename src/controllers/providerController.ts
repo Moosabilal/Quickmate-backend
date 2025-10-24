@@ -297,7 +297,6 @@ const getFeaturedProviders = await this._providerService.getFeaturedProviders(pa
         try {
             const userId = req.user.id;
             const availability = await this._providerService.getAvailability(userId);
-            console.log('the daat', availability)
             res.status(HttpStatusCode.OK).json({ success: true, data: availability });
         } catch (error) {
             next(error);
