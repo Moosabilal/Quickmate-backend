@@ -71,7 +71,7 @@ export function toBackendProviderDTO(
   const primaryService = providerServices.find(s => s.subCategoryId.toString() === subCategoryId) || providerServices[0];
 
   const [provLng, provLat] = provider.serviceLocation.coordinates;
-  const distanceKm = _haversineKm(userLat, userLng, provLat, provLng); // Assume _haversineKm is a local or imported helper
+  const distanceKm = _haversineKm(userLat, userLng, provLat, provLng);
 
   return {
     _id: provider._id.toString(),
@@ -81,7 +81,7 @@ export function toBackendProviderDTO(
     profilePhoto: provider.profilePhoto,
     serviceArea: provider.serviceArea,
     serviceLocation: `${provLat},${provLng}`,
-    availability: provider.availability as any,
+    availability: provider.availability,
     status: provider.status,
     earnings: provider.earnings,
     totalBookings: provider.totalBookings,
@@ -201,7 +201,6 @@ export function toEarningsAnalyticsDTO(
   currentBookings: IBooking[]
 ): EarningsAnalyticsData {
 
-  // The mapping logic for the 'breakdown' array lives here
   const breakdown = currentBookings.map(b => ({
     date: new Date(b.bookingDate as string | number | Date),
     service: (b.serviceId as any)?.title || 'Unknown Service',
@@ -210,7 +209,6 @@ export function toEarningsAnalyticsDTO(
     status: String(b.status || 'Unknown'),
   }));
 
-  // Assemble the final DTO
   return {
     totalEarnings,
     earningsChangePercentage,
@@ -297,7 +295,6 @@ export function toProviderPerformanceDTO(
   serviceBreakdown: IServiceBreakdown[]
 ): IProviderPerformance {
 
-  // --- Basic Calculations ---
   const totalBookings = bookings.length;
   const completedBookings = bookings.filter(b => b.status === BookingStatus.COMPLETED).length;
   const cancelledBookings = bookings.filter(b => b.status === BookingStatus.CANCELLED).length;
@@ -310,7 +307,6 @@ export function toProviderPerformanceDTO(
     ? reviewsFromDb.reduce((sum, r) => sum + (Number(r.rating) ?? 0), 0) / reviewsFromDb.length
     : 0;
 
-  // --- Format Reviews with User Info ---
   const reviews: IReview[] = reviewsFromDb.map(r => {
     const user = users.find(u => u._id.toString() === r.userId?.toString());
     return {
@@ -322,7 +318,6 @@ export function toProviderPerformanceDTO(
     };
   });
 
-  // --- Rating Distribution Calculation ---
   const ratingCounts = new Map<number, number>([[5, 0], [4, 0], [3, 0], [2, 0], [1, 0]]);
   reviewsFromDb.forEach(review => {
     const rating = Math.round(Number(review.rating));
@@ -337,7 +332,6 @@ export function toProviderPerformanceDTO(
     percentage: totalReviews > 0 ? parseFloat(((count / totalReviews) * 100).toFixed(1)) : 0
   })).sort((a, b) => b.stars - a.stars);
 
-  // --- Star Rating Trend (Last 6 Months) ---
   const monthlyRatingData: { [key: string]: { sum: number, count: number } } = {};
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
@@ -366,7 +360,6 @@ export function toProviderPerformanceDTO(
     });
   }
 
-  // --- Final Assembly ---
   const completionRate = totalBookings > 0 ? ((completedBookings / totalBookings) * 100).toFixed(1) : "0";
   const cancellationRate = totalBookings > 0 ? ((cancelledBookings / totalBookings) * 100).toFixed(1) : "0";
 

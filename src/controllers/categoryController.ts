@@ -1,16 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-import { CategoryService } from '../services/implementation/categoryService';
 import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../interface/category';
 import { ICategory } from '../models/Categories';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
-import { validationResult } from 'express-validator';
-import * as fs from 'fs';
 import * as fsPromises from 'fs/promises';
 import { inject, injectable } from 'inversify';
 import TYPES from '../di/type';
 import { ICategoryService } from '../services/interface/ICategoryService';
 import { HttpStatusCode } from '../enums/HttpStatusCode';
-import { CommissionTypes } from '../enums/CommissionType.enum';
 import logger from '../logger/logger';
 import { ZodError } from 'zod';
 import {
@@ -37,11 +33,9 @@ export class CategoryController {
 
   createCategory = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
-      // 1. VALIDATION with Zod
       const validatedBody = createCategorySchema.parse(req.body);
       const { name, description, status, parentId, commissionType, commissionValue, commissionStatus } = validatedBody;
 
-      // File handling remains the same
       let iconUrl: string | undefined;
       if (req.file) {
         const fullUrl = await uploadToCloudinary(req.file.path);
@@ -93,18 +87,16 @@ export class CategoryController {
 
   updateCategory = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
-      // 1. VALIDATE both URL params and body
       const { id } = mongoIdParamSchema.parse(req.params);
       const validatedBody = updateCategorySchema.parse(req.body);
       const { name, description, status, parentId, commissionType, commissionValue, commissionStatus } = validatedBody;
 
-      // File handling remains the same
-      let iconUrl: string | undefined | null = req.body.iconUrl; // Keep existing icon by default
+      let iconUrl: string | undefined | null = req.body.iconUrl;
       if (req.file) {
         const fullUrl = await uploadToCloudinary(req.file.path);
         iconUrl = fullUrl.replace(process.env.CLOUDINARY_BASE_URL, '');
       } else if (req.body.iconUrl === '') {
-        iconUrl = null; // Signal to remove the icon
+        iconUrl = null; 
       }
 
       const updateCategoryData: Partial<ICategoryInput> = {
@@ -130,7 +122,6 @@ export class CategoryController {
       });
 
     } catch (error) {
-      // Cleanup file on any error
       if (req.file?.path) {
         await fsPromises.unlink(req.file.path).catch(err => logger.error("Failed to delete temp file on error:", err));
       }
@@ -151,13 +142,10 @@ export class CategoryController {
 
   getCategoryById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      // 1. Validate the incoming request parameter
       const { id } = mongoIdParamSchema.parse(req.params);
 
-      // 2. Call the service to get the fully prepared data
       const responseData = await this._categoryService.getCategoryById(id);
 
-      // 3. Send the response
       res.status(HttpStatusCode.OK).json(responseData);
 
     } catch (error) {
@@ -233,7 +221,6 @@ public getCategoryForEdit = async (req: Request, res: Response, next: NextFuncti
 
   getSubCategories = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            // VALIDATION ADDED for query parameters
             const { page = 1, limit = 10, search = '' } = getSubcategoriesQuerySchema.parse(req.query);
             const allSubCategories = await this._categoryService.getSubcategories(page, limit, search);
             res.status(HttpStatusCode.OK).json(allSubCategories);

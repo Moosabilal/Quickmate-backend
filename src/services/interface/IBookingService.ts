@@ -4,6 +4,7 @@ import { IPaymentVerificationPayload, IPaymentVerificationRequest } from "../../
 import { RazorpayOrder } from "../../interface/razorpay";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IMessage } from "../../models/message";
+import { Roles } from "../../enums/userRoles";
 
 export interface IBookingService {
     createNewBooking(data: IBookingRequest): Promise<{ message: string }>;
@@ -25,6 +26,6 @@ export interface IBookingService {
         limit: number,
         filters: { search?: string; bookingStatus?: string; }
     ): Promise<IAdminBookingsResponse>;
-    findProviderRange(userId: string, serviceId: string, lat: number, lng: number, radius: number): Promise<boolean>;
+    findProviderRange(userId: string, userRole: Roles, serviceId: string, lat: number, lng: number, radius: number): Promise<boolean>;
 
 }

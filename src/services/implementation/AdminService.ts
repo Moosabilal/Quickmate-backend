@@ -47,7 +47,6 @@ export class AdminService implements IAdminService {
     }
 
     public async getDashboardAnalytics(): Promise<IAnalyticsData> {
-        // Fetch all data points in parallel for maximum efficiency
         const [
             topServiceCategoriesRaw,
             bookingTrends,
@@ -68,14 +67,12 @@ export class AdminService implements IAdminService {
             this._reviewRepository.getAverageRating()
         ]);
 
-        // Calculate percentages for service categories based on the total of the top categories
         const totalTopCategoryBookings = topServiceCategoriesRaw.reduce((sum, cat) => sum + cat.value, 0);
         const topServiceCategories = topServiceCategoriesRaw.map(cat => ({
             ...cat,
             value: totalTopCategoryBookings > 0 ? parseFloat(((cat.value / totalTopCategoryBookings) * 100).toFixed(1)) : 0
         }));
 
-        // Assemble the final response object in the required structure
         return {
             topServiceCategories,
             bookingTrends,

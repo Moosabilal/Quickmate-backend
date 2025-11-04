@@ -138,7 +138,11 @@ export interface IBackendProvider {
   serviceArea: string;
   serviceLocation?: string;
   experience: number;
-  availability: Availability[];
+  availability: {
+    weeklySchedule: DaySchedule[];
+    dateOverrides: DateOverride[];
+    leavePeriods: LeavePeriod[];
+  };
   status: string;
   earnings: number;
   price: number;
@@ -155,7 +159,6 @@ export interface IProviderForChatListPage {
   location: string;
   isOnline: boolean;
   services: string;
-  // completedJobs: number;
   lastMessage?: string;
   lastMessageAt?: Date | null;
 }
@@ -222,9 +225,7 @@ export interface EarningsAnalyticsData {
   }>;
 }
 
-// src/interface/performance.dto.ts
 
-// Represents a single user review
 export interface IReview {
   name: string;
   time: string;
@@ -233,20 +234,17 @@ export interface IReview {
   avatar: string;
 }
 
-// Data for the rating distribution chart
 export interface IRatingDistribution {
   stars: number;
   count: number;
   percentage: number;
 }
 
-// Data for the monthly trend charts
 export interface IMonthlyTrend {
   month: string;
-  value: number; // The average rating for that month
+  value: number; 
 }
 
-// Data for the service breakdown view
 export interface IServiceBreakdown {
   serviceName: string;
   completed: number;
@@ -254,7 +252,6 @@ export interface IServiceBreakdown {
   completionRate: number;
 }
 
-// The final, complete data structure for the performance dashboard
 export interface IProviderPerformance {
   providerId: string;
   providerName: string;
@@ -267,9 +264,13 @@ export interface IProviderPerformance {
   completionRate: string;
   cancellationRate: string;
   reviews: IReview[];
-  // --- NEW FIELDS ---
   ratingDistribution: IRatingDistribution[];
   starRatingTrend: IMonthlyTrend[];
   serviceBreakdown: IServiceBreakdown[];
 }
 
+export interface IAvailabilityUpdateData {
+    weeklySchedule: DaySchedule[];
+    dateOverrides: DateOverride[];
+    leavePeriods: LeavePeriod[];
+}

@@ -1,5 +1,5 @@
 import { IProvider } from "../../models/Providers";
-import { EarningsAnalyticsData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IServiceAddPageResponse } from "../../interface/provider";
+import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IServiceAddPageResponse } from "../../interface/provider";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { calendar_v3 } from 'googleapis';
 
@@ -18,7 +18,7 @@ export interface IProviderService {
     }>;
     getServicesForAddservice() : Promise<{mainCategories: IServiceAddPageResponse[], services: IServiceAddPageResponse[]}>
     fetchProviderById(userId: string): Promise<IProviderProfile>;
-    updateProviderDetails(updateData: IProviderRegistrationData): Promise<IProviderProfile>;
+    updateProviderDetails(updateData: Partial<IProviderRegistrationData>): Promise<IProviderProfile>;
     updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
     getProviderwithFilters(userId: string, serviceId: string, filters: {radiusKm?: number, lat?: number, long?: number, experience?: number; date?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
     providerForChatPage(userId: string): Promise<IProviderForChatListPage[]>;
@@ -34,5 +34,7 @@ export interface IProviderService {
     ): Promise<Array<{ providerId: string; providerName: string; availableSlots: calendar_v3.Schema$TimePeriod[] }>>;
     getEarningsAnalytics(userId: string, period: 'week' | 'month'): Promise<EarningsAnalyticsData>;
     getProviderPerformance(userId: string): Promise<IProviderPerformance>;
+    getAvailability(userId: string): Promise<IProvider['availability']>;
+    updateAvailability(userId: string, data: IAvailabilityUpdateData): Promise<IProvider['availability']>;
 
 }

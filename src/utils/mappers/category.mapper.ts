@@ -19,10 +19,8 @@ export const toCategoryResponseDTO = (category: ICategory): ICategoryResponse =>
 
     return {
         ...categoryObject,
-        // Convert ObjectIds to strings
         _id: categoryObject._id.toString(),
         parentId: categoryObject.parentId ? categoryObject.parentId.toString() : null,
-        // Convert Dates to ISO strings
         createdAt: categoryObject.createdAt.toISOString(),
         updatedAt: categoryObject.updatedAt.toISOString(),
     };
@@ -33,10 +31,8 @@ export const toCommissionRuleResponseDTO = (rule: ICommissionRule): ICommissionR
 
     return {
         ...ruleObject,
-        // Convert ObjectIds to strings
         _id: ruleObject._id.toString(),
         categoryId: ruleObject.categoryId ? ruleObject.categoryId.toString() : null,
-        // Convert Dates to ISO strings
         createdAt: ruleObject.createdAt.toISOString(),
         updatedAt: ruleObject.updatedAt.toISOString(),
     };

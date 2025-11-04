@@ -551,13 +551,18 @@ export class BookingService implements IBookingService {
         };
     }
 
-    public async findProviderRange(userId: string, serviceId: string, lat: number, lng: number, radius: number): Promise<boolean> {
+    public async findProviderRange(userId: string, userRole: Roles, serviceId: string, lat: number, lng: number, radius: number): Promise<boolean> {
         const services = await this._serviceRepository.findAll({ subCategoryId: serviceId })
         if (!services || services.length <= 0) {
             throw new CustomError('Currently no service available', HttpStatusCode.NOT_FOUND);
         }
-        const currentProvider = await this._providerRepository.findOne({userId: userId})
-        const currentProviderId = currentProvider._id.toString()
+        let currentProviderId: string | null = null;
+        if (userRole === Roles.PROVIDER) {
+            const currentProvider = await this._providerRepository.findOne({ userId });
+            if (currentProvider) {
+                currentProviderId = currentProvider._id.toString();
+            }
+        }
         const providerids = services.map(s => s.providerId.toString()).filter(id => id !== currentProviderId);
         const providers = await this._providerRepository.findAll({ _id: { $in: providerids } })
         return isProviderInRange(providers, lat, lng, radius);

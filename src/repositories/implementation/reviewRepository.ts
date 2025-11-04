@@ -49,7 +49,6 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
 
         const pipeline: PipelineStage[] = [];
 
-        // Stage 1: Populate User data using $lookup
         pipeline.push({
             $lookup: {
                 from: 'users',
@@ -59,7 +58,6 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
             }
         });
 
-        // Stage 2: Populate Provider data using $lookup
         pipeline.push({
             $lookup: {
                 from: 'providers',
@@ -69,11 +67,9 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
             }
         });
 
-        // Stage 3: Deconstruct the arrays created by $lookup
         pipeline.push({ $unwind: '$user' });
         pipeline.push({ $unwind: '$provider' });
 
-        // Stage 4: Build the match query for filtering and searching
         const matchStage: FilterQuery<any> = {};
 
         if (rating) {
@@ -92,7 +88,6 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
             pipeline.push({ $match: matchStage });
         }
         
-        // Stage 5: Use $facet for efficient pagination and total counting in one query
         pipeline.push({
             $facet: {
                 total: [{ $count: 'count' }],

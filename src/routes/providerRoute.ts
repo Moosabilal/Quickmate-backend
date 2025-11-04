@@ -28,6 +28,9 @@ router.get('/earnings', isProvider, providerController.getEarningsAnalytics);
 router.get('/calendar/availability', isProvOrUser, providerController.getProviderAvailability)
 router.get('/performance', isProvider,providerController.getPerformance);
 
+//provider
+router.get('/availability', isProvider, providerController.getAvailability);
+router.put('/availability', isProvider, providerController.updateAvailability);
 
 // admin
 router.get('/getAllProviders', providerController.getAllProvidersList)

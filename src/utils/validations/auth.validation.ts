@@ -8,9 +8,9 @@ export const registerSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters long."),
     email: emailSchema,
     password: passwordSchema,
-    role: z.nativeEnum(Roles, {
-        message: "Invalid role specified."
-    }),
+    // role: z.nativeEnum(Roles, {
+    //     message: "Invalid role specified."
+    // }),
 });
 
 export const loginSchema = z.object({
@@ -28,12 +28,12 @@ export const emailOnlySchema = z.object({
 });
 
 export const resetPasswordSchema = z.object({
-    email: emailSchema,
+    token: z.string().min(1, "A valid token is required."),
     newPassword: passwordSchema,
-    confirmPassword: passwordSchema,
-}).refine(data => data.newPassword === data.confirmPassword, {
+    confirmNewPassword: passwordSchema,
+}).refine(data => data.newPassword === data.confirmNewPassword, {
     message: "Passwords do not match.",
-    path: ["confirmPassword"],
+    path: ["confirmNewPassword"],
 });
 
 export const googleLoginSchema = z.object({

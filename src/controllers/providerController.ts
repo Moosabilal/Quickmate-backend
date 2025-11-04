@@ -7,11 +7,8 @@ import { IProviderRegistrationData } from "../interface/provider";
 import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth";
-import { IProvider } from "../models/Providers";
-import { getOAuthClient } from "../utils/googleCalendar";
 import { ZodError } from "zod";
 
-// --- Import all the new Zod schemas ---
 import {
     registerProviderSchema,
     updateProviderSchema,
@@ -20,7 +17,9 @@ import {
     mongoIdParamSchema,
     getServiceProviderQuerySchema,
     getAvailabilityQuerySchema,
-    getEarningsQuerySchema
+    getEarningsQuerySchema,
+    featuredProvidersQuerySchema,
+    updateAvailabilitySchema
 } from '../utils/validations/provider.validation';
 import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation";
 @injectable()
@@ -89,6 +88,8 @@ export class ProviderController {
     public updateProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
+            const validatedBody = updateProviderSchema.parse(req.body);
+
             const files = req.files as {
                 aadhaarIdProof?: Express.Multer.File[];
                 profilePhoto?: Express.Multer.File[];
@@ -108,12 +109,12 @@ export class ProviderController {
 
             let lat: number | undefined;
             let lon: number | undefined;
-            if (req.body.serviceLocation) {
-                [lat, lon] = req.body.serviceLocation.split(",").map(Number);
+            if (validatedBody.serviceLocation) {
+                [lat, lon] = validatedBody.serviceLocation.split(",").map(Number);
             }
 
-            const updateData: IProviderRegistrationData = {
-                ...req.body,
+            const updateData: Partial<IProviderRegistrationData> = {
+                ...validatedBody,
                 userId: req.user.id,
                 serviceLocation: { type: "Point", coordinates: [lon, lat] }
             };
@@ -138,6 +139,7 @@ export class ProviderController {
                 message: "Profile updated successfully",
             });
         } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             next(error);
         }
     }
@@ -182,12 +184,11 @@ export class ProviderController {
 
     public featuredProviders = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const page = parseInt(req.query.page as string) || 1;
-            const limit = parseInt(req.query.limit as string) || 10;
-            const search = (req.query.search as string) || '';
+            const { page = 1, limit = 10, search = '' } = featuredProvidersQuerySchema.parse(req.query);
             const getFeaturedProviders = await this._providerService.getFeaturedProviders(page, limit, search)
             res.status(HttpStatusCode.OK).json(getFeaturedProviders)
         } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             next(error);
         }
 
@@ -206,10 +207,22 @@ export class ProviderController {
 
     public getServiceProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const filters = getServiceProviderQuerySchema.parse(req.query);
+            const validatedQuery = getServiceProviderQuerySchema.parse(req.query);
             const userId = req.user.id;
 
-            const response = await this._providerService.getProviderwithFilters(userId, filters.serviceId, filters)
+            const filtersForService = {
+                lat: validatedQuery.latitude,
+                long: validatedQuery.longitude,
+                radius: validatedQuery.radius ?? 10, // Use parsed radius, or a default
+                experience: validatedQuery.experience,
+                date: validatedQuery.date,
+                time: validatedQuery.time,
+                price: validatedQuery.price
+            };
+
+            console.log('tbe faksdfbalsdfas', filtersForService)
+
+            const response = await this._providerService.getProviderwithFilters(userId, validatedQuery.serviceId, filtersForService)
             res.status(200).json(response)
         } catch (error) {
             next(error)
@@ -242,7 +255,7 @@ export class ProviderController {
 
             const query = getAvailabilityQuerySchema.parse(req.query);
             const userId = req.user.id;
-            
+
             const response = await this._providerService.getAvailabilityByLocation(
                 userId,
                 query.serviceId,
@@ -287,6 +300,34 @@ export class ProviderController {
             next(error);
         }
     };
+
+    public getAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id;
+            const availability = await this._providerService.getAvailability(userId);
+            res.status(HttpStatusCode.OK).json({ success: true, data: availability });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public updateAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id;
+
+            const data = updateAvailabilitySchema.parse(req.body);
+
+            const availability = await this._providerService.updateAvailability(userId, data);
+            res.status(HttpStatusCode.OK).json({
+                success: true,
+                message: "Availability updated successfully",
+                data: availability
+            });
+        } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
+        }
+    }
 
 
 }

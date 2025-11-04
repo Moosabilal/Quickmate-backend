@@ -10,7 +10,6 @@ const authController = container.get<AuthController>(TYPES.AuthController)
 
 const isUser = [authenticateToken, authorizeRoles(['Customer','ServiceProvider'])];
 const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
-const isAdminOrUser = 
 
 router.post('/register',authController.register);
 router.post('/login',  authController.login);

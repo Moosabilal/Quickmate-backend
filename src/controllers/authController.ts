@@ -100,7 +100,7 @@ export class AuthController {
   public resetPassword = async (req: Request<{}, {}, ResetPasswordRequestBody>, res: Response, next: NextFunction) => {
     try {
       const validatedBody = resetPasswordSchema.parse(req.body);
-      const response = await this._authService.resetPassword(req.body);
+      const response = await this._authService.resetPassword(validatedBody);
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);

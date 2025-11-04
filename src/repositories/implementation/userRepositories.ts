@@ -55,7 +55,6 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
   }
 
   public async getActiveUserCount(): Promise<number> {
-        // Assuming 'active' means the user's account is verified
         return this.model.countDocuments({ isVerified: true });
     }
 
