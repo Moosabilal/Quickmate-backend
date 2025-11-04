@@ -138,7 +138,11 @@ export interface IBackendProvider {
   serviceArea: string;
   serviceLocation?: string;
   experience: number;
-  availability: Availability[];
+  availability: {
+    weeklySchedule: DaySchedule[];
+    dateOverrides: DateOverride[];
+    leavePeriods: LeavePeriod[];
+  };
   status: string;
   earnings: number;
   price: number;

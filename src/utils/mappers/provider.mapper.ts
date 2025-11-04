@@ -81,7 +81,7 @@ export function toBackendProviderDTO(
     profilePhoto: provider.profilePhoto,
     serviceArea: provider.serviceArea,
     serviceLocation: `${provLat},${provLng}`,
-    availability: provider.availability as any,
+    availability: provider.availability,
     status: provider.status,
     earnings: provider.earnings,
     totalBookings: provider.totalBookings,

@@ -567,3 +567,169 @@
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Client disconnected: 8sscfC5HMgFeUWY7AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - the reset link
+[ERROR  ] - Error sending password reset email to moosabilal75608@gmail.com: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-29551168756sm84901255ad.16 - gsmtp
+[ERROR  ] - POST /api/auth/forgot-password 500 Failed to send password reset email. -> Failed to send password reset email.
+[INFO   ] - the reset link
+[ERROR  ] - Error sending password reset email to moosabilal75608@gmail.com: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-295269cc3d4sm112628125ad.112 - gsmtp
+[ERROR  ] - POST /api/auth/forgot-password 500 Failed to send password reset email. -> Failed to send password reset email.
+[INFO   ] - Client disconnected: wCZXREWD3jF_hdErAAAB
+[INFO   ] - Client disconnected: Sa4kOegmGHA2CczgAAAD
+[INFO   ] - Client disconnected: XAYXHgWLEElAJEBQAAAF
+[INFO   ] - Client disconnected: xnxmY5D-rijmnGViAAAH
+[INFO   ] - Client disconnected: de7dKcbE539YiO43AAAJ
+[INFO   ] - Client disconnected: PSurR_5rnK-e7d2TAAAL
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Client disconnected: dyNjxxbtKaa-CsoqAAAP
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - the reset link
+[ERROR  ] - Error sending password reset email to moosabilal75608@gmail.com: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-340a72c021fsm4517268a91.11 - gsmtp
+[ERROR  ] - POST /api/auth/forgot-password 500 Failed to send password reset email. -> Failed to send password reset email.
+[INFO   ] - Client disconnected: j-QVd9RYQlKto7TBAAAN
+[INFO   ] - Client disconnected: fBh06W-QbJAnRL5KAAAT
+[INFO   ] - Client disconnected: Ap2cBeZDM_N4_aWgAAAV
+[INFO   ] - Client disconnected: VRFFWX6l-24x-UC8AAAX
+[INFO   ] - Client disconnected: mcRJIomXihDSdo31AAAR
+[INFO   ] - the reset link
+[ERROR  ] - Error sending password reset email to moosabilal75608@gmail.com: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-3415a1c2e69sm557911a91.6 - gsmtp
+[ERROR  ] - POST /api/auth/forgot-password 500 Failed to send password reset email. -> Failed to send password reset email.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: bCyPFthz274PCtsWAAAD
+[INFO   ] - Client disconnected: 1cpc_SjUblYDw_osAAAF
+[INFO   ] - the reset link
+[INFO   ] - Password reset email sent to moosabilal75608@gmail.com
+[INFO   ] - Client disconnected: da0SpUNFLALX_oY9AAAJ
+[INFO   ] - Client disconnected: wI4_5Ufz5IISb0q2AAAH
+[INFO   ] - Client disconnected: 0sUlS2Fl-FCjVI7jAAAL
+[INFO   ] - Client disconnected: a8rJiqTlUvZH9DAKAAAN
+[INFO   ] - Client disconnected: kU0D-kv3OF0ixRqgAAAP
+[INFO   ] - Client disconnected: 5AJsHVXF_kxM2FC9AAAR
+[INFO   ] - Client disconnected: -XI2Rj7I6o6frDFfAAAT
+[INFO   ] - Client disconnected: 48Io4pTz5JcX-h0mAAAV
+[INFO   ] - Client disconnected: nnDoMiga_CTlaIvwAAAX
+[INFO   ] - Client disconnected: Z_GBCoFDiK3GcCFJAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Client disconnected: fuv-hI-papJuErlAAAAD
+[INFO   ] - Client disconnected: sJYmdVIhJ2nHQGZPAAAF
+[INFO   ] - Client disconnected: rDw8IjboJBjnvfwkAAAB
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: TP6w1frEUEV6EunKAAAJ
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: _PHK2c0AQjnK8E5UAAAL
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: mf_bm0CDQlna615CAAAN
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: 8eI4IKcQdhnnusGlAAAP
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: oMDEULkcosXM9OABAAAR
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: EnR7mSpuBqluvNEzAAAT
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: U_NkzkYzaqrvSdpwAAAV
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: n-UhGs5tk5xYelIFAAAX
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: LsBVLz_07LPcps0IAAAZ
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: EisPluW18rL12A7IAAAb
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: VtKUUKDYiRq-qFJOAAAd
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: HqVhP7IsXYGGkQ2OAAAf
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: afXdZvxCAYqmDWTdAAAh
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: dVfrFn9RrGMKknvKAAAj
+[INFO   ] - Client disconnected: QgT1EXqQ0RE-zTHHAAAl
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: 5leOW-p94H4yIoQSAAAD
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: Y3lJLsGHV42deDrtAAAF
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: zgvvX-mw01Jb40zeAAAH
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: kDMFMYjIY3fSE22hAAAJ
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: bjX8xDbY4JeqxlR-AAAL
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: e0Ab5ouDicOxwT5QAAAN
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: Tb7cKuAoeAa5SRSPAAAP
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: Ycw-MWIWOW0PDQqPAAAR
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: DCiPYK6POQZyK021AAAT
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: K5NvVUAi9U6rgb58AAAB
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: dscJ8n2RAstWC4bMAAAD
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: 83PUMWh3y3L_Gf2YAAAF
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: BBjzjodn2i1rWJihAAAJ
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: yq-pGZcQB6l3-C1aAAAL
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: 69ktFFyMLHYWSyODAAAN
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: ZG4FjmNHdtcnn3HaAAAP
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: lk85M39zmqxMp3wEAAAR
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: TM1Tl8KpGjetd6JVAAAT
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: Fuy2AercwibmvfImAAAV
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: YqyEMGP6tKt1lot5AAAX
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: vBSZJWpuLzjd7MJLAAAZ
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: cXQtm7hMmperRWeXAAAb
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: V-LSvV-4pSFyWo_1AAAd
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: gCG1bQ1v341s71H-AAAf
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: ivEXRTSFhmCrA-qyAAAh
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Client disconnected: o8RZAlS-bivHIlvOAAAj
+[INFO   ] - Client disconnected: ySDK3YgNdG221ctsAAAl
+[INFO   ] - Client disconnected: tYTsG-fmju2PcjlBAAAn
+[INFO   ] - Client disconnected: Mpdc1fVRlelkEnVXAAAp
+[INFO   ] - Client disconnected: kNRQCWQ1m5FpZ1uMAAAr
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

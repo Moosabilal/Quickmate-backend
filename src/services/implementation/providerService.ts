@@ -363,22 +363,22 @@ export class ProviderService implements IProviderService {
 
         enrichedProviders.sort((a, b) => a.distanceKm - b.distanceKm);
 
-        const enrichedMap = enrichedProviders.map(p => ({
-            id: p._id,
-            name: p.fullName,
-            phone: p.phoneNumber,
-            email: p.email,
-            experience: p.experience,
-            price: p.price,
-            distanceKm: p.distanceKm,
-            totalBookings: p.totalBookings,
-            earnings: p.earnings,
-            reviewsCount: p.reviews?.length || 0,
-            serviceName: p.serviceName,
-            status: p.status,
-            availability: p.availability?.length || 0,
-        }));
-        console.table(enrichedMap);
+        // const enrichedMap = enrichedProviders.map(p => ({
+        //     id: p._id,
+        //     name: p.fullName,
+        //     phone: p.phoneNumber,
+        //     email: p.email,
+        //     experience: p.experience,
+        //     price: p.price,
+        //     distanceKm: p.distanceKm,
+        //     totalBookings: p.totalBookings,
+        //     earnings: p.earnings,
+        //     reviewsCount: p.reviews?.length || 0,
+        //     serviceName: p.serviceName,
+        //     status: p.status,
+        //     availability: p.availability?.length || 0,
+        // }));
+        console.log('the frontend getting data', JSON.stringify(enrichedProviders, null, 2))
 
         return enrichedProviders;
     }
