@@ -740,3 +740,326 @@
 [INFO   ] - Client disconnected: kJWsH0Dd_8OyF61GAAAB
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: TFsWsTa0AH1y_Pe0AAAB
+[INFO   ] - Client disconnected: gAJ_K85u00AwFxIvAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: ZEgCXLhc3erWqkInAAAB
+[INFO   ] - Client disconnected: Vpjd9MlrdMYNDBfRAAAD
+[INFO   ] - Client disconnected: d-pc5vHzDB4IvmZOAAAF
+[INFO   ] - Client disconnected: UN-j_5iJmNq6ktf5AAAH
+[INFO   ] - Client disconnected: L3RefBvFYDAGtcM1AAAJ
+[INFO   ] - Client disconnected: -LnW1l65OsYkJvX8AAAL
+[INFO   ] - Client disconnected: WS-60c4cgSnGDGDwAAAN
+[INFO   ] - Client disconnected: sdK2msUGJKh5IgWEAAAP
+[INFO   ] - Client disconnected: RRmBpgPp2sS4Cv01AAAR
+[INFO   ] - Client disconnected: T_NB75jbkC0_CnPhAAAT
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: ZBsC9-zeEvFPv95FAAAB
+[INFO   ] - Client disconnected: q5BR6LGVyBBTAGcnAAAD
+[INFO   ] - Client disconnected: D7z1fpFyHuzjkSg7AAAF
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 8AIVtm0NYvDot2_dAAAH
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: LzwJRAy2IEDsvLO-AAAJ
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: Da2F9LRwifneAEJ2AAAL
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: oQPvHy-VaW5ftPC6AAAN
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: csCcNgxFgemBEfZeAAAP
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: XQvWKeQNX9yGGcv5AAAR
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: tk3YZTUcIugUobhoAAAT
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: AR9NaRq8iz9vU1H5AAAV
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: OB1XNP3KuehxcYW0AAAX
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: qjEIGK5LcxeHm5BDAAAZ
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: HDBj6EzqKD0muf_EAAAb
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 2E2GxSFO-38L1xD6AAAd
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 9xbJGQ5W7D-x6HktAAAf
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 5OJjckL5KckHbmreAAAh
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: bo99YO_qSwCzD119AAAj
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: -GVviy7MUMuO_WkHAAAl
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: M9mll0T8o3B-PnouAAAn
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 2qRJNvu1ImDvjq2FAAAp
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: IOGwlso96F4YUQnVAAAr
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: _jcoB6MZqF5e-ZM7AAAt
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: TU1kYdhv3ehOSrYKAAAv
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: JdZlIwFzzFCjhOvhAAAx
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: jhzeEeLstrIGWn9CAAAz
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: fRyissHQBQNs2tHTAAA1
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: qhSI9veZHmiZnGomAAA3
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 5qkD8Lin88bSwk_SAAA5
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: PmDsnG_p4HFcTpIYAAA7
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: lwsZG3s9urcGBJ6TAAA9
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: edpmi1XvvQzmplHVAAA_
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: Gdl5VrxD5xhwSbjjAABB
+[INFO   ] - Client disconnected: xX76lDSFXU41WrlzAABD
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: 1xULHvzKwvt_0F5-AABF
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: mTS9h6lpLqDBrkM8AABH
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 7eava6r8SGJdicm0AABJ
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: vR2al5EXIIQwnpkbAABL
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: k5TlGnTfliFYteyWAABN
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: EXL3KMgAvl42wu6VAABP
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: NrU3t8T-h8BGfaDLAABR
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 13CVzi3dHMOAoHhxAABT
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: 8CnXLXV_2bUR9fK7AABV
+[ERROR  ] - GET /api/categories 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[INFO   ] - Client disconnected: acfS2f-zzazW8XtKAABX
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: bDoM4yUxc4w8LV7aAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/details/68be7033d506e858a68dcf3c 500 [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+] -> [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+[ERROR  ] - GET /api/provider/getProvider 401 Authorization token is missing. Please re-login -> Authorization token is missing. Please re-login
+[ERROR  ] - GET /api/provider/details/68be7033d506e858a68dcf3c 500 [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+] -> [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+[ERROR  ] - GET /api/provider/details/68be7033d506e858a68dcf3c 500 [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+] -> [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: o14IoJara26_XZZJAAAB
+[INFO   ] - Client disconnected: tVBQ7T4HrIpANLVFAAAD
+[INFO   ] - Client disconnected: -FgU9DEZoVyrZ4-aAAAF
+[INFO   ] - Client disconnected: evHgFhU9d92UzSFZAAAH
+[INFO   ] - Client disconnected: gsd5fBLf1TXjosrJAAAJ
+[INFO   ] - Client disconnected: 60gf3HtCRULshe0OAAAL
+[INFO   ] - Client disconnected: ZCGIVD6jmx8h06F7AAAN
+[INFO   ] - Client disconnected: yS-eQloe-VX0rb3pAAAP
+[INFO   ] - Client disconnected: bAPKin3K1dUraLqZAAAR
+[INFO   ] - Client disconnected: k2QSsMVaAegF12WhAAAT
+[INFO   ] - Client disconnected: CgJ5eqgK-2QH6iikAAAV
+[INFO   ] - Client disconnected: xfPF6cSyK6K7Mu1oAAAX
+[INFO   ] - Client disconnected: TdJGMP4E9hVFeqamAAAZ
+[INFO   ] - Client disconnected: CBw7r3-TwV_dK_ZGAAAb
+[INFO   ] - Client disconnected: 7OUZNwmM4PdrhN3aAAAd
+[INFO   ] - Client disconnected: Unj0HTlQjZ5fTwpmAAAf
+[INFO   ] - Client disconnected: kyv8xfQGwIkHRscWAAAh
+[INFO   ] - Client disconnected: 1ICjWZYURRLaz1QHAAAj
+[INFO   ] - Client disconnected: dKgUepjhwXvWXmH9AAAl
+[INFO   ] - Client disconnected: HD5npf2O8LugeQukAAAn
+[INFO   ] - Client disconnected: ZM_LTIR9NYF67fgvAAAp
+[INFO   ] - Client disconnected: W_LYescFR4s0OpDjAAAr
+[INFO   ] - Client disconnected: _W4L3Ve30PSdSe60AAAt
+[INFO   ] - Client disconnected: oV7QgOiWRzinWrpnAAAv
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: ATEqvlhMxdQNgptTAAAB
+[INFO   ] - Client disconnected: LwnvH7KPtV6SaM2lAAAD
+[INFO   ] - Socket eLHcjMfhyp8g3zUwAAAF joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Client disconnected: eLHcjMfhyp8g3zUwAAAF
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket Lge2cI_oNtbevNq4AAAB joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket 149WkjAm8Xw5JLOHAAAB joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Client disconnected: 149WkjAm8Xw5JLOHAAAB
+[INFO   ] - Socket cTwRziGUVH2FCiQaAAAD joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket cTwRziGUVH2FCiQaAAAD joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: xdB21vENFrzEiB30AAAB
+[INFO   ] - Socket qSqMcGi0bK48h5qZAAAD joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket GbB40g1LsgwYD-7GAAAB joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Client disconnected: GbB40g1LsgwYD-7GAAAB
+[INFO   ] - Client disconnected: EGEFduMlILQXLu3TAAAD

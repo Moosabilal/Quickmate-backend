@@ -274,3 +274,21 @@ export interface IAvailabilityUpdateData {
     dateOverrides: DateOverride[];
     leavePeriods: LeavePeriod[];
 }
+
+
+export interface IServiceDetails {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  priceUnit: string;
+  duration: string;
+  categoryId: { name: string };
+  subCategoryId: { name: string };
+  experience?: number;
+}
+
+export interface IProviderDetailsResponse {
+  provider: IProviderProfile;
+  services: IServiceDetails[];
+}

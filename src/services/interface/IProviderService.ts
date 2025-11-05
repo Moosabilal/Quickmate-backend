@@ -1,5 +1,5 @@
 import { IProvider } from "../../models/Providers";
-import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IServiceAddPageResponse } from "../../interface/provider";
+import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderDetailsResponse, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IServiceAddPageResponse } from "../../interface/provider";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { calendar_v3 } from 'googleapis';
 
@@ -36,5 +36,6 @@ export interface IProviderService {
     getProviderPerformance(userId: string): Promise<IProviderPerformance>;
     getAvailability(userId: string): Promise<IProvider['availability']>;
     updateAvailability(userId: string, data: IAvailabilityUpdateData): Promise<IProvider['availability']>;
+    getPublicProviderDetails(providerId: string): Promise<IProviderDetailsResponse>;
 
 }

@@ -1,5 +1,5 @@
 import { IProvider } from '../../models/Providers';
-import { EarningsAnalyticsData, IBackendProvider, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse, IServiceBreakdown } from '../../interface/provider';
+import { EarningsAnalyticsData, IBackendProvider, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse, IServiceBreakdown, IServiceDetails } from '../../interface/provider';
 import { ICategory } from '../../models/Categories';
 import { IBooking } from '../../models/Booking';
 import { IService } from '../../models/Service';
@@ -8,6 +8,12 @@ import { BookingStatus } from "../../enums/booking.enum";
 import { IReview as IReviewModel } from '../../models/Review';
 import { IUser } from '../../models/User';
 import { _haversineKm } from '../helperFunctions/haversineKm';
+
+
+const createJoiningId = (id1: string, id2: string): string => {
+    if (!id1 || !id2) return '';
+    return [id1, id2].sort().join('-');
+};
 
 
 export function toProviderDTO(provider: IProvider): IProviderProfile {
@@ -92,12 +98,16 @@ export function toBackendProviderDTO(
   };
 }
 
+
 export function toProviderForChatListPage(
+  currentUserId: string,
   bookings: IBooking[],
   providers: IProvider[],
   services: IService[],
-  messages: { bookingId: string; lastMessage: string; createdAt: Date }[]
+  messages: { joiningId: string; lastMessage: string; createdAt: Date }[]
 ): IProviderForChatListPage[] {
+
+  const messageMap = new Map(messages.map(m => [m.joiningId, m]));
 
   return providers.map((provider) => {
     const booking = bookings.find(
@@ -106,9 +116,10 @@ export function toProviderForChatListPage(
     const providerServices = services.filter(
       (s) => s.providerId?.toString() === provider._id.toString()
     );
-    const lastMessageData = messages.find(
-      (m) => m.bookingId === booking?._id.toString()
-    )
+    
+    const joiningId = createJoiningId(currentUserId, provider.userId.toString());
+    
+    const lastMessageData = messageMap.get(joiningId);
 
     return {
       id: provider.userId.toString(),
@@ -124,16 +135,15 @@ export function toProviderForChatListPage(
   });
 }
 
-
-
-
-
 export function toClientForChatListPage(
+  currentUserId: string,
   bookings: IBooking[],
   clients: IUser[],
   services: IService[],
-  messages: { bookingId: string; lastMessage: string; createdAt: Date }[]
+  messages: { joiningId: string; lastMessage: string; createdAt: Date }[]
 ): IProviderForChatListPage[] {
+
+  const messageMap = new Map(messages.map(m => [m.joiningId, m]));
 
   return clients.map((client) => {
     const clientBooking = bookings
@@ -145,28 +155,24 @@ export function toClientForChatListPage(
     const service = services.find(
       (s) => s._id.toString() === clientBooking.serviceId?.toString()
     );
-    const lastMessageData = messages.find(
-      (m) => m.bookingId === clientBooking._id.toString()
-    );
+    
+    const joiningId = createJoiningId(currentUserId, client._id.toString());
+    
+    const lastMessageData = messageMap.get(joiningId);
 
     return {
       id: client._id.toString(),
       bookingId: clientBooking._id.toString(),
       name: client.name as string,
       profilePicture: (client.profilePicture as string) || "",
-      location: "",
-      isOnline: true,
+      location: "", 
+      isOnline: true, 
       services: service?.title || "",
       lastMessage: lastMessageData?.lastMessage || "",
       lastMessageAt: lastMessageData?.createdAt || null,
-    } as IProviderForChatListPage
+    } as IProviderForChatListPage;
   }).filter((item): item is IProviderForChatListPage => item !== null);
 }
-
-
-
-
-
 
 
 function buildRatingHistory(reviews: IReviewModel[]) {
@@ -379,4 +385,24 @@ export function toProviderPerformanceDTO(
     starRatingTrend,
     serviceBreakdown
   };
+}
+
+
+export function toServiceDetailsDTO(service: IService): IServiceDetails {
+    // We cast to 'any' here to access the populated fields 'categoryId.name'
+    // This is safe because we controlled the query in the repository.
+    const serviceObj = service as any;
+
+    return {
+        _id: serviceObj._id.toString(),
+        title: serviceObj.title,
+        description: serviceObj.description,
+        price: serviceObj.price,
+        priceUnit: serviceObj.priceUnit,
+        duration: serviceObj.duration,
+        // The populated fields are accessed here
+        categoryId: serviceObj.categoryId, 
+        subCategoryId: serviceObj.subCategoryId,
+        experience: serviceObj.experience
+    };
 }

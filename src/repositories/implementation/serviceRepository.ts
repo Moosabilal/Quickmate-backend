@@ -49,4 +49,13 @@ export class ServiceRepository extends BaseRepository<IService> implements IServ
 
         return this.findAll(filter);
     }
+
+    public async findPopulatedByProviderId(providerId: string): Promise<IService[]> {
+        // This query finds all services by the providerId and uses .populate() 
+        // to fetch the 'name' from the referenced Category documents.
+        return this.model.find({ providerId: new Types.ObjectId(providerId) })
+            .populate('categoryId', 'name')
+            .populate('subCategoryId', 'name')
+            .lean(); // .lean() makes it faster for read-only operations
+    }
 }

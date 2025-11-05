@@ -4,7 +4,7 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose from "mongoose";
 import { IProvider } from "../../models/Providers";
-import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IReviewsOfUser, IServiceAddPageResponse, TimeSlot } from "../../interface/provider";
+import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderDetailsResponse, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IReviewsOfUser, IServiceAddPageResponse, TimeSlot } from "../../interface/provider";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -15,7 +15,7 @@ import { sendVerificationEmail } from "../../utils/emailService";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
-import { toBackendProviderDTO, toClientForChatListPage, toEarningsAnalyticsDTO, toProviderDashboardDTO, toProviderDTO, toProviderForAdminResponseDTO, toProviderForChatListPage, toProviderPerformanceDTO, toServiceAddPage } from "../../utils/mappers/provider.mapper";
+import { toBackendProviderDTO, toClientForChatListPage, toEarningsAnalyticsDTO, toProviderDashboardDTO, toProviderDTO, toProviderForAdminResponseDTO, toProviderForChatListPage, toProviderPerformanceDTO, toServiceAddPage, toServiceDetailsDTO } from "../../utils/mappers/provider.mapper";
 import { toLoginResponseDTO } from "../../utils/mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
@@ -313,6 +313,7 @@ export class ProviderService implements IProviderService {
             userId: provider.userId.toString(),
             fullName: provider.fullName,
             profilePhoto: provider.profilePhoto,
+            rating: provider.rating,
 
         }))
 
@@ -363,72 +364,55 @@ export class ProviderService implements IProviderService {
 
         enrichedProviders.sort((a, b) => a.distanceKm - b.distanceKm);
 
-        // const enrichedMap = enrichedProviders.map(p => ({
-        //     id: p._id,
-        //     name: p.fullName,
-        //     phone: p.phoneNumber,
-        //     email: p.email,
-        //     experience: p.experience,
-        //     price: p.price,
-        //     distanceKm: p.distanceKm,
-        //     totalBookings: p.totalBookings,
-        //     earnings: p.earnings,
-        //     reviewsCount: p.reviews?.length || 0,
-        //     serviceName: p.serviceName,
-        //     status: p.status,
-        //     availability: p.availability?.length || 0,
-        // }));
-        console.log('the frontend getting data', JSON.stringify(enrichedProviders, null, 2))
-
         return enrichedProviders;
     }
 
 
 
     public async providerForChatPage(userId: string): Promise<IProviderForChatListPage[]> {
-        if (!userId) {
-            throw new CustomError("Sorry, UserId not found", HttpStatusCode.NOT_FOUND);
-        }
-
-        const user = await this._userRepository.findById(userId);
-        if (!user) {
-            throw new CustomError("User not found", HttpStatusCode.NOT_FOUND);
-        }
-
-        if (user.role === Roles.PROVIDER) {
-
-            const providerProfile = await this._providerRepository.findOne({ userId });
-            if (!providerProfile) return [];
-
-            const bookings = await this._bookingRepository.findAll({ providerId: providerProfile._id });
-            if (!bookings.length) return [];
-
-            const clientIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
-            const clients = await this._userRepository.findAll({ _id: { $in: clientIds } });
-
-            const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
-            const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
-            const bookingIds = bookings.map(b => b._id.toString());
-            const messages = await this._messageRepository.findLastMessagesByBookingIds(bookingIds);
-
-            return toClientForChatListPage(bookings, clients, services, messages);
-
-        } else {
-
-            const bookings = await this._bookingRepository.findAll({ userId });
-            if (!bookings.length) return [];
-
-            const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
-            const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
-
-            const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
-            const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
-            const bookingIds = bookings.map(b => b._id.toString());
-            const messages = await this._messageRepository.findLastMessagesByBookingIds(bookingIds);
-
-            return toProviderForChatListPage(bookings, providers, services, messages);
-        }
+    if (!userId) {
+        throw new CustomError("Sorry, UserId not found", HttpStatusCode.NOT_FOUND);
     }
+    const user = await this._userRepository.findById(userId);
+    if (!user) {
+        throw new CustomError("User not found", HttpStatusCode.NOT_FOUND);
+    }
+
+    const createJoiningId = (id1: string, id2: string) => [id1, id2].sort().join('-');
+
+    if (user.role === Roles.PROVIDER) {
+        const providerProfile = await this._providerRepository.findOne({ userId });
+        if (!providerProfile) return [];
+        const bookings = await this._bookingRepository.findAll({ providerId: providerProfile._id });
+        if (!bookings.length) return [];
+
+        const clientIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
+        const clients = await this._userRepository.findAll({ _id: { $in: clientIds } });
+        const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
+        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+
+        const joiningIds = clients.map(client => createJoiningId(user.id, client._id.toString()));
+        const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
+
+        return toClientForChatListPage(user.id, bookings, clients, services, messages);
+
+    } else {
+        const bookings = await this._bookingRepository.findAll({ userId });
+        if (!bookings.length) return [];
+
+        const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
+
+        const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
+        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+        
+        const providerUserIds = providers.map(p => p.userId.toString());
+        const joiningIds = providerUserIds.map(providerUserId => createJoiningId(user.id, providerUserId));
+        const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
+
+        return toProviderForChatListPage(user.id, bookings, providers, services, messages);
+    }
+}
 
 
     public async getProviderDashboard(
@@ -671,11 +655,6 @@ export class ProviderService implements IProviderService {
     }
 
 
-
-
-
-
-
     private async _getProvidersByInitialCriteria(
         subCategoryId: string,
         userIdToExclude: string,
@@ -800,7 +779,7 @@ export class ProviderService implements IProviderService {
     }
 
     private _isProviderOnLeave(provider: IProvider, dateStr: string): boolean {
-        const date = new Date(dateStr.replace(/-/g, '/')); // Use replace for cross-browser safety
+        const date = new Date(dateStr.replace(/-/g, '/')); 
         return provider.availability.leavePeriods.some(period => {
             const from = new Date(period.from.replace(/-/g, '/'));
             const to = new Date(period.to.replace(/-/g, '/'));
@@ -851,6 +830,24 @@ export class ProviderService implements IProviderService {
         if (busySlotConflict) return false;
 
         return true;
+    }
+
+    public async getPublicProviderDetails(providerId: string): Promise<IProviderDetailsResponse> {
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) {
+            throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
+        }
+
+        const services = await this._serviceRepository.findPopulatedByProviderId(providerId);
+
+        const providerProfile = toProviderDTO(provider);
+        
+        const serviceDetails = services.map(toServiceDetailsDTO);
+
+        return {
+            provider: providerProfile,
+            services: serviceDetails
+        };
     }
 
 

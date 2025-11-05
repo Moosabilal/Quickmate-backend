@@ -19,6 +19,7 @@ router.post('/verify-registration-otp', providerController.verifyOtp);
 router.post('/resend-registration-otp', providerController.resendOtp);
 router.post('/updateProvider', isProvider, authenticateToken, upload.fields([{ name: 'aadhaarIdProof', maxCount: 1 },{ name: 'profilePhoto', maxCount: 1 }]), providerController.updateProvider)
 router.get('/getProvider', providerController.getProvider)
+router.get('/details/:providerId', providerController.getPublicProviderDetails);
 router.get('/getFeaturedProviders', providerController.featuredProviders)
 router.get('/getFilteredServiceProvider',isProvOrUser, providerController.getServiceProvider)
 router.get('/getServicesForAddPage', providerController.getServicesForAddPage)

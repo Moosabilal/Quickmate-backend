@@ -8,6 +8,7 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth";
 import { ZodError } from "zod";
+import { z } from "zod";
 
 import {
     registerProviderSchema,
@@ -213,14 +214,12 @@ export class ProviderController {
             const filtersForService = {
                 lat: validatedQuery.latitude,
                 long: validatedQuery.longitude,
-                radius: validatedQuery.radius ?? 10, // Use parsed radius, or a default
+                radius: validatedQuery.radius ?? 10,
                 experience: validatedQuery.experience,
                 date: validatedQuery.date,
                 time: validatedQuery.time,
                 price: validatedQuery.price
             };
-
-            console.log('tbe faksdfbalsdfas', filtersForService)
 
             const response = await this._providerService.getProviderwithFilters(userId, validatedQuery.serviceId, filtersForService)
             res.status(200).json(response)
@@ -323,6 +322,20 @@ export class ProviderController {
                 message: "Availability updated successfully",
                 data: availability
             });
+        } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
+        }
+    }
+
+    public getPublicProviderDetails = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+
+            const { providerId } = req.params;
+            
+            const response = await this._providerService.getPublicProviderDetails(providerId);
+            
+            res.status(HttpStatusCode.OK).json({ success: true, data: response });
         } catch (error) {
             if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             next(error);
