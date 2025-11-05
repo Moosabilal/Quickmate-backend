@@ -20,7 +20,8 @@ import {
     getAvailabilityQuerySchema,
     getEarningsQuerySchema,
     featuredProvidersQuerySchema,
-    updateAvailabilitySchema
+    updateAvailabilitySchema,
+    searchQuerySchema
 } from '../utils/validations/provider.validation';
 import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation";
 @injectable()
@@ -231,8 +232,10 @@ export class ProviderController {
     public getProviderForChatPage = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
+            const { search } = searchQuerySchema.parse(req.query);
+
             const userId = req.user.id
-            const response = await this._providerService.providerForChatPage(userId)
+            const response = await this._providerService.providerForChatPage(userId, search)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

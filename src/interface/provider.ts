@@ -159,7 +159,9 @@ export interface IProviderForChatListPage {
   location: string;
   isOnline: boolean;
   services: string;
-  lastMessage?: string;
+  lastMessage: string | null; 
+  messageType: 'text' | 'image' | 'file';
+  lastMessageSenderId: string | null; 
   lastMessageAt?: Date | null;
 }
 

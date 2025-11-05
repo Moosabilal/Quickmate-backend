@@ -63,3 +63,13 @@ export const findProviderRangeSchema = z.object({
     lng: z.coerce.number(),
     radius: z.coerce.number().positive(),
 });
+
+export const bookingFilterSchema = z.object({
+    search: z.string().optional(),
+    status: z.nativeEnum(BookingStatus).optional()
+        .transform(val => (val === BookingStatus.All) ? undefined : val),
+});
+
+export const providerBookingsQuerySchema = bookingFilterSchema.extend({
+    providerId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
+});

@@ -32,6 +32,7 @@ const TYPES = {
     SubscriptionPlanController: Symbol.for('SubscriptionPlanController'),
     SubscriptionPlanService: Symbol.for('SubscriptionPlanService'),
     SubscriptionPlanRepository: Symbol.for('SubscriptionPlanRepository'),
+    MessageController: Symbol.for('MessageController'),
 
 }
 

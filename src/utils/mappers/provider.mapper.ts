@@ -8,6 +8,7 @@ import { BookingStatus } from "../../enums/booking.enum";
 import { IReview as IReviewModel } from '../../models/Review';
 import { IUser } from '../../models/User';
 import { _haversineKm } from '../helperFunctions/haversineKm';
+import { LastMessageData } from '../../interface/message';
 
 
 const createJoiningId = (id1: string, id2: string): string => {
@@ -104,7 +105,7 @@ export function toProviderForChatListPage(
   bookings: IBooking[],
   providers: IProvider[],
   services: IService[],
-  messages: { joiningId: string; lastMessage: string; createdAt: Date }[]
+  messages: LastMessageData[]
 ): IProviderForChatListPage[] {
 
   const messageMap = new Map(messages.map(m => [m.joiningId, m]));
@@ -128,8 +129,10 @@ export function toProviderForChatListPage(
       profilePicture: provider.profilePhoto || "",
       location: provider.serviceArea,
       isOnline: true,
-      services: providerServices[0]?.title || "",
-      lastMessage: lastMessageData?.lastMessage || "",
+      services: providerServices[0]?.title || "",      
+      lastMessage: lastMessageData?.lastMessage || null,
+      messageType: lastMessageData?.messageType || 'text',
+      lastMessageSenderId: lastMessageData?.senderId || null,
       lastMessageAt: lastMessageData?.createdAt || null,
     };
   });
@@ -140,7 +143,7 @@ export function toClientForChatListPage(
   bookings: IBooking[],
   clients: IUser[],
   services: IService[],
-  messages: { joiningId: string; lastMessage: string; createdAt: Date }[]
+  messages: LastMessageData[]
 ): IProviderForChatListPage[] {
 
   const messageMap = new Map(messages.map(m => [m.joiningId, m]));
@@ -159,16 +162,19 @@ export function toClientForChatListPage(
     const joiningId = createJoiningId(currentUserId, client._id.toString());
     
     const lastMessageData = messageMap.get(joiningId);
+    console.log('the last message data', lastMessageData);
 
     return {
       id: client._id.toString(),
       bookingId: clientBooking._id.toString(),
       name: client.name as string,
       profilePicture: (client.profilePicture as string) || "",
-      location: "", 
+      location: "",
       isOnline: true, 
-      services: service?.title || "",
-      lastMessage: lastMessageData?.lastMessage || "",
+      services: service?.title || "",      
+      lastMessage: lastMessageData?.lastMessage || null,
+      messageType: lastMessageData?.messageType || 'text',
+      lastMessageSenderId: lastMessageData?.senderId || null,
       lastMessageAt: lastMessageData?.createdAt || null,
     } as IProviderForChatListPage;
   }).filter((item): item is IProviderForChatListPage => item !== null);

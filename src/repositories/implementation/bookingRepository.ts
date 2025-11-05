@@ -1,9 +1,9 @@
 import { injectable } from "inversify";
-import { IBookingRequest } from "../../interface/booking";
+import { IBookingRequest, IBookingStatusCount, IProviderBookingManagement } from "../../interface/booking";
 import Booking, { IBooking } from "../../models/Booking";
 import { IBookingRepository } from "../interface/IBookingRepository";
 import { BaseRepository } from "./base/BaseRepository";
-import { FilterQuery, Types } from "mongoose";
+import { FilterQuery, PipelineStage, Types } from "mongoose";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IServiceBreakdown } from "../../interface/provider";
 
@@ -239,7 +239,240 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         return result;
     }
 
+    private _buildHistorySearchPipeline(userId: string, search?: string): PipelineStage[] {
+        const pipeline: PipelineStage[] = [
+            { $lookup: { from: 'providers', localField: 'providerId', foreignField: '_id', as: 'provider' } },
+            { $lookup: { from: 'services', localField: 'serviceId', foreignField: '_id', as: 'service' } },
+            { $unwind: { path: '$provider', preserveNullAndEmptyArrays: true } },
+            { $unwind: { path: '$service', preserveNullAndEmptyArrays: true } },
+        ];
+        
+        if (search) {
+            pipeline.push({
+                $match: {
+                    $or: [
+                        { 'service.title': { $regex: search, $options: 'i' } },
+                        { 'provider.fullName': { $regex: search, $options: 'i' } }
+                    ]
+                }
+            });
+        }
+        return pipeline;
+    }
 
+    public async findBookingsForUserHistory(
+        userId: string, 
+        filters: { status?: BookingStatus, search?: string }
+        // 1. Removed page and limit parameters
+    ): Promise<{ bookings: any[], total: number }> {
+        
+        const mainMatch: PipelineStage.Match = {
+            $match: { userId: new Types.ObjectId(userId) }
+        };
+        
+        if (filters.status) {
+            mainMatch.$match.status = filters.status;
+        }
+
+        const searchPipeline = this._buildHistorySearchPipeline(userId, filters.search);
+
+        const aggregation = await this.model.aggregate([
+            mainMatch,
+            ...searchPipeline,
+            {
+                $facet: {
+                    metadata: [{ $count: 'total' }],
+                    data: [
+                        { $sort: { createdAt: -1 } },
+                        // 2. REMOVED $skip and $limit stages
+                        { $lookup: { from: 'addresses', localField: 'addressId', foreignField: '_id', as: 'address' } },
+                        { $unwind: { path: '$address', preserveNullAndEmptyArrays: true } },
+                        { $lookup: { from: 'categories', localField: 'service.subCategoryId', foreignField: '_id', as: 'subCategory' } },
+                        { $unwind: { path: '$subCategory', preserveNullAndEmptyArrays: true } },
+                        {
+                            $project: {
+                                _id: 0,
+                                id: '$_id',
+                                serviceName: { $ifNull: ['$service.title', 'Unknown Service'] },
+                                serviceImage: { $ifNull: ['$subCategory.iconUrl', ''] },
+                                providerName: { $ifNull: ['$provider.fullName', 'Unknown Provider'] },
+                                providerImage: { $ifNull: ['$provider.profilePhoto', ''] },
+                                date: '$scheduledDate',
+                                time: '$scheduledTime',
+                                status: '$status',
+                                price: { $toDouble: "$amount" },
+                                location: { $concat: ["$address.street", ", ", "$address.city"] },
+                                priceUnit: '$service.priceUnit',
+                                duration: '$service.duration',
+                                description: '$instructions',
+                                createdAt: '$createdAt'
+                            }
+                        }
+                    ]
+                }
+            }
+        ]);
+        
+        const bookings = aggregation[0].data;
+        const total = aggregation[0].metadata[0] ? aggregation[0].metadata[0].total : 0;
+        
+        return { bookings, total };
+    }
+
+    public async getBookingStatusCounts(userId: string, search?: string): Promise<IBookingStatusCount[]> {
+        const searchPipeline = this._buildHistorySearchPipeline(userId, search);
+
+        const aggregation = await this.model.aggregate([
+            { $match: { userId: new Types.ObjectId(userId) } },
+            ...searchPipeline,
+            {
+                $group: {
+                    _id: "$status",
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+        
+        return aggregation;
+    }
+
+    public async getBookingsByFilter(userId: string, status: BookingStatus, search?: string): Promise<IBooking[]>{
+        
+        const mainMatch: PipelineStage.Match = {
+            $match: { userId: new Types.ObjectId(userId) }
+        };
+
+        if (status && status !== BookingStatus.All) {
+            mainMatch.$match.status = status;
+        }
+
+        const searchPipeline = this._buildHistorySearchPipeline(userId, search);
+
+        const aggregationPipeline: PipelineStage[] = [
+            mainMatch,
+            ...searchPipeline,
+            { $sort: { createdAt: -1 } }
+        ];
+
+        const bookings = await this.model.aggregate(aggregationPipeline);
+
+        return bookings;
+    }
+
+
+    private _buildProviderBookingSearchPipeline(search?: string): PipelineStage[] {
+        const pipeline: PipelineStage[] = [
+            { $lookup: { from: 'users', localField: 'userId', foreignField: '_id', as: 'user' } },
+            { $lookup: { from: 'services', localField: 'serviceId', foreignField: '_id', as: 'service' } },
+            { $lookup: { from: 'addresses', localField: 'addressId', foreignField: '_id', as: 'address' } },
+            { $unwind: { path: '$user', preserveNullAndEmptyArrays: true } },
+            { $unwind: { path: '$service', preserveNullAndEmptyArrays: true } },
+            { $unwind: { path: '$address', preserveNullAndEmptyArrays: true } },
+        ];
+        
+        if (search) {
+            pipeline.push({
+                $match: {
+                    $or: [
+                        { 'service.title': { $regex: search, $options: 'i' } },
+                        { 'user.name': { $regex: search, $options: 'i' } },
+                        { 'customerName': { $regex: search, $options: 'i' } },
+                        { 'address.city': { $regex: search, $options: 'i' } },
+                        { 'address.street': { $regex: search, $options: 'i' } },
+                    ]
+                }
+            });
+        }
+        return pipeline;
+    }
+
+    // --- ADD THE NEW METHOD IMPLEMENTATION ---
+    /**
+     * @description Finds bookings for the provider management page.
+     */
+    public async findBookingsForProvider(
+        providerId: string, 
+        filters: { status?: BookingStatus, search?: string }, 
+        page: number, 
+        limit: number
+    ): Promise<{ bookings: IProviderBookingManagement[], total: number }> {
+        
+        const skip = (page - 1) * limit;
+        const mainMatch: PipelineStage.Match = {
+            $match: { providerId: new Types.ObjectId(providerId) }
+        };
+        
+        if (filters.status && filters.status !== BookingStatus.All) {
+            mainMatch.$match.status = filters.status;
+        }
+
+        const searchPipeline = this._buildProviderBookingSearchPipeline(filters.search);
+
+        const aggregation = await this.model.aggregate([
+            mainMatch,
+            ...searchPipeline,
+            {
+                $facet: {
+                    metadata: [{ $count: 'total' }],
+                    data: [
+                        { $sort: { createdAt: -1 } },
+                        { $skip: skip },
+                        { $limit: limit },
+                        { $lookup: { from: 'payments', localField: 'paymentId', foreignField: '_id', as: 'payment' } },
+                        { $unwind: { path: '$payment', preserveNullAndEmptyArrays: true } },
+                        {
+                            $project: {
+                                _id: 0,
+                                id: '$_id',
+                                customerId: '$user._id',
+                                customerName: { $ifNull: ['$customerName', '$user.name'] },
+                                customerImage: { $ifNull: ['$user.profilePicture', ''] },
+                                service: { $ifNull: ['$service.title', 'Unknown Service'] },
+                                date: '$scheduledDate',
+                                time: '$scheduledTime',
+                                duration: '$service.duration',
+                                location: { $concat: ["$address.street", ", ", "$address.city"] },
+                                payment: { $ifNull: ['$payment.amount', 0] },
+                                paymentStatus: '$paymentStatus',
+                                status: '$status',
+                                description: '$service.description',
+                                customerPhone: '$phone',
+                                customerEmail: '$user.email',
+                                specialRequests: '$instructions',
+                                createdAt: '$createdAt'
+                            }
+                        }
+                    ]
+                }
+            }
+        ]);
+        
+        const bookings = aggregation[0].data;
+        const total = aggregation[0].metadata[0] ? aggregation[0].metadata[0].total : 0;
+        
+        return { bookings, total };
+    }
+
+    // --- ADD THE NEW METHOD IMPLEMENTATION ---
+    /**
+     * @description Gets the count of bookings grouped by status for a specific provider.
+     */
+    public async getBookingStatusCountsForProvider(providerId: string, search?: string): Promise<IBookingStatusCount[]> {
+        const searchPipeline = this._buildProviderBookingSearchPipeline(search);
+
+        const aggregation = await this.model.aggregate([
+            { $match: { providerId: new Types.ObjectId(providerId) } },
+            ...searchPipeline,
+            {
+                $group: {
+                    _id: "$status",
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+        
+        return aggregation;
+    }
 
 
 }

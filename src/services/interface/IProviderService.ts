@@ -21,7 +21,7 @@ export interface IProviderService {
     updateProviderDetails(updateData: Partial<IProviderRegistrationData>): Promise<IProviderProfile>;
     updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
     getProviderwithFilters(userId: string, serviceId: string, filters: {radiusKm?: number, lat?: number, long?: number, experience?: number; date?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
-    providerForChatPage(userId: string): Promise<IProviderForChatListPage[]>;
+    providerForChatPage(userId: string, search?: string): Promise<IProviderForChatListPage[]>;
     getProviderDashboard(userId: string): Promise<{dashboardData: IDashboardResponse[], dashboardStat: IDashboardStatus}>;
     getAvailabilityByLocation(
         userId: string,

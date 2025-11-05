@@ -369,50 +369,54 @@ export class ProviderService implements IProviderService {
 
 
 
-    public async providerForChatPage(userId: string): Promise<IProviderForChatListPage[]> {
-    if (!userId) {
-        throw new CustomError("Sorry, UserId not found", HttpStatusCode.NOT_FOUND);
+    public async providerForChatPage(userId: string, search?: string): Promise<IProviderForChatListPage[]> {
+        if (!userId) {
+            throw new CustomError("Sorry, UserId not found", HttpStatusCode.NOT_FOUND);
+        }
+        const user = await this._userRepository.findById(userId);
+        if (!user) {
+            throw new CustomError("User not found", HttpStatusCode.NOT_FOUND);
+        }
+
+        const createJoiningId = (id1: string, id2: string) => [id1, id2].sort().join('-');
+
+        if (user.role === Roles.PROVIDER) {
+            const providerProfile = await this._providerRepository.findOne({ userId });
+            if (!providerProfile) return [];
+
+            const bookings = await this._bookingRepository.findAll({ providerId: providerProfile._id });
+            if (!bookings.length) return [];
+
+            const clientIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
+
+            const clients = await this._userRepository.findUsersByIdsAndSearch(clientIds, search);
+
+            const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
+            const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+
+            const joiningIds = clients.map(client => createJoiningId(user.id, client._id.toString()));
+            const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
+
+            return toClientForChatListPage(user.id, bookings, clients, services, messages);
+
+        } else {
+            const bookings = await this._bookingRepository.findAll({ userId });
+            if (!bookings.length) return [];
+
+            const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
+
+            const providers = await this._providerRepository.findProvidersByIdsAndSearch(providerIds, search);
+
+            const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
+            const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+
+            const providerUserIds = providers.map(p => p.userId.toString());
+            const joiningIds = providerUserIds.map(providerUserId => createJoiningId(user.id, providerUserId));
+            const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
+
+            return toProviderForChatListPage(user.id, bookings, providers, services, messages);
+        }
     }
-    const user = await this._userRepository.findById(userId);
-    if (!user) {
-        throw new CustomError("User not found", HttpStatusCode.NOT_FOUND);
-    }
-
-    const createJoiningId = (id1: string, id2: string) => [id1, id2].sort().join('-');
-
-    if (user.role === Roles.PROVIDER) {
-        const providerProfile = await this._providerRepository.findOne({ userId });
-        if (!providerProfile) return [];
-        const bookings = await this._bookingRepository.findAll({ providerId: providerProfile._id });
-        if (!bookings.length) return [];
-
-        const clientIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
-        const clients = await this._userRepository.findAll({ _id: { $in: clientIds } });
-        const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
-        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
-
-        const joiningIds = clients.map(client => createJoiningId(user.id, client._id.toString()));
-        const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
-
-        return toClientForChatListPage(user.id, bookings, clients, services, messages);
-
-    } else {
-        const bookings = await this._bookingRepository.findAll({ userId });
-        if (!bookings.length) return [];
-
-        const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
-
-        const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
-        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
-        
-        const providerUserIds = providers.map(p => p.userId.toString());
-        const joiningIds = providerUserIds.map(providerUserId => createJoiningId(user.id, providerUserId));
-        const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
-
-        return toProviderForChatListPage(user.id, bookings, providers, services, messages);
-    }
-}
 
 
     public async getProviderDashboard(
@@ -779,7 +783,7 @@ export class ProviderService implements IProviderService {
     }
 
     private _isProviderOnLeave(provider: IProvider, dateStr: string): boolean {
-        const date = new Date(dateStr.replace(/-/g, '/')); 
+        const date = new Date(dateStr.replace(/-/g, '/'));
         return provider.availability.leavePeriods.some(period => {
             const from = new Date(period.from.replace(/-/g, '/'));
             const to = new Date(period.to.replace(/-/g, '/'));
@@ -841,7 +845,7 @@ export class ProviderService implements IProviderService {
         const services = await this._serviceRepository.findPopulatedByProviderId(providerId);
 
         const providerProfile = toProviderDTO(provider);
-        
+
         const serviceDetails = services.map(toServiceDetailsDTO);
 
         return {

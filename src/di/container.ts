@@ -57,6 +57,7 @@ import { ISubscriptionPlanService } from '../services/interface/ISubscriptionPla
 import { ISubscriptionPlanRepository } from '../repositories/interface/ISubscriptionPlanRepository';
 import { SubscriptionPlanService } from '../services/implementation/subscriptionPlanService';
 import { SubscriptionPlanRepository } from '../repositories/implementation/subscriptionPlanRepository';
+import { MessageController } from '../controllers/messageController';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -101,5 +102,7 @@ container.bind<IReviewRepository>(TYPES.ReviewRepository).to(ReviewRepository)
 container.bind<SubscriptionPlanController>(TYPES.SubscriptionPlanController).to(SubscriptionPlanController)
 container.bind<ISubscriptionPlanService>(TYPES.SubscriptionPlanService).to(SubscriptionPlanService)
 container.bind<ISubscriptionPlanRepository>(TYPES.SubscriptionPlanRepository).to(SubscriptionPlanRepository)
+
+container.bind<MessageController>(TYPES.MessageController).to(MessageController)
 
 export {container}

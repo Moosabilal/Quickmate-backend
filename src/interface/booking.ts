@@ -116,3 +116,30 @@ export interface IAdminBookingsResponse {
   currentPage: number;
   totalBookings: number;
 }
+
+export interface IBookingStatusCounts {
+  [BookingStatus.All]: number;
+  [BookingStatus.PENDING]: number;
+  [BookingStatus.CONFIRMED]: number;
+  [BookingStatus.IN_PROGRESS]: number;
+  [BookingStatus.COMPLETED]: number;
+  [BookingStatus.CANCELLED]: number;
+}
+
+// --- This interface defines the shape of the data returned by the aggregation ---
+export interface IBookingStatusCount {
+  _id: BookingStatus | null;
+  count: number;
+}
+
+// --- This is the final response object from your service ---
+export interface IUserBookingsResponse {
+  data: IBookingHistoryPage[];
+  counts: IBookingStatusCounts;
+}
+
+export interface IProviderBookingsResponse {
+  bookings: IProviderBookingManagement[];
+  earnings: number;
+  counts: IBookingStatusCounts;
+}

@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IBookingService } from "../interface/IBookingService";
 import TYPES from "../../di/type";
-import { BookingOtpPayload, IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingLog, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking";
+import { BookingOtpPayload, IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingLog, IBookingRequest, IBookingStatusCount, IBookingStatusCounts, IGetMessages, IProviderBookingManagement, IProviderBookingsResponse, IUserBookingsResponse } from "../../interface/booking";
 import { paymentCreation, razorpay, verifyPaymentSignature } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
@@ -41,6 +41,7 @@ import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscr
 import { IBooking } from "../../models/Booking";
 import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
+import { ISocketMessage } from "../../interface/message";
 
 
 @injectable()
@@ -162,8 +163,6 @@ export class BookingService implements IBookingService {
 
         const durationInMinutes = convertDurationToMinutes(service.duration);
 
-        console.log('the service duration is:', typeof service.duration, service.duration)
-
         const udpatedpayment123 = await this._bookingRepository.update(verifyPayment.bookingId, {
             paymentId: createdPayment._id,
             paymentStatus: PaymentStatus.PAID,
@@ -227,94 +226,116 @@ export class BookingService implements IBookingService {
     }
 
 
-    async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
-        const bookings = await this._bookingRepository.findAll({ userId }, { createdAt: -1 });
+    public async getAllFilteredBookings(
+        userId: string, 
+        filters: { search?: string, status?: BookingStatus }
+    ): Promise<IUserBookingsResponse> {
+        
+        const { search, status } = filters;
 
-        const providerIds = [...new Set(bookings.map(s => {
-            return s.providerId?.toString();
-        }).filter(Boolean))];
-
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
-
-        const addressIds = [...new Set(bookings.map(s => {
-            return s.addressId?.toString();
-        }).filter(Boolean))];
-
-        const addresses = await this._addressRepository.findAll({ _id: { $in: addressIds } });
-
-        const serviceIds = [...new Set(bookings.map(s => {
-            return s.serviceId?.toString();
-        }).filter(Boolean))];
-
-        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
-
-        const subCategoryIds = [...new Set(services.map(s => {
-            return s.subCategoryId?.toString();
-        }).filter(Boolean))];
-
-        const subCategories = await this._categoryRepository.findAll({ _id: { $in: subCategoryIds } });
-
-        const providerMap = new Map(providers.map(prov => [prov._id.toString(), { fullName: prov.fullName, profilePhoto: prov.profilePhoto }]));
-        const subCategoryMap = new Map(subCategories.map(sub => [sub._id.toString(), { iconUrl: sub.iconUrl }]));
-        const serviceMap = new Map(services.map(serv => [serv._id.toString(), { title: serv.title, priceUnit: serv.priceUnit, duration: serv.duration, price: serv.price, subCategoryId: serv.subCategoryId.toString() }]));
-        const addressMap = new Map(addresses.map(add => [add._id.toString(), { street: add.street, city: add.city }]));
-
-        const mappedBooking = toBookingHistoryPage(bookings, addressMap, providerMap, subCategoryMap, serviceMap);
-        return mappedBooking;
-    }
-
-
-    async getBookingFor_Prov_mngmnt(
-        userId: string,
-        providerId: string,
-        search: string
-    ): Promise<{ earnings: number; bookings: IProviderBookingManagement[] }> {
-
-        const provider = await this._providerRepository.findById(providerId);
-
-        const bookings = await this._bookingRepository.findAll({ providerId, userId: { $ne: userId } });
-
-        let filteredBookings = bookings;
-        if (search) {
-            const searchRegex = { $regex: search, $options: 'i' };
-            const matchedUsers = await this._userRepository.findAll({ name: searchRegex });
-            const userIds = matchedUsers.map(u => u._id.toString());
-            filteredBookings = bookings.filter(b => userIds.includes(b.userId?.toString() || ''));
-        }
-
-        const userIds = [...new Set(filteredBookings.map(b => b.userId?.toString()).filter(Boolean))];
-        const serviceIds = [...new Set(filteredBookings.map(b => b.serviceId?.toString()).filter(Boolean))];
-        const addressIds = [...new Set(filteredBookings.map(b => b.addressId?.toString()).filter(Boolean))];
-        const paymentIds = [...new Set(filteredBookings.map(b => b.paymentId?.toString()).filter(Boolean))];
-
-        const [users, services, addresses, payments] = await Promise.all([
-            this._userRepository.findAll({ _id: { $in: userIds } }),
-            this._serviceRepository.findAll({ _id: { $in: serviceIds } }),
-            this._addressRepository.findAll({ _id: { $in: addressIds } }),
-            this._paymentRepository.findAll({ _id: { $in: paymentIds } })
+        const [data, statusCounts] = await Promise.all([
+            this._bookingRepository.findBookingsForUserHistory(userId, { status, search }), 
+            this._bookingRepository.getBookingStatusCounts(userId, search)
         ]);
 
-        const mappedBookings = toProviderBookingManagement(filteredBookings, users, services, addresses, payments);
+        const { bookings } = data;
+
+        const counts: IBookingStatusCounts = {
+            [BookingStatus.All]: 0,
+            [BookingStatus.PENDING]: 0,
+            [BookingStatus.CONFIRMED]: 0,
+            [BookingStatus.IN_PROGRESS]: 0,
+            [BookingStatus.COMPLETED]: 0,
+            [BookingStatus.CANCELLED]: 0,
+        };
+        
+        let allBookingsCount = 0;
+        
+        statusCounts.forEach((item: IBookingStatusCount) => {
+            if (item._id && counts.hasOwnProperty(item._id)) {
+                counts[item._id] = item.count;
+            }
+            allBookingsCount += item.count;
+        });
+        counts.All = allBookingsCount;
 
         return {
-            earnings: Number(provider?.earnings || 0),
-            bookings: mappedBookings
+            data: bookings,
+            counts: counts
         };
     }
 
-    async saveAndEmitMessage(io: any, joiningId: string, senderId: string, text: string) {
-        const data = {
-            joiningId,
-            senderId: senderId,
-            text,
+
+    public async getBookingFor_Prov_mngmnt(
+        providerId: string, 
+        search?: string, 
+        status?: BookingStatus 
+    ): Promise<IProviderBookingsResponse> {
+        
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) {
+            throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
+        }
+
+        const [data, statusCounts] = await Promise.all([
+            this._bookingRepository.findBookingsForProvider(
+                providerId,
+                { status: status, search: search },
+                1, 
+                1000 
+            ),
+            this._bookingRepository.getBookingStatusCountsForProvider(providerId, search)
+        ]);
+        
+        const { bookings } = data;
+
+        const counts: IBookingStatusCounts = {
+            [BookingStatus.All]: 0,
+            [BookingStatus.PENDING]: 0,
+            [BookingStatus.CONFIRMED]: 0,
+            [BookingStatus.IN_PROGRESS]: 0,
+            [BookingStatus.COMPLETED]: 0,
+            [BookingStatus.CANCELLED]: 0,
         };
+        
+        let allBookingsCount = 0;
+        statusCounts.forEach((item: IBookingStatusCount) => {
+            if (item._id && counts.hasOwnProperty(item._id)) {
+                counts[item._id] = item.count;
+            }
+            allBookingsCount += item.count;
+        });
+        counts.All = allBookingsCount;
 
-        const message = await this._messageRepository.create(data);
-
-        io.to(joiningId).emit("receiveBookingMessage", message);
-
-        return message;
+        return {
+            bookings: bookings,
+            earnings: provider.earnings || 0,
+            counts: counts
+        };
     }
+
+    async saveAndEmitMessage(
+    io: any, 
+    messageData: ISocketMessage 
+) {
+    // 1. Prepare the data for the database
+    const dataToCreate = {
+        joiningId: messageData.joiningId,
+        senderId: messageData.senderId,
+        messageType: messageData.messageType,
+        text: messageData.text,
+        fileUrl: messageData.fileUrl,
+    };
+
+    // 2. Save the new message structure to the repository
+    const savedMessage = await this._messageRepository.create(dataToCreate);
+
+    // 3. Emit the full, saved message (including _id and createdAt)
+    // back to all clients in the room.
+    io.to(savedMessage.joiningId).emit("receiveBookingMessage", savedMessage);
+
+    return savedMessage;
+}
 
     async getBookingMessages(joiningId: string): Promise<IMessage[]> {
         const data = await this._messageRepository.findAllSorted(joiningId);
@@ -422,8 +443,6 @@ export class BookingService implements IBookingService {
                 this._serviceRepository.findById(booking.serviceId.toString())
             ]);
 
-            console.log('the payment details are:', payment)
-
             const wallet = await this._walletRepository.findOne({ ownerId: user._id.toString() })
             if (!wallet) {
                 await this._walletRepository.create({
@@ -432,7 +451,6 @@ export class BookingService implements IBookingService {
                     ownerType: Roles.PROVIDER,
                 })
             } else {
-                console.log('the payment amount is:', payment.providerAmount)
                 wallet.balance += payment.providerAmount
                 provider.earnings += payment.providerAmount;
                 provider.totalBookings += 1

@@ -18,6 +18,8 @@ import {
     verifyBookingOtpSchema,
     adminBookingsQuerySchema,
     findProviderRangeSchema,
+    bookingFilterSchema,
+    providerBookingsQuerySchema,
 } from "../utils/validations/booking.validation";
 import { Roles } from "../enums/userRoles";
 
@@ -36,7 +38,7 @@ export class BookingController {
         try {
             const userId = req.user.id
             const validatedBody = createBookingSchema.parse(req.body);
-            const response = await this._bookingService.createNewBooking({...validatedBody, userId})
+            const response = await this._bookingService.createNewBooking({ ...validatedBody, userId })
 
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -55,24 +57,24 @@ export class BookingController {
     }
 
     public verifyPayment = async (req: AuthRequest, res: Response, next: NextFunction) => {
-    try {
-        const validatedBody = verifyPaymentSchema.parse(req.body);
-        
-        const paymentPayload: IPaymentVerificationRequest = {
-            ...validatedBody,
-            userId: req.user.id,
-        };
+        try {
+            const validatedBody = verifyPaymentSchema.parse(req.body);
 
-        const response = await this._bookingService.paymentVerification(paymentPayload);
-        
-        res.status(HttpStatusCode.OK).json(response);
-    } catch (error) {
-        if (error instanceof ZodError) {
-             res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            const paymentPayload: IPaymentVerificationRequest = {
+                ...validatedBody,
+                userId: req.user.id,
+            };
+
+            const response = await this._bookingService.paymentVerification(paymentPayload);
+
+            res.status(HttpStatusCode.OK).json(response);
+        } catch (error) {
+            if (error instanceof ZodError) {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            }
+            next(error);
         }
-        next(error);
     }
-}
 
     public getBookingById = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
@@ -86,20 +88,26 @@ export class BookingController {
 
     public getAllBookings = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+            const { search, status } = bookingFilterSchema.parse(req.query);
+
             const userId = req.user.id;
-            const response = await this._bookingService.getAllFilteredBookings(userId)
-            res.status(HttpStatusCode.OK).json(response)
+
+            const response = await this._bookingService.getAllFilteredBookings(userId, { search, status });
+
+            res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
-            next(error)
+            if (error instanceof ZodError) {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            }
+            next(error);
         }
     }
 
     public getBookingFor_Prov_mngmnt = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const providerId = req.params.id
-            const search = req.query.search as string
-            const userId = req.user.id
-            const response = await this._bookingService.getBookingFor_Prov_mngmnt(userId, providerId, search)
+
+            const { providerId, search, status } = providerBookingsQuerySchema.parse(req.query);
+            const response = await this._bookingService.getBookingFor_Prov_mngmnt(providerId, search, status)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

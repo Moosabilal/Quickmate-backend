@@ -62,7 +62,6 @@ export const featuredProvidersQuerySchema = z.object({
     search: z.string().optional(),
 });
 
-// --- ADD THIS SCHEMA for updateAvailability ---
 const timeSlotSchema = z.object({
     start: z.string(),
     end: z.string(),
@@ -91,4 +90,8 @@ export const updateAvailabilitySchema = z.object({
     weeklySchedule: z.array(dayScheduleSchema),
     dateOverrides: z.array(dateOverrideSchema),
     leavePeriods: z.array(leavePeriodSchema),
+});
+
+export const searchQuerySchema = z.object({
+  search: z.string().optional(),
 });

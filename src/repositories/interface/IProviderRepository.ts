@@ -24,6 +24,7 @@ export interface IProviderRepository extends IBaseRepository<IProvider> {
             date?: string;
             time?: string;
         }): Promise<IProvider[]>;
-    getTopProvidersByEarnings(limit?: number): Promise<{ name: string; earnings: number }[]>;    
+    getTopProvidersByEarnings(limit?: number): Promise<{ name: string; earnings: number }[]>; 
+    findProvidersByIdsAndSearch( providerIds: string[], search?: string): Promise<IProvider[]>;
 
 }

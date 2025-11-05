@@ -211,5 +211,20 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
             .then(providers => providers.map(p => ({ name: p.fullName, earnings: p.earnings || 0 })));
     }
 
+    public async findProvidersByIdsAndSearch(
+        providerIds: string[], 
+        search?: string
+    ): Promise<IProvider[]> {
+        
+        const filter: FilterQuery<IProvider> = {
+             _id: { $in: providerIds.map(id => new Types.ObjectId(id)) }
+        };
+
+        if (search) {
+            filter.fullName = { $regex: search, $options: 'i' };
+        }
+
+        return this.findAll(filter);
+    }
 
 }

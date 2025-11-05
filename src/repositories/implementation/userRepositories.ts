@@ -38,7 +38,7 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
   }
 
   async findAllUsers(): Promise<IUser[]> {
-    return await User.find({}).select('-password -registrationOtp -registrationOtpExpires -registrationOtpAttempts -passwordResetToken -passwordResetExpires -googleId'); 
+    return await User.find({}).select('-password -registrationOtp -registrationOtpExpires -registrationOtpAttempts -passwordResetToken -passwordResetExpires -googleId');
   }
 
   public async findUsersWithFilter(filter: any, skip: number, limit: number): Promise<IUser[]> {
@@ -55,7 +55,23 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
   }
 
   public async getActiveUserCount(): Promise<number> {
-        return this.model.countDocuments({ isVerified: true });
+    return this.model.countDocuments({ isVerified: true });
+  }
+
+  public async findUsersByIdsAndSearch(
+    userIds: string[],
+    search?: string
+  ): Promise<IUser[]> {
+
+    const filter: FilterQuery<IUser> = {
+      _id: { $in: userIds.map(id => new Types.ObjectId(id)) }
+    };
+
+    if (search) {
+      filter.name = { $regex: search, $options: 'i' };
     }
+
+    return this.findAll(filter);
+  }
 
 }

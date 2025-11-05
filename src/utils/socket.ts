@@ -2,6 +2,7 @@ import { BookingService } from "../services/implementation/bookingService";
 import { container } from "../di/container";
 import TYPES from "../di/type";
 import logger from "../logger/logger";
+import { ISocketMessage } from "../interface/message";
 
 export function chatSocket(io: any) {
   const bookingService = container.get<BookingService>(TYPES.BookingService);
@@ -20,10 +21,11 @@ export function chatSocket(io: any) {
 
     socket.on(
       "sendBookingMessage",
-      async ({ joiningId, senderId, text }) => {
+      async (messageData: ISocketMessage) => {
         try {
-          await bookingService.saveAndEmitMessage(io, joiningId, senderId, text);
+          await bookingService.saveAndEmitMessage(io, messageData);
         } catch (err) {
+          logger.error("Error in sendBookingMessage:", err);
           socket.emit("chat:error", { message: "Failed to send message" });
         }
       }

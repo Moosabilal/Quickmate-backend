@@ -21,7 +21,7 @@ export const uploadToCloudinary = async (filePath: string): Promise<string> => {
 
     fs.unlinkSync(filePath);
 
-    return result.secure_url; 
+    return result.public_id; 
   } catch (error) {
     console.error('Cloudinary upload error:', error);
     if (fs.existsSync(filePath)) {
