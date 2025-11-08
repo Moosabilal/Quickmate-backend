@@ -36,3 +36,7 @@ export const verifySubscriptionPaymentSchema = z.object({
     razorpay_payment_id: z.string(),
     razorpay_signature: z.string(),
 });
+
+export const getSubscriptionPlanQuerySchema = z.object({
+    search: z.string().optional(),
+});

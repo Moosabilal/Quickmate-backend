@@ -199,7 +199,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         const result = await this.model.aggregate([
             {
                 $group: {
-                    _id: { $dayOfWeek: "$createdAt" }, // Sunday=1, Monday=2, ...
+                    _id: { $dayOfWeek: "$createdAt" },
                     count: { $sum: 1 }
                 }
             },
@@ -263,7 +263,6 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
     public async findBookingsForUserHistory(
         userId: string, 
         filters: { status?: BookingStatus, search?: string }
-        // 1. Removed page and limit parameters
     ): Promise<{ bookings: any[], total: number }> {
         
         const mainMatch: PipelineStage.Match = {
@@ -284,7 +283,6 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                     metadata: [{ $count: 'total' }],
                     data: [
                         { $sort: { createdAt: -1 } },
-                        // 2. REMOVED $skip and $limit stages
                         { $lookup: { from: 'addresses', localField: 'addressId', foreignField: '_id', as: 'address' } },
                         { $unwind: { path: '$address', preserveNullAndEmptyArrays: true } },
                         { $lookup: { from: 'categories', localField: 'service.subCategoryId', foreignField: '_id', as: 'subCategory' } },
@@ -386,10 +384,6 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         return pipeline;
     }
 
-    // --- ADD THE NEW METHOD IMPLEMENTATION ---
-    /**
-     * @description Finds bookings for the provider management page.
-     */
     public async findBookingsForProvider(
         providerId: string, 
         filters: { status?: BookingStatus, search?: string }, 
@@ -453,10 +447,6 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         return { bookings, total };
     }
 
-    // --- ADD THE NEW METHOD IMPLEMENTATION ---
-    /**
-     * @description Gets the count of bookings grouped by status for a specific provider.
-     */
     public async getBookingStatusCountsForProvider(providerId: string, search?: string): Promise<IBookingStatusCount[]> {
         const searchPipeline = this._buildProviderBookingSearchPipeline(search);
 
@@ -472,6 +462,12 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         ]);
         
         return aggregation;
+    }
+
+    async countInDateRange(startDate: Date, endDate: Date): Promise<number> {
+        return this.model.countDocuments({
+            createdAt: { $gte: startDate, $lte: endDate }
+        });
     }
 
 

@@ -34,7 +34,8 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     payoutPending: provider.payoutPending,
     rating: provider.rating,
     isVerified: provider.isVerified,
-    subscription: provider.subscription
+    subscription: provider.subscription,
+    aadhaarIdProof: provider.aadhaarIdProof
   };
 }
 
@@ -162,7 +163,6 @@ export function toClientForChatListPage(
     const joiningId = createJoiningId(currentUserId, client._id.toString());
     
     const lastMessageData = messageMap.get(joiningId);
-    console.log('the last message data', lastMessageData);
 
     return {
       id: client._id.toString(),
@@ -395,8 +395,6 @@ export function toProviderPerformanceDTO(
 
 
 export function toServiceDetailsDTO(service: IService): IServiceDetails {
-    // We cast to 'any' here to access the populated fields 'categoryId.name'
-    // This is safe because we controlled the query in the repository.
     const serviceObj = service as any;
 
     return {
@@ -406,7 +404,6 @@ export function toServiceDetailsDTO(service: IService): IServiceDetails {
         price: serviceObj.price,
         priceUnit: serviceObj.priceUnit,
         duration: serviceObj.duration,
-        // The populated fields are accessed here
         categoryId: serviceObj.categoryId, 
         subCategoryId: serviceObj.subCategoryId,
         experience: serviceObj.experience

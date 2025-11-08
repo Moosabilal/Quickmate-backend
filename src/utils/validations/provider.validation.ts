@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ProviderStatus } from '../../enums/provider.enum'; // Adjust import path
+import { ProviderStatus } from '../../enums/provider.enum'; 
 
 const mongoIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format');
 export const mongoIdParamSchema = z.object({ id: mongoIdSchema });
@@ -33,12 +33,11 @@ export const getServiceProviderQuerySchema = z.object({
     serviceId: mongoIdSchema,
     experience: z.coerce.number().positive().optional(),
     
-    // --- FIX 1: Rename 'radiusKm' to 'radius' ---
     radius: z.coerce.number().positive().optional(),
     
     price: z.coerce.number().positive().optional(),
-    latitude: z.coerce.number(),
-    longitude: z.coerce.number(),
+    latitude: z.coerce.number().optional(),
+    longitude: z.coerce.number().optional(),
     date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format').optional(),
     time: z.string().optional(),
 });

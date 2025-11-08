@@ -28,13 +28,7 @@ export interface IBookingRepository extends IBaseRepository<IBooking> {
         page: number, 
         limit: number
     ): Promise<{ bookings: IProviderBookingManagement[], total: number }>;
-
-    /**
-     * @description Gets the count of bookings grouped by status for a specific provider.
-     */
-    getBookingStatusCountsForProvider(
-        providerId: string, 
-        search?: string
-    ): Promise<IBookingStatusCount[]>;
+    getBookingStatusCountsForProvider(providerId: string, search?: string): Promise<IBookingStatusCount[]>;
+    countInDateRange(startDate: Date, endDate: Date): Promise<number>;
     
 }

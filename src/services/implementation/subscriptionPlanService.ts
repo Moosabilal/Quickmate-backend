@@ -14,6 +14,7 @@ import { IProviderProfile, ISubscription } from "../../interface/provider";
 import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
 import { RazorpayOrder } from "../../interface/razorpay";
 import { toProviderDTO } from "../../utils/mappers/provider.mapper";
+import { FilterQuery } from "mongoose";
 
 @injectable()
 export class SubscriptionPlanService implements ISubscriptionPlanService {
@@ -39,8 +40,13 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
         await this._subscriptionPlanRepository.create(dataPlan)
     }
 
-    public async getSubscriptionPlan(): Promise<AdminSubscriptionPlanDTO[]> {
-        const plans = await this._subscriptionPlanRepository.findAll()
+    public async getSubscriptionPlan(search?: string): Promise<AdminSubscriptionPlanDTO[]> {
+        console.log("Search term in service:", search);
+        const filter: FilterQuery<ISubscriptionPlan> = {};
+        if (search) {
+            filter.name = { $regex: search, $options: 'i' };
+        }
+        const plans = await this._subscriptionPlanRepository.findAll(filter)
         if (!plans || plans.length <= 0) {
             return []
         }

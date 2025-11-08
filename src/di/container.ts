@@ -58,6 +58,17 @@ import { ISubscriptionPlanRepository } from '../repositories/interface/ISubscrip
 import { SubscriptionPlanService } from '../services/implementation/subscriptionPlanService';
 import { SubscriptionPlanRepository } from '../repositories/implementation/subscriptionPlanRepository';
 import { MessageController } from '../controllers/messageController';
+import { ChatbotController } from '../controllers/chatBotController';
+import { IChatBotService } from '../services/interface/IChatBotService';
+import { ChatbotService } from '../services/implementation/chatBotService';
+import { IChatSessionRepository } from '../repositories/interface/IChatSessionRepository';
+import { IChatMessageRepository } from '../repositories/interface/IChatMessageRepository';
+import { ChatSessionRepository } from '../repositories/implementation/chatSessionRepository';
+import { ChatMessageRepository } from '../repositories/implementation/chatMessageRepository';
+import { IPaymentService } from '../services/interface/IPaymentService';
+import { PaymentService } from '../services/implementation/paymentService';
+import { BookingBotService } from '../services/implementation/bookingBotService';
+import { IBookingBotService } from '../services/interface/IBookingBotService';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -83,6 +94,10 @@ container.bind<IAddressRepository>(TYPES.AddressRepository).to(AddressRepository
 container.bind<BookingController>(TYPES.BookingController).to(BookingController);
 container.bind<IBookingService>(TYPES.BookingService).to(BookingService);
 container.bind<IBookingRepository>(TYPES.BookingRepository).to(BookingRepository)
+
+container.bind<IBookingBotService>(TYPES.BookingBotService).to(BookingBotService);
+
+container.bind<IPaymentService>(TYPES.PaymentService).to(PaymentService);
 container.bind<IPaymentRepository>(TYPES.PaymentRepository).to(PaymentRepository)
 
 container.bind<ServiceController>(TYPES.ServiceController).to(ServiceController);
@@ -104,5 +119,10 @@ container.bind<ISubscriptionPlanService>(TYPES.SubscriptionPlanService).to(Subsc
 container.bind<ISubscriptionPlanRepository>(TYPES.SubscriptionPlanRepository).to(SubscriptionPlanRepository)
 
 container.bind<MessageController>(TYPES.MessageController).to(MessageController)
+
+container.bind<ChatbotController>(TYPES.ChatbotController).to(ChatbotController)
+container.bind<IChatBotService>(TYPES.ChatbotService).to(ChatbotService)
+container.bind<IChatSessionRepository>(TYPES.ChatSessionRepository).to(ChatSessionRepository);
+container.bind<IChatMessageRepository>(TYPES.ChatMessageRepository).to(ChatMessageRepository);
 
 export {container}

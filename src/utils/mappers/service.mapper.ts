@@ -6,16 +6,22 @@ import { IService } from "../../models/Service";
 export function toProviderServicePage(
     services: IService[],
     categoryMap: Map<string, string>,
-    subCategoryMap: Map<string, { name: string, iconUrl: string }>
+    subCategoryMap: Map<string, { name: string, iconUrl: string }>,
+    reviewMap: Map<string, { avgRating: number; reviewCount: number }>
 ): IProviderServicePageResponse[] {
-    return services.map((service) => ({
-        id: service.id,
-        category: categoryMap.get(service.categoryId.toString()) || '',
-        title: subCategoryMap.get(service.subCategoryId.toString())?.name || '',
-        serviceImage: subCategoryMap.get(service.subCategoryId.toString())?.iconUrl || '',
-        description: service.description,
-        price: service.price
-    }));
+    return services.map(service => {
+        const reviewData = reviewMap.get(service.id.toString()) || { avgRating: 0, reviewCount: 0 };
+        return {
+            id: service.id,
+            category: categoryMap.get(service.categoryId.toString()) || '',
+            title: subCategoryMap.get(service.subCategoryId.toString())?.name || '',
+            serviceImage: subCategoryMap.get(service.subCategoryId.toString())?.iconUrl || '',
+            description: service.description,
+            price: service.price,
+            rating: reviewData.avgRating,
+            reviews: reviewData.reviewCount
+        };
+    });
 }
 
 export function toServiceEditPage(service: IService, category: ICategory): IAddAndEditServiceForm {

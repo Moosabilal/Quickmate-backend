@@ -6,6 +6,7 @@ import { BookingStatus } from "../../enums/booking.enum";
 import { IMessage } from "../../models/message";
 import { Roles } from "../../enums/userRoles";
 import { ISocketMessage } from "../../interface/message";
+import { IBooking } from "../../models/Booking";
 
 export interface IBookingService {
     createNewBooking(data: IBookingRequest): Promise<{ message: string }>;
@@ -24,8 +25,9 @@ export interface IBookingService {
     getAllBookingsForAdmin(
         page: number,
         limit: number,
-        filters: { search?: string; bookingStatus?: string; }
+        filters: { search?: string; bookingStatus?: string; dateRange?: string }
     ): Promise<IAdminBookingsResponse>;
     findProviderRange(userId: string, userRole: Roles, serviceId: string, lat: number, lng: number, radius: number): Promise<boolean>;
+    createBookingFromBot(data: IBookingRequest): Promise<IBooking>;
 
 }

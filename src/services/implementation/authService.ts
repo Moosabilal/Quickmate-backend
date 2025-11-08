@@ -440,9 +440,13 @@ export class AuthService implements IAuthService {
         ]);
 
         if (!users || users.length === 0) {
-            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
-
-        }
+        return {
+            users: [],
+            total: 0,
+            totalPages: 0,
+            currentPage: 1
+        };
+    }
 
         const mappedUsers = users.map(user => ({
             id: user._id.toString(),

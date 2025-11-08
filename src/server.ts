@@ -22,6 +22,7 @@ import walletRoutes from './routes/walletRoutes'
 import reviewRoutes from './routes/reviewRoutes'
 import subscriptionRoutes from './routes/subscriptionRoutes'
 import messageRoutes from './routes/messageRoutes';
+import chatbotRoutes from './routes/chatBotRoutes';
 import fs from 'fs';
 import { CustomError } from './utils/CustomError';
 import { errorHandler } from './middleware/errorHandler';
@@ -68,6 +69,7 @@ app.use('/api/wallet', walletRoutes)
 app.use('/api/review', reviewRoutes)
 app.use('/api/subscriptionPlan', subscriptionRoutes)
 app.use('/api/messages', messageRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 
 app.use((req, res, next) => {

@@ -12,7 +12,8 @@ import {
     mongoIdParamSchema,
     providerIdParamSchema,
     createSubscriptionOrderSchema,
-    verifySubscriptionPaymentSchema
+    verifySubscriptionPaymentSchema,
+    getSubscriptionPlanQuerySchema
 } from '../utils/validations/subscription.validation';
 
 @injectable()
@@ -35,7 +36,8 @@ export class SubscriptionPlanController {
 
     public getSubscriptionPlan = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const response = await this._subscriptionPlanService.getSubscriptionPlan()
+            const { search } = getSubscriptionPlanQuerySchema.parse(req.query);
+            const response = await this._subscriptionPlanService.getSubscriptionPlan(search)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

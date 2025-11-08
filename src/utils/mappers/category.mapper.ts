@@ -19,7 +19,7 @@ export const toCategoryResponseDTO = (category: ICategory): ICategoryResponse =>
 
     return {
         ...categoryObject,
-        _id: categoryObject._id.toString(),
+        id: categoryObject._id.toString(),
         parentId: categoryObject.parentId ? categoryObject.parentId.toString() : null,
         createdAt: categoryObject.createdAt.toISOString(),
         updatedAt: categoryObject.updatedAt.toISOString(),

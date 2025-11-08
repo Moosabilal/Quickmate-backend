@@ -3,6 +3,7 @@ import Payment, { IPayment} from "../../models/payment";
 import { IPaymentRepository } from "../interface/IPaymentRepository";
 import { BaseRepository } from "./base/BaseRepository";
 import { BookingStatus } from "../../enums/booking.enum";
+import { IPaymentTotals } from "../../interface/payment";
 
 
 @injectable()
@@ -61,14 +62,27 @@ export class PaymentRepository extends BaseRepository<IPayment> implements IPaym
         return result[0]?.totalRevenue || 0;
     }
 
-    // async createPayment(data: IPaymentCreationData): Promise<IPayment> {
-    //     const dataForDb = {
-    //         ...data,
-    //         userId: data.userId,
-    //         providerId: data.providerId,
-    //         bookingId: data.bookingId,
-    //     };
-    //     return await this.create(dataForDb);
-    // }
+    async getTotalsInDateRange(startDate: Date, endDate: Date): Promise<IPaymentTotals> {
+        const result = await this.model.aggregate([
+            {
+                $match: {
+                    paymentDate: { $gte: startDate, $lte: endDate }
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    totalCommission: { $sum: "$adminCommission" },
+                    totalProviderAmount: { $sum: "$providerAmount" }
+                }
+            }
+        ]);
+
+        if (result.length > 0) {
+            return result[0];
+        }
+
+        return { totalCommission: 0, totalProviderAmount: 0 };
+    }
 
 }

@@ -2371,3 +2371,2933 @@
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Client disconnected: ffSRZ4okRLAqOmXpAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: YMz_spFB8-F5Yt8mAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moasdf&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moasdfs&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moasdfsa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moasdfsad&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moasdfsa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moasdfs&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moasdf&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdf&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdf&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfasdf&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfasdfa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfasdfas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfasdfasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfasdfas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfasdfa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfasdf&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdfa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasdf&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdfa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasdf&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfa&status=All 404 User not found. -> User not found.
+[INFO   ] - Client disconnected: 8no9cDTPKKh0_Zk3AAAB
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=asdfa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moyama&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moyamas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moyamasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moyamas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=moyama&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=ddd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=dddASDASDASDASD&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=dddASDASDASDASDasd&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=dddASDASDASDASDas&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=dddASDASDASDASDa&status=All 404 User not found. -> User not found.
+[ERROR  ] - GET /api/auth/getUserWithAllDetails?page=1&limit=6&search=&status=Inactive 404 User not found. -> User not found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: q-XCiAIAZpD6NsDCAAAB
+[INFO   ] - Client disconnected: 91xPblOFlIBcvR0wAAAD
+[INFO   ] - Client disconnected: c-m-7YCbXZaltFigAAAF
+[INFO   ] - Client disconnected: MjcwcG2VDYVnbCjIAAAH
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Lr6OWQSmhUhKFAC_AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: x82O7DQ16sq05mrlAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: tfCI4jvCindNRk86AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: s23KokSwoCiP8LfDAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 9UAjSpSAypEHgQ2qAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: dWm_-zfxWHGH99RlAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: twYFQ4AejjvVgEnuAAAD
+[INFO   ] - Client disconnected: 2rt_fV7FWwtGY3-RAAAB
+[INFO   ] - Client disconnected: NTfAIysTAEk_deb5AAAG
+[INFO   ] - Client disconnected: KgoBEAwLTJhRNthNAAAH
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /admin/categories?page=1&limit=4 404 Not Found - /admin/categories?page=1&limit=4 -> Not Found - /admin/categories?page=1&limit=4
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: expOLwAl69NJsP_SAAAB
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: Uj2lXxRzxW86hPNrAAAD
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admin-list?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/categories/admin-?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/admi?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/adm?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/ad?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/a?page=1&limit=4&search= 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: aX8RO5iVkZu3z1VKAAAB
+[INFO   ] - Client disconnected: RtoVBRXlFSK54fTTAAAD
+[INFO   ] - Client disconnected: z0eyh_g8dnx6ZsLWAAAF
+[INFO   ] - Client disconnected: fzmtV1vEOeBmIoz2AAAH
+[INFO   ] - Client disconnected: sYs97JG-l6cG0TVxAAAJ
+[INFO   ] - Client disconnected: n3pSCN6dbmAkiy5yAAAL
+[INFO   ] - Client disconnected: VpwybBuQtUf6uIJDAAAN
+[ERROR  ] - GET /api/categories/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - PUT /api/categories/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: bqZqtOn_5HQmdu71AAAP
+[INFO   ] - Client disconnected: 8VSEhRoC-7iIQds9AAAR
+[INFO   ] - Client disconnected: 5m7nCY6MxoPcG-c-AAAT
+[INFO   ] - Client disconnected: bquwcnKfIiuJhoTCAAAV
+[INFO   ] - Client disconnected: NgL9C1lyDPfD87qpAAAX
+[INFO   ] - Client disconnected: 3lV9oizEBugNq3SmAAAZ
+[INFO   ] - Client disconnected: ryghDkicmWXm9nMBAAAb
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: d1Wlal2toX7EcjK8AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: FlbEmaAtSwj-nduHAAAB
+[INFO   ] - Client disconnected: ANQrJEtuVlz2hkXjAAAD
+[INFO   ] - Client disconnected: R_j26Me0_5K6ESIWAAAF
+[ERROR  ] - GET /api/categories/edit/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: lb99UHZopmiSCqJdAAAB
+[ERROR  ] - GET /api/categories/edit/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/undefined 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: LCXnNFqKqPW2duX3AAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: KJNekDVjJ9979oYkAAAB
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: ESPa3EPEE5c0gNDqAAAD
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 5EqUWTakCEz5BrZGAAAB
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: 03STTMX8yhSPGV3OAAAD
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: zUmTXXgMRlBOEOFRAAAB
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: qtVsb6qkq6ICGjcYAAAB
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: 75FXKwIT0SPQN3x1AAAD
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: v2Qc6s4NPySjKG94AAAF
+[ERROR  ] - GET /api/categories/commission-summary 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: m2vdTUDvLqtTSt3_AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 9HdPvSXeX935nIzUAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: DO9JL_bFrY90gDEFAAAB
+[INFO   ] - Client disconnected: i1klWebIDwDkjFCAAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: LXVhY3gkp0I8IFaNAAAB
+[INFO   ] - Client disconnected: -owc8RbOtWitKMKjAAAD
+[INFO   ] - Client disconnected: nwIydRqrb5EXR73_AAAF
+[INFO   ] - Client disconnected: -jZOoBoXlKnMc_abAAAH
+[INFO   ] - Client disconnected: 3AOIS8PqQttRXxdWAAAJ
+[INFO   ] - Client disconnected: _DaGlBDFHj80vkm7AAAL
+[INFO   ] - Client disconnected: papRZoKzcPejSE7eAAAN
+[ERROR  ] - POST /api/chatbot/session 404 Not Found - /api/chatbot/session -> Not Found - /api/chatbot/session
+[INFO   ] - Client disconnected: 6-DfTpKhQA1ETK2lAAAP
+[ERROR  ] - POST /api/chatbot/session 404 Not Found - /api/chatbot/session -> Not Found - /api/chatbot/session
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Srh7tGSj1NNL-VWdAAAB
+[ERROR  ] - POST /api/chatbot/session 404 Not Found - /api/chatbot/session -> Not Found - /api/chatbot/session
+[INFO   ] - Client disconnected: m-QwLRkO2aMQfywRAAAD
+[ERROR  ] - POST /api/chatbot/session 404 Not Found - /api/chatbot/session -> Not Found - /api/chatbot/session
+[INFO   ] - Client disconnected: IPMKTZPoV34Nb9BHAAAF
+[ERROR  ] - POST /api/chatbot/session 404 Not Found - /api/chatbot/session -> Not Found - /api/chatbot/session
+[INFO   ] - Client disconnected: Cn6cqwH8sV4AtK3JAAAH
+[ERROR  ] - POST /api/chatbot/session 404 Not Found - /api/chatbot/session -> Not Found - /api/chatbot/session
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: QOs7FPRo1SMWHkvYAAAB
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [403 Forbidden] Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"serviceTitle":"Generative Language API","consumer":"projects/815624716811","activationUrl":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811","containerInfo":"815624716811","service":"generativelanguage.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811"}]}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [403 Forbidden] Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"serviceTitle":"Generative Language API","consumer":"projects/815624716811","activationUrl":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811","containerInfo":"815624716811","service":"generativelanguage.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811"}]}]
+[INFO   ] - Client disconnected: 4_qbvOvoSdROJYCHAAAD
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [403 Forbidden] Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"service":"generativelanguage.googleapis.com","serviceTitle":"Generative Language API","activationUrl":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811","containerInfo":"815624716811","consumer":"projects/815624716811"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811"}]}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [403 Forbidden] Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"service":"generativelanguage.googleapis.com","serviceTitle":"Generative Language API","activationUrl":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811","containerInfo":"815624716811","consumer":"projects/815624716811"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811"}]}]
+[INFO   ] - Client disconnected: pwZkG7ABpiAaQNInAAAF
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [403 Forbidden] Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"activationUrl":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811","containerInfo":"815624716811","service":"generativelanguage.googleapis.com","consumer":"projects/815624716811","serviceTitle":"Generative Language API"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811"}]}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [403 Forbidden] Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"activationUrl":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811","containerInfo":"815624716811","service":"generativelanguage.googleapis.com","consumer":"projects/815624716811","serviceTitle":"Generative Language API"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Generative Language API has not been used in project 815624716811 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/generativelanguage.googleapis.com/overview?project=815624716811"}]}]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: GOWS_goqwe3vcdxYAAAB
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[INFO   ] - Client disconnected: iHGbZ64V8GoWQO36AAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: miuOq_pniEOwQJJaAAAB
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 1XD8gJd4ntjI18FLAAAB
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent: [404 Not Found] models/gemini-1.0-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent: [404 Not Found] models/gemini-1.0-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[INFO   ] - Client disconnected: Lf8MUEoR1ap5jIl6AAAD
+[INFO   ] - Client disconnected: TwVIBxviJ0K4QP0eAAAF
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent: [404 Not Found] models/gemini-1.0-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent: [404 Not Found] models/gemini-1.0-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 61l-ajvfdHYukf14AAAB
+[INFO   ] - Client disconnected: PRTqZyDH964b3NxeAAAD
+[INFO   ] - Client disconnected: VQdu23ZwR1SUidK1AAAF
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent: [404 Not Found] models/gemini-1.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent: [404 Not Found] models/gemini-1.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: BS4h6MC5GBaUwnLbAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: jDYXZdUI-riYPt7WAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: JYnEjUd6F71UYqt3AAAB
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: UoIUbKLZpCASifHbAAAB
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[INFO   ] - Client disconnected: H5Iex8l8ml_xvSnSAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: ranxwh6sOwPg1ZIyAAAB
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-latest:generateContent: [404 Not Found] models/gemini-2.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-latest:generateContent: [404 Not Found] models/gemini-2.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-latest:generateContent: [404 Not Found] models/gemini-2.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-latest:generateContent: [404 Not Found] models/gemini-2.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: -tOkusPJb-LtsxsoAAAB
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[INFO   ] - Client disconnected: SEnuJkk88Ey9-rkcAAAD
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[INFO   ] - Client disconnected: PNXdyibdBxT7Y90XAAAF
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 43.194388371s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"43s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 43.194388371s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"43s"}]
+[INFO   ] - Client disconnected: UpJzo0b936mA_8MjAAAH
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 4.873890673s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"4s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 4.873890673s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"4s"}]
+[INFO   ] - Client disconnected: Tp8sOmp9ccD0br1-AAAJ
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: lSbVg2wxGztvaTbSAAAB
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent: [404 Not Found] models/gemini-1.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent: [404 Not Found] models/gemini-1.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent: [404 Not Found] models/gemini-1.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent: [404 Not Found] models/gemini-1.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent: [404 Not Found] models/gemini-1.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent: [404 Not Found] models/gemini-1.5-pro-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Kd91qAQcv-hEHamdAAAB
+[INFO   ] - Client disconnected: 9kaJhSEY2DqbJyzdAAAD
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 404 Chat session not found -> Chat session not found
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 404 Chat session not found -> Chat session not found
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/chatbot/session/kAU2NFA8FU/message 404 Chat session not found -> Chat session not found
+[INFO   ] - Client disconnected: VrvE5BdPVjsvMkaqAAAB
+[ERROR  ] - POST /api/chatbot/session/DiA43UGhIB/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/DiA43UGhIB/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[ERROR  ] - POST /api/chatbot/session/DiA43UGhIB/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 14.22636563s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"14s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 14.22636563s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"14s"}]
+[ERROR  ] - POST /api/chatbot/session/DiA43UGhIB/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: iAqlvY4JrSSPitQXAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 7mrhraFjcaL_maIeAAAB
+[INFO   ] - Client disconnected: P79wEzb006HbQF0KAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: euaiIxPZXq2ghxPcAAAD
+[INFO   ] - Client disconnected: iQy6eviiXWUTI7aXAAAF
+[INFO   ] - Client disconnected: z0djqDWVkySesx6gAAAB
+[INFO   ] - Client disconnected: gy7mAESgr8lwVnEgAAAH
+[INFO   ] - Client disconnected: mXSNc7PDL7SWxOfqAAAJ
+[INFO   ] - Client disconnected: CN3-JJNp1ePOeO9YAAAL
+[INFO   ] - Client disconnected: fRaj-WNp4M2TbmL1AAAP
+[INFO   ] - Client disconnected: 5RzBLNvgg-eP3V2kAAAR
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: wtDjAJmdKtx2YoITAAAB
+[INFO   ] - Client disconnected: -UDSbwLxD8oQnJENAAAF
+[ERROR  ] - POST /api/chatbot/session/yHYDasj8Lu/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/yHYDasj8Lu/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/yHYDasj8Lu/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[INFO   ] - Client disconnected: N_VNQRajk1b6K7seAAAH
+[ERROR  ] - POST /api/chatbot/session/yHYDasj8Lu/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/yHYDasj8Lu/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[INFO   ] - Client disconnected: ylpafv7D2BpQAoFRAAAJ
+[INFO   ] - Client disconnected: ZtkO0supWltDEvgrAAAL
+[ERROR  ] - POST /api/chatbot/session/PIuciIz-5W/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/PIuciIz-5W/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/PIuciIz-5W/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/PIuciIz-5W/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: opxDfmAH8DOxj6EHAAAD
+[ERROR  ] - POST /api/chatbot/session/PIuciIz-5W/message 500 Failed to find coordinates for that address. -> Failed to find coordinates for that address.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: __O2MoQ7QgErRLFWAAAD
+[INFO   ] - Client disconnected: dHx1fk2xLwuIGN7nAAAB
+[INFO   ] - Client disconnected: 2UVito4-azr-Uoo7AAAF
+[INFO   ] - Client disconnected: DLxsZvgwNwiXID2OAAAH
+[INFO   ] - Client disconnected: mxHF4nSwOGZMoQYsAAAK
+[INFO   ] - Sending verification email to hello@gmail.com with OTP: 822515 mail
+[INFO   ] - Verification OTP sent to hello@gmail.com
+[ERROR  ] - POST /api/chatbot/session/7JzvBHnuni/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/7JzvBHnuni/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/7JzvBHnuni/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/7JzvBHnuni/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[INFO   ] - Client disconnected: _Eon_LGqYnMNBULbAAAN
+[ERROR  ] - POST /api/chatbot/session/7JzvBHnuni/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/7JzvBHnuni/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[INFO   ] - Client disconnected: CExgdxIyscKY-OzzAAAP
+[ERROR  ] - POST /api/chatbot/session/cFAQ_oanFH/message 500 Failed to find coordinates for that address. -> Failed to find coordinates for that address.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: ypKCOxKw1A7uBtYjAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 2fjr1B90hQKhaiApAAAB
+[ERROR  ] - POST /api/chatbot/session/cFAQ_oanFH/message 500 Failed to find coordinates for that address. -> Failed to find coordinates for that address.
+[INFO   ] - Client disconnected: 5TWC1SzFWPuiLhnTAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Hz_waH61MGpnHdO0AAAB
+[ERROR  ] - POST /api/chatbot/session/lRCgMVSiUO/message 500 Failed to find coordinates for that address. -> Failed to find coordinates for that address.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: RhpAnhjFUejteT8oAAAB
+[INFO   ] - Client disconnected: ZnrKTUP8hG-iwttSAAAD
+[INFO   ] - Client disconnected: tfkv5BA1ExFAv89LAAAF
+[ERROR  ] - POST /api/chatbot/session/aiKTsukdID/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/aiKTsukdID/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/aiKTsukdID/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/aiKTsukdID/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[ERROR  ] - POST /api/chatbot/session/aiKTsukdID/message 500 ChatMessage validation failed: text: Path `text` is required. -> ChatMessage validation failed: text: Path `text` is required.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: NHXyy10U7jcHCd30AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 3iBjtH_M20tCKEa1AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: zaKzdsAb4246q4X4AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: AEQBXyOoiYt8v9s4AAAB
+[ERROR  ] - POST /api/chatbot/session/aiKTsukdID/message 404 Chat session not found -> Chat session not found
+[INFO   ] - Client disconnected: ogpDRI99Wc_rGD4gAAAD
+[ERROR  ] - POST /api/chatbot/session/TdOMl-n-zb/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 12.248100609s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"12s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 12.248100609s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"12s"}]
+[ERROR  ] - POST /api/chatbot/session/TdOMl-n-zb/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 57.874483886s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"57s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 57.874483886s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"57s"}]
+[ERROR  ] - POST /api/chatbot/session/TdOMl-n-zb/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 56.845405851s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"56s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 56.845405851s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"56s"}]
+[ERROR  ] - POST /api/chatbot/session/TdOMl-n-zb/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 11.278072307s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"11s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 11.278072307s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"11s"}]
+[ERROR  ] - POST /api/chatbot/session/TdOMl-n-zb/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 2.510649332s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"2s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 2
+Please retry in 2.510649332s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-pro"},"quotaValue":"2"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"2s"}]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: _-TExKyBSwBk1fgyAAAB
+[ERROR  ] - POST /api/chatbot/session/TdOMl-n-zb/message 500 Cannot read properties of undefined (reading 'toString') -> Cannot read properties of undefined (reading 'toString')
+[ERROR  ] - POST /api/chatbot/session/TdOMl-n-zb/message 500 Cannot read properties of undefined (reading 'toString') -> Cannot read properties of undefined (reading 'toString')
+[INFO   ] - Client disconnected: aM2pzJB4EvqpUpYwAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: AMEnkuvWSW4KnH-mAAAB
+[ERROR  ] - POST /api/chatbot/session/AzOCEN60GC/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 32.101600611s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"50"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"32s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 32.101600611s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"50"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"32s"}]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: NhfpwPZYSQE2ktu5AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: UzL1IqO6FmyNr6dpAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: f2BMWZyddccru_nSAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: hxJsK44k7vu-jPOjAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: rHN0KEbFAkvtRlvKAAAB
+[INFO   ] - Server running on port 5000
+[ERROR  ] - MongoDB connection error:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: TRJHzuaNbAjk0Tw9AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: C6nODvWwEH7AzuaEAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Wm_28Tc-TbOOd6KUAAAB
+[INFO   ] - Client disconnected: 6sBl5PMIahLOu2HUAAAD
+[INFO   ] - Client disconnected: 00u-fA3u-QcQcXtEAAAF
+[INFO   ] - Client disconnected: kHHKUkWgP73y3lgMAAAH
+[INFO   ] - Client disconnected: N-rVkibPYBbYw04xAAAJ
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: gF3tYJ9rzKH6LcfOAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Ecm0iecA2LSn7-7NAAAB
+[INFO   ] - Client disconnected: JGiBLOMo2dKKiIZMAAAD
+[INFO   ] - Client disconnected: x5-ADVF2n0wZugn5AAAF
+[ERROR  ] - POST /api/chatbot/session/tcb_y48tcB/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 250
+Please retry in 20.566196194s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-flash"},"quotaValue":"250"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"20s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 250
+Please retry in 20.566196194s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-flash"},"quotaValue":"250"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"20s"}]
+[ERROR  ] - POST /api/chatbot/session/tcb_y48tcB/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 250
+Please retry in 7.523320863s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-flash"},"quotaValue":"250"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"7s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 250
+Please retry in 7.523320863s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.5-flash"},"quotaValue":"250"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"7s"}]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: BK_s19szYUA73sHuAAAB
+[ERROR  ] - POST /api/chatbot/session/tcb_y48tcB/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 250
+Please retry in 36.939429281s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-flash","location":"global"},"quotaValue":"250"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"36s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 250
+Please retry in 36.939429281s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-flash","location":"global"},"quotaValue":"250"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"36s"}]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: X3iqGCBxtUeDzGSFAAAB
+[ERROR  ] - POST /api/chatbot/session/tcb_y48tcB/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 50.325346836s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"50"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"50s"}] -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 50.325346836s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.5-pro","location":"global"},"quotaValue":"50"}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"50s"}]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: r0dke9dPR4q2W4IyAAAB
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=68fb1845a3a0e056e462f7d8&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Qc0jUIWu1bFMsjpUAAAB
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Client disconnected: AiV4QggkJfh7c690AAAD
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 6S6QIPBY7_7-jHA1AAAB
+[INFO   ] - Client disconnected: J9tN3Md-1lfv7h-9AAAD
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Client disconnected: p_dcsWb66Lvkwp_CAAAF
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Client disconnected: m_vbEqTtnpvVf_93AAAH
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Client disconnected: EPNwIq_gmw86PqW4AAAJ
+[ERROR  ] - GET /api/provider/getFilteredServiceProvider?serviceId=6890525c8e590753867b2bd6&radius=10 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "latitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "longitude"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: P1F0ta1zs73L_4IhAAAB
+[INFO   ] - Client disconnected: angQbL1a3FitHngLAAAD
+[INFO   ] - Client disconnected: dPHKN-9Q2-hYysFGAAAF
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: rksAw17YOVvVqSvjAAAB
+[INFO   ] - Client disconnected: mh10Zz1LpKD8yJFzAAAD
+[INFO   ] - Client disconnected: 0q1Q89sgZBnxzV0ZAAAF
+[INFO   ] - Client disconnected: qBmdY7yHUSj5Od_BAAAH
+[INFO   ] - Client disconnected: ITncPBTVIZDogLbhAAAJ
+[INFO   ] - Client disconnected: 1qPFmdj_bw59W1UgAAAL
+[INFO   ] - Client disconnected: YUmOHsNIy90qAOSgAAAN
+[INFO   ] - Client disconnected: nDmlW057bFYmG-lPAAAP
+[INFO   ] - Client disconnected: ZPJ0aACAca8N_A-QAAAR
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: HeEDzdnz54x2vL3aAAAT
+[INFO   ] - Client disconnected: PQYohserFH2I3rV7AAAV
+[INFO   ] - Client disconnected: 0bPo9gbKXUuqWKLDAAAX
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 9T80WZbbP2fJKf70AAAB
+[ERROR  ] - POST /api/provider/register 500 Failed to upload image to Cloudinary. -> Failed to upload image to Cloudinary.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/provider/register 500 Failed to upload image to Cloudinary. -> Failed to upload image to Cloudinary.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Sending verification email to najathProvider@gmail.com with OTP: 763359 mail
+[INFO   ] - Verification OTP sent to najathProvider@gmail.com
+[INFO   ] - Client disconnected: KEiqrP2Q7l_OBzvTAAAD
+[INFO   ] - Client disconnected: h86bXiv5LRhOfNx3AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - POST /api/services/addService 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 0,
+    "inclusive": false,
+    "path": [
+      "experience"
+    ],
+    "message": "Experience must be a positive integer."
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 0,
+    "inclusive": false,
+    "path": [
+      "experience"
+    ],
+    "message": "Experience must be a positive integer."
+  }
+]
+[ERROR  ] - POST /api/services/addService 500 Cannot read properties of undefined (reading 'id') -> Cannot read properties of undefined (reading 'id')
+[ERROR  ] - POST /api/auth/register 409 User with this email already exists -> User with this email already exists
+[INFO   ] - Sending verification email to moosaUser@gmail.com with OTP: 982932 mail
+[INFO   ] - Verification OTP sent to moosaUser@gmail.com
+[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=689428490e204569ec823623&lat=12.6619&lng=74.888&radius=18 404 Currently no service available -> Currently no service available
+[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=689428490e204569ec823623&lat=12.6619&lng=74.888&radius=25 404 Currently no service available -> Currently no service available
+[INFO   ] - Client disconnected: x5S9NxacW203JABaAAAF
+[INFO   ] - Sending verification email to mani@gmail.com with OTP: 130129 mail
+[INFO   ] - Verification OTP sent to mani@gmail.com
+[INFO   ] - Socket 0UP26u8JHOeYXV4KAAAD joined booking room: 68d39e8c4ff443368da2ecd6-690db464272ca818943be403
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[INFO   ] - Socket 0UP26u8JHOeYXV4KAAAD joined booking room: 68d39e8c4ff443368da2ecd6-690db464272ca818943be403
+[INFO   ] - Socket TUvDDVQWdOhat_ZfAAAB joined booking room: 68d39e8c4ff443368da2ecd6-690db464272ca818943be403
+[INFO   ] - Client disconnected: TUvDDVQWdOhat_ZfAAAB
+[ERROR  ] - GET /api/bookings/findProviderRange?serviceId=689428490e204569ec823623&lat=12.6619&lng=74.888&radius=25 404 Currently no service available -> Currently no service available
+[INFO   ] - Client disconnected: 0UP26u8JHOeYXV4KAAAD
+[INFO   ] - the email
+[INFO   ] - Sending verification email to mishabprovider@gmail.com with OTP: 884190 mail
+[INFO   ] - Verification OTP sent to mishabprovider@gmail.com
+[INFO   ] - Client disconnected: x_dt3RbHRi_o5KqeAAAJ
+[INFO   ] - Client disconnected: 3KI4SwnIShy9tf1pAAAH
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[INFO   ] - Client disconnected: fLflmfyX-meF6ARLAAAN
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[INFO   ] - Client disconnected: cx6eckgLJOkgOWjQAAAP
+[INFO   ] - Client disconnected: yCydY96sMfN2tl5UAAAR
+[INFO   ] - Client disconnected: TdQ_M5ekEXcauof-AAAT
+[INFO   ] - Client disconnected: 1f90fGw1Zsr-GyZhAAAV
+[INFO   ] - Client disconnected: NibIhYKj4xyh2bRPAAAX
+[INFO   ] - Client disconnected: edVpGenc8PhOeA5zAAAL
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: GyCCizNx-d8vNbUvAAAB
+[INFO   ] - the reset link
+[INFO   ] - Password reset email sent to moosaUser@gmail.com
+[INFO   ] - Client disconnected: J9mL2A6h6Tc-V_JVAAAF
+[INFO   ] - Sending verification email to habidprovider@gmail.com with OTP: 440718 mail
+[INFO   ] - Verification OTP sent to habidprovider@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Sending verification email to habidprovider@gmail.com with OTP: 679165 mail
+[INFO   ] - Verification OTP sent to habidprovider@gmail.com
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: HfggSKNjmrUB21dsAAAB
+[INFO   ] - Client disconnected: snvNw5Bgiv0It-gQAAAD
+[INFO   ] - Client disconnected: jGw2xBKmzllwxVWxAAAF
+[INFO   ] - Client disconnected: luk5J72XCD0EGl8dAAAH
+[INFO   ] - Client disconnected: fDbI0J01KLUS1xSYAAAJ
+[INFO   ] - Client disconnected: rdakEMgmTMpdEQAPAAAL
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: R17wVL3jeS2AFHGgAAAB
+[INFO   ] - Client disconnected: jEXBVzWCnKPgywPOAAAD
+[INFO   ] - Client disconnected: gfuTTJA4BO70KfKBAAAF
+[INFO   ] - Client disconnected: A0BlQtEoHsvGkSZZAAAH
+[INFO   ] - Client disconnected: gvKncA3cGQ9GFNxIAAAJ
+[INFO   ] - Client disconnected: bLhS1c5INqjbjcGrAAAL
+[INFO   ] - Client disconnected: 5fa9Ethjq7sXEyeGAAAN
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: F1sh_-aWTCSFBB60AAAB
+[INFO   ] - Client disconnected: f4CfCrBj5diCcLT-AAAF
+[ERROR  ] - POST /api/auth/login 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: W3hDfNO98Rsj_KkEAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: GmS8E3l0xa771dOjAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: oNaxQaCSwmSI4-gnAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: F3g9jbrukILDNC7FAAAD
+[INFO   ] - Client disconnected: qjPjSm4U18ldmT3AAAAF
+[INFO   ] - Client disconnected: xDT4IZB3BVOEGcPEAAAB
+[INFO   ] - Client disconnected: m_HDLelOGSpCxMEQAAAH
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: KbYqi9o1nFFdiWRZAAAB
+[INFO   ] - Client disconnected: uCRfoGUIQ6WcMHLyAAAF
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Tu7WYYNN_vOeJeJEAAAD

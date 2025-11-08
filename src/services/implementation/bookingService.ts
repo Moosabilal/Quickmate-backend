@@ -42,6 +42,7 @@ import { IBooking } from "../../models/Booking";
 import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
 import { ISocketMessage } from "../../interface/message";
+import { endOfDay, endOfMonth, endOfWeek, startOfDay, startOfMonth, startOfWeek } from "date-fns";
 
 
 @injectable()
@@ -318,7 +319,6 @@ export class BookingService implements IBookingService {
     io: any, 
     messageData: ISocketMessage 
 ) {
-    // 1. Prepare the data for the database
     const dataToCreate = {
         joiningId: messageData.joiningId,
         senderId: messageData.senderId,
@@ -327,11 +327,8 @@ export class BookingService implements IBookingService {
         fileUrl: messageData.fileUrl,
     };
 
-    // 2. Save the new message structure to the repository
     const savedMessage = await this._messageRepository.create(dataToCreate);
 
-    // 3. Emit the full, saved message (including _id and createdAt)
-    // back to all clients in the room.
     io.to(savedMessage.joiningId).emit("receiveBookingMessage", savedMessage);
 
     return savedMessage;
@@ -499,7 +496,7 @@ export class BookingService implements IBookingService {
     public async getAllBookingsForAdmin(
         page: number,
         limit: number,
-        filters: { search?: string; bookingStatus?: string; }
+        filters: { search?: string; bookingStatus?: string; dateRange?: string }
     ): Promise<IAdminBookingsResponse> {
 
         const bookingFilter: FilterQuery<IBooking> = {};
@@ -523,6 +520,36 @@ export class BookingService implements IBookingService {
 
         if (filters.bookingStatus && filters.bookingStatus !== 'All') {
             bookingFilter.status = filters.bookingStatus;
+        }
+
+        if (filters.dateRange && filters.dateRange !== 'All') {
+            const now = new Date();
+            let startDate: Date;
+            let endDate: Date;
+
+            switch (filters.dateRange) {
+                case 'All':
+                    startDate = startOfDay(now);
+                    endDate = endOfDay(now);
+                    break;
+                case 'Last 7 Days':
+                    startDate = startOfWeek(now);
+                    endDate = endOfWeek(now);
+                    break;
+                case 'Last 30 Days':
+                    startDate = startOfMonth(now);
+                    endDate = endOfMonth(now);
+                    break;
+                default:
+                    break;
+            }
+
+            if (startDate && endDate) {
+                bookingFilter.createdAt = {
+                    $gte: startDate,
+                    $lte: endDate,
+                };
+            }
         }
 
         const allBookings = await this._bookingRepository.findAll(bookingFilter, { createdAt: -1 });
@@ -584,6 +611,17 @@ export class BookingService implements IBookingService {
         const providerids = services.map(s => s.providerId.toString()).filter(id => id !== currentProviderId);
         const providers = await this._providerRepository.findAll({ _id: { $in: providerids } })
         return isProviderInRange(providers, lat, lng, radius);
+    }
+
+    public async createBookingFromBot(data: IBookingRequest): Promise<IBooking> {
+        
+        const booking = await this._bookingRepository.create({
+            ...data,
+            status: BookingStatus.PENDING, 
+            paymentStatus: PaymentStatus.UNPAID,
+            bookingDate: new Date(),
+        });
+        return booking;
     }
 
 

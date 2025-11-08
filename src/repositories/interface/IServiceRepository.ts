@@ -10,4 +10,8 @@ export interface IServiceRepository extends IBaseRepository<IService> {
     findById(serviceId: string): Promise<IService>;
     findServicesByCriteria(criteria: {subCategoryId: string;minExperience?: number;maxPrice?: number;}): Promise<IService[]>
     findPopulatedByProviderId(providerId: string): Promise<IService[]>;
+    findServicesWithProvider(
+        subCategoryId: string, 
+        maxPrice?: number
+    ): Promise<IService[]>;
 }

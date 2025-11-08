@@ -19,6 +19,7 @@ export const uploadToCloudinary = async (filePath: string): Promise<string> => {
       timeout: 60000,
     });
 
+    
     fs.unlinkSync(filePath);
 
     return result.public_id; 

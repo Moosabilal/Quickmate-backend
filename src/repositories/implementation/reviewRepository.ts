@@ -83,11 +83,11 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
                 { reviewText: { $regex: search, $options: 'i' } }
             ];
         }
-        
+
         if (Object.keys(matchStage).length > 0) {
             pipeline.push({ $match: matchStage });
         }
-        
+
         pipeline.push({
             $facet: {
                 total: [{ $count: 'count' }],
@@ -110,10 +110,10 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
         });
 
         const result = await Review.aggregate(pipeline);
-        
+
         const reviews = result[0].data;
         const total = result[0].total[0] ? result[0].total[0].count : 0;
-        
+
         const formattedReviews = reviews.map((r: any) => ({
             ...r,
             id: r._id.toString(),
@@ -129,5 +129,33 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
         ]);
         return result[0]?.avgRating || 0;
     }
-    
+
+    public async getReviewStatsByServiceIds(serviceIds: string[]): Promise<{ serviceId: string; avgRating: number; reviewCount: number }[]> {
+        const result = await Review.aggregate([
+            {
+                $match: {
+                    serviceId: { $in: serviceIds.map(id => new Types.ObjectId(id)) },
+                    // status: "APPROVED" 
+                }
+            },
+            {
+                $group: {
+                    _id: "$serviceId",
+                    avgRating: { $avg: "$rating" },
+                    reviewCount: { $sum: 1 }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    serviceId: "$_id",
+                    avgRating: { $round: ["$avgRating", 1] },
+                    reviewCount: 1
+                }
+            }
+        ]);
+        return result;
+    }
+
+
 }

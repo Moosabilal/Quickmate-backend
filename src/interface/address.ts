@@ -10,3 +10,11 @@ export interface IAddressRequest {
     zip: string;
     locationCoords?: string;
 }
+
+export interface IAddressData {
+    label: string;
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+}

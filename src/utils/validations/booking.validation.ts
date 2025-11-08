@@ -53,7 +53,6 @@ export const adminBookingsQuerySchema = z.object({
     limit: z.coerce.number().int().positive().optional(),
     search: z.string().optional(),
     bookingStatus: z.nativeEnum(BookingStatus).optional(),
-    serviceType: z.string().optional(),
     dateRange: z.string().optional(),
 });
 

@@ -8,7 +8,7 @@ export interface ICategoryInput {
     iconUrl?: string | null; 
 }
 export interface ICategoryResponse extends Omit<ICategoryInput, 'parentId'> {
-    _id: string; 
+    id: string; 
     parentId?: string | null; 
     createdAt: string; 
     updatedAt: string; 
@@ -55,4 +55,15 @@ export interface IserviceResponse {
     description?: string;
     iconUrl?: string | null;
     parentId?: string | null
+}
+
+export interface ICommissionSummary {
+    totalCommissionRevenue: number;
+    totalCommissionRevenueChange: number;
+    averageCommissionPerBooking: number;
+    averageCommissionPerBookingChange: number;
+    totalBookings: number;
+    totalBookingsChange: number;
+    commissionDeductionsToProviders: number;
+    commissionDeductionsToProvidersChange: number;
 }

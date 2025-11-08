@@ -18,7 +18,9 @@ const TYPES = {
     BookingController: Symbol.for('BookingController'),
     BookingService: Symbol.for('BookingService'),
     BookingRepository: Symbol.for('BookingRepository'),
+    BookingBotService: Symbol.for("BookingBotService"),
     PaymentRepository: Symbol.for('PaymentRepository'),
+    PaymentService: Symbol.for('PaymentService'),
     ServiceController: Symbol.for('ServiceController'),
     ServiceService: Symbol.for('ServiceService'),
     ServiceRepository: Symbol.for('ServiceRepository'),
@@ -33,6 +35,10 @@ const TYPES = {
     SubscriptionPlanService: Symbol.for('SubscriptionPlanService'),
     SubscriptionPlanRepository: Symbol.for('SubscriptionPlanRepository'),
     MessageController: Symbol.for('MessageController'),
+    ChatbotController: Symbol.for('ChatbotController'),
+    ChatbotService: Symbol.for('ChatbotService'),
+    ChatSessionRepository: Symbol.for('ChatSessionRepository'),
+    ChatMessageRepository: Symbol.for('ChatMessageRepository'),
 
 }
 

@@ -8,9 +8,6 @@ export const registerSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters long."),
     email: emailSchema,
     password: passwordSchema,
-    // role: z.nativeEnum(Roles, {
-    //     message: "Invalid role specified."
-    // }),
 });
 
 export const loginSchema = z.object({
