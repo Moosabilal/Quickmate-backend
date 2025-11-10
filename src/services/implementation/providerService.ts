@@ -303,7 +303,8 @@ export class ProviderService implements IProviderService {
             $or: [
                 { fullName: { $regex: search, $options: 'i' } },
                 { serviceName: { $regex: search, $options: 'i' } },
-            ]
+            ],
+            status: ProviderStatus.ACTIVE
         }
         const providers = await this._providerRepository.findProvidersWithFilter(filter, skip, limit);
         const total = await this._providerRepository.countProviders(filter)

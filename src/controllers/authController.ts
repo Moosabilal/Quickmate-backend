@@ -18,6 +18,7 @@ import {
     updateProfileSchema
 } from '../utils/validations/auth.validation';
 import { ZodError } from 'zod';
+import { CustomError } from '../utils/CustomError';
 
 @injectable()
 export class AuthController {
@@ -137,8 +138,7 @@ export class AuthController {
     try {
       const refresh_token = req.cookies.refreshToken
       if (!refresh_token) {
-        res.status(401).json({ message: 'Refresh token not found' })
-        return
+        throw new CustomError('Refresh token not found', HttpStatusCode.UNAUTHORIZED)
       }
       const response = await this._authService.createRefreshToken(refresh_token)
       res.cookie('token', response.newToken, {

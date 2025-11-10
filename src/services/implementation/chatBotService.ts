@@ -128,11 +128,16 @@ export class ChatbotService implements IChatBotService {
 
     public async startSession(userId?: string): Promise<IChatSession> {
         const sessionId = nanoid(10);
-        const newSession = await this._sessionRepo.create({
-            userId: userId ? new Types.ObjectId(userId) : undefined,
-            sessionId,
-            context: { userId: userId || null }
-        });
+        console.log('user id in start session:', userId);
+        const finalUserId = userId
+        ? new Types.ObjectId(userId)
+        : new Types.ObjectId(); // create a new unique ObjectId if none provided
+
+    const newSession = await this._sessionRepo.create({
+        userId: finalUserId,
+        sessionId,
+        context: { userId: finalUserId.toString() } // safe for JSON storage
+    });
         return newSession;
     }
 

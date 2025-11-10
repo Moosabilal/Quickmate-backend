@@ -8,7 +8,7 @@ const router = Router();
 const chatbotController = container.get<ChatbotController>(TYPES.ChatbotController);
 const isProviderUser = [authenticateToken, authorizeRoles(["ServiceProvider", "Customer"])];
 
-router.post('/session', isProviderUser, chatbotController.startSession);
+router.post('/session/:userId', chatbotController.startSession);
 router.get('/session/:sessionId', chatbotController.getHistory); 
 router.post('/session/:sessionId/message', chatbotController.postMessage);
 

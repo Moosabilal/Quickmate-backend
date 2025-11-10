@@ -13,7 +13,7 @@ export interface AuthRequest extends Request {
 export const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction): void => {
   const token = req.cookies.token;
   if (!token) {
-    res.status(401).json({ message: 'Access token not found not found' });
+    res.status(401).json({ message: 'Access token not found' });
     return; 
   }
 
@@ -23,6 +23,7 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
 
     next();
   } catch (error) {
+    console.log('the token verification failed')
     res.status(401).json({ message: 'Access token invalid or expired' });
     return; 
   }

@@ -459,7 +459,8 @@ export class CategoryService implements ICategoryService {
             id: s._id.toString(),
             name: s.name,
             iconUrl: s.iconUrl,
-            parentId: s.parentId.toString()
+            parentId: s.parentId.toString(),
+            description: s.description || '',
         }));
     }
 
@@ -470,7 +471,8 @@ export class CategoryService implements ICategoryService {
             id: s._id.toString(),
             name: s.name,
             iconUrl: s.iconUrl,
-            parentId: s.parentId.toString()
+            parentId: s.parentId.toString(),
+            description: s.description || '',
         }));
     }
 
