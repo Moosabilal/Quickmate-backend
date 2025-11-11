@@ -38979,3 +38979,172 @@ Please retry in 50.325346836s. [{"@type":"type.googleapis.com/google.rpc.Help","
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
 [INFO   ] - Client disconnected: pQUCFCHhCHOTzIyYAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 4xGh7xxYBzBi6y7tAAAB
+[INFO   ] - Client disconnected: 9IRncgrJRtQvqlDyAAAD
+[ERROR  ] - POST /api/chatbot/session/undefined 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[INFO   ] - Client disconnected: x_fd7UBj9x3kj4_HAAAF
+[ERROR  ] - POST /api/chatbot/session/undefined 500 input must be a 24 character hex string, 12 byte Uint8Array, or an integer -> input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+[ERROR  ] - POST /api/chatbot/session%7BuserId%7D 404 Not Found - /api/chatbot/session%7BuserId%7D -> Not Found - /api/chatbot/session%7BuserId%7D
+[ERROR  ] - POST /api/chatbot/session 404 Not Found - /api/chatbot/session -> Not Found - /api/chatbot/session
+[ERROR  ] - POST /api/chatbot/session 404 Not Found - /api/chatbot/session -> Not Found - /api/chatbot/session
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: pIreMiEFZaYUlXPPAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: _VhueXVvynlwjGtoAAAB
+[INFO   ] - Client disconnected: TMt8aYUWdnD1yLboAAAD
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: HIiWZoEZ2zIFd8A9AAAF
+[INFO   ] - Client disconnected: iKnNtHiETE2_mv5hAAAH
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: GoaMUxOq1aywmx0eAAAJ
+[INFO   ] - Client disconnected: 7o-T8JWB0hEs57TWAAAL
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: UPg5EwbTq4-z3NrIAAAN
+[INFO   ] - Client disconnected: Jc1CNWMYOgZnpv96AAAP
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: TY-5S52ncKPoNVgPAAAR
+[INFO   ] - Client disconnected: jjp0wHuQY7jorFUuAAAT
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: MOmjJJhvFxqViu2bAAAV
+[INFO   ] - Client disconnected: QfrCj4GR5siW_ItYAAAX
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: suRRx3AhTyAm19zdAAAZ
+[INFO   ] - Client disconnected: GNR-bRqz5jQ4QS0FAAAb
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: H0t4qdaOqHn167P9AAAd
+[INFO   ] - Client disconnected: ybL_O9V7Z8t-9hvmAAAf
+[INFO   ] - Client disconnected: gWXBy4n_DC2jhuKEAAAh
+[INFO   ] - Client disconnected: GnfKW3UTl9iau_EAAAAj
+[INFO   ] - Client disconnected: _rMRMI-F76_okM4lAAAl
+[INFO   ] - Client disconnected: e69tdyWU6B9-CV17AAAn
+[INFO   ] - Client disconnected: B5UCOx612-Ciu--xAAAp
+[INFO   ] - Client disconnected: 4395lCVeyvt17eC0AAAr
+[INFO   ] - Client disconnected: nIC2jDaeWRpAgoNiAAAt
+[INFO   ] - Client disconnected: sDvv9O5MsVfe55xFAAAv
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: 3HueplynfOd87pqeAAAx
+[INFO   ] - Client disconnected: t1KLPs6jNLeDukYpAAAz
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: keQxfuHzVl8ljoLEAAA1
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[INFO   ] - Client disconnected: tyq8t_W4_O7dh9oQAAA3
+[INFO   ] - Client disconnected: 2d2y6cxifVkLIbWkAAA5
+[INFO   ] - Client disconnected: b-Eu_uelxO2yTTDOAAA7
+[INFO   ] - Client disconnected: 2jbnOOzJHjX2IqQmAAA9
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: l3knCwXpyTfc-8VdAAAB
+[INFO   ] - Client disconnected: zzLASbX7iTrEvuiPAAAD
+[INFO   ] - Client disconnected: Asq8knzxKCUBOWjNAAAF
+[INFO   ] - Client disconnected: xGQjI2PBOb0wkxclAAAH
+[INFO   ] - Client disconnected: OK2erHo7kIbwRUMYAAAJ
+[INFO   ] - Client disconnected: 2G_m5s4fYGs8dwcMAAAL
+[INFO   ] - Client disconnected: ATab7PWCZI-MQdWQAAAN
+[INFO   ] - Client disconnected: FbSf5ql5SaDQhnmPAAAP
+[INFO   ] - Client disconnected: 5PwC6aRdrlvfLeI6AAAR
+[INFO   ] - Client disconnected: g6sJMUMEqSBsX90UAAAT
+[INFO   ] - Client disconnected: fQ6vsw6ebwi7Am_xAAAV
+[INFO   ] - Client disconnected: d-z0-v-I_87NzDE7AAAX
+[INFO   ] - Client disconnected: zsdWs2QzbzZ8ZjXoAAAZ
+[INFO   ] - Client disconnected: fJRWM8HitG5re1tpAAAb
+[INFO   ] - Client disconnected: WGiiDWI2mSX-nJMPAAAd
+[ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 404 Provider not found -> Provider not found
+[ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 404 Provider not found -> Provider not found
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Jc7mJr5hm1b_oxbDAAAB
+[ERROR  ] - POST /api/subscriptionPlan/verify-payment 500 [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "planId"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+] -> [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "planId"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+[INFO   ] - Client disconnected: HxyfTaqJorSJqkP1AAAD
+[INFO   ] - Client disconnected: NOJQvAOt2RfEhR3rAAAF
+[ERROR  ] - POST /api/subscriptionPlan/verify-payment 500 [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "planId"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+] -> [
+  {
+    "expected": "string",
+    "code": "invalid_type",
+    "path": [
+      "planId"
+    ],
+    "message": "Invalid input: expected string, received undefined"
+  }
+]
+[INFO   ] - Client disconnected: WjQnLTwI9O-vTckbAAAH
+[INFO   ] - Client disconnected: ro31YsqhVdK77TE9AAAJ
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: M4lR7nUOKTZ4NewqAAAB
+[INFO   ] - Client disconnected: sjlCsMryPvhPLTr0AAAD
+[INFO   ] - Client disconnected: jCJwfqpAEZ3zXXCzAAAF
+[INFO   ] - Client disconnected: t-pa_o1ob2MauisjAAAH
+[INFO   ] - Client disconnected: e2XDbGrHeoA3qaCpAAAJ
+[INFO   ] - Client disconnected: XN9RVlIsYC38Dqa0AAAL
+[INFO   ] - Client disconnected: 0Sei1lmSXbe4jEwbAAAN
+[INFO   ] - Client disconnected: WAzVNzQFzcuoekn5AAAP
+[INFO   ] - Client disconnected: deWpjT7P-S8LRoHJAAAR
+[INFO   ] - Client disconnected: q4HVh5W31fFYgx0mAAAT
+[INFO   ] - Client disconnected: tw53NXQNWF3xyf_BAAAV
+[INFO   ] - Client disconnected: GDFiVkCYwSdR52vMAAAX
+[INFO   ] - Client disconnected: fO2YWBIXTkB7kArOAAAZ
+[INFO   ] - Client disconnected: fOiTu5Qmlx8azWuXAAAb
+[INFO   ] - Client disconnected: lZhpkuooIH5HaqWbAAAd
+[INFO   ] - Client disconnected: 8JR7RHe5uQka2i0PAAAf
+[INFO   ] - Client disconnected: uON_D7GJ-uOsMiohAAAh
+[INFO   ] - Client disconnected: SU3fAeDm0Vm8ygY5AAAj
+[INFO   ] - Client disconnected: GwiNzRR-6EtZ-S52AAAl
+[INFO   ] - Client disconnected: LzVJkCXU9Mz_VMQ0AAAn
+[INFO   ] - Client disconnected: tcazkWlkptPzGp-ZAAAp
+[INFO   ] - Client disconnected: xe7upmcr_99wGXdEAAAr
+[INFO   ] - Client disconnected: _eDWz8Jn3yU4Dua8AAAt
+[INFO   ] - Client disconnected: ocgfmRInldlTJrr9AAAv
+[INFO   ] - Client disconnected: JryWnaG_TF2fuDnRAAAx
+[INFO   ] - Client disconnected: wJOLBHWrawBjxYtCAAA0
+[INFO   ] - Client disconnected: wuwPqjNumVzmvIyMAAA2
+[INFO   ] - Client disconnected: 43pwsIVY5CpozaL2AAA4
+[INFO   ] - Client disconnected: -uSqkOkSe3XpYZdqAAA6
+[INFO   ] - Client disconnected: V5eWqXS0gMtCjhYJAAA8
+[INFO   ] - Client disconnected: oQ48Fsvp3OYAHoqwAAA-
+[INFO   ] - Client disconnected: xSrGiamEa3xxVysVAABA

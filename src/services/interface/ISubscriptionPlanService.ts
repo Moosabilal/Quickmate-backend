@@ -1,6 +1,6 @@
 import { IProviderProfile, ISubscription } from "../../interface/provider";
 import { RazorpayOrder } from "../../interface/razorpay";
-import { AdminSubscriptionPlanDTO } from "../../interface/subscriptionPlan";
+import { AdminSubscriptionPlanDTO, IUpgradeCostResponse } from "../../interface/subscriptionPlan";
 import { ISubscriptionPlan } from "../../models/subscription";
 
 export interface ISubscriptionPlanService {
@@ -10,6 +10,7 @@ export interface ISubscriptionPlanService {
     deleteSubscriptionPlan(id: string): Promise<void>;
     checkAndExpire(providerId: string): Promise<ISubscription>;
     createSubscriptionOrder(providerId: string, planId: string): Promise<{ order: RazorpayOrder, plan: ISubscriptionPlan }>
+    calculateUpgradeCost(userId: string, newPlanId: string): Promise<IUpgradeCostResponse>;
     verifySubscriptionPayment(
         providerId: string,
         planId: string,

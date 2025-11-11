@@ -13,7 +13,8 @@ import {
     providerIdParamSchema,
     createSubscriptionOrderSchema,
     verifySubscriptionPaymentSchema,
-    getSubscriptionPlanQuerySchema
+    getSubscriptionPlanQuerySchema,
+    calculateUpgradeSchema
 } from '../utils/validations/subscription.validation';
 
 @injectable()
@@ -85,6 +86,19 @@ export class SubscriptionPlanController {
         } catch (error) {
             if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             next(error)
+        }
+    }
+
+    public calculateUpgrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { newPlanId } = calculateUpgradeSchema.parse(req.body);
+            const userId = req.user.id; // Get provider from logged-in user
+
+            const response = await this._subscriptionPlanService.calculateUpgradeCost(userId, newPlanId);
+            res.status(HttpStatusCode.OK).json({ success: true, data: response });
+        } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
         }
     }
 

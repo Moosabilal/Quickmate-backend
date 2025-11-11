@@ -14,10 +14,9 @@ export class ChatbotController {
     this._chatbotService = chatbotService;
   }
 
-  public startSession = async (req: AuthRequest, res: Response, next: NextFunction) => {
+  public startSession = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log('req params in start session:', req.params);
-      const userId = req.params.userId as string | undefined;
+      const userId = req.body.userId as string | undefined;
       const session = await this._chatbotService.startSession(userId);
       res.status(HttpStatusCode.OK).json({ success: true, sessionId: session.sessionId });
     } catch (error) { next(error); }

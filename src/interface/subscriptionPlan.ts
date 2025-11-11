@@ -1,3 +1,6 @@
+import { ISubscriptionPlan } from "../models/subscription";
+import { RazorpayOrder } from "./razorpay";
+
 export interface AdminSubscriptionPlanDTO {
   id?: string;
   name?: string;
@@ -14,4 +17,12 @@ export interface IVerifySubscriptionPaymentReq {
   razorpay_order_id: string,
   razorpay_payment_id: string,
   razorpay_signature: string
+}
+
+export interface IUpgradeCostResponse {
+    order: RazorpayOrder;
+    newPlan: ISubscriptionPlan;
+    oldPlanValue: number;
+    newPlanPrice: number;
+    finalAmount: number;
 }

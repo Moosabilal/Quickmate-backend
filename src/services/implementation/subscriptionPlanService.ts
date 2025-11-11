@@ -7,7 +7,7 @@ import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
 import { toAdminSubscriptionPlanList } from "../../utils/mappers/subscription.mapper";
-import { AdminSubscriptionPlanDTO } from "../../interface/subscriptionPlan";
+import { AdminSubscriptionPlanDTO, IUpgradeCostResponse } from "../../interface/subscriptionPlan";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { SubscriptionStatus } from "../../enums/subscription.enum";
 import { IProviderProfile, ISubscription } from "../../interface/provider";
@@ -41,7 +41,6 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
     }
 
     public async getSubscriptionPlan(search?: string): Promise<AdminSubscriptionPlanDTO[]> {
-        console.log("Search term in service:", search);
         const filter: FilterQuery<ISubscriptionPlan> = {};
         if (search) {
             filter.name = { $regex: search, $options: 'i' };
@@ -104,6 +103,64 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
             plan
         }
     };
+
+    public async calculateUpgradeCost(userId: string, newPlanId: string): Promise<IUpgradeCostResponse> {
+        // 1. Get provider and plans in parallel
+        const providerId = await this._providerRepository.getProviderId(userId)
+        const [provider, newPlan] = await Promise.all([
+            this._providerRepository.findById(providerId),
+            this._subscriptionPlanRepository.findById(newPlanId)
+        ]);
+
+        if (!provider) throw new CustomError(ErrorMessage.PROVIDER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+        if (!newPlan) throw new CustomError(ErrorMessage.PLAN_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+
+        const sub = provider.subscription;
+
+        // 2. Check if there is a valid, active subscription
+        if (!sub || !sub.planId || !sub.endDate || sub.status !== SubscriptionStatus.ACTIVE) {
+            // No active plan, so this is a new subscription, not an upgrade.
+            // Call the existing createSubscriptionOrder logic.
+            throw new CustomError("No active subscription found. Please use the standard subscribe method.", HttpStatusCode.BAD_REQUEST);
+        }
+
+        const currentPlan = await this._subscriptionPlanRepository.findById(sub.planId.toString());
+        if (!currentPlan) throw new CustomError("Current plan not found.", HttpStatusCode.INTERNAL_SERVER_ERROR);
+
+        // 3. Check if it's actually an upgrade
+        if (newPlan.price <= currentPlan.price) {
+            throw new CustomError("This is a downgrade or same plan. Downgrades will be supported in a future update.", HttpStatusCode.BAD_REQUEST);
+        }
+
+        // 4. --- PRORATION LOGIC ---
+        const today = new Date();
+        const endDate = new Date(sub.endDate);
+        if (today >= endDate) {
+            // Plan is expired, treat as a new subscription
+             throw new CustomError("Your plan is expired. Please create a new subscription.", HttpStatusCode.BAD_REQUEST);
+        }
+
+        const msInDay = 1000 * 60 * 60 * 24;
+        const daysRemaining = Math.max(0, (endDate.getTime() - today.getTime()) / msInDay);
+        
+        const perDayCost = currentPlan.price / currentPlan.durationInDays;
+        const remainingValue = perDayCost * daysRemaining;
+
+        // Calculate final cost, ensuring it's at least 1 Rupee (or your minimum)
+        const costToPay = Math.max(1, newPlan.price - remainingValue);
+        const finalAmountInRupees = Math.round(costToPay); // Charge in whole rupees
+
+        // 5. Create Razorpay order for the prorated amount
+        const order = await paymentCreation(finalAmountInRupees);
+
+        return {
+            order: {...order, entity: "order"} as RazorpayOrder,
+            newPlan: newPlan,
+            oldPlanValue: Math.round(remainingValue),
+            newPlanPrice: newPlan.price,
+            finalAmount: finalAmountInRupees
+        };
+    }
 
     public async verifySubscriptionPayment(
         providerId: string,

@@ -40,3 +40,7 @@ export const verifySubscriptionPaymentSchema = z.object({
 export const getSubscriptionPlanQuerySchema = z.object({
     search: z.string().optional(),
 });
+
+export const calculateUpgradeSchema = z.object({
+    newPlanId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Plan ID'),
+});
