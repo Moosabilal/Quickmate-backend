@@ -10,6 +10,7 @@ const authController = container.get<AuthController>(TYPES.AuthController)
 
 const isUser = [authenticateToken, authorizeRoles(['Customer','ServiceProvider'])];
 const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
+const isAdminOrUserOrProvider = [authenticateToken, authorizeRoles(['Admin','Customer','ServiceProvider'])];
 
 router.post('/register',authController.register);
 router.post('/login',  authController.login);
@@ -26,7 +27,7 @@ router.post('/contactUsSubmission',isUser, authController.contactUsEmail)
 
 
 router.get('/getUser', authenticateToken, authController.getUser);
-router.put('/update-profile', isUser, upload.single('profilePicture') , authController.updateProfile);
+router.put('/update-profile', isAdminOrUserOrProvider, upload.single('profilePicture') , authController.updateProfile);
 router.get('/getAllDataForChatBot', isUser, authController.getAllDataForChatBot)
 router.post('/logout', authController.logout )
 

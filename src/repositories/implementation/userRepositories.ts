@@ -74,4 +74,8 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
     return this.findAll(filter);
   }
 
+  public async findByIdWithPassword(id: string): Promise<IUser | null> {
+    return await this.model.findById(id).select('+password').exec();
+  }
+
 }

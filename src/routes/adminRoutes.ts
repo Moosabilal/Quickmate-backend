@@ -11,6 +11,8 @@ const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
 
 router.get('/getAdminDashboard', adminController.getAdminDashboard)
 router.get('/analytics/dashboard', isAdmin, adminController.getDashboardAnalytics);
+router.put('/change-password', isAdmin, adminController.changePassword
+);
 
 
 

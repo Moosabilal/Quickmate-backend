@@ -16,5 +16,7 @@ export interface ISubscriptionPlanService {
         planId: string,
         razorpay_order_id: string,
         razorpay_payment_id: string,
-        razorpay_signature: string): Promise<{ message: string, provider: IProviderProfile }>
+        razorpay_signature: string): Promise<{ message: string, provider: IProviderProfile }>;
+    scheduleDowngrade(userId: string, newPlanId: string): Promise<ISubscription>;
+    cancelDowngrade(userId: string): Promise<ISubscription>;
 }

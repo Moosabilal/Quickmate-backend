@@ -1,4 +1,9 @@
 import { z } from 'zod';
+import { ReviewStatus } from '../../enums/review.enum';
+
+export const updateReviewStatusSchema = z.object({
+    status: z.nativeEnum(ReviewStatus),
+});
 
 export const addReviewSchema = z.object({
     bookingId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'A valid booking ID is required.'),
@@ -12,4 +17,6 @@ export const getReviewsQuerySchema = z.object({
     search: z.string().optional(),
     rating: z.coerce.number().int().min(1).max(5).optional(),
     sort: z.enum(['newest', 'oldest']).optional(),
+    status: z.nativeEnum(ReviewStatus).optional()
+        .transform(val => (val === ReviewStatus.ALL ? undefined : val)),
 });

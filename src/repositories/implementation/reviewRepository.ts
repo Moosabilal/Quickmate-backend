@@ -44,7 +44,7 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
     }
 
     public async findReviewsWithDetails(options: IReviewFilters): Promise<{ reviews: PopulatedReview[]; total: number }> {
-        const { page = 1, limit = 10, search, rating, sort = 'newest' } = options;
+        const { page = 1, limit = 10, search, rating, sort = 'newest', status } = options;
         const skip = (page - 1) * limit;
 
         const pipeline: PipelineStage[] = [];
@@ -71,6 +71,10 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
         pipeline.push({ $unwind: '$provider' });
 
         const matchStage: FilterQuery<any> = {};
+
+        if (status) {
+            matchStage.status = status;
+        }
 
         if (rating) {
             matchStage.rating = rating;
@@ -100,6 +104,7 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
                             _id: 1,
                             reviewContent: '$reviewText',
                             rating: 1,
+                            status: 1,
                             date: '$createdAt',
                             'user.name': '$user.name',
                             'provider.name': '$provider.fullName'

@@ -20,6 +20,8 @@ router.get("/:providerId/check", isProvider, subscriptionController.checkProvide
 router.post("/create-order", isProvider, subscriptionController.createSubscriptionOrder);
 router.post("/verify-payment", isProvider, subscriptionController.verifySubscriptionPayment);
 router.post("/calculate-upgrade", isProvider, subscriptionController.calculateUpgrade);
+router.post("/schedule-downgrade", isProvider, subscriptionController.scheduleDowngrade);
+router.post("/cancel-downgrade", isProvider, subscriptionController.cancelDowngrade);
 
 
 export default router

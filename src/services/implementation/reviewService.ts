@@ -9,6 +9,8 @@ import message from "../../models/message";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IBooking } from "../../models/Booking";
 import { IReviewFilters, PopulatedReview } from "../../interface/review";
+import { CustomError } from "../../utils/CustomError";
+import { HttpStatusCode } from "../../enums/HttpStatusCode";
 
 @injectable()
 export class ReviewService implements IReviewService {
@@ -44,7 +46,7 @@ export class ReviewService implements IReviewService {
             bookingId: bookingId.toString(),
             rating,
             reviewText: review,
-            status: ReviewStatus.PENDING,
+            status: ReviewStatus.PENDING
         };
 
         await this._reviewRepository.create(reviewData);
@@ -52,17 +54,17 @@ export class ReviewService implements IReviewService {
         booking.reviewed = true;
         await this._bookingRepository.update(bookingId, booking);
 
-        const reviews = (await this._reviewRepository.findAll({
-            providerId: booking.providerId,
-            status: ReviewStatus.PENDING,
-        })) as IReview[];
+        // const reviews = (await this._reviewRepository.findAll({
+        //     providerId: booking.providerId,
+        //     status: ReviewStatus.PENDING,
+        // })) as IReview[];
 
-        const totalRatings = reviews.reduce((sum: number, r: IReview) => sum + (r.rating as number), 0);
-        const avgRating = reviews.length > 0 ? totalRatings / reviews.length : 0;
+        // const totalRatings = reviews.reduce((sum: number, r: IReview) => sum + (r.rating as number), 0);
+        // const avgRating = reviews.length > 0 ? totalRatings / reviews.length : 0;
 
-        await this._providerRepository.update(booking.providerId.toString(), {
-            rating: avgRating,
-        });
+        // await this._providerRepository.update(booking.providerId.toString(), {
+        //     rating: avgRating,
+        // });
 
         return {
             message: "Your Review Submitted",
@@ -73,6 +75,34 @@ export class ReviewService implements IReviewService {
         filters: IReviewFilters
     ): Promise<{ reviews: PopulatedReview[]; total: number }> {
         return this._reviewRepository.findReviewsWithDetails(filters);
+    }
+
+    public async updateReviewStatus(reviewId: string, newStatus: ReviewStatus): Promise<IReview> {
+        const review = await this._reviewRepository.findById(reviewId);
+        if (!review) {
+            throw new CustomError("Review not found", HttpStatusCode.NOT_FOUND);
+        }
+
+        review.status = newStatus;
+        
+        // We update the document directly
+        const updatedReview = await this._reviewRepository.update(reviewId, review);
+        
+        // --- Recalculate Provider Rating ---
+        // We must recalculate the provider's rating after removing a review
+        const reviews = await this._reviewRepository.findAll({
+            providerId: review.providerId,
+            status: ReviewStatus.APPROVED, // Only count approved reviews
+        });
+
+        const totalRatings = reviews.reduce((sum: number, r: IReview) => sum + (r.rating as number), 0);
+        const avgRating = reviews.length > 0 ? totalRatings / reviews.length : 0;
+
+        await this._providerRepository.update(review.providerId.toString(), {
+            rating: avgRating,
+        });
+        
+        return updatedReview;
     }
 
 }

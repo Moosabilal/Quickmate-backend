@@ -11,7 +11,8 @@ const isProvOrUser = [authenticateToken, authorizeRoles(['Customer','ServieProvi
 const isAdmin = [authenticateToken, authorizeRoles(['Admin'])]
 
 router.post('/addReview', isProvOrUser, reviewController.addReview)
-router.get('/reviews', isAdmin, reviewController.getAllReviewsForAdmin)
+router.get('/reviews', isAdmin, reviewController.getAllReviewsForAdmin);
+router.patch('/reviews/:id/status', isAdmin, reviewController.updateReviewStatus);
 
 
 export default router

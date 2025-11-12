@@ -14,7 +14,7 @@ import { IProviderProfile, ISubscription } from "../../interface/provider";
 import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
 import { RazorpayOrder } from "../../interface/razorpay";
 import { toProviderDTO } from "../../utils/mappers/provider.mapper";
-import { FilterQuery } from "mongoose";
+import { FilterQuery, Types } from "mongoose";
 
 @injectable()
 export class SubscriptionPlanService implements ISubscriptionPlanService {
@@ -74,17 +74,93 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
     }
 
 
+    public async scheduleDowngrade(userId: string, newPlanId: string): Promise<ISubscription> {
+        const providerId = await this._providerRepository.getProviderId(userId)
+        const [provider, newPlan] = await Promise.all([
+            this._providerRepository.findById(providerId),
+            this._subscriptionPlanRepository.findById(newPlanId)
+        ]);
+        
+        if (!provider) throw new CustomError(ErrorMessage.PROVIDER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+        if (!newPlan) throw new CustomError(ErrorMessage.PLAN_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+        if (!provider.subscription || provider.subscription.status !== SubscriptionStatus.ACTIVE) {
+            throw new CustomError("No active subscription to downgrade.", HttpStatusCode.BAD_REQUEST);
+        }
+
+        const currentPlan = await this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
+        if (!currentPlan) throw new CustomError("Current plan not found.", HttpStatusCode.INTERNAL_SERVER_ERROR);
+
+        if (newPlan.price >= currentPlan.price) {
+            throw new CustomError("This is not a downgrade. Please use the Upgrade or Subscribe flow.", HttpStatusCode.BAD_REQUEST);
+        }
+
+        // Set the pending downgrade ID
+        provider.subscription.pendingDowngradePlanId = new Types.ObjectId(newPlanId);
+        
+        const updatedProvider = await provider.save();
+        return updatedProvider.subscription;
+    }
+
+    public async cancelDowngrade(userId: string): Promise<ISubscription> {
+        const providerId = await this._providerRepository.getProviderId(userId)
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) throw new CustomError(ErrorMessage.PROVIDER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+
+        if (!provider.subscription) {
+            throw new CustomError("No subscription found.", HttpStatusCode.BAD_REQUEST);
+        }
+        
+        if (!provider.subscription.pendingDowngradePlanId) {
+             throw new CustomError("No pending downgrade to cancel.", HttpStatusCode.BAD_REQUEST);
+        }
+
+        // Clear the pending downgrade
+        provider.subscription.pendingDowngradePlanId = undefined;
+        
+        const updatedProvider = await provider.save();
+        return updatedProvider.subscription;
+    }
+
+    // --- THIS METHOD IS UPDATED ---
     public async checkAndExpire(providerId: string): Promise<ISubscription> {
         const provider = await this._providerRepository.findById(providerId);
         if (!provider) throw new CustomError(ErrorMessage.PROVIDER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
 
         const subscription = provider.subscription;
+        if (!subscription) {
+            return { status: SubscriptionStatus.NONE } as ISubscription; // Return a NONE status
+        }
+        
+        // Check if the plan is expired
         if (
-            subscription?.status === SubscriptionStatus.ACTIVE &&
-            subscription?.endDate &&
+            subscription.status === SubscriptionStatus.ACTIVE &&
+            subscription.endDate &&
             new Date(subscription.endDate) < new Date()
         ) {
+            // --- 1. CHECK FOR A PENDING DOWNGRADE ---
+            if (subscription.pendingDowngradePlanId) {
+                const newPlan = await this._subscriptionPlanRepository.findById(subscription.pendingDowngradePlanId.toString());
+                
+                if (newPlan) {
+                    // 2. ACTIVATE THE NEW (CHEAPER) PLAN
+                    const newStartDate = new Date();
+                    const newEndDate = new Date(newStartDate);
+                    newEndDate.setDate(newEndDate.getDate() + newPlan.durationInDays);
+
+                    subscription.planId = newPlan._id;
+                    subscription.startDate = newStartDate;
+                    subscription.endDate = newEndDate;
+                    subscription.status = SubscriptionStatus.ACTIVE;
+                    subscription.pendingDowngradePlanId = undefined; // Clear the pending downgrade
+
+                    await provider.save();
+                    return provider.subscription;
+                }
+            }
+            
+            // --- 3. NO DOWNGRADE, just expire the plan ---
             subscription.status = SubscriptionStatus.EXPIRED;
+            subscription.pendingDowngradePlanId = undefined; // Clear it just in case
             await provider.save();
         }
 

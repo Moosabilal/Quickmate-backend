@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import { IReview } from "../models/Review";
+import { ReviewStatus } from "../enums/review.enum";
 
 export interface IReviewFilters {
     page: number;
@@ -20,4 +21,5 @@ export interface IReviewFilters {
     search?: string;
     rating?: number;
     sort?: 'newest' | 'oldest';
+    status?: ReviewStatus
 }

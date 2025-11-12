@@ -579,7 +579,7 @@ export class BookingService implements IBookingService {
             return {
                 id: booking._id.toString(),
                 userName: user?.name as string || 'N/A',
-                userAvatar: (user?.profilePicture as string) || `https://i.pravatar.cc/150?u=${user?.id}`,
+                userAvatar: (user?.profilePicture as string) || null,
                 providerName: provider?.fullName as string || 'N/A',
                 serviceType: service?.title as string || 'N/A',
                 dateTime: `${booking.scheduledDate || ''} ${booking.scheduledTime || ''}`.trim(),

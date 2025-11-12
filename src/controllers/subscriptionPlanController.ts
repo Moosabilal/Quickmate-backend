@@ -5,7 +5,7 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import { NextFunction, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { IVerifySubscriptionPaymentReq } from "../interface/subscriptionPlan";
-import { ZodError } from "zod";
+import z, { ZodError } from "zod";
 import {
     createSubscriptionPlanSchema,
     updateSubscriptionPlanSchema,
@@ -98,6 +98,38 @@ export class SubscriptionPlanController {
             res.status(HttpStatusCode.OK).json({ success: true, data: response });
         } catch (error) {
             if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
+        }
+    }
+
+    public scheduleDowngrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { newPlanId } = z.object({ newPlanId: mongoIdParamSchema.shape.id }).parse(req.body);
+            const userId = req.user.id; // Get provider from logged-in user
+
+            const updatedSubscription = await this._subscriptionPlanService.scheduleDowngrade(userId, newPlanId);
+            res.status(HttpStatusCode.OK).json({ 
+                success: true, 
+                message: "Downgrade scheduled successfully.",
+                data: updatedSubscription 
+            });
+        } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
+        }
+    }
+    public cancelDowngrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id; // Get provider from logged-in user
+
+            const updatedSubscription = await this._subscriptionPlanService.cancelDowngrade(userId);
+            res.status(HttpStatusCode.OK).json({ 
+                success: true, 
+                message: "Your scheduled downgrade has been cancelled.",
+                data: updatedSubscription 
+            });
+        } catch (error) {
+            // No Zod validation, so just catch general errors
             next(error);
         }
     }

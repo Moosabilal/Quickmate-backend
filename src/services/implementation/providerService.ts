@@ -33,6 +33,7 @@ import { _haversineKm } from "../../utils/helperFunctions/haversineKm";
 import { format } from 'date-fns/format';
 import { addDays } from 'date-fns/addDays';
 import { IBooking } from "../../models/Booking";
+import { ReviewStatus } from "../../enums/review.enum";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5;
@@ -447,6 +448,7 @@ export class ProviderService implements IProviderService {
 
         const reviews = await this._reviewRepository.findAll({
             providerId: provider._id.toString(),
+            status: ReviewStatus.APPROVED
         });
 
         return toProviderDashboardDTO(provider, bookings, services, subCategories, parentCategories, reviews);

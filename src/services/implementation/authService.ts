@@ -160,7 +160,7 @@ export class AuthService implements IAuthService {
         return { message: 'A new OTP has been sent to your email.' };
     }
 
-    public async login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; googleCalendar?: { tokens?: Credentials } }; token: string; refreshToken: string }> {
+    public async login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; }; token: string; refreshToken: string }> {
         const user = await this._userRepository.findByEmail(email, true);
 
         if (!user || !user.password) {
@@ -193,7 +193,6 @@ export class AuthService implements IAuthService {
                 role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
                 isVerified: Boolean(user.isVerified),
                 profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
-                googleCalendar: user.googleCalendar
             },
             token,
             refreshToken,
@@ -341,7 +340,7 @@ export class AuthService implements IAuthService {
     }
 
 
-    public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string; googleCalendar?: { tokens?: Credentials } }> {
+    public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string; }> {
 
         if (!token) {
             throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
@@ -367,11 +366,10 @@ export class AuthService implements IAuthService {
             role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
             isVerified: Boolean(user.isVerified),
             profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
-            googleCalendar: user.googleCalendar
         };
     }
 
-    public async updateProfile(token: string, data: { name: string; email: string; profilePicture?: string }): Promise<{ id: string; name: string; email: string; profilePicture?: string; }> {
+    public async updateProfile(token: string, data: { name: string; email: string; profilePicture?: string }): Promise<{ id: string; name: string; email: string; role: string; isVerified: boolean; profilePicture?: string; }> {
         if (!token) {
             throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
         }
@@ -400,6 +398,8 @@ export class AuthService implements IAuthService {
             id: (user._id as { toString(): string }).toString(),
             name: user.name as string,
             email: user.email as string,
+            role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
+            isVerified: Boolean(user.isVerified),
             profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
         };
     }
@@ -570,7 +570,7 @@ export class AuthService implements IAuthService {
             id: user._id.toString(),
             name: user.name as string,
             email: user.email as string,
-            avatarUrl: (user.profilePicture as string) || `https://i.pravatar.cc/150?u=${user.id}`,
+            avatarUrl: (user.profilePicture as string) || null,
             phone: providerProfile?.phoneNumber || 'N/A',
             registrationDate: (user.createdAt as Date).toISOString().split('T')[0],
             lastLogin: (user.updatedAt as Date).toISOString().split('T')[0],

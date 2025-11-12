@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { Roles } from '../../enums/userRoles';
 
 const emailSchema = z.string().email("Invalid email address.");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters long.");

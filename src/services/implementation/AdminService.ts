@@ -2,6 +2,7 @@ import { inject, injectable } from "inversify";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { IAdminService } from "../interface/IAdminService";
 import TYPES from "../../di/type";
+import bcrypt from 'bcryptjs';
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { BookingStatus } from "../../enums/booking.enum";
 import { Roles } from "../../enums/userRoles";
@@ -11,6 +12,9 @@ import { IReviewRepository } from "../../repositories/interface/IReviewRepositor
 import { toAdminDashboardDTO } from "../../utils/mappers/admin.mapper";
 import { IProviderDashboardRes } from "../../interface/provider";
 import { IAnalyticsData } from "../../interface/admin";
+import { CustomError } from "../../utils/CustomError";
+import { ErrorMessage } from "../../enums/ErrorMessage";
+import { HttpStatusCode } from "../../enums/HttpStatusCode";
 
 @injectable()
 export class AdminService implements IAdminService {
@@ -35,12 +39,12 @@ export class AdminService implements IAdminService {
 
     public async getAdminDashboard(): Promise<IProviderDashboardRes> {
         const totalUsers = await this._userRepository.countUsers()
-        const totalProviders = await this._userRepository.countUsers({role: Roles.PROVIDER})
-        const dailyBookings = await this._bookingRepository.getDailyBookingCount({status: BookingStatus.COMPLETED})
+        const totalProviders = await this._userRepository.countUsers({ role: Roles.PROVIDER })
+        const dailyBookings = await this._bookingRepository.getDailyBookingCount({ status: BookingStatus.COMPLETED })
         const monthlyRevenue = await this._paymentRepository.getMonthlyAdminRevenue()
         const topActiveProviders = await this._providerRepository.getTopActiveProviders()
         const providerReviewCounts = await this._reviewRepository.getReviewCountsByProvider()
-        const totalBookings = dailyBookings.reduce((acc,booking) => acc += booking.total, 0)
+        const totalBookings = dailyBookings.reduce((acc, booking) => acc += booking.total, 0)
 
         return toAdminDashboardDTO(totalUsers, totalProviders, totalBookings, dailyBookings, monthlyRevenue, topActiveProviders, providerReviewCounts)
 
@@ -85,5 +89,20 @@ export class AdminService implements IAdminService {
                 avgRating: parseFloat(averageRating.toFixed(1))
             }
         };
+    }
+
+    public async changePassword(userId: string, currentPassword: string, newPassword: string): Promise<void> {
+        const user = await this._userRepository.findByIdWithPassword(userId);
+
+        if (!user) {
+            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+        }
+        const isMatch = await bcrypt.compare(currentPassword, user.password as string);
+        if (!isMatch) {
+            throw new CustomError("Incorrect current password.", HttpStatusCode.BAD_REQUEST);
+        }
+
+        user.password = newPassword;
+        await user.save();
     }
 }
