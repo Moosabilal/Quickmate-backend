@@ -128,7 +128,6 @@ export class ChatbotService implements IChatBotService {
 
     public async startSession(userId?: string): Promise<IChatSession> {
         const sessionId = nanoid(10);
-        console.log('user id in start session:', userId);
         let finalUserId: Types.ObjectId;
         if (!userId || userId === "undefined") {
             finalUserId = new Types.ObjectId();

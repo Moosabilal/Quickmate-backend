@@ -106,7 +106,10 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
                             rating: 1,
                             status: 1,
                             date: '$createdAt',
+                            'user.id': '$userId',
                             'user.name': '$user.name',
+                            'user.isVerified': '$user.isVerified',
+                            'provider.id': '$providerId',
                             'provider.name': '$provider.fullName'
                         }
                     }

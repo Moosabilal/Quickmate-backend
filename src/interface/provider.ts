@@ -37,6 +37,7 @@ export interface IProviderForAdminResponce {
   serviceArea: string;
   profilePhoto: string;
   status: string;
+  rating: number;
   serviceName?: string;
   serviceOffered?: string[]
 

@@ -14,7 +14,7 @@ import { ICategoryRepository } from "../../repositories/interface/ICategoryRepos
 import { ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
 import { CommissionTypes } from "../../enums/CommissionType.enum";
 import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
-import mongoose, { FilterQuery, Types } from "mongoose";
+import mongoose, { FilterQuery, Types, UpdateQuery } from "mongoose";
 import { IPayment } from "../../models/payment";
 import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
@@ -350,6 +350,7 @@ export class BookingService implements IBookingService {
             return { message: ErrorMessage.BOOKING_IS_ALREADY_CANCELLED }
         }
         let bookingOtp: string | undefined;
+        const updatePayload: UpdateQuery<IBooking> = { status: status };
         if (status === BookingStatus.CANCELLED) {
             const userId = booking.userId.toString()
             const wallet = await this._walletRepository.findOne({ ownerId: userId })
@@ -376,6 +377,7 @@ export class BookingService implements IBookingService {
                     description: `Refund Received from ${service.title}`,
                 },
             );
+            updatePayload.paymentStatus = PaymentStatus.REFUNDED;
 
 
         } else if (status === BookingStatus.COMPLETED) {
@@ -383,6 +385,7 @@ export class BookingService implements IBookingService {
             if (!user) {
                 throw new CustomError('userId not found', HttpStatusCode.NOT_FOUND)
             }
+            await this._bookingRepository.update(bookingId, updatePayload);
             const otp = generateOTP()
             bookingOtp = jwt.sign({ bookingId, otp }, process.env.JWT_SECRET, { expiresIn: "10m" })
             await sendBookingVerificationEmail(String(user.email), otp)

@@ -54,6 +54,7 @@ export function toProviderForAdminResponseDTO(
       serviceArea: provider.serviceArea,
       profilePhoto: provider.profilePhoto,
       status: provider.status,
+      rating: provider.rating,
       serviceOffered: serviceMap.get(providerIdStr) || [],
     };
   });

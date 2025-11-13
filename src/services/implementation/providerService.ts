@@ -216,7 +216,8 @@ export class ProviderService implements IProviderService {
         page: number,
         limit: number,
         search: string,
-        status: string
+        status: string,
+        rating: number
     ): Promise<{
         data: IProviderForAdminResponce[];
         total: number;
@@ -235,6 +236,12 @@ export class ProviderService implements IProviderService {
         if (status && status !== 'All') {
             filter.status = status;
         }
+
+        if (rating) {
+        filter.rating = { $gte: rating, $lt: rating + 1 };
+        
+        // filter.rating = { $gte: rating };
+    }
 
         const [providers, total] = await Promise.all([
             this._providerRepository.findProvidersWithFilter(filter, skip, limit),

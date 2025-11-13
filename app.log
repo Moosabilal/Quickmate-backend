@@ -39348,3 +39348,1798 @@ Please retry in 50.325346836s. [{"@type":"type.googleapis.com/google.rpc.Help","
 [INFO   ] - Client disconnected: UW12MhlF5_n3LJ39AAAB
 [INFO   ] - Client disconnected: V70W3Lk6IodK5YTsAAAF
 [ERROR  ] - PUT /api/auth/update-user/68fb1671a3a0e056e462f75f 404 User not found. -> User not found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 8mhzUXh6mh52Dyv6AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: J_fIAxLa2zU0RWglAAAB
+[ERROR  ] - PUT /api/auth/update-user/68fb1671a3a0e056e462f75f 404 User not found. -> User not found.
+[ERROR  ] - POST /api/auth/login 403 Account not verified. Please verify your email or contact admin. -> Account not verified. Please verify your email or contact admin.
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: JUMGggfln99jiyveAAAF
+[INFO   ] - Client disconnected: RG0q8cXkDbIunpmqAAAH
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: fjtdzWygOgX0p0U-AAAJ
+[INFO   ] - Client disconnected: QntF2KYCV2f6N7FWAAAL
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: PfjvQar2z-cYJUmrAAAN
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: 2bwmNRff1VC3BMjnAAAP
+[INFO   ] - Client disconnected: Nys0N-vWPuKuvOq7AAAR
+[INFO   ] - Client disconnected: 9sA8pa6cpfYX_tU_AAAD
+[INFO   ] - Client disconnected: IMLSy7tmqfAcvSsjAAAT
+[INFO   ] - Client disconnected: gjTGBO4mzUAm--b5AAAW
+[INFO   ] - Client disconnected: X6qB7qkloXkVuYchAAAY
+[ERROR  ] - PUT /api/auth/update-user/68fb1671a3a0e056e462f75f 404 User not found. -> User not found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 0wqkfY_TA0BukX9cAAAB
+[ERROR  ] - PUT /api/auth/update-user/68fb1671a3a0e056e462f75f 404 User not found. -> User not found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: bw8jjwjsM1RciWqpAAAB
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/review/reviews?page=1&limit=10&sort=newest&status=Approved 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: XRRnQNWH3giunR4GAAAB
+[INFO   ] - Client disconnected: 73aFnahFGb5wOM7OAAAD
+[INFO   ] - Client disconnected: _JtwnCOE7STXRXJyAAAF
+[INFO   ] - Client disconnected: 1lGkR9RnVSmIR__cAAAH
+[INFO   ] - Client disconnected: VARMsP7P3wT1j-y8AAAJ
+[INFO   ] - Client disconnected: KTojt1OdTo8tEwaHAAAL
+[INFO   ] - Client disconnected: uyZjvQsiI9HMhQgqAAAN
+[INFO   ] - Client disconnected: QfKGWB4apMkqc4pFAAAP
+[INFO   ] - Client disconnected: CDWSM0uOagTbp6ulAAAR
+[INFO   ] - Client disconnected: Qc-R3txqwZzYbI9AAAAT
+[INFO   ] - Client disconnected: LrPKZhcEBJK7PQHaAAAV
+[INFO   ] - Client disconnected: CJbZvUB1RiRbuUAqAAAX
+[INFO   ] - Client disconnected: KNuaPbVYIc5_kWAIAAAZ
+[INFO   ] - Client disconnected: 7RgHD0cGSOflfnxuAAAb
+[INFO   ] - Client disconnected: XgpTi3Btwwk0McEuAAAd
+[INFO   ] - Client disconnected: qZMCyXGp3I_CLRHDAAAf
+[INFO   ] - Client disconnected: 9ZKonowp_ifq4XixAAAh
+[INFO   ] - Client disconnected: mjDL7AcXsLpBp88aAAAj
+[INFO   ] - Client disconnected: Sq5smQkSTYeTs0qfAAAl
+[INFO   ] - Client disconnected: -dCDkJmLJAYYH7lbAAAn
+[INFO   ] - Client disconnected: ETSz0Eyzrxy-uikqAAAp
+[INFO   ] - Client disconnected: 0DNsThTE5VZ6__deAAAr
+[INFO   ] - Client disconnected: n7Ww5TfnnHZZ6AdrAAAt
+[INFO   ] - Client disconnected: Lc0yOlCV6xYwy4xTAAAv
+[INFO   ] - Client disconnected: vKElHBF3wIrnmRomAAAx
+[INFO   ] - Client disconnected: tnfypOV7e1YzApkNAAAz
+[INFO   ] - Client disconnected: PQfzA4GDHu0Xuxm8AAA1
+[INFO   ] - Client disconnected: vwJ1_wxDjHd30gKvAAA3
+[INFO   ] - Client disconnected: 9cfPv8JQhrrprHoiAAA5
+[INFO   ] - Client disconnected: oiF-QjtCdkMcQIL_AAA7
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=Suspended&verification=undefined&rating=undefined&page=1&limit=4 404 No providers found. -> No providers found.
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=Pending&verification=undefined&rating=undefined&page=1&limit=4 404 No providers found. -> No providers found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: _-ojYBL7b_YsuACgAAAB
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=5&page=1&limit=4 404 No providers found. -> No providers found.
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=1&page=1&limit=4 404 No providers found. -> No providers found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 8t-kuqZQPzGErFt-AAAB
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Client disconnected: bCbktPd_QnSam0_uAAAD
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Client disconnected: 7bxQ-j7i6KBsn9SVAAAF
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: Bnb_Pe4ZK91sVYNtAAAB
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: VQ9tHS2Nh4PmdhxzAAAD
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: Dc-Dy6FegLllqpcwAAAF
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: zTNNg9eS5ZCcn3LUAAAH
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: _IO74oSNkebfKcEDAAAJ
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: WyoORrdtw4c-BITBAAAL
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: IqyONWKJIwfyS35JAAAN
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: NCU15UyK9ZpcLMtPAAAP
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: wc32fTS9LIUPnx0FAAAR
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: Leu9R34fOP42jQUsAAAT
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: Vouqz325v5LIMTZHAAAV
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: g9br0ij3fCcv7kEqAAAX
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: VQDvWVE0ojkQueeoAAAZ
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: uY4EvpAfKQ_08UShAAAb
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: 4f0KywQCDR2NaJJvAAAd
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[INFO   ] - Client disconnected: SLBpPQUwmQlXlXOxAAAf
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=0&page=1&limit=4 500 [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+] -> [
+  {
+    "origin": "number",
+    "code": "too_small",
+    "minimum": 1,
+    "inclusive": true,
+    "path": [
+      "rating"
+    ],
+    "message": "Too small: expected number to be >=1"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=undefined&page=1&limit=4 500 [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+] -> [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "received": "NaN",
+    "path": [
+      "rating"
+    ],
+    "message": "Invalid input: expected number, received NaN"
+  }
+]
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=5&page=1&limit=4 404 No providers found. -> No providers found.
+[INFO   ] - Client disconnected: VTYvw0jOd8_15MokAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 00Ju6fJDNg10Opc0AAAD
+[ERROR  ] - GET /api/provider/getProviderList?search=&status=undefined&rating=5&page=1&limit=4 404 No providers found. -> No providers found.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: u9Pxryd_ha6agyP6AAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: kgD6qZpp_AZAICLoAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: WE3oC8LP-QFum4PcAAAB
+[INFO   ] - Client disconnected: dbvxdzRC7c5MoG-VAAAD
+[INFO   ] - Client disconnected: ZsV1OJ-PzTy7LcA5AAAF
+[INFO   ] - Client disconnected: FEezY4AvHhlnVV67AAAH
+[INFO   ] - Client disconnected: sAdhqabu2JFafpJ6AAAJ
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

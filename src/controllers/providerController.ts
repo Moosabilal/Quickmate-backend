@@ -176,8 +176,8 @@ export class ProviderController {
 
     public getProvidersforAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { page, limit, search, status } = providersForAdminQuerySchema.parse(req.query);
-            const providersDetails = await this._providerService.providersForAdmin(page, limit, search, status);
+            const { page, limit, search, status, rating } = providersForAdminQuerySchema.parse(req.query);
+            const providersDetails = await this._providerService.providersForAdmin(page, limit, search, status, rating);
             res.status(HttpStatusCode.OK).json(providersDetails);
         } catch (error) {
             next(error);

@@ -9,7 +9,7 @@ export interface IProviderService {
     verifyOtp(data: VerifyOtpRequestBody): Promise<{ provider?: IProviderProfile, user?: ILoginResponseDTO, message?: string }>
     resendOtp(data: ResendOtpRequestBody): Promise<{ message: string }>
     getProviderWithAllDetails(): Promise<IProvider[]>;
-    providersForAdmin(page: number, limit: number, search: string, status: string): Promise<{ data: IProviderForAdminResponce[], total: number, totalPages: number, currentPage: number }>;
+    providersForAdmin(page: number, limit: number, search: string, status: string, rating?: number): Promise<{ data: IProviderForAdminResponce[], total: number, totalPages: number, currentPage: number }>;
     getFeaturedProviders(page: number, limit: number, search: string): Promise<{
         providers: IFeaturedProviders[],
         total: number;

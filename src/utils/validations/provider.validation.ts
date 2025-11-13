@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ProviderStatus } from '../../enums/provider.enum'; 
+import { ProviderStatus } from '../../enums/provider.enum';
 
 const mongoIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format');
 export const mongoIdParamSchema = z.object({ id: mongoIdSchema });
@@ -27,14 +27,22 @@ export const providersForAdminQuerySchema = z.object({
     status: z.string().optional()
         .transform(val => (val === 'undefined' || val === 'All') ? undefined : val)
         .pipe(z.nativeEnum(ProviderStatus).optional()),
+    rating: z
+        .union([
+            z.coerce.number().int().min(1).max(5),
+            z.literal('undefined'),
+            z.literal('All'),
+        ])
+        .optional()
+        .transform((val) => (val === 'undefined' || val === 'All') ? undefined : val),
 });
 
 export const getServiceProviderQuerySchema = z.object({
     serviceId: mongoIdSchema,
     experience: z.coerce.number().positive().optional(),
-    
+
     radius: z.coerce.number().positive().optional(),
-    
+
     price: z.coerce.number().positive().optional(),
     latitude: z.coerce.number().optional(),
     longitude: z.coerce.number().optional(),
@@ -47,7 +55,7 @@ export const getAvailabilityQuerySchema = z.object({
     latitude: z.coerce.number(),
     longitude: z.coerce.number(),
     radius: z.coerce.number().int().positive().optional(),
-    timeMin: z.string().datetime(), 
+    timeMin: z.string().datetime(),
     timeMax: z.string().datetime(),
 });
 
@@ -92,5 +100,5 @@ export const updateAvailabilitySchema = z.object({
 });
 
 export const searchQuerySchema = z.object({
-  search: z.string().optional(),
+    search: z.string().optional(),
 });
