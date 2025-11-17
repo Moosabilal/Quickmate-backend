@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.toAddressRequestDTO = void 0;
+const toAddressRequestDTO = (address) => {
+    return {
+        id: address._id.toString(),
+        userId: address.userId.toString(),
+        label: address.label,
+        street: address.street,
+        city: address.city,
+        state: address.state,
+        zip: address.zip,
+        locationCoords: `${address.locationCoords.coordinates[1]},${address.locationCoords.coordinates[0]}`,
+    };
+};
+exports.toAddressRequestDTO = toAddressRequestDTO;

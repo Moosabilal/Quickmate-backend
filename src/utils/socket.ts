@@ -10,6 +10,11 @@ export function chatSocket(io: any) {
   io.on("connection", (socket: any) => {
 
     socket.on("joinBookingRoom", (joiningId: string) => {
+      // Validate joiningId
+      if (!joiningId || typeof joiningId !== 'string' || joiningId.trim() === '') {
+        logger.warn("Invalid joiningId received:", joiningId);
+        return;
+      }
       socket.join(joiningId);
       logger.info(`Socket ${socket.id} joined booking room: ${joiningId}`);
 
@@ -22,6 +27,12 @@ export function chatSocket(io: any) {
     socket.on(
       "sendBookingMessage",
       async (messageData: ISocketMessage) => {
+        // Validate message data
+        if (!messageData || !messageData.joiningId || !messageData.senderId) {
+          logger.warn("Invalid message data received:", messageData);
+          socket.emit("chat:error", { message: "Invalid message data" });
+          return;
+        }
         try {
           await bookingService.saveAndEmitMessage(io, messageData);
         } catch (err) {
@@ -32,9 +43,23 @@ export function chatSocket(io: any) {
     );
 
     const forwardEventHandler = (eventName: string) => {
-      socket.on(eventName, (payload: { joiningId: string; fromUserId: string }) => {
-        if (!payload || !payload.joiningId) {
+      socket.on(eventName, (payload: any) => {
+        // Enhanced validation for WebRTC events
+        if (!payload || !payload.joiningId || !payload.fromUserId) {
           logger.warn(`Invalid payload for ${eventName}:`, payload);
+          return;
+        }
+        // Additional validation for specific events
+        if (eventName === "webrtc:offer" && !payload.offer) {
+          logger.warn(`Missing offer in ${eventName}:`, payload);
+          return;
+        }
+        if (eventName === "webrtc:answer" && !payload.answer) {
+          logger.warn(`Missing answer in ${eventName}:`, payload);
+          return;
+        }
+        if (eventName === "webrtc:ice-candidate" && !payload.candidate) {
+          logger.warn(`Missing candidate in ${eventName}:`, payload);
           return;
         }
         logger.info(`Forwarding ${eventName} from ${payload.fromUserId} to room ${payload.joiningId}`);

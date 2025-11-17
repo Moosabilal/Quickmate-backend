@@ -15,8 +15,6 @@ export class MessageRepository extends BaseRepository<IMessage> implements IMess
         return data
     }
 
-    // src/repositories/implementation/MessageRepository.ts
-
     public async findLastMessagesByJoiningIds(
         joiningIds: string[]
     ): Promise<{
@@ -31,20 +29,18 @@ export class MessageRepository extends BaseRepository<IMessage> implements IMess
             { $match: { joiningId: { $in: joiningIds } } },
             { $sort: { createdAt: -1 } },
             {
-                // 1. Get the entire document of the most recent message
                 $group: {
                     _id: "$joiningId",
                     lastMessageDoc: { $first: "$$ROOT" }
                 }
             },
             {
-                // 2. Project the fields we need
                 $project: {
                     _id: 0,
                     joiningId: "$_id",
                     createdAt: "$lastMessageDoc.createdAt",
                     messageType: "$lastMessageDoc.messageType",
-                    lastMessage: "$lastMessageDoc.text", // This will be the text or null
+                    lastMessage: "$lastMessageDoc.text", 
                     senderId: "$lastMessageDoc.senderId"
                 }
             }

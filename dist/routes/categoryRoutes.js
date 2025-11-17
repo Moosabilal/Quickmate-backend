@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authMiddleware_1 = require("../middleware/authMiddleware");
+const multer_1 = __importDefault(require("../utils/multer"));
+const type_1 = __importDefault(require("../di/type"));
+const container_1 = require("../di/container");
+const router = (0, express_1.Router)();
+const categoryController = container_1.container.get(type_1.default.CategoryController);
+const isAdmin = [authMiddleware_1.authenticateToken, (0, authMiddleware_1.authorizeRoles)(['Admin'])];
+const isAdminOrUser = [authMiddleware_1.authenticateToken, (0, authMiddleware_1.authorizeRoles)(['Admin', 'Customer'])];
+const isAdminOrUserOrProvider = [authMiddleware_1.authenticateToken, (0, authMiddleware_1.authorizeRoles)(['Admin', 'Customer', 'ServiceProvider'])];
+router.get('/', categoryController.getAllCategories);
+router.post('/', isAdmin, multer_1.default.single('categoryIcon'), categoryController.createCategory);
+router.get('/commission-summary', isAdmin, categoryController.getCommissionSummary);
+router.get('/top-level', categoryController.getTopLevelCategories);
+router.get('/popular-services', categoryController.getPopularServices);
+router.get('/trending-services', categoryController.getTrendingServices);
+router.get('/edit/:id', isAdminOrUserOrProvider, categoryController.getCategoryForEdit);
+router.get('/getAllSubCategories', categoryController.getSubCategories);
+router.put('/:id', isAdmin, multer_1.default.single('categoryIcon'), categoryController.updateCategory);
+router.get('/:id', categoryController.getCategoryById);
+exports.default = router;

@@ -327,7 +327,7 @@ export function toProviderPerformanceDTO(
       time: r.createdAt ? new Date(r.createdAt as string | Date).toLocaleDateString() : "N/A",
       rating: Number(r.rating) ?? 0,
       comment: (r.reviewText as string) || "",
-      avatar: (user?.profilePicture as string) ?? "default_avatar.png"
+      avatar: user?.profilePicture as string
     };
   });
 

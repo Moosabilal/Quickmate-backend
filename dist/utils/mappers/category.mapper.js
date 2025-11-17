@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.toCommissionRuleResponseDTO = exports.toCategoryResponseDTO = void 0;
+exports.toHomePageDTO = toHomePageDTO;
+function toHomePageDTO(category) {
+    return {
+        id: category._id.toString(),
+        name: category.name,
+        description: category.description,
+        iconUrl: category.iconUrl,
+        parentId: category.parentId.toString(),
+    };
+}
+const toCategoryResponseDTO = (category) => {
+    const categoryObject = category.toJSON();
+    return Object.assign(Object.assign({}, categoryObject), { id: categoryObject._id.toString(), parentId: categoryObject.parentId ? categoryObject.parentId.toString() : null, createdAt: categoryObject.createdAt.toISOString(), updatedAt: categoryObject.updatedAt.toISOString() });
+};
+exports.toCategoryResponseDTO = toCategoryResponseDTO;
+const toCommissionRuleResponseDTO = (rule) => {
+    const ruleObject = rule.toJSON();
+    return Object.assign(Object.assign({}, ruleObject), { _id: ruleObject._id.toString(), categoryId: ruleObject.categoryId ? ruleObject.categoryId.toString() : null, createdAt: ruleObject.createdAt.toISOString(), updatedAt: ruleObject.updatedAt.toISOString() });
+};
+exports.toCommissionRuleResponseDTO = toCommissionRuleResponseDTO;
