@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { IProvider } from "../../models/Providers";
 import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderDetailsResponse, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IReviewsOfUser, IServiceAddPageResponse, TimeSlot } from "../../interface/provider";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
@@ -864,5 +864,106 @@ export class ProviderService implements IProviderService {
         };
     }
 
+    public async findProvidersAvailableAtSlot(
+        providerIds: string[],
+        date: string, // YYYY-MM-DD
+        time: string  // hh:mm AM/PM
+    ): Promise<IProvider[]> {
+
+        // 1. Convert time to 24-hour format for comparison
+        const time24h = convertTo24Hour(time);
+        const [hour, minute] = time24h.split(':').map(Number);
+        
+        // 2. Create the Date objects for the 1-hour slot
+        const slotStart = new Date(date);
+        slotStart.setHours(hour, minute, 0, 0);
+        
+        const slotEnd = new Date(slotStart.getTime() + 60 * 60 * 1000); // 1-hour duration
+
+        // 3. Get all providers from the list
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
+
+        const availableProviders: IProvider[] = [];
+
+        for (const provider of providers) {
+            const providerId = provider._id.toString();
+
+            // 4. Get this provider's bookings for the day
+            const existingBookings = await this._bookingRepository.findByProviderByTime(
+                providerId,
+                date,
+                date
+            );
+
+            // 5. Get their specific availability rules for that day
+            const dayName = format(new Date(date), 'EEEE');
+            const weeklySlots = this._getWeeklySlots(provider, dayName);
+            const override = this._getDateOverride(provider, date);
+            const busySlots = override ? override.busySlots : [];
+
+            // 6. Use your existing helper to see if the slot is free
+            const isAvailable = this._isSlotAvailable(
+                slotStart,
+                slotEnd,
+                existingBookings,
+                busySlots
+            );
+
+            if (isAvailable) {
+                availableProviders.push(provider);
+            }
+        }
+        
+        return availableProviders;
+    }
+
+    public async findNearbyProviders(
+        coordinates: [number, number],
+        radiusInKm: number = 10,
+        subCategoryId: string // This is the subCategoryId, not serviceId
+    ): Promise<any[]> {
+        try {
+            // 1. Find all services that match this subcategory
+            const services = await this._serviceRepository.findAll({ 
+                subCategoryId: new Types.ObjectId(subCategoryId),
+                status: true 
+            });
+
+            if (!services.length) {
+                return [];
+            }
+
+            // 2. Extract unique provider IDs from those services
+            const providerIds = [...new Set(services.map(s => s.providerId.toString()))];
+
+            // 3. Convert radius to meters
+            const radiusInMeters = radiusInKm * 1000;
+
+            // 4. Find providers who:
+            //    - Are in the list of IDs (offer the service)
+            //    - Are verified and approved
+            //    - Are within the location radius
+            const providers = await this._providerRepository.findAll({
+                _id: { $in: providerIds.map(id => new Types.ObjectId(id)) },
+                status: "Approved", // Assuming 'Approved' is the correct enum value
+                isVerified: true,
+                serviceLocation: {
+                    $near: {
+                        $geometry: {
+                            type: 'Point',
+                            coordinates: coordinates
+                        },
+                        $maxDistance: radiusInMeters
+                    }
+                }
+            });
+
+            return providers;
+
+        } catch (error) {
+            console.error('Error finding nearby providers:', error);
+            return [];
+        }
+    }
 
 }

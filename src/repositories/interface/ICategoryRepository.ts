@@ -29,5 +29,6 @@ export interface ICategoryRepository extends IBaseRepository<ICategory> {
 
     findSubCategoryByName(name: string): Promise<ICategory | null>;
     findParentCategoryByName(name: string): Promise<ICategory | null>;
+    findAllActiveSubCategories(): Promise<ICategory[]>;
 
 }   

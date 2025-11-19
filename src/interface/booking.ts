@@ -12,6 +12,7 @@ export interface IBookingRequest {
   addressId: string
   scheduledDate?: string;
   scheduledTime?: string;
+  amount: number;
 }
 
 export interface IBookingConfirmationRes {

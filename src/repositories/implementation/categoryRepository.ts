@@ -200,4 +200,13 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         });
     }
 
+    public async findAllActiveSubCategories(): Promise<ICategory[]> {
+        return this.model.find({ 
+            parentId: { $ne: null },
+            status: true       
+        })
+        .select('name')
+        .lean();
+    }
+
 }

@@ -92,6 +92,7 @@ export class ServiceRepository extends BaseRepository<IService> implements IServ
                 $project: {
                     title: 1,
                     price: 1,
+                    'provider._id': 1,
                     'provider.fullName': 1,
                     'provider.rating': 1,
                 }

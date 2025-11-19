@@ -1,5 +1,5 @@
 import { FilterQuery } from "mongoose";
-import { IBookingHistoryPage, IBookingRequest, IBookingStatusCount, IProviderBookingManagement } from "../../interface/booking";
+import { IBookingHistoryPage, IBookingStatusCount, IProviderBookingManagement } from "../../interface/booking";
 import { IBooking } from "../../models/Booking";
 import { IBaseRepository } from "./base/IBaseRepository";
 import { IServiceBreakdown } from "../../interface/provider";

@@ -2,7 +2,7 @@ import { Schema, model, Types, HydratedDocument, InferSchemaType } from 'mongoos
 
 const AddressSchema = new Schema({
   userId: {
-    type: Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },

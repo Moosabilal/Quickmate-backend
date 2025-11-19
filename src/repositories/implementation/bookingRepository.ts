@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { IBookingRequest, IBookingStatusCount, IProviderBookingManagement } from "../../interface/booking";
+import { IBookingStatusCount, IProviderBookingManagement } from "../../interface/booking";
 import Booking, { IBooking } from "../../models/Booking";
 import { IBookingRepository } from "../interface/IBookingRepository";
 import { BaseRepository } from "./base/BaseRepository";

@@ -37,5 +37,15 @@ export interface IProviderService {
     getAvailability(userId: string): Promise<IProvider['availability']>;
     updateAvailability(userId: string, data: IAvailabilityUpdateData): Promise<IProvider['availability']>;
     getPublicProviderDetails(providerId: string): Promise<IProviderDetailsResponse>;
+    findProvidersAvailableAtSlot(
+        providerIds: string[],
+        date: string,
+        time: string
+    ): Promise<IProvider[]>;
+    findNearbyProviders(
+        coordinates: [number, number], 
+        radiusInKm: number, 
+        serviceId: string
+    ): Promise<any[]>;
 
 }
