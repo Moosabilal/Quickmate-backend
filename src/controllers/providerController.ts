@@ -345,6 +345,16 @@ export class ProviderController {
         }
     }
 
+    public getProviderFullDetails = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { id } = mongoIdParamSchema.parse(req.params); 
+            const data = await this._providerService.getProviderFullDetails(id);
+            res.status(HttpStatusCode.OK).json({ success: true, data });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 
 }
 

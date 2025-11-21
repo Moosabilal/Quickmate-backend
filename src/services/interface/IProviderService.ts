@@ -2,6 +2,7 @@ import { IProvider } from "../../models/Providers";
 import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderDetailsResponse, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IServiceAddPageResponse } from "../../interface/provider";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { calendar_v3 } from 'googleapis';
+import { IProviderFullDetails } from "../../interface/admin";
 
 
 export interface IProviderService {
@@ -47,5 +48,6 @@ export interface IProviderService {
         radiusInKm: number, 
         serviceId: string
     ): Promise<any[]>;
+    getProviderFullDetails(providerId: string): Promise<IProviderFullDetails>
 
 }

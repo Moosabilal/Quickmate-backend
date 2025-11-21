@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IBookingService } from "../interface/IBookingService";
 import TYPES from "../../di/type";
-import { BookingOtpPayload, IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingLog, IBookingRequest, IBookingStatusCount, IBookingStatusCounts, IGetMessages, IProviderBookingManagement, IProviderBookingsResponse, IUserBookingsResponse } from "../../interface/booking";
+import { BookingOtpPayload, IAdminBookingsResponse, IBookingConfirmationRes, IBookingDetailData, IBookingHistoryPage, IBookingLog, IBookingRequest, IBookingStatusCount, IBookingStatusCounts, IGetMessages, IProviderBookingManagement, IProviderBookingsResponse, IUserBookingsResponse } from "../../interface/booking";
 import { paymentCreation, razorpay, verifyPaymentSignature } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
@@ -18,7 +18,7 @@ import mongoose, { FilterQuery, Types, UpdateQuery } from "mongoose";
 import { IPayment } from "../../models/payment";
 import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
-import { toBookingConfirmationPage, toBookingHistoryPage, toProviderBookingManagement } from "../../utils/mappers/booking.mapper";
+import { toBookingConfirmationPage } from "../../utils/mappers/booking.mapper";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
@@ -87,7 +87,6 @@ export class BookingService implements IBookingService {
     }
 
     async createNewBooking(data: Partial<IBookingRequest>): Promise<{ bookingId: string, message: string }> {
-
         const subCategoryId = data.serviceId
         const providerId = data.providerId
         const findServiceId = await this._serviceRepository.findOne({ subCategoryId, providerId })
@@ -228,14 +227,14 @@ export class BookingService implements IBookingService {
 
 
     public async getAllFilteredBookings(
-        userId: string, 
+        userId: string,
         filters: { search?: string, status?: BookingStatus }
     ): Promise<IUserBookingsResponse> {
-        
+
         const { search, status } = filters;
 
         const [data, statusCounts] = await Promise.all([
-            this._bookingRepository.findBookingsForUserHistory(userId, { status, search }), 
+            this._bookingRepository.findBookingsForUserHistory(userId, { status, search }),
             this._bookingRepository.getBookingStatusCounts(userId, search)
         ]);
 
@@ -249,9 +248,9 @@ export class BookingService implements IBookingService {
             [BookingStatus.COMPLETED]: 0,
             [BookingStatus.CANCELLED]: 0,
         };
-        
+
         let allBookingsCount = 0;
-        
+
         statusCounts.forEach((item: IBookingStatusCount) => {
             if (item._id && counts.hasOwnProperty(item._id)) {
                 counts[item._id] = item.count;
@@ -268,11 +267,11 @@ export class BookingService implements IBookingService {
 
 
     public async getBookingFor_Prov_mngmnt(
-        providerId: string, 
-        search?: string, 
-        status?: BookingStatus 
+        providerId: string,
+        search?: string,
+        status?: BookingStatus
     ): Promise<IProviderBookingsResponse> {
-        
+
         const provider = await this._providerRepository.findById(providerId);
         if (!provider) {
             throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
@@ -282,12 +281,12 @@ export class BookingService implements IBookingService {
             this._bookingRepository.findBookingsForProvider(
                 providerId,
                 { status: status, search: search },
-                1, 
-                1000 
+                1,
+                1000
             ),
             this._bookingRepository.getBookingStatusCountsForProvider(providerId, search)
         ]);
-        
+
         const { bookings } = data;
 
         const counts: IBookingStatusCounts = {
@@ -298,7 +297,7 @@ export class BookingService implements IBookingService {
             [BookingStatus.COMPLETED]: 0,
             [BookingStatus.CANCELLED]: 0,
         };
-        
+
         let allBookingsCount = 0;
         statusCounts.forEach((item: IBookingStatusCount) => {
             if (item._id && counts.hasOwnProperty(item._id)) {
@@ -316,23 +315,23 @@ export class BookingService implements IBookingService {
     }
 
     async saveAndEmitMessage(
-    io: any, 
-    messageData: ISocketMessage 
-) {
-    const dataToCreate = {
-        joiningId: messageData.joiningId,
-        senderId: messageData.senderId,
-        messageType: messageData.messageType,
-        text: messageData.text,
-        fileUrl: messageData.fileUrl,
-    };
+        io: any,
+        messageData: ISocketMessage
+    ) {
+        const dataToCreate = {
+            joiningId: messageData.joiningId,
+            senderId: messageData.senderId,
+            messageType: messageData.messageType,
+            text: messageData.text,
+            fileUrl: messageData.fileUrl,
+        };
 
-    const savedMessage = await this._messageRepository.create(dataToCreate);
+        const savedMessage = await this._messageRepository.create(dataToCreate);
 
-    io.to(savedMessage.joiningId).emit("receiveBookingMessage", savedMessage);
+        io.to(savedMessage.joiningId).emit("receiveBookingMessage", savedMessage);
 
-    return savedMessage;
-}
+        return savedMessage;
+    }
 
     async getBookingMessages(joiningId: string): Promise<IMessage[]> {
         const data = await this._messageRepository.findAllSorted(joiningId);
@@ -617,14 +616,68 @@ export class BookingService implements IBookingService {
     }
 
     public async createBookingFromBot(data: IBookingRequest): Promise<IBooking> {
-        
+
         const booking = await this._bookingRepository.create({
             ...data,
-            status: BookingStatus.PENDING, 
+            status: BookingStatus.PENDING,
             paymentStatus: PaymentStatus.UNPAID,
             bookingDate: new Date(),
         });
         return booking;
+    }
+
+    public async getBookingDetailsForAdmin(bookingId: string): Promise<IBookingDetailData> {
+        const booking = await this._bookingRepository.findById(bookingId);
+        if (!booking) throw new CustomError("Booking not found", HttpStatusCode.NOT_FOUND);
+
+        const [user, provider, service, address, payment] = await Promise.all([
+            this._userRepository.findById(booking.userId?.toString() || ""),
+            this._providerRepository.findById(booking.providerId?.toString() || ""),
+            this._serviceRepository.findById(booking.serviceId?.toString() || ""),
+            this._addressRepository.findById(booking.addressId?.toString() || ""),
+            booking.paymentId ? this._paymentRepository.findById(booking.paymentId.toString()) : null
+        ]);
+
+        return {
+            booking: {
+                _id: booking._id.toString(),
+                status: booking.status as BookingStatus,
+                paymentStatus: booking.paymentStatus as PaymentStatus,
+                amount: booking.amount as string,
+                date: booking.scheduledDate as string,
+                time: booking.scheduledTime as string,
+                createdAt: new Date(booking.createdAt as string | Date).toISOString(),
+                instructions: booking.instructions as string,
+            },
+            user: user ? {
+                name: user.name as string,
+                email: user.email as string,
+                phone: user.phone as string,
+                image: user.profilePicture as string
+            } : null,
+            provider: provider ? {
+                _id: provider._id.toString(),
+                name: provider.fullName as string,
+                email: provider.email as string,
+                phone: provider.phoneNumber as string,
+                image: provider.profilePhoto as string,
+                serviceArea: provider.serviceArea as string
+            } : null,
+            service: service ? {
+                title: service.title as string,
+                duration: service.duration as string,
+                price: service.price as number
+            } : null,
+            address: address ? {
+                label: address.label,
+                fullAddress: `${address.street}, ${address.city}, ${address.state} - ${address.zip}`,
+            } : null,
+            payment: payment ? {
+                method: payment.paymentMethod as PaymentMethod,
+                transactionId: (payment.razorpay_payment_id || payment._id.toString()) as string,
+                date: new Date(payment.paymentDate).toISOString()
+            } : null
+        };
     }
 
 

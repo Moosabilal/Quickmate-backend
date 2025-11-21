@@ -4,7 +4,11 @@ import { IProviderService } from "../interface/IProviderService";
 import TYPES from "../../di/type";
 import mongoose, { Types } from "mongoose";
 import { IProvider } from "../../models/Providers";
-import { EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus, IFeaturedProviders, IProviderDetailsResponse, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IProviderRegistrationData, IReviewsOfUser, IServiceAddPageResponse, TimeSlot } from "../../interface/provider";
+import {
+    EarningsAnalyticsData, IAvailabilityUpdateData, IBackendProvider, IDashboardResponse, IDashboardStatus,
+    IFeaturedProviders, IProviderDetailsResponse, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance,
+    IProviderProfile, IProviderRegistrationData, IReviewsOfUser, IServiceAddPageResponse, TimeSlot
+} from "../../interface/provider";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
@@ -15,7 +19,10 @@ import { sendVerificationEmail } from "../../utils/emailService";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
-import { toBackendProviderDTO, toClientForChatListPage, toEarningsAnalyticsDTO, toProviderDashboardDTO, toProviderDTO, toProviderForAdminResponseDTO, toProviderForChatListPage, toProviderPerformanceDTO, toServiceAddPage, toServiceDetailsDTO } from "../../utils/mappers/provider.mapper";
+import {
+    toBackendProviderDTO, toClientForChatListPage, toEarningsAnalyticsDTO, toProviderDashboardDTO, toProviderDTO,
+    toProviderForAdminResponseDTO, toProviderForChatListPage, toProviderPerformanceDTO, toServiceAddPage, toServiceDetailsDTO
+} from "../../utils/mappers/provider.mapper";
 import { toLoginResponseDTO } from "../../utils/mappers/user.mapper";
 import { ProviderStatus } from "../../enums/provider.enum";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
@@ -34,6 +41,10 @@ import { format } from 'date-fns/format';
 import { addDays } from 'date-fns/addDays';
 import { IBooking } from "../../models/Booking";
 import { ReviewStatus } from "../../enums/review.enum";
+import { IProviderFullDetails } from "../../interface/admin";
+import { BookingStatus } from "../../enums/booking.enum";
+import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
+import { ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5;
@@ -49,6 +60,9 @@ export class ProviderService implements IProviderService {
     private _bookingRepository: IBookingRepository
     private _messageRepository: IMessageRepository;
     private _reviewRepository: IReviewRepository;
+    private _paymentRepository: IPaymentRepository;
+    private _subscriptionPlanRepository: ISubscriptionPlanRepository;
+
 
     constructor(@inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
         @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
@@ -57,6 +71,8 @@ export class ProviderService implements IProviderService {
         @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
         @inject(TYPES.MessageRepository) messageRepository: IMessageRepository,
         @inject(TYPES.ReviewRepository) reviewRepository: IReviewRepository,
+        @inject(TYPES.PaymentRepository) paymentRepository: IPaymentRepository,
+        @inject(TYPES.SubscriptionPlanRepository) subscriptionPlanRepository: ISubscriptionPlanRepository
     ) {
         this._providerRepository = providerRepository
         this._serviceRepository = serviceRepository
@@ -65,6 +81,8 @@ export class ProviderService implements IProviderService {
         this._bookingRepository = bookingRepository
         this._messageRepository = messageRepository;
         this._reviewRepository = reviewRepository;
+        this._paymentRepository = paymentRepository;
+        this._subscriptionPlanRepository = subscriptionPlanRepository;
     }
 
     public async registerProvider(data: IProviderRegistrationData): Promise<{ message: string, email: string }> {
@@ -238,10 +256,8 @@ export class ProviderService implements IProviderService {
         }
 
         if (rating) {
-        filter.rating = { $gte: rating, $lt: rating + 1 };
-        
-        // filter.rating = { $gte: rating };
-    }
+            filter.rating = { $gte: rating, $lt: rating + 1 };
+        }
 
         const [providers, total] = await Promise.all([
             this._providerRepository.findProvidersWithFilter(filter, skip, limit),
@@ -866,21 +882,18 @@ export class ProviderService implements IProviderService {
 
     public async findProvidersAvailableAtSlot(
         providerIds: string[],
-        date: string, // YYYY-MM-DD
-        time: string  // hh:mm AM/PM
+        date: string, 
+        time: string 
     ): Promise<IProvider[]> {
 
-        // 1. Convert time to 24-hour format for comparison
         const time24h = convertTo24Hour(time);
         const [hour, minute] = time24h.split(':').map(Number);
-        
-        // 2. Create the Date objects for the 1-hour slot
+
         const slotStart = new Date(date);
         slotStart.setHours(hour, minute, 0, 0);
-        
-        const slotEnd = new Date(slotStart.getTime() + 60 * 60 * 1000); // 1-hour duration
 
-        // 3. Get all providers from the list
+        const slotEnd = new Date(slotStart.getTime() + 60 * 60 * 1000); 
+
         const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
 
         const availableProviders: IProvider[] = [];
@@ -888,20 +901,17 @@ export class ProviderService implements IProviderService {
         for (const provider of providers) {
             const providerId = provider._id.toString();
 
-            // 4. Get this provider's bookings for the day
             const existingBookings = await this._bookingRepository.findByProviderByTime(
                 providerId,
                 date,
                 date
             );
 
-            // 5. Get their specific availability rules for that day
             const dayName = format(new Date(date), 'EEEE');
             const weeklySlots = this._getWeeklySlots(provider, dayName);
             const override = this._getDateOverride(provider, date);
             const busySlots = override ? override.busySlots : [];
 
-            // 6. Use your existing helper to see if the slot is free
             const isAvailable = this._isSlotAvailable(
                 slotStart,
                 slotEnd,
@@ -913,39 +923,30 @@ export class ProviderService implements IProviderService {
                 availableProviders.push(provider);
             }
         }
-        
+
         return availableProviders;
     }
 
     public async findNearbyProviders(
         coordinates: [number, number],
         radiusInKm: number = 10,
-        subCategoryId: string // This is the subCategoryId, not serviceId
+        subCategoryId: string 
     ): Promise<any[]> {
         try {
-            // 1. Find all services that match this subcategory
-            const services = await this._serviceRepository.findAll({ 
+            const services = await this._serviceRepository.findAll({
                 subCategoryId: new Types.ObjectId(subCategoryId),
-                status: true 
+                status: true
             });
 
             if (!services.length) {
                 return [];
             }
 
-            // 2. Extract unique provider IDs from those services
             const providerIds = [...new Set(services.map(s => s.providerId.toString()))];
-
-            // 3. Convert radius to meters
             const radiusInMeters = radiusInKm * 1000;
-
-            // 4. Find providers who:
-            //    - Are in the list of IDs (offer the service)
-            //    - Are verified and approved
-            //    - Are within the location radius
             const providers = await this._providerRepository.findAll({
                 _id: { $in: providerIds.map(id => new Types.ObjectId(id)) },
-                status: "Approved", // Assuming 'Approved' is the correct enum value
+                status: ProviderStatus.ACTIVE,
                 isVerified: true,
                 serviceLocation: {
                     $near: {
@@ -964,6 +965,41 @@ export class ProviderService implements IProviderService {
             console.error('Error finding nearby providers:', error);
             return [];
         }
+    }
+
+    public async getProviderFullDetails(providerId: string): Promise<IProviderFullDetails> {
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
+
+        const providerProfile = toProviderDTO(provider);
+
+        const [services, bookings, payments] = await Promise.all([
+            this._serviceRepository.findAll({ providerId: provider._id }),
+            this._bookingRepository.findAll({ providerId: provider._id }, { createdAt: -1 }),
+            this._paymentRepository.findAll({ providerId: provider._id }, { createdAt: -1 })
+        ]);
+
+        let currentPlan = null;
+        if (provider.subscription?.planId) {
+            currentPlan = await this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
+        }
+
+        const stats = {
+            totalEarnings: provider.earnings,
+            totalBookings: bookings.length,
+            completedBookings: bookings.filter(b => b.status === BookingStatus.COMPLETED).length,
+            cancelledBookings: bookings.filter(b => b.status === BookingStatus.CANCELLED).length,
+            averageRating: provider.rating
+        };
+
+        return {
+            profile: providerProfile,
+            services: services,
+            bookings: bookings.slice(0, 10),
+            payments: payments.slice(0, 10),
+            currentPlan: currentPlan,
+            stats
+        };
     }
 
 }

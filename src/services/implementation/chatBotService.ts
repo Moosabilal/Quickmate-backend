@@ -16,14 +16,24 @@ import { ICategoryRepository } from "../../repositories/interface/ICategoryRepos
 import { IAddressService } from "../interface/IAddressService";
 import { IBookingService } from "../interface/IBookingService";
 import { IProviderService } from "../interface/IProviderService";
-import { IPaymentService } from "../interface/IPaymentService"; // Still needed for creating orders
-import { IBookingRepository } from "../../repositories/interface/IBookingRepository"; // Still needed
+import { IPaymentService } from "../interface/IPaymentService"; 
+import { IBookingRepository } from "../../repositories/interface/IBookingRepository"; 
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
-import { IChatbotResponse } from "../../interface/chatBot";
-import { IBookingRequest } from "../../interface/booking";
+import { IChatbotResponse, IChatPaymentVerify } from "../../interface/chatBot";
 import { IAddressData } from "../../interface/address";
-import { Roles } from "../../enums/userRoles";
-import { convertTo24Hour } from "../../utils/helperFunctions/convertTo24hrs";
+import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
+import { ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
+import { ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository";
+import { verifyPaymentSignature } from "../../utils/razorpay";
+import { calculateCommission, calculateParentCommission } from "../../utils/helperFunctions/commissionRule";
+import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription";
+import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
+import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
+import { BookingStatus } from "../../enums/booking.enum";
+import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
+import logger from "../../logger/logger";
+
+const BOOKING_KEYWORDS = ['book', 'schedule', 'appointment', 'clean', 'repair', 'service', 'want'];
 
 @injectable()
 export class ChatbotService implements IChatBotService {
@@ -35,10 +45,14 @@ export class ChatbotService implements IChatBotService {
     private _categoryRepository: ICategoryRepository;
     private _addressService: IAddressService;
     private _bookingService: IBookingService;
+    private _providerRepository: IProviderRepository;
     private _providerService: IProviderService;
     private _userRepository: IUserRepository;
     private _PaymentService: IPaymentService;
+    private _paymentRepository: IPaymentRepository;
     private _bookingRepository: IBookingRepository;
+    private _commissionRuleRepository: ICommissionRuleRepository;
+    private _subscriptionPlanRepository: ISubscriptionPlanRepository;
 
 
     constructor(
@@ -49,10 +63,14 @@ export class ChatbotService implements IChatBotService {
         @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
         @inject(TYPES.AddressService) addressService: IAddressService,
         @inject(TYPES.BookingService) bookingService: IBookingService,
+        @inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
         @inject(TYPES.ProviderService) providerService: IProviderService,
         @inject(TYPES.UserRepository) userRepository: IUserRepository,
         @inject(TYPES.PaymentService) paymentService: IPaymentService,
-        @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository
+        @inject(TYPES.PaymentRepository) paymentRepository: IPaymentRepository,
+        @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
+        @inject(TYPES.CommissionRuleRepository) commissionRuleRepository: ICommissionRuleRepository,
+        @inject(TYPES.SubscriptionPlanRepository) subscriptionPlanRepository: ISubscriptionPlanRepository,
     ) {
         this._genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
         this._categoryService = categoryService;
@@ -62,13 +80,16 @@ export class ChatbotService implements IChatBotService {
         this._categoryRepository = categoryRepository;
         this._addressService = addressService;
         this._bookingService = bookingService;
+        this._providerRepository = providerRepository;
         this._providerService = providerService;
         this._userRepository = userRepository;
         this._PaymentService = paymentService;
+        this._paymentRepository = paymentRepository;
         this._bookingRepository = bookingRepository;
+        this._commissionRuleRepository = commissionRuleRepository;
+        this._subscriptionPlanRepository = subscriptionPlanRepository;
     }
 
-    // --- SYSTEM PROMPT (Updated) ---
     private SYSTEM_PROMPT = `
     You are QuickMate AI, a friendly and professional assistant. Your goal is to help users book a service.
     **CRITICAL RULE: HANDLING CHANGES**
@@ -126,7 +147,6 @@ export class ChatbotService implements IChatBotService {
     `;
 
 
-    // --- TOOL DEFINITIONS ---
     private tools: FunctionDeclaration[] = [
         {
             name: "findSubcategoryByName",
@@ -201,300 +221,32 @@ export class ChatbotService implements IChatBotService {
         return this._messageRepo.findAll({ sessionId: session._id });
     }
 
-    // public async sendMessage(sessionId: string, userMessage: string): Promise<IChatbotResponse> {
-    //     const session = await this._sessionRepo.findOne({ sessionId });
-    //     if (!session) throw new CustomError("Chat session not found", HttpStatusCode.NOT_FOUND);
-
-    //     await this._messageRepo.create({ sessionId: session._id, role: "user", text: userMessage });
-
-    //     const history = await this._messageRepo.findAll({ sessionId: session._id });
-    //     const chatHistory = history.map(msg => ({ role: msg.role as 'user' | 'model', parts: [{ text: msg.text as string }] }));
-
-    //     const model = this._genAI.getGenerativeModel({
-    //         model: "gemini-2.5-flash",
-    //         tools: [{ functionDeclarations: this.tools }]
-    //     });
-
-    //     const chat = model.startChat({ history: chatHistory });
-
-    //     // --- NOTE: We explicitly remind the AI of its context ---
-    //     const contextPrompt = `
-    //         SYSTEM_PROMPT: ${this.SYSTEM_PROMPT} 
-    //         CURRENT_CONTEXT: ${JSON.stringify(session.context)}
-    //         USER_MESSAGE: ${userMessage}
-    //     `;
-
-    //     const result = await chat.sendMessage(contextPrompt);
-    //     const response = result.response;
-    //     const functionCalls = response.functionCalls();
-
-    //     if (functionCalls && functionCalls.length > 0) {
-    //         const call = functionCalls[0];
-    //         let toolResult: any;
-    //         let botResponseText: string | null = null;
-
-    //         const context: any = session.context || {};
-
-    //         try {
-    //             switch (call.name) {
-    //                 case "findSubcategoryByName": {
-    //                     const { serviceName } = call.args as { serviceName: string };
-    //                     const category = await this._categoryRepository.findSubCategoryByName(serviceName);
-    //                     if (!category) {
-    //                         toolResult = { error: `The service '${serviceName}' does not exist.` };
-    //                     } else {
-    //                         session.context.serviceSubCategoryId = category._id.toString();
-    //                         await session.save();
-    //                         toolResult = { success: true, serviceName: category.name };
-    //                     }
-    //                     break;
-    //                 }
-
-    //                 case "getUserAddresses": {
-    //                     if (!session.userId) {
-    //                         toolResult = { error: "User not logged in. You must ask them for their full address." };
-    //                     } else {
-    //                         const addresses = await this._addressService.getAddressesForUser(session.userId.toString());
-    //                         // --- CRITICAL: We send the full address list so the AI can parse the user's selection ---
-    //                         const addressList = addresses.map((a, i) => ({ 
-    //                             id: a._id.toString(), 
-    //                             label: a.label, 
-    //                             street: a.street, 
-    //                             city: a.city, 
-    //                             lat: a.locationCoords.coordinates[1], 
-    //                             lng: a.locationCoords.coordinates[0],
-    //                             index: i + 1 // Give the AI a number to reference
-    //                         }));
-
-    //                         // Store this list in context so we can reference it later if the user says "number 1"
-    //                         session.context.tempAddressList = addressList;
-    //                         await session.save();
-
-    //                         toolResult = { addresses: addressList };
-    //                     }
-    //                     break;
-    //                 }
-
-    //                 case "createAddress": {
-    //                     if (!session.userId) {
-    //                         toolResult = { error: "User is not logged in. Cannot save a new address." };
-    //                     } else {
-    //                         const addressData: IAddressData = call.args as any;
-    //                         try {
-    //                             const newAddress = await this._addressService.createAddress(addressData, session.userId.toString());
-    //                             session.context.addressId = newAddress._id.toString();
-    //                             session.context.location = { lat: newAddress.locationCoords.coordinates[1], lng: newAddress.locationCoords.coordinates[0] };
-    //                             await session.save();
-    //                             toolResult = { newAddress: { id: newAddress._id, label: newAddress.label } };
-    //                         } catch (geoError: any) {
-    //                             toolResult = { error: "I couldn't find that address. Can you please provide a valid street, city, state, and zip code?" };
-    //                         }
-    //                     }
-    //                     break;
-    //                 }
-
-    //                 case "getAvailableTimeSlots": {
-    //                     const { date, radius } = call.args as { date: string, radius: number };
-    //                     session.context.date = date; 
-    //                     session.context.radius = radius; 
-
-    //                     // --- LOGIC TO CHECK IF USER SELECTED AN ADDRESS ---
-    //                     // If the user just said "Use address 1", the AI might not have called a tool to 'select' it.
-    //                     // But since we saved the list in context, we can check if we have location data.
-    //                     if (!context.location && context.tempAddressList) {
-    //                          // If the user picked an address but we don't have location yet, 
-    //                          // it means the AI skipped a step or inferred it. 
-    //                          // Ideally, the AI should have called a tool to 'select' it, but we can infer it here if needed
-    //                          // OR, better yet, we rely on the AI's memory. 
-    //                          // If the AI calls this tool, it implies it *knows* the location.
-    //                          // If context.location is missing, we return an error telling the AI to ask for address again.
-    //                          toolResult = { error: "I don't have a location yet. Please ask the user to select an address first." };
-    //                          break;
-    //                     }
-
-    //                     if (!context.serviceSubCategoryId || !context.location) {
-    //                         toolResult = { error: "Missing service or address. You must ask for them first." };
-    //                         break;
-    //                     }
-
-    //                     const slots = await this._providerService.getAvailabilityByLocation(
-    //                         session.userId?.toString() || "",
-    //                         context.serviceSubCategoryId,
-    //                         context.location.lat,
-    //                         context.location.lng,
-    //                         radius,
-    //                         date, 
-    //                         date
-    //                     );
-
-    //                     const allSlots = slots.flatMap(provider => provider.availableSlots.map(s => new Date(s.start).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })));
-    //                     const uniqueSlots = [...new Set(allSlots)].sort();
-
-    //                     toolResult = { availableSlots: uniqueSlots };
-    //                     break;
-    //                 }
-
-    //                 case "findAvailableProvidersForSlot": {
-    //                     const { time } = call.args as { time: string };
-    //                     session.context.time = time;
-
-    //                     if (!context.serviceSubCategoryId || !context.location || !context.radius || !context.date) {
-    //                         toolResult = { error: "Missing context. You must get service, address, radius, and date first." };
-    //                         break;
-    //                     }
-
-    //                     // Find providers in range
-    //                     const nearbyProviders = await this._providerService.findNearbyProviders(
-    //                         [context.location.lng, context.location.lat], 
-    //                         context.radius || 10,
-    //                         context.serviceSubCategoryId
-    //                     );
-
-    //                     if (!nearbyProviders || nearbyProviders.length === 0) {
-    //                         toolResult = { providers: [], message: "No providers found within that radius." };
-    //                         break;
-    //                     }
-
-    //                     // 2. Create an array of ID strings
-    //                     const providersInRange = nearbyProviders.map((p: any) => p._id.toString());
-
-    //                     // 3. Find services (This part remains the same)
-    //                     const services = await this._serviceRepository.findServicesWithProvider(context.serviceSubCategoryId, undefined);
-
-    //                     // 4. Filter services using the array we just created
-    //                     // Now .includes() will work because providersInRange is string[]
-    //                     const servicesInRange = services.filter(s => providersInRange.includes((s as any).provider._id.toString()));
-
-    //                     if (!servicesInRange.length) {
-    //                          toolResult = { providers: [] };
-    //                          break;
-    //                     }
-
-    //                     // 5. Check slots (This part remains the same)
-    //                     const providerIds = servicesInRange.map(s => (s as any).provider._id.toString());
-    //                     const availableProviders = await this._providerService.findProvidersAvailableAtSlot(
-    //                         providerIds,
-    //                         context.date,
-    //                         time
-    //                     );
-
-    //                     const providerList = availableProviders.map(p => {
-    //                         const service = servicesInRange.find(s => (s as any).provider._id.toString() === p._id.toString());
-    //                         return {
-    //                             serviceId: service._id.toString(),
-    //                             providerId: p._id.toString(),
-    //                             name: p.fullName,
-    //                             rating: p.rating,
-    //                             price: service.price
-    //                         };
-    //                     });
-
-    //                     session.context.lastFoundProviders = providerList; 
-    //                     await session.save();
-    //                     toolResult = { providers: providerList };
-    //                     break;
-    //                 }
-
-    //                 case "initiatePayment": {
-    //                     const { customerName, phone, instructions } = call.args as any;
-    //                     session.context.customerName = customerName;
-    //                     session.context.phone = phone;
-    //                     session.context.instructions = instructions;
-
-    //                     const chosenProvider = (context.lastFoundProviders as any[]).find(p => p.providerId === context.providerId);
-    //                     if(chosenProvider) {
-    //                         session.context.serviceId = chosenProvider.serviceId;
-    //                         session.context.amount = chosenProvider.price;
-    //                     }
-    //                     await session.save();
-
-    //                     if (!context.serviceId || !context.providerId || !context.addressId || !context.date || !context.time || !context.amount) {
-    //                          toolResult = { error: "Missing critical booking info. You must confirm all details with the user first." };
-    //                          break;
-    //                     }
-
-    //                     const order = await this._PaymentService.createOrder(context.amount);
-
-    //                     const response: IChatbotResponse = {
-    //                         role: 'model',
-    //                         text: "Great! Please complete your payment to confirm the booking.",
-    //                         action: 'REQUIRE_PAYMENT',
-    //                         payload: {
-    //                             orderId: order.id,
-    //                             amount: context.amount,
-    //                             bookingData: {
-    //                                 serviceId: context.serviceId,
-    //                                 providerId: context.providerId,
-    //                                 addressId: context.addressId,
-    //                                 scheduledDate: context.date,
-    //                                 scheduledTime: context.time,
-    //                                 customerName: context.customerName,
-    //                                 phone: context.phone,
-    //                                 instructions: context.instructions,
-    //                                 amount: context.amount // Ensure amount is passed
-    //                             }
-    //                         }
-    //                     };
-
-    //                     await this._messageRepo.create({ sessionId: session._id, role: "model", text: response.text });
-    //                     await session.save();
-    //                     return response;
-    //                 }
-
-    //                 default:
-    //                     toolResult = { error: "Unknown tool" };
-    //             }
-
-    //             const result2 = await chat.sendMessage([{ functionResponse: { name: call.name, response: toolResult } }]);
-    //             botResponseText = result2.response.text() || "Got it. What's next?";
-
-    //             // --- CRITICAL: The AI needs to know that it successfully "selected" an address ---
-    //             // If the AI's response text indicates it understood the address choice (e.g., "Okay, using Home"),
-    //             // we need to make sure the 'context' reflects that. 
-    //             // However, since we can't parse the AI's text easily, we rely on the System Prompt
-    //             // to force the AI to use 'getAvailableTimeSlots' NEXT, which will fail if address is missing,
-    //             // prompting the AI to ask again or use the list.
-
-    //         } catch (err: any) {
-    //             botResponseText = "Sorry, something went wrong while processing your request.";
-    //             console.error("[ChatbotService Error]", err);
-    //         }
-
-    //         await this._messageRepo.create({ sessionId: session._id, role: "model", text: botResponseText });
-    //         await session.save();
-    //         return { role: "model", text: botResponseText };
-    //     }
-
-    //     const textResponse = response.text() || "Sorry, I'm not sure how to respond to that.";
-    //     await this._messageRepo.create({ sessionId: session._id, role: "model", text: textResponse });
-
-    //     // --- CHECK FOR ADDRESS SELECTION IN TEXT ---
-    //     // If the user replied with a number, we need to check if they are selecting an address
-    //     if (session.context.tempAddressList && !session.context.addressId) {
-    //         const match = userMessage.match(/\b(\d+)\b/);
-    //         if (match) {
-    //             const index = parseInt(match[1]) - 1;
-    //             if (session.context.tempAddressList[index]) {
-    //                 const selected = session.context.tempAddressList[index];
-    //                 session.context.addressId = selected.id;
-    //                 session.context.location = { lat: selected.lat, lng: selected.lng };
-    //                 delete session.context.tempAddressList; // Clear the temp list
-    //                 await session.save();
-    //             }
-    //         }
-    //     }
-
-    //     return { role: "model", text: textResponse };
-    // }
-
-
     public async sendMessage(sessionId: string, userMessage: string): Promise<IChatbotResponse> {
-        console.log(`[Chatbot] 📨 New message for session ${sessionId}: "${userMessage}"`);
+        logger.info(`[Chatbot] 📨 New message for session ${sessionId}: "${userMessage}"`);
 
         let session = await this._sessionRepo.findOne({ sessionId });
         if (!session) {
-            console.error(`[Chatbot] ❌ Session not found: ${sessionId}`);
+            logger.error(`[Chatbot] ❌ Session not found: ${sessionId}`);
             throw new CustomError("Chat session not found", HttpStatusCode.NOT_FOUND);
+        }
+
+        if (!session.userId) {
+            const lowerMsg = userMessage.toLowerCase();
+            const hasBookingIntent = BOOKING_KEYWORDS.some(keyword => lowerMsg.includes(keyword));
+
+            if (hasBookingIntent) {
+                await this._messageRepo.create({ sessionId: session._id, role: "user", text: userMessage });
+
+                const loginMsg = "To help you book a service, I need you to log in first. Please log in to continue.";
+                
+                await this._messageRepo.create({ sessionId: session._id, role: "model", text: loginMsg });
+
+                return {
+                    role: 'model',
+                    text: loginMsg,
+                    action: 'REQUIRE_LOGIN'
+                } as any; 
+            }
         }
 
 
@@ -502,7 +254,6 @@ export class ChatbotService implements IChatBotService {
         let contextUpdated = false;
 
 
-        // Check tempAddressList and no addressId
         if (session.context.tempAddressList && !session.context.addressId) {
 
             const match = userMessage.match(/\b(?:option|select|choose|pick)?\s*(\d+)\b/i);
@@ -511,21 +262,16 @@ export class ChatbotService implements IChatBotService {
                 const index = parseInt(match[1]) - 1;
 
                 if (session.context.tempAddressList[index]) {
-                    console.log(`[Chatbot] 📍 User selected address #${index + 1}`);
+                    logger.info(`[Chatbot] 📍 User selected address #${index + 1}`);
 
                     const selected = session.context.tempAddressList[index];
-
                     const newContext = { ...session.context };
-
                     newContext.addressId = selected.id;
-
                     newContext.location = {
                         lat: selected.lat,
                         lng: selected.lng
                     };
-
                     delete newContext.tempAddressList;
-
 
                     session.context = newContext;
                     session.markModified("context");
@@ -537,22 +283,22 @@ export class ChatbotService implements IChatBotService {
             }
         }
 
-        console.log('lastFound Providers', session.context.lastFoundProviders)
-        console.log('providerId', session.context.providerId)
-
         if (session.context.lastFoundProviders && !session.context.providerId) {
             const match = userMessage.match(/\b(?:option|select|choose|pick)?\s*(\d+)\b/i);
-            console.log('match', match)
             if (match) {
                 const index = parseInt(match[1]) - 1;
                 if (session.context.lastFoundProviders[index]) {
-                    console.log(`[Chatbot] 📍 User selected provider #${index + 1}`);
-                    session.context.providerId = session.context.lastFoundProviders[index].providerId;
-                    session.context = session.context;
-                    delete session.context.lastFoundProviders;
+                    const selected = session.context.lastFoundProviders[index];
+                    logger.info(`[Chatbot] 📍 User selected provider #${index + 1}: ${selected.name}`);
+
+                    const newContext = { ...session.context };
+                    newContext.providerId = selected.providerId;
+                    newContext.serviceId = selected.serviceId;
+                    newContext.amount = selected.price;
+
+                    session.context = newContext;
                     session.markModified('context');
                     await session.save();
-                    console.log('saved in the session context')
                     contextUpdated = true;
 
                 }
@@ -562,7 +308,7 @@ export class ChatbotService implements IChatBotService {
 
 
         let workingContext = JSON.parse(JSON.stringify(session.context));
-        console.log(`[Chatbot] Context (Start of Turn):`, JSON.stringify(workingContext, null, 2));
+        logger.info(`[Chatbot] Context (Start of Turn):`, JSON.stringify(workingContext, null, 2));
 
         await this._messageRepo.create({ sessionId: session._id, role: "user", text: userMessage });
 
@@ -619,20 +365,18 @@ export class ChatbotService implements IChatBotService {
             USER_MESSAGE: ${userMessage}
         `;
 
-        console.log(`[Chatbot] 🚀 Sending to Gemini...`);
+        logger.info(`[Chatbot] 🚀 Sending to Gemini...`);
         const result = await chat.sendMessage(contextPrompt);
         const response = result.response;
         const functionCalls = response.functionCalls();
 
         if (functionCalls && functionCalls.length > 0) {
             const call = functionCalls[0];
-            console.log(`[Chatbot] 🛠️ Gemini wants to call tool: ${call.name}`);
-            console.log(`[Chatbot] 📦 Tool Arguments:`, JSON.stringify(call.args, null, 2));
+            logger.info(`[Chatbot] 🛠️ Gemini wants to call tool: ${call.name}`);
+            logger.info(`[Chatbot] 📦 Tool Arguments:`, JSON.stringify(call.args, null, 2));
 
             let toolResult: any;
             let botResponseText: string | null = null;
-
-            console.log('the session context before updating', session.context)
 
             const context: any = session.context || {};
 
@@ -646,7 +390,7 @@ export class ChatbotService implements IChatBotService {
                         const category = await this._categoryRepository.findSubCategoryByName(serviceName);
 
                         if (category) {
-                            console.log(`[Chatbot] Tool found category: ${category.name} (${category._id})`);
+                            logger.info(`[Chatbot] Tool found category: ${category.name} (${category._id})`);
 
                             session.context = {
                                 userId: session.context.userId,
@@ -667,7 +411,7 @@ export class ChatbotService implements IChatBotService {
 
                             toolResult = { success: true, serviceName: category.name };
                         } else {
-                            console.warn(`[Chatbot] Exact match failed for: ${serviceName}. Trying fuzzy search...`);
+                            logger.warn(`[Chatbot] Exact match failed for: ${serviceName}. Trying fuzzy search...`);
 
                             const allSubCategories = await this._categoryRepository.findAllActiveSubCategories();
 
@@ -679,7 +423,7 @@ export class ChatbotService implements IChatBotService {
                             }).map(s => s.name);
 
                             if (suggestions.length > 0) {
-                                console.log(`[Chatbot] Found suggestions:`, suggestions);
+                                logger.info(`[Chatbot] Found suggestions:`, suggestions);
                                 toolResult = {
                                     error: `Service '${serviceName}' not found directly.`,
                                     possibleMatches: suggestions.slice(0, 5)
@@ -697,14 +441,14 @@ export class ChatbotService implements IChatBotService {
 
                     case "getUserAddresses": {
                         if (!session.userId) {
-                            console.log(`[Chatbot] ❌ User not logged in. Cannot fetch addresses.`);
+                            logger.info(`[Chatbot] ❌ User not logged in. Cannot fetch addresses.`);
                             toolResult = { error: "User not logged in. You must ask them for their full address." };
 
                         } else {
                             try {
                                 const addresses = await this._addressService.getAddressesForUser(session.userId.toString());
 
-                                console.log(`[Chatbot] ✓ Found ${addresses.length} addresses for user.`);
+                                logger.info(`[Chatbot] ✓ Found ${addresses.length} addresses for user.`);
                                 const addressList = addresses.map((a, i) => {
                                     const converted = {
                                         id: a._id.toString(),
@@ -732,7 +476,7 @@ export class ChatbotService implements IChatBotService {
                                 toolResult = { addresses: addressList };
 
                             } catch (err) {
-                                console.log("[ERROR] Failed fetching addresses:", err);
+                                logger.error("[ERROR] Failed fetching addresses:", err);
                                 toolResult = { error: "Failed to fetch addresses." };
                             }
                         }
@@ -742,21 +486,21 @@ export class ChatbotService implements IChatBotService {
 
                     case "createAddress": {
                         const addressData: IAddressData = call.args as any;
-                        console.log(`[Chatbot] Creating new address:`, addressData);
+                        logger.info(`[Chatbot] Creating new address:`, addressData);
 
                         if (!session.userId) {
                             toolResult = { error: "User is not logged in. Cannot save a new address." };
                         } else {
                             try {
                                 const newAddress = await this._addressService.createAddress(addressData, session.userId.toString());
-                                console.log(`[Chatbot] Address created: ${newAddress._id}`);
+                                logger.info(`[Chatbot] Address created: ${newAddress._id}`);
 
                                 session.context.addressId = newAddress._id.toString();
                                 session.context.location = { lat: newAddress.locationCoords.coordinates[1], lng: newAddress.locationCoords.coordinates[0] };
                                 await session.save();
                                 toolResult = { newAddress: { id: newAddress._id, label: newAddress.label } };
                             } catch (geoError: any) {
-                                console.error(`[Chatbot] Address creation failed:`, geoError);
+                                logger.error(`[Chatbot] Address creation failed:`, geoError);
                                 toolResult = { error: "I couldn't find that address. Can you please provide a valid street, city, state, and zip code?" };
                             }
                         }
@@ -765,22 +509,22 @@ export class ChatbotService implements IChatBotService {
 
                     case "getAvailableTimeSlots": {
                         const { date, radius } = call.args as { date: string, radius: number };
-                        console.log(`[Chatbot] Getting slots for date: ${date}, radius: ${radius}km`);
+                        logger.info(`[Chatbot] Getting slots for date: ${date}, radius: ${radius}km`);
 
                         currentContext.date = date;
                         currentContext.radius = radius;
                         session.context = currentContext;
                         session.markModified('context');
 
-                        console.log(`[Chatbot] Current Context the second one:`, JSON.stringify(currentContext, null, 2))
+                        logger.info(`[Chatbot] Current Context the second one:`, JSON.stringify(currentContext, null, 2))
                         if (!currentContext.location && currentContext.tempAddressList) {
-                            console.warn(`[Chatbot] Missing location but temp address list exists. User likely selected by number.`);
+                            logger.warn(`[Chatbot] Missing location but temp address list exists. User likely selected by number.`);
                             toolResult = { error: "I don't have a location yet. Please ask the user to select an address first." };
                             break;
                         }
 
                         if (!context.serviceSubCategoryId || !context.location) {
-                            console.warn(`[Chatbot] Missing context. SubCat: ${currentContext.serviceSubCategoryId}, Loc: ${JSON.stringify(currentContext.location)}`);
+                            logger.warn(`[Chatbot] Missing context. SubCat: ${currentContext.serviceSubCategoryId}, Loc: ${JSON.stringify(currentContext.location)}`);
                             toolResult = { error: "Missing service or address. You must ask for them first." };
                             await session.save();
                             break;
@@ -799,7 +543,7 @@ export class ChatbotService implements IChatBotService {
                         const allSlots = slots.flatMap(provider => provider.availableSlots.map(s => new Date(s.start).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })));
                         const uniqueSlots = [...new Set(allSlots)].sort();
 
-                        console.log(`[Chatbot] Found ${uniqueSlots.length} unique slots.`);
+                        logger.info(`[Chatbot] Found ${uniqueSlots.length} unique slots.`);
                         toolResult = { availableSlots: uniqueSlots };
                         await session.save();
                         break;
@@ -807,18 +551,17 @@ export class ChatbotService implements IChatBotService {
 
                     case "findAvailableProvidersForSlot": {
 
-                        console.log(`[Chatbot] Raw function call args:`, call.args);
+                        logger.info(`[Chatbot] Raw function call args:`, call.args);
 
                         const { time } = call.args as { time: string };
-                        console.log(`[Chatbot] Extracted time: ${time}`);
+                        logger.info(`[Chatbot] Extracted time: ${time}`);
 
                         workingContext.time = time;
                         session.context.time = time;
-                        console.log(`[Chatbot] Updated context.time = ${session.context.time}`);
+                        logger.info(`[Chatbot] Updated context.time = ${session.context.time}`);
 
-                        console.log(`[Chatbot] Current context before validation:`, JSON.stringify(context, null, 2));
+                        logger.info(`[Chatbot] Current context before validation:`, JSON.stringify(context, null, 2));
 
-                        // --- VALIDATION ---
                         if (!workingContext.serviceSubCategoryId || !workingContext.location || !workingContext.radius || !workingContext.date) {
                             console.warn(`[Chatbot] ❗ Missing required context fields.`);
                             console.warn(`[Chatbot] serviceSubCategoryId:`, context.serviceSubCategoryId);
@@ -829,17 +572,16 @@ export class ChatbotService implements IChatBotService {
                             toolResult = {
                                 error: "Missing context. You must get service, address, radius, and date first."
                             };
-                            console.log(`[Chatbot] Returning ERROR toolResult for missing context:`, toolResult);
+                            logger.info(`[Chatbot] Returning ERROR toolResult for missing context:`, toolResult);
                             break;
                         }
 
-                        console.log(`[Chatbot] Context validation success. Proceeding to provider search...`);
+                        logger.info(`[Chatbot] Context validation success. Proceeding to provider search...`);
 
-                        // --- FIND NEARBY PROVIDERS ---
-                        console.log(`[Chatbot] Searching nearby providers with:`);
-                        console.log(` - Location (lng, lat): [${context.location.lng}, ${context.location.lat}]`);
-                        console.log(` - Radius: ${context.radius}`);
-                        console.log(` - Subcategory: ${context.serviceSubCategoryId}`);
+                        logger.info(`[Chatbot] Searching nearby providers with:`);
+                        logger.info(` - Location (lng, lat): [${context.location.lng}, ${context.location.lat}]`);
+                        logger.info(` - Radius: ${context.radius}`);
+                        logger.info(` - Subcategory: ${context.serviceSubCategoryId}`);
 
                         const nearbyProviders = await this._providerService.findNearbyProviders(
                             [context.location.lng, context.location.lat],
@@ -847,42 +589,40 @@ export class ChatbotService implements IChatBotService {
                             context.serviceSubCategoryId
                         );
 
-                        console.log(`[Chatbot] Nearby provider raw result:`, nearbyProviders);
+                        logger.info(`[Chatbot] Nearby provider raw result:`, nearbyProviders);
 
                         if (!nearbyProviders || nearbyProviders.length === 0) {
-                            console.log(`[Chatbot] ❗ No providers found nearby.`);
+                            logger.info(`[Chatbot] ❗ No providers found nearby.`);
                             toolResult = { providers: [], message: "No providers found within that radius." };
                             break;
                         }
 
-                        console.log(`[Chatbot] Found ${nearbyProviders.length} providers in range.`);
+                        logger.info(`[Chatbot] Found ${nearbyProviders.length} providers in range.`);
 
-                        // --- FILTER SERVICES ---
                         const providersInRange = nearbyProviders.map((p: any) => p._id.toString());
-                        console.log(`[Chatbot] Provider IDs in range:`, providersInRange);
+                        logger.info(`[Chatbot] Provider IDs in range:`, providersInRange);
 
                         const services = await this._serviceRepository.findServicesWithProvider(
                             context.serviceSubCategoryId,
                             undefined
                         );
 
-                        console.log(`[Chatbot] Raw services fetched:`, services.length);
+                        logger.info(`[Chatbot] Raw services fetched:`, services.length);
 
                         const servicesInRange = services.filter(s =>
                             providersInRange.includes((s as any).provider._id.toString())
                         );
 
-                        console.log(`[Chatbot] Services matching providers in range: ${servicesInRange.length}`);
+                        logger.info(`[Chatbot] Services matching providers in range: ${servicesInRange.length}`);
 
                         if (!servicesInRange.length) {
-                            console.log(`[Chatbot] ❗ Providers found, but none have matching service documents.`);
+                            logger.info(`[Chatbot] ❗ Providers found, but none have matching service documents.`);
                             toolResult = { providers: [] };
                             break;
                         }
 
-                        // --- CHECK TIME AVAILABILITY ---
                         const providerIds = servicesInRange.map(s => (s as any).provider._id.toString());
-                        console.log(`[Chatbot] Checking availability for provider IDs:`, providerIds);
+                        logger.info(`[Chatbot] Checking availability for provider IDs:`, providerIds);
 
                         const availableProviders = await this._providerService.findProvidersAvailableAtSlot(
                             providerIds,
@@ -890,15 +630,14 @@ export class ChatbotService implements IChatBotService {
                             time
                         );
 
-                        console.log(`[Chatbot] Available providers after time check:`, availableProviders);
+                        logger.info(`[Chatbot] Available providers after time check:`, availableProviders);
 
-                        // --- FORMAT RESPONSE ---
                         const providerList = availableProviders.map(p => {
                             const service = servicesInRange.find(
                                 s => (s as any).provider._id.toString() === p._id.toString()
                             );
 
-                            console.log(`[Chatbot] Mapping provider ${p._id}:`, { service });
+                            logger.info(`[Chatbot] Mapping provider ${p._id}:`, { service });
 
                             return {
                                 serviceId: service._id.toString(),
@@ -909,54 +648,39 @@ export class ChatbotService implements IChatBotService {
                             };
                         });
 
-                        console.log(`[Chatbot] ✅ Final provider list:`, providerList);
+                        logger.info(`[Chatbot] ✅ Final provider list:`, providerList);
 
-                        // --- 3. CRITICAL FIX: Update workingContext ---
                         workingContext.lastFoundProviders = providerList;
                         session.context.lastFoundProviders = providerList;
                         session.markModified("context");
                         await session.save();
 
-                        console.log(`[Chatbot] Saved lastFoundProviders to session.context.`);
 
                         toolResult = { providers: providerList };
-                        console.log(`[Chatbot] Returning toolResult:`, toolResult);
+                        logger.info(`[Chatbot] Returning toolResult:`, toolResult);
 
-                        console.log("================= 🟩 [Chatbot] findAvailableProvidersForSlot END 🟩 =====================\n");
                         break;
                     }
 
 
                     case "initiatePayment": {
-                        console.log("\n================= 🟦 [Chatbot] initiatePayment START 🟦 =================");
-
-                        console.log(`[Chatbot] Raw call.args:`, call.args);
 
                         const { customerName, phone, instructions } = call.args as any;
-                        console.log(`[Chatbot] Extracted:`);
-                        console.log(` - customerName: ${customerName}`);
-                        console.log(` - phone: ${phone}`);
-                        console.log(` - instructions: ${instructions}`);
 
-                        // Update context
                         workingContext.customerName = customerName;
                         workingContext.phone = phone;
                         workingContext.instructions = instructions;
 
-                        console.log(`[Chatbot] Updated context after adding customer details:`, JSON.stringify(workingContext, null, 2));
-
-                        // Find selected provider
-                        console.log(`[Chatbot] Looking for providerId in context: ${workingContext.providerId}`);
-                        console.log(`[Chatbot] lastFoundProviders:`, JSON.stringify(workingContext.lastFoundProviders, null, 2));
+                        logger.info(`[Chatbot] Updated context after adding customer details:`, JSON.stringify(workingContext, null, 2));
 
                         if (!workingContext.providerId) {
-                            // Check if user message contained a number choice for provider
                             const match = userMessage.match(/^\s*(\d+)\s*$/);
                             if (match && workingContext.lastFoundProviders) {
                                 const index = parseInt(match[1]) - 1;
                                 if (workingContext.lastFoundProviders[index]) {
+                                    logger.info(`[Chatbot] User selected provider #${index + 1}`);
                                     workingContext.providerId = workingContext.lastFoundProviders[index].providerId;
-                                    console.log(`[Chatbot] Inferred provider selection: ${workingContext.providerId}`);
+                                    logger.info(`[Chatbot] Inferred provider selection: ${workingContext.providerId}`);
                                 }
                             }
                         }
@@ -966,50 +690,37 @@ export class ChatbotService implements IChatBotService {
                         );
 
                         if (!chosenProvider) {
-                            console.error(`[Chatbot] ❌ No matching provider found for providerId: ${context.providerId}`);
+                            logger.error(`[Chatbot] ❌ No matching provider found for providerId: ${context.providerId}`);
                         } else {
-                            console.log(`[Chatbot] Found chosen provider:`, chosenProvider);
+                            logger.info(`[Chatbot] Found chosen provider:`, chosenProvider);
                             workingContext.serviceId = chosenProvider.serviceId;
                             workingContext.amount = chosenProvider.price;
-
-                            console.log(`[Chatbot] Updated context with serviceId and amount:`);
-                            console.log(` - serviceId: ${chosenProvider.serviceId}`);
-                            console.log(` - amount: ${chosenProvider.price}`);
                         }
 
-                        console.log("[Chatbot] Saving session after provider mapping...");
                         await session.save();
-                        console.log("[Chatbot] Session saved successfully.");
 
-                        // Validation check
-                        console.log("[Chatbot] Validating required payment fields...");
-
-                        console.log(`serviceId: ${workingContext.serviceId}`);
-                        console.log(`providerId: ${workingContext.providerId}`);
-                        console.log(`addressId: ${workingContext.addressId}`);
-                        console.log(`date: ${workingContext.date}`);
-                        console.log(`time: ${workingContext.time}`);
-                        console.log(`amount: ${workingContext.amount}`);
+                        logger.info(`serviceId: ${workingContext.serviceId}`);
+                        logger.info(`providerId: ${workingContext.providerId}`);
+                        logger.info(`addressId: ${workingContext.addressId}`);
+                        logger.info(`date: ${workingContext.date}`);
+                        logger.info(`time: ${workingContext.time}`);
+                        logger.info(`amount: ${workingContext.amount}`);
 
                         if (!workingContext.serviceId || !workingContext.providerId || !workingContext.addressId || !workingContext.date || !workingContext.time || !workingContext.amount) {
-                            console.error(`[Chatbot] ❌ Missing critical booking info.`);
-                            console.error(`[Chatbot] Full Context:`, JSON.stringify(context, null, 2));
+                            logger.error(`[Chatbot] ❌ Missing critical booking info.`);
+                            logger.error(`[Chatbot] Full Context:`, JSON.stringify(context, null, 2));
 
                             toolResult = {
                                 error: "Missing critical booking info. You must confirm all details with the user first."
                             };
-                            console.log(`[Chatbot] Returning error toolResult.`);
+                            logger.info(`[Chatbot] Returning error toolResult.`);
                             break;
                         }
 
-                        // Create order
-                        console.log(`[Chatbot] Creating payment order for amount: ${context.amount}`);
-                        const order = await this._PaymentService.createOrder(context.amount);
+                        const order = await this._PaymentService.createOrder(workingContext.amount);
 
-                        console.log(`[Chatbot] Order created successfully:`);
-                        console.log(` - orderId: ${order.id}`);
+                        logger.info(` - orderId: ${order.id}`);
 
-                        // Build response
                         const response: IChatbotResponse = {
                             role: 'model',
                             text: "Great! Please complete your payment to confirm the booking.",
@@ -1031,24 +742,18 @@ export class ChatbotService implements IChatBotService {
                             }
                         };
 
-                        console.log(`[Chatbot] Final response payload:`, JSON.stringify(response, null, 2));
+                        logger.info(`[Chatbot] Final response payload:`, JSON.stringify(response, null, 2));
 
-                        // Save message
-                        console.log("[Chatbot] Saving message to messageRepo...");
                         await this._messageRepo.create({
                             sessionId: session._id,
                             role: "model",
                             text: response.text
                         });
 
-                        console.log("[Chatbot] Message saved.");
-                        console.log("[Chatbot] Saving session...");
                         session.context = workingContext;
                         session.markModified('context');
                         await session.save();
-                        console.log("[Chatbot] Session saved.");
-
-                        console.log("================= 🟩 [Chatbot] initiatePayment END 🟩 =====================\n");
+                        logger.info("[Chatbot] Session saved.");
 
                         return response;
                     }
@@ -1059,11 +764,11 @@ export class ChatbotService implements IChatBotService {
                         toolResult = { error: "Unknown tool" };
                 }
 
-                console.log(`[Chatbot] ✅ Tool Result:`, JSON.stringify(toolResult, null, 2));
+                logger.info(`[Chatbot] ✅ Tool Result:`, JSON.stringify(toolResult, null, 2));
 
                 const result2 = await chat.sendMessage([{ functionResponse: { name: call.name, response: toolResult } }]);
                 botResponseText = result2.response.text() || "Got it. What's next?";
-                console.log(`[Chatbot] 🤖 Final Response after tool: "${botResponseText}"`);
+                logger.info(`[Chatbot] 🤖 Final Response after tool: "${botResponseText}"`);
 
             } catch (err: any) {
                 session.context = workingContext;
@@ -1079,7 +784,7 @@ export class ChatbotService implements IChatBotService {
         }
 
         const textResponse = response.text() || "Sorry, I'm not sure how to respond to that.";
-        console.log(`[Chatbot] 🤖 Simple Text Response: "${textResponse}"`);
+        logger.info(`[Chatbot] 🤖 Simple Text Response: "${textResponse}"`);
 
         await this._messageRepo.create({ sessionId: session._id, role: "model", text: textResponse });
 
@@ -1087,149 +792,94 @@ export class ChatbotService implements IChatBotService {
     }
 
 
-    // private async showAvailableSlots(session: IChatSession): Promise<IChatbotResponse> {
-    //     const slots = await this.generateTimeSlots();
-    //     session.context.availableSlots = slots;
-    //     session.state = "awaiting_slot_selection";
-    //     await session.save();
-
-    //     const slotList = slots.map((s, i) => `${i + 1}. ${s.display}`).join('\n');
-    //     const msg = `Great! Here are available time slots for ${session.context.selectedService?.name}:\n\n${slotList}\n\nPlease select a slot number.`;
-
-    //     await this._messageRepo.create({ sessionId: session._id, role: "model", text: msg });
-    //     return { role: "model", text: msg };
-    // }
-
-    // private async findProviders(session: IChatSession): Promise<void> {
-    //     // This would be called automatically to find providers
-    //     const providers = await this._providerService.findNearbyProviders(
-    //         session.context.selectedAddress.coords.coordinates,
-    //         10,
-    //         session.context.selectedService.id
-    //     );
-
-    //     if (!providers || providers.length === 0) {
-    //         const msg = `Sorry, no providers are available in your area. Would you like to try a different time slot?`;
-    //         await this._messageRepo.create({ sessionId: session._id, role: "model", text: msg });
-    //         return;
-    //     }
-
-    //     session.context.availableProviders = providers.map((p, i) => ({
-    //         id: p._id,
-    //         name: p.fullName,
-    //         rating: p.rating || 4.0,
-    //         number: i + 1
-    //     }));
-    //     session.state = "awaiting_provider_selection";
-    //     await session.save();
-
-    //     const providerList = session.context.availableProviders
-    //         .map(p => `${p.number}. ${p.name} — ⭐ ${p.rating}/5.0`)
-    //         .join('\n');
-
-    //     const msg = `Excellent! Here are available providers:\n\n${providerList}\n\nPlease select a provider by number.`;
-    //     await this._messageRepo.create({ sessionId: session._id, role: "model", text: msg });
-    // }
-
-    // private async generateTimeSlots(): Promise<Array<{ display: string, value: string }>> {
-    //     const slots = [];
-    //     const today = new Date();
-
-    //     // Generate slots for next 7 days
-    //     for (let day = 1; day <= 7; day++) {
-    //         const date = new Date(today);
-    //         date.setDate(today.getDate() + day);
-
-    //         // Morning slots
-    //         ['09:00', '10:00', '11:00'].forEach(time => {
-    //             const dateTime = new Date(date);
-    //             const [hours, minutes] = time.split(':');
-    //             dateTime.setHours(parseInt(hours), parseInt(minutes), 0);
-
-    //             slots.push({
-    //                 display: `${date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })} at ${time} AM`,
-    //                 value: dateTime.toISOString()
-    //             });
-    //         });
-
-    //         // Afternoon slots
-    //         ['14:00', '15:00', '16:00'].forEach(time => {
-    //             const dateTime = new Date(date);
-    //             const [hours, minutes] = time.split(':');
-    //             dateTime.setHours(parseInt(hours), parseInt(minutes), 0);
-
-    //             const displayHour = parseInt(hours) - 12;
-    //             slots.push({
-    //                 display: `${date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })} at ${displayHour}:${minutes} PM`,
-    //                 value: dateTime.toISOString()
-    //             });
-    //         });
-    //     }
-
-    //     return slots.slice(0, 15); // Return first 15 slots
-    // }
-
-    async createRazorpayOrder(userId: string, orderData: any) {
-        const { amount } = orderData;
-        const order = await this._PaymentService.createOrder(amount);
-        return {
-            id: order.id,
-            amount,
-            key: process.env.RAZORPAY_KEY_ID,
-            currency: "INR",
-            metadata: orderData
-        };
-    }
-
-    async verifyRazorpayPayment(sessionId: string, paymentData: any) {
-        const verified = await this._PaymentService.verifySignature(
+    async verifyRazorpayPayment(sessionId: string, paymentData: IChatPaymentVerify) {
+        logger.info('the payment data', paymentData)
+        const verified = verifyPaymentSignature(
             paymentData.razorpay_order_id,
             paymentData.razorpay_payment_id,
             paymentData.razorpay_signature
         );
 
-        if (!verified) throw new Error("Payment verification failed");
+        if (!verified) throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST);
 
         const session = await this._sessionRepo.findOne({ sessionId });
-        if (!session || !session.context.pendingPayment) {
-            throw new Error("Session or pending payment not found");
+        if (!session) {
+            throw new CustomError("Session not found", HttpStatusCode.NOT_FOUND);
         }
 
-        const { pendingPayment } = session.context;
+        const { bookingData } = paymentData;
+
+        const service = await this._serviceRepository.findById(bookingData.serviceId);
+        if (!service) throw new CustomError("Service not found", HttpStatusCode.NOT_FOUND);
+
+        const amount = Number(service.price);
+
+        const subCategory = await this._categoryRepository.findById(service.subCategoryId.toString());
+        const commissionRule = await this._commissionRuleRepository.findOne({ categoryId: subCategory._id.toString() });
+
+        let totalCommission = await calculateCommission(amount, commissionRule);
+        totalCommission += await calculateParentCommission(amount, subCategory, this._categoryRepository, this._commissionRuleRepository);
+
+        const provider = await this._providerRepository.findById(bookingData.providerId);
+        if (provider?.subscription?.status === "ACTIVE" && provider.subscription.planId) {
+            const plan = await this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
+            totalCommission = applySubscriptionAdjustments(amount, totalCommission, plan, commissionRule);
+        }
+
+        const providerAmount = amount - totalCommission;
+        const durationInMinutes = convertDurationToMinutes(service.duration);
 
         const booking = await this._bookingRepository.create({
             userId: session.userId,
-            serviceId: pendingPayment.serviceId,
-            providerId: pendingPayment.providerId,
-            addressId: pendingPayment.addressId,
-            paymentStatus: "Paid",
-            amount: String(pendingPayment.amount),
-            status: "Pending",
-            scheduledDate: new Date(pendingPayment.scheduledAt).toISOString().split('T')[0],
-            scheduledTime: new Date(pendingPayment.scheduledAt).toTimeString().slice(0, 5),
+            serviceId: new Types.ObjectId(bookingData.serviceId),
+            providerId: new Types.ObjectId(bookingData.providerId),
+            addressId: new Types.ObjectId(bookingData.addressId),
+            paymentStatus: PaymentStatus.PAID,
+            amount: String(amount),
+            status: BookingStatus.PENDING,
+            scheduledDate: bookingData.scheduledDate,
+            scheduledTime: bookingData.scheduledTime,
+            customerName: bookingData.customerName,
+            phone: bookingData.phone,
+            instructions: bookingData.instructions,
             createdBy: "Bot",
-            paymentId: paymentData.razorpay_payment_id
+            duration: durationInMinutes
         });
 
-        // Update session
-        session.context.completedBooking = {
-            bookingId: booking._id,
-            service: session.context.selectedService?.name,
-            provider: session.context.selectedProvider?.name,
-            time: session.context.selectedSlot?.display
+        const payment = await this._paymentRepository.create({
+            userId: session.userId ? new Types.ObjectId(session.userId.toString()) : undefined,
+            providerId: new Types.ObjectId(bookingData.providerId),
+            bookingId: booking._id as Types.ObjectId,
+            paymentMethod: PaymentMethod.BANK,
+            paymentDate: new Date(),
+            amount: amount,
+            adminCommission: totalCommission,
+            providerAmount: providerAmount,
+            razorpay_order_id: paymentData.razorpay_order_id,
+            razorpay_payment_id: paymentData.razorpay_payment_id,
+            razorpay_signature: paymentData.razorpay_signature
+        });
+
+        booking.paymentId = payment._id;
+        await booking.save();
+
+        session.context = {
+            ...session.context,
+            completedBookingId: booking._id.toString()
         };
-        session.state = "booking_completed";
+        delete (session.context as any).pendingPayment;
+
+        session.markModified('context');
         await session.save();
 
-        // Send confirmation message
         const confirmationMsg = `
 🎉 **Booking Confirmed!**
 
 ✅ Payment successful
 📋 Booking ID: ${booking._id}
-🛠️ Service: ${session.context.selectedService?.name}
-👤 Provider: ${session.context.selectedProvider?.name}
-🕐 Scheduled: ${session.context.selectedSlot?.display}
+🛠️ Service: ${service.title}
+👤 Provider: ${provider?.fullName}
+🕐 Scheduled: ${bookingData.scheduledDate} at ${bookingData.scheduledTime}
 
 Your provider will contact you shortly. Thank you for using QuickMate!
         `.trim();

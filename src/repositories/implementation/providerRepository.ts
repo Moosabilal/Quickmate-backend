@@ -88,56 +88,6 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return result;
     }
 
-    //     public async findFilteredProviders(criteria: {
-    //     providerIds: string[];
-    //     userIdToExclude: string;
-    //     lat?: number;
-    //     long?: number;
-    //     radius?: number;
-    //     date?: string; 
-    //     time?: string; 
-    // }): Promise<IProvider[]> {
-    //     console.log('\n[DEBUG][findFilteredProviders] ▶️ Start');
-
-    //     const filter: mongoose.FilterQuery<IProvider> = {
-    //         _id: { $in: criteria.providerIds },
-    //         userId: { $ne: criteria.userIdToExclude},
-    //     };
-
-    //     const testData = await this.findAll(filter)
-    // console.log('Full data:', JSON.stringify(testData, null, 2));
-
-
-    //     if (criteria.lat && criteria.long && criteria.radius) {
-    //         filter.serviceLocation = {
-    //             $geoWithin: {
-    //                 $centerSphere: [
-    //                     [criteria.long, criteria.lat],
-    //                     criteria.radius / 6378.1, // Earth radius in km
-    //                 ],
-    //             },
-    //         };
-    //     }
-
-    //     if (criteria.date || criteria.time) {
-    //         filter.availability = { $elemMatch: {} as any };
-
-    //         if (criteria.date) {
-    //             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    //             const dayOfWeek = days[new Date(criteria.date).getDay()];
-    //             filter.availability.$elemMatch.day = dayOfWeek;
-    //         }
-
-    //         if (criteria.time) {
-    //             filter.availability.$elemMatch.startTime = { $lte: criteria.time };
-    //             filter.availability.$elemMatch.endTime = { $gte: criteria.time };
-    //         }
-    //     }
-
-    //     const result = await this.findAll(filter);
-    //     return result;
-    // }
-
     public async findFilteredProviders(criteria: {
         providerIds: string[];
         userIdToExclude: string;

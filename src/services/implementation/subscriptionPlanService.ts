@@ -94,7 +94,6 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
             throw new CustomError("This is not a downgrade. Please use the Upgrade or Subscribe flow.", HttpStatusCode.BAD_REQUEST);
         }
 
-        // Set the pending downgrade ID
         provider.subscription.pendingDowngradePlanId = new Types.ObjectId(newPlanId);
         
         const updatedProvider = await provider.save();
@@ -114,35 +113,30 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
              throw new CustomError("No pending downgrade to cancel.", HttpStatusCode.BAD_REQUEST);
         }
 
-        // Clear the pending downgrade
         provider.subscription.pendingDowngradePlanId = undefined;
         
         const updatedProvider = await provider.save();
         return updatedProvider.subscription;
     }
 
-    // --- THIS METHOD IS UPDATED ---
     public async checkAndExpire(providerId: string): Promise<ISubscription> {
         const provider = await this._providerRepository.findById(providerId);
         if (!provider) throw new CustomError(ErrorMessage.PROVIDER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
 
         const subscription = provider.subscription;
         if (!subscription) {
-            return { status: SubscriptionStatus.NONE } as ISubscription; // Return a NONE status
+            return { status: SubscriptionStatus.NONE } as ISubscription;
         }
         
-        // Check if the plan is expired
         if (
             subscription.status === SubscriptionStatus.ACTIVE &&
             subscription.endDate &&
             new Date(subscription.endDate) < new Date()
         ) {
-            // --- 1. CHECK FOR A PENDING DOWNGRADE ---
             if (subscription.pendingDowngradePlanId) {
                 const newPlan = await this._subscriptionPlanRepository.findById(subscription.pendingDowngradePlanId.toString());
                 
                 if (newPlan) {
-                    // 2. ACTIVATE THE NEW (CHEAPER) PLAN
                     const newStartDate = new Date();
                     const newEndDate = new Date(newStartDate);
                     newEndDate.setDate(newEndDate.getDate() + newPlan.durationInDays);
@@ -151,16 +145,15 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
                     subscription.startDate = newStartDate;
                     subscription.endDate = newEndDate;
                     subscription.status = SubscriptionStatus.ACTIVE;
-                    subscription.pendingDowngradePlanId = undefined; // Clear the pending downgrade
+                    subscription.pendingDowngradePlanId = undefined; 
 
                     await provider.save();
                     return provider.subscription;
                 }
             }
             
-            // --- 3. NO DOWNGRADE, just expire the plan ---
             subscription.status = SubscriptionStatus.EXPIRED;
-            subscription.pendingDowngradePlanId = undefined; // Clear it just in case
+            subscription.pendingDowngradePlanId = undefined;
             await provider.save();
         }
 
@@ -181,7 +174,6 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
     };
 
     public async calculateUpgradeCost(userId: string, newPlanId: string): Promise<IUpgradeCostResponse> {
-        // 1. Get provider and plans in parallel
         const providerId = await this._providerRepository.getProviderId(userId)
         const [provider, newPlan] = await Promise.all([
             this._providerRepository.findById(providerId),
@@ -193,26 +185,20 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
 
         const sub = provider.subscription;
 
-        // 2. Check if there is a valid, active subscription
         if (!sub || !sub.planId || !sub.endDate || sub.status !== SubscriptionStatus.ACTIVE) {
-            // No active plan, so this is a new subscription, not an upgrade.
-            // Call the existing createSubscriptionOrder logic.
             throw new CustomError("No active subscription found. Please use the standard subscribe method.", HttpStatusCode.BAD_REQUEST);
         }
 
         const currentPlan = await this._subscriptionPlanRepository.findById(sub.planId.toString());
         if (!currentPlan) throw new CustomError("Current plan not found.", HttpStatusCode.INTERNAL_SERVER_ERROR);
 
-        // 3. Check if it's actually an upgrade
         if (newPlan.price <= currentPlan.price) {
             throw new CustomError("This is a downgrade or same plan. Downgrades will be supported in a future update.", HttpStatusCode.BAD_REQUEST);
         }
 
-        // 4. --- PRORATION LOGIC ---
         const today = new Date();
         const endDate = new Date(sub.endDate);
         if (today >= endDate) {
-            // Plan is expired, treat as a new subscription
              throw new CustomError("Your plan is expired. Please create a new subscription.", HttpStatusCode.BAD_REQUEST);
         }
 
@@ -222,11 +208,9 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
         const perDayCost = currentPlan.price / currentPlan.durationInDays;
         const remainingValue = perDayCost * daysRemaining;
 
-        // Calculate final cost, ensuring it's at least 1 Rupee (or your minimum)
         const costToPay = Math.max(1, newPlan.price - remainingValue);
-        const finalAmountInRupees = Math.round(costToPay); // Charge in whole rupees
+        const finalAmountInRupees = Math.round(costToPay); 
 
-        // 5. Create Razorpay order for the prorated amount
         const order = await paymentCreation(finalAmountInRupees);
 
         return {

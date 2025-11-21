@@ -25,7 +25,7 @@ const PaymentSchema = new Schema(
     },
     paymentDate: {
       type: Date,
-      required: true,
+      required: false,
     },
     transactionId: {
       type: String,

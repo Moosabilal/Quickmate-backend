@@ -8,6 +8,8 @@ const router = express.Router()
 const bookingController = container.get<BookingController>(TYPES.BookingController)
 const isUser = [authenticateToken, authorizeRoles(['Customer','ServiceProvider'])];
 const isProvider = [authenticateToken, authorizeRoles(['ServiceProvider'])]
+const isAdmin = [authenticateToken, authorizeRoles(['Admin'])]
+
 
 
 router.post('/createBooking', isUser, bookingController.createBooking)
@@ -25,6 +27,9 @@ router.get('/getBookingFor_Prov_mngmnt', isProvider, bookingController.getBookin
 router.post('/verify-bookingCompletion-otp', isProvider, bookingController.verifyOtp);
 router.post('/resend-bookingCompletion-otp', isProvider, bookingController.resendOtp);
 router.get('/admin/bookings', bookingController.getAllBookingsForAdmin);
+
+//admin
+router.get('/admin/bookings/:id', isAdmin, bookingController.getBookingDetailsForAdmin);
 
 
 

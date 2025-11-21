@@ -21,7 +21,6 @@ import { ICategoryRepository } from '../../repositories/interface/ICategoryRepos
 import { ICategory } from '../../models/Categories';
 import { IService } from '../../models/Service';
 import { IProvider } from '../../models/Providers';
-import { Credentials } from "google-auth-library";
 import { BookingStatus } from '../../enums/booking.enum';
 
 

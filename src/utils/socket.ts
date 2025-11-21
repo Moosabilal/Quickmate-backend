@@ -10,7 +10,6 @@ export function chatSocket(io: any) {
   io.on("connection", (socket: any) => {
 
     socket.on("joinBookingRoom", (joiningId: string) => {
-      // Validate joiningId
       if (!joiningId || typeof joiningId !== 'string' || joiningId.trim() === '') {
         logger.warn("Invalid joiningId received:", joiningId);
         return;
@@ -27,7 +26,6 @@ export function chatSocket(io: any) {
     socket.on(
       "sendBookingMessage",
       async (messageData: ISocketMessage) => {
-        // Validate message data
         if (!messageData || !messageData.joiningId || !messageData.senderId) {
           logger.warn("Invalid message data received:", messageData);
           socket.emit("chat:error", { message: "Invalid message data" });
@@ -44,12 +42,10 @@ export function chatSocket(io: any) {
 
     const forwardEventHandler = (eventName: string) => {
       socket.on(eventName, (payload: any) => {
-        // Enhanced validation for WebRTC events
         if (!payload || !payload.joiningId || !payload.fromUserId) {
           logger.warn(`Invalid payload for ${eventName}:`, payload);
           return;
         }
-        // Additional validation for specific events
         if (eventName === "webrtc:offer" && !payload.offer) {
           logger.warn(`Missing offer in ${eventName}:`, payload);
           return;

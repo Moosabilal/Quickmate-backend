@@ -73,16 +73,13 @@ export const providerBookingsQuerySchema = bookingFilterSchema.extend({
     providerId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
 });
 
-// --- 1. Reuse your createBookingSchema but make userId optional ---
 export const chatBookingSchema = createBookingSchema.extend({
   userId: z.string().optional(),
 });
 
-// --- 2. ADD THIS NEW SCHEMA ---
 export const verifyChatPaymentSchema = z.object({
     razorpay_order_id: z.string(),
     razorpay_payment_id: z.string(), 
     razorpay_signature: z.string(),
-    // We validate that the bookingData object has the correct shape
     bookingData: chatBookingSchema, 
 });

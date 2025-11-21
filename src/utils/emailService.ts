@@ -56,6 +56,8 @@ export const sendPasswordResetEmail = async (to: string, resetLink: string) => {
     `,
   };
 
+  logger.info(`Sending resetLink email ${resetLink} `);
+
   try {
     await transporter.sendMail(mailOptions);
     logger.info(`Password reset email sent to ${to}`);

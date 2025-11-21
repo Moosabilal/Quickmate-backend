@@ -142,3 +142,21 @@ export interface IProviderBookingsResponse {
   earnings: number;
   counts: IBookingStatusCounts;
 }
+
+export interface IBookingDetailData {
+  booking: {
+    _id: string;
+    status: string;
+    paymentStatus: string;
+    amount: string;
+    date: string;
+    time: string;
+    createdAt: string;
+    instructions?: string;
+  };
+  user: { name: string; email: string; phone: string; image: string };
+  provider: { _id: string; name: string; email: string; phone: string; image: string; serviceArea: string };
+  service: { title: string; duration: string; price: number };
+  address: { label: string; fullAddress: string };
+  payment?: { method: string; transactionId: string; date: string };
+}

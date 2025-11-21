@@ -95,7 +95,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         })
             .populate('userId', 'name')
             .populate('serviceId', 'title')
-            .sort({ updatedAt: -1 }) 
+            .sort({ updatedAt: -1 })
             .lean();
     }
     async countUniqueClientsBeforeDate(providerId: string, date: Date): Promise<number> {
@@ -120,7 +120,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
     async getBookingStatsByService(providerId: string): Promise<IServiceBreakdown[]> {
         const stats = await Booking.aggregate([
             { $match: { providerId: new Types.ObjectId(providerId) } },
-            
+
             {
                 $group: {
                     _id: "$serviceId",
@@ -130,18 +130,18 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                     }
                 }
             },
-            
+
             {
                 $lookup: {
-                    from: "services", 
+                    from: "services",
                     localField: "_id",
                     foreignField: "_id",
                     as: "serviceInfo"
                 }
             },
-            
+
             { $unwind: "$serviceInfo" },
-            
+
             {
                 $project: {
                     _id: 0,
@@ -246,7 +246,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
             { $unwind: { path: '$provider', preserveNullAndEmptyArrays: true } },
             { $unwind: { path: '$service', preserveNullAndEmptyArrays: true } },
         ];
-        
+
         if (search) {
             pipeline.push({
                 $match: {
@@ -261,14 +261,14 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
     }
 
     public async findBookingsForUserHistory(
-        userId: string, 
+        userId: string,
         filters: { status?: BookingStatus, search?: string }
     ): Promise<{ bookings: any[], total: number }> {
-        
+
         const mainMatch: PipelineStage.Match = {
             $match: { userId: new Types.ObjectId(userId) }
         };
-        
+
         if (filters.status) {
             mainMatch.$match.status = filters.status;
         }
@@ -310,10 +310,10 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 }
             }
         ]);
-        
+
         const bookings = aggregation[0].data;
         const total = aggregation[0].metadata[0] ? aggregation[0].metadata[0].total : 0;
-        
+
         return { bookings, total };
     }
 
@@ -330,12 +330,12 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 }
             }
         ]);
-        
+
         return aggregation;
     }
 
-    public async getBookingsByFilter(userId: string, status: BookingStatus, search?: string): Promise<IBooking[]>{
-        
+    public async getBookingsByFilter(userId: string, status: BookingStatus, search?: string): Promise<IBooking[]> {
+
         const mainMatch: PipelineStage.Match = {
             $match: { userId: new Types.ObjectId(userId) }
         };
@@ -367,7 +367,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
             { $unwind: { path: '$service', preserveNullAndEmptyArrays: true } },
             { $unwind: { path: '$address', preserveNullAndEmptyArrays: true } },
         ];
-        
+
         if (search) {
             pipeline.push({
                 $match: {
@@ -385,17 +385,17 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
     }
 
     public async findBookingsForProvider(
-        providerId: string, 
-        filters: { status?: BookingStatus, search?: string }, 
-        page: number, 
+        providerId: string,
+        filters: { status?: BookingStatus, search?: string },
+        page: number,
         limit: number
     ): Promise<{ bookings: IProviderBookingManagement[], total: number }> {
-        
+
         const skip = (page - 1) * limit;
         const mainMatch: PipelineStage.Match = {
             $match: { providerId: new Types.ObjectId(providerId) }
         };
-        
+
         if (filters.status && filters.status !== BookingStatus.All) {
             mainMatch.$match.status = filters.status;
         }
@@ -433,17 +433,17 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                                 customerPhone: '$phone',
                                 customerEmail: '$user.email',
                                 specialRequests: '$instructions',
-                                createdAt: '$createdAt'
+                                createdAt: '$createdAt',
                             }
                         }
                     ]
                 }
             }
         ]);
-        
+
         const bookings = aggregation[0].data;
         const total = aggregation[0].metadata[0] ? aggregation[0].metadata[0].total : 0;
-        
+
         return { bookings, total };
     }
 
@@ -460,7 +460,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 }
             }
         ]);
-        
+
         return aggregation;
     }
 

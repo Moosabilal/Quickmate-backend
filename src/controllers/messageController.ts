@@ -43,7 +43,6 @@ export class MessageController {
         } catch (error: any) {
             console.error('File upload error in controller:', error.message);
 
-            // Return appropriate error response based on error type
             let statusCode = HttpStatusCode.INTERNAL_SERVER_ERROR;
             let errorMessage = "Failed to upload file";
 

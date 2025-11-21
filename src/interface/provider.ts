@@ -103,7 +103,8 @@ export interface IProviderProfile {
   payoutPending: number;
   rating: number;
   isVerified: boolean
-  subscription?: ISubscription
+  subscription?: ISubscription;
+  createdAt?: Date;
 }
 
 export interface ProviderFilterQuery {

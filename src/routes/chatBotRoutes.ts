@@ -12,7 +12,6 @@ router.post('/session', chatbotController.startSession);
 router.get('/session/:sessionId', chatbotController.getHistory); 
 router.post('/session/:sessionId/message', chatbotController.postMessage);
 
-router.post('/payment/create-order', isProviderUser, chatbotController.createRazorpayOrder);
-router.post('/payment/verify', isProviderUser, chatbotController.verifyRazorpayPayment);
+router.post('/verify-chat-payment/:sessionId', isProviderUser, chatbotController.verifyRazorpayPayment);
 
 export default router;

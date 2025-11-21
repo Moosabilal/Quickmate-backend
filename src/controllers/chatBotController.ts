@@ -5,6 +5,7 @@ import { HttpStatusCode } from '../enums/HttpStatusCode';
 import { IChatBotService } from '../services/interface/IChatBotService';
 import { AuthRequest } from '../middleware/authMiddleware';
 import { CustomError } from '../utils/CustomError';
+import { IChatPaymentVerify } from '../interface/chatBot';
 
 @injectable()
 export class ChatbotController {
@@ -61,34 +62,17 @@ export class ChatbotController {
         }
     };
 
-    public createRazorpayOrder = async (req: AuthRequest, res: Response, next: NextFunction) => {
-        try {
-            const userId = req.user?.id;
-            if (!userId) {
-                throw new CustomError("User not authenticated", HttpStatusCode.UNAUTHORIZED);
-            }
-
-            const orderData = req.body;
-            const order = await this._chatbotService.createRazorpayOrder(userId, orderData);
-            
-            res.status(HttpStatusCode.OK).json({ 
-                success: true, 
-                order 
-            });
-        } catch (error) { 
-            next(error); 
-        }
-    };
-
     public verifyRazorpayPayment = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { sessionId } = req.body;
+            console.log('the params', req.params)
+            console.log('the body', req.body)
+            const { sessionId } = req.params;
             
             if (!sessionId) {
                 throw new CustomError("Session ID is required", HttpStatusCode.BAD_REQUEST);
             }
 
-            const paymentData = req.body;
+            const paymentData = req.body as IChatPaymentVerify;
             const booking = await this._chatbotService.verifyRazorpayPayment(sessionId, paymentData);
             
             res.status(HttpStatusCode.OK).json({ 
@@ -101,7 +85,6 @@ export class ChatbotController {
         }
     };
 
-    // New endpoint to get session status
     public getSessionStatus = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { sessionId } = req.params;

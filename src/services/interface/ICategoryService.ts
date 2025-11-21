@@ -28,6 +28,7 @@ export interface ICategoryService {
     
     getTopLevelCategoryNames(): Promise<string[]>;
     getSubcategoriesForCategory(parentCategoryName: string): Promise<string[]>;
+    getRelatedCategories(categoryId: string): Promise<IserviceResponse[]>;
 
 }
     

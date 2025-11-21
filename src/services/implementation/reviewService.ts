@@ -54,18 +54,6 @@ export class ReviewService implements IReviewService {
         booking.reviewed = true;
         await this._bookingRepository.update(bookingId, booking);
 
-        // const reviews = (await this._reviewRepository.findAll({
-        //     providerId: booking.providerId,
-        //     status: ReviewStatus.PENDING,
-        // })) as IReview[];
-
-        // const totalRatings = reviews.reduce((sum: number, r: IReview) => sum + (r.rating as number), 0);
-        // const avgRating = reviews.length > 0 ? totalRatings / reviews.length : 0;
-
-        // await this._providerRepository.update(booking.providerId.toString(), {
-        //     rating: avgRating,
-        // });
-
         return {
             message: "Your Review Submitted",
         };
@@ -85,14 +73,11 @@ export class ReviewService implements IReviewService {
 
         review.status = newStatus;
         
-        // We update the document directly
         const updatedReview = await this._reviewRepository.update(reviewId, review);
         
-        // --- Recalculate Provider Rating ---
-        // We must recalculate the provider's rating after removing a review
         const reviews = await this._reviewRepository.findAll({
             providerId: review.providerId,
-            status: ReviewStatus.APPROVED, // Only count approved reviews
+            status: ReviewStatus.APPROVED, 
         });
 
         const totalRatings = reviews.reduce((sum: number, r: IReview) => sum + (r.rating as number), 0);

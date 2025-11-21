@@ -92,7 +92,7 @@ export class SubscriptionPlanController {
     public calculateUpgrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const { newPlanId } = calculateUpgradeSchema.parse(req.body);
-            const userId = req.user.id; // Get provider from logged-in user
+            const userId = req.user.id;
 
             const response = await this._subscriptionPlanService.calculateUpgradeCost(userId, newPlanId);
             res.status(HttpStatusCode.OK).json({ success: true, data: response });
@@ -105,7 +105,7 @@ export class SubscriptionPlanController {
     public scheduleDowngrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const { newPlanId } = z.object({ newPlanId: mongoIdParamSchema.shape.id }).parse(req.body);
-            const userId = req.user.id; // Get provider from logged-in user
+            const userId = req.user.id; 
 
             const updatedSubscription = await this._subscriptionPlanService.scheduleDowngrade(userId, newPlanId);
             res.status(HttpStatusCode.OK).json({ 
@@ -120,7 +120,7 @@ export class SubscriptionPlanController {
     }
     public cancelDowngrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const userId = req.user.id; // Get provider from logged-in user
+            const userId = req.user.id;
 
             const updatedSubscription = await this._subscriptionPlanService.cancelDowngrade(userId);
             res.status(HttpStatusCode.OK).json({ 
@@ -129,7 +129,6 @@ export class SubscriptionPlanController {
                 data: updatedSubscription 
             });
         } catch (error) {
-            // No Zod validation, so just catch general errors
             next(error);
         }
     }

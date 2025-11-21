@@ -2,7 +2,6 @@ import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 import path from 'path';
 
-// Validate Cloudinary configuration
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 const apiKey = process.env.CLOUDINARY_API_KEY;
 const apiSecret = process.env.CLOUDINARY_API_SECRET;
@@ -20,7 +19,6 @@ cloudinary.config({
   timeout: 60000,
 });
 
-// Validate file before upload
 const validateFile = (filePath: string): void => {
   if (!fs.existsSync(filePath)) {
     throw new Error('File does not exist');
@@ -29,12 +27,10 @@ const validateFile = (filePath: string): void => {
   const stats = fs.statSync(filePath);
   const fileSizeMB = stats.size / (1024 * 1024);
 
-  // Check file size (max 10MB for free tier)
   if (fileSizeMB > 10) {
     throw new Error('File size exceeds 10MB limit');
   }
 
-  // Check file extension
   const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.tiff'];
   const ext = path.extname(filePath).toLowerCase();
 
@@ -47,7 +43,6 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
   const maxRetries = 3;
 
   try {
-    // Validate file before attempting upload
     validateFile(filePath);
 
     console.log(`Attempting to upload file: ${filePath} (attempt ${retryCount + 1}/${maxRetries + 1})`);
@@ -56,7 +51,6 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
       folder: 'quickmate_images',
       resource_type: 'auto',
       timeout: 60000,
-      // Add transformation for optimization
       transformation: [
         { width: 1200, height: 1200, crop: 'limit' },
         { quality: 'auto' }
@@ -65,7 +59,6 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
 
     console.log(`Successfully uploaded to Cloudinary: ${result.public_id}`);
 
-    // Clean up local file after successful upload
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
       console.log(`Cleaned up local file: ${filePath}`);
@@ -73,43 +66,39 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
 
     return result.public_id;
   } catch (error: any) {
-    // Enhanced error logging
     console.error('Cloudinary upload error details:', {
       message: error.message,
       http_code: error.http_code,
       error_code: error.error?.code || error.code,
       name: error.name,
-      stack: error.stack?.substring(0, 500), // Limit stack trace length
+      stack: error.stack?.substring(0, 500),
       filePath,
       retryCount
     });
 
-    // Clean up local file on error
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
       console.log(`Cleaned up local file after error: ${filePath}`);
     }
 
-    // Retry logic for transient errors
     const isRetryableError = (
-      error.http_code === 500 || // Internal server error
-      error.http_code === 502 || // Bad gateway
-      error.http_code === 503 || // Service unavailable
-      error.http_code === 504 || // Gateway timeout
+      error.http_code === 500 ||
+      error.http_code === 502 || 
+      error.http_code === 503 ||
+      error.http_code === 504 || 
       error.code === 'ETIMEDOUT' ||
       error.code === 'ECONNRESET' ||
       error.code === 'ENOTFOUND' ||
-      !error.http_code // Network or unknown errors
+      !error.http_code 
     );
 
     if (isRetryableError && retryCount < maxRetries) {
-      const delay = Math.pow(2, retryCount) * 1000; // Exponential backoff: 1s, 2s, 4s
+      const delay = Math.pow(2, retryCount) * 1000; 
       console.log(`Retrying upload in ${delay}ms...`);
       await new Promise(resolve => setTimeout(resolve, delay));
       return uploadToCloudinary(filePath, retryCount + 1);
     }
 
-    // Provide more specific error messages
     if (error.message?.includes('File size')) {
       throw new Error('File is too large. Maximum size is 10MB.');
     } else if (error.message?.includes('not supported')) {

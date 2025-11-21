@@ -103,7 +103,8 @@ export function toProviderBookingManagement(
             specialRequests: String(booking.instructions || ''),
             createdAt: booking.createdAt
                 ? (booking.createdAt as Date).toISOString()
-                : ''
+                : '',
+            
         };
     });
 }

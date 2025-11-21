@@ -16,7 +16,7 @@ export class PaymentService implements IPaymentService {
 
   public async createOrder(amount: number): Promise<any> {
     const options = {
-      amount: amount * 100, // convert to paise
+      amount: amount * 100,
       currency: 'INR',
       receipt: `receipt_${Date.now()}`,
     };

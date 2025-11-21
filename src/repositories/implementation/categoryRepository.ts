@@ -209,4 +209,15 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         .lean();
     }
 
+    public async findRelatedCategories(parentId: string, currentId: string, limit: number): Promise<ICategory[]> {
+        return this.model.find({
+            parentId: new Types.ObjectId(parentId), 
+            _id: { $ne: new Types.ObjectId(currentId) },
+            status: true 
+        })
+        .select('name iconUrl parentId')
+        .limit(limit)
+        .lean(); 
+    }
+
 }

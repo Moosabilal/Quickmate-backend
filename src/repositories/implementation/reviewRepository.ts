@@ -4,6 +4,7 @@ import { IReviewRepository } from "../interface/IReviewRepository";
 import { BaseRepository } from "./base/BaseRepository";
 import { FilterQuery, PipelineStage, Types } from "mongoose";
 import { IReviewFilters, PopulatedReview } from "../../interface/review";
+import { ReviewStatus } from "../../enums/review.enum";
 
 @injectable()
 export class ReviewRepository extends BaseRepository<IReview> implements IReviewRepository {
@@ -143,7 +144,7 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
             {
                 $match: {
                     serviceId: { $in: serviceIds.map(id => new Types.ObjectId(id)) },
-                    // status: "APPROVED" 
+                    status: ReviewStatus.APPROVED
                 }
             },
             {

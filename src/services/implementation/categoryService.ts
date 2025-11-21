@@ -501,4 +501,26 @@ export class CategoryService implements ICategoryService {
 
         return subCategories.map(cat => cat.name);
     }
+
+    public async getRelatedCategories(categoryId: string): Promise<IserviceResponse[]> {
+        const currentCategory = await this._categoryRepository.findById(categoryId);
+        
+        if (!currentCategory || !currentCategory.parentId) {
+            return [];
+        }
+
+        const related = await this._categoryRepository.findRelatedCategories(
+            currentCategory.parentId.toString(),
+            categoryId,
+            4
+        );
+
+        return related.map(cat => ({
+            id: cat._id.toString(),
+            name: cat.name,
+            description: cat.description || '',
+            iconUrl: cat.iconUrl || '',
+            parentId: cat.parentId?.toString() || null,
+        }));
+    }
 }

@@ -22,6 +22,7 @@ router.get('/popular-services', categoryController.getPopularServices);
 router.get('/trending-services', categoryController.getTrendingServices);
 router.get('/edit/:id', isAdminOrUserOrProvider, categoryController.getCategoryForEdit);
 router.get('/getAllSubCategories', categoryController.getSubCategories)
+router.get('/:id/related', categoryController.getRelatedCategories);
 
 
 router.put('/:id', isAdmin, upload.single('categoryIcon'), categoryController.updateCategory);

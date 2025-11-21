@@ -241,4 +241,14 @@ public getCategoryForEdit = async (req: Request, res: Response, next: NextFuncti
             next(error);
         }
     }
+
+    public getRelatedCategories = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const { id } = mongoIdParamSchema.parse(req.params);
+            const related = await this._categoryService.getRelatedCategories(id);
+            res.status(HttpStatusCode.OK).json({ success: true, data: related });
+        } catch (error) {
+            next(error);
+        }
+    }
 }

@@ -28,6 +28,7 @@ import { CustomError } from './utils/CustomError';
 import { errorHandler } from './middleware/errorHandler';
 import logger from './logger/logger';
 import { chatSocket } from './utils/socket';
+import { startScheduleCleanupJob } from './jobs/cleanupProviderSchedule';
 
 
 const uploadDir = path.join(__dirname, '../uploads');
@@ -90,6 +91,8 @@ const io = new SocketIOServer(server, {
 });
 
 chatSocket(io)
+
+startScheduleCleanupJob();
 
 
 

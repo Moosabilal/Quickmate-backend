@@ -35,7 +35,8 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     rating: provider.rating,
     isVerified: provider.isVerified,
     subscription: provider.subscription,
-    aadhaarIdProof: provider.aadhaarIdProof
+    aadhaarIdProof: provider.aadhaarIdProof,
+    createdAt: provider.createdAt,
   };
 }
 

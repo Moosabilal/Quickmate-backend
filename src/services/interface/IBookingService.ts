@@ -1,5 +1,5 @@
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
-import { IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement, IUserBookingsResponse } from "../../interface/booking";
+import { IAdminBookingsResponse, IBookingConfirmationRes, IBookingDetailData, IBookingHistoryPage, IBookingRequest, IGetMessages, IProviderBookingManagement, IUserBookingsResponse } from "../../interface/booking";
 import { IPaymentVerificationPayload, IPaymentVerificationRequest } from "../../interface/payment";
 import { RazorpayOrder } from "../../interface/razorpay";
 import { BookingStatus } from "../../enums/booking.enum";
@@ -29,5 +29,6 @@ export interface IBookingService {
     ): Promise<IAdminBookingsResponse>;
     findProviderRange(userId: string, userRole: Roles, serviceId: string, lat: number, lng: number, radius: number): Promise<boolean>;
     createBookingFromBot(data: IBookingRequest): Promise<IBooking>;
+    getBookingDetailsForAdmin(bookingId: string): Promise<IBookingDetailData>; 
 
 }
