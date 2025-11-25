@@ -69,22 +69,7 @@ export class AddressService implements IAddressService {
     }
 
     public async getAddressesForUser(userId: string): Promise<IAddress[]> {
-        console.log('the userid', userId)
-        return this._addressRepository.findAll({ userId: new Types.ObjectId(userId) });
+        return this._addressRepository.findAll({ userId: new Types.ObjectId(userId), label: { $ne: "Current Location" }});
     }
 
-    public async createAddress(data: IAddressData, userId: string): Promise<IAddress> {
-        
-        const { lat, lng } = await geocodeAddress(data.street, data.city, data.state, data.zip);
-
-        const newAddress = await this._addressRepository.create({
-            ...data,
-            userId: new Types.ObjectId(userId) as any,
-            locationCoords: {
-                type: 'Point',
-                coordinates: [lng, lat]
-            }
-        });
-        return newAddress;
-    }
 }

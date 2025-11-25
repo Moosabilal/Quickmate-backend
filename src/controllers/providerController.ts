@@ -280,6 +280,7 @@ export class ProviderController {
             const userId = req.user.id;
 
             const analyticsData = await this._providerService.getEarningsAnalytics(userId, period);
+            console.log(analyticsData)
 
             res.status(HttpStatusCode.OK).json({ success: true, data: analyticsData });
         } catch (error) {

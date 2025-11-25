@@ -216,7 +216,7 @@ export function toEarningsAnalyticsDTO(
 ): EarningsAnalyticsData {
 
   const breakdown = currentBookings.map(b => ({
-    date: new Date(b.bookingDate as string | number | Date),
+    date: new Date(b.createdAt as string | number | Date),
     service: (b.serviceId as any)?.title || 'Unknown Service',
     client: (b.userId as any)?.name || 'Unknown Client',
     amount: Number(b.amount) || 0,

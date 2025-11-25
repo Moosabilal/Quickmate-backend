@@ -673,6 +673,46 @@ export class ProviderService implements IProviderService {
             throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
         }
 
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); 
+
+        for (const period of data.leavePeriods) {
+            const fromDate = new Date(period.from);
+            if (fromDate < today) {
+                throw new CustomError(`Leave 'from' date (${period.from}) cannot be in the past.`, HttpStatusCode.BAD_REQUEST);
+            }
+            const toDate = new Date(period.to);
+            if (toDate < fromDate) {
+                throw new CustomError(`Leave 'to' date (${period.to}) cannot be before 'from' date (${period.from}).`, HttpStatusCode.BAD_REQUEST);
+            }
+        }
+
+        for (const override of data.dateOverrides) {
+            const overrideDate = new Date(override.date);
+            if (overrideDate < today) {
+                throw new CustomError(`Date override (${override.date}) cannot be in the past.`, HttpStatusCode.BAD_REQUEST);
+            }
+        }
+
+        for (const day of data.weeklySchedule) {
+            if (day.slots.length > 1) {
+                const sortedSlots = [...day.slots].sort((a, b) => a.start.localeCompare(b.start));
+
+                for (let i = 0; i < sortedSlots.length - 1; i++) {
+                    const currentSlot = sortedSlots[i];
+                    const nextSlot = sortedSlots[i + 1];
+
+                    if (nextSlot.start < currentSlot.end) {
+                        throw new CustomError(
+                            `Overlapping time slots detected for ${day.day}: [${currentSlot.start}-${currentSlot.end}] and [${nextSlot.start}-${nextSlot.end}].`,
+                            HttpStatusCode.BAD_REQUEST
+                        );
+                    }
+                }
+            }
+        }
+
+
         const updatedProvider = await this._providerRepository.update(provider._id.toString(), {
             availability: data
         });

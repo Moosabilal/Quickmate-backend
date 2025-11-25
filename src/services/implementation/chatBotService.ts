@@ -92,28 +92,33 @@ export class ChatbotService implements IChatBotService {
 
     private SYSTEM_PROMPT = `
     You are QuickMate AI, a friendly and professional assistant. Your goal is to help users book a service.
-    **CRITICAL RULE: HANDLING CHANGES**
-    - If the user changes their mind (e.g., "Actually, I need a cleaner" instead of a plumber), you MUST restart at Step 1.
-    - Call 'findSubcategoryByName' for the NEW service immediately.
-    - Ignore the previous service ID in your context.
+    **CRITICAL RULE: HANDLING CHANGES & RESETS**
+    - If the user wants to change something you've already asked for (e.g., "change address", "pick a different time", "start over", "book something else"), you MUST clear the relevant information from your context to go back to that step.
+    - Example 1: If 'addressId' is already set and user says "use a different address", you must clear 'addressId' and 'location' from the context and call 'getUserAddresses' again.
+    - Example 2: If 'serviceSubCategoryId' is set and user says "actually, I need a cleaner", you must clear 'serviceSubCategoryId', 'providerId', 'date', 'time', etc., and call 'findSubcategoryByName' for "cleaner".
+
     **CRITICAL RULE: HANDLING SEARCH FAILURES**
     - If the 'findSubcategoryByName' tool returns an error with "possibleMatches", you MUST present those options to the user.
     - Example: "I couldn't find 'X', but did you mean 'Y' or 'Z'?"
+    **CRITICAL RULE: LISTING ALL SERVICES**
+    - If the user asks a general question about what services are available (e.g., "what can you do?", "list all services", "what do you offer?"), you MUST call the 'listAllServices' tool.
+
+
     CRITICAL RULE: You MUST follow these steps in order. Ask for only ONE piece of information at a time.
+
     CRITICAL RULE: You MUST save important details (serviceId, providerId, addressId, date, time) to the session.context as you learn them.
 
     **Step 1: Greet & Find Service**
     - User: "I need a kitchen cleaner"
     - You: (Call 'findSubcategoryByName' with 'serviceName: "kitchen cleaner"'. This finds the Subcategory ID.)
     - (The tool returns the serviceName. Save 'serviceId' and 'subCategoryId' to context.)
-    - You: "I can help with that. To find providers, I need your address."
+    - You: "Great, you've selected [Service Name]. To find providers, I need your address. Do you have saved Address"
 
     **Step 2: Get Address**
     - (Call 'getUserAddresses'.)
-    - If empty or user is a guest: Ask for 5 pieces of info ONE BY ONE: "What's a label for this address (e.g., Home)?" -> "What's the street?" -> "What's the city?" -> "What's the state?" -> "What's the zip code?". Then call 'createAddress'.
-    - If addresses exist: "I found your saved addresses: 1. Home (123 Main St). Which one?"
-    - (User replies with a number or name. You must identify which address they mean from the list you just got.)
-    - (Once you identify the address, save its 'id' as 'addressId' and its 'coordinates' as 'location' {lat, lng} to context.)
+    - If the tool returns 'addressesFound: 0': You MUST stop and tell the user to add an address in their profile page. Do not ask for address details in the chat. Your response should be: "It looks like you don't have any saved addresses. Please go to your profile to add an address, then come back to continue booking."
+    - If addresses exist: "I found your saved addresses. Which one would you like to use?" (The frontend will show buttons).
+    - (User selects an address. The system will handle saving the 'addressId' and 'location' to the context.)
 
     **Step 3: Get Radius & Date**
     - You: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
@@ -154,21 +159,14 @@ export class ChatbotService implements IChatBotService {
             parameters: { type: SchemaType.OBJECT, properties: { serviceName: { type: SchemaType.STRING } }, required: ["serviceName"] }
         },
         {
-            name: "getUserAddresses",
-            description: "Get list of user's saved addresses. Only works if the user is logged in.",
+            name: "listAllServices",
+            description: "Lists all available services when the user asks a general question like 'what services do you have?' or 'show me all services'.",
             parameters: { type: SchemaType.OBJECT, properties: {} }
         },
         {
-            name: "createAddress",
-            description: "Creates a new address for a logged-in user. Requires all parts.",
-            parameters: {
-                type: SchemaType.OBJECT,
-                properties: {
-                    label: { type: SchemaType.STRING }, street: { type: SchemaType.STRING },
-                    city: { type: SchemaType.STRING }, state: { type: SchemaType.STRING }, zip: { type: SchemaType.STRING }
-                },
-                required: ["label", "street", "city", "state", "zip"]
-            }
+            name: "getUserAddresses",
+            description: "Get list of user's saved addresses. Only works if the user is logged in.",
+            parameters: { type: SchemaType.OBJECT, properties: {} }
         },
         {
             name: "getAvailableTimeSlots",
@@ -377,6 +375,7 @@ export class ChatbotService implements IChatBotService {
 
             let toolResult: any;
             let botResponseText: string | null = null;
+            let responseOptions: any[] | undefined = undefined;
 
             const context: any = session.context || {};
 
@@ -397,19 +396,13 @@ export class ChatbotService implements IChatBotService {
                                 role: session.context.role,
                                 customerName: session.context.customerName,
                                 phone: session.context.phone,
-
-                                addressId: session.context.addressId,
-                                location: session.context.location,
-                                tempAddressList: session.context.tempAddressList,
-
                                 serviceSubCategoryId: category._id.toString(),
-
                             };
 
                             session.markModified('context');
                             await session.save();
 
-                            toolResult = { success: true, serviceName: category.name };
+                            toolResult = { serviceSelected: category.name };
                         } else {
                             logger.warn(`[Chatbot] Exact match failed for: ${serviceName}. Trying fuzzy search...`);
 
@@ -422,27 +415,43 @@ export class ChatbotService implements IChatBotService {
                                 return searchTerms.some(term => subName.includes(term));
                             }).map(s => s.name);
 
-                            if (suggestions.length > 0) {
+                            if (suggestions.length === 1) {
+                                const suggestedCategory = allSubCategories.find(c => c.name === suggestions[0]);
+                                if (suggestedCategory) {
+                                    session.context.serviceSubCategoryId = suggestedCategory._id.toString();
+                                    session.markModified('context');
+                                    await session.save();
+                                    toolResult = { serviceSelected: suggestedCategory.name };
+                                }
+                            } else if (suggestions.length > 1) {
                                 logger.info(`[Chatbot] Found suggestions:`, suggestions);
-                                toolResult = {
-                                    error: `Service '${serviceName}' not found directly.`,
-                                    possibleMatches: suggestions.slice(0, 5)
-                                };
+                                const suggestionOptions = suggestions.slice(0, 5).map(name => ({ name }));
+                                toolResult = { servicesFound: suggestionOptions.length };
+                                responseOptions = suggestionOptions;
                             } else {
                                 const examples = allSubCategories.slice(0, 3).map(s => s.name);
-                                toolResult = {
-                                    error: `Service '${serviceName}' not found.`,
-                                    availableExamples: examples
-                                };
+                                toolResult = { error: `Service '${serviceName}' not found.`, availableExamples: examples };
                             }
                         }
+                        break;
+                    }
+
+                    case "listAllServices": {
+                        logger.info(`[Chatbot] Tool: Listing all available services.`);
+                        const allServices = await this._categoryRepository.findAllActiveSubCategories();
+                        const serviceOptions = allServices.map(s => ({ name: s.name }));
+
+                        toolResult = { servicesFound: serviceOptions.length };
+                        responseOptions = serviceOptions;
+
+                        logger.info(`[Chatbot] Found ${serviceOptions.length} services to show.`);
                         break;
                     }
 
                     case "getUserAddresses": {
                         if (!session.userId) {
                             logger.info(`[Chatbot] ❌ User not logged in. Cannot fetch addresses.`);
-                            toolResult = { error: "User not logged in. You must ask them for their full address." };
+                            toolResult = { addressesFound: 0, error: "User not logged in." };
 
                         } else {
                             try {
@@ -464,16 +473,10 @@ export class ChatbotService implements IChatBotService {
                                 });
 
 
-                                currentContext.tempAddressList = addressList;
+                                workingContext.tempAddressList = addressList;
 
-
-                                session.context = currentContext;
-
-                                session.markModified("context");
-
-                                await session.save();
-
-                                toolResult = { addresses: addressList };
+                                toolResult = { addressesFound: addressList.length };
+                                responseOptions = addressList;
 
                             } catch (err) {
                                 logger.error("[ERROR] Failed fetching addresses:", err);
@@ -481,29 +484,6 @@ export class ChatbotService implements IChatBotService {
                             }
                         }
 
-                        break;
-                    }
-
-                    case "createAddress": {
-                        const addressData: IAddressData = call.args as any;
-                        logger.info(`[Chatbot] Creating new address:`, addressData);
-
-                        if (!session.userId) {
-                            toolResult = { error: "User is not logged in. Cannot save a new address." };
-                        } else {
-                            try {
-                                const newAddress = await this._addressService.createAddress(addressData, session.userId.toString());
-                                logger.info(`[Chatbot] Address created: ${newAddress._id}`);
-
-                                session.context.addressId = newAddress._id.toString();
-                                session.context.location = { lat: newAddress.locationCoords.coordinates[1], lng: newAddress.locationCoords.coordinates[0] };
-                                await session.save();
-                                toolResult = { newAddress: { id: newAddress._id, label: newAddress.label } };
-                            } catch (geoError: any) {
-                                logger.error(`[Chatbot] Address creation failed:`, geoError);
-                                toolResult = { error: "I couldn't find that address. Can you please provide a valid street, city, state, and zip code?" };
-                            }
-                        }
                         break;
                     }
 
@@ -544,7 +524,8 @@ export class ChatbotService implements IChatBotService {
                         const uniqueSlots = [...new Set(allSlots)].sort();
 
                         logger.info(`[Chatbot] Found ${uniqueSlots.length} unique slots.`);
-                        toolResult = { availableSlots: uniqueSlots };
+                        toolResult = { slotsFound: uniqueSlots.length };
+                        responseOptions = uniqueSlots;
                         await session.save();
                         break;
                     }
@@ -650,21 +631,38 @@ export class ChatbotService implements IChatBotService {
 
                         logger.info(`[Chatbot] ✅ Final provider list:`, providerList);
 
-                        workingContext.lastFoundProviders = providerList;
-                        session.context.lastFoundProviders = providerList;
-                        session.markModified("context");
-                        await session.save();
+                        if (providerList.length === 1) {
+                            const selected = providerList[0];
+                            logger.info(`[Chatbot] 📍 Auto-selecting the only available provider: ${selected.name}`);
+
+                            workingContext.providerId = selected.providerId;
+                            workingContext.serviceId = selected.serviceId;
+                            workingContext.amount = selected.price;
+                            delete workingContext.lastFoundProviders;
+
+                            session.context = workingContext;
+                            session.markModified('context');
+                            await session.save();
+
+                            toolResult = { autoSelectedProvider: selected };
+                            responseOptions = undefined;
+                        } else {
+                            workingContext.lastFoundProviders = providerList;
+                            session.context.lastFoundProviders = providerList;
+                            session.markModified("context");
+                            await session.save();
 
 
-                        toolResult = { providers: providerList };
-                        logger.info(`[Chatbot] Returning toolResult:`, toolResult);
+                            toolResult = { providersFound: providerList.length };
+                            responseOptions = providerList;
+                            logger.info(`[Chatbot] Returning toolResult:`, toolResult);
+                        }
 
                         break;
                     }
 
 
                     case "initiatePayment": {
-
                         const { customerName, phone, instructions } = call.args as any;
 
                         workingContext.customerName = customerName;
@@ -780,7 +778,7 @@ export class ChatbotService implements IChatBotService {
 
             await this._messageRepo.create({ sessionId: session._id, role: "model", text: botResponseText });
             await session.save();
-            return { role: "model", text: botResponseText };
+            return { role: "model", text: botResponseText, options: responseOptions };
         }
 
         const textResponse = response.text() || "Sorry, I'm not sure how to respond to that.";
@@ -863,11 +861,15 @@ export class ChatbotService implements IChatBotService {
         booking.paymentId = payment._id;
         await booking.save();
 
+        // **THIS IS THE KEY CHANGE**
+        // Reset the context for the next booking, keeping only essential user info.
         session.context = {
-            ...session.context,
-            completedBookingId: booking._id.toString()
+            userId: session.context.userId,
+            role: session.context.role,
+            customerName: session.context.customerName, // Keep name and phone for convenience
+            phone: session.context.phone,
+            lastBookingId: booking._id.toString() // Keep a record of the last booking
         };
-        delete (session.context as any).pendingPayment;
 
         session.markModified('context');
         await session.save();

@@ -199,7 +199,7 @@ export class BookingController {
             const { serviceId, lat, lng, radius } = findProviderRangeSchema.parse(req.query);
             const userId = req.user.id
             const userRole = req.user.role as Roles
-            const response = await this._bookingService.findProviderRange(userId, userRole, serviceId as string, Number(lat), Number(lng), Number(radius));
+            const response = await this._bookingService.findProviderRange(userId, userRole, serviceId, Number(lat), Number(lng), Number(radius));
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);

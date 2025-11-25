@@ -6,5 +6,4 @@ export interface IAddressService {
     updateAddressById(id: string, data: IAddressRequest): Promise<IAddressRequest>;
     delete_Address(id: string): Promise<{message: string}>;
     getAddressesForUser(userId: string): Promise<IAddress[]>;
-    createAddress(data: IAddressData, userId: string): Promise<IAddress>;
 }

@@ -7,6 +7,7 @@ export interface IChatbotResponse {
         amount: number;
         bookingData: any; 
     };
+    options?: any[];
 }
 
 interface IBookingRequest {
