@@ -44563,3 +44563,2325 @@ Which one would you like to use for AC installation?"
 [INFO   ] - Client disconnected: g4Nzpd4SvQATDgViAAAd
 [INFO   ] - Client disconnected: 5nxmi8LSxOnOQJDoAAAf
 [INFO   ] - Client disconnected: uWI597oZ23PM-a5AAAAh
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "can you show the services ids"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: listAllServices
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool: Listing all available services.
+[INFO   ] - [Chatbot] Found 13 services to show.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found 13 services. What service are you interested in?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "can you show the price of each services"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I can't show you the price of each service. I can only show you the price once you choose a service, date, and time, and then I find available providers."
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool found category: kitchen cleaning (6890525c8e590753867b2bd6)
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 1 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "show my address"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "adfadfasfasd"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "That doesn't seem to be a valid radius. Please provide the search radius in kilometers (e.g., 10km, 25km)."
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "how"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "That doesn't seem to be a valid radius. Please provide the search radius in kilometers (e.g., 10km, 25km)."
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "-25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "That doesn't seem to be a valid radius. Please provide a positive number for the search radius in kilometers (e.g., 10km, 25km)."
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "70"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g., tomorrow, or YYYY-MM-DD)"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "sdfga"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "That doesn't seem to be a valid date. Please provide the date in `YYYY-MM-DD` format (e.g., 2024-12-25) or say "tomorrow"."
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "0012-22-22"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "That doesn't seem to be a valid date. Please provide the date in `YYYY-MM-DD` format (e.g., 2024-12-25) or say "tomorrow"."
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "tomorrow"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2024-05-18, radius: 70km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: 6890525c8e590753867b2bd6, Loc: undefined
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Got it. What's next?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "tomorrow"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2024-05-18, radius: 70km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: 6890525c8e590753867b2bd6, Loc: undefined
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Got it. What's next?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "hello"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "what and all services do you have"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: listAllServices
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool: Listing all available services.
+[INFO   ] - [Chatbot] Found 13 services to show.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found 13 services. What service are you interested in?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session C_8KdbKlu1: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - Client disconnected: GBuUlN_kfcWxsSGPAAAB
+[INFO   ] - [Chatbot] 📨 New message for session znStHWl6ay: "show services for ac"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: ac. Trying fuzzy search...
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find 'ac', but did you mean 'full floor clean123', 'kitchen cleaning', or 'car cleaning'?"
+[INFO   ] - [Chatbot] 📨 New message for session znStHWl6ay: "show services for cooling"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: cooling. Trying fuzzy search...
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected AC Repair (Cooling Issue / No Power). To find providers, I need your address. Do you have a saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session znStHWl6ay: "no need for install"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session znStHWl6ay: "no i want for ac install"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: ac install. Trying fuzzy search...
+[INFO   ] - [Chatbot] Found suggestions:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected AC Installation. To find providers, I need your address. Do you have a saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session znStHWl6ay: "ac installation"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session znStHWl6ay: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - Client disconnected: Hw7NF3LacoYI5y-4AAAD
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "i want a person for putting new ac to my home"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool found category: ac installation (689428490e204569ec823623)
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected ac installation. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Y9EG413_i8r8vCQjAAAB
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "70"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "2024-11-21"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2024-11-21, radius: 70km
+[WARN   ] - [Chatbot] ❗ Invalid radius: 70km. Must be between 5 and 25.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "The search radius must be between 5km and 25km. Please provide a valid distance."
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2024-11-21, radius: 25km
+[WARN   ] - [Chatbot] ❗ Invalid or past date provided: 2024-11-21
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "The date provided (2024-11-21) is in the past. Please provide a future date in YYYY-MM-DD format."
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "28-11-2025"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: 689428490e204569ec823623, Loc: undefined
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Got it. What's next?"
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "28-11-2025"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: 689428490e204569ec823623, Loc: undefined
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "It looks like I'm missing your address information. Let me get your saved addresses."
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: 689428490e204569ec823623, Loc: undefined
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Got it. What's next?"
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: 689428490e204569ec823623, Loc: undefined
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "It looks like I'm still missing your address information to proceed. Let me get your saved addresses again."
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session lzVHppqEV9: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I've noted your selection for option 1 as your address. Now, let's find some available time slots.
+"
+[INFO   ] - Client disconnected: uXxK5HCHh3m4qb-9AAAB
+[INFO   ] - [Chatbot] 📨 New message for session woLVghMlXm: "i want a person to put a new ac ot ou home"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool found category: ac installation (689428490e204569ec823623)
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected AC Installation. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session woLVghMlXm: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session woLVghMlXm: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session woLVghMlXm: "twenty five"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session woLVghMlXm: "21-11-2025"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I need the date in YYYY-MM-DD format. Can you please provide it in that format?"
+[INFO   ] - [Chatbot] 📨 New message for session woLVghMlXm: "2025-11-21"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-21, radius: 25km
+[WARN   ] - [Chatbot] ❗ Invalid or past date provided: 2025-11-21
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "The date provided (2025-11-21) is either in the past or not a valid date. Please provide a future date in YYYY-MM-DD format."
+[INFO   ] - [Chatbot] 📨 New message for session woLVghMlXm: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: 689428490e204569ec823623, Loc: undefined
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "It looks like I'm missing some information. I need to confirm your address before I can find available time slots. Do you have any saved addresses I can use?"
+[INFO   ] - [Chatbot] 📨 New message for session woLVghMlXm: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session woLVghMlXm: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: 689428490e204569ec823623, Loc: undefined
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I'm sorry, it seems like there was an issue processing your address selection. I still need your address to find available time slots. Do you have saved addresses?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: lthywPt40MWwX1sLAAAB
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "i need a person to set new ac to my home"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool found category: ac installation (689428490e204569ec823623)
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected AC installation. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "twenty five"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] Found 0 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] Found 0 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Sorry, I couldn't find any open slots on that day. Please pick a different date."
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "2025-11-26"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-26, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] Found 0 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Sorry, I couldn't find any open slots on that day. Please pick a different date."
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "i want kitchedn cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool found category: kitchen cleaning (6890525c8e590753867b2bd6)
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "ues"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "twenyty four"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great, I'll use a 24km radius. What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session Zjm1I-Eleg: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 24km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] Found 7 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - Client disconnected: t5bpWu9_Eprnum_BAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 1eoanL3Z5b_rklnkAAAB
+[INFO   ] - [Chatbot] 📨 New message for session TVetTVXDfD: "i need a service to remove ac from the room"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: AC removal. Trying fuzzy search...
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find 'AC removal', but did you mean 'full floor clean123', 'kitchen cleaning', or 'car cleaning'?"
+[INFO   ] - [Chatbot] 📨 New message for session TVetTVXDfD: "what and all service is there for repairing"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: listAllServices
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool: Listing all available services.
+[INFO   ] - [Chatbot] Found 13 services to show.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Got it. What's next?"
+[INFO   ] - [Chatbot] 📨 New message for session TVetTVXDfD: "i want a person to remove ac"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: AC removal. Trying fuzzy search...
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find 'AC removal', but did you mean 'full floor clean123', 'kitchen cleaning', or 'car cleaning'?"
+[INFO   ] - [Chatbot] 📨 New message for session TVetTVXDfD: "i want repairence"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: repairence. Trying fuzzy search...
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find 'repairence', but did you mean 'full floor clean123', 'kitchen cleaning', or 'car cleaning'?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session TVetTVXDfD: "i want repairence"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: repairence. Trying fuzzy search...
+[INFO   ] - [Chatbot] Found suggestions:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found a couple of services related to 'repairence'. Could you please specify which one you're interested in?"
+[INFO   ] - [Chatbot] 📨 New message for session TVetTVXDfD: "i want a person to remove the ac"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: AC removal. Trying fuzzy search...
+[INFO   ] - [Chatbot] Found suggestions:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected AC removal. To find providers, I need your address. Do you have a saved Address?"
+[INFO   ] - Client disconnected: v-JOGeUgwFKfA9AKAAAB
+[INFO   ] - [Chatbot] 📨 New message for session Sz2YcLlQid: "i want a person to remove ac in my home"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: AC removal. Trying fuzzy search...
+[INFO   ] - [Chatbot] Found suggestions:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected AC removal. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 3Bj5oxRda87FPOHHAAAB
+[INFO   ] - [Chatbot] 📨 New message for session FpLNIvQq1L: "i want a person to remove ac"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: AC removal. Trying fuzzy search...
+[INFO   ] - [Chatbot] Found suggestions:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected AC removal. To find providers, I need your address. Do you have a saved Address?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 8AEsYMNDJkdwuMWHAAAB
+[INFO   ] - [Chatbot] 📨 New message for session nNCkCb0cbC: "i want a person to remove ac"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: AC removal. Trying fuzzy search...
+[WARN   ] - [Chatbot] No relevant suggestions found for 'AC removal'.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Sorry, I couldn't find any services matching 'AC removal'. You can ask me to list all services to see what's available."
+[INFO   ] - [Chatbot] 📨 New message for session nNCkCb0cbC: "any uninstall... somthing like that"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: uninstall. Trying fuzzy search...
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected AC Uninstallation. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: xR3Svxg6sqy6FUdwAAAB
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "do you have any fridge repairing service"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: fridge repairing. Trying fuzzy search...
+[INFO   ] - [Chatbot] Found suggestions:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find 'fridge repairing', but did you mean 'ac repairing and maintenance'?"
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "what and all repair service do you have"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: listAllServices
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool: Listing all available services.
+[INFO   ] - [Chatbot] Found 13 services to show.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found 13 services. What kind of repair service are you looking for?"
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "i want a persont to clean kitchen"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "yea"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: undefined, Loc: {"lat":12.7249174,"lng":74.8873713}
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Got it. What's next?"
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "2025-11-26"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-26, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: undefined, Loc: {"lat":12.7249174,"lng":74.8873713}
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Got it. What's next?"
+[INFO   ] - [Chatbot] 📨 New message for session Gl3snc5_dc: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: undefined, Loc: {"lat":12.7249174,"lng":74.8873713}
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Got it. What's next?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: lhiTPhQULi3k3WzkAAAB
+[INFO   ] - [Chatbot] 📨 New message for session 1iFdzsZzOs: "i want a persont to clean my home kitchen"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have any saved addresses?"
+[INFO   ] - [Chatbot] 📨 New message for session 1iFdzsZzOs: "kitchen cleaning"
+[INFO   ] - [Chatbot] 📝 User confirmed service: kitchen cleaning
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have any saved addresses?"
+[INFO   ] - [Chatbot] 📨 New message for session 1iFdzsZzOs: "yea"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 1iFdzsZzOs: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 1iFdzsZzOs: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 1iFdzsZzOs: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] Found 7 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day: 9:00 AM, 10:00 AM, 11:00 AM, 1:00 PM, 2:00 PM, 3:00 PM, 4:00 PM. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session 1iFdzsZzOs: "09:00 AM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 09:00 AM
+[INFO   ] - [Chatbot] Updated context.time = 09:00 AM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68be7033d506e858a68dcf3c:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] Returning toolResult:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found 2 providers available at 09:00 AM. To finalize the booking, I just need your full name and phone number. What is your full name?"
+[INFO   ] - [Chatbot] 📨 New message for session 1iFdzsZzOs: "mishabProvider"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay, you've selected mishabProvider.
+
+To finalize the booking, I just need your full name and phone number. What is your full name?"
+[INFO   ] - Client disconnected: IrK-I_WyRjRlX9oCAAAD
+[INFO   ] - [Chatbot] 📨 New message for session qkIk--AxZj: "i want a persont to clean my kitchen"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session qkIk--AxZj: "yea"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session qkIk--AxZj: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session qkIk--AxZj: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session qkIk--AxZj: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - Client disconnected: e8-OzjTfoVQxaykSAAAF
+[ERROR  ] - POST /api/chatbot/session/qkIk--AxZj/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: fetch failed -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: fetch failed
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/top-level 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/popular-services 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/trending-services 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/chatbot/session/qkIk--AxZj 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: 4csO033rbn5rW7BOAAAH
+[INFO   ] - [Chatbot] 📨 New message for session qkIk--AxZj: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: undefined, Loc: {"lat":12.7249174,"lng":74.8873713}
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Got it. What's next?"
+[INFO   ] - Client disconnected: gk8tYHAejZu7oDQRAAAJ
+[INFO   ] - [Chatbot] 📨 New message for session 5W7miEsbP1: "i want a person to clean my kitchen"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session 5W7miEsbP1: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 5W7miEsbP1: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 5W7miEsbP1: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 5W7miEsbP1: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[WARN   ] - [Chatbot] Missing context. SubCat: undefined, Loc: {"lat":12.7249174,"lng":74.8873713}
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "It seems like I missed a step. I need to confirm the service first.
+
+"
+[INFO   ] - [Chatbot] 📨 New message for session 5W7miEsbP1: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning.
+
+"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: ghba1g2Ff7l9TEIDAAAB
+[INFO   ] - [Chatbot] 📨 New message for session fkXKv3DX4u: "i want a person to lcean my kitchend"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session fkXKv3DX4u: "kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - Client disconnected: Tp21L2gp4Xixek0YAAAD
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "i want a person to clean my kithen"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] Found 7 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "09:00 AM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 09:00 AM
+[INFO   ] - [Chatbot] Updated context.time = 09:00 AM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68be7033d506e858a68dcf3c:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] Returning toolResult:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found 2 providers available at that time. Which one would you like to book?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 7a7h2VvTKfF4LJO9AAAB
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "2"
+[INFO   ] - [Chatbot] 📍 User selected provider #2: asdfProvider
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "To finalize the booking, I just need your full name and phone number. What is your full name?"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "mishab"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "And your phone number?"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "9876543201"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[INFO   ] - [Chatbot] Found chosen provider:
+[INFO   ] - serviceId: 68f5db84ba1bf1d1d4c8148a
+[INFO   ] - providerId: 68f3bfce887e123a14f9e6bd
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-11-28
+[INFO   ] - time: 09:00 AM
+[INFO   ] - amount: 150
+[INFO   ] -  - orderId: order_RkHGDDkyaUz5JE
+[INFO   ] - [Chatbot] Final response payload:
+[INFO   ] - [Chatbot] Session saved.
+[INFO   ] - the payment data
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "i want a cleaner"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: cleaner. Trying fuzzy search...
+[INFO   ] - [Chatbot] Found suggestions:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find 'cleaner', but did you mean 'car cleaning', 'kitchen cleaning' or 'full floor clean123'?"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "kitchen cleaning"
+[INFO   ] - [Chatbot] 📝 User confirmed service: kitchen cleaning
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session 0JFemwkuRD: "01:00 PM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 01:00 PM
+[INFO   ] - [Chatbot] Updated context.time = 01:00 PM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68be7033d506e858a68dcf3c:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] Returning toolResult:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found 2 providers available at that time. Which one would you like to book?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: IMgNAmAsPu0fayM-AAAB
+[INFO   ] - [Chatbot] 📨 New message for session W2641L7yFt: "i want kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session W2641L7yFt: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session W2641L7yFt: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session W2641L7yFt: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session W2641L7yFt: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day: 9:00 AM, 10:00 AM, 2:00 PM. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session W2641L7yFt: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I found several open slots on that day: 9:00 AM, 10:00 AM, 2:00 PM. Which one works for you?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session W2641L7yFt: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I found several open slots on that day: 9:00 AM, 10:00 AM, 2:00 PM. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session W2641L7yFt: "12:00 PM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I found several open slots on that day: 9:00 AM, 10:00 AM, 2:00 PM. Which one works for you?"
+[INFO   ] - Client disconnected: bYSsSSsEEW9q70oeAAAB
+[INFO   ] - [Chatbot] 📨 New message for session I0zqarl26T: "i want kitchen cleaning"
+[INFO   ] - Client disconnected: lXuA3q5THAiR9jYJAAAD
+[INFO   ] - Client disconnected: sHQkitt0wQdir2onAAAF
+[INFO   ] - [Chatbot] 📨 New message for session SCC79NMCND: "i want kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session SCC79NMCND: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session SCC79NMCND: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session SCC79NMCND: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session SCC79NMCND: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session SCC79NMCND: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session SCC79NMCND: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session SCC79NMCND: "02:00 PM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 02:00 PM
+[INFO   ] - [Chatbot] Updated context.time = 02:00 PM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own provider profile. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] 📍 Auto-selecting the only available provider: asdfProvider
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found these providers available at that time: 1. asdfProvider (Rating: 0, Price: 150). Which one would you like to book?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: c7BGgQkDB5KVQymjAAAB
+[INFO   ] - [Chatbot] 📨 New message for session hrpOVM1zUB: "i want kitchend clean"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session hrpOVM1zUB: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session hrpOVM1zUB: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session hrpOVM1zUB: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session hrpOVM1zUB: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session hrpOVM1zUB: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session hrpOVM1zUB: "11:00 AM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 11:00 AM
+[INFO   ] - [Chatbot] Updated context.time = 11:00 AM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own provider profile. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] 📍 Auto-selecting the only available provider: asdfProvider
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found these providers available at that time. Which one would you like to book?
+To finalize the booking, I just need your full name and phone number. What is your full name?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: PlcCyLfrAz6x6DvaAAAB
+[INFO   ] - [Chatbot] 📨 New message for session cMY55moNdV: "i want kitchen clena"
+[INFO   ] - Client disconnected: 53Xk029ydVAtPJHxAAAD
+[INFO   ] - [Chatbot] 📨 New message for session X78cKQT0b0: "i wnat kitchen cleanign"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session X78cKQT0b0: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session X78cKQT0b0: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session X78cKQT0b0: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session X78cKQT0b0: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session X78cKQT0b0: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session X78cKQT0b0: "02:00 PM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 02:00 PM
+[INFO   ] - [Chatbot] Updated context.time = 02:00 PM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own provider profile. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] 📍 Auto-selecting the only available provider: asdfProvider
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found these providers available at that time: 1. asdfProvider (Rating: 0, Price: 150). Which one would you like to book?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: VslTt78VOCTWQMizAAAB
+[INFO   ] - [Chatbot] 📨 New message for session SQWLTYJp_d: "i want kitchen cleaning"
+[INFO   ] - Client disconnected: 4HoW52-CbZUtE9egAAAD
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "i want ktichen cleanign"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "2025-11-28"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-11-28, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 4 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "02:00 PM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 02:00 PM
+[INFO   ] - [Chatbot] Updated context.time = 02:00 PM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own provider profile. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] Returning toolResult:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found a provider available at that time. To finalize the booking, I just need your full name and phone number. What is your full name?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "mishab"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "And your phone number?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "9876543201"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-11-28 at 02:00 PM, at your saved address. The total is 150. Is this all correct?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "no my number is 9876540321"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-11-28 at 02:00 PM, at your saved address. The total is 150. Is this all correct?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-11-28
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Please complete your payment to confirm the booking."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-11-28
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-11-28 at 02:00 PM, at your saved address. The total is 150. Is this all correct?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-11-28
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-11-28 at 02:00 PM, at your saved address. The total is 150. Is this all correct?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok how to do the payment"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-11-28
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-11-28 at 02:00 PM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-11-28
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-11-28 at 02:00 PM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - Client disconnected: 8wKKqvE2MADvfVr7AAAB
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-11-28
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-11-28 at 02:00 PM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "no"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay, what would you like to change?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "i want to change the date"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "2025-12-3"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-03, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 8 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "10:00 AM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 10:00 AM
+[INFO   ] - [Chatbot] Updated context.time = 10:00 AM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own provider profile. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] Returning toolResult:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found a provider available at that time: asdfProvider (Price: 150).
+
+To finalize the booking, I just need your full name and phone number. What is your full name?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected provider #1: asdfProvider
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "To finalize the booking, I just need your full name and phone number. What is your full name?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "mishab"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "And your phone number?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "9876543201"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-03 at 10:00 AM, at your saved address. The total is 150. Is this all correct?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "no my phone number is 9876598765"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-03 at 10:00 AM, at your saved address. The total is 150. Is this all correct?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[INFO   ] - [Chatbot] Found chosen provider:
+[INFO   ] - serviceId: 68f5db84ba1bf1d1d4c8148a
+[INFO   ] - providerId: 68f3bfce887e123a14f9e6bd
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-03
+[INFO   ] - time: 10:00 AM
+[INFO   ] - amount: 150
+[INFO   ] -  - orderId: order_RkIcxdsjUAD4sE
+[INFO   ] - [Chatbot] Final response payload:
+[INFO   ] - [Chatbot] Session saved.
+[INFO   ] - the payment data
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "can i book this again at the same time"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "no i dont want this service"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay, I understand. What service are you interested in booking instead?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "show service yo have"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: listAllServices
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Tool: Listing all available services.
+[INFO   ] - [Chatbot] Found 13 services to show.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found 13 services. What service are you interested in?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "what is special about this website"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I can help you book various services quickly and easily! I can find providers, schedule appointments, and process payments for you. What kind of service are you looking for today?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "how the provider get paid"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "We use Razorpay for secure online payments. You pay upfront to confirm your booking, and the provider is paid after the service is completed."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "how much commission is getting for the admin"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I'm sorry, I don't have information about the commission structure for the admin. My purpose is to help you book services."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "tell me about this website"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "QuickMate is a platform that connects users with trusted local service providers for tasks like cleaning, repairs, and more. You can book services quickly and easily, find providers, schedule appointments, and process payments securely."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "how to book service manually"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "To book a service, you would typically follow these steps:
+
+1.  **Choose a Service:** Tell me what kind of service you need (e.g., kitchen cleaning, plumbing, etc.).
+2.  **Provide Location:** I'll ask for your address and how far you're willing to search for a provider.
+3.  **Select Date and Time:** You'll pick a preferred date and time for the service.
+4.  **Choose a Provider:** I'll show you available providers for your chosen slot, and you can select one.
+5.  **Confirm Details:** I'll ask for your name and phone number and then confirm all the booking details with you.
+6.  **Make Payment:** Finally, you'll complete the payment to confirm your booking.
+
+I handle all the searching, scheduling, and payment processing for you to make it quick and easy!"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "i dont want to book through this how to book manually from website"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "While I can guide you through the booking process here, if you prefer to book manually through the website, you would typically follow a similar set of steps:
+
+1.  **Browse Services:** Go to the QuickMate website and look through the available services.
+2.  **Select a Service:** Click on the specific service you need (like kitchen cleaning).
+3.  **Enter Location:** You'll be prompted to enter your address or choose a saved one.
+4.  **Choose Date and Time:** Select your preferred date and time slot from the available options.
+5.  **Pick a Provider:** You'll see a list of providers available for that slot, often with their ratings and prices. You can then choose your preferred provider.
+6.  **Confirm Details:** Review all the booking details.
+7.  **Proceed to Payment:** Complete the secure online payment to confirm your booking.
+
+The AI here essentially automates these steps for you, making it quicker to get to the final booking confirmation."
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: IASabTiEf4aWQ6kbAAAB
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "how to book not from here in this chat without chat"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Besides chatting with me, you can also browse our services on the website. Just go to the 'Services' page, find what you need, and you can book a provider directly from there."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "i want cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[WARN   ] - [Chatbot] Exact match failed for: cleaning. Trying fuzzy search...
+[INFO   ] - [Chatbot] Found suggestions:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found multiple cleaning services. Which one are you interested in?
+* car cleaning
+* kitchen cleaning
+* wardrobe & floor cleaning
+* mattress & curtain cleaning"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "car cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "Select option 1"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "2025-12-4"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-04, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 8 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "10:00 AM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 10:00 AM
+[INFO   ] - [Chatbot] Updated context.time = 10:00 AM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own provider profile. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] Returning toolResult:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found a provider available at that time: asdfProvider (Price: 150).
+
+Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-04 at 10:00 AM, at your saved address. The total is 150. Is this all correct?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-04
+[INFO   ] - time: 10:00 AM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-04 at 10:00 AM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-04
+[INFO   ] - time: 10:00 AM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-04 at 10:00 AM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-04
+[INFO   ] - time: 10:00 AM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-04 at 10:00 AM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-04
+[INFO   ] - time: 10:00 AM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-04 at 10:00 AM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected provider #1: asdfProvider
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-04 at 10:00 AM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[INFO   ] - [Chatbot] Found chosen provider:
+[INFO   ] - serviceId: 68f5db84ba1bf1d1d4c8148a
+[INFO   ] - providerId: 68f3bfce887e123a14f9e6bd
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-04
+[INFO   ] - time: 10:00 AM
+[INFO   ] - amount: 150
+[INFO   ] -  - orderId: order_RkJ1IU0xe8SAf6
+[INFO   ] - [Chatbot] Final response payload:
+[INFO   ] - [Chatbot] Session saved.
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[INFO   ] - [Chatbot] Found chosen provider:
+[INFO   ] - serviceId: 68f5db84ba1bf1d1d4c8148a
+[INFO   ] - providerId: 68f3bfce887e123a14f9e6bd
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-04
+[INFO   ] - time: 10:00 AM
+[INFO   ] - amount: 150
+[INFO   ] -  - orderId: order_RkJ1gC9gH0ukbI
+[INFO   ] - [Chatbot] Final response payload:
+[INFO   ] - [Chatbot] Session saved.
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "i want ac installation"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: ac installation
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected ac installation. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "2025-12-3"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-03, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 0 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find any open slots on that day. Please choose a different date."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "2025-12-4"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-04, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 0 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find any open slots on that day. Please choose a different date."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "2025-12-4"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-04, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 0 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find any open slots on that day. Please choose a different date."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "why"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "It seems like there are no providers available for AC installation within 25km on 2025-12-04. This could be due to high demand, or providers not being available on that specific date. Would you like to try a different date, or perhaps a different radius?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "yes radius"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay, what would you like the new search radius to be? (e.g., 10km, 50km)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "50"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-04, radius: 50km
+[WARN   ] - [Chatbot] ❗ Invalid radius: 50km. Must be between 5 and 25.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "The search radius must be between 5km and 25km. Please provide a valid distance."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "i want kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[ERROR  ] - POST /api/chatbot/session/88B5FUipMS/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-04, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 0 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I couldn't find any open slots on that day. Please choose a different date."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "i want kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I couldn't find any open slots on that day. Please choose a different date."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "i need a person to clean my kitchen idont want ac installation"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "show my saved address"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "2025-13-3"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "That's an invalid date. Please provide the date in YYYY-MM-DD format (e.g., 2025-12-03)."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "2025-12-3"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-03, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 6 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "02:00 PM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 02:00 PM
+[INFO   ] - [Chatbot] Updated context.time = 02:00 PM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own provider profile. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] Returning toolResult:
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-03 at 02:00 PM, at your saved address. The total is 150. Is this all correct?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-03
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-03 at 02:00 PM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: undefined
+[INFO   ] - serviceId: undefined
+[INFO   ] - providerId: undefined
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-03
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: undefined
+[ERROR  ] - [Chatbot] ❌ Missing critical booking info.
+[ERROR  ] - [Chatbot] Full Context:
+[INFO   ] - [Chatbot] Returning error toolResult.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-03 at 02:00 PM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected provider #1: asdfProvider
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[INFO   ] - [Chatbot] Found chosen provider:
+[INFO   ] - serviceId: 68f5db84ba1bf1d1d4c8148a
+[INFO   ] - providerId: 68f3bfce887e123a14f9e6bd
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-03
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: 150
+[INFO   ] -  - orderId: order_RkJ8x5UP02xWhU
+[INFO   ] - [Chatbot] Final response payload:
+[INFO   ] - [Chatbot] Session saved.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "which is the service i selected"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "You have selected kitchen cleaning."
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok what next"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[INFO   ] - [Chatbot] Found chosen provider:
+[INFO   ] - serviceId: 68f5db84ba1bf1d1d4c8148a
+[INFO   ] - providerId: 68f3bfce887e123a14f9e6bd
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-03
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: 150
+[INFO   ] -  - orderId: order_RkJCWjPHX0jSsI
+[INFO   ] - [Chatbot] Final response payload:
+[INFO   ] - [Chatbot] Session saved.
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "start from beginning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay, let's start fresh. What service are you interested in booking today?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "kitchen cleaning"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "2025-12-3"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-03, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 6 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "02:00 PM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 02:00 PM
+[INFO   ] - [Chatbot] Updated context.time = 02:00 PM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own provider profile. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] 📍 Auto-selecting the only available provider: asdfProvider
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-03 at 02:00 PM, at your saved address. The total is 150. Is this all correct?"
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "ok"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: initiatePayment
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Updated context after adding customer details:
+[ERROR  ] - [Chatbot] ❌ No matching provider found for providerId: 68f3bfce887e123a14f9e6bd
+[INFO   ] - serviceId: 68f5db84ba1bf1d1d4c8148a
+[INFO   ] - providerId: 68f3bfce887e123a14f9e6bd
+[INFO   ] - addressId: 691ac58e6ff0d8ced49bb271
+[INFO   ] - date: 2025-12-03
+[INFO   ] - time: 02:00 PM
+[INFO   ] - amount: 150
+[INFO   ] -  - orderId: order_RkJEsLDRMByzku
+[INFO   ] - [Chatbot] Final response payload:
+[INFO   ] - [Chatbot] Session saved.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "show confirmation again"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-03 at 02:00 PM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - [Chatbot] 📨 New message for session 88B5FUipMS: "show the confirmation again"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Okay! Just to confirm: You want kitchen cleaning with asdfProvider on 2025-12-03 at 02:00 PM, at your saved address. The total is 150. Is this all correct? Please say "yes" to confirm."
+[INFO   ] - Client disconnected: b_DmQ-u3p-CB_eGAAAAB
+[INFO   ] - [Chatbot] 📨 New message for session FjnhQsxWsx: "enik kitchen clean akani oral venam"
+[INFO   ] - Client disconnected: 4JfHyBnwlR2MhRdMAAAD
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "enik kitchen clean akani oral venam"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: kitchen cleaning
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected kitchen cleaning. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[ERROR  ] - POST /api/chatbot/session/4aUcEv1RMW/message 500 [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later. -> [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent: [503 Service Unavailable] The model is overloaded. Please try again later.
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "2025-12-3"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-03, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 6 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found several open slots on that day. Which one works for you?"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "02:00 PM"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findAvailableProvidersForSlot
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Raw function call args:
+[INFO   ] - [Chatbot] Extracted time: 02:00 PM
+[INFO   ] - [Chatbot] Updated context.time = 02:00 PM
+[INFO   ] - [Chatbot] Current context before validation:
+[INFO   ] - [Chatbot] Context validation success. Proceeding to provider search...
+[INFO   ] - [Chatbot] Searching nearby providers with:
+[INFO   ] -  - Location (lng, lat): [74.8873713, 12.7249174]
+[INFO   ] -  - Radius: 25
+[INFO   ] -  - Subcategory: 6890525c8e590753867b2bd6
+[INFO   ] - [Chatbot] Nearby provider raw result:
+[INFO   ] - [Chatbot] Found 2 providers in range.
+[INFO   ] - [Chatbot] Provider IDs in range:
+[INFO   ] - [Chatbot] Raw services fetched:
+[INFO   ] - [Chatbot] Services matching providers in range: 2
+[INFO   ] - [Chatbot] Checking availability for provider IDs:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own provider profile. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Available providers after time check:
+[INFO   ] - [Chatbot] Mapping provider 68f3bfce887e123a14f9e6bd:
+[INFO   ] - [Chatbot] ✅ Final provider list:
+[INFO   ] - [Chatbot] 📍 Auto-selecting the only available provider: asdfProvider
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Perfect. I found these providers available at that time: 1. asdfProvider (Rating: 0, Price: 150). Which one would you like to book?
+To finalize the booking, I just need your full name and phone number. What is your full name?"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "is there any other provider"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I'm sorry, that's the only provider available for the selected time slot. Would you like to try a different time or date?"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "i want ac uninstallation"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: findSubcategoryByName
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Exact match found for: AC uninstallation
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "Great, you've selected AC Uninstallation. To find providers, I need your address. Do you have saved Address"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "yes"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getUserAddresses
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] ✓ Found 2 addresses for user.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I found your saved addresses. Which one would you like to use?"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "Select option 1"
+[INFO   ] - [Chatbot] 📍 User selected address #1
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "Great. How far are you willing to search for a provider? (e.g., 10km, 25km)"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "25"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "What date would you like this service? (e.g. YYYY-MM-DD)"
+[INFO   ] - [Chatbot] 📨 New message for session 4aUcEv1RMW: "2025-12-3"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🛠️ Gemini wants to call tool: getAvailableTimeSlots
+[INFO   ] - [Chatbot] 📦 Tool Arguments:
+[INFO   ] - [Chatbot] Getting slots for date: 2025-12-03, radius: 25km
+[INFO   ] - [Chatbot] Current Context the second one:
+[INFO   ] - [Chatbot] 🛡️ Provider user detected. Filtering out their own slots. Provider ID: 68be7033d506e858a68dcf3c
+[INFO   ] - [Chatbot] Found 0 unique slots.
+[INFO   ] - [Chatbot] ✅ Tool Result:
+[INFO   ] - [Chatbot] 🤖 Final Response after tool: "I'm sorry, I couldn't find any available time slots for AC Uninstallation on 2025-12-03 within 25km. Would you like to try a different date or adjust the search radius?"
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: xHiR8bGD9CH6r0roAAAB
+[INFO   ] - Client disconnected: TDEUE_pS0GR6495EAAAD
+[INFO   ] - Client disconnected: T5d6FJkGfK9uflUGAAAF
+[INFO   ] - Client disconnected: VFG2VhVz223sP5TaAAAH
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/edit/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6/related 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Client disconnected: HKGW_kc9u096OMlqAAAJ
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/edit/6890525c8e590753867b2bd6 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6/related 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Client disconnected: ICHTn2GCSX0-I5T6AAAL
+[ERROR  ] - GET /api/categories/6890525c8e590753867b2bd6/related 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: gr2UdUsC6rnqiN4ZAAAN
+[INFO   ] - Client disconnected: a-N4DHbdAtFba6aBAAAP
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: K85LqWklGhnDwOEuAAAR
+[INFO   ] - Client disconnected: hbVT7B19tO5oiTATAAAT
+[INFO   ] - Client disconnected: Pl2hHFNv6rYP-pWtAAAV
+[INFO   ] - Client disconnected: _Cj7CeUebp4qwwP0AAAX
+[INFO   ] - Client disconnected: SpMPDXJ4LO8jNGapAAAZ
+[INFO   ] - Client disconnected: 5iajLtVBswq4jHZKAAAb
+[ERROR  ] - GET /api/categories/trending-services 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[ERROR  ] - GET /api/chatbot/session/Ms58fcsJam 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[INFO   ] - Client disconnected: pJZk88aI-0dknDmKAAAd
+[INFO   ] - Client disconnected: WsrLCfa6LjGDkRWDAAAf
+[INFO   ] - Client disconnected: FmdWjdvGHUViYkgvAAAh
+[INFO   ] - Client disconnected: -bVpFvN79TGSV4p3AAAj
+[INFO   ] - Client disconnected: kp8ZnrghxE8f6DshAAAl
