@@ -1,10 +1,43 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
@@ -27,7 +60,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProviderService = void 0;
 const inversify_1 = require("inversify");
 const type_1 = __importDefault(require("../../di/type"));
-const mongoose_1 = __importDefault(require("mongoose"));
+const mongoose_1 = __importStar(require("mongoose"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const HttpStatusCode_1 = require("../../enums/HttpStatusCode");
 const ErrorMessage_1 = require("../../enums/ErrorMessage");
@@ -47,11 +80,12 @@ const sub_1 = require("date-fns/sub");
 const haversineKm_1 = require("../../utils/helperFunctions/haversineKm");
 const format_1 = require("date-fns/format");
 const review_enum_1 = require("../../enums/review.enum");
+const booking_enum_1 = require("../../enums/booking.enum");
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5;
 const RESEND_COOLDOWN_SECONDS = parseInt(process.env.RESEND_COOLDOWN_SECONDS, 10) || 30;
 let ProviderService = class ProviderService {
-    constructor(providerRepository, serviceRepository, userRepository, categoryRepository, bookingRepository, messageRepository, reviewRepository) {
+    constructor(providerRepository, serviceRepository, userRepository, categoryRepository, bookingRepository, messageRepository, reviewRepository, paymentRepository, subscriptionPlanRepository) {
         this._providerRepository = providerRepository;
         this._serviceRepository = serviceRepository;
         this._userRepository = userRepository;
@@ -59,6 +93,8 @@ let ProviderService = class ProviderService {
         this._bookingRepository = bookingRepository;
         this._messageRepository = messageRepository;
         this._reviewRepository = reviewRepository;
+        this._paymentRepository = paymentRepository;
+        this._subscriptionPlanRepository = subscriptionPlanRepository;
     }
     registerProvider(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -199,7 +235,6 @@ let ProviderService = class ProviderService {
             }
             if (rating) {
                 filter.rating = { $gte: rating, $lt: rating + 1 };
-                // filter.rating = { $gte: rating };
             }
             const [providers, total] = yield Promise.all([
                 this._providerRepository.findProvidersWithFilter(filter, skip, limit),
@@ -522,6 +557,36 @@ let ProviderService = class ProviderService {
             if (!provider) {
                 throw new CustomError_1.CustomError("Provider not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
             }
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            for (const period of data.leavePeriods) {
+                const fromDate = new Date(period.from);
+                if (fromDate < today) {
+                    throw new CustomError_1.CustomError(`Leave 'from' date (${period.from}) cannot be in the past.`, HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
+                }
+                const toDate = new Date(period.to);
+                if (toDate < fromDate) {
+                    throw new CustomError_1.CustomError(`Leave 'to' date (${period.to}) cannot be before 'from' date (${period.from}).`, HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
+                }
+            }
+            for (const override of data.dateOverrides) {
+                const overrideDate = new Date(override.date);
+                if (overrideDate < today) {
+                    throw new CustomError_1.CustomError(`Date override (${override.date}) cannot be in the past.`, HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
+                }
+            }
+            for (const day of data.weeklySchedule) {
+                if (day.slots.length > 1) {
+                    const sortedSlots = [...day.slots].sort((a, b) => a.start.localeCompare(b.start));
+                    for (let i = 0; i < sortedSlots.length - 1; i++) {
+                        const currentSlot = sortedSlots[i];
+                        const nextSlot = sortedSlots[i + 1];
+                        if (nextSlot.start < currentSlot.end) {
+                            throw new CustomError_1.CustomError(`Overlapping time slots detected for ${day.day}: [${currentSlot.start}-${currentSlot.end}] and [${nextSlot.start}-${nextSlot.end}].`, HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
+                        }
+                    }
+                }
+            }
             const updatedProvider = yield this._providerRepository.update(provider._id.toString(), {
                 availability: data
             });
@@ -665,6 +730,97 @@ let ProviderService = class ProviderService {
             };
         });
     }
+    findProvidersAvailableAtSlot(providerIds, date, time) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const time24h = (0, convertTo24hrs_1.convertTo24Hour)(time);
+            const [hour, minute] = time24h.split(':').map(Number);
+            const slotStart = new Date(date);
+            slotStart.setHours(hour, minute, 0, 0);
+            const slotEnd = new Date(slotStart.getTime() + 60 * 60 * 1000);
+            const providers = yield this._providerRepository.findAll({ _id: { $in: providerIds } });
+            const availableProviders = [];
+            for (const provider of providers) {
+                const providerId = provider._id.toString();
+                const existingBookings = yield this._bookingRepository.findByProviderByTime(providerId, date, date);
+                const dayName = (0, format_1.format)(new Date(date), 'EEEE');
+                const weeklySlots = this._getWeeklySlots(provider, dayName);
+                const override = this._getDateOverride(provider, date);
+                const busySlots = override ? override.busySlots : [];
+                const isAvailable = this._isSlotAvailable(slotStart, slotEnd, existingBookings, busySlots);
+                if (isAvailable) {
+                    availableProviders.push(provider);
+                }
+            }
+            return availableProviders;
+        });
+    }
+    findNearbyProviders(coordinates_1) {
+        return __awaiter(this, arguments, void 0, function* (coordinates, radiusInKm = 10, subCategoryId) {
+            try {
+                const services = yield this._serviceRepository.findAll({
+                    subCategoryId: new mongoose_1.Types.ObjectId(subCategoryId),
+                    status: true
+                });
+                if (!services.length) {
+                    return [];
+                }
+                const providerIds = [...new Set(services.map(s => s.providerId.toString()))];
+                const radiusInMeters = radiusInKm * 1000;
+                const providers = yield this._providerRepository.findAll({
+                    _id: { $in: providerIds.map(id => new mongoose_1.Types.ObjectId(id)) },
+                    status: provider_enum_1.ProviderStatus.ACTIVE,
+                    isVerified: true,
+                    serviceLocation: {
+                        $near: {
+                            $geometry: {
+                                type: 'Point',
+                                coordinates: coordinates
+                            },
+                            $maxDistance: radiusInMeters
+                        }
+                    }
+                });
+                return providers;
+            }
+            catch (error) {
+                console.error('Error finding nearby providers:', error);
+                return [];
+            }
+        });
+    }
+    getProviderFullDetails(providerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            const provider = yield this._providerRepository.findById(providerId);
+            if (!provider)
+                throw new CustomError_1.CustomError("Provider not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
+            const providerProfile = (0, provider_mapper_1.toProviderDTO)(provider);
+            const [services, bookings, payments] = yield Promise.all([
+                this._serviceRepository.findAll({ providerId: provider._id }),
+                this._bookingRepository.findAll({ providerId: provider._id }, { createdAt: -1 }),
+                this._paymentRepository.findAll({ providerId: provider._id }, { createdAt: -1 })
+            ]);
+            let currentPlan = null;
+            if ((_a = provider.subscription) === null || _a === void 0 ? void 0 : _a.planId) {
+                currentPlan = yield this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
+            }
+            const stats = {
+                totalEarnings: provider.earnings,
+                totalBookings: bookings.length,
+                completedBookings: bookings.filter(b => b.status === booking_enum_1.BookingStatus.COMPLETED).length,
+                cancelledBookings: bookings.filter(b => b.status === booking_enum_1.BookingStatus.CANCELLED).length,
+                averageRating: provider.rating
+            };
+            return {
+                profile: providerProfile,
+                services: services,
+                bookings: bookings.slice(0, 10),
+                payments: payments.slice(0, 10),
+                currentPlan: currentPlan,
+                stats
+            };
+        });
+    }
 };
 exports.ProviderService = ProviderService;
 exports.ProviderService = ProviderService = __decorate([
@@ -676,5 +832,7 @@ exports.ProviderService = ProviderService = __decorate([
     __param(4, (0, inversify_1.inject)(type_1.default.BookingRepository)),
     __param(5, (0, inversify_1.inject)(type_1.default.MessageRepository)),
     __param(6, (0, inversify_1.inject)(type_1.default.ReviewRepository)),
-    __metadata("design:paramtypes", [Object, Object, Object, Object, Object, Object, Object])
+    __param(7, (0, inversify_1.inject)(type_1.default.PaymentRepository)),
+    __param(8, (0, inversify_1.inject)(type_1.default.SubscriptionPlanRepository)),
+    __metadata("design:paramtypes", [Object, Object, Object, Object, Object, Object, Object, Object, Object])
 ], ProviderService);

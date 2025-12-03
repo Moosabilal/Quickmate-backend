@@ -419,6 +419,25 @@ let CategoryService = class CategoryService {
             return subCategories.map(cat => cat.name);
         });
     }
+    getRelatedCategories(categoryId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const currentCategory = yield this._categoryRepository.findById(categoryId);
+            if (!currentCategory || !currentCategory.parentId) {
+                return [];
+            }
+            const related = yield this._categoryRepository.findRelatedCategories(currentCategory.parentId.toString(), categoryId, 4);
+            return related.map(cat => {
+                var _a;
+                return ({
+                    id: cat._id.toString(),
+                    name: cat.name,
+                    description: cat.description || '',
+                    iconUrl: cat.iconUrl || '',
+                    parentId: ((_a = cat.parentId) === null || _a === void 0 ? void 0 : _a.toString()) || null,
+                });
+            });
+        });
+    }
 };
 exports.CategoryService = CategoryService;
 exports.CategoryService = CategoryService = __decorate([

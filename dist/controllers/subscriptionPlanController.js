@@ -138,7 +138,7 @@ let SubscriptionPlanController = class SubscriptionPlanController {
         this.calculateUpgrade = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const { newPlanId } = subscription_validation_1.calculateUpgradeSchema.parse(req.body);
-                const userId = req.user.id; // Get provider from logged-in user
+                const userId = req.user.id;
                 const response = yield this._subscriptionPlanService.calculateUpgradeCost(userId, newPlanId);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, data: response });
             }
@@ -151,7 +151,7 @@ let SubscriptionPlanController = class SubscriptionPlanController {
         this.scheduleDowngrade = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const { newPlanId } = zod_1.default.object({ newPlanId: subscription_validation_1.mongoIdParamSchema.shape.id }).parse(req.body);
-                const userId = req.user.id; // Get provider from logged-in user
+                const userId = req.user.id;
                 const updatedSubscription = yield this._subscriptionPlanService.scheduleDowngrade(userId, newPlanId);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
                     success: true,
@@ -167,7 +167,7 @@ let SubscriptionPlanController = class SubscriptionPlanController {
         });
         this.cancelDowngrade = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const userId = req.user.id; // Get provider from logged-in user
+                const userId = req.user.id;
                 const updatedSubscription = yield this._subscriptionPlanService.cancelDowngrade(userId);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
                     success: true,
@@ -176,7 +176,6 @@ let SubscriptionPlanController = class SubscriptionPlanController {
                 });
             }
             catch (error) {
-                // No Zod validation, so just catch general errors
                 next(error);
             }
         });

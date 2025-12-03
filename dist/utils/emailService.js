@@ -67,6 +67,7 @@ const sendPasswordResetEmail = (to, resetLink) => __awaiter(void 0, void 0, void
       <p>If you did not request this, please ignore this email.</p>
     `,
     };
+    logger_1.default.info(`Sending resetLink email ${resetLink} `);
     try {
         yield transporter.sendMail(mailOptions);
         logger_1.default.info(`Password reset email sent to ${to}`);

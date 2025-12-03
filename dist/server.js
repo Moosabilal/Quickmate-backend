@@ -31,6 +31,7 @@ const CustomError_1 = require("./utils/CustomError");
 const errorHandler_1 = require("./middleware/errorHandler");
 const logger_1 = __importDefault(require("./logger/logger"));
 const socket_1 = require("./utils/socket");
+const cleanupProviderSchedule_1 = require("./jobs/cleanupProviderSchedule");
 const uploadDir = path_1.default.join(__dirname, '../uploads');
 if (!fs_1.default.existsSync(uploadDir)) {
     fs_1.default.mkdirSync(uploadDir);
@@ -76,4 +77,5 @@ const io = new socket_io_1.Server(server, {
     }
 });
 (0, socket_1.chatSocket)(io);
+(0, cleanupProviderSchedule_1.startScheduleCleanupJob)();
 server.listen(PORT, () => logger_1.default.info(`Server running on port ${PORT}`));

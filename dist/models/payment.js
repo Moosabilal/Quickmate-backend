@@ -37,17 +37,17 @@ const mongoose_1 = __importStar(require("mongoose"));
 const userRoles_1 = require("../enums/userRoles");
 const PaymentSchema = new mongoose_1.Schema({
     userId: {
-        type: mongoose_1.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
     providerId: {
-        type: mongoose_1.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Provider',
         required: true,
     },
     bookingId: {
-        type: mongoose_1.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Booking',
         required: true,
     },
@@ -58,7 +58,7 @@ const PaymentSchema = new mongoose_1.Schema({
     },
     paymentDate: {
         type: Date,
-        required: true,
+        required: false,
     },
     transactionId: {
         type: String,

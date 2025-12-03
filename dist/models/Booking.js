@@ -38,26 +38,26 @@ const userRoles_1 = require("../enums/userRoles");
 const booking_enum_1 = require("../enums/booking.enum");
 const BookingSchema = new mongoose_1.Schema({
     userId: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User',
         required: false,
     },
     serviceId: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Service',
         required: false,
     },
     providerId: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Provider',
         required: false,
     },
     paymentId: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Payment',
     },
     addressId: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Address'
     },
     customerName: {

@@ -35,7 +35,7 @@ let PaymentService = class PaymentService {
     createOrder(amount) {
         return __awaiter(this, void 0, void 0, function* () {
             const options = {
-                amount: amount * 100, // convert to paise
+                amount: amount * 100,
                 currency: 'INR',
                 receipt: `receipt_${Date.now()}`,
             };

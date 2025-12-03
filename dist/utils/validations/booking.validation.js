@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.providerBookingsQuerySchema = exports.bookingFilterSchema = exports.findProviderRangeSchema = exports.adminBookingsQuerySchema = exports.verifyBookingOtpSchema = exports.updateBookingDateTimeSchema = exports.updateBookingStatusSchema = exports.verifyPaymentSchema = exports.confirmPaymentSchema = exports.createBookingSchema = exports.mongoIdParamSchema = void 0;
+exports.verifyChatPaymentSchema = exports.chatBookingSchema = exports.providerBookingsQuerySchema = exports.bookingFilterSchema = exports.findProviderRangeSchema = exports.adminBookingsQuerySchema = exports.verifyBookingOtpSchema = exports.updateBookingDateTimeSchema = exports.updateBookingStatusSchema = exports.verifyPaymentSchema = exports.confirmPaymentSchema = exports.createBookingSchema = exports.mongoIdParamSchema = void 0;
 const zod_1 = require("zod");
 const booking_enum_1 = require("../../enums/booking.enum");
 const userRoles_1 = require("../../enums/userRoles");
@@ -62,4 +62,13 @@ exports.bookingFilterSchema = zod_1.z.object({
 });
 exports.providerBookingsQuerySchema = exports.bookingFilterSchema.extend({
     providerId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
+});
+exports.chatBookingSchema = exports.createBookingSchema.extend({
+    userId: zod_1.z.string().optional(),
+});
+exports.verifyChatPaymentSchema = zod_1.z.object({
+    razorpay_order_id: zod_1.z.string(),
+    razorpay_payment_id: zod_1.z.string(),
+    razorpay_signature: zod_1.z.string(),
+    bookingData: exports.chatBookingSchema,
 });

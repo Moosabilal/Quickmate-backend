@@ -26,6 +26,7 @@ const inversify_1 = require("inversify");
 const Review_1 = __importDefault(require("../../models/Review"));
 const BaseRepository_1 = require("./base/BaseRepository");
 const mongoose_1 = require("mongoose");
+const review_enum_1 = require("../../enums/review.enum");
 let ReviewRepository = class ReviewRepository extends BaseRepository_1.BaseRepository {
     constructor() {
         super(Review_1.default);
@@ -149,7 +150,7 @@ let ReviewRepository = class ReviewRepository extends BaseRepository_1.BaseRepos
                 {
                     $match: {
                         serviceId: { $in: serviceIds.map(id => new mongoose_1.Types.ObjectId(id)) },
-                        // status: "APPROVED" 
+                        status: review_enum_1.ReviewStatus.APPROVED
                     }
                 },
                 {

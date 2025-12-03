@@ -104,7 +104,6 @@ let SubscriptionPlanService = class SubscriptionPlanService {
             if (newPlan.price >= currentPlan.price) {
                 throw new CustomError_1.CustomError("This is not a downgrade. Please use the Upgrade or Subscribe flow.", HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
             }
-            // Set the pending downgrade ID
             provider.subscription.pendingDowngradePlanId = new mongoose_1.Types.ObjectId(newPlanId);
             const updatedProvider = yield provider.save();
             return updatedProvider.subscription;
@@ -122,13 +121,11 @@ let SubscriptionPlanService = class SubscriptionPlanService {
             if (!provider.subscription.pendingDowngradePlanId) {
                 throw new CustomError_1.CustomError("No pending downgrade to cancel.", HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
             }
-            // Clear the pending downgrade
             provider.subscription.pendingDowngradePlanId = undefined;
             const updatedProvider = yield provider.save();
             return updatedProvider.subscription;
         });
     }
-    // --- THIS METHOD IS UPDATED ---
     checkAndExpire(providerId) {
         return __awaiter(this, void 0, void 0, function* () {
             const provider = yield this._providerRepository.findById(providerId);
@@ -136,17 +133,14 @@ let SubscriptionPlanService = class SubscriptionPlanService {
                 throw new CustomError_1.CustomError(ErrorMessage_1.ErrorMessage.PROVIDER_NOT_FOUND, HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
             const subscription = provider.subscription;
             if (!subscription) {
-                return { status: subscription_enum_1.SubscriptionStatus.NONE }; // Return a NONE status
+                return { status: subscription_enum_1.SubscriptionStatus.NONE };
             }
-            // Check if the plan is expired
             if (subscription.status === subscription_enum_1.SubscriptionStatus.ACTIVE &&
                 subscription.endDate &&
                 new Date(subscription.endDate) < new Date()) {
-                // --- 1. CHECK FOR A PENDING DOWNGRADE ---
                 if (subscription.pendingDowngradePlanId) {
                     const newPlan = yield this._subscriptionPlanRepository.findById(subscription.pendingDowngradePlanId.toString());
                     if (newPlan) {
-                        // 2. ACTIVATE THE NEW (CHEAPER) PLAN
                         const newStartDate = new Date();
                         const newEndDate = new Date(newStartDate);
                         newEndDate.setDate(newEndDate.getDate() + newPlan.durationInDays);
@@ -154,14 +148,13 @@ let SubscriptionPlanService = class SubscriptionPlanService {
                         subscription.startDate = newStartDate;
                         subscription.endDate = newEndDate;
                         subscription.status = subscription_enum_1.SubscriptionStatus.ACTIVE;
-                        subscription.pendingDowngradePlanId = undefined; // Clear the pending downgrade
+                        subscription.pendingDowngradePlanId = undefined;
                         yield provider.save();
                         return provider.subscription;
                     }
                 }
-                // --- 3. NO DOWNGRADE, just expire the plan ---
                 subscription.status = subscription_enum_1.SubscriptionStatus.EXPIRED;
-                subscription.pendingDowngradePlanId = undefined; // Clear it just in case
+                subscription.pendingDowngradePlanId = undefined;
                 yield provider.save();
             }
             return provider.subscription;
@@ -182,7 +175,6 @@ let SubscriptionPlanService = class SubscriptionPlanService {
     ;
     calculateUpgradeCost(userId, newPlanId) {
         return __awaiter(this, void 0, void 0, function* () {
-            // 1. Get provider and plans in parallel
             const providerId = yield this._providerRepository.getProviderId(userId);
             const [provider, newPlan] = yield Promise.all([
                 this._providerRepository.findById(providerId),
@@ -193,34 +185,26 @@ let SubscriptionPlanService = class SubscriptionPlanService {
             if (!newPlan)
                 throw new CustomError_1.CustomError(ErrorMessage_1.ErrorMessage.PLAN_NOT_FOUND, HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
             const sub = provider.subscription;
-            // 2. Check if there is a valid, active subscription
             if (!sub || !sub.planId || !sub.endDate || sub.status !== subscription_enum_1.SubscriptionStatus.ACTIVE) {
-                // No active plan, so this is a new subscription, not an upgrade.
-                // Call the existing createSubscriptionOrder logic.
                 throw new CustomError_1.CustomError("No active subscription found. Please use the standard subscribe method.", HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
             }
             const currentPlan = yield this._subscriptionPlanRepository.findById(sub.planId.toString());
             if (!currentPlan)
                 throw new CustomError_1.CustomError("Current plan not found.", HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR);
-            // 3. Check if it's actually an upgrade
             if (newPlan.price <= currentPlan.price) {
                 throw new CustomError_1.CustomError("This is a downgrade or same plan. Downgrades will be supported in a future update.", HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
             }
-            // 4. --- PRORATION LOGIC ---
             const today = new Date();
             const endDate = new Date(sub.endDate);
             if (today >= endDate) {
-                // Plan is expired, treat as a new subscription
                 throw new CustomError_1.CustomError("Your plan is expired. Please create a new subscription.", HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
             }
             const msInDay = 1000 * 60 * 60 * 24;
             const daysRemaining = Math.max(0, (endDate.getTime() - today.getTime()) / msInDay);
             const perDayCost = currentPlan.price / currentPlan.durationInDays;
             const remainingValue = perDayCost * daysRemaining;
-            // Calculate final cost, ensuring it's at least 1 Rupee (or your minimum)
             const costToPay = Math.max(1, newPlan.price - remainingValue);
-            const finalAmountInRupees = Math.round(costToPay); // Charge in whole rupees
-            // 5. Create Razorpay order for the prorated amount
+            const finalAmountInRupees = Math.round(costToPay);
             const order = yield (0, razorpay_1.paymentCreation)(finalAmountInRupees);
             return {
                 order: Object.assign(Object.assign({}, order), { entity: "order" }),

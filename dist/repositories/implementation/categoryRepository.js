@@ -225,6 +225,28 @@ let CategoryRepository = class CategoryRepository extends BaseRepository_1.BaseR
             });
         });
     }
+    findAllActiveSubCategories() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.model.find({
+                parentId: { $ne: null },
+                status: true
+            })
+                .select('name')
+                .lean();
+        });
+    }
+    findRelatedCategories(parentId, currentId, limit) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.model.find({
+                parentId: new mongoose_1.Types.ObjectId(parentId),
+                _id: { $ne: new mongoose_1.Types.ObjectId(currentId) },
+                status: true
+            })
+                .select('name iconUrl parentId')
+                .limit(limit)
+                .lean();
+        });
+    }
 };
 exports.CategoryRepository = CategoryRepository;
 exports.CategoryRepository = CategoryRepository = __decorate([

@@ -43,6 +43,7 @@ import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
 import { ISocketMessage } from "../../interface/message";
 import { endOfDay, endOfMonth, endOfWeek, startOfDay, startOfMonth, startOfWeek } from "date-fns";
+import { Http2ServerRequest } from "http2";
 
 
 @injectable()
@@ -120,6 +121,7 @@ export class BookingService implements IBookingService {
             if (!isValid) throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST);
         }
 
+
         const booking = await this._bookingRepository.findById(verifyPayment.bookingId);
         const service = await this._serviceRepository.findById(booking.serviceId.toString());
         const subCategory = await this._categoryRepository.findById(service.subCategoryId.toString());
@@ -166,7 +168,7 @@ export class BookingService implements IBookingService {
         const udpatedpayment123 = await this._bookingRepository.update(verifyPayment.bookingId, {
             paymentId: createdPayment._id,
             paymentStatus: PaymentStatus.PAID,
-            duration: durationInMinutes
+            duration: durationInMinutes,
         });
 
         return {
@@ -217,12 +219,20 @@ export class BookingService implements IBookingService {
             ? await this._paymentRepository.findById(booking.paymentId.toString())
             : null;
 
+        const reviewStats = await this._reviewRepository.getReviewStatsByServiceIds([service._id.toString()]);
+        const providerReviewStats = reviewStats.find(rs => rs.serviceId.toString() === service._id.toString());
+
         let review: IReview | undefined;
         if (booking.reviewed) {
             review = await this._reviewRepository.findOne({ bookingId: booking._id.toString() });
         }
 
-        return toBookingConfirmationPage(booking, address, subCat.iconUrl, service, payment, provider, review);
+        return toBookingConfirmationPage(
+            booking, address, subCat.iconUrl,
+            service, payment, provider, review,
+            providerReviewStats?.avgRating,
+            providerReviewStats?.reviewCount
+        );
     }
 
 

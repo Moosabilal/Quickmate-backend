@@ -237,6 +237,7 @@ let ProviderController = class ProviderController {
                 const { period } = provider_validation_1.getEarningsQuerySchema.parse(req.query);
                 const userId = req.user.id;
                 const analyticsData = yield this._providerService.getEarningsAnalytics(userId, period);
+                console.log(analyticsData);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, data: analyticsData });
             }
             catch (error) {
@@ -293,6 +294,16 @@ let ProviderController = class ProviderController {
             catch (error) {
                 if (error instanceof zod_1.ZodError)
                     res.status(HttpStatusCode_1.HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+                next(error);
+            }
+        });
+        this.getProviderFullDetails = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id } = provider_validation_1.mongoIdParamSchema.parse(req.params);
+                const data = yield this._providerService.getProviderFullDetails(id);
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, data });
+            }
+            catch (error) {
                 next(error);
             }
         });

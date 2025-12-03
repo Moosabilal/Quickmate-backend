@@ -411,7 +411,7 @@ let BookingRepository = class BookingRepository extends BaseRepository_1.BaseRep
                                     customerPhone: '$phone',
                                     customerEmail: '$user.email',
                                     specialRequests: '$instructions',
-                                    createdAt: '$createdAt'
+                                    createdAt: '$createdAt',
                                 }
                             }
                         ]

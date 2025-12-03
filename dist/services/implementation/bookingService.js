@@ -499,6 +499,61 @@ let BookingService = class BookingService {
             return booking;
         });
     }
+    getBookingDetailsForAdmin(bookingId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a, _b, _c, _d;
+            const booking = yield this._bookingRepository.findById(bookingId);
+            if (!booking)
+                throw new CustomError_1.CustomError("Booking not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
+            const [user, provider, service, address, payment] = yield Promise.all([
+                this._userRepository.findById(((_a = booking.userId) === null || _a === void 0 ? void 0 : _a.toString()) || ""),
+                this._providerRepository.findById(((_b = booking.providerId) === null || _b === void 0 ? void 0 : _b.toString()) || ""),
+                this._serviceRepository.findById(((_c = booking.serviceId) === null || _c === void 0 ? void 0 : _c.toString()) || ""),
+                this._addressRepository.findById(((_d = booking.addressId) === null || _d === void 0 ? void 0 : _d.toString()) || ""),
+                booking.paymentId ? this._paymentRepository.findById(booking.paymentId.toString()) : null
+            ]);
+            return {
+                booking: {
+                    _id: booking._id.toString(),
+                    status: booking.status,
+                    paymentStatus: booking.paymentStatus,
+                    amount: booking.amount,
+                    date: booking.scheduledDate,
+                    time: booking.scheduledTime,
+                    createdAt: new Date(booking.createdAt).toISOString(),
+                    instructions: booking.instructions,
+                },
+                user: user ? {
+                    name: user.name,
+                    email: user.email,
+                    phone: user.phone,
+                    image: user.profilePicture
+                } : null,
+                provider: provider ? {
+                    _id: provider._id.toString(),
+                    name: provider.fullName,
+                    email: provider.email,
+                    phone: provider.phoneNumber,
+                    image: provider.profilePhoto,
+                    serviceArea: provider.serviceArea
+                } : null,
+                service: service ? {
+                    title: service.title,
+                    duration: service.duration,
+                    price: service.price
+                } : null,
+                address: address ? {
+                    label: address.label,
+                    fullAddress: `${address.street}, ${address.city}, ${address.state} - ${address.zip}`,
+                } : null,
+                payment: payment ? {
+                    method: payment.paymentMethod,
+                    transactionId: (payment.razorpay_payment_id || payment._id.toString()),
+                    date: new Date(payment.paymentDate).toISOString()
+                } : null
+            };
+        });
+    }
 };
 exports.BookingService = BookingService;
 exports.BookingService = BookingService = __decorate([

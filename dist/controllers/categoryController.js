@@ -258,6 +258,16 @@ let CategoryController = class CategoryController {
                 next(error);
             }
         });
+        this.getRelatedCategories = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id } = category_validation_1.mongoIdParamSchema.parse(req.params);
+                const related = yield this._categoryService.getRelatedCategories(id);
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, data: related });
+            }
+            catch (error) {
+                next(error);
+            }
+        });
         this._categoryService = categoryService;
     }
 };

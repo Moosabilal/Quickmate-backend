@@ -55,7 +55,6 @@ let MessageController = class MessageController {
             }
             catch (error) {
                 console.error('File upload error in controller:', error.message);
-                // Return appropriate error response based on error type
                 let statusCode = HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR;
                 let errorMessage = "Failed to upload file";
                 if ((_a = error.message) === null || _a === void 0 ? void 0 : _a.includes('File size exceeds')) {

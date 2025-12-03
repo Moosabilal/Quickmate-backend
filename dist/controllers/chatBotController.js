@@ -35,7 +35,11 @@ let ChatbotController = class ChatbotController {
             try {
                 const userId = req.body.userId;
                 const session = yield this._chatbotService.startSession(userId);
-                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, sessionId: session.sessionId });
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
+                    success: true,
+                    sessionId: session.sessionId,
+                    message: "Chat session started successfully"
+                });
             }
             catch (error) {
                 next(error);
@@ -45,7 +49,11 @@ let ChatbotController = class ChatbotController {
             try {
                 const { sessionId } = req.params;
                 const history = yield this._chatbotService.getHistory(sessionId);
-                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, history });
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
+                    success: true,
+                    history,
+                    count: history.length
+                });
             }
             catch (error) {
                 next(error);
@@ -55,35 +63,47 @@ let ChatbotController = class ChatbotController {
             try {
                 const { sessionId } = req.params;
                 const { text } = req.body;
-                if (!text) {
+                if (!text || text.trim() === "") {
                     throw new CustomError_1.CustomError("Message text is required", HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
                 }
                 const response = yield this._chatbotService.sendMessage(sessionId, text);
-                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, response });
-            }
-            catch (error) {
-                next(error);
-            }
-        });
-        this.createRazorpayOrder = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            var _a;
-            try {
-                const userId = (_a = req.user) === null || _a === void 0 ? void 0 : _a.id;
-                const orderData = req.body;
-                const order = yield this._chatbotService.createRazorpayOrder(userId, orderData);
-                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, order });
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
+                    success: true,
+                    response
+                });
             }
             catch (error) {
                 next(error);
             }
         });
         this.verifyRazorpayPayment = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            var _a;
             try {
-                const userId = (_a = req.user) === null || _a === void 0 ? void 0 : _a.id;
+                console.log('the params', req.params);
+                console.log('the body', req.body);
+                const { sessionId } = req.params;
+                if (!sessionId) {
+                    throw new CustomError_1.CustomError("Session ID is required", HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
+                }
                 const paymentData = req.body;
-                const booking = yield this._chatbotService.verifyRazorpayPayment(userId, paymentData);
-                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, booking });
+                const booking = yield this._chatbotService.verifyRazorpayPayment(sessionId, paymentData);
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
+                    success: true,
+                    booking,
+                    message: "Payment verified and booking confirmed successfully"
+                });
+            }
+            catch (error) {
+                next(error);
+            }
+        });
+        this.getSessionStatus = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { sessionId } = req.params;
+                const session = yield this._chatbotService.getSessionStatus(sessionId);
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
+                    success: true,
+                    session
+                });
             }
             catch (error) {
                 next(error);

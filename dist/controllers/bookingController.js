@@ -202,6 +202,16 @@ let BookingController = class BookingController {
                 next(error);
             }
         });
+        this.getBookingDetailsForAdmin = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id } = booking_validation_1.mongoIdParamSchema.parse(req.params);
+                const data = yield this._bookingService.getBookingDetailsForAdmin(id);
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, data });
+            }
+            catch (error) {
+                next(error);
+            }
+        });
         this._bookingService = bookingService;
         this._providerService = providerService;
     }

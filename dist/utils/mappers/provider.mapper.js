@@ -35,7 +35,8 @@ function toProviderDTO(provider) {
         rating: provider.rating,
         isVerified: provider.isVerified,
         subscription: provider.subscription,
-        aadhaarIdProof: provider.aadhaarIdProof
+        aadhaarIdProof: provider.aadhaarIdProof,
+        createdAt: provider.createdAt,
     };
 }
 function toProviderForAdminResponseDTO(providers, serviceMap) {
@@ -156,7 +157,7 @@ function toEarningsAnalyticsDTO(totalEarnings, earningsChangePercentage, totalCl
     const breakdown = currentBookings.map(b => {
         var _a, _b;
         return ({
-            date: new Date(b.bookingDate),
+            date: new Date(b.createdAt),
             service: ((_a = b.serviceId) === null || _a === void 0 ? void 0 : _a.title) || 'Unknown Service',
             client: ((_b = b.userId) === null || _b === void 0 ? void 0 : _b.name) || 'Unknown Client',
             amount: Number(b.amount) || 0,
@@ -225,14 +226,14 @@ function toProviderPerformanceDTO(provider, bookings, reviewsFromDb, users, acti
         ? reviewsFromDb.reduce((sum, r) => { var _a; return sum + ((_a = Number(r.rating)) !== null && _a !== void 0 ? _a : 0); }, 0) / reviewsFromDb.length
         : 0;
     const reviews = reviewsFromDb.map(r => {
-        var _a, _b, _c;
+        var _a, _b;
         const user = users.find(u => { var _a; return u._id.toString() === ((_a = r.userId) === null || _a === void 0 ? void 0 : _a.toString()); });
         return {
             name: (_a = user === null || user === void 0 ? void 0 : user.name) !== null && _a !== void 0 ? _a : "Anonymous",
             time: r.createdAt ? new Date(r.createdAt).toLocaleDateString() : "N/A",
             rating: (_b = Number(r.rating)) !== null && _b !== void 0 ? _b : 0,
             comment: r.reviewText || "",
-            avatar: (_c = user === null || user === void 0 ? void 0 : user.profilePicture) !== null
+            avatar: user === null || user === void 0 ? void 0 : user.profilePicture
         };
     });
     const ratingCounts = new Map([[5, 0], [4, 0], [3, 0], [2, 0], [1, 0]]);

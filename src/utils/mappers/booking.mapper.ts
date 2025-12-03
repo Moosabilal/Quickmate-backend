@@ -12,13 +12,15 @@ import { IProvider } from "../../models/Providers";
 import { IUser } from "../../models/User";
 import { IReview } from "../../models/Review";
 
-export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider, review?: IReview): IBookingConfirmationRes {
+export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider, review?: IReview, providerRating?: number, providerReviewsCount?: number): IBookingConfirmationRes {
     return {
         id: booking._id.toString(),
         serviceName: service.title,
         serviceImage: categoryIcon || '',
         providerName: provider.fullName,
         providerImage: provider.profilePhoto || '',
+        providerRating: providerRating || 0,
+        providerReviewsCount: providerReviewsCount || 0,
         priceUnit: service.priceUnit as string,
         duration: service.duration || '',
         bookedOrderId: payment.razorpay_order_id,
@@ -108,4 +110,3 @@ export function toProviderBookingManagement(
         };
     });
 }
-

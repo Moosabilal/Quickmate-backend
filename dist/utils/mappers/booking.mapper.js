@@ -82,7 +82,7 @@ function toProviderBookingManagement(bookings, users, services, addresses, payme
             specialRequests: String(booking.instructions || ''),
             createdAt: booking.createdAt
                 ? booking.createdAt.toISOString()
-                : ''
+                : '',
         };
     });
 }

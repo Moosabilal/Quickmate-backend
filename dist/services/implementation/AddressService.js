@@ -30,7 +30,6 @@ const type_1 = __importDefault(require("../../di/type"));
 const address_mapper_1 = require("../../utils/mappers/address.mapper");
 const address_rMapper_1 = require("../../utils/reverseMapper/address.rMapper");
 const mongoose_1 = require("mongoose");
-const geocoder_1 = require("../../utils/helperFunctions/geocoder");
 (0, inversify_1.injectable)();
 let AddressService = class AddressService {
     constructor(addressRepsitory) {
@@ -92,18 +91,7 @@ let AddressService = class AddressService {
     }
     getAddressesForUser(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('the userid', userId);
-            return this._addressRepository.findAll({ userId: new mongoose_1.Types.ObjectId(userId) });
-        });
-    }
-    createAddress(data, userId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { lat, lng } = yield (0, geocoder_1.geocodeAddress)(data.street, data.city, data.state, data.zip);
-            const newAddress = yield this._addressRepository.create(Object.assign(Object.assign({}, data), { userId: new mongoose_1.Types.ObjectId(userId), locationCoords: {
-                    type: 'Point',
-                    coordinates: [lng, lat]
-                } }));
-            return newAddress;
+            return this._addressRepository.findAll({ userId: new mongoose_1.Types.ObjectId(userId), label: { $ne: "Current Location" } });
         });
     }
 };

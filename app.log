@@ -46885,3 +46885,575 @@ To finalize the booking, I just need your full name and phone number. What is yo
 [INFO   ] - Client disconnected: FmdWjdvGHUViYkgvAAAh
 [INFO   ] - Client disconnected: -bVpFvN79TGSV4p3AAAj
 [INFO   ] - Client disconnected: kp8ZnrghxE8f6DshAAAl
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: veHOluNpBsa4f8C0AAAB
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: t-ixm5S3aF_uM5PPAAAD
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/top-level 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/popular-services 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/categories/trending-services 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[ERROR  ] - GET /api/chatbot/session/Ms58fcsJam 500 getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-01.1xluc.mongodb.net
+[INFO   ] - Client disconnected: fiw60NsPypAhbQ2IAAAF
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: zDGFCJ4pr2-yUUohAAAH
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: iYLDoPKh4yTwwVNgAAAB
+[INFO   ] - Socket 1ijRvC1B7XS9R6ztAAAD joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Client disconnected: 1ijRvC1B7XS9R6ztAAAD
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-690db464272ca818943be403
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:offer from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:ice-candidate from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:hangup from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Forwarding webrtc:offer from 6874aa958192c435066b619d to room 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-690db464272ca818943be403
+[INFO   ] - Socket bN-F_HPzM1HZkNSeAAAF joined booking room: 6874aa958192c435066b619d-6887a018f50acd7333997043
+[INFO   ] - Client disconnected: bN-F_HPzM1HZkNSeAAAF
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: gBhUGiTKIAnPK6GjAAAH
+[INFO   ] - Client disconnected: Wa26xdK1hW1_tSfjAAAL
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: P8gUl2sA9V2Tqm-hAAAN
+[INFO   ] - Client disconnected: gTQ2AyQ0k62bq62fAAAP
+[INFO   ] - Client disconnected: B58fYc_N6cR1kxgFAAAJ
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid Credentails -> Invalid Credentails
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Client disconnected: ffAr18NRI7o0TTDEAAAT
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: kpQ_XJ1uBmTR7bmvAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: IiMsqeC3xBg4blSxAAAB
+[INFO   ] - Client disconnected: mQj7XxtXujpE7GpPAAAD
+[INFO   ] - Client disconnected: hIN8RMPrY5TbirmTAAAF
+[INFO   ] - Socket vmUx4-90y3d22Yn6AAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: vmUx4-90y3d22Yn6AAAH
+[INFO   ] - Client disconnected: 4rbsmr394uTfuMRmAAAJ
+[INFO   ] - Client disconnected: 7vL_U3oSchn4Zdi1AAAL
+[INFO   ] - Client disconnected: 7kjp_RqPun2RVp0rAAAN
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: RispYGOC9tM42ZrKAAAB
+[INFO   ] - Client disconnected: P2i_h-rqtsmWvI0bAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: eFdItrGLXaRCb4XGAAAB
+[INFO   ] - Client disconnected: GRQbyWliOkGvpwo6AAAD
+[INFO   ] - Client disconnected: MU_2_S1fn--wg-s6AAAF
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: wo11J6dCVSIzHQv3AAAH
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: VW-r_Cipgn3zaXjzAAAJ
+[INFO   ] - Client disconnected: CRq3AV8UjpPWzZROAAAL
+[INFO   ] - Client disconnected: BbokwNf6WB_3-jYfAAAN
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[ERROR  ] - GET /api/categories/edit/ 500 [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+] -> [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/^[0-9a-fA-F]{24}$/",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid ID format"
+  }
+]
+[INFO   ] - Client disconnected: fafO656lfAVKIvNgAAAP
+[INFO   ] - Client disconnected: HQd1bWlXvaG5kOt7AAAR
+[INFO   ] - Client disconnected: ycO3cwE2whq_Zp6KAAAT
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Y4WDVXEFrxxDu8qfAAAB
+[ERROR  ] - GET /api/bookings/getBookingById/692028685f7ae188642e47f0 404 No matched address found -> No matched address found
+[INFO   ] - Client disconnected: qpA5HavROdOrm9RNAAAD
+[INFO   ] - Client disconnected: Y1PwgA2wb4iRvLl9AAAF
+[INFO   ] - Client disconnected: gEH1HyYsi6v06N-aAAAH
+[INFO   ] - Client disconnected: tvEEUiO4n_rHCCkOAAAJ
+[INFO   ] - Client disconnected: oeJr01F5ZxChQM4cAAAL
+[INFO   ] - Client disconnected: L3FUtRpV3AZ3dgAZAAAN
+[INFO   ] - Client disconnected: kKQ0OI9z7Bgh7ncrAAAP
+[INFO   ] - Client disconnected: aoH_wPh5qMzpVfveAAAR
+[INFO   ] - Client disconnected: oyNGJa0Xy4hU30JaAAAT
+[INFO   ] - Client disconnected: 72APCFhm3YudY3qbAAAV
+[INFO   ] - Client disconnected: 0BTbHRNBEuf1nBf2AAAX
+[INFO   ] - Client disconnected: JKR3H5n7qWZB3uqaAAAZ
+[INFO   ] - Client disconnected: 6pfb-EPeYZQiSOvbAAAb
+[INFO   ] - Client disconnected: tb8vK5HW-SBAWYfvAAAd
+[INFO   ] - Client disconnected: GdlGeW1M9OeW7q0HAAAf
+[INFO   ] - Client disconnected: mq9h45Jqklc9hEEDAAAh
+[INFO   ] - Client disconnected: zObg-eTFGz0NZYIjAAAj
+[INFO   ] - Client disconnected: 2jwiQK-BVxLcVm-rAAAn
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket 8dMsMvDK-G2toOeiAAAB joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: 8dMsMvDK-G2toOeiAAAB
+[INFO   ] - Socket bAAuLgM5viCmD4TjAAAD joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket bAAuLgM5viCmD4TjAAAD joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: bAAuLgM5viCmD4TjAAAD
+[INFO   ] - Client disconnected: 7Ojv6WzpQncSJoJMAAAF
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6887a219f50acd733399709b-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket enOS_laRpZUVeZAMAAAH joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: enOS_laRpZUVeZAMAAAH
+[INFO   ] - Socket 1zcWpD4uJ573q4F8AAAJ joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket 1zcWpD4uJ573q4F8AAAJ joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: 1zcWpD4uJ573q4F8AAAJ
+[INFO   ] - Socket c68JNGflbJhLLrVjAAAL joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket c68JNGflbJhLLrVjAAAL joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: c68JNGflbJhLLrVjAAAL
+[INFO   ] - Socket nO-mr-ZojU3SHlb1AAAN joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket nO-mr-ZojU3SHlb1AAAN joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: nO-mr-ZojU3SHlb1AAAN
+[INFO   ] - Socket wUagDzNMNUjgAaBLAAAP joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: wUagDzNMNUjgAaBLAAAP
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: dDWXPjdERq97pmSzAAAR
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: fT_l47d1-Fcfqv0BAAAT
+[INFO   ] - Client disconnected: hVi88SUBkdwGl7YEAAAV
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: mnojhklphExgYrsYAAAX
+[INFO   ] - Client disconnected: ezOI3nyupc2JkojdAAAZ
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: k4HzmqqqyCFbJS5KAAAb
+[INFO   ] - Client disconnected: iiqKUafeiruP0Fk7AAAd
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: bBDP5PQ1qsVIjdGwAAAf
+[INFO   ] - Client disconnected: OFsCUKBznIXnRBpyAAAh
+[ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[INFO   ] - Client disconnected: j2RtG8Dl_81W31n7AAAj
+[INFO   ] - Client disconnected: dzodKp4dpUHTU8l9AAAl
+[INFO   ] - Client disconnected: OXm8k1Pe_mkrn9J0AAAn
+[INFO   ] - Client disconnected: aROjZGGw34DD1l1bAAAp
+[INFO   ] - Client disconnected: LyLITPzIv0U9fDZeAAAr
+[INFO   ] - Client disconnected: kUgB_IPIU7pqC6n9AAAt
+[INFO   ] - Socket GDSE6KHmkbDUwJJwAAAv joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: GDSE6KHmkbDUwJJwAAAv
+[INFO   ] - Socket fsgtYd-qx3DxgZqHAAAx joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket fsgtYd-qx3DxgZqHAAAx joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: fsgtYd-qx3DxgZqHAAAx
+[INFO   ] - Socket g2nFwu9w5JwqmGsYAAAz joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: g2nFwu9w5JwqmGsYAAAz
+[INFO   ] - Client disconnected: yNTaH1YvNgfrnc97AAA1
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:offer from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:ice-candidate from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:hangup from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Forwarding webrtc:offer from 691f29e4f4137dd13800d2be to room 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket oZyS4aEK__ZBnBW9AAA3 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Client disconnected: oZyS4aEK__ZBnBW9AAA3
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[INFO   ] - Socket J-nmWw_Lf9hf64J_AAA5 joined booking room: 6874aa958192c435066b619d-691f29e4f4137dd13800d2be
+[ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[INFO   ] - Client disconnected: J-nmWw_Lf9hf64J_AAA5
+[INFO   ] - Client disconnected: _23XVX0BEsFoMMOzAAA7

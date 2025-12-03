@@ -22,6 +22,8 @@ export interface IBookingConfirmationRes {
   serviceImage: string;
   providerName: string;
   providerImage: string;
+  providerRating?: number;
+  providerReviewsCount?: number;
   priceUnit: string;
   duration: string;
   customer?: string;

@@ -24,14 +24,15 @@ router.get('/getFilteredServiceProvider', isProvOrUser, providerController.getSe
 router.get('/getServicesForAddPage', providerController.getServicesForAddPage);
 router.get('/getProviderForChatPage', authMiddleware_1.authenticateToken, providerController.getProviderForChatPage);
 router.get('/getProviderDashboard', isProvider, providerController.getProviderDashboard);
-router.get('/earnings', isProvider, providerController.getEarningsAnalytics);
 router.get('/calendar/availability', isProvOrUser, providerController.getProviderAvailability);
 router.get('/performance', isProvider, providerController.getPerformance);
 //provider
 router.get('/availability', isProvider, providerController.getAvailability);
 router.put('/availability', isProvider, providerController.updateAvailability);
+router.get('/earnings', isProvider, providerController.getEarningsAnalytics);
 // admin
 router.get('/getAllProviders', providerController.getAllProvidersList);
 router.get('/getProviderList', providerController.getProvidersforAdmin);
 router.patch('/updateProviderStatus/:id', isAdmin, providerController.updateProviderStatus);
+router.get('/admin/:id/full-details', isAdmin, providerController.getProviderFullDetails);
 exports.default = router;

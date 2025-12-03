@@ -56,15 +56,6 @@ let ReviewService = class ReviewService {
             yield this._reviewRepository.create(reviewData);
             booking.reviewed = true;
             yield this._bookingRepository.update(bookingId, booking);
-            // const reviews = (await this._reviewRepository.findAll({
-            //     providerId: booking.providerId,
-            //     status: ReviewStatus.PENDING,
-            // })) as IReview[];
-            // const totalRatings = reviews.reduce((sum: number, r: IReview) => sum + (r.rating as number), 0);
-            // const avgRating = reviews.length > 0 ? totalRatings / reviews.length : 0;
-            // await this._providerRepository.update(booking.providerId.toString(), {
-            //     rating: avgRating,
-            // });
             return {
                 message: "Your Review Submitted",
             };
@@ -82,13 +73,10 @@ let ReviewService = class ReviewService {
                 throw new CustomError_1.CustomError("Review not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
             }
             review.status = newStatus;
-            // We update the document directly
             const updatedReview = yield this._reviewRepository.update(reviewId, review);
-            // --- Recalculate Provider Rating ---
-            // We must recalculate the provider's rating after removing a review
             const reviews = yield this._reviewRepository.findAll({
                 providerId: review.providerId,
-                status: review_enum_1.ReviewStatus.APPROVED, // Only count approved reviews
+                status: review_enum_1.ReviewStatus.APPROVED,
             });
             const totalRatings = reviews.reduce((sum, r) => sum + r.rating, 0);
             const avgRating = reviews.length > 0 ? totalRatings / reviews.length : 0;
