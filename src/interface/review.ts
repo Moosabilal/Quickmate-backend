@@ -23,3 +23,20 @@ export interface IReviewFilters {
     sort?: 'newest' | 'oldest';
     status?: ReviewStatus
 }
+
+export interface RawAggregatedReview {
+    _id: string;
+    reviewContent: string;
+    rating: number;
+    status: string;
+    date: Date;
+    user: {
+        id: string;
+        name: string;
+        isVerified: boolean;
+    };
+    provider: {
+        id: string;
+        name: string;
+    };
+}

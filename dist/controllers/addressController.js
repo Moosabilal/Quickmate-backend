@@ -55,14 +55,20 @@ let AddressController = class AddressController {
         });
         this.updateAddress = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = address_validation_1.mongoIdSchema.parse(req.params);
+                const { id } = address_validation_1.paramIdSchema.parse(req.params);
                 const validatedBody = address_validation_1.updateAddressSchema.parse(req.body);
-                const updateData = Object.assign({}, validatedBody);
-                const locationString = validatedBody.locationCoords;
+                const updateData = {
+                    label: validatedBody.label,
+                    street: validatedBody.street,
+                    city: validatedBody.city,
+                    state: validatedBody.state,
+                    zip: validatedBody.zip
+                };
                 if (validatedBody.locationCoords) {
                     const [lat, lon] = validatedBody.locationCoords.split(",").map(Number);
                     updateData.locationCoords = { type: "Point", coordinates: [lon, lat] };
                 }
+                console.log('the location correds', updateData);
                 const updateAddress = yield this._addressService.updateAddressById(id, updateData);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(updateAddress);
             }
@@ -72,7 +78,7 @@ let AddressController = class AddressController {
         });
         this.deleteAddress = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = address_validation_1.mongoIdSchema.parse(req.params);
+                const { id } = address_validation_1.paramIdSchema.parse(req.params);
                 const response = yield this._addressService.delete_Address(id);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(response);
             }

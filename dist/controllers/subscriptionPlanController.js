@@ -101,7 +101,7 @@ let SubscriptionPlanController = class SubscriptionPlanController {
         });
         this.deleteSubscriptionPlan = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = subscription_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id } = subscription_validation_1.paramIdSchema.parse(req.params);
                 yield this._subscriptionPlanService.deleteSubscriptionPlan(id);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json();
             }
@@ -150,7 +150,7 @@ let SubscriptionPlanController = class SubscriptionPlanController {
         });
         this.scheduleDowngrade = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { newPlanId } = zod_1.default.object({ newPlanId: subscription_validation_1.mongoIdParamSchema.shape.id }).parse(req.body);
+                const { newPlanId } = zod_1.default.object({ newPlanId: subscription_validation_1.paramIdSchema.shape.id }).parse(req.body);
                 const userId = req.user.id;
                 const updatedSubscription = yield this._subscriptionPlanService.scheduleDowngrade(userId, newPlanId);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({

@@ -12,7 +12,7 @@ import { ZodError } from 'zod';
 import {
   createCategorySchema,
   updateCategorySchema,
-  mongoIdParamSchema,
+  paramIdSchema,
   getSubcategoriesQuerySchema
 } from '../utils/validations/category.validation';
 
@@ -87,7 +87,7 @@ export class CategoryController {
 
   updateCategory = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id } = mongoIdParamSchema.parse(req.params);
+      const { id } = paramIdSchema.parse(req.params);
       const validatedBody = updateCategorySchema.parse(req.body);
       const { name, description, status, parentId, commissionType, commissionValue, commissionStatus } = validatedBody;
 
@@ -142,7 +142,7 @@ export class CategoryController {
 
   getCategoryById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id } = mongoIdParamSchema.parse(req.params);
+      const { id } = paramIdSchema.parse(req.params);
 
       const responseData = await this._categoryService.getCategoryById(id);
 
@@ -161,7 +161,7 @@ export class CategoryController {
 
 public getCategoryForEdit = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id } = mongoIdParamSchema.parse(req.params);
+      const { id } = paramIdSchema.parse(req.params);
       const categoryData = await this._categoryService.getCategoryForEdit(id);
       res.status(HttpStatusCode.OK).json(categoryData);
     } catch (error) {
@@ -244,7 +244,7 @@ public getCategoryForEdit = async (req: Request, res: Response, next: NextFuncti
 
     public getRelatedCategories = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdParamSchema.parse(req.params);
+            const { id } = paramIdSchema.parse(req.params);
             const related = await this._categoryService.getRelatedCategories(id);
             res.status(HttpStatusCode.OK).json({ success: true, data: related });
         } catch (error) {

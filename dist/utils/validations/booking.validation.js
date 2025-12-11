@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyChatPaymentSchema = exports.chatBookingSchema = exports.providerBookingsQuerySchema = exports.bookingFilterSchema = exports.findProviderRangeSchema = exports.adminBookingsQuerySchema = exports.verifyBookingOtpSchema = exports.updateBookingDateTimeSchema = exports.updateBookingStatusSchema = exports.verifyPaymentSchema = exports.confirmPaymentSchema = exports.createBookingSchema = exports.mongoIdParamSchema = void 0;
+exports.verifyChatPaymentSchema = exports.chatBookingSchema = exports.providerBookingsQuerySchema = exports.bookingFilterSchema = exports.findProviderRangeSchema = exports.adminBookingsQuerySchema = exports.verifyBookingOtpSchema = exports.updateBookingDateTimeSchema = exports.updateBookingStatusSchema = exports.verifyPaymentSchema = exports.confirmPaymentSchema = exports.createBookingSchema = exports.paramIdSchema = void 0;
 const zod_1 = require("zod");
 const booking_enum_1 = require("../../enums/booking.enum");
 const userRoles_1 = require("../../enums/userRoles");
-exports.mongoIdParamSchema = zod_1.z.object({
-    id: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
+exports.paramIdSchema = zod_1.z.object({
+    id: zod_1.z.string().min(1, "ID is required"),
 });
 exports.createBookingSchema = zod_1.z.object({
-    providerId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Provider ID'),
-    serviceId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Service ID'),
-    addressId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Address ID'),
+    providerId: zod_1.z.string().min(1, "ID is required"),
+    serviceId: zod_1.z.string().min(1, "ID is required"),
+    addressId: zod_1.z.string().min(1, "ID is required"),
     customerName: zod_1.z.string().min(2, "Customer name is required."),
     phone: zod_1.z.string().min(10, "A valid phone number is required."),
     amount: zod_1.z.coerce.number().positive("Amount must be a positive number."),
@@ -26,7 +26,7 @@ exports.verifyPaymentSchema = zod_1.z.object({
     razorpay_payment_id: zod_1.z.string().optional(),
     razorpay_signature: zod_1.z.string().optional(),
     bookingId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Booking ID'),
-    providerId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Provider ID'),
+    providerId: zod_1.z.string().min(1, "ID is required"),
     paymentMethod: zod_1.z.nativeEnum(userRoles_1.PaymentMethod),
     paymentDate: zod_1.z.coerce.date(),
     amount: zod_1.z.number().positive(),
@@ -50,7 +50,7 @@ exports.adminBookingsQuerySchema = zod_1.z.object({
     dateRange: zod_1.z.string().optional(),
 });
 exports.findProviderRangeSchema = zod_1.z.object({
-    serviceId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Service ID'),
+    serviceId: zod_1.z.string().min(1, "ID is required"),
     lat: zod_1.z.coerce.number(),
     lng: zod_1.z.coerce.number(),
     radius: zod_1.z.coerce.number().positive(),
@@ -61,7 +61,7 @@ exports.bookingFilterSchema = zod_1.z.object({
         .transform(val => (val === booking_enum_1.BookingStatus.All) ? undefined : val),
 });
 exports.providerBookingsQuerySchema = exports.bookingFilterSchema.extend({
-    providerId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
+    providerId: zod_1.z.string().min(1, "ID is required"),
 });
 exports.chatBookingSchema = exports.createBookingSchema.extend({
     userId: zod_1.z.string().optional(),

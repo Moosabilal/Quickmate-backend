@@ -12,7 +12,6 @@ import {
     createBookingSchema,
     confirmPaymentSchema,
     verifyPaymentSchema,
-    mongoIdParamSchema,
     updateBookingStatusSchema,
     updateBookingDateTimeSchema,
     verifyBookingOtpSchema,
@@ -20,6 +19,7 @@ import {
     findProviderRangeSchema,
     bookingFilterSchema,
     providerBookingsQuerySchema,
+    paramIdSchema,
 } from "../utils/validations/booking.validation";
 import { Roles } from "../enums/userRoles";
 
@@ -78,7 +78,7 @@ export class BookingController {
 
     public getBookingById = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id: bookingId } = mongoIdParamSchema.parse(req.params);
+            const { id: bookingId } = paramIdSchema.parse(req.params);
             const response = await this._bookingService.findBookingById(bookingId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -126,7 +126,7 @@ export class BookingController {
 
     public updateBookingStatus = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id: bookingId } = mongoIdParamSchema.parse(req.params);
+            const { id: bookingId } = paramIdSchema.parse(req.params);
             const { status } = updateBookingStatusSchema.parse(req.body);
             const userId = req.user.id
             const response = await this._bookingService.updateStatus(bookingId, status, userId)
@@ -146,7 +146,7 @@ export class BookingController {
 
     public updateBookingDateTime = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id: bookingId } = mongoIdParamSchema.parse(req.params);
+            const { id: bookingId } = paramIdSchema.parse(req.params);
             const { date, time } = updateBookingDateTimeSchema.parse(req.body);
             await this._bookingService.updateBookingDateTime(bookingId, date, time);
             res.status(HttpStatusCode.NO_CONTENT).send()
@@ -208,7 +208,7 @@ export class BookingController {
 
     public getBookingDetailsForAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdParamSchema.parse(req.params);
+            const { id } = paramIdSchema.parse(req.params);
             const data = await this._bookingService.getBookingDetailsForAdmin(id);
             res.status(HttpStatusCode.OK).json({ success: true, data });
         } catch (error) {

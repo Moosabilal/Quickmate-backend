@@ -6,7 +6,7 @@ import { uploadToCloudinary } from "../utils/cloudinaryUpload";
 
 @injectable()
 export class MessageController {
-    constructor() {}
+    constructor() { }
 
     public uploadChatFile = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
@@ -40,24 +40,28 @@ export class MessageController {
                 message: "File uploaded successfully",
                 url: fileUrl
             });
-        } catch (error: any) {
-            console.error('File upload error in controller:', error.message);
+        } catch (error: unknown) {
+            console.error('File upload error in controller:', error);
 
             let statusCode = HttpStatusCode.INTERNAL_SERVER_ERROR;
             let errorMessage = "Failed to upload file";
 
-            if (error.message?.includes('File size exceeds')) {
-                statusCode = HttpStatusCode.BAD_REQUEST;
-                errorMessage = error.message;
-            } else if (error.message?.includes('not supported')) {
-                statusCode = HttpStatusCode.BAD_REQUEST;
-                errorMessage = error.message;
-            } else if (error.message?.includes('authentication failed')) {
-                statusCode = HttpStatusCode.INTERNAL_SERVER_ERROR;
-                errorMessage = "Server configuration error";
-            } else if (error.message?.includes('Invalid file format')) {
-                statusCode = HttpStatusCode.BAD_REQUEST;
-                errorMessage = "Invalid file format";
+            if (error instanceof Error) {
+                const msg = error.message;
+
+                if (msg?.includes('File size exceeds')) {
+                    statusCode = HttpStatusCode.BAD_REQUEST;
+                    errorMessage = msg;
+                } else if (msg?.includes('not supported')) {
+                    statusCode = HttpStatusCode.BAD_REQUEST;
+                    errorMessage = msg;
+                } else if (msg?.includes('authentication failed')) {
+                    statusCode = HttpStatusCode.INTERNAL_SERVER_ERROR;
+                    errorMessage = "Server configuration error";
+                } else if (msg?.includes('Invalid file format')) {
+                    statusCode = HttpStatusCode.BAD_REQUEST;
+                    errorMessage = "Invalid file format";
+                }
             }
 
             res.status(statusCode).json({

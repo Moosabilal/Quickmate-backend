@@ -32,7 +32,6 @@ const HttpStatusCode_1 = require("../../enums/HttpStatusCode");
 const razorpay_1 = require("../../utils/razorpay");
 const wallet_mapper_1 = require("../../utils/mappers/wallet.mapper");
 const mongoose_1 = require("mongoose");
-const payment_wallet_enum_1 = require("../../enums/payment&wallet.enum");
 let WalletService = class WalletService {
     constructor(walletRepository) {
         this._walletRepository = walletRepository;
@@ -53,21 +52,16 @@ let WalletService = class WalletService {
     getSummary(userId, ownerType, filters, page, limit) {
         return __awaiter(this, void 0, void 0, function* () {
             const wallet = yield this.getOrCreateWallet(userId, ownerType);
-            const walletId = wallet._id.toString();
             const skip = (page - 1) * limit;
-            const query = { walletId };
-            if (filters.status && filters.status !== payment_wallet_enum_1.TransactionStatus.ALL) {
-                query.status = filters.status;
-            }
-            if (filters.transactionType) {
-                query.transactionType = filters.transactionType;
-            }
-            if (filters.startDate) {
-                query.createdAt = { $gte: new Date(filters.startDate) };
-            }
+            const filterOptions = {
+                walletId: wallet._id.toString(),
+                status: filters.status,
+                transactionType: filters.transactionType,
+                startDate: filters.startDate ? new Date(filters.startDate) : undefined
+            };
             const [txns, total] = yield Promise.all([
-                this._walletRepository.getTransactions(query, skip, limit),
-                this._walletRepository.transactionCount()
+                this._walletRepository.getTransactions(filterOptions, skip, limit),
+                this._walletRepository.transactionCount(filterOptions)
             ]);
             return {
                 wallet,

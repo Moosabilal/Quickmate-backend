@@ -41,7 +41,8 @@ function chatSocket(io) {
                 yield bookingService.saveAndEmitMessage(io, messageData);
             }
             catch (err) {
-                logger_1.default.error("Error in sendBookingMessage:", err);
+                const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+                logger_1.default.error("Error in sendBookingMessage:", errorMessage);
                 socket.emit("chat:error", { message: "Failed to send message" });
             }
         }));
@@ -51,15 +52,15 @@ function chatSocket(io) {
                     logger_1.default.warn(`Invalid payload for ${eventName}:`, payload);
                     return;
                 }
-                if (eventName === "webrtc:offer" && !payload.offer) {
+                if (eventName === "webrtc:offer" && !("offer" in payload && payload.offer)) {
                     logger_1.default.warn(`Missing offer in ${eventName}:`, payload);
                     return;
                 }
-                if (eventName === "webrtc:answer" && !payload.answer) {
+                if (eventName === "webrtc:answer" && !("answer" in payload && payload.answer)) {
                     logger_1.default.warn(`Missing answer in ${eventName}:`, payload);
                     return;
                 }
-                if (eventName === "webrtc:ice-candidate" && !payload.candidate) {
+                if (eventName === "webrtc:ice-candidate" && !("candidate" in payload && payload.candidate)) {
                     logger_1.default.warn(`Missing candidate in ${eventName}:`, payload);
                     return;
                 }

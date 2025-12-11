@@ -44,6 +44,7 @@ import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDur
 import { ISocketMessage } from "../../interface/message";
 import { endOfDay, endOfMonth, endOfWeek, startOfDay, startOfMonth, startOfWeek } from "date-fns";
 import { Http2ServerRequest } from "http2";
+import { Server } from "socket.io";
 
 
 @injectable()
@@ -257,6 +258,7 @@ export class BookingService implements IBookingService {
             [BookingStatus.IN_PROGRESS]: 0,
             [BookingStatus.COMPLETED]: 0,
             [BookingStatus.CANCELLED]: 0,
+            [BookingStatus.EXPIRED]: 0,
         };
 
         let allBookingsCount = 0;
@@ -306,6 +308,7 @@ export class BookingService implements IBookingService {
             [BookingStatus.IN_PROGRESS]: 0,
             [BookingStatus.COMPLETED]: 0,
             [BookingStatus.CANCELLED]: 0,
+            [BookingStatus.EXPIRED]: 0,
         };
 
         let allBookingsCount = 0;
@@ -325,7 +328,7 @@ export class BookingService implements IBookingService {
     }
 
     async saveAndEmitMessage(
-        io: any,
+        io: Server,
         messageData: ISocketMessage
     ) {
         const dataToCreate = {
@@ -355,9 +358,21 @@ export class BookingService implements IBookingService {
         if (!booking) {
             throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
+
         if (booking.status === BookingStatus.CANCELLED) {
             return { message: ErrorMessage.BOOKING_IS_ALREADY_CANCELLED }
         }
+
+        if (status === BookingStatus.IN_PROGRESS) {
+            const dateTimeString = `${booking.scheduledTime} ${booking.scheduledDate}`;
+            const scheduledTime = new Date(dateTimeString);
+            const currenttimeStamp = new Date()
+            const diffInMinutes = (scheduledTime.getTime() - currenttimeStamp.getTime()) / (1000 * 60);
+            if(diffInMinutes > 5){
+                throw new CustomError("You can start the booking only 5 minutes before the scheduled time", HttpStatusCode.BAD_REQUEST) 
+            } 
+        }
+
         let bookingOtp: string | undefined;
         const updatePayload: UpdateQuery<IBooking> = { status: status };
         if (status === BookingStatus.CANCELLED) {

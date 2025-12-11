@@ -45,7 +45,6 @@ const chatBotService_1 = require("../services/implementation/chatBotService");
 const chatSessionRepository_1 = require("../repositories/implementation/chatSessionRepository");
 const chatMessageRepository_1 = require("../repositories/implementation/chatMessageRepository");
 const paymentService_1 = require("../services/implementation/paymentService");
-const bookingBotService_1 = require("../services/implementation/bookingBotService");
 const container = new inversify_1.Container();
 exports.container = container;
 container.bind(type_1.default.AuthController).to(authController_1.AuthController);
@@ -66,7 +65,6 @@ container.bind(type_1.default.AddressRepository).to(addressRepository_1.AddressR
 container.bind(type_1.default.BookingController).to(bookingController_1.BookingController);
 container.bind(type_1.default.BookingService).to(bookingService_1.BookingService);
 container.bind(type_1.default.BookingRepository).to(bookingRepository_1.BookingRepository);
-container.bind(type_1.default.BookingBotService).to(bookingBotService_1.BookingBotService);
 container.bind(type_1.default.PaymentService).to(paymentService_1.PaymentService);
 container.bind(type_1.default.PaymentRepository).to(paymentRepository_1.PaymentRepository);
 container.bind(type_1.default.ServiceController).to(serviceController_1.ServiceController);

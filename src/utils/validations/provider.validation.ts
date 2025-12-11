@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { ProviderStatus } from '../../enums/provider.enum';
 
-const mongoIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format');
-export const mongoIdParamSchema = z.object({ id: mongoIdSchema });
+const IdSchema = z.string().min(1, "ID is required");
+export const paramIdSchema = z.object({ id: IdSchema });
 
 
 export const registerProviderSchema = z.object({
@@ -38,7 +38,7 @@ export const providersForAdminQuerySchema = z.object({
 });
 
 export const getServiceProviderQuerySchema = z.object({
-    serviceId: mongoIdSchema,
+    serviceId: IdSchema,
     experience: z.coerce.number().positive().optional(),
 
     radius: z.coerce.number().positive().optional(),
@@ -51,7 +51,7 @@ export const getServiceProviderQuerySchema = z.object({
 });
 
 export const getAvailabilityQuerySchema = z.object({
-    serviceId: mongoIdSchema,
+    serviceId: IdSchema,
     latitude: z.coerce.number(),
     longitude: z.coerce.number(),
     radius: z.coerce.number().int().positive().optional(),

@@ -118,7 +118,7 @@ let CategoryController = class CategoryController {
         this.updateCategory = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
-                const { id } = category_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id } = category_validation_1.paramIdSchema.parse(req.params);
                 const validatedBody = category_validation_1.updateCategorySchema.parse(req.body);
                 const { name, description, status, parentId, commissionType, commissionValue, commissionStatus } = validatedBody;
                 let iconUrl = req.body.iconUrl;
@@ -166,7 +166,7 @@ let CategoryController = class CategoryController {
         });
         this.getCategoryById = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = category_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id } = category_validation_1.paramIdSchema.parse(req.params);
                 const responseData = yield this._categoryService.getCategoryById(id);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(responseData);
             }
@@ -182,7 +182,7 @@ let CategoryController = class CategoryController {
         });
         this.getCategoryForEdit = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = category_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id } = category_validation_1.paramIdSchema.parse(req.params);
                 const categoryData = yield this._categoryService.getCategoryForEdit(id);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(categoryData);
             }
@@ -260,7 +260,7 @@ let CategoryController = class CategoryController {
         });
         this.getRelatedCategories = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = category_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id } = category_validation_1.paramIdSchema.parse(req.params);
                 const related = yield this._categoryService.getRelatedCategories(id);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, data: related });
             }

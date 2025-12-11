@@ -2,14 +2,14 @@ import { z } from 'zod';
 import { BookingStatus } from '../../enums/booking.enum'; 
 import { PaymentMethod } from '../../enums/userRoles';
 
-export const mongoIdParamSchema = z.object({
-    id: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
+export const paramIdSchema = z.object({
+    id: z.string().min(1, "ID is required"),
 });
 
 export const createBookingSchema = z.object({
-    providerId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Provider ID'),
-    serviceId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Service ID'),
-    addressId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Address ID'),
+    providerId: z.string().min(1, "ID is required"),
+    serviceId: z.string().min(1, "ID is required"),
+    addressId: z.string().min(1, "ID is required"),
     customerName: z.string().min(2, "Customer name is required."),
     phone: z.string().min(10, "A valid phone number is required."),
     amount: z.coerce.number().positive("Amount must be a positive number."),
@@ -28,7 +28,7 @@ export const verifyPaymentSchema = z.object({
     razorpay_signature: z.string().optional(),  
     bookingId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Booking ID'),
 
-    providerId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Provider ID'),
+    providerId: z.string().min(1, "ID is required"),
     paymentMethod: z.nativeEnum(PaymentMethod),
     paymentDate: z.coerce.date(), 
     amount: z.number().positive(),
@@ -57,7 +57,7 @@ export const adminBookingsQuerySchema = z.object({
 });
 
 export const findProviderRangeSchema = z.object({
-    serviceId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Service ID'),
+    serviceId: z.string().min(1, "ID is required"),
     lat: z.coerce.number(),
     lng: z.coerce.number(),
     radius: z.coerce.number().positive(),
@@ -70,7 +70,7 @@ export const bookingFilterSchema = z.object({
 });
 
 export const providerBookingsQuerySchema = bookingFilterSchema.extend({
-    providerId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
+    providerId: z.string().min(1, "ID is required"),
 });
 
 export const chatBookingSchema = createBookingSchema.extend({

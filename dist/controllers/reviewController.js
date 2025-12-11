@@ -84,7 +84,7 @@ let ReviewController = class ReviewController {
         });
         this.updateReviewStatus = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = booking_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id } = booking_validation_1.paramIdSchema.parse(req.params);
                 const { status } = review_validation_1.updateReviewStatusSchema.parse(req.body);
                 const updatedReview = yield this._reviewService.updateReviewStatus(id, status);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({

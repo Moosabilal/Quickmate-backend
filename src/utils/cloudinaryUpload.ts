@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 import path from 'path';
+import { CloudinaryDeleteResponse, CloudinaryError } from '../interface/cloudinary';
 
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 const apiKey = process.env.CLOUDINARY_API_KEY;
@@ -65,7 +66,10 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
     }
 
     return result.public_id;
-  } catch (error: any) {
+  } catch (rawError: unknown) {
+    // Type Assertion: Treat the unknown error as our defined CloudinaryError
+    const error = rawError as CloudinaryError;
+
     console.error('Cloudinary upload error details:', {
       message: error.message,
       http_code: error.http_code,
@@ -123,10 +127,10 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
 };
 
 
-export const deleteFromCloudinary = async (publicId: string): Promise<any> => {
+export const deleteFromCloudinary = async (publicId: string): Promise<CloudinaryDeleteResponse> => {
   try {
     const result = await cloudinary.uploader.destroy(publicId);
-    return result;
+    return result as CloudinaryDeleteResponse;
   } catch (error) {
     console.error('Cloudinary deletion error:', error);
     throw new Error('Failed to delete image from Cloudinary.');

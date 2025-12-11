@@ -9,6 +9,7 @@ import { IReview as IReviewModel } from '../../models/Review';
 import { IUser } from '../../models/User';
 import { _haversineKm } from '../helperFunctions/haversineKm';
 import { LastMessageData } from '../../interface/message';
+import { IPopulatedBookingForEarnings } from '../../interface/booking';
 
 
 const createJoiningId = (id1: string, id2: string): string => {
@@ -212,13 +213,13 @@ export function toEarningsAnalyticsDTO(
   totalClients: number,
   newClients: number,
   topService: { name: string, earnings: number },
-  currentBookings: IBooking[]
+  currentBookings: IPopulatedBookingForEarnings[]
 ): EarningsAnalyticsData {
 
   const breakdown = currentBookings.map(b => ({
     date: new Date(b.createdAt as string | number | Date),
-    service: (b.serviceId as any)?.title || 'Unknown Service',
-    client: (b.userId as any)?.name || 'Unknown Client',
+    service: b.serviceId?.title || 'Unknown Service',
+    client: b.userId?.name || 'Unknown Client',
     amount: Number(b.amount) || 0,
     status: String(b.status || 'Unknown'),
   }));
@@ -397,7 +398,7 @@ export function toProviderPerformanceDTO(
 
 
 export function toServiceDetailsDTO(service: IService): IServiceDetails {
-    const serviceObj = service as any;
+    const serviceObj = service as IService;
 
     return {
         _id: serviceObj._id.toString(),
@@ -406,8 +407,8 @@ export function toServiceDetailsDTO(service: IService): IServiceDetails {
         price: serviceObj.price,
         priceUnit: serviceObj.priceUnit,
         duration: serviceObj.duration,
-        categoryId: serviceObj.categoryId, 
-        subCategoryId: serviceObj.subCategoryId,
+        categoryId: serviceObj.categoryId.toString(), 
+        subCategoryId: serviceObj.subCategoryId.toString(),
         experience: serviceObj.experience
     };
 }

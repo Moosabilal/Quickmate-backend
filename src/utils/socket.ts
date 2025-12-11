@@ -3,11 +3,13 @@ import { container } from "../di/container";
 import TYPES from "../di/type";
 import logger from "../logger/logger";
 import { ISocketMessage } from "../interface/message";
+import { Server, Socket } from "socket.io";
+import { WebRTCPayload } from "../interface/socket";
 
-export function chatSocket(io: any) {
+export function chatSocket(io: Server) {
   const bookingService = container.get<BookingService>(TYPES.BookingService);
 
-  io.on("connection", (socket: any) => {
+  io.on("connection", (socket: Socket) => {
 
     socket.on("joinBookingRoom", (joiningId: string) => {
       if (!joiningId || typeof joiningId !== 'string' || joiningId.trim() === '') {
@@ -33,28 +35,29 @@ export function chatSocket(io: any) {
         }
         try {
           await bookingService.saveAndEmitMessage(io, messageData);
-        } catch (err) {
-          logger.error("Error in sendBookingMessage:", err);
+        } catch (err: unknown) {
+          const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+          logger.error("Error in sendBookingMessage:", errorMessage);
           socket.emit("chat:error", { message: "Failed to send message" });
         }
       }
     );
 
     const forwardEventHandler = (eventName: string) => {
-      socket.on(eventName, (payload: any) => {
+      socket.on(eventName, (payload: WebRTCPayload) => {
         if (!payload || !payload.joiningId || !payload.fromUserId) {
           logger.warn(`Invalid payload for ${eventName}:`, payload);
           return;
         }
-        if (eventName === "webrtc:offer" && !payload.offer) {
+        if (eventName === "webrtc:offer" && !("offer" in payload && payload.offer)) {
           logger.warn(`Missing offer in ${eventName}:`, payload);
           return;
         }
-        if (eventName === "webrtc:answer" && !payload.answer) {
+        if (eventName === "webrtc:answer" && !("answer" in payload && payload.answer)) {
           logger.warn(`Missing answer in ${eventName}:`, payload);
           return;
         }
-        if (eventName === "webrtc:ice-candidate" && !payload.candidate) {
+        if (eventName === "webrtc:ice-candidate" && !("candidate" in payload && payload.candidate)) {
           logger.warn(`Missing candidate in ${eventName}:`, payload);
           return;
         }

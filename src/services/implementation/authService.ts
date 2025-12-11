@@ -141,9 +141,9 @@ export class AuthService implements IAuthService {
         if (user.registrationOtpExpires && user.registrationOtpExpires instanceof Date) {
             const timeSinceLastOtpSent = Date.now() - (user.registrationOtpExpires.getTime() - (OTP_EXPIRY_MINUTES * 60 * 1000));
             if (timeSinceLastOtpSent < RESEND_COOLDOWN_SECONDS * 1000) {
-                const error = new Error(`Please wait ${RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000)} seconds before requesting another OTP.`);
-                (error as any).statusCode = 429;
-                throw error;
+                const remainingSeconds = RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000);
+
+                throw new CustomError(`Please wait ${remainingSeconds} seconds before requesting another OTP.`, 429);
             }
         }
 
@@ -415,37 +415,21 @@ export class AuthService implements IAuthService {
         total: number;
         totalPages: number;
         currentPage: number;
-    }> {
-        const skip = (page - 1) * limit;
-
-        const filter: any = {
-            $or: [
-                { name: { $regex: search, $options: 'i' } },
-                { email: { $regex: search, $options: 'i' } },
-            ],
-        };
-
-        if (status && status !== 'All') {
-            if (status === 'Active') {
-                filter.isVerified = true;
-            } else if (status === 'Inactive') {
-                filter.isVerified = false;
-            }
-        }
+    }> {        
 
         const [users, total] = await Promise.all([
-            this._userRepository.findUsersWithFilter(filter, skip, limit),
-            this._userRepository.countUsers(filter),
+            this._userRepository.findUsersWithFilter({search: search, status: status}, page, limit),
+            this._userRepository.countUsers({search: search, status: status}),
         ]);
 
         if (!users || users.length === 0) {
-        return {
-            users: [],
-            total: 0,
-            totalPages: 0,
-            currentPage: 1
-        };
-    }
+            return {
+                users: [],
+                total: 0,
+                totalPages: 0,
+                currentPage: 1
+            };
+        }
 
         const mappedUsers = users.map(user => ({
             id: user._id.toString(),

@@ -9,7 +9,7 @@ import z, { ZodError } from "zod";
 import {
     createSubscriptionPlanSchema,
     updateSubscriptionPlanSchema,
-    mongoIdParamSchema,
+    paramIdSchema,
     providerIdParamSchema,
     createSubscriptionOrderSchema,
     verifySubscriptionPaymentSchema,
@@ -58,7 +58,7 @@ export class SubscriptionPlanController {
 
     public deleteSubscriptionPlan = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdParamSchema.parse(req.params);
+            const { id } = paramIdSchema.parse(req.params);
             await this._subscriptionPlanService.deleteSubscriptionPlan(id)
             res.status(HttpStatusCode.OK).json()
         } catch (error) {
@@ -72,7 +72,7 @@ export class SubscriptionPlanController {
             const { providerId } = providerIdParamSchema.parse(req.params);
             const subscription = await this._subscriptionPlanService.checkAndExpire(providerId);
             res.json(subscription);
-        } catch (error: any) {
+        } catch (error) {
             if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             res.status(400).json({ message: error.message });
         }
@@ -104,7 +104,7 @@ export class SubscriptionPlanController {
 
     public scheduleDowngrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { newPlanId } = z.object({ newPlanId: mongoIdParamSchema.shape.id }).parse(req.body);
+            const { newPlanId } = z.object({ newPlanId: paramIdSchema.shape.id }).parse(req.body);
             const userId = req.user.id; 
 
             const updatedSubscription = await this._subscriptionPlanService.scheduleDowngrade(userId, newPlanId);

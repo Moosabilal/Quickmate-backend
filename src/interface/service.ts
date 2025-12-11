@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { ServicesPriceUnit } from "../enums/Services.enum";
 
 export interface IAddAndEditServiceForm {
@@ -27,4 +28,15 @@ export interface IProviderServicePageResponse {
     rating?: number;
     reviews?: number;
 
+}
+
+export interface IServiceWithProvider {
+    _id: Types.ObjectId;
+    title: string;
+    price: number;
+    provider: {
+        _id: Types.ObjectId;
+        fullName: string;
+        rating: number;
+    };
 }

@@ -1,6 +1,8 @@
 import { CommissionTypes } from "../../enums/CommissionType.enum";
 import { ICategory } from "../../models/Categories";
 import { ICommissionRule } from "../../models/Commission";
+import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
+import { ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
 
 export async function calculateCommission(
     amount: number,
@@ -17,8 +19,8 @@ export async function calculateCommission(
 export async function calculateParentCommission(
     amount: number,
     subCategory: ICategory,
-    categoryRepo: any,
-    commissionRepo: any
+    categoryRepo: ICategoryRepository,
+    commissionRepo: ICommissionRuleRepository
 ): Promise<number> {
     if (!subCategory.parentId) return 0;
 

@@ -7,7 +7,7 @@ exports.updateReviewStatusSchema = zod_1.z.object({
     status: zod_1.z.nativeEnum(review_enum_1.ReviewStatus),
 });
 exports.addReviewSchema = zod_1.z.object({
-    bookingId: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'A valid booking ID is required.'),
+    bookingId: zod_1.z.string().min(1, "ID is required"),
     rating: zod_1.z.coerce.number().int().min(1, "Rating must be at least 1.").max(5, "Rating cannot be more than 5."),
     review: zod_1.z.string().min(10, "Review must be at least 10 characters long.").optional(),
 });

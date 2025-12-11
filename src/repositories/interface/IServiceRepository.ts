@@ -1,5 +1,5 @@
 import { promises } from "dns";
-import { IAddAndEditServiceForm } from "../../interface/service";
+import { IAddAndEditServiceForm, IServiceWithProvider } from "../../interface/service";
 import { IService } from "../../models/Service";
 import { IBaseRepository } from "./base/IBaseRepository";
 
@@ -13,5 +13,5 @@ export interface IServiceRepository extends IBaseRepository<IService> {
     findServicesWithProvider(
         subCategoryId: string, 
         maxPrice?: number
-    ): Promise<IService[]>;
+    ): Promise<IServiceWithProvider[]>;
 }

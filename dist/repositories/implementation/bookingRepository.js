@@ -279,7 +279,7 @@ let BookingRepository = class BookingRepository extends BaseRepository_1.BaseRep
                     $facet: {
                         metadata: [{ $count: 'total' }],
                         data: [
-                            { $sort: { createdAt: -1 } },
+                            { $sort: { createdAt: 1 } },
                             { $lookup: { from: 'addresses', localField: 'addressId', foreignField: '_id', as: 'address' } },
                             { $unwind: { path: '$address', preserveNullAndEmptyArrays: true } },
                             { $lookup: { from: 'categories', localField: 'service.subCategoryId', foreignField: '_id', as: 'subCategory' } },
@@ -444,6 +444,19 @@ let BookingRepository = class BookingRepository extends BaseRepository_1.BaseRep
             return this.model.countDocuments({
                 createdAt: { $gte: startDate, $lte: endDate }
             });
+        });
+    }
+    findOverdueBookings(cutoffDate) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.model.find({
+                status: { $in: [booking_enum_1.BookingStatus.PENDING, booking_enum_1.BookingStatus.CONFIRMED] },
+                scheduledDate: { $lt: cutoffDate }
+            });
+        });
+    }
+    updateStatus(bookingId, status) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.model.findByIdAndUpdate(bookingId, { status: status }, { new: true });
         });
     }
 };

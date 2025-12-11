@@ -96,19 +96,6 @@ let ChatbotController = class ChatbotController {
                 next(error);
             }
         });
-        this.getSessionStatus = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { sessionId } = req.params;
-                const session = yield this._chatbotService.getSessionStatus(sessionId);
-                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
-                    success: true,
-                    session
-                });
-            }
-            catch (error) {
-                next(error);
-            }
-        });
         this._chatbotService = chatbotService;
     }
 };

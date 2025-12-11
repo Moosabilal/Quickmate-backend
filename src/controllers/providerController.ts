@@ -15,7 +15,7 @@ import {
     updateProviderSchema,
     providersForAdminQuerySchema,
     updateProviderStatusSchema,
-    mongoIdParamSchema,
+    paramIdSchema,
     getServiceProviderQuerySchema,
     getAvailabilityQuerySchema,
     getEarningsQuerySchema,
@@ -198,7 +198,7 @@ export class ProviderController {
 
     public updateProviderStatus = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdParamSchema.parse(req.params);
+            const { id } = paramIdSchema.parse(req.params);
             const { newStatus } = updateProviderStatusSchema.parse(req.body);
             const response = await this._providerService.updateProviderStat(id, newStatus)
             res.status(HttpStatusCode.OK).json(response)
@@ -348,7 +348,7 @@ export class ProviderController {
 
     public getProviderFullDetails = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdParamSchema.parse(req.params); 
+            const { id } = paramIdSchema.parse(req.params); 
             const data = await this._providerService.getProviderFullDetails(id);
             res.status(HttpStatusCode.OK).json({ success: true, data });
         } catch (error) {

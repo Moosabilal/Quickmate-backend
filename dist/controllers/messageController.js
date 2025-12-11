@@ -25,7 +25,6 @@ const cloudinaryUpload_1 = require("../utils/cloudinaryUpload");
 let MessageController = class MessageController {
     constructor() {
         this.uploadChatFile = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            var _a, _b, _c, _d;
             try {
                 if (!req.file) {
                     res.status(HttpStatusCode_1.HttpStatusCode.BAD_REQUEST).json({
@@ -54,24 +53,27 @@ let MessageController = class MessageController {
                 });
             }
             catch (error) {
-                console.error('File upload error in controller:', error.message);
+                console.error('File upload error in controller:', error);
                 let statusCode = HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR;
                 let errorMessage = "Failed to upload file";
-                if ((_a = error.message) === null || _a === void 0 ? void 0 : _a.includes('File size exceeds')) {
-                    statusCode = HttpStatusCode_1.HttpStatusCode.BAD_REQUEST;
-                    errorMessage = error.message;
-                }
-                else if ((_b = error.message) === null || _b === void 0 ? void 0 : _b.includes('not supported')) {
-                    statusCode = HttpStatusCode_1.HttpStatusCode.BAD_REQUEST;
-                    errorMessage = error.message;
-                }
-                else if ((_c = error.message) === null || _c === void 0 ? void 0 : _c.includes('authentication failed')) {
-                    statusCode = HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR;
-                    errorMessage = "Server configuration error";
-                }
-                else if ((_d = error.message) === null || _d === void 0 ? void 0 : _d.includes('Invalid file format')) {
-                    statusCode = HttpStatusCode_1.HttpStatusCode.BAD_REQUEST;
-                    errorMessage = "Invalid file format";
+                if (error instanceof Error) {
+                    const msg = error.message;
+                    if (msg === null || msg === void 0 ? void 0 : msg.includes('File size exceeds')) {
+                        statusCode = HttpStatusCode_1.HttpStatusCode.BAD_REQUEST;
+                        errorMessage = msg;
+                    }
+                    else if (msg === null || msg === void 0 ? void 0 : msg.includes('not supported')) {
+                        statusCode = HttpStatusCode_1.HttpStatusCode.BAD_REQUEST;
+                        errorMessage = msg;
+                    }
+                    else if (msg === null || msg === void 0 ? void 0 : msg.includes('authentication failed')) {
+                        statusCode = HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR;
+                        errorMessage = "Server configuration error";
+                    }
+                    else if (msg === null || msg === void 0 ? void 0 : msg.includes('Invalid file format')) {
+                        statusCode = HttpStatusCode_1.HttpStatusCode.BAD_REQUEST;
+                        errorMessage = "Invalid file format";
+                    }
                 }
                 res.status(statusCode).json({
                     success: false,

@@ -3,7 +3,6 @@ import { inject, injectable } from 'inversify';
 import TYPES from '../di/type';
 import { HttpStatusCode } from '../enums/HttpStatusCode';
 import { IChatBotService } from '../services/interface/IChatBotService';
-import { AuthRequest } from '../middleware/authMiddleware';
 import { CustomError } from '../utils/CustomError';
 import { IChatPaymentVerify } from '../interface/chatBot';
 
@@ -79,20 +78,6 @@ export class ChatbotController {
                 success: true, 
                 booking,
                 message: "Payment verified and booking confirmed successfully"
-            });
-        } catch (error) { 
-            next(error); 
-        }
-    };
-
-    public getSessionStatus = async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            const { sessionId } = req.params;
-            const session = await this._chatbotService.getSessionStatus(sessionId);
-            
-            res.status(HttpStatusCode.OK).json({ 
-                success: true, 
-                session 
             });
         } catch (error) { 
             next(error); 

@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { BookingStatus } from "../enums/booking.enum";
 import { PaymentStatus } from "../enums/userRoles";
 import { DaySchedule } from "./provider";
@@ -127,6 +128,7 @@ export interface IBookingStatusCounts {
   [BookingStatus.IN_PROGRESS]: number;
   [BookingStatus.COMPLETED]: number;
   [BookingStatus.CANCELLED]: number;
+  [BookingStatus.EXPIRED]: number;
 }
 
 export interface IBookingStatusCount {
@@ -148,7 +150,7 @@ export interface IProviderBookingsResponse {
 export interface IBookingDetailData {
   booking: {
     _id: string;
-    status: string;
+    status: BookingStatus;
     paymentStatus: string;
     amount: string;
     date: string;
@@ -161,4 +163,20 @@ export interface IBookingDetailData {
   service: { title: string; duration: string; price: number };
   address: { label: string; fullAddress: string };
   payment?: { method: string; transactionId: string; date: string };
+}
+
+export interface IPopulatedBookingForEarnings {
+  _id: Types.ObjectId | string;
+  amount: string;
+  status: BookingStatus;
+  userId: {
+    _id: Types.ObjectId | string;
+    name: string;
+  };
+  serviceId: {
+    _id: Types.ObjectId | string;
+    title: string;
+  };
+  updatedAt: Date;
+  createdAt: Date;
 }

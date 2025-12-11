@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import { Category, ICategory } from '../../models/Categories';
-import { ICategoryInput } from '../../interface/category';
-import { FilterQuery, PipelineStage, Types } from 'mongoose';
+import { ICategoryAndCommission, ICategoryFilter, ICategoryInput } from '../../interface/category';
+import { FilterQuery, PipelineStage, SortOrder, Types } from 'mongoose';
 import { ICategoryRepository } from '../interface/ICategoryRepository';
 import { BaseRepository } from './base/BaseRepository';
 
@@ -26,7 +26,7 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         return await Category.findOne({ name, parentId: parentObjectId }).exec();
     }
 
-    async findAll(filter: any = {}): Promise<ICategory[]> {
+    async findAll(filter: ICategoryFilter = {}): Promise<ICategory[]> {
         const queryFilter = { ...filter };
 
         if (queryFilter.parentId && typeof queryFilter.parentId === 'string') {
@@ -112,7 +112,7 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         filter: FilterQuery<ICategory>,
         page: number,
         limit: number
-    }): Promise<{ categories: ICategory[], total: number }> {
+    }): Promise<{ categories: ICategoryAndCommission[], total: number }> {
 
         const { filter, page, limit } = options;
         const skip = (page - 1) * limit;
@@ -171,7 +171,7 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
     }
 
     public async findActiveSubCategories(
-        sort: any,
+        sort: number,
         skip: number,
         limit: number
     ): Promise<ICategory[]> {
@@ -180,7 +180,7 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
             parentId: { $ne: null },
             status: true
         })
-            .sort(sort)
+            .sort({createdAt: sort as SortOrder} )
             .skip(skip)
             .limit(limit)
             .lean();

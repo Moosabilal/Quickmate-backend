@@ -3,7 +3,7 @@ import Review, { IReview } from "../../models/Review";
 import { IReviewRepository } from "../interface/IReviewRepository";
 import { BaseRepository } from "./base/BaseRepository";
 import { FilterQuery, PipelineStage, Types } from "mongoose";
-import { IReviewFilters, PopulatedReview } from "../../interface/review";
+import { IReviewFilters, PopulatedReview, RawAggregatedReview } from "../../interface/review";
 import { ReviewStatus } from "../../enums/review.enum";
 
 @injectable()
@@ -71,7 +71,7 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
         pipeline.push({ $unwind: '$user' });
         pipeline.push({ $unwind: '$provider' });
 
-        const matchStage: FilterQuery<any> = {};
+        const matchStage: FilterQuery<IReview> = {};
 
         if (status) {
             matchStage.status = status;
@@ -123,7 +123,7 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
         const reviews = result[0].data;
         const total = result[0].total[0] ? result[0].total[0].count : 0;
 
-        const formattedReviews = reviews.map((r: any) => ({
+        const formattedReviews = reviews.map((r: RawAggregatedReview) => ({
             ...r,
             id: r._id.toString(),
             date: new Date(r.date).toISOString().split('T')[0]

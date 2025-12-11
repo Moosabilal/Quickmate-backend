@@ -19,8 +19,7 @@ import { IProviderService } from "../interface/IProviderService";
 import { IPaymentService } from "../interface/IPaymentService";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
-import { IChatbotResponse, IChatPaymentVerify } from "../../interface/chatBot";
-import { IAddressData } from "../../interface/address";
+import { IChatbotResponse, IChatPaymentVerify, IChatSessionContext, IResponseOption, IToolExecutionResult } from "../../interface/chatBot";
 import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
 import { ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
 import { ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository";
@@ -33,6 +32,7 @@ import { BookingStatus } from "../../enums/booking.enum";
 import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
 import logger from "../../logger/logger";
 import Fuse from 'fuse.js';
+import { IBooking } from "../../models/Booking";
 
 const BOOKING_KEYWORDS = ['book', 'schedule', 'appointment', 'clean', 'repair', 'service', 'want'];
 
@@ -262,7 +262,7 @@ export class ChatbotService implements IChatBotService {
                     role: 'model',
                     text: loginMsg,
                     action: 'REQUIRE_LOGIN'
-                } as any;
+                };
             }
         }
 
@@ -281,8 +281,6 @@ export class ChatbotService implements IChatBotService {
                 session.markModified("context");
                 await session.save();
                 contextUpdated = true;
-                // By setting contextUpdated = true and NOT returning, we allow the flow
-                // to continue to the Gemini call with the newly updated context.
             }
         }
 
@@ -348,7 +346,7 @@ export class ChatbotService implements IChatBotService {
 
         const chat = model.startChat({ history: chatHistory });
 
-        const context = session.context as any;
+        const context = session.context as unknown as IChatSessionContext;
         let progressReport = "CURRENT PROGRESS:\n";
 
         if (context.serviceSubCategoryId) {
@@ -401,11 +399,11 @@ export class ChatbotService implements IChatBotService {
             logger.info(`[Chatbot] 🛠️ Gemini wants to call tool: ${call.name}`);
             logger.info(`[Chatbot] 📦 Tool Arguments:`, JSON.stringify(call.args, null, 2));
 
-            let toolResult: any;
+            let toolResult: IToolExecutionResult | undefined;
             let botResponseText: string | null = null;
-            let responseOptions: any[] | undefined = undefined;
+            let responseOptions: IResponseOption[] | undefined = undefined;
 
-            const context: any = session.context || {};
+            const context: IChatSessionContext = (session.context as unknown as IChatSessionContext) || {};
 
             let currentContext = { ...session.context };
 
@@ -519,7 +517,6 @@ export class ChatbotService implements IChatBotService {
                         const { date, radius } = call.args as { date: string, radius: number };
                         logger.info(`[Chatbot] Getting slots for date: ${date}, radius: ${radius}km`);
 
-                        // --- Start of Validation ---
                         if (radius < 5 || radius > 25) {
                             logger.warn(`[Chatbot] ❗ Invalid radius: ${radius}km. Must be between 5 and 25.`);
                             toolResult = { error: `The search radius must be between 5km and 25km. Please provide a valid distance.` };
@@ -528,7 +525,7 @@ export class ChatbotService implements IChatBotService {
 
                         const requestedDate = new Date(date);
                         const today = new Date();
-                        today.setHours(0, 0, 0, 0); 
+                        today.setHours(0, 0, 0, 0);
 
                         if (isNaN(requestedDate.getTime()) || requestedDate < today) {
                             logger.warn(`[Chatbot] ❗ Invalid or past date provided: ${date}`);
@@ -621,7 +618,7 @@ export class ChatbotService implements IChatBotService {
 
                         logger.info(`[Chatbot] Found ${nearbyProviders.length} providers in range.`);
 
-                        const providersInRange = nearbyProviders.map((p: any) => p._id.toString());
+                        const providersInRange = nearbyProviders.map((p) => p._id.toString());
                         logger.info(`[Chatbot] Provider IDs in range:`, providersInRange);
 
                         const services = await this._serviceRepository.findServicesWithProvider(
@@ -632,7 +629,7 @@ export class ChatbotService implements IChatBotService {
                         logger.info(`[Chatbot] Raw services fetched:`, services.length);
 
                         const servicesInRange = services.filter(s =>
-                            providersInRange.includes((s as any).provider._id.toString())
+                            providersInRange.includes((s).provider._id.toString())
                         );
 
                         logger.info(`[Chatbot] Services matching providers in range: ${servicesInRange.length}`);
@@ -643,7 +640,7 @@ export class ChatbotService implements IChatBotService {
                             break;
                         }
 
-                        const providerIds = servicesInRange.map(s => (s as any).provider._id.toString());
+                        const providerIds = servicesInRange.map(s => (s).provider._id.toString());
                         logger.info(`[Chatbot] Checking availability for provider IDs:`, providerIds);
 
                         let availableProviders = await this._providerService.findProvidersAvailableAtSlot(
@@ -664,7 +661,7 @@ export class ChatbotService implements IChatBotService {
 
                         const providerList = availableProviders.map(p => {
                             const service = servicesInRange.find(
-                                s => (s as any).provider._id.toString() === p._id.toString()
+                                s => (s).provider._id.toString() === p._id.toString()
                             );
 
                             logger.info(`[Chatbot] Mapping provider ${p._id}:`, { service });
@@ -713,7 +710,7 @@ export class ChatbotService implements IChatBotService {
 
 
                     case "initiatePayment": {
-                        const { customerName, phone, instructions } = call.args as any;
+                        const { customerName, phone, instructions } = call.args as { customerName: string, phone: string, instructions?: string };
 
                         workingContext.customerName = customerName;
                         workingContext.phone = phone;
@@ -733,7 +730,7 @@ export class ChatbotService implements IChatBotService {
                             }
                         }
 
-                        const chosenProvider = (workingContext.lastFoundProviders as any[])?.find(
+                        const chosenProvider = (workingContext.lastFoundProviders)?.find(
                             p => p.providerId === workingContext.providerId
                         );
 
@@ -813,7 +810,7 @@ export class ChatbotService implements IChatBotService {
                 botResponseText = result2.response.text() || "Got it. What's next?";
                 logger.info(`[Chatbot] 🤖 Final Response after tool: "${botResponseText}"`);
 
-            } catch (err: any) {
+            } catch (err: unknown) {
                 session.context = workingContext;
                 session.markModified('context');
                 await session.save();
@@ -835,7 +832,7 @@ export class ChatbotService implements IChatBotService {
     }
 
 
-    async verifyRazorpayPayment(sessionId: string, paymentData: IChatPaymentVerify) {
+    async verifyRazorpayPayment(sessionId: string, paymentData: IChatPaymentVerify): Promise<IBooking> {
         logger.info('the payment data', paymentData)
         const verified = verifyPaymentSignature(
             paymentData.razorpay_order_id,
@@ -909,9 +906,9 @@ export class ChatbotService implements IChatBotService {
         session.context = {
             userId: session.context.userId,
             role: session.context.role,
-            customerName: session.context.customerName, // Keep name and phone for convenience
+            customerName: session.context.customerName,
             phone: session.context.phone,
-            lastBookingId: booking._id.toString() // Keep a record of the last booking
+            lastBookingId: booking._id.toString() 
         };
 
         session.markModified('context');
@@ -938,17 +935,4 @@ Your provider will contact you shortly. Thank you for using QuickMate!
         return booking;
     }
 
-    async getSessionStatus(sessionId: string): Promise<any> {
-        const session = await this._sessionRepo.findOne({ sessionId });
-        if (!session) {
-            throw new CustomError("Session not found", HttpStatusCode.NOT_FOUND);
-        }
-
-        return {
-            sessionId: session.sessionId,
-            state: session.state,
-            context: session.context,
-            userId: session.userId
-        };
-    }
 }

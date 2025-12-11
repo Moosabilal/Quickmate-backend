@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { IBookingStatusCount, IProviderBookingManagement } from "../../interface/booking";
+import { IBookingHistoryPage, IBookingStatusCount, IPopulatedBookingForEarnings, IProviderBookingManagement } from "../../interface/booking";
 import Booking, { IBooking } from "../../models/Booking";
 import { IBookingRepository } from "../interface/IBookingRepository";
 import { BaseRepository } from "./base/BaseRepository";
@@ -84,7 +84,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         providerId: string,
         startDate: Date,
         endDate: Date
-    ): Promise<IBooking[]> {
+    ): Promise<IPopulatedBookingForEarnings[]> {
         return Booking.find({
             providerId: new Types.ObjectId(providerId),
             status: BookingStatus.COMPLETED,
@@ -94,9 +94,9 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
             },
         })
             .populate('userId', 'name')
-            .populate('serviceId', 'title')
+            .populate<{ serviceId: { _id: string; title: string } }>('serviceId', 'title')
             .sort({ updatedAt: -1 })
-            .lean();
+            .lean<IPopulatedBookingForEarnings[]>();
     }
     async countUniqueClientsBeforeDate(providerId: string, date: Date): Promise<number> {
         const distinctClients = await Booking.distinct('userId', {
@@ -263,7 +263,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
     public async findBookingsForUserHistory(
         userId: string,
         filters: { status?: BookingStatus, search?: string }
-    ): Promise<{ bookings: any[], total: number }> {
+    ): Promise<{ bookings: IBookingHistoryPage[], total: number }> {
 
         const mainMatch: PipelineStage.Match = {
             $match: { userId: new Types.ObjectId(userId) }
@@ -282,7 +282,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 $facet: {
                     metadata: [{ $count: 'total' }],
                     data: [
-                        { $sort: { createdAt: -1 } },
+                        { $sort: { createdAt: 1 } },
                         { $lookup: { from: 'addresses', localField: 'addressId', foreignField: '_id', as: 'address' } },
                         { $unwind: { path: '$address', preserveNullAndEmptyArrays: true } },
                         { $lookup: { from: 'categories', localField: 'service.subCategoryId', foreignField: '_id', as: 'subCategory' } },
@@ -468,6 +468,21 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         return this.model.countDocuments({
             createdAt: { $gte: startDate, $lte: endDate }
         });
+    }
+
+    async findOverdueBookings(cutoffDate: string): Promise<IBooking[]> {
+        return this.model.find({
+            status: { $in: [BookingStatus.PENDING, BookingStatus.CONFIRMED] },
+            scheduledDate: { $lt: cutoffDate }
+        });
+    }
+
+    async updateStatus(bookingId: string, status: BookingStatus): Promise<IBooking | null> {
+        return this.model.findByIdAndUpdate(
+            bookingId, 
+            { status: status },
+            { new: true }
+        );
     }
 
 

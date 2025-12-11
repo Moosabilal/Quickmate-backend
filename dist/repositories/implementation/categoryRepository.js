@@ -203,7 +203,7 @@ let CategoryRepository = class CategoryRepository extends BaseRepository_1.BaseR
                 parentId: { $ne: null },
                 status: true
             })
-                .sort(sort)
+                .sort({ createdAt: sort })
                 .skip(skip)
                 .limit(limit)
                 .lean();

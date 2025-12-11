@@ -169,7 +169,7 @@ let ProviderController = class ProviderController {
         });
         this.updateProviderStatus = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = provider_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id } = provider_validation_1.paramIdSchema.parse(req.params);
                 const { newStatus } = provider_validation_1.updateProviderStatusSchema.parse(req.body);
                 const response = yield this._providerService.updateProviderStat(id, newStatus);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(response);
@@ -299,7 +299,7 @@ let ProviderController = class ProviderController {
         });
         this.getProviderFullDetails = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = provider_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id } = provider_validation_1.paramIdSchema.parse(req.params);
                 const data = yield this._providerService.getProviderFullDetails(id);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, data });
             }

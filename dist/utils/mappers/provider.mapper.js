@@ -303,8 +303,8 @@ function toServiceDetailsDTO(service) {
         price: serviceObj.price,
         priceUnit: serviceObj.priceUnit,
         duration: serviceObj.duration,
-        categoryId: serviceObj.categoryId,
-        subCategoryId: serviceObj.subCategoryId,
+        categoryId: serviceObj.categoryId.toString(),
+        subCategoryId: serviceObj.subCategoryId.toString(),
         experience: serviceObj.experience
     };
 }

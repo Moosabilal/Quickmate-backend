@@ -6,8 +6,6 @@ import { IBaseRepository } from './base/IBaseRepository';
 
 export interface ICommissionRuleRepository extends IBaseRepository<ICommissionRule> {
     getAllCommissions(): Promise<ICommissionRule[]>
-    findAll(filter: any): Promise<ICommissionRule[]>
-    update(id: string | Types.ObjectId, updateData: Partial<ICommissionRuleInput>): Promise<ICommissionRule | null>
     delete(id: string | Types.ObjectId): Promise<ICommissionRule | null>
     updateStatusForCategoryIds(categoryIds: Types.ObjectId[], status: boolean): Promise<void>;
     createOrUpdate(categoryId: string, ruleInput: ICommissionRuleInput): Promise<ICommissionRule>

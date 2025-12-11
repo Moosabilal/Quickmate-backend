@@ -80,7 +80,7 @@ let BookingController = class BookingController {
         });
         this.getBookingById = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id: bookingId } = booking_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id: bookingId } = booking_validation_1.paramIdSchema.parse(req.params);
                 const response = yield this._bookingService.findBookingById(bookingId);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(response);
             }
@@ -124,7 +124,7 @@ let BookingController = class BookingController {
         });
         this.updateBookingStatus = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id: bookingId } = booking_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id: bookingId } = booking_validation_1.paramIdSchema.parse(req.params);
                 const { status } = booking_validation_1.updateBookingStatusSchema.parse(req.body);
                 const userId = req.user.id;
                 const response = yield this._bookingService.updateStatus(bookingId, status, userId);
@@ -143,7 +143,7 @@ let BookingController = class BookingController {
         });
         this.updateBookingDateTime = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id: bookingId } = booking_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id: bookingId } = booking_validation_1.paramIdSchema.parse(req.params);
                 const { date, time } = booking_validation_1.updateBookingDateTimeSchema.parse(req.body);
                 yield this._bookingService.updateBookingDateTime(bookingId, date, time);
                 res.status(HttpStatusCode_1.HttpStatusCode.NO_CONTENT).send();
@@ -204,7 +204,7 @@ let BookingController = class BookingController {
         });
         this.getBookingDetailsForAdmin = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = booking_validation_1.mongoIdParamSchema.parse(req.params);
+                const { id } = booking_validation_1.paramIdSchema.parse(req.params);
                 const data = yield this._bookingService.getBookingDetailsForAdmin(id);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({ success: true, data });
             }

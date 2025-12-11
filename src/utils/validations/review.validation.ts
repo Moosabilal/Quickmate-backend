@@ -6,7 +6,7 @@ export const updateReviewStatusSchema = z.object({
 });
 
 export const addReviewSchema = z.object({
-    bookingId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'A valid booking ID is required.'),
+    bookingId: z.string().min(1, "ID is required"),
     rating: z.coerce.number().int().min(1, "Rating must be at least 1.").max(5, "Rating cannot be more than 5."),
     review: z.string().min(10, "Review must be at least 10 characters long.").optional(),
 });

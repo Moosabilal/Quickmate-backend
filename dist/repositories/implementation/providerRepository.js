@@ -60,9 +60,13 @@ let ProviderRepository = class ProviderRepository extends BaseRepository_1.BaseR
             return yield Providers_1.Provider.find({});
         });
     }
-    findProvidersWithFilter(filter, skip, limit) {
+    findProvidersWithFilter(filter) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Providers_1.Provider.find(filter)
+            const mongooseQuery = this.buildQuery(filter);
+            const page = filter.page || 1;
+            const limit = filter.limit || 10;
+            const skip = (page - 1) * limit;
+            return yield this.model.find(mongooseQuery)
                 .skip(skip)
                 .limit(limit)
                 .sort({ createdAt: -1 });
@@ -70,7 +74,8 @@ let ProviderRepository = class ProviderRepository extends BaseRepository_1.BaseR
     }
     countProviders(filter) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Providers_1.Provider.countDocuments(filter);
+            const mongooseQuery = this.buildQuery(filter);
+            return yield this.model.countDocuments(mongooseQuery);
         });
     }
     updateStatusById(id, newStatus) {
@@ -169,6 +174,23 @@ let ProviderRepository = class ProviderRepository extends BaseRepository_1.BaseR
             }
             return this.findAll(filter);
         });
+    }
+    buildQuery(filter) {
+        const query = {};
+        if (filter.search) {
+            query.$or = [
+                { fullName: { $regex: filter.search, $options: 'i' } },
+                { email: { $regex: filter.search, $options: 'i' } },
+                { serviceName: { $regex: filter.search, $options: 'i' } }
+            ];
+        }
+        if (filter.status && filter.status !== 'All') {
+            query.status = filter.status;
+        }
+        if (filter.rating) {
+            query.rating = { $gte: filter.rating, $lt: filter.rating + 1 };
+        }
+        return query;
     }
 };
 exports.ProviderRepository = ProviderRepository;

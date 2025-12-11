@@ -3,7 +3,7 @@ import mongoose, { FilterQuery, Types } from 'mongoose';
 
 import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
-import { IProviderForAdminResponce, IProviderProfile, IProviderRegistrationData, ProviderFilterQuery } from "../../interface/provider";
+import { IDateOverride, IDaySchedule, ILeavePeriod, IProviderFilter, IProviderForAdminResponce, IProviderProfile, IProviderRegistrationData, ITimeSlot, ITopActiveProviders, ProviderFilterQuery } from "../../interface/provider";
 import { IProviderRepository } from "../interface/IProviderRepository";
 import { injectable } from "inversify";
 import { BaseRepository } from "./base/BaseRepository";
@@ -46,15 +46,21 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return await Provider.find({});
     }
 
-    async findProvidersWithFilter(filter: any, skip: number, limit: number): Promise<IProvider[]> {
-        return await Provider.find(filter)
+    async findProvidersWithFilter(filter: IProviderFilter): Promise<IProvider[]> {
+        const mongooseQuery = this.buildQuery(filter);
+        const page = filter.page || 1;
+        const limit = filter.limit || 10;
+        const skip = (page - 1) * limit;
+
+        return await this.model.find(mongooseQuery)
             .skip(skip)
             .limit(limit)
             .sort({ createdAt: -1 });
     }
 
-    async countProviders(filter: any): Promise<number> {
-        return await Provider.countDocuments(filter);
+    async countProviders(filter: IProviderFilter): Promise<number> {
+        const mongooseQuery = this.buildQuery(filter);
+        return await this.model.countDocuments(mongooseQuery);
     }
 
     async updateStatusById(id: string, newStatus: string): Promise<void> {
@@ -71,7 +77,7 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return provider._id.toString()
     }
 
-    async getTopActiveProviders(): Promise<any[]> {
+    async getTopActiveProviders(): Promise<ITopActiveProviders[]> {
         const result = await Provider.aggregate([
             {
                 $project: {
@@ -127,21 +133,21 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
                 if (!availability || !availability.weeklySchedule) return false;
 
                 const isOnLeave = availability.leavePeriods?.some(
-                    (period: any) => criteria.date >= period.from && criteria.date <= period.to
+                    (period: ILeavePeriod) => criteria.date >= period.from && criteria.date <= period.to
                 );
                 if (isOnLeave) return false;
 
                 const override = availability.dateOverrides?.find(
-                    (o: any) => o.date === criteria.date
+                    (o: IDateOverride) => o.date === criteria.date
                 );
                 if (override?.isUnavailable) return false;
 
-                const daySchedule = availability.weeklySchedule.find((d: any) => d.day === targetDay && d.active);
+                const daySchedule = availability.weeklySchedule.find((d: IDaySchedule) => d.day === targetDay && d.active);
                 if (!daySchedule) return false;
 
                 if (targetTime && daySchedule.slots?.length) {
                     return daySchedule.slots.some(
-                        (slot: any) => targetTime >= slot.start && targetTime <= slot.end
+                        (slot: ITimeSlot) => targetTime >= slot.start && targetTime <= slot.end
                     );
                 }
 
@@ -175,6 +181,28 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         }
 
         return this.findAll(filter);
+    }
+
+    private buildQuery(filter: IProviderFilter): FilterQuery<IProvider> {
+        const query: FilterQuery<IProvider> = {};
+
+        if (filter.search) {
+            query.$or = [
+                { fullName: { $regex: filter.search, $options: 'i' } },
+                { email: { $regex: filter.search, $options: 'i' } },
+                { serviceName: { $regex: filter.search, $options: 'i' } }
+            ];
+        }
+
+        if (filter.status && filter.status !== 'All') {
+            query.status = filter.status;
+        }
+
+        if (filter.rating) {
+            query.rating = { $gte: filter.rating, $lt: filter.rating + 1 };
+        }
+
+        return query;
     }
 
 }

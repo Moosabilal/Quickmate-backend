@@ -33,15 +33,42 @@ let WalletRepository = class WalletRepository extends BaseRepository_1.BaseRepos
             return txn;
         });
     }
-    getTransactions(filter_1, skip_1) {
-        return __awaiter(this, arguments, void 0, function* (filter, skip, limit = 20) {
-            return transaction_1.Transaction.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit);
+    getTransactions(filterOpts_1, skip_1) {
+        return __awaiter(this, arguments, void 0, function* (filterOpts, skip, limit = 20) {
+            const query = this.buildTransactionQuery(filterOpts);
+            return transaction_1.Transaction.find(query)
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit)
+                .exec();
         });
     }
-    transactionCount() {
+    transactionCount(filterOpts) {
         return __awaiter(this, void 0, void 0, function* () {
-            return transaction_1.Transaction.countDocuments();
+            const query = this.buildTransactionQuery(filterOpts);
+            return transaction_1.Transaction.countDocuments(query).exec();
         });
+    }
+    buildTransactionQuery(filterOpts) {
+        const query = {
+            walletId: filterOpts.walletId
+        };
+        if (filterOpts.status && filterOpts.status !== 'All') {
+            query.status = filterOpts.status;
+        }
+        if (filterOpts.transactionType) {
+            query.transactionType = filterOpts.transactionType;
+        }
+        if (filterOpts.startDate || filterOpts.endDate) {
+            query.createdAt = {};
+            if (filterOpts.startDate) {
+                query.createdAt.$gte = filterOpts.startDate;
+            }
+            if (filterOpts.endDate) {
+                query.createdAt.$lte = filterOpts.endDate;
+            }
+        }
+        return query;
     }
 };
 exports.WalletRepository = WalletRepository;

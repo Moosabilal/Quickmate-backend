@@ -36,7 +36,7 @@ export class CommissionRuleRepository extends BaseRepository<ICommissionRule> im
     };
 
     if (existingRule) {
-      return this.update(existingRule._id.toString(), ruleData as any);
+      return this.update(existingRule._id.toString(), ruleData);
     } else {
       return this.create(ruleData);
     }

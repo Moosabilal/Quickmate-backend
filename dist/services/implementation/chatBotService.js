@@ -240,8 +240,6 @@ let ChatbotService = class ChatbotService {
                     session.markModified("context");
                     yield session.save();
                     contextUpdated = true;
-                    // By setting contextUpdated = true and NOT returning, we allow the flow
-                    // to continue to the Gemini call with the newly updated context.
                 }
             }
             if (session.context.tempAddressList && !session.context.addressId) {
@@ -438,7 +436,6 @@ let ChatbotService = class ChatbotService {
                         case "getAvailableTimeSlots": {
                             const { date, radius } = call.args;
                             logger_1.default.info(`[Chatbot] Getting slots for date: ${date}, radius: ${radius}km`);
-                            // --- Start of Validation ---
                             if (radius < 5 || radius > 25) {
                                 logger_1.default.warn(`[Chatbot] ❗ Invalid radius: ${radius}km. Must be between 5 and 25.`);
                                 toolResult = { error: `The search radius must be between 5km and 25km. Please provide a valid distance.` };
@@ -512,14 +509,14 @@ let ChatbotService = class ChatbotService {
                             logger_1.default.info(`[Chatbot] Provider IDs in range:`, providersInRange);
                             const services = yield this._serviceRepository.findServicesWithProvider(context.serviceSubCategoryId, undefined);
                             logger_1.default.info(`[Chatbot] Raw services fetched:`, services.length);
-                            const servicesInRange = services.filter(s => providersInRange.includes(s.provider._id.toString()));
+                            const servicesInRange = services.filter(s => providersInRange.includes((s).provider._id.toString()));
                             logger_1.default.info(`[Chatbot] Services matching providers in range: ${servicesInRange.length}`);
                             if (!servicesInRange.length) {
                                 logger_1.default.info(`[Chatbot] ❗ Providers found, but none have matching service documents.`);
                                 toolResult = { providers: [] };
                                 break;
                             }
-                            const providerIds = servicesInRange.map(s => s.provider._id.toString());
+                            const providerIds = servicesInRange.map(s => (s).provider._id.toString());
                             logger_1.default.info(`[Chatbot] Checking availability for provider IDs:`, providerIds);
                             let availableProviders = yield this._providerService.findProvidersAvailableAtSlot(providerIds, context.date, time);
                             if (session.context.role === userRoles_1.Roles.PROVIDER && session.userId) {
@@ -531,7 +528,7 @@ let ChatbotService = class ChatbotService {
                             }
                             logger_1.default.info(`[Chatbot] Available providers after time check:`, availableProviders);
                             const providerList = availableProviders.map(p => {
-                                const service = servicesInRange.find(s => s.provider._id.toString() === p._id.toString());
+                                const service = servicesInRange.find(s => (s).provider._id.toString() === p._id.toString());
                                 logger_1.default.info(`[Chatbot] Mapping provider ${p._id}:`, { service });
                                 return {
                                     serviceId: service._id.toString(),
@@ -586,7 +583,7 @@ let ChatbotService = class ChatbotService {
                                     }
                                 }
                             }
-                            const chosenProvider = (_b = workingContext.lastFoundProviders) === null || _b === void 0 ? void 0 : _b.find(p => p.providerId === workingContext.providerId);
+                            const chosenProvider = (_b = (workingContext.lastFoundProviders)) === null || _b === void 0 ? void 0 : _b.find(p => p.providerId === workingContext.providerId);
                             if (!chosenProvider) {
                                 logger_1.default.error(`[Chatbot] ❌ No matching provider found for providerId: ${context.providerId}`);
                             }
@@ -727,9 +724,9 @@ let ChatbotService = class ChatbotService {
             session.context = {
                 userId: session.context.userId,
                 role: session.context.role,
-                customerName: session.context.customerName, // Keep name and phone for convenience
+                customerName: session.context.customerName,
                 phone: session.context.phone,
-                lastBookingId: booking._id.toString() // Keep a record of the last booking
+                lastBookingId: booking._id.toString()
             };
             session.markModified('context');
             yield session.save();
@@ -750,20 +747,6 @@ Your provider will contact you shortly. Thank you for using QuickMate!
                 text: confirmationMsg
             });
             return booking;
-        });
-    }
-    getSessionStatus(sessionId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const session = yield this._sessionRepo.findOne({ sessionId });
-            if (!session) {
-                throw new CustomError_1.CustomError("Session not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
-            }
-            return {
-                sessionId: session.sessionId,
-                state: session.state,
-                context: session.context,
-                userId: session.userId
-            };
         });
     }
 };

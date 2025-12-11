@@ -134,9 +134,8 @@ let AuthService = class AuthService {
             if (user.registrationOtpExpires && user.registrationOtpExpires instanceof Date) {
                 const timeSinceLastOtpSent = Date.now() - (user.registrationOtpExpires.getTime() - (OTP_EXPIRY_MINUTES * 60 * 1000));
                 if (timeSinceLastOtpSent < RESEND_COOLDOWN_SECONDS * 1000) {
-                    const error = new Error(`Please wait ${RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000)} seconds before requesting another OTP.`);
-                    error.statusCode = 429;
-                    throw error;
+                    const remainingSeconds = RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000);
+                    throw new CustomError_1.CustomError(`Please wait ${remainingSeconds} seconds before requesting another OTP.`, 429);
                 }
             }
             const newOtp = (0, otpGenerator_1.generateOTP)();
@@ -359,24 +358,9 @@ let AuthService = class AuthService {
     }
     getUserWithAllDetails(page, limit, search, status) {
         return __awaiter(this, void 0, void 0, function* () {
-            const skip = (page - 1) * limit;
-            const filter = {
-                $or: [
-                    { name: { $regex: search, $options: 'i' } },
-                    { email: { $regex: search, $options: 'i' } },
-                ],
-            };
-            if (status && status !== 'All') {
-                if (status === 'Active') {
-                    filter.isVerified = true;
-                }
-                else if (status === 'Inactive') {
-                    filter.isVerified = false;
-                }
-            }
             const [users, total] = yield Promise.all([
-                this._userRepository.findUsersWithFilter(filter, skip, limit),
-                this._userRepository.countUsers(filter),
+                this._userRepository.findUsersWithFilter({ search: search, status: status }, page, limit),
+                this._userRepository.countUsers({ search: search, status: status }),
             ]);
             if (!users || users.length === 0) {
                 return {

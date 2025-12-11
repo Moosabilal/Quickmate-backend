@@ -197,9 +197,8 @@ export class ProviderService implements IProviderService {
         if (provider.registrationOtpExpires && provider.registrationOtpExpires instanceof Date) {
             const timeSinceLastOtpSent = Date.now() - (provider.registrationOtpExpires.getTime() - (OTP_EXPIRY_MINUTES * 60 * 1000));
             if (timeSinceLastOtpSent < RESEND_COOLDOWN_SECONDS * 1000) {
-                const error = new Error(`Please wait ${RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000)} seconds before requesting another OTP.`);
-                (error as any).statusCode = 429;
-                throw error;
+                const remainingCooldown = RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000);
+                throw new CustomError(`Please wait ${remainingCooldown} seconds before requesting another OTP.`, HttpStatusCode.FORBIDDEN);
             }
         }
 
@@ -242,26 +241,9 @@ export class ProviderService implements IProviderService {
         totalPages: number;
         currentPage: number;
     }> {
-        const skip = (page - 1) * limit;
-
-        const filter: any = {
-            $or: [
-                { fullName: { $regex: search, $options: 'i' } },
-                { email: { $regex: search, $options: 'i' } },
-            ],
-        };
-
-        if (status && status !== 'All') {
-            filter.status = status;
-        }
-
-        if (rating) {
-            filter.rating = { $gte: rating, $lt: rating + 1 };
-        }
-
         const [providers, total] = await Promise.all([
-            this._providerRepository.findProvidersWithFilter(filter, skip, limit),
-            this._providerRepository.countProviders(filter),
+            this._providerRepository.findProvidersWithFilter({ search, status, rating, page, limit}),
+            this._providerRepository.countProviders({search, status, rating}),
         ]);
 
         if (!providers || providers.length === 0) {
@@ -321,18 +303,11 @@ export class ProviderService implements IProviderService {
     }
 
     public async getFeaturedProviders(page: number, limit: number, search: string): Promise<{ providers: IFeaturedProviders[], total: number, totalPages: number, currentPage: number }> {
-        const skip = (page - 1) * limit;
-
-        const filter: any = {
-            $or: [
-                { fullName: { $regex: search, $options: 'i' } },
-                { serviceName: { $regex: search, $options: 'i' } },
-            ],
-            status: ProviderStatus.ACTIVE
-        }
-        const providers = await this._providerRepository.findProvidersWithFilter(filter, skip, limit);
-        const total = await this._providerRepository.countProviders(filter)
-
+        const [providers, total] = await Promise.all([
+            await this._providerRepository.findProvidersWithFilter({search, status: ProviderStatus.ACTIVE, page, limit}),
+            await this._providerRepository.countProviders({search, status: ProviderStatus.ACTIVE})
+        ]);
+        
         const featuredProviders = providers.map(provider => ({
             id: provider._id.toString(),
             userId: provider.userId.toString(),
@@ -611,7 +586,7 @@ export class ProviderService implements IProviderService {
 
         const serviceEarnings: { [key: string]: number } = {};
         currentBookings.forEach(b => {
-            const serviceName = (b.serviceId as any)?.title || 'Unknown Service';
+            const serviceName = (b.serviceId )?.title || 'Unknown Service';
             serviceEarnings[serviceName] = (serviceEarnings[serviceName] || 0) + (Number(b.amount) || 0);
         });
         const topServiceEntry = Object.entries(serviceEarnings).sort((a, b) => b[1] - a[1])[0] || ['N/A', 0];
@@ -971,7 +946,7 @@ export class ProviderService implements IProviderService {
         coordinates: [number, number],
         radiusInKm: number = 10,
         subCategoryId: string 
-    ): Promise<any[]> {
+    ): Promise<IProvider[]> {
         try {
             const services = await this._serviceRepository.findAll({
                 subCategoryId: new Types.ObjectId(subCategoryId),

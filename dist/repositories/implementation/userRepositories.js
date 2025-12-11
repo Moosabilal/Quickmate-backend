@@ -63,14 +63,21 @@ let UserRepository = class UserRepository extends BaseRepository_1.BaseRepositor
             return yield User_1.default.find({}).select('-password -registrationOtp -registrationOtpExpires -registrationOtpAttempts -passwordResetToken -passwordResetExpires -googleId');
         });
     }
-    findUsersWithFilter(filter, skip, limit) {
+    findUsersWithFilter(filter, page, limit) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield User_1.default.find(filter).skip(skip).limit(limit).exec();
+            const mongooseQuery = this.buildMongooseQuery(filter);
+            const skip = (page - 1) * limit;
+            return yield this.model.find(mongooseQuery)
+                .skip(skip)
+                .limit(limit)
+                .sort({ createdAt: -1 }) // Usually you want newest first
+                .exec();
         });
     }
-    countUsers(filter) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield User_1.default.countDocuments(filter).exec();
+    countUsers() {
+        return __awaiter(this, arguments, void 0, function* (filter = {}) {
+            const mongooseQuery = this.buildMongooseQuery(filter);
+            return yield this.model.countDocuments(mongooseQuery).exec();
         });
     }
     findUsersByIds(userIds) {
@@ -99,6 +106,27 @@ let UserRepository = class UserRepository extends BaseRepository_1.BaseRepositor
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.model.findById(id).select('+password').exec();
         });
+    }
+    buildMongooseQuery(filter) {
+        const query = {};
+        if (filter.search) {
+            query.$or = [
+                { name: { $regex: filter.search, $options: 'i' } },
+                { email: { $regex: filter.search, $options: 'i' } },
+            ];
+        }
+        if (filter.status && filter.status !== 'All') {
+            if (filter.status === 'Active') {
+                query.isVerified = true;
+            }
+            else if (filter.status === 'Inactive') {
+                query.isVerified = false;
+            }
+        }
+        if (filter.role) {
+            query.role = filter.role;
+        }
+        return query;
     }
 };
 exports.UserRepository = UserRepository;

@@ -2,6 +2,7 @@ import { injectable } from 'inversify';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
 import { IPaymentService } from '../interface/IPaymentService';
+import { RazorpayOrder } from '../../interface/razorpay';
 
 @injectable()
 export class PaymentService implements IPaymentService {
@@ -14,7 +15,7 @@ export class PaymentService implements IPaymentService {
     });
   }
 
-  public async createOrder(amount: number): Promise<any> {
+  public async createOrder(amount: number): Promise<RazorpayOrder> {
     const options = {
       amount: amount * 100,
       currency: 'INR',

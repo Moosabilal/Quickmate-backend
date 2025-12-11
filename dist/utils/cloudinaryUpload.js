@@ -67,7 +67,9 @@ const uploadToCloudinary = (filePath_1, ...args_1) => __awaiter(void 0, [filePat
         }
         return result.public_id;
     }
-    catch (error) {
+    catch (rawError) {
+        // Type Assertion: Treat the unknown error as our defined CloudinaryError
+        const error = rawError;
         console.error('Cloudinary upload error details:', {
             message: error.message,
             http_code: error.http_code,

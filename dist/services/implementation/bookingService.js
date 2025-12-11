@@ -118,7 +118,7 @@ let BookingService = class BookingService {
             const udpatedpayment123 = yield this._bookingRepository.update(verifyPayment.bookingId, {
                 paymentId: createdPayment._id,
                 paymentStatus: userRoles_1.PaymentStatus.PAID,
-                duration: durationInMinutes
+                duration: durationInMinutes,
             });
             return {
                 message: "payment successfully verified",
@@ -159,11 +159,13 @@ let BookingService = class BookingService {
             const payment = booking.paymentId
                 ? yield this._paymentRepository.findById(booking.paymentId.toString())
                 : null;
+            const reviewStats = yield this._reviewRepository.getReviewStatsByServiceIds([service._id.toString()]);
+            const providerReviewStats = reviewStats.find(rs => rs.serviceId.toString() === service._id.toString());
             let review;
             if (booking.reviewed) {
                 review = yield this._reviewRepository.findOne({ bookingId: booking._id.toString() });
             }
-            return (0, booking_mapper_1.toBookingConfirmationPage)(booking, address, subCat.iconUrl, service, payment, provider, review);
+            return (0, booking_mapper_1.toBookingConfirmationPage)(booking, address, subCat.iconUrl, service, payment, provider, review, providerReviewStats === null || providerReviewStats === void 0 ? void 0 : providerReviewStats.avgRating, providerReviewStats === null || providerReviewStats === void 0 ? void 0 : providerReviewStats.reviewCount);
         });
     }
     getAllFilteredBookings(userId, filters) {
@@ -181,6 +183,7 @@ let BookingService = class BookingService {
                 [booking_enum_1.BookingStatus.IN_PROGRESS]: 0,
                 [booking_enum_1.BookingStatus.COMPLETED]: 0,
                 [booking_enum_1.BookingStatus.CANCELLED]: 0,
+                [booking_enum_1.BookingStatus.EXPIRED]: 0,
             };
             let allBookingsCount = 0;
             statusCounts.forEach((item) => {
@@ -214,6 +217,7 @@ let BookingService = class BookingService {
                 [booking_enum_1.BookingStatus.IN_PROGRESS]: 0,
                 [booking_enum_1.BookingStatus.COMPLETED]: 0,
                 [booking_enum_1.BookingStatus.CANCELLED]: 0,
+                [booking_enum_1.BookingStatus.EXPIRED]: 0,
             };
             let allBookingsCount = 0;
             statusCounts.forEach((item) => {
@@ -258,6 +262,15 @@ let BookingService = class BookingService {
             }
             if (booking.status === booking_enum_1.BookingStatus.CANCELLED) {
                 return { message: ErrorMessage_1.ErrorMessage.BOOKING_IS_ALREADY_CANCELLED };
+            }
+            if (status === booking_enum_1.BookingStatus.IN_PROGRESS) {
+                const dateTimeString = `${booking.scheduledTime} ${booking.scheduledDate}`;
+                const scheduledTime = new Date(dateTimeString);
+                const currenttimeStamp = new Date();
+                const diffInMinutes = (scheduledTime.getTime() - currenttimeStamp.getTime()) / (1000 * 60);
+                if (diffInMinutes > 5) {
+                    throw new CustomError_1.CustomError("You can start the booking only 5 minutes before the scheduled time", HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
+                }
             }
             let bookingOtp;
             const updatePayload = { status: status };

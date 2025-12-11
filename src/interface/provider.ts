@@ -9,6 +9,14 @@ export interface Availability {
   endTime: string;
 }
 
+export interface IProviderFilter {
+    search?: string;
+    status?: string;
+    rating?: number;
+    page?: number;
+    limit?: number;
+}
+
 export interface IProviderRegistrationData {
   fullName: string;
   phoneNumber: string;
@@ -191,7 +199,7 @@ export interface IDashboardStatus {
 }
 
 export interface ITopActiveProviders {
-  _id: Types.ObjectId | string;
+  _id?: Types.ObjectId | string;
   fullName: string;
   totalBookings: number;
   profilePhoto: string;
@@ -287,12 +295,36 @@ export interface IServiceDetails {
   price: number;
   priceUnit: string;
   duration: string;
-  categoryId: { name: string };
-  subCategoryId: { name: string };
+  categoryId: string;
+  subCategoryId:string;
   experience?: number;
 }
 
 export interface IProviderDetailsResponse {
   provider: IProviderProfile;
   services: IServiceDetails[];
+}
+
+export interface ITimeSlot {
+    start: string;
+    end: string;
+}
+
+export interface IDaySchedule {
+    day: string;
+    active: boolean;
+    slots: ITimeSlot[];
+}
+
+export interface IDateOverride {
+    date: string;
+    isUnavailable: boolean;
+    busySlots: ITimeSlot[];
+    reason?: string;
+}
+
+export interface ILeavePeriod {
+    from: string;
+    to: string;
+    reason?: string;
 }

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendBookingVerificationEmail = exports.sendContactUsEmail = exports.sendPasswordResetEmail = exports.sendVerificationEmail = void 0;
+exports.sendPenaltyEmail = exports.sendBookingVerificationEmail = exports.sendContactUsEmail = exports.sendPasswordResetEmail = exports.sendVerificationEmail = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const logger_1 = __importDefault(require("../logger/logger"));
@@ -126,3 +126,41 @@ const sendBookingVerificationEmail = (toEmail, otp) => __awaiter(void 0, void 0,
     }
 });
 exports.sendBookingVerificationEmail = sendBookingVerificationEmail;
+const sendPenaltyEmail = (toEmail, bookingDate, newRating) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const mailOptions = {
+            from: process.env.EMAIL_FROM,
+            to: toEmail,
+            subject: '⚠️ Notice: Penalty Applied for Missed Booking - QuickMate',
+            html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px;">
+          <h2 style="color: #d9534f; border-bottom: 2px solid #d9534f; padding-bottom: 10px;">Missed Booking Alert</h2>
+          <p>Dear Provider,</p>
+          
+          <p>We noticed that you missed a scheduled booking on <strong>${bookingDate}</strong>.</p>
+          
+          <div style="background-color: #fff3f3; border-left: 4px solid #d9534f; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0; font-weight: bold;">Action Taken:</p>
+            <ul style="margin: 10px 0 0 20px; padding: 0;">
+              <li>Your rating has been lowered by <strong>1 star</strong>.</li>
+              <li>Your new rating is now: <strong style="font-size: 18px;">${newRating}/5</strong></li>
+            </ul>
+          </div>
+
+          <p>Reliability is critical for success on QuickMate. Repeated missed bookings may lead to temporary suspension of your account.</p>
+          
+          <p>Please ensure you fulfill all accepted bookings or cancel them well in advance to avoid further penalties.</p>
+          
+          <p style="margin-top: 30px; font-size: 14px; color: #777;">Regards,<br/>QuickMate Team</p>
+        </div>
+      `,
+        };
+        logger_1.default.info(`Sending penalty email to ${toEmail}`);
+        yield transporter.sendMail(mailOptions);
+        logger_1.default.info(`Penalty email sent successfully to ${toEmail}`);
+    }
+    catch (error) {
+        logger_1.default.error(`Error sending penalty email to ${toEmail}:`, error);
+    }
+});
+exports.sendPenaltyEmail = sendPenaltyEmail;

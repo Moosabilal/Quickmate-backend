@@ -47,7 +47,7 @@ export interface IProviderService {
         coordinates: [number, number], 
         radiusInKm: number, 
         serviceId: string
-    ): Promise<any[]>;
+    ): Promise<IProvider[]>;
     getProviderFullDetails(providerId: string): Promise<IProviderFullDetails>
 
 }

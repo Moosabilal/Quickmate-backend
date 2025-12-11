@@ -193,9 +193,8 @@ let ProviderService = class ProviderService {
             if (provider.registrationOtpExpires && provider.registrationOtpExpires instanceof Date) {
                 const timeSinceLastOtpSent = Date.now() - (provider.registrationOtpExpires.getTime() - (OTP_EXPIRY_MINUTES * 60 * 1000));
                 if (timeSinceLastOtpSent < RESEND_COOLDOWN_SECONDS * 1000) {
-                    const error = new Error(`Please wait ${RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000)} seconds before requesting another OTP.`);
-                    error.statusCode = 429;
-                    throw error;
+                    const remainingCooldown = RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000);
+                    throw new CustomError_1.CustomError(`Please wait ${remainingCooldown} seconds before requesting another OTP.`, HttpStatusCode_1.HttpStatusCode.FORBIDDEN);
                 }
             }
             const newOtp = (0, otpGenerator_1.generateOTP)();
@@ -223,22 +222,9 @@ let ProviderService = class ProviderService {
     }
     providersForAdmin(page, limit, search, status, rating) {
         return __awaiter(this, void 0, void 0, function* () {
-            const skip = (page - 1) * limit;
-            const filter = {
-                $or: [
-                    { fullName: { $regex: search, $options: 'i' } },
-                    { email: { $regex: search, $options: 'i' } },
-                ],
-            };
-            if (status && status !== 'All') {
-                filter.status = status;
-            }
-            if (rating) {
-                filter.rating = { $gte: rating, $lt: rating + 1 };
-            }
             const [providers, total] = yield Promise.all([
-                this._providerRepository.findProvidersWithFilter(filter, skip, limit),
-                this._providerRepository.countProviders(filter),
+                this._providerRepository.findProvidersWithFilter({ search, status, rating, page, limit }),
+                this._providerRepository.countProviders({ search, status, rating }),
             ]);
             if (!providers || providers.length === 0) {
                 throw new CustomError_1.CustomError('No providers found.', HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
@@ -294,16 +280,10 @@ let ProviderService = class ProviderService {
     }
     getFeaturedProviders(page, limit, search) {
         return __awaiter(this, void 0, void 0, function* () {
-            const skip = (page - 1) * limit;
-            const filter = {
-                $or: [
-                    { fullName: { $regex: search, $options: 'i' } },
-                    { serviceName: { $regex: search, $options: 'i' } },
-                ],
-                status: provider_enum_1.ProviderStatus.ACTIVE
-            };
-            const providers = yield this._providerRepository.findProvidersWithFilter(filter, skip, limit);
-            const total = yield this._providerRepository.countProviders(filter);
+            const [providers, total] = yield Promise.all([
+                yield this._providerRepository.findProvidersWithFilter({ search, status: provider_enum_1.ProviderStatus.ACTIVE, page, limit }),
+                yield this._providerRepository.countProviders({ search, status: provider_enum_1.ProviderStatus.ACTIVE })
+            ]);
             const featuredProviders = providers.map(provider => ({
                 id: provider._id.toString(),
                 userId: provider.userId.toString(),
@@ -516,7 +496,7 @@ let ProviderService = class ProviderService {
             const serviceEarnings = {};
             currentBookings.forEach(b => {
                 var _a;
-                const serviceName = ((_a = b.serviceId) === null || _a === void 0 ? void 0 : _a.title) || 'Unknown Service';
+                const serviceName = ((_a = (b.serviceId)) === null || _a === void 0 ? void 0 : _a.title) || 'Unknown Service';
                 serviceEarnings[serviceName] = (serviceEarnings[serviceName] || 0) + (Number(b.amount) || 0);
             });
             const topServiceEntry = Object.entries(serviceEarnings).sort((a, b) => b[1] - a[1])[0] || ['N/A', 0];

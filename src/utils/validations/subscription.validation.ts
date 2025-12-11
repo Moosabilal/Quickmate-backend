@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
-export const mongoIdParamSchema = z.object({
-    id: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
+export const paramIdSchema = z.object({
+    id: z.string().min(1, "ID is required"),
 });
 
 export const providerIdParamSchema = z.object({
-    providerId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Provider ID format'),
+    providerId: z.string().min(1, "ID is required"),
 });
 
 
@@ -25,13 +25,13 @@ export const updateSubscriptionPlanSchema = z.object({
 });
 
 export const createSubscriptionOrderSchema = z.object({
-    providerId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Provider ID'),
-    planId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Plan ID'),
+    providerId: z.string().min(1, "ID is required"),
+    planId: z.string().min(1, "ID is required"),
 });
 
 export const verifySubscriptionPaymentSchema = z.object({
-    providerId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Provider ID'),
-    planId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Plan ID'),
+    providerId: z.string().min(1, "ID is required"),
+    planId: z.string().min(1, "ID is required"),
     razorpay_order_id: z.string(),
     razorpay_payment_id: z.string(),
     razorpay_signature: z.string(),
@@ -42,5 +42,5 @@ export const getSubscriptionPlanQuerySchema = z.object({
 });
 
 export const calculateUpgradeSchema = z.object({
-    newPlanId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Plan ID'),
+    newPlanId: z.string().min(1, "ID is required"),
 });

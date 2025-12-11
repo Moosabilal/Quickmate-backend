@@ -31,3 +31,11 @@ export interface IGetWalletRes {
     transactionType: "credit" | "debit";
 
 }
+
+export interface TransactionFilterOptions {
+    walletId: string;
+    status?: TransactionStatus;
+    transactionType?: string;
+    startDate?: Date;
+    endDate?: Date;
+}

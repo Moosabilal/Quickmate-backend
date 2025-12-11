@@ -51,11 +51,11 @@ const MessageSchema = new mongoose_1.Schema({
     },
     text: {
         type: String,
-        required: function () { return this.messageType === 'text'; }
+        required: false
     },
     fileUrl: {
         type: String,
-        required: function () { return this.messageType !== 'text'; }
+        required: false
     }
 }, { timestamps: true });
 exports.default = mongoose_1.default.model("Message", MessageSchema);

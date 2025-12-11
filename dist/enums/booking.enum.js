@@ -9,4 +9,5 @@ var BookingStatus;
     BookingStatus["CANCELLED"] = "Cancelled";
     BookingStatus["COMPLETED"] = "Completed";
     BookingStatus["IN_PROGRESS"] = "In-Progress";
+    BookingStatus["EXPIRED"] = "Expired";
 })(BookingStatus || (exports.BookingStatus = BookingStatus = {}));

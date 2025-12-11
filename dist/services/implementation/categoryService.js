@@ -200,7 +200,7 @@ let CategoryService = class CategoryService {
                 limit
             });
             const mappedData = categories.map(cat => {
-                var _a, _b, _c, _d, _e;
+                var _a, _b, _c, _d, _e, _f;
                 const categoryWithExtras = cat;
                 return {
                     id: categoryWithExtras._id.toString(),
@@ -211,8 +211,8 @@ let CategoryService = class CategoryService {
                     parentId: categoryWithExtras.parentId ? categoryWithExtras.parentId.toString() : null,
                     subCategoriesCount: categoryWithExtras.subCategoryCount || 0,
                     commissionType: ((_b = categoryWithExtras.commissionRule) === null || _b === void 0 ? void 0 : _b.commissionType) || CommissionType_enum_1.CommissionTypes.NONE,
-                    commissionValue: ((_c = categoryWithExtras.commissionRule) === null || _c === void 0 ? void 0 : _c.commissionValue) || '',
-                    commissionStatus: (_e = (_d = categoryWithExtras.commissionRule) === null || _d === void 0 ? void 0 : _d.status) !== null && _e !== void 0 ? _e : false,
+                    commissionValue: ((_d = (_c = categoryWithExtras.commissionRule) === null || _c === void 0 ? void 0 : _c.commissionValue) !== null && _d !== void 0 ? _d : ''),
+                    commissionStatus: (_f = (_e = categoryWithExtras.commissionRule) === null || _e === void 0 ? void 0 : _e.status) !== null && _f !== void 0 ? _f : false,
                 };
             });
             return {
@@ -372,7 +372,7 @@ let CategoryService = class CategoryService {
     }
     getPopularServices() {
         return __awaiter(this, void 0, void 0, function* () {
-            const services = yield this._categoryRepository.findActiveSubCategories({ createdAt: -1 }, 0, 5);
+            const services = yield this._categoryRepository.findActiveSubCategories(-1, 0, 5);
             return services.map(s => ({
                 id: s._id.toString(),
                 name: s.name,
@@ -384,7 +384,7 @@ let CategoryService = class CategoryService {
     }
     getTrendingServices() {
         return __awaiter(this, void 0, void 0, function* () {
-            const services = yield this._categoryRepository.findActiveSubCategories({ createdAt: -1 }, 5, 6);
+            const services = yield this._categoryRepository.findActiveSubCategories(-1, 5, 6);
             return services.map(s => ({
                 id: s._id.toString(),
                 name: s.name,

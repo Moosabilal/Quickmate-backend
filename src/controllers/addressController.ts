@@ -7,9 +7,10 @@ import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { ZodError } from 'zod';
 import {
     createAddressSchema,
+    paramIdSchema,
     updateAddressSchema,
-    mongoIdSchema
 } from '../utils/validations/address.validation';
+import { IAddressData, IAddressRequest } from "../interface/address";
 
 
 injectable()
@@ -42,15 +43,21 @@ export class AddressController {
 
     public updateAddress = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdSchema.parse(req.params);
+            const { id } = paramIdSchema.parse(req.params);
             const validatedBody = updateAddressSchema.parse(req.body);
-            const updateData: any = { ...validatedBody };
-            const locationString = validatedBody.locationCoords;
+            const updateData: IAddressData = { 
+                label: validatedBody.label,
+                street: validatedBody.street,
+                city: validatedBody.city,
+                state: validatedBody.state,
+                zip: validatedBody.zip
+             };
             if (validatedBody.locationCoords) {
                 const [lat, lon] = validatedBody.locationCoords.split(",").map(Number);
                 updateData.locationCoords = { type: "Point", coordinates: [lon, lat] };
             }
-            const updateAddress = await this._addressService.updateAddressById(id, updateData)
+            console.log('the location correds', updateData)
+            const updateAddress = await this._addressService.updateAddressById(id, updateData as IAddressRequest)
             res.status(HttpStatusCode.OK).json(updateAddress)
         } catch (error) {
             next(error)
@@ -60,7 +67,7 @@ export class AddressController {
 
     public deleteAddress = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdSchema.parse(req.params);
+            const { id } = paramIdSchema.parse(req.params);
             const response = await this._addressService.delete_Address(id)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {

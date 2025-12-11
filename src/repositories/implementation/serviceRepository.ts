@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { IAddAndEditServiceForm } from "../../interface/service";
+import { IAddAndEditServiceForm, IServiceWithProvider } from "../../interface/service";
 import Service, { IService } from "../../models/Service";
 import { IServiceRepository } from "../interface/IServiceRepository";
 import { BaseRepository } from "./base/BaseRepository";
@@ -61,7 +61,7 @@ export class ServiceRepository extends BaseRepository<IService> implements IServ
     public async findServicesWithProvider(
         subCategoryId: string, 
         maxPrice?: number
-    ): Promise<IService[]> {
+    ): Promise<IServiceWithProvider[]> {
         
         const matchStage: PipelineStage.Match = {
             $match: {

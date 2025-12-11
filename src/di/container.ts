@@ -67,8 +67,6 @@ import { ChatSessionRepository } from '../repositories/implementation/chatSessio
 import { ChatMessageRepository } from '../repositories/implementation/chatMessageRepository';
 import { IPaymentService } from '../services/interface/IPaymentService';
 import { PaymentService } from '../services/implementation/paymentService';
-import { BookingBotService } from '../services/implementation/bookingBotService';
-import { IBookingBotService } from '../services/interface/IBookingBotService';
 
 const container = new Container()
 container.bind<AuthController>(TYPES.AuthController).to(AuthController)
@@ -94,8 +92,6 @@ container.bind<IAddressRepository>(TYPES.AddressRepository).to(AddressRepository
 container.bind<BookingController>(TYPES.BookingController).to(BookingController);
 container.bind<IBookingService>(TYPES.BookingService).to(BookingService);
 container.bind<IBookingRepository>(TYPES.BookingRepository).to(BookingRepository)
-
-container.bind<IBookingBotService>(TYPES.BookingBotService).to(BookingBotService);
 
 container.bind<IPaymentService>(TYPES.PaymentService).to(PaymentService);
 container.bind<IPaymentRepository>(TYPES.PaymentRepository).to(PaymentRepository)

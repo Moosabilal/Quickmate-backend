@@ -18,11 +18,11 @@ const MessageSchema = new Schema({
   },
   text: { 
     type: String, 
-    required: function(this: any) { return this.messageType === 'text'; } 
+    required: false
   },
   fileUrl: {
     type: String,
-    required: function(this: any) { return this.messageType !== 'text'; }
+    required: false
   }
 
 }, { timestamps: true });

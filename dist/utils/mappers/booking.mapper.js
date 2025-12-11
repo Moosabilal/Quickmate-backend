@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.toBookingConfirmationPage = toBookingConfirmationPage;
 exports.toBookingHistoryPage = toBookingHistoryPage;
 exports.toProviderBookingManagement = toProviderBookingManagement;
-function toBookingConfirmationPage(booking, address, categoryIcon, service, payment, provider, review) {
+function toBookingConfirmationPage(booking, address, categoryIcon, service, payment, provider, review, providerRating, providerReviewsCount) {
     var _a;
     return {
         id: booking._id.toString(),
@@ -11,6 +11,8 @@ function toBookingConfirmationPage(booking, address, categoryIcon, service, paym
         serviceImage: categoryIcon || '',
         providerName: provider.fullName,
         providerImage: provider.profilePhoto || '',
+        providerRating: providerRating || 0,
+        providerReviewsCount: providerReviewsCount || 0,
         priceUnit: service.priceUnit,
         duration: service.duration || '',
         bookedOrderId: payment.razorpay_order_id,

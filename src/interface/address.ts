@@ -17,4 +17,5 @@ export interface IAddressData {
     city: string;
     state: string;
     zip: string;
+    locationCoords?: string | { type: "Point"; coordinates: number[] } ;
 }

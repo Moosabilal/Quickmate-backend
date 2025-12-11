@@ -1,6 +1,6 @@
 import cron from 'node-cron';
 import { format, subDays } from 'date-fns';
-import { Provider } from '../models/Providers';
+import { IProvider, Provider } from '../models/Providers';
 
 export const startScheduleCleanupJob = () => {
     cron.schedule('0 0 * * *', async () => {
@@ -30,7 +30,7 @@ export const startScheduleCleanupJob = () => {
                     );
 
                     if (filteredOverrides.length !== originalLength) {
-                        provider.availability.dateOverrides = filteredOverrides as any;
+                        provider.availability.dateOverrides = filteredOverrides as IProvider['availability']['dateOverrides'    ];
                         isModified = true;
                     }
                 }
@@ -43,7 +43,7 @@ export const startScheduleCleanupJob = () => {
                     );
 
                     if (filteredLeaves.length !== originalLength) {
-                        provider.availability.leavePeriods = filteredLeaves as any;
+                        provider.availability.leavePeriods = filteredLeaves as IProvider['availability']['leavePeriods'];
                         isModified = true;
                     }
                 }

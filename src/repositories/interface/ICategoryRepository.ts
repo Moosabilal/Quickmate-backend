@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { ICategory } from "../../models/Categories";
-import { ICategoryInput } from "../../interface/category";
+import { ICategoryAndCommission, ICategoryFilter, ICategoryInput } from "../../interface/category";
 import { IBaseRepository } from "./base/IBaseRepository";
 import { FilterQuery } from "mongoose";
 
@@ -9,7 +9,7 @@ export interface ICategoryRepository extends IBaseRepository<ICategory> {
     findByName(name: string): Promise<ICategory | null>
     findSubCatByName(name: string): Promise<ICategory | null>
     findByNameAndParent(name: string, parentId: string | Types.ObjectId): Promise<ICategory | null>
-    findAll(filter: any): Promise<ICategory[]>
+    findAll(filter: ICategoryFilter): Promise<ICategory[]>
     findAllSubcategories(p0: {}): Promise<ICategory[]>
     getAllCategories(): Promise<ICategory[]>
     update(id: string | Types.ObjectId, updateData: Partial<ICategoryInput>): Promise<ICategory | null>
@@ -24,8 +24,8 @@ export interface ICategoryRepository extends IBaseRepository<ICategory> {
         filter: FilterQuery<ICategory>,
         page: number,
         limit: number
-    }): Promise<{ categories: ICategory[], total: number }>;
-    findActiveSubCategories(sort: any, skip: number, limit: number): Promise<ICategory[]>;
+    }): Promise<{ categories: ICategoryAndCommission[], total: number }>;
+    findActiveSubCategories(sort: number, skip: number, limit: number): Promise<ICategory[]>;
 
     findSubCategoryByName(name: string): Promise<ICategory | null>;
     findParentCategoryByName(name: string): Promise<ICategory | null>;

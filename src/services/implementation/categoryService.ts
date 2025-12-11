@@ -1,6 +1,6 @@
 import { CategoryRepository } from '../../repositories/implementation/categoryRepository';
 import { CommissionRuleRepository } from '../../repositories/implementation/commissionRuleRepository';
-import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse, ICommissionSummary, IserviceResponse } from '../../interface/category';
+import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICategoryWithDetails, ICommissionRuleInput, ICommissionRuleResponse, ICommissionSummary, IserviceResponse } from '../../interface/category';
 import { ICategory } from '../../models/Categories';
 import { FilterQuery, Types } from 'mongoose';
 import { inject, injectable } from 'inversify';
@@ -227,7 +227,7 @@ export class CategoryService implements ICategoryService {
         limit: number,
         search?: string
     ): Promise<{
-        data: ICategoryFormCombinedData[];
+        data: ICategoryWithDetails[];
         total: number;
         totalPages: number;
     }> {
@@ -244,7 +244,7 @@ export class CategoryService implements ICategoryService {
         });
 
         const mappedData = categories.map(cat => {
-            const categoryWithExtras = cat as any;
+            const categoryWithExtras = cat;
 
             return {
                 id: categoryWithExtras._id.toString(),
@@ -256,7 +256,7 @@ export class CategoryService implements ICategoryService {
 
                 subCategoriesCount: categoryWithExtras.subCategoryCount || 0,
                 commissionType: categoryWithExtras.commissionRule?.commissionType || CommissionTypes.NONE,
-                commissionValue: categoryWithExtras.commissionRule?.commissionValue || '',
+                commissionValue: (categoryWithExtras.commissionRule?.commissionValue ?? '' as number | ''),
                 commissionStatus: categoryWithExtras.commissionRule?.status ?? false,
             };
         });
@@ -453,7 +453,7 @@ export class CategoryService implements ICategoryService {
     }
 
     public async getPopularServices(): Promise<IserviceResponse[]> {
-        const services = await this._categoryRepository.findActiveSubCategories({ createdAt: -1 }, 0, 5);
+        const services = await this._categoryRepository.findActiveSubCategories(-1 , 0, 5);
 
         return services.map(s => ({
             id: s._id.toString(),
@@ -465,7 +465,7 @@ export class CategoryService implements ICategoryService {
     }
 
     public async getTrendingServices(): Promise<IserviceResponse[]> {
-        const services = await this._categoryRepository.findActiveSubCategories({ createdAt: -1 }, 5, 6);
+        const services = await this._categoryRepository.findActiveSubCategories(-1 , 5, 6);
 
         return services.map(s => ({
             id: s._id.toString(),

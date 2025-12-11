@@ -8,7 +8,7 @@ import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { IReviewFilters } from "../interface/review";
 import { ZodError } from "zod";
 import { addReviewSchema, getReviewsQuerySchema, updateReviewStatusSchema } from "../utils/validations/review.validation";
-import { mongoIdParamSchema } from "../utils/validations/booking.validation";
+import { paramIdSchema } from "../utils/validations/booking.validation";
 
 @injectable()
 export class ReviewController {
@@ -63,7 +63,7 @@ export class ReviewController {
 
     public updateReviewStatus = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdParamSchema.parse(req.params);
+            const { id } = paramIdSchema.parse(req.params);
             const { status } = updateReviewStatusSchema.parse(req.body);
 
             const updatedReview = await this._reviewService.updateReviewStatus(id, status);

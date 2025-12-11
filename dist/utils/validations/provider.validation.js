@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchQuerySchema = exports.updateAvailabilitySchema = exports.featuredProvidersQuerySchema = exports.getEarningsQuerySchema = exports.getAvailabilityQuerySchema = exports.getServiceProviderQuerySchema = exports.providersForAdminQuerySchema = exports.updateProviderStatusSchema = exports.updateProviderSchema = exports.registerProviderSchema = exports.mongoIdParamSchema = void 0;
+exports.searchQuerySchema = exports.updateAvailabilitySchema = exports.featuredProvidersQuerySchema = exports.getEarningsQuerySchema = exports.getAvailabilityQuerySchema = exports.getServiceProviderQuerySchema = exports.providersForAdminQuerySchema = exports.updateProviderStatusSchema = exports.updateProviderSchema = exports.registerProviderSchema = exports.paramIdSchema = void 0;
 const zod_1 = require("zod");
 const provider_enum_1 = require("../../enums/provider.enum");
-const mongoIdSchema = zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format');
-exports.mongoIdParamSchema = zod_1.z.object({ id: mongoIdSchema });
+const IdSchema = zod_1.z.string().min(1, "ID is required");
+exports.paramIdSchema = zod_1.z.object({ id: IdSchema });
 exports.registerProviderSchema = zod_1.z.object({
     fullName: zod_1.z.string().min(2, "Full name is required."),
     phoneNumber: zod_1.z.string().min(10, "A valid phone number is required."),
@@ -33,7 +33,7 @@ exports.providersForAdminQuerySchema = zod_1.z.object({
         .transform((val) => (val === 'undefined' || val === 'All') ? undefined : val),
 });
 exports.getServiceProviderQuerySchema = zod_1.z.object({
-    serviceId: mongoIdSchema,
+    serviceId: IdSchema,
     experience: zod_1.z.coerce.number().positive().optional(),
     radius: zod_1.z.coerce.number().positive().optional(),
     price: zod_1.z.coerce.number().positive().optional(),
@@ -43,7 +43,7 @@ exports.getServiceProviderQuerySchema = zod_1.z.object({
     time: zod_1.z.string().optional(),
 });
 exports.getAvailabilityQuerySchema = zod_1.z.object({
-    serviceId: mongoIdSchema,
+    serviceId: IdSchema,
     latitude: zod_1.z.coerce.number(),
     longitude: zod_1.z.coerce.number(),
     radius: zod_1.z.coerce.number().int().positive().optional(),
