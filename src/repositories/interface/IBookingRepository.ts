@@ -1,14 +1,14 @@
 import { FilterQuery } from "mongoose";
 import { IBookingHistoryPage, IBookingStatusCount, IPopulatedBookingForEarnings, IProviderBookingManagement } from "../../interface/booking";
-import { IBooking } from "../../models/Booking";
+import { BookingLean, IBooking } from "../../models/Booking";
 import { IBaseRepository } from "./base/IBaseRepository";
 import { IServiceBreakdown } from "../../interface/provider";
 import { BookingStatus } from "../../enums/booking.enum";
 
 export interface IBookingRepository extends IBaseRepository<IBooking> {
     getDailyBookingCount(filter?: FilterQuery<IBooking>): Promise<{ date: string; total: number }[]>;
-    findByProviderAndDateRange(providerIds: string[],startDate: string,endDate: string,statuses?: string[]): Promise<IBooking[]>
-    findByProviderByTime(providerId: string, startDate: string, endDate: string, statuses?: string[]): Promise<IBooking[]>;
+    findByProviderAndDateRange(providerIds: string[],startDate: string,endDate: string,statuses?: string[]): Promise<BookingLean[]>
+    findByProviderByTime(providerId: string, startDate: string, endDate: string, statuses?: string[]): Promise<BookingLean[]>;
     findByProviderAndDateRangeForEarnings(providerId: string,startDate: Date,endDate: Date): Promise<IPopulatedBookingForEarnings[]>
     countUniqueClientsBeforeDate(providerId: string, date: Date): Promise<number>
     hasPriorBooking(userId: string, providerId: string, beforeDate: Date): Promise<boolean>; 

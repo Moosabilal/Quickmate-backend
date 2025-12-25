@@ -15,7 +15,7 @@ import { HttpStatusCode } from "../../enums/HttpStatusCode";
 import { ErrorMessage } from "../../enums/ErrorMessage";
 import { CustomError } from "../../utils/CustomError";
 import { generateOTP } from "../../utils/otpGenerator";
-import { sendVerificationEmail } from "../../utils/emailService";
+import { sendProviderStatusUpdateEmail, sendVerificationEmail } from "../../utils/emailService";
 import { ILoginResponseDTO, ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
 import { Roles } from "../../enums/userRoles";
@@ -39,12 +39,14 @@ import { sub } from "date-fns/sub";
 import { _haversineKm } from "../../utils/helperFunctions/haversineKm";
 import { format } from 'date-fns/format';
 import { addDays } from 'date-fns/addDays';
-import { IBooking } from "../../models/Booking";
+import { BookingLean, IBooking } from "../../models/Booking";
 import { ReviewStatus } from "../../enums/review.enum";
 import { IProviderFullDetails } from "../../interface/admin";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
 import { ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository";
+import { getSignedUrl } from "../../utils/cloudinaryUpload";
+import { IService } from "../../models/Service";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5;
@@ -141,44 +143,40 @@ export class ProviderService implements IProviderService {
             throw new CustomError('OTP has expired. Please request a new one.', HttpStatusCode.BAD_REQUEST);
         }
 
-        const session = await mongoose.startSession();
-        session.startTransaction();
+        const providerUpdatePayload = {
+            isVerified: true,
+            status: ProviderStatus.PENDING,
+            registrationOtp: undefined,
+            registrationOtpExpires: undefined,
+            registrationOtpAttempts: 0,
+        };
+        const updatedProvider = await this._providerRepository.update(provider.id, providerUpdatePayload);
 
-        try {
-            const providerUpdatePayload = {
-                isVerified: true,
-                status: ProviderStatus.PENDING,
-                registrationOtp: undefined,
-                registrationOtpExpires: undefined,
-                registrationOtpAttempts: 0,
-            };
-            const updatedProvider = await this._providerRepository.update(provider.id, providerUpdatePayload, { session });
-
-            if (!updatedProvider) {
-                throw new CustomError("Failed to update provider record.", HttpStatusCode.INTERNAL_SERVER_ERROR);
-            }
-
-            const userUpdatePayload = {
-                role: Roles.PROVIDER
-            };
-            const updatedUser = await this._userRepository.update(provider.userId.toString(), userUpdatePayload, { session });
-
-            if (!updatedUser) {
-                throw new CustomError("Failed to update user role.", HttpStatusCode.INTERNAL_SERVER_ERROR);
-            }
-
-            await session.commitTransaction();
-
-            return {
-                provider: toProviderDTO(updatedProvider),
-                user: toLoginResponseDTO(updatedUser)
-            };
-
-        } catch (error) {
-            await session.abortTransaction();
-        } finally {
-            session.endSession();
+        if (!updatedProvider) {
+            throw new CustomError("Failed to update provider record.", HttpStatusCode.INTERNAL_SERVER_ERROR);
         }
+
+        const userUpdatePayload = {
+            role: Roles.PROVIDER
+        };
+        const updatedUser = await this._userRepository.update(provider.userId.toString(), userUpdatePayload);
+
+        if (!updatedUser) {
+            throw new CustomError("Failed to update user role.", HttpStatusCode.INTERNAL_SERVER_ERROR);
+        }
+
+        if (updatedProvider.email && updatedProvider.fullName) {
+            await sendProviderStatusUpdateEmail(
+                updatedProvider.email,
+                updatedProvider.fullName,
+                'Pending'
+            );
+        }
+
+        return {
+            provider: toProviderDTO(updatedProvider),
+            user: toLoginResponseDTO(updatedUser)
+        };
     }
 
     public async resendOtp(data: ResendOtpRequestBody): Promise<{ message: string }> {
@@ -225,8 +223,9 @@ export class ProviderService implements IProviderService {
     }
 
 
-    public async getProviderWithAllDetails(): Promise<IProvider[]> {
-        return this._providerRepository.getAllProviders();
+    public async getProviderWithAllDetails(): Promise<IProviderProfile[]> {
+        const providers = await this._providerRepository.getAllProviders();
+        return providers.map(provider => toProviderDTO(provider))
     }
 
     public async providersForAdmin(
@@ -242,8 +241,8 @@ export class ProviderService implements IProviderService {
         currentPage: number;
     }> {
         const [providers, total] = await Promise.all([
-            this._providerRepository.findProvidersWithFilter({ search, status, rating, page, limit}),
-            this._providerRepository.countProviders({search, status, rating}),
+            this._providerRepository.findProvidersWithFilter({ search, status, rating, page, limit }),
+            this._providerRepository.countProviders({ search, status, rating }),
         ]);
 
         if (!providers || providers.length === 0) {
@@ -304,15 +303,15 @@ export class ProviderService implements IProviderService {
 
     public async getFeaturedProviders(page: number, limit: number, search: string): Promise<{ providers: IFeaturedProviders[], total: number, totalPages: number, currentPage: number }> {
         const [providers, total] = await Promise.all([
-            await this._providerRepository.findProvidersWithFilter({search, status: ProviderStatus.ACTIVE, page, limit}),
-            await this._providerRepository.countProviders({search, status: ProviderStatus.ACTIVE})
+            await this._providerRepository.findProvidersWithFilter({ search, status: ProviderStatus.ACTIVE, page, limit }),
+            await this._providerRepository.countProviders({ search, status: ProviderStatus.ACTIVE })
         ]);
-        
+
         const featuredProviders = providers.map(provider => ({
             id: provider._id.toString(),
             userId: provider.userId.toString(),
             fullName: provider.fullName,
-            profilePhoto: provider.profilePhoto,
+            profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
             rating: provider.rating,
 
         }))
@@ -325,7 +324,7 @@ export class ProviderService implements IProviderService {
         }
     }
 
-    public async updateProviderStat(id: string, newStatus: string): Promise<{ message: string }> {
+    public async updateProviderStat(id: string, newStatus: string, reason?: string): Promise<{ message: string }> {
         if (!newStatus) {
             throw new CustomError('Status is required', HttpStatusCode.BAD_REQUEST);
         }
@@ -334,7 +333,21 @@ export class ProviderService implements IProviderService {
         if (!allowedStatuses.includes(newStatus as ProviderStatus)) {
             throw new CustomError(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`, HttpStatusCode.BAD_REQUEST);
         }
+        const provider = await this._providerRepository.findById(id);
+        if (!provider) {
+            throw new CustomError('Provider not found', HttpStatusCode.NOT_FOUND);
+        }
         await this._providerRepository.updateStatusById(id, newStatus)
+
+        if (provider.email && provider.fullName) {
+            await sendProviderStatusUpdateEmail(
+                provider.email,
+                provider.fullName,
+                newStatus,
+                reason
+            );
+        }
+
         return { message: "provider Status updated" }
     }
 
@@ -368,7 +381,6 @@ export class ProviderService implements IProviderService {
     }
 
 
-
     public async providerForChatPage(userId: string, search?: string): Promise<IProviderForChatListPage[]> {
         if (!userId) {
             throw new CustomError("Sorry, UserId not found", HttpStatusCode.NOT_FOUND);
@@ -378,44 +390,53 @@ export class ProviderService implements IProviderService {
             throw new CustomError("User not found", HttpStatusCode.NOT_FOUND);
         }
 
+        console.log('the user role', user)
+
         const createJoiningId = (id1: string, id2: string) => [id1, id2].sort().join('-');
+
+        let chatList: IProviderForChatListPage[] = [];
 
         if (user.role === Roles.PROVIDER) {
             const providerProfile = await this._providerRepository.findOne({ userId });
-            if (!providerProfile) return [];
+            if (providerProfile) {
+                const bookings = await this._bookingRepository.findAll({ providerId: providerProfile._id });
+                if (bookings.length > 0) {
+                    const clientIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
+                    const clients = await this._userRepository.findUsersByIdsAndSearch(clientIds, search);
 
-            const bookings = await this._bookingRepository.findAll({ providerId: providerProfile._id });
-            if (!bookings.length) return [];
+                    if (clients.length > 0) {
+                        const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
+                        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
 
-            const clientIds = [...new Set(bookings.map(b => b.userId?.toString()).filter(Boolean))];
+                        const joiningIds = clients.map(client => createJoiningId(user.id, client._id.toString()));
+                        const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
 
-            const clients = await this._userRepository.findUsersByIdsAndSearch(clientIds, search);
+                        const clientChats = toClientForChatListPage(user.id, bookings, clients, services, messages);
+                        chatList = [...chatList, ...clientChats];
+                    }
+                }
+            }
+        }
 
-            const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
-            const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
-
-            const joiningIds = clients.map(client => createJoiningId(user.id, client._id.toString()));
-            const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
-
-            return toClientForChatListPage(user.id, bookings, clients, services, messages);
-
-        } else {
-            const bookings = await this._bookingRepository.findAll({ userId });
-            if (!bookings.length) return [];
-
-            const providerIds = [...new Set(bookings.map(b => b.providerId?.toString()).filter(Boolean))];
-
+        const bookingsAsClient = await this._bookingRepository.findAll({ userId: new Types.ObjectId(userId) });
+        if (bookingsAsClient.length > 0) {
+            const providerIds = [...new Set(bookingsAsClient.map(b => b.providerId?.toString()).filter(Boolean))];
             const providers = await this._providerRepository.findProvidersByIdsAndSearch(providerIds, search);
 
-            const serviceIds = bookings.map(b => b.serviceId?.toString()).filter(Boolean);
-            const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+            if (providers.length > 0) {
+                const serviceIds = bookingsAsClient.map(b => b.serviceId?.toString()).filter(Boolean);
+                const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
 
-            const providerUserIds = providers.map(p => p.userId.toString());
-            const joiningIds = providerUserIds.map(providerUserId => createJoiningId(user.id, providerUserId));
-            const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
+                const providerUserIds = providers.map(p => p.userId.toString());
+                const joiningIds = providerUserIds.map(providerUserId => createJoiningId(user.id, providerUserId));
+                const messages = await this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
 
-            return toProviderForChatListPage(user.id, bookings, providers, services, messages);
+                const providerChats = toProviderForChatListPage(user.id, bookingsAsClient, providers, services, messages);
+                chatList = [...chatList, ...providerChats];
+            }
         }
+
+        return chatList;
     }
 
 
@@ -586,7 +607,7 @@ export class ProviderService implements IProviderService {
 
         const serviceEarnings: { [key: string]: number } = {};
         currentBookings.forEach(b => {
-            const serviceName = (b.serviceId )?.title || 'Unknown Service';
+            const serviceName = (b.serviceId)?.title || 'Unknown Service';
             serviceEarnings[serviceName] = (serviceEarnings[serviceName] || 0) + (Number(b.amount) || 0);
         });
         const topServiceEntry = Object.entries(serviceEarnings).sort((a, b) => b[1] - a[1])[0] || ['N/A', 0];
@@ -649,7 +670,7 @@ export class ProviderService implements IProviderService {
         }
 
         const today = new Date();
-        today.setHours(0, 0, 0, 0); 
+        today.setHours(0, 0, 0, 0);
 
         for (const period of data.leavePeriods) {
             const fromDate = new Date(period.from);
@@ -699,7 +720,156 @@ export class ProviderService implements IProviderService {
         return updatedProvider.availability;
     }
 
+    public async getPublicProviderDetails(providerId: string): Promise<IProviderDetailsResponse> {
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) {
+            throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
+        }
 
+        const services = await this._serviceRepository.findPopulatedByProviderId(providerId);
+
+        const providerProfile = toProviderDTO(provider);
+
+        const serviceDetails = services.map(toServiceDetailsDTO);
+
+        return {
+            provider: providerProfile,
+            services: serviceDetails
+        };
+    }
+
+    public async findProvidersAvailableAtSlot(
+        providerIds: string[],
+        date: string,
+        time: string
+    ): Promise<IProvider[]> {
+
+        const time24h = convertTo24Hour(time);
+        const [hour, minute] = time24h.split(':').map(Number);
+
+        const slotStart = new Date(date);
+        slotStart.setHours(hour, minute, 0, 0);
+
+        const slotEnd = new Date(slotStart.getTime() + 60 * 60 * 1000);
+
+        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
+
+        const availableProviders: IProvider[] = [];
+
+        for (const provider of providers) {
+            const providerId = provider._id.toString();
+
+            const existingBookings = await this._bookingRepository.findByProviderByTime(
+                providerId,
+                date,
+                date
+            );
+
+            const dayName = format(new Date(date), 'EEEE');
+            const weeklySlots = this._getWeeklySlots(provider, dayName);
+            const override = this._getDateOverride(provider, date);
+            const busySlots = override ? override.busySlots : [];
+
+            const isAvailable = this._isSlotAvailable(
+                slotStart,
+                slotEnd,
+                existingBookings,
+                busySlots
+            );
+
+            if (isAvailable) {
+                availableProviders.push(provider);
+            }
+        }
+
+        return availableProviders;
+    }
+
+    public async findNearbyProviders(
+        coordinates: [number, number],
+        radiusInKm: number = 10,
+        subCategoryId: string
+    ): Promise<IProviderProfile[]> {
+        try {
+            const services = await this._serviceRepository.findAll({
+                subCategoryId: new Types.ObjectId(subCategoryId),
+                status: true
+            });
+
+            if (!services.length) {
+                return [];
+            }
+
+            const providerIds = [...new Set(services.map(s => s.providerId.toString()))];
+            const radiusInMeters = radiusInKm * 1000;
+            const providers = await this._providerRepository.findAll({
+                _id: { $in: providerIds.map(id => new Types.ObjectId(id)) },
+                status: ProviderStatus.ACTIVE,
+                isVerified: true,
+                serviceLocation: {
+                    $near: {
+                        $geometry: {
+                            type: 'Point',
+                            coordinates: coordinates
+                        },
+                        $maxDistance: radiusInMeters
+                    }
+                }
+            });
+
+            return providers.map(provider => toProviderDTO(provider));
+
+        } catch (error) {
+            console.error('Error finding nearby providers:', error);
+            return [];
+        }
+    }
+
+    public async getProviderFullDetails(providerId: string): Promise<IProviderFullDetails> {
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
+
+        const providerProfile = toProviderDTO(provider);
+
+        const [services, bookings, payments] = await Promise.all([
+            this._serviceRepository.findAll({ providerId: provider._id }),
+            this._bookingRepository.findAll({ providerId: provider._id }, { createdAt: -1 }),
+            this._paymentRepository.findAll({ providerId: provider._id }, { createdAt: -1 })
+        ]);
+
+        let currentPlan = null;
+        if (provider.subscription?.planId) {
+            currentPlan = await this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
+        }
+
+        const stats = {
+            totalEarnings: provider.earnings,
+            totalBookings: bookings.length,
+            completedBookings: bookings.filter(b => b.status === BookingStatus.COMPLETED).length,
+            cancelledBookings: bookings.filter(b => b.status === BookingStatus.CANCELLED).length,
+            averageRating: provider.rating
+        };
+
+        const securedServices = services.map(service => {
+            const s = service.toObject ? service.toObject() : service;
+            return {
+                ...s,
+                businessCertification: s.businessCertification ? getSignedUrl(s.businessCertification) : ''
+            } as IService
+        })
+
+        return {
+            profile: providerProfile,
+            services: securedServices,
+            bookings: bookings.slice(0, 10),
+            payments: payments.slice(0, 10),
+            currentPlan: currentPlan,
+            stats
+        };
+    }
+
+
+    //private functions
     private async _getProvidersByInitialCriteria(
         subCategoryId: string,
         userIdToExclude: string,
@@ -844,7 +1014,7 @@ export class ProviderService implements IProviderService {
     private _isSlotAvailable(
         slotStart: Date,
         slotEnd: Date,
-        existingBookings: IBooking[],
+        existingBookings: BookingLean[],
         busySlots: TimeSlot[]
     ): boolean {
         const bookingConflict = existingBookings.some(booking => {
@@ -877,144 +1047,5 @@ export class ProviderService implements IProviderService {
         return true;
     }
 
-    public async getPublicProviderDetails(providerId: string): Promise<IProviderDetailsResponse> {
-        const provider = await this._providerRepository.findById(providerId);
-        if (!provider) {
-            throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
-        }
-
-        const services = await this._serviceRepository.findPopulatedByProviderId(providerId);
-
-        const providerProfile = toProviderDTO(provider);
-
-        const serviceDetails = services.map(toServiceDetailsDTO);
-
-        return {
-            provider: providerProfile,
-            services: serviceDetails
-        };
-    }
-
-    public async findProvidersAvailableAtSlot(
-        providerIds: string[],
-        date: string, 
-        time: string 
-    ): Promise<IProvider[]> {
-
-        const time24h = convertTo24Hour(time);
-        const [hour, minute] = time24h.split(':').map(Number);
-
-        const slotStart = new Date(date);
-        slotStart.setHours(hour, minute, 0, 0);
-
-        const slotEnd = new Date(slotStart.getTime() + 60 * 60 * 1000); 
-
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
-
-        const availableProviders: IProvider[] = [];
-
-        for (const provider of providers) {
-            const providerId = provider._id.toString();
-
-            const existingBookings = await this._bookingRepository.findByProviderByTime(
-                providerId,
-                date,
-                date
-            );
-
-            const dayName = format(new Date(date), 'EEEE');
-            const weeklySlots = this._getWeeklySlots(provider, dayName);
-            const override = this._getDateOverride(provider, date);
-            const busySlots = override ? override.busySlots : [];
-
-            const isAvailable = this._isSlotAvailable(
-                slotStart,
-                slotEnd,
-                existingBookings,
-                busySlots
-            );
-
-            if (isAvailable) {
-                availableProviders.push(provider);
-            }
-        }
-
-        return availableProviders;
-    }
-
-    public async findNearbyProviders(
-        coordinates: [number, number],
-        radiusInKm: number = 10,
-        subCategoryId: string 
-    ): Promise<IProvider[]> {
-        try {
-            const services = await this._serviceRepository.findAll({
-                subCategoryId: new Types.ObjectId(subCategoryId),
-                status: true
-            });
-
-            if (!services.length) {
-                return [];
-            }
-
-            const providerIds = [...new Set(services.map(s => s.providerId.toString()))];
-            const radiusInMeters = radiusInKm * 1000;
-            const providers = await this._providerRepository.findAll({
-                _id: { $in: providerIds.map(id => new Types.ObjectId(id)) },
-                status: ProviderStatus.ACTIVE,
-                isVerified: true,
-                serviceLocation: {
-                    $near: {
-                        $geometry: {
-                            type: 'Point',
-                            coordinates: coordinates
-                        },
-                        $maxDistance: radiusInMeters
-                    }
-                }
-            });
-
-            return providers;
-
-        } catch (error) {
-            console.error('Error finding nearby providers:', error);
-            return [];
-        }
-    }
-
-    public async getProviderFullDetails(providerId: string): Promise<IProviderFullDetails> {
-        const provider = await this._providerRepository.findById(providerId);
-        if (!provider) throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
-
-        const providerProfile = toProviderDTO(provider);
-
-        const [services, bookings, payments] = await Promise.all([
-            this._serviceRepository.findAll({ providerId: provider._id }),
-            this._bookingRepository.findAll({ providerId: provider._id }, { createdAt: -1 }),
-            this._paymentRepository.findAll({ providerId: provider._id }, { createdAt: -1 })
-        ]);
-
-        let currentPlan = null;
-        if (provider.subscription?.planId) {
-            currentPlan = await this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
-        }
-
-        const stats = {
-            totalEarnings: provider.earnings,
-            totalBookings: bookings.length,
-            completedBookings: bookings.filter(b => b.status === BookingStatus.COMPLETED).length,
-            cancelledBookings: bookings.filter(b => b.status === BookingStatus.CANCELLED).length,
-            averageRating: provider.rating
-        };
-
-        return {
-            profile: providerProfile,
-            services: services,
-            bookings: bookings.slice(0, 10),
-            payments: payments.slice(0, 10),
-            currentPlan: currentPlan,
-            stats
-        };
-    }
 
 }

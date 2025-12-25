@@ -33,6 +33,7 @@ exports.verifyPaymentSchema = zod_1.z.object({
 });
 exports.updateBookingStatusSchema = zod_1.z.object({
     status: zod_1.z.nativeEnum(booking_enum_1.BookingStatus),
+    role: zod_1.z.string().optional(),
 });
 exports.updateBookingDateTimeSchema = zod_1.z.object({
     date: zod_1.z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format. Expected YYYY-MM-DD'),

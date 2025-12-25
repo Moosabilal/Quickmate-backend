@@ -84,3 +84,7 @@ export interface ICategoryFilter extends FilterQuery<ICategory> {
 export interface ICategoryWithDetails extends ICategoryFormCombinedData {
     subCategoriesCount: number;
 }
+
+export interface ICategoryDto extends Partial<ICategory> {
+    iconUrl: string | null;
+}

@@ -39,8 +39,7 @@ let ServiceController = class ServiceController {
                 const validatedBody = service_validation_1.addServiceSchema.parse(req.body);
                 const files = req.files;
                 const certificate = (_a = files === null || files === void 0 ? void 0 : files.businessCertification) === null || _a === void 0 ? void 0 : _a[0];
-                const baseUrl = process.env.CLOUDINARY_BASE_URL;
-                const businessCertificationUrl = certificate ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(certificate.path)).replace(baseUrl, '') : '';
+                const businessCertificationUrl = certificate ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(certificate.path)) : '';
                 const serviceToAdd = Object.assign(Object.assign({}, validatedBody), { status: req.body.status === "true", businessCertification: businessCertificationUrl, experience: parseInt(req.body.experience), price: parseInt(req.body.price), userId: req.user.id });
                 const response = yield this._serviceService.addService(serviceToAdd);
                 res.status(200).json(response);

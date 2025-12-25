@@ -82,3 +82,4 @@ export interface IUserListFilter {
     status?: 'Active' | 'Inactive' | 'All' | string;
     role?: string; 
 }
+

@@ -34,18 +34,8 @@ let MessageController = class MessageController {
                     return;
                 }
                 console.log(`Processing file upload: ${req.file.originalname}, size: ${req.file.size} bytes`);
-                const baseUrl = process.env.CLOUDINARY_BASE_URL;
-                if (!baseUrl) {
-                    console.error('CLOUDINARY_BASE_URL environment variable not set');
-                    res.status(HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-                        success: false,
-                        message: "Server configuration error"
-                    });
-                    return;
-                }
-                const publicId = yield (0, cloudinaryUpload_1.uploadToCloudinary)(req.file.path);
-                const fileUrl = publicId.replace(baseUrl, '');
-                console.log(`File uploaded successfully: ${publicId}`);
+                const fileUrl = yield (0, cloudinaryUpload_1.uploadToCloudinary)(req.file.path);
+                console.log(`File uploaded successfully: ${fileUrl}`);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
                     success: true,
                     message: "File uploaded successfully",

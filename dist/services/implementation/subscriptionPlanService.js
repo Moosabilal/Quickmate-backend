@@ -55,7 +55,10 @@ let SubscriptionPlanService = class SubscriptionPlanService {
         return __awaiter(this, void 0, void 0, function* () {
             const filter = {};
             if (search) {
-                filter.name = { $regex: search, $options: 'i' };
+                filter.$or = [
+                    { name: { $regex: search, $options: 'i' } },
+                    { description: { $regex: search, $options: 'i' } }
+                ];
             }
             const plans = yield this._subscriptionPlanRepository.findAll(filter);
             if (!plans || plans.length <= 0) {

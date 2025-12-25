@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { IBookingHistoryPage, IBookingStatusCount, IPopulatedBookingForEarnings, IProviderBookingManagement } from "../../interface/booking";
-import Booking, { IBooking } from "../../models/Booking";
+import Booking, { BookingLean, IBooking } from "../../models/Booking";
 import { IBookingRepository } from "../interface/IBookingRepository";
 import { BaseRepository } from "./base/BaseRepository";
 import { FilterQuery, PipelineStage, Types } from "mongoose";
@@ -53,7 +53,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         startDate: string,
         endDate: string,
         statuses: string[] = ['Pending', 'Confirmed', 'In_Progress']
-    ): Promise<IBooking[]> {
+    ): Promise<BookingLean[]> {
         return await Booking.find({
             providerId: { $in: providerIds },
             status: { $in: statuses },
@@ -61,7 +61,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 $gte: startDate,
                 $lte: endDate
             }
-        }).lean();
+        }).lean<BookingLean[]>();
     }
 
     async findByProviderByTime(
@@ -69,7 +69,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
         startDate: string,
         endDate: string,
         statuses: string[] = ['Pending', 'Confirmed', 'In_Progress']
-    ) {
+    ): Promise<BookingLean[]> {
         return await Booking.find({
             providerId,
             status: { $in: statuses },
@@ -77,7 +77,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 $gte: startDate,
                 $lte: endDate
             }
-        }).lean();
+        }).lean<BookingLean[]>();
     }
 
     async findByProviderAndDateRangeForEarnings(
@@ -282,7 +282,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 $facet: {
                     metadata: [{ $count: 'total' }],
                     data: [
-                        { $sort: { createdAt: 1 } },
+                        { $sort: { createdAt: -1 } },
                         { $lookup: { from: 'addresses', localField: 'addressId', foreignField: '_id', as: 'address' } },
                         { $unwind: { path: '$address', preserveNullAndEmptyArrays: true } },
                         { $lookup: { from: 'categories', localField: 'service.subCategoryId', foreignField: '_id', as: 'subCategory' } },

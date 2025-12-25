@@ -10,6 +10,8 @@ import { IUser } from '../../models/User';
 import { _haversineKm } from '../helperFunctions/haversineKm';
 import { LastMessageData } from '../../interface/message';
 import { IPopulatedBookingForEarnings } from '../../interface/booking';
+import { SignalMedium } from 'lucide-react';
+import { getSignedUrl } from '../cloudinaryUpload';
 
 
 const createJoiningId = (id1: string, id2: string): string => {
@@ -28,7 +30,7 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
     serviceArea: provider.serviceArea,
     availability: provider.availability,
-    profilePhoto: provider.profilePhoto,
+    profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
     earnings: provider.earnings,
     status: provider.status,
     totalBookings: provider.totalBookings,
@@ -36,7 +38,7 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     rating: provider.rating,
     isVerified: provider.isVerified,
     subscription: provider.subscription,
-    aadhaarIdProof: provider.aadhaarIdProof,
+    aadhaarIdProof: provider.aadhaarIdProof ? getSignedUrl(provider.aadhaarIdProof) : '',
     createdAt: provider.createdAt,
   };
 }
@@ -54,7 +56,7 @@ export function toProviderForAdminResponseDTO(
       phoneNumber: provider.phoneNumber,
       email: provider.email,
       serviceArea: provider.serviceArea,
-      profilePhoto: provider.profilePhoto,
+      profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
       status: provider.status,
       rating: provider.rating,
       serviceOffered: serviceMap.get(providerIdStr) || [],
@@ -89,7 +91,7 @@ export function toBackendProviderDTO(
     fullName: provider.fullName,
     phoneNumber: provider.phoneNumber,
     email: provider.email,
-    profilePhoto: provider.profilePhoto,
+    profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
     serviceArea: provider.serviceArea,
     serviceLocation: `${provLat},${provLng}`,
     availability: provider.availability,
@@ -130,7 +132,7 @@ export function toProviderForChatListPage(
       id: provider.userId.toString(),
       bookingId: booking?._id.toString(),
       name: provider.fullName,
-      profilePicture: provider.profilePhoto || "",
+      profilePicture: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
       location: provider.serviceArea,
       isOnline: true,
       services: providerServices[0]?.title || "",      
@@ -171,7 +173,7 @@ export function toClientForChatListPage(
       id: client._id.toString(),
       bookingId: clientBooking._id.toString(),
       name: client.name as string,
-      profilePicture: (client.profilePicture as string) || "",
+      profilePicture: client.profilePicture && client.profilePicture === 'string' ? getSignedUrl(client.profilePicture) : '',
       location: "",
       isOnline: true, 
       services: service?.title || "",      
@@ -265,7 +267,7 @@ export function toProviderDashboardDTO(
       service: service?.title || "Unknown Service",
       client: `${booking.customerName} • ${booking.scheduledDate} ${booking.scheduledTime}`,
       status: booking.status as BookingStatus,
-      image: subCategory?.iconUrl || "",
+      image: subCategory?.iconUrl ? getSignedUrl(subCategory.iconUrl) : '',
       category: parentCategory?.name || "Unknown Category",
     };
   });

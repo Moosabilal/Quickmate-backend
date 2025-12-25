@@ -2,6 +2,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 import path from 'path';
 import { CloudinaryDeleteResponse, CloudinaryError } from '../interface/cloudinary';
+import logger from '../logger/logger';
 
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 const apiKey = process.env.CLOUDINARY_API_KEY;
@@ -46,11 +47,10 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
   try {
     validateFile(filePath);
 
-    console.log(`Attempting to upload file: ${filePath} (attempt ${retryCount + 1}/${maxRetries + 1})`);
-
     const result = await cloudinary.uploader.upload(filePath, {
       folder: 'quickmate_images',
       resource_type: 'auto',
+      type: 'authenticated',
       timeout: 60000,
       transformation: [
         { width: 1200, height: 1200, crop: 'limit' },
@@ -58,19 +58,15 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
       ]
     });
 
-    console.log(`Successfully uploaded to Cloudinary: ${result.public_id}`);
-
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
-      console.log(`Cleaned up local file: ${filePath}`);
     }
 
     return result.public_id;
   } catch (rawError: unknown) {
-    // Type Assertion: Treat the unknown error as our defined CloudinaryError
     const error = rawError as CloudinaryError;
 
-    console.error('Cloudinary upload error details:', {
+    logger.error('Cloudinary upload error details:', {
       message: error.message,
       http_code: error.http_code,
       error_code: error.error?.code || error.code,
@@ -82,7 +78,7 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
 
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
-      console.log(`Cleaned up local file after error: ${filePath}`);
+      logger.info(`Cleaned up local file after error: ${filePath}`);
     }
 
     const isRetryableError = (
@@ -98,7 +94,7 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
 
     if (isRetryableError && retryCount < maxRetries) {
       const delay = Math.pow(2, retryCount) * 1000; 
-      console.log(`Retrying upload in ${delay}ms...`);
+      logger.info(`Retrying upload in ${delay}ms...`);
       await new Promise(resolve => setTimeout(resolve, delay));
       return uploadToCloudinary(filePath, retryCount + 1);
     }
@@ -126,13 +122,31 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
   }
 };
 
+export const getSignedUrl = (publicId: string): string => {
+  if (!publicId) return '';
+
+  // Generate a timestamp for 1 hour from now (in seconds)
+  const expirationTime = Math.round(new Date().getTime() / 1000) + 3600; 
+
+  return cloudinary.url(publicId, {
+    type: 'authenticated', // Must match the upload type
+    secure: true,          // Force HTTPS
+    sign_url: true,        // Generate the signature
+    // auth_token: {          // Level 4: Time-limited token
+    //   key: process.env.CLOUDINARY_API_KEY, 
+    //   start_time: Math.round(new Date().getTime() / 1000), 
+    //   duration: 3600 // 1 hour duration
+    // }
+  });
+};
+
 
 export const deleteFromCloudinary = async (publicId: string): Promise<CloudinaryDeleteResponse> => {
   try {
     const result = await cloudinary.uploader.destroy(publicId);
     return result as CloudinaryDeleteResponse;
   } catch (error) {
-    console.error('Cloudinary deletion error:', error);
+    logger.error('Cloudinary deletion error:', error);
     throw new Error('Failed to delete image from Cloudinary.');
   }
 };

@@ -279,7 +279,7 @@ let BookingRepository = class BookingRepository extends BaseRepository_1.BaseRep
                     $facet: {
                         metadata: [{ $count: 'total' }],
                         data: [
-                            { $sort: { createdAt: 1 } },
+                            { $sort: { createdAt: -1 } },
                             { $lookup: { from: 'addresses', localField: 'addressId', foreignField: '_id', as: 'address' } },
                             { $unwind: { path: '$address', preserveNullAndEmptyArrays: true } },
                             { $lookup: { from: 'categories', localField: 'service.subCategoryId', foreignField: '_id', as: 'subCategory' } },

@@ -16,6 +16,7 @@ import { ICommissionRule } from '../../models/Commission';
 import { endOfDay, startOfDay, subDays } from 'date-fns';
 import { IPaymentRepository } from '../../repositories/interface/IPaymentRepository';
 import { IBookingRepository } from '../../repositories/interface/IBookingRepository';
+import { getSignedUrl } from '../../utils/cloudinaryUpload';
 
 
 @injectable()
@@ -69,8 +70,12 @@ export class CategoryService implements ICategoryService {
 
         const createdCategoryDoc = await this._categoryRepository.create(categoryDataToCreate);
 
-        const categoryResponse: ICategoryResponse = createdCategoryDoc.toJSON() as unknown as ICategoryResponse;
+        const categoryObj = createdCategoryDoc.toJSON() as unknown as ICategoryResponse;
 
+        const categoryResponse: ICategoryResponse = {
+            ...categoryObj,
+            iconUrl: categoryObj.iconUrl ? getSignedUrl(categoryObj.iconUrl) : null
+        };
         let createdCommissionRule: ICommissionRuleResponse | undefined;
 
         const ruleData: Partial<ICommissionRule> = {
@@ -148,7 +153,7 @@ export class CategoryService implements ICategoryService {
             id: categoryDoc._id.toString(),
             name: categoryDoc.name,
             description: categoryDoc.description || '',
-            iconUrl: categoryDoc.iconUrl || null,
+            iconUrl: categoryDoc.iconUrl ? getSignedUrl(categoryDoc.iconUrl) : null,
             status: categoryDoc.status ?? false,
             parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
             commissionType: commissionRuleDoc?.commissionType || CommissionTypes.NONE,
@@ -175,7 +180,7 @@ export class CategoryService implements ICategoryService {
                 id: sub._id.toString(),
                 name: sub.name,
                 description: sub.description || '',
-                iconUrl: sub.iconUrl || null,
+                iconUrl: sub.iconUrl ? getSignedUrl(sub.iconUrl) : null,
                 status: sub.status ?? false,
                 parentId: sub.parentId ? sub.parentId.toString() : null,
                 commissionType: subRule?.commissionType || CommissionTypes.NONE,
@@ -204,7 +209,7 @@ export class CategoryService implements ICategoryService {
             id: categoryDoc._id.toString(),
             name: categoryDoc.name,
             description: categoryDoc.description || '',
-            iconUrl: categoryDoc.iconUrl || null,
+            iconUrl: categoryDoc.iconUrl ? getSignedUrl(categoryDoc.iconUrl) : null,
             status: categoryDoc.status ?? false,
             parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
             commissionType: CommissionTypes.NONE,
@@ -250,7 +255,7 @@ export class CategoryService implements ICategoryService {
                 id: categoryWithExtras._id.toString(),
                 name: categoryWithExtras.name,
                 description: categoryWithExtras.description || '',
-                iconUrl: categoryWithExtras.iconUrl || null,
+                iconUrl: categoryWithExtras.iconUrl ? getSignedUrl(categoryWithExtras.iconUrl) : null,
                 status: categoryWithExtras.status ?? false,
                 parentId: categoryWithExtras.parentId ? categoryWithExtras.parentId.toString() : null,
 
@@ -286,7 +291,7 @@ export class CategoryService implements ICategoryService {
                     _id: raw._id.toString(),
                     name: raw.name,
                     description: raw.description || '',
-                    iconUrl: raw.iconUrl || null,
+                    iconUrl: raw.iconUrl ? getSignedUrl(raw.iconUrl) : null,
                     status: raw.status ?? false,
                     parentId: raw.parentId ? raw.parentId.toString() : null,
                 };
@@ -322,12 +327,12 @@ export class CategoryService implements ICategoryService {
             this._categoryRepository.findAllSubCategories(search, skip, limit),
             this._categoryRepository.countOfSubCategories(search),
         ]);
-        
+
         const featuredServices = services.map(service => {
             return {
                 id: service._id.toString(),
                 name: service.name,
-                iconUrl: service.iconUrl,
+                iconUrl: service.iconUrl ? getSignedUrl(service.iconUrl) : null,
                 parentId: service.parentId.toString()
             }
 
@@ -453,24 +458,24 @@ export class CategoryService implements ICategoryService {
     }
 
     public async getPopularServices(): Promise<IserviceResponse[]> {
-        const services = await this._categoryRepository.findActiveSubCategories(-1 , 0, 5);
+        const services = await this._categoryRepository.findActiveSubCategories(-1, 0, 5);
 
         return services.map(s => ({
             id: s._id.toString(),
             name: s.name,
-            iconUrl: s.iconUrl,
+            iconUrl: s.iconUrl ? getSignedUrl(s.iconUrl) : null,
             parentId: s.parentId.toString(),
             description: s.description || '',
         }));
     }
 
     public async getTrendingServices(): Promise<IserviceResponse[]> {
-        const services = await this._categoryRepository.findActiveSubCategories(-1 , 5, 6);
+        const services = await this._categoryRepository.findActiveSubCategories(-1, 5, 6);
 
         return services.map(s => ({
             id: s._id.toString(),
             name: s.name,
-            iconUrl: s.iconUrl,
+            iconUrl: s.iconUrl ? getSignedUrl(s.iconUrl) : null,
             parentId: s.parentId.toString(),
             description: s.description || '',
         }));
@@ -504,7 +509,7 @@ export class CategoryService implements ICategoryService {
 
     public async getRelatedCategories(categoryId: string): Promise<IserviceResponse[]> {
         const currentCategory = await this._categoryRepository.findById(categoryId);
-        
+
         if (!currentCategory || !currentCategory.parentId) {
             return [];
         }
@@ -519,7 +524,7 @@ export class CategoryService implements ICategoryService {
             id: cat._id.toString(),
             name: cat.name,
             description: cat.description || '',
-            iconUrl: cat.iconUrl || '',
+            iconUrl: cat.iconUrl ? getSignedUrl(cat.iconUrl) : '',
             parentId: cat.parentId?.toString() || null,
         }));
     }

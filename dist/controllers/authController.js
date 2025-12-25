@@ -176,9 +176,7 @@ let AuthController = class AuthController {
                 const profilePicturePath = (_a = req.file) === null || _a === void 0 ? void 0 : _a.path;
                 let profilePicture;
                 if (profilePicturePath) {
-                    const fullUrl = yield (0, cloudinaryUpload_1.uploadToCloudinary)(profilePicturePath);
-                    const baseUrl = process.env.CLOUDINARY_BASE_URL;
-                    profilePicture = fullUrl.replace(baseUrl, '');
+                    profilePicture = yield (0, cloudinaryUpload_1.uploadToCloudinary)(profilePicturePath);
                 }
                 else if (req.body.iconUrl === '') {
                     profilePicture = null;
@@ -188,6 +186,17 @@ let AuthController = class AuthController {
                 }
                 const updatedUser = yield this._authService.updateProfile(token, { name, email, profilePicture });
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(updatedUser);
+            }
+            catch (error) {
+                next(error);
+            }
+        });
+        this.generateOtp = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const userId = req.user.id;
+                const { email } = req.body;
+                const response = yield this._authService.generateOtp(userId, email);
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json(response);
             }
             catch (error) {
                 next(error);
@@ -209,7 +218,8 @@ let AuthController = class AuthController {
         this.updateUser = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const userId = req.params.userId;
-                const updatedUser = yield this._authService.updateUser(userId);
+                const reason = req.body.reason ? req.body.reason : undefined;
+                const updatedUser = yield this._authService.updateUser(userId, reason);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(updatedUser);
             }
             catch (error) {
@@ -258,6 +268,16 @@ let AuthController = class AuthController {
                 }
                 const userDetails = yield this._authService.getUserDetailsForAdmin(userId);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(userDetails);
+            }
+            catch (error) {
+                next(error);
+            }
+        });
+        this.searchResources = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const query = req.query.query || '';
+                const result = yield this._authService.searchResources(query);
+                res.status(HttpStatusCode_1.HttpStatusCode.OK).json(result);
             }
             catch (error) {
                 next(error);

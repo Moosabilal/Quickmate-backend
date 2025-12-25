@@ -1,43 +1,10 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
@@ -60,7 +27,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProviderService = void 0;
 const inversify_1 = require("inversify");
 const type_1 = __importDefault(require("../../di/type"));
-const mongoose_1 = __importStar(require("mongoose"));
+const mongoose_1 = require("mongoose");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const HttpStatusCode_1 = require("../../enums/HttpStatusCode");
 const ErrorMessage_1 = require("../../enums/ErrorMessage");
@@ -81,6 +48,7 @@ const haversineKm_1 = require("../../utils/helperFunctions/haversineKm");
 const format_1 = require("date-fns/format");
 const review_enum_1 = require("../../enums/review.enum");
 const booking_enum_1 = require("../../enums/booking.enum");
+const cloudinaryUpload_1 = require("../../utils/cloudinaryUpload");
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5;
 const RESEND_COOLDOWN_SECONDS = parseInt(process.env.RESEND_COOLDOWN_SECONDS, 10) || 30;
@@ -145,39 +113,31 @@ let ProviderService = class ProviderService {
             if (!provider.registrationOtpExpires || new Date() > provider.registrationOtpExpires) {
                 throw new CustomError_1.CustomError('OTP has expired. Please request a new one.', HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
             }
-            const session = yield mongoose_1.default.startSession();
-            session.startTransaction();
-            try {
-                const providerUpdatePayload = {
-                    isVerified: true,
-                    status: provider_enum_1.ProviderStatus.PENDING,
-                    registrationOtp: undefined,
-                    registrationOtpExpires: undefined,
-                    registrationOtpAttempts: 0,
-                };
-                const updatedProvider = yield this._providerRepository.update(provider.id, providerUpdatePayload, { session });
-                if (!updatedProvider) {
-                    throw new CustomError_1.CustomError("Failed to update provider record.", HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR);
-                }
-                const userUpdatePayload = {
-                    role: userRoles_1.Roles.PROVIDER
-                };
-                const updatedUser = yield this._userRepository.update(provider.userId.toString(), userUpdatePayload, { session });
-                if (!updatedUser) {
-                    throw new CustomError_1.CustomError("Failed to update user role.", HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR);
-                }
-                yield session.commitTransaction();
-                return {
-                    provider: (0, provider_mapper_1.toProviderDTO)(updatedProvider),
-                    user: (0, user_mapper_1.toLoginResponseDTO)(updatedUser)
-                };
+            const providerUpdatePayload = {
+                isVerified: true,
+                status: provider_enum_1.ProviderStatus.PENDING,
+                registrationOtp: undefined,
+                registrationOtpExpires: undefined,
+                registrationOtpAttempts: 0,
+            };
+            const updatedProvider = yield this._providerRepository.update(provider.id, providerUpdatePayload);
+            if (!updatedProvider) {
+                throw new CustomError_1.CustomError("Failed to update provider record.", HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR);
             }
-            catch (error) {
-                yield session.abortTransaction();
+            const userUpdatePayload = {
+                role: userRoles_1.Roles.PROVIDER
+            };
+            const updatedUser = yield this._userRepository.update(provider.userId.toString(), userUpdatePayload);
+            if (!updatedUser) {
+                throw new CustomError_1.CustomError("Failed to update user role.", HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR);
             }
-            finally {
-                session.endSession();
+            if (updatedProvider.email && updatedProvider.fullName) {
+                yield (0, emailService_1.sendProviderStatusUpdateEmail)(updatedProvider.email, updatedProvider.fullName, 'Pending');
             }
+            return {
+                provider: (0, provider_mapper_1.toProviderDTO)(updatedProvider),
+                user: (0, user_mapper_1.toLoginResponseDTO)(updatedUser)
+            };
         });
     }
     resendOtp(data) {
@@ -217,7 +177,8 @@ let ProviderService = class ProviderService {
     }
     getProviderWithAllDetails() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this._providerRepository.getAllProviders();
+            const providers = yield this._providerRepository.getAllProviders();
+            return providers.map(provider => (0, provider_mapper_1.toProviderDTO)(provider));
         });
     }
     providersForAdmin(page, limit, search, status, rating) {
@@ -288,7 +249,7 @@ let ProviderService = class ProviderService {
                 id: provider._id.toString(),
                 userId: provider.userId.toString(),
                 fullName: provider.fullName,
-                profilePhoto: provider.profilePhoto,
+                profilePhoto: provider.profilePhoto ? (0, cloudinaryUpload_1.getSignedUrl)(provider.profilePhoto) : '',
                 rating: provider.rating,
             }));
             return {
@@ -299,7 +260,7 @@ let ProviderService = class ProviderService {
             };
         });
     }
-    updateProviderStat(id, newStatus) {
+    updateProviderStat(id, newStatus, reason) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!newStatus) {
                 throw new CustomError_1.CustomError('Status is required', HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
@@ -308,7 +269,14 @@ let ProviderService = class ProviderService {
             if (!allowedStatuses.includes(newStatus)) {
                 throw new CustomError_1.CustomError(`Invalid status. Allowed: ${allowedStatuses.join(", ")}`, HttpStatusCode_1.HttpStatusCode.BAD_REQUEST);
             }
+            const provider = yield this._providerRepository.findById(id);
+            if (!provider) {
+                throw new CustomError_1.CustomError('Provider not found', HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
+            }
             yield this._providerRepository.updateStatusById(id, newStatus);
+            if (provider.email && provider.fullName) {
+                yield (0, emailService_1.sendProviderStatusUpdateEmail)(provider.email, provider.fullName, newStatus, reason);
+            }
             return { message: "provider Status updated" };
         });
     }
@@ -334,35 +302,42 @@ let ProviderService = class ProviderService {
             if (!user) {
                 throw new CustomError_1.CustomError("User not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
             }
+            console.log('the user role', user);
             const createJoiningId = (id1, id2) => [id1, id2].sort().join('-');
+            let chatList = [];
             if (user.role === userRoles_1.Roles.PROVIDER) {
                 const providerProfile = yield this._providerRepository.findOne({ userId });
-                if (!providerProfile)
-                    return [];
-                const bookings = yield this._bookingRepository.findAll({ providerId: providerProfile._id });
-                if (!bookings.length)
-                    return [];
-                const clientIds = [...new Set(bookings.map(b => { var _a; return (_a = b.userId) === null || _a === void 0 ? void 0 : _a.toString(); }).filter(Boolean))];
-                const clients = yield this._userRepository.findUsersByIdsAndSearch(clientIds, search);
-                const serviceIds = bookings.map(b => { var _a; return (_a = b.serviceId) === null || _a === void 0 ? void 0 : _a.toString(); }).filter(Boolean);
-                const services = yield this._serviceRepository.findAll({ _id: { $in: serviceIds } });
-                const joiningIds = clients.map(client => createJoiningId(user.id, client._id.toString()));
-                const messages = yield this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
-                return (0, provider_mapper_1.toClientForChatListPage)(user.id, bookings, clients, services, messages);
+                if (providerProfile) {
+                    const bookings = yield this._bookingRepository.findAll({ providerId: providerProfile._id });
+                    if (bookings.length > 0) {
+                        const clientIds = [...new Set(bookings.map(b => { var _a; return (_a = b.userId) === null || _a === void 0 ? void 0 : _a.toString(); }).filter(Boolean))];
+                        const clients = yield this._userRepository.findUsersByIdsAndSearch(clientIds, search);
+                        if (clients.length > 0) {
+                            const serviceIds = bookings.map(b => { var _a; return (_a = b.serviceId) === null || _a === void 0 ? void 0 : _a.toString(); }).filter(Boolean);
+                            const services = yield this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+                            const joiningIds = clients.map(client => createJoiningId(user.id, client._id.toString()));
+                            const messages = yield this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
+                            const clientChats = (0, provider_mapper_1.toClientForChatListPage)(user.id, bookings, clients, services, messages);
+                            chatList = [...chatList, ...clientChats];
+                        }
+                    }
+                }
             }
-            else {
-                const bookings = yield this._bookingRepository.findAll({ userId });
-                if (!bookings.length)
-                    return [];
-                const providerIds = [...new Set(bookings.map(b => { var _a; return (_a = b.providerId) === null || _a === void 0 ? void 0 : _a.toString(); }).filter(Boolean))];
+            const bookingsAsClient = yield this._bookingRepository.findAll({ userId: new mongoose_1.Types.ObjectId(userId) });
+            if (bookingsAsClient.length > 0) {
+                const providerIds = [...new Set(bookingsAsClient.map(b => { var _a; return (_a = b.providerId) === null || _a === void 0 ? void 0 : _a.toString(); }).filter(Boolean))];
                 const providers = yield this._providerRepository.findProvidersByIdsAndSearch(providerIds, search);
-                const serviceIds = bookings.map(b => { var _a; return (_a = b.serviceId) === null || _a === void 0 ? void 0 : _a.toString(); }).filter(Boolean);
-                const services = yield this._serviceRepository.findAll({ _id: { $in: serviceIds } });
-                const providerUserIds = providers.map(p => p.userId.toString());
-                const joiningIds = providerUserIds.map(providerUserId => createJoiningId(user.id, providerUserId));
-                const messages = yield this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
-                return (0, provider_mapper_1.toProviderForChatListPage)(user.id, bookings, providers, services, messages);
+                if (providers.length > 0) {
+                    const serviceIds = bookingsAsClient.map(b => { var _a; return (_a = b.serviceId) === null || _a === void 0 ? void 0 : _a.toString(); }).filter(Boolean);
+                    const services = yield this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+                    const providerUserIds = providers.map(p => p.userId.toString());
+                    const joiningIds = providerUserIds.map(providerUserId => createJoiningId(user.id, providerUserId));
+                    const messages = yield this._messageRepository.findLastMessagesByJoiningIds(joiningIds);
+                    const providerChats = (0, provider_mapper_1.toProviderForChatListPage)(user.id, bookingsAsClient, providers, services, messages);
+                    chatList = [...chatList, ...providerChats];
+                }
             }
+            return chatList;
         });
     }
     getProviderDashboard(userId) {
@@ -576,6 +551,117 @@ let ProviderService = class ProviderService {
             return updatedProvider.availability;
         });
     }
+    getPublicProviderDetails(providerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const provider = yield this._providerRepository.findById(providerId);
+            if (!provider) {
+                throw new CustomError_1.CustomError("Provider not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
+            }
+            const services = yield this._serviceRepository.findPopulatedByProviderId(providerId);
+            const providerProfile = (0, provider_mapper_1.toProviderDTO)(provider);
+            const serviceDetails = services.map(provider_mapper_1.toServiceDetailsDTO);
+            return {
+                provider: providerProfile,
+                services: serviceDetails
+            };
+        });
+    }
+    findProvidersAvailableAtSlot(providerIds, date, time) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const time24h = (0, convertTo24hrs_1.convertTo24Hour)(time);
+            const [hour, minute] = time24h.split(':').map(Number);
+            const slotStart = new Date(date);
+            slotStart.setHours(hour, minute, 0, 0);
+            const slotEnd = new Date(slotStart.getTime() + 60 * 60 * 1000);
+            const providers = yield this._providerRepository.findAll({ _id: { $in: providerIds } });
+            const availableProviders = [];
+            for (const provider of providers) {
+                const providerId = provider._id.toString();
+                const existingBookings = yield this._bookingRepository.findByProviderByTime(providerId, date, date);
+                const dayName = (0, format_1.format)(new Date(date), 'EEEE');
+                const weeklySlots = this._getWeeklySlots(provider, dayName);
+                const override = this._getDateOverride(provider, date);
+                const busySlots = override ? override.busySlots : [];
+                const isAvailable = this._isSlotAvailable(slotStart, slotEnd, existingBookings, busySlots);
+                if (isAvailable) {
+                    availableProviders.push(provider);
+                }
+            }
+            return availableProviders;
+        });
+    }
+    findNearbyProviders(coordinates_1) {
+        return __awaiter(this, arguments, void 0, function* (coordinates, radiusInKm = 10, subCategoryId) {
+            try {
+                const services = yield this._serviceRepository.findAll({
+                    subCategoryId: new mongoose_1.Types.ObjectId(subCategoryId),
+                    status: true
+                });
+                if (!services.length) {
+                    return [];
+                }
+                const providerIds = [...new Set(services.map(s => s.providerId.toString()))];
+                const radiusInMeters = radiusInKm * 1000;
+                const providers = yield this._providerRepository.findAll({
+                    _id: { $in: providerIds.map(id => new mongoose_1.Types.ObjectId(id)) },
+                    status: provider_enum_1.ProviderStatus.ACTIVE,
+                    isVerified: true,
+                    serviceLocation: {
+                        $near: {
+                            $geometry: {
+                                type: 'Point',
+                                coordinates: coordinates
+                            },
+                            $maxDistance: radiusInMeters
+                        }
+                    }
+                });
+                return providers.map(provider => (0, provider_mapper_1.toProviderDTO)(provider));
+            }
+            catch (error) {
+                console.error('Error finding nearby providers:', error);
+                return [];
+            }
+        });
+    }
+    getProviderFullDetails(providerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            const provider = yield this._providerRepository.findById(providerId);
+            if (!provider)
+                throw new CustomError_1.CustomError("Provider not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
+            const providerProfile = (0, provider_mapper_1.toProviderDTO)(provider);
+            const [services, bookings, payments] = yield Promise.all([
+                this._serviceRepository.findAll({ providerId: provider._id }),
+                this._bookingRepository.findAll({ providerId: provider._id }, { createdAt: -1 }),
+                this._paymentRepository.findAll({ providerId: provider._id }, { createdAt: -1 })
+            ]);
+            let currentPlan = null;
+            if ((_a = provider.subscription) === null || _a === void 0 ? void 0 : _a.planId) {
+                currentPlan = yield this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
+            }
+            const stats = {
+                totalEarnings: provider.earnings,
+                totalBookings: bookings.length,
+                completedBookings: bookings.filter(b => b.status === booking_enum_1.BookingStatus.COMPLETED).length,
+                cancelledBookings: bookings.filter(b => b.status === booking_enum_1.BookingStatus.CANCELLED).length,
+                averageRating: provider.rating
+            };
+            const securedServices = services.map(service => {
+                const s = service.toObject ? service.toObject() : service;
+                return Object.assign(Object.assign({}, s), { businessCertification: s.businessCertification ? (0, cloudinaryUpload_1.getSignedUrl)(s.businessCertification) : '' });
+            });
+            return {
+                profile: providerProfile,
+                services: securedServices,
+                bookings: bookings.slice(0, 10),
+                payments: payments.slice(0, 10),
+                currentPlan: currentPlan,
+                stats
+            };
+        });
+    }
+    //private functions
     _getProvidersByInitialCriteria(subCategoryId, userIdToExclude, filters) {
         return __awaiter(this, void 0, void 0, function* () {
             const services = yield this._serviceRepository.findServicesByCriteria({
@@ -694,112 +780,6 @@ let ProviderService = class ProviderService {
         if (busySlotConflict)
             return false;
         return true;
-    }
-    getPublicProviderDetails(providerId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const provider = yield this._providerRepository.findById(providerId);
-            if (!provider) {
-                throw new CustomError_1.CustomError("Provider not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
-            }
-            const services = yield this._serviceRepository.findPopulatedByProviderId(providerId);
-            const providerProfile = (0, provider_mapper_1.toProviderDTO)(provider);
-            const serviceDetails = services.map(provider_mapper_1.toServiceDetailsDTO);
-            return {
-                provider: providerProfile,
-                services: serviceDetails
-            };
-        });
-    }
-    findProvidersAvailableAtSlot(providerIds, date, time) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const time24h = (0, convertTo24hrs_1.convertTo24Hour)(time);
-            const [hour, minute] = time24h.split(':').map(Number);
-            const slotStart = new Date(date);
-            slotStart.setHours(hour, minute, 0, 0);
-            const slotEnd = new Date(slotStart.getTime() + 60 * 60 * 1000);
-            const providers = yield this._providerRepository.findAll({ _id: { $in: providerIds } });
-            const availableProviders = [];
-            for (const provider of providers) {
-                const providerId = provider._id.toString();
-                const existingBookings = yield this._bookingRepository.findByProviderByTime(providerId, date, date);
-                const dayName = (0, format_1.format)(new Date(date), 'EEEE');
-                const weeklySlots = this._getWeeklySlots(provider, dayName);
-                const override = this._getDateOverride(provider, date);
-                const busySlots = override ? override.busySlots : [];
-                const isAvailable = this._isSlotAvailable(slotStart, slotEnd, existingBookings, busySlots);
-                if (isAvailable) {
-                    availableProviders.push(provider);
-                }
-            }
-            return availableProviders;
-        });
-    }
-    findNearbyProviders(coordinates_1) {
-        return __awaiter(this, arguments, void 0, function* (coordinates, radiusInKm = 10, subCategoryId) {
-            try {
-                const services = yield this._serviceRepository.findAll({
-                    subCategoryId: new mongoose_1.Types.ObjectId(subCategoryId),
-                    status: true
-                });
-                if (!services.length) {
-                    return [];
-                }
-                const providerIds = [...new Set(services.map(s => s.providerId.toString()))];
-                const radiusInMeters = radiusInKm * 1000;
-                const providers = yield this._providerRepository.findAll({
-                    _id: { $in: providerIds.map(id => new mongoose_1.Types.ObjectId(id)) },
-                    status: provider_enum_1.ProviderStatus.ACTIVE,
-                    isVerified: true,
-                    serviceLocation: {
-                        $near: {
-                            $geometry: {
-                                type: 'Point',
-                                coordinates: coordinates
-                            },
-                            $maxDistance: radiusInMeters
-                        }
-                    }
-                });
-                return providers;
-            }
-            catch (error) {
-                console.error('Error finding nearby providers:', error);
-                return [];
-            }
-        });
-    }
-    getProviderFullDetails(providerId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var _a;
-            const provider = yield this._providerRepository.findById(providerId);
-            if (!provider)
-                throw new CustomError_1.CustomError("Provider not found", HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
-            const providerProfile = (0, provider_mapper_1.toProviderDTO)(provider);
-            const [services, bookings, payments] = yield Promise.all([
-                this._serviceRepository.findAll({ providerId: provider._id }),
-                this._bookingRepository.findAll({ providerId: provider._id }, { createdAt: -1 }),
-                this._paymentRepository.findAll({ providerId: provider._id }, { createdAt: -1 })
-            ]);
-            let currentPlan = null;
-            if ((_a = provider.subscription) === null || _a === void 0 ? void 0 : _a.planId) {
-                currentPlan = yield this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
-            }
-            const stats = {
-                totalEarnings: provider.earnings,
-                totalBookings: bookings.length,
-                completedBookings: bookings.filter(b => b.status === booking_enum_1.BookingStatus.COMPLETED).length,
-                cancelledBookings: bookings.filter(b => b.status === booking_enum_1.BookingStatus.CANCELLED).length,
-                averageRating: provider.rating
-            };
-            return {
-                profile: providerProfile,
-                services: services,
-                bookings: bookings.slice(0, 10),
-                payments: payments.slice(0, 10),
-                currentPlan: currentPlan,
-                stats
-            };
-        });
     }
 };
 exports.ProviderService = ProviderService;

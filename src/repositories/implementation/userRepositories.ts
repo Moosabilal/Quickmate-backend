@@ -15,10 +15,10 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
   }
 
   async findByEmail(email: string, includeOtpFields: boolean = false): Promise<IUser | null> {
-    let query = User.findOne<IUser>({ email });
+    const query = User.findOne({ email });
 
     if (includeOtpFields) {
-      query = query.select('+registrationOtp +registrationOtpExpires +registrationOtpAttempts +password');
+      query.select('+registrationOtp +registrationOtpExpires +registrationOtpAttempts +password');
     }
     return await query.exec();
   }
@@ -35,11 +35,11 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
   }
 
   async findByIdForRefreshToken(id: string): Promise<IUser | null> {
-    return await User.findById(id).select('+refreshToken')
+    return await User.findById(id).select('+refreshToken').exec()
   }
 
   async findAllUsers(): Promise<IUser[]> {
-    return await User.find({}).select('-password -registrationOtp -registrationOtpExpires -registrationOtpAttempts -passwordResetToken -passwordResetExpires -googleId');
+    return await User.find({}).select('-password -registrationOtp -registrationOtpExpires -registrationOtpAttempts -passwordResetToken -passwordResetExpires -googleId').exec();
   }
 
   public async findUsersWithFilter(filter: IUserListFilter, page: number, limit: number): Promise<IUser[]> {

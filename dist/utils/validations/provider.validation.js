@@ -15,6 +15,7 @@ exports.registerProviderSchema = zod_1.z.object({
 exports.updateProviderSchema = exports.registerProviderSchema.partial();
 exports.updateProviderStatusSchema = zod_1.z.object({
     newStatus: zod_1.z.nativeEnum(provider_enum_1.ProviderStatus),
+    reason: zod_1.z.string().optional()
 });
 exports.providersForAdminQuerySchema = zod_1.z.object({
     page: zod_1.z.coerce.number().int().positive().optional(),

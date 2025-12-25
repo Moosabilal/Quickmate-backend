@@ -44,10 +44,8 @@ export class ProviderController {
             const aadhaar = files?.aadhaarIdProof?.[0];
             const profile = files?.profilePhoto?.[0];
 
-            const baseUrl = process.env.CLOUDINARY_BASE_URL;
-
-            const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '') : '';
-            const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '') : '';
+            const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)) : '';
+            const profileUrl = profile ? (await uploadToCloudinary(profile.path)) : '';
 
             const [lat, lon] = validatedBody.serviceLocation.split(",").map(Number);
 
@@ -100,14 +98,10 @@ export class ProviderController {
             const aadhaar = files?.aadhaarIdProof?.[0];
             const profile = files?.profilePhoto?.[0];
 
-            const baseUrl = process.env.CLOUDINARY_BASE_URL;
-
             const aadhaarUrl = aadhaar
-                ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '')
-                : undefined;
+                ? (await uploadToCloudinary(aadhaar.path)) : undefined;
             const profileUrl = profile
-                ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '')
-                : undefined;
+                ? (await uploadToCloudinary(profile.path)) : undefined;
 
             let lat: number | undefined;
             let lon: number | undefined;
@@ -199,8 +193,8 @@ export class ProviderController {
     public updateProviderStatus = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { id } = paramIdSchema.parse(req.params);
-            const { newStatus } = updateProviderStatusSchema.parse(req.body);
-            const response = await this._providerService.updateProviderStat(id, newStatus)
+            const { newStatus, reason } = updateProviderStatusSchema.parse(req.body);
+            const response = await this._providerService.updateProviderStat(id, newStatus, reason)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -236,6 +230,7 @@ export class ProviderController {
 
             const userId = req.user.id
             const response = await this._providerService.providerForChatPage(userId, search)
+            console.log('the respose', response)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)

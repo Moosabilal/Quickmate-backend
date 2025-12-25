@@ -24,6 +24,8 @@ router.post('/refresh-token', authController.refreshToken);
 router.post('/contactUsSubmission', isUser, authController.contactUsEmail);
 router.get('/getUser', authMiddleware_1.authenticateToken, authController.getUser);
 router.put('/update-profile', isAdminOrUserOrProvider, multer_1.default.single('profilePicture'), authController.updateProfile);
+router.post('/generateOtp', isUser, authController.generateOtp);
+router.get('/search-resources', authController.searchResources);
 router.get('/getAllDataForChatBot', isUser, authController.getAllDataForChatBot);
 router.post('/logout', authController.logout);
 // admin routes

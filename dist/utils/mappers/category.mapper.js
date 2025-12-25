@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toCommissionRuleResponseDTO = exports.toCategoryResponseDTO = void 0;
 exports.toHomePageDTO = toHomePageDTO;
+const cloudinaryUpload_1 = require("../cloudinaryUpload");
 function toHomePageDTO(category) {
     return {
         id: category._id.toString(),
@@ -13,7 +14,7 @@ function toHomePageDTO(category) {
 }
 const toCategoryResponseDTO = (category) => {
     const categoryObject = category.toJSON();
-    return Object.assign(Object.assign({}, categoryObject), { id: categoryObject._id.toString(), parentId: categoryObject.parentId ? categoryObject.parentId.toString() : null, createdAt: categoryObject.createdAt.toISOString(), updatedAt: categoryObject.updatedAt.toISOString() });
+    return Object.assign(Object.assign({}, categoryObject), { id: categoryObject._id.toString(), parentId: categoryObject.parentId ? categoryObject.parentId.toString() : null, iconUrl: categoryObject.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(categoryObject.iconUrl) : null, createdAt: categoryObject.createdAt.toISOString(), updatedAt: categoryObject.updatedAt.toISOString() });
 };
 exports.toCategoryResponseDTO = toCategoryResponseDTO;
 const toCommissionRuleResponseDTO = (rule) => {

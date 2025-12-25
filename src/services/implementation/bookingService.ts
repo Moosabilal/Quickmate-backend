@@ -8,17 +8,15 @@ import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
 import { RazorpayOrder } from "../../interface/razorpay";
-import { createHmac } from "crypto";
-import { IPaymentVerificationPayload, IPaymentVerificationRequest } from "../../interface/payment";
+import { IPaymentVerificationRequest } from "../../interface/payment";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import { ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
-import { CommissionTypes } from "../../enums/CommissionType.enum";
 import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
-import mongoose, { FilterQuery, Types, UpdateQuery } from "mongoose";
+import { FilterQuery, Types, UpdateQuery } from "mongoose";
 import { IPayment } from "../../models/payment";
 import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
-import { toBookingConfirmationPage } from "../../utils/mappers/booking.mapper";
+import { toBookingConfirmationPage, toBookingMessagesDto, toGetAllFiltersBookingDto, toGetBookingForProvider } from "../../utils/mappers/booking.mapper";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
@@ -26,9 +24,7 @@ import { IMessageRepository } from "../../repositories/interface/IMessageReposit
 import { IMessage } from "../../models/message";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IWalletRepository } from "../../repositories/interface/IWalletRepository";
-import { WalletRepository } from "../../repositories/implementation/WalletRepository";
 import { TransactionStatus } from "../../enums/payment&wallet.enum";
-import { IWallet } from "../../models/wallet";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { generateOTP } from "../../utils/otpGenerator";
 import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils/emailService";
@@ -43,8 +39,8 @@ import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
 import { ISocketMessage } from "../../interface/message";
 import { endOfDay, endOfMonth, endOfWeek, startOfDay, startOfMonth, startOfWeek } from "date-fns";
-import { Http2ServerRequest } from "http2";
 import { Server } from "socket.io";
+import { getSignedUrl } from "../../utils/cloudinaryUpload";
 
 
 @injectable()
@@ -166,7 +162,7 @@ export class BookingService implements IBookingService {
 
         const durationInMinutes = convertDurationToMinutes(service.duration);
 
-        const udpatedpayment123 = await this._bookingRepository.update(verifyPayment.bookingId, {
+        await this._bookingRepository.update(verifyPayment.bookingId, {
             paymentId: createdPayment._id,
             paymentStatus: PaymentStatus.PAID,
             duration: durationInMinutes,
@@ -271,8 +267,10 @@ export class BookingService implements IBookingService {
         });
         counts.All = allBookingsCount;
 
+        const securedBookings = bookings.map(toGetAllFiltersBookingDto)
+
         return {
-            data: bookings,
+            data: securedBookings,
             counts: counts
         };
     }
@@ -320,8 +318,10 @@ export class BookingService implements IBookingService {
         });
         counts.All = allBookingsCount;
 
+        const securedBookings = bookings.map(toGetBookingForProvider)
+
         return {
-            bookings: bookings,
+            bookings: securedBookings,
             earnings: provider.earnings || 0,
             counts: counts
         };
@@ -330,7 +330,12 @@ export class BookingService implements IBookingService {
     async saveAndEmitMessage(
         io: Server,
         messageData: ISocketMessage
-    ) {
+    ): Promise<Partial<IMessage>> {
+        let signedFileUrl = messageData.fileUrl;
+
+        if (messageData.messageType !== 'text' && messageData.fileUrl) {
+            signedFileUrl = getSignedUrl(messageData.fileUrl);
+        }
         const dataToCreate = {
             joiningId: messageData.joiningId,
             senderId: messageData.senderId,
@@ -341,19 +346,26 @@ export class BookingService implements IBookingService {
 
         const savedMessage = await this._messageRepository.create(dataToCreate);
 
-        io.to(savedMessage.joiningId).emit("receiveBookingMessage", savedMessage);
+        const messageForFrontend = {
+            ...savedMessage.toObject(),
+            fileUrl: signedFileUrl
+        };
 
-        return savedMessage;
+        io.to(savedMessage.joiningId).emit("receiveBookingMessage", messageForFrontend);
+
+        return messageForFrontend;
     }
 
-    async getBookingMessages(joiningId: string): Promise<IMessage[]> {
-        const data = await this._messageRepository.findAllSorted(joiningId);
+    async getBookingMessages(joiningId: string): Promise<ISocketMessage[]> {
+        const datas = await this._messageRepository.findAllSorted(joiningId);
 
-        return data
+        const securedData = datas.map(toBookingMessagesDto)
+
+        return securedData
 
     }
 
-    async updateStatus(bookingId: string, status: BookingStatus, userId?: string): Promise<{ message: string, completionToken?: string }> {
+    async updateStatus(bookingId: string, status: BookingStatus, userId?: string, role?: Roles): Promise<{ message: string, completionToken?: string }> {
         const booking = await this._bookingRepository.findById(bookingId)
         if (!booking) {
             throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
@@ -368,9 +380,9 @@ export class BookingService implements IBookingService {
             const scheduledTime = new Date(dateTimeString);
             const currenttimeStamp = new Date()
             const diffInMinutes = (scheduledTime.getTime() - currenttimeStamp.getTime()) / (1000 * 60);
-            if(diffInMinutes > 5){
-                throw new CustomError("You can start the booking only 5 minutes before the scheduled time", HttpStatusCode.BAD_REQUEST) 
-            } 
+            if (diffInMinutes > 5) {
+                throw new CustomError("You can start the booking only 5 minutes before the scheduled time", HttpStatusCode.BAD_REQUEST)
+            }
         }
 
         let bookingOtp: string | undefined;
@@ -379,7 +391,7 @@ export class BookingService implements IBookingService {
             const userId = booking.userId.toString()
             const wallet = await this._walletRepository.findOne({ ownerId: userId })
             let returAmount: number;
-            if (booking.status === BookingStatus.CONFIRMED) {
+            if (booking.status === BookingStatus.CONFIRMED && role === Roles.USER) {
                 returAmount = (Number(booking.amount) * 0.5)
                 wallet.balance += returAmount
             } else {
@@ -606,7 +618,7 @@ export class BookingService implements IBookingService {
             return {
                 id: booking._id.toString(),
                 userName: user?.name as string || 'N/A',
-                userAvatar: (user?.profilePicture as string) || null,
+                userAvatar: user?.profilePicture ? getSignedUrl(user?.profilePicture as string) : null,
                 providerName: provider?.fullName as string || 'N/A',
                 serviceType: service?.title as string || 'N/A',
                 dateTime: `${booking.scheduledDate || ''} ${booking.scheduledTime || ''}`.trim(),
@@ -678,14 +690,14 @@ export class BookingService implements IBookingService {
                 name: user.name as string,
                 email: user.email as string,
                 phone: user.phone as string,
-                image: user.profilePicture as string
+                image: user.profilePicture ? getSignedUrl(user.profilePicture as string) : ''
             } : null,
             provider: provider ? {
                 _id: provider._id.toString(),
                 name: provider.fullName as string,
                 email: provider.email as string,
                 phone: provider.phoneNumber as string,
-                image: provider.profilePhoto as string,
+                image: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
                 serviceArea: provider.serviceArea as string
             } : null,
             service: service ? {

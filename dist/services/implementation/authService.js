@@ -38,6 +38,8 @@ const ErrorMessage_1 = require("../../enums/ErrorMessage");
 const HttpStatusCode_1 = require("../../enums/HttpStatusCode");
 const logger_1 = __importDefault(require("../../logger/logger"));
 const booking_enum_1 = require("../../enums/booking.enum");
+const cloudinaryUpload_1 = require("../../utils/cloudinaryUpload");
+const user_mapper_1 = require("../../utils/mappers/user.mapper");
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
 const RESEND_COOLDOWN_SECONDS = 30;
@@ -49,11 +51,21 @@ let AuthService = class AuthService {
             if (!user) {
                 throw new CustomError_1.CustomError(ErrorMessage_1.ErrorMessage.USER_NOT_FOUND, HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
             }
-            const bookings = yield this._bookingRepository.findAll({ userId });
-            const providers = yield this._providerRepository.findAll();
-            const categories = yield this._categoryRepository.getAllCategories();
-            const services = yield this._serviceRepository.findAll();
-            return { categories, services, providers, bookings };
+            const [bookings, providers, categories, services] = yield Promise.all([
+                this._bookingRepository.findAll({ userId }),
+                this._providerRepository.findAll(),
+                this._categoryRepository.getAllCategories(),
+                this._serviceRepository.findAll()
+            ]);
+            const secureProviders = providers.map(user_mapper_1.mapProviderToDto);
+            const secureServices = services.map(user_mapper_1.mapServiceToDto);
+            const secureCategories = categories.map(user_mapper_1.mapCategoryToDto);
+            return {
+                categories: secureCategories,
+                services: secureServices,
+                providers: secureProviders,
+                bookings
+            };
         });
         this._userRepository = userRepository;
         this._bookingRepository = bookingRepository;
@@ -95,7 +107,7 @@ let AuthService = class AuthService {
             if (!user) {
                 throw new CustomError_1.CustomError(ErrorMessage_1.ErrorMessage.USER_NOT_FOUND, HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
             }
-            if (user.isVerified) {
+            if (user.isVerified && !user.registrationOtp) {
                 return { message: 'Account already verified.' };
             }
             if (typeof user.registrationOtpAttempts === 'number' && user.registrationOtpAttempts >= MAX_OTP_ATTEMPTS) {
@@ -164,6 +176,10 @@ let AuthService = class AuthService {
             const refreshToken = jsonwebtoken_1.default.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
             user.refreshToken = refreshToken;
             yield this._userRepository.update(user._id.toString(), user);
+            let signedProfileUrl = undefined;
+            if (user.profilePicture && typeof user.profilePicture === 'string') {
+                signedProfileUrl = (0, cloudinaryUpload_1.getSignedUrl)(user.profilePicture);
+            }
             return {
                 user: {
                     id: user._id.toString(),
@@ -171,7 +187,7 @@ let AuthService = class AuthService {
                     email: user.email,
                     role: (typeof user.role === 'string' ? user.role : 'Customer'),
                     isVerified: Boolean(user.isVerified),
-                    profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
+                    profilePicture: signedProfileUrl,
                 },
                 token,
                 refreshToken,
@@ -313,13 +329,17 @@ let AuthService = class AuthService {
             if (!user) {
                 throw new CustomError_1.CustomError(ErrorMessage_1.ErrorMessage.USER_NOT_FOUND, HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
             }
+            let signedProfileUrl = undefined;
+            if (user.profilePicture && typeof user.profilePicture === 'string') {
+                signedProfileUrl = (0, cloudinaryUpload_1.getSignedUrl)(user.profilePicture);
+            }
             return {
                 id: user._id.toString(),
                 name: user.name,
                 email: user.email,
                 role: (typeof user.role === 'string' ? user.role : 'Customer'),
                 isVerified: Boolean(user.isVerified),
-                profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
+                profilePicture: signedProfileUrl,
             };
         });
     }
@@ -345,15 +365,53 @@ let AuthService = class AuthService {
                 user.profilePicture = data.profilePicture;
             }
             const updatedUser = yield this._userRepository.update(user._id.toString(), user);
-            const {} = updatedUser;
+            let signedProfileUrl = undefined;
+            if (updatedUser.profilePicture && typeof updatedUser.profilePicture === 'string') {
+                signedProfileUrl = (0, cloudinaryUpload_1.getSignedUrl)(updatedUser.profilePicture);
+            }
             return {
                 id: user._id.toString(),
                 name: user.name,
                 email: user.email,
                 role: (typeof user.role === 'string' ? user.role : 'Customer'),
                 isVerified: Boolean(user.isVerified),
-                profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
+                profilePicture: signedProfileUrl,
             };
+        });
+    }
+    searchResources(query) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const [services, providers] = yield Promise.all([
+                yield this._categoryRepository.findAll({ name: { $regex: query, $options: 'i' } }),
+                yield this._providerRepository.findAll({ fullName: { $regex: query, $options: 'i' } })
+            ]);
+            const secureProviders = providers.map(user_mapper_1.mapProviderToDto);
+            const secureServices = services.map(user_mapper_1.mapCategoryToDto);
+            return {
+                services: secureServices,
+                providers: secureProviders
+            };
+        });
+    }
+    generateOtp(userId, email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!userId) {
+                throw new CustomError_1.CustomError('UserId not found', HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
+            }
+            if (!email) {
+                throw new CustomError_1.CustomError('Email not found!, Please try again later');
+            }
+            const user = yield this._userRepository.findById(userId);
+            if (!user) {
+                throw new CustomError_1.CustomError(ErrorMessage_1.ErrorMessage.USER_NOT_FOUND, HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
+            }
+            const otp = (0, otpGenerator_1.generateOTP)();
+            user.registrationOtp = otp;
+            user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
+            user.registrationOtpAttempts = 0;
+            yield this._userRepository.update(user._id.toString(), user);
+            yield (0, emailService_1.sendVerificationEmail)(email, otp);
+            return { message: 'An OTP has been sent to your email for verification' };
         });
     }
     getUserWithAllDetails(page, limit, search, status) {
@@ -370,14 +428,20 @@ let AuthService = class AuthService {
                     currentPage: 1
                 };
             }
-            const mappedUsers = users.map(user => ({
-                id: user._id.toString(),
-                name: user.name,
-                email: user.email,
-                role: typeof user.role === 'string' ? user.role : 'Customer',
-                isVerified: Boolean(user.isVerified),
-                profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
-            }));
+            const mappedUsers = users.map(user => {
+                let signedProfileUrl = undefined;
+                if (user.profilePicture && typeof user.profilePicture === 'string') {
+                    signedProfileUrl = (0, cloudinaryUpload_1.getSignedUrl)(user.profilePicture);
+                }
+                return {
+                    id: user._id.toString(),
+                    name: user.name,
+                    email: user.email,
+                    role: (typeof user.role === 'string' ? user.role : 'Customer'),
+                    isVerified: Boolean(user.isVerified),
+                    profilePicture: signedProfileUrl,
+                };
+            });
             return {
                 users: mappedUsers,
                 total,
@@ -386,7 +450,7 @@ let AuthService = class AuthService {
             };
         });
     }
-    updateUser(id) {
+    updateUser(id, reason) {
         return __awaiter(this, void 0, void 0, function* () {
             const user = yield this._userRepository.findById(id);
             if (!user) {
@@ -394,13 +458,19 @@ let AuthService = class AuthService {
             }
             user.isVerified = !user.isVerified;
             yield this._userRepository.update(user._id.toString(), user);
+            const isNowBlocked = !user.isVerified;
+            yield (0, emailService_1.sendUserStatusChangeEmail)(user.email, user.name, isNowBlocked, reason);
+            let signedProfileUrl = undefined;
+            if (user.profilePicture && typeof user.profilePicture === 'string') {
+                signedProfileUrl = (0, cloudinaryUpload_1.getSignedUrl)(user.profilePicture);
+            }
             return {
                 id: user._id.toString(),
                 name: user.name,
                 email: user.email,
                 role: (typeof user.role === 'string' ? user.role : 'Customer'),
                 isVerified: Boolean(user.isVerified),
-                profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
+                profilePicture: signedProfileUrl,
             };
         });
     }
@@ -468,11 +538,15 @@ let AuthService = class AuthService {
                     status: booking.status,
                 };
             });
+            let signedProfileUrl = undefined;
+            if (user.profilePicture && typeof user.profilePicture === 'string') {
+                signedProfileUrl = (0, cloudinaryUpload_1.getSignedUrl)(user.profilePicture);
+            }
             const userDetailsResponse = {
                 id: user._id.toString(),
                 name: user.name,
                 email: user.email,
-                avatarUrl: user.profilePicture || null,
+                avatarUrl: signedProfileUrl,
                 phone: (providerProfile === null || providerProfile === void 0 ? void 0 : providerProfile.phoneNumber) || 'N/A',
                 registrationDate: user.createdAt.toISOString().split('T')[0],
                 lastLogin: user.updatedAt.toISOString().split('T')[0],

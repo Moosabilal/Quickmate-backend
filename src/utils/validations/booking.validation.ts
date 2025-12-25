@@ -36,6 +36,7 @@ export const verifyPaymentSchema = z.object({
 
 export const updateBookingStatusSchema = z.object({
     status: z.nativeEnum(BookingStatus),
+    role: z.string().optional(),
 });
 
 export const updateBookingDateTimeSchema = z.object({

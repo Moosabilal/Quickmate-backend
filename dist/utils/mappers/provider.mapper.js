@@ -12,6 +12,7 @@ exports.toProviderPerformanceDTO = toProviderPerformanceDTO;
 exports.toServiceDetailsDTO = toServiceDetailsDTO;
 const booking_enum_1 = require("../../enums/booking.enum");
 const haversineKm_1 = require("../helperFunctions/haversineKm");
+const cloudinaryUpload_1 = require("../cloudinaryUpload");
 const createJoiningId = (id1, id2) => {
     if (!id1 || !id2)
         return '';
@@ -27,7 +28,7 @@ function toProviderDTO(provider) {
         serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
         serviceArea: provider.serviceArea,
         availability: provider.availability,
-        profilePhoto: provider.profilePhoto,
+        profilePhoto: provider.profilePhoto ? (0, cloudinaryUpload_1.getSignedUrl)(provider.profilePhoto) : '',
         earnings: provider.earnings,
         status: provider.status,
         totalBookings: provider.totalBookings,
@@ -35,7 +36,7 @@ function toProviderDTO(provider) {
         rating: provider.rating,
         isVerified: provider.isVerified,
         subscription: provider.subscription,
-        aadhaarIdProof: provider.aadhaarIdProof,
+        aadhaarIdProof: provider.aadhaarIdProof ? (0, cloudinaryUpload_1.getSignedUrl)(provider.aadhaarIdProof) : '',
         createdAt: provider.createdAt,
     };
 }
@@ -49,7 +50,7 @@ function toProviderForAdminResponseDTO(providers, serviceMap) {
             phoneNumber: provider.phoneNumber,
             email: provider.email,
             serviceArea: provider.serviceArea,
-            profilePhoto: provider.profilePhoto,
+            profilePhoto: provider.profilePhoto ? (0, cloudinaryUpload_1.getSignedUrl)(provider.profilePhoto) : '',
             status: provider.status,
             rating: provider.rating,
             serviceOffered: serviceMap.get(providerIdStr) || [],
@@ -73,7 +74,7 @@ function toBackendProviderDTO(provider, services, reviews, subCategoryId, userLa
         fullName: provider.fullName,
         phoneNumber: provider.phoneNumber,
         email: provider.email,
-        profilePhoto: provider.profilePhoto,
+        profilePhoto: provider.profilePhoto ? (0, cloudinaryUpload_1.getSignedUrl)(provider.profilePhoto) : '',
         serviceArea: provider.serviceArea,
         serviceLocation: `${provLat},${provLng}`,
         availability: provider.availability,
@@ -98,7 +99,7 @@ function toProviderForChatListPage(currentUserId, bookings, providers, services,
             id: provider.userId.toString(),
             bookingId: booking === null || booking === void 0 ? void 0 : booking._id.toString(),
             name: provider.fullName,
-            profilePicture: provider.profilePhoto || "",
+            profilePicture: provider.profilePhoto ? (0, cloudinaryUpload_1.getSignedUrl)(provider.profilePhoto) : '',
             location: provider.serviceArea,
             isOnline: true,
             services: ((_a = providerServices[0]) === null || _a === void 0 ? void 0 : _a.title) || "",
@@ -124,7 +125,7 @@ function toClientForChatListPage(currentUserId, bookings, clients, services, mes
             id: client._id.toString(),
             bookingId: clientBooking._id.toString(),
             name: client.name,
-            profilePicture: client.profilePicture || "",
+            profilePicture: client.profilePicture && client.profilePicture === 'string' ? (0, cloudinaryUpload_1.getSignedUrl)(client.profilePicture) : '',
             location: "",
             isOnline: true,
             services: (service === null || service === void 0 ? void 0 : service.title) || "",
@@ -191,7 +192,7 @@ function toProviderDashboardDTO(provider, bookings, services, subCategories, par
             service: (service === null || service === void 0 ? void 0 : service.title) || "Unknown Service",
             client: `${booking.customerName} • ${booking.scheduledDate} ${booking.scheduledTime}`,
             status: booking.status,
-            image: (subCategory === null || subCategory === void 0 ? void 0 : subCategory.iconUrl) || "",
+            image: (subCategory === null || subCategory === void 0 ? void 0 : subCategory.iconUrl) ? (0, cloudinaryUpload_1.getSignedUrl)(subCategory.iconUrl) : '',
             category: (parentCategory === null || parentCategory === void 0 ? void 0 : parentCategory.name) || "Unknown Category",
         };
     });

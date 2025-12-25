@@ -55,7 +55,6 @@ export class ServiceRepository extends BaseRepository<IService> implements IServ
         return this.model.find({ providerId: new Types.ObjectId(providerId) })
             .populate('categoryId', 'name')
             .populate('subCategoryId', 'name')
-            .lean();
     }
 
     public async findServicesWithProvider(

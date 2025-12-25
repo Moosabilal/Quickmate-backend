@@ -33,6 +33,7 @@ const CustomError_1 = require("../../utils/CustomError");
 const HttpStatusCode_1 = require("../../enums/HttpStatusCode");
 const category_mapper_1 = require("../../utils/mappers/category.mapper");
 const date_fns_1 = require("date-fns");
+const cloudinaryUpload_1 = require("../../utils/cloudinaryUpload");
 let CategoryService = class CategoryService {
     constructor(categoryRepository, commissionRuleRepository, paymentRepository, bookingRepository) {
         this._categoryRepository = categoryRepository;
@@ -63,7 +64,8 @@ let CategoryService = class CategoryService {
                     ? new mongoose_1.Types.ObjectId(categoryInput.parentId)
                     : null, status: (_a = categoryInput.status) !== null && _a !== void 0 ? _a : true });
             const createdCategoryDoc = yield this._categoryRepository.create(categoryDataToCreate);
-            const categoryResponse = createdCategoryDoc.toJSON();
+            const categoryObj = createdCategoryDoc.toJSON();
+            const categoryResponse = Object.assign(Object.assign({}, categoryObj), { iconUrl: categoryObj.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(categoryObj.iconUrl) : null });
             let createdCommissionRule;
             const ruleData = {
                 categoryId: createdCategoryDoc._id ? new mongoose_1.Types.ObjectId(createdCategoryDoc._id) : null,
@@ -123,7 +125,7 @@ let CategoryService = class CategoryService {
                 id: categoryDoc._id.toString(),
                 name: categoryDoc.name,
                 description: categoryDoc.description || '',
-                iconUrl: categoryDoc.iconUrl || null,
+                iconUrl: categoryDoc.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(categoryDoc.iconUrl) : null,
                 status: (_a = categoryDoc.status) !== null && _a !== void 0 ? _a : false,
                 parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
                 commissionType: (commissionRuleDoc === null || commissionRuleDoc === void 0 ? void 0 : commissionRuleDoc.commissionType) || CommissionType_enum_1.CommissionTypes.NONE,
@@ -145,7 +147,7 @@ let CategoryService = class CategoryService {
                     id: sub._id.toString(),
                     name: sub.name,
                     description: sub.description || '',
-                    iconUrl: sub.iconUrl || null,
+                    iconUrl: sub.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(sub.iconUrl) : null,
                     status: (_a = sub.status) !== null && _a !== void 0 ? _a : false,
                     parentId: sub.parentId ? sub.parentId.toString() : null,
                     commissionType: (subRule === null || subRule === void 0 ? void 0 : subRule.commissionType) || CommissionType_enum_1.CommissionTypes.NONE,
@@ -173,7 +175,7 @@ let CategoryService = class CategoryService {
                 id: categoryDoc._id.toString(),
                 name: categoryDoc.name,
                 description: categoryDoc.description || '',
-                iconUrl: categoryDoc.iconUrl || null,
+                iconUrl: categoryDoc.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(categoryDoc.iconUrl) : null,
                 status: (_a = categoryDoc.status) !== null && _a !== void 0 ? _a : false,
                 parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
                 commissionType: CommissionType_enum_1.CommissionTypes.NONE,
@@ -206,7 +208,7 @@ let CategoryService = class CategoryService {
                     id: categoryWithExtras._id.toString(),
                     name: categoryWithExtras.name,
                     description: categoryWithExtras.description || '',
-                    iconUrl: categoryWithExtras.iconUrl || null,
+                    iconUrl: categoryWithExtras.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(categoryWithExtras.iconUrl) : null,
                     status: (_a = categoryWithExtras.status) !== null && _a !== void 0 ? _a : false,
                     parentId: categoryWithExtras.parentId ? categoryWithExtras.parentId.toString() : null,
                     subCategoriesCount: categoryWithExtras.subCategoryCount || 0,
@@ -237,7 +239,7 @@ let CategoryService = class CategoryService {
                     _id: raw._id.toString(),
                     name: raw.name,
                     description: raw.description || '',
-                    iconUrl: raw.iconUrl || null,
+                    iconUrl: raw.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(raw.iconUrl) : null,
                     status: (_a = raw.status) !== null && _a !== void 0 ? _a : false,
                     parentId: raw.parentId ? raw.parentId.toString() : null,
                 };
@@ -264,7 +266,7 @@ let CategoryService = class CategoryService {
                 return {
                     id: service._id.toString(),
                     name: service.name,
-                    iconUrl: service.iconUrl,
+                    iconUrl: service.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(service.iconUrl) : null,
                     parentId: service.parentId.toString()
                 };
             });
@@ -376,7 +378,7 @@ let CategoryService = class CategoryService {
             return services.map(s => ({
                 id: s._id.toString(),
                 name: s.name,
-                iconUrl: s.iconUrl,
+                iconUrl: s.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(s.iconUrl) : null,
                 parentId: s.parentId.toString(),
                 description: s.description || '',
             }));
@@ -388,7 +390,7 @@ let CategoryService = class CategoryService {
             return services.map(s => ({
                 id: s._id.toString(),
                 name: s.name,
-                iconUrl: s.iconUrl,
+                iconUrl: s.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(s.iconUrl) : null,
                 parentId: s.parentId.toString(),
                 description: s.description || '',
             }));
@@ -432,7 +434,7 @@ let CategoryService = class CategoryService {
                     id: cat._id.toString(),
                     name: cat.name,
                     description: cat.description || '',
-                    iconUrl: cat.iconUrl || '',
+                    iconUrl: cat.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(cat.iconUrl) : '',
                     parentId: ((_a = cat.parentId) === null || _a === void 0 ? void 0 : _a.toString()) || null,
                 });
             });

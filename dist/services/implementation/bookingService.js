@@ -44,6 +44,7 @@ const subscription_1 = require("../../utils/helperFunctions/subscription");
 const locRangeCal_1 = require("../../utils/helperFunctions/locRangeCal");
 const convertDurationToMinutes_1 = require("../../utils/helperFunctions/convertDurationToMinutes");
 const date_fns_1 = require("date-fns");
+const cloudinaryUpload_1 = require("../../utils/cloudinaryUpload");
 let BookingService = class BookingService {
     constructor(bookingRepository, categoryRepository, commissionRuleRepository, paymentRepository, addressRepository, providerRepository, serviceRepository, userRepository, messageRepository, WalletRepository, reviewRepository, subscriptionPlanRepository) {
         this._bookingRepository = bookingRepository;
@@ -115,7 +116,7 @@ let BookingService = class BookingService {
                 });
             }
             const durationInMinutes = (0, convertDurationToMinutes_1.convertDurationToMinutes)(service.duration);
-            const udpatedpayment123 = yield this._bookingRepository.update(verifyPayment.bookingId, {
+            yield this._bookingRepository.update(verifyPayment.bookingId, {
                 paymentId: createdPayment._id,
                 paymentStatus: userRoles_1.PaymentStatus.PAID,
                 duration: durationInMinutes,
@@ -193,8 +194,9 @@ let BookingService = class BookingService {
                 allBookingsCount += item.count;
             });
             counts.All = allBookingsCount;
+            const securedBookings = bookings.map(booking_mapper_1.toGetAllFiltersBookingDto);
             return {
-                data: bookings,
+                data: securedBookings,
                 counts: counts
             };
         });
@@ -227,6 +229,7 @@ let BookingService = class BookingService {
                 allBookingsCount += item.count;
             });
             counts.All = allBookingsCount;
+            const securedBookings = bookings.map(booking_mapper_1.toGetBookingForProvider);
             return {
                 bookings: bookings,
                 earnings: provider.earnings || 0,
@@ -236,6 +239,10 @@ let BookingService = class BookingService {
     }
     saveAndEmitMessage(io, messageData) {
         return __awaiter(this, void 0, void 0, function* () {
+            let signedFileUrl = messageData.fileUrl;
+            if (messageData.messageType !== 'text' && messageData.fileUrl) {
+                signedFileUrl = (0, cloudinaryUpload_1.getSignedUrl)(messageData.fileUrl);
+            }
             const dataToCreate = {
                 joiningId: messageData.joiningId,
                 senderId: messageData.senderId,
@@ -244,17 +251,19 @@ let BookingService = class BookingService {
                 fileUrl: messageData.fileUrl,
             };
             const savedMessage = yield this._messageRepository.create(dataToCreate);
-            io.to(savedMessage.joiningId).emit("receiveBookingMessage", savedMessage);
-            return savedMessage;
+            const messageForFrontend = Object.assign(Object.assign({}, savedMessage.toObject()), { fileUrl: signedFileUrl });
+            io.to(savedMessage.joiningId).emit("receiveBookingMessage", messageForFrontend);
+            return messageForFrontend;
         });
     }
     getBookingMessages(joiningId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield this._messageRepository.findAllSorted(joiningId);
-            return data;
+            const datas = yield this._messageRepository.findAllSorted(joiningId);
+            const securedData = datas.map(booking_mapper_1.toBookingMessagesDto);
+            return securedData;
         });
     }
-    updateStatus(bookingId, status, userId) {
+    updateStatus(bookingId, status, userId, role) {
         return __awaiter(this, void 0, void 0, function* () {
             const booking = yield this._bookingRepository.findById(bookingId);
             if (!booking) {
@@ -278,7 +287,7 @@ let BookingService = class BookingService {
                 const userId = booking.userId.toString();
                 const wallet = yield this._walletRepository.findOne({ ownerId: userId });
                 let returAmount;
-                if (booking.status === booking_enum_1.BookingStatus.CONFIRMED) {
+                if (booking.status === booking_enum_1.BookingStatus.CONFIRMED && role === userRoles_1.Roles.USER) {
                     returAmount = (Number(booking.amount) * 0.5);
                     wallet.balance += returAmount;
                 }
@@ -472,7 +481,7 @@ let BookingService = class BookingService {
                 return {
                     id: booking._id.toString(),
                     userName: (user === null || user === void 0 ? void 0 : user.name) || 'N/A',
-                    userAvatar: (user === null || user === void 0 ? void 0 : user.profilePicture) || null,
+                    userAvatar: (user === null || user === void 0 ? void 0 : user.profilePicture) ? (0, cloudinaryUpload_1.getSignedUrl)(user === null || user === void 0 ? void 0 : user.profilePicture) : null,
                     providerName: (provider === null || provider === void 0 ? void 0 : provider.fullName) || 'N/A',
                     serviceType: (service === null || service === void 0 ? void 0 : service.title) || 'N/A',
                     dateTime: `${booking.scheduledDate || ''} ${booking.scheduledTime || ''}`.trim(),
@@ -540,14 +549,14 @@ let BookingService = class BookingService {
                     name: user.name,
                     email: user.email,
                     phone: user.phone,
-                    image: user.profilePicture
+                    image: user.profilePicture ? (0, cloudinaryUpload_1.getSignedUrl)(user.profilePicture) : ''
                 } : null,
                 provider: provider ? {
                     _id: provider._id.toString(),
                     name: provider.fullName,
                     email: provider.email,
                     phone: provider.phoneNumber,
-                    image: provider.profilePhoto,
+                    image: provider.profilePhoto ? (0, cloudinaryUpload_1.getSignedUrl)(provider.profilePhoto) : '',
                     serviceArea: provider.serviceArea
                 } : null,
                 service: service ? {

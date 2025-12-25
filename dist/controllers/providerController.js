@@ -41,9 +41,8 @@ let ProviderController = class ProviderController {
                 const files = req.files;
                 const aadhaar = (_a = files === null || files === void 0 ? void 0 : files.aadhaarIdProof) === null || _a === void 0 ? void 0 : _a[0];
                 const profile = (_b = files === null || files === void 0 ? void 0 : files.profilePhoto) === null || _b === void 0 ? void 0 : _b[0];
-                const baseUrl = process.env.CLOUDINARY_BASE_URL;
-                const aadhaarUrl = aadhaar ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(aadhaar.path)).replace(baseUrl, '') : '';
-                const profileUrl = profile ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(profile.path)).replace(baseUrl, '') : '';
+                const aadhaarUrl = aadhaar ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(aadhaar.path)) : '';
+                const profileUrl = profile ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(profile.path)) : '';
                 const [lat, lon] = validatedBody.serviceLocation.split(",").map(Number);
                 const formData = Object.assign(Object.assign({}, validatedBody), { aadhaarIdProof: aadhaarUrl, profilePhoto: profileUrl, userId: (_c = req.user) === null || _c === void 0 ? void 0 : _c.id, serviceLocation: { type: "Point", coordinates: [lon, lat] } });
                 const response = yield this._providerService.registerProvider(formData);
@@ -80,13 +79,10 @@ let ProviderController = class ProviderController {
                 const files = req.files;
                 const aadhaar = (_a = files === null || files === void 0 ? void 0 : files.aadhaarIdProof) === null || _a === void 0 ? void 0 : _a[0];
                 const profile = (_b = files === null || files === void 0 ? void 0 : files.profilePhoto) === null || _b === void 0 ? void 0 : _b[0];
-                const baseUrl = process.env.CLOUDINARY_BASE_URL;
                 const aadhaarUrl = aadhaar
-                    ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(aadhaar.path)).replace(baseUrl, '')
-                    : undefined;
+                    ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(aadhaar.path)) : undefined;
                 const profileUrl = profile
-                    ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(profile.path)).replace(baseUrl, '')
-                    : undefined;
+                    ? (yield (0, cloudinaryUpload_1.uploadToCloudinary)(profile.path)) : undefined;
                 let lat;
                 let lon;
                 if (validatedBody.serviceLocation) {
@@ -170,8 +166,8 @@ let ProviderController = class ProviderController {
         this.updateProviderStatus = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id } = provider_validation_1.paramIdSchema.parse(req.params);
-                const { newStatus } = provider_validation_1.updateProviderStatusSchema.parse(req.body);
-                const response = yield this._providerService.updateProviderStat(id, newStatus);
+                const { newStatus, reason } = provider_validation_1.updateProviderStatusSchema.parse(req.body);
+                const response = yield this._providerService.updateProviderStat(id, newStatus, reason);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(response);
             }
             catch (error) {
@@ -204,6 +200,7 @@ let ProviderController = class ProviderController {
                 const { search } = provider_validation_1.searchQuerySchema.parse(req.query);
                 const userId = req.user.id;
                 const response = yield this._providerService.providerForChatPage(userId, search);
+                console.log('the respose', response);
                 res.status(HttpStatusCode_1.HttpStatusCode.OK).json(response);
             }
             catch (error) {

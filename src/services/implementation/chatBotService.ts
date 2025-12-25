@@ -116,6 +116,11 @@ export class ChatbotService implements IChatBotService {
     - **How do I book a service manually?** Besides chatting with me, you can also browse our services on the website. Just go to the 'Services' page, find what you need, and you can book a provider directly from there.
     ---
 
+    **CRITICAL RULE: OUT OF SCOPE QUESTIONS**
+    - You are strictly a booking assistant for QuickMate.
+    - If the user asks about topics unrelated to QuickMate, booking services, or home maintenance (e.g., "What is JavaScript?", "Write me a poem", "What is the weather in Paris?"), you MUST politely refuse.
+    - Standard Refusal Response: "I'm sorry, I can only help you with booking home services or answering questions about QuickMate. How can I help you with that today?"
+
     CRITICAL RULE: You MUST follow these steps in order. Ask for only ONE piece of information at a time.
 
     CRITICAL RULE: You MUST save important details (serviceId, providerId, addressId, date, time) to the session.context as you learn them.
@@ -390,7 +395,15 @@ export class ChatbotService implements IChatBotService {
         `;
 
         logger.info(`[Chatbot] 🚀 Sending to Gemini...`);
-        const result = await chat.sendMessage(contextPrompt);
+        let result;
+        try {
+            result = await chat.sendMessage(contextPrompt);
+        } catch (error: unknown) {
+            if (error instanceof Error && (error.message.includes('429') || error.message.includes('quota'))) {
+                return { role: "model", text: "Exceeded request limit. Please try again later." };
+            }
+            throw error;
+        }
         const response = result.response;
         const functionCalls = response.functionCalls();
 
@@ -437,7 +450,7 @@ export class ChatbotService implements IChatBotService {
                             const fuse = new Fuse(allSubCategories, {
                                 keys: ['name'],
                                 includeScore: true,
-                                threshold: 0.4
+                                threshold: 0.9
                             });
 
                             const results = fuse.search(serviceName);
@@ -618,7 +631,7 @@ export class ChatbotService implements IChatBotService {
 
                         logger.info(`[Chatbot] Found ${nearbyProviders.length} providers in range.`);
 
-                        const providersInRange = nearbyProviders.map((p) => p._id.toString());
+                        const providersInRange = nearbyProviders.map((p) => p.id.toString());
                         logger.info(`[Chatbot] Provider IDs in range:`, providersInRange);
 
                         const services = await this._serviceRepository.findServicesWithProvider(
@@ -811,11 +824,16 @@ export class ChatbotService implements IChatBotService {
                 logger.info(`[Chatbot] 🤖 Final Response after tool: "${botResponseText}"`);
 
             } catch (err: unknown) {
-                session.context = workingContext;
-                session.markModified('context');
-                await session.save();
-                botResponseText = "Sorry, something went wrong while processing your request.";
-                logger.error("[Chatbot] 💥 Error executing tool:", err);
+                const errorMessage = err instanceof Error ? err.message : String(err);
+                if (errorMessage.includes('429') || errorMessage.includes('quota')) {
+                    botResponseText = "Exceeded request limit. Please try again later.";
+                } else {
+                    session.context = workingContext;
+                    session.markModified('context');
+                    await session.save();
+                    botResponseText = "Sorry, something went wrong while processing your request.";
+                    logger.error("[Chatbot] 💥 Error executing tool:", err);
+                }
             }
 
             await this._messageRepo.create({ sessionId: session._id, role: "model", text: botResponseText });

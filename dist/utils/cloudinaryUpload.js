@@ -12,10 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteFromCloudinary = exports.uploadToCloudinary = void 0;
+exports.deleteFromCloudinary = exports.getSignedUrl = exports.uploadToCloudinary = void 0;
 const cloudinary_1 = require("cloudinary");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const logger_1 = __importDefault(require("../logger/logger"));
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 const apiKey = process.env.CLOUDINARY_API_KEY;
 const apiSecret = process.env.CLOUDINARY_API_SECRET;
@@ -50,27 +51,24 @@ const uploadToCloudinary = (filePath_1, ...args_1) => __awaiter(void 0, [filePat
     const maxRetries = 3;
     try {
         validateFile(filePath);
-        console.log(`Attempting to upload file: ${filePath} (attempt ${retryCount + 1}/${maxRetries + 1})`);
         const result = yield cloudinary_1.v2.uploader.upload(filePath, {
             folder: 'quickmate_images',
             resource_type: 'auto',
+            type: 'authenticated',
             timeout: 60000,
             transformation: [
                 { width: 1200, height: 1200, crop: 'limit' },
                 { quality: 'auto' }
             ]
         });
-        console.log(`Successfully uploaded to Cloudinary: ${result.public_id}`);
         if (fs_1.default.existsSync(filePath)) {
             fs_1.default.unlinkSync(filePath);
-            console.log(`Cleaned up local file: ${filePath}`);
         }
         return result.public_id;
     }
     catch (rawError) {
-        // Type Assertion: Treat the unknown error as our defined CloudinaryError
         const error = rawError;
-        console.error('Cloudinary upload error details:', {
+        logger_1.default.error('Cloudinary upload error details:', {
             message: error.message,
             http_code: error.http_code,
             error_code: ((_a = error.error) === null || _a === void 0 ? void 0 : _a.code) || error.code,
@@ -81,7 +79,7 @@ const uploadToCloudinary = (filePath_1, ...args_1) => __awaiter(void 0, [filePat
         });
         if (fs_1.default.existsSync(filePath)) {
             fs_1.default.unlinkSync(filePath);
-            console.log(`Cleaned up local file after error: ${filePath}`);
+            logger_1.default.info(`Cleaned up local file after error: ${filePath}`);
         }
         const isRetryableError = (error.http_code === 500 ||
             error.http_code === 502 ||
@@ -93,7 +91,7 @@ const uploadToCloudinary = (filePath_1, ...args_1) => __awaiter(void 0, [filePat
             !error.http_code);
         if (isRetryableError && retryCount < maxRetries) {
             const delay = Math.pow(2, retryCount) * 1000;
-            console.log(`Retrying upload in ${delay}ms...`);
+            logger_1.default.info(`Retrying upload in ${delay}ms...`);
             yield new Promise(resolve => setTimeout(resolve, delay));
             return (0, exports.uploadToCloudinary)(filePath, retryCount + 1);
         }
@@ -128,13 +126,30 @@ const uploadToCloudinary = (filePath_1, ...args_1) => __awaiter(void 0, [filePat
     }
 });
 exports.uploadToCloudinary = uploadToCloudinary;
+const getSignedUrl = (publicId) => {
+    if (!publicId)
+        return '';
+    // Generate a timestamp for 1 hour from now (in seconds)
+    const expirationTime = Math.round(new Date().getTime() / 1000) + 3600;
+    return cloudinary_1.v2.url(publicId, {
+        type: 'authenticated', // Must match the upload type
+        secure: true, // Force HTTPS
+        sign_url: true, // Generate the signature
+        // auth_token: {          // Level 4: Time-limited token
+        //   key: process.env.CLOUDINARY_API_KEY, 
+        //   start_time: Math.round(new Date().getTime() / 1000), 
+        //   duration: 3600 // 1 hour duration
+        // }
+    });
+};
+exports.getSignedUrl = getSignedUrl;
 const deleteFromCloudinary = (publicId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield cloudinary_1.v2.uploader.destroy(publicId);
         return result;
     }
     catch (error) {
-        console.error('Cloudinary deletion error:', error);
+        logger_1.default.error('Cloudinary deletion error:', error);
         throw new Error('Failed to delete image from Cloudinary.');
     }
 });

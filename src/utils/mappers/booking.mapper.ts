@@ -11,14 +11,17 @@ import { IService } from "../../models/Service";
 import { IProvider } from "../../models/Providers";
 import { IUser } from "../../models/User";
 import { IReview } from "../../models/Review";
+import { getSignedUrl } from "../cloudinaryUpload";
+import { ISocketMessage } from "../../interface/message";
 
 export function toBookingConfirmationPage(booking: IBooking, address: IAddress, categoryIcon: string, service: IService, payment: IPayment, provider: IProvider, review?: IReview, providerRating?: number, providerReviewsCount?: number): IBookingConfirmationRes {
+
     return {
         id: booking._id.toString(),
         serviceName: service.title,
-        serviceImage: categoryIcon || '',
+        serviceImage: categoryIcon ? getSignedUrl(categoryIcon) : '',
         providerName: provider.fullName,
-        providerImage: provider.profilePhoto || '',
+        providerImage: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
         providerRating: providerRating || 0,
         providerReviewsCount: providerReviewsCount || 0,
         priceUnit: service.priceUnit as string,
@@ -109,4 +112,33 @@ export function toProviderBookingManagement(
             
         };
     });
+}
+
+export function toGetAllFiltersBookingDto(booking: IBookingHistoryPage ): IBookingHistoryPage {
+    return {
+        ...booking,
+        serviceImage: booking.serviceImage 
+            ? getSignedUrl(booking.serviceImage) 
+            : '',        
+        providerImage: booking.providerImage 
+            ? getSignedUrl(booking.providerImage) 
+            : '',
+    };
+}
+
+export function toGetBookingForProvider(booking: IProviderBookingManagement): IProviderBookingManagement {
+    return {
+        ...booking,
+        customerImage: booking.customerImage 
+        ? getSignedUrl(booking.customerImage) 
+        : '' 
+    }
+}
+
+export function toBookingMessagesDto(message: IMessage): ISocketMessage { 
+    const msgObj = message.toObject ? message.toObject() : message;
+    return {
+        ...msgObj,
+        fileUrl: msgObj.fileUrl ? getSignedUrl(msgObj.fileUrl) : ''
+    };
 }

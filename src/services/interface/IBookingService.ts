@@ -15,13 +15,13 @@ export interface IBookingService {
     paymentVerification(verifyPayment: IPaymentVerificationRequest): Promise<{ message: string, orderId: string }>;
     findBookingById(id: string): Promise<IBookingConfirmationRes>;
     getAllFilteredBookings(userId: string, filters: { search?: string, status?: BookingStatus }): Promise<IUserBookingsResponse>; 
-    updateStatus(bookingId: string, status: BookingStatus, userId?: string): Promise<{ message: string, completionToken?: string }>;
+    updateStatus(bookingId: string, status: BookingStatus, userId?: string, role?: Roles): Promise<{ message: string, completionToken?: string }>;
     updateBookingDateTime(bookingId: string, date: string, time: string): Promise<void>;
 
     //provider
     getBookingFor_Prov_mngmnt(providerId: string, search?: string, status?: BookingStatus): Promise<{ earnings: number, bookings: IProviderBookingManagement[] }>;
-    saveAndEmitMessage(io: Server, messageData: ISocketMessage): Promise<IMessage>;
-    getBookingMessages(joiningId: string): Promise<IMessage[]>;
+    saveAndEmitMessage(io: Server, messageData: ISocketMessage): Promise<Partial<IMessage>>;
+    getBookingMessages(joiningId: string): Promise<ISocketMessage[]>;
     verifyOtp(data: VerifyOtpRequestBody, bookingToken: string): Promise<void>
     resendOtp(data: ResendOtpRequestBody, userId?: string): Promise<{ message: string, newCompletionToken?: string }>;
     getAllBookingsForAdmin(

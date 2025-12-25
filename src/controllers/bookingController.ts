@@ -127,9 +127,9 @@ export class BookingController {
     public updateBookingStatus = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
             const { id: bookingId } = paramIdSchema.parse(req.params);
-            const { status } = updateBookingStatusSchema.parse(req.body);
+            const { status, role } = updateBookingStatusSchema.parse(req.body);
             const userId = req.user.id
-            const response = await this._bookingService.updateStatus(bookingId, status, userId)
+            const response = await this._bookingService.updateStatus(bookingId, status, userId, role as Roles);
             let bookingVerifyToken = response.completionToken
             res.cookie('bookingToken', bookingVerifyToken, {
                 httpOnly: true,

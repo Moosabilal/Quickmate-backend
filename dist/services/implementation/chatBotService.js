@@ -332,7 +332,16 @@ let ChatbotService = class ChatbotService {
             USER_MESSAGE: ${userMessage}
         `;
             logger_1.default.info(`[Chatbot] 🚀 Sending to Gemini...`);
-            const result = yield chat.sendMessage(contextPrompt);
+            let result;
+            try {
+                result = yield chat.sendMessage(contextPrompt);
+            }
+            catch (error) {
+                if (error instanceof Error && (error.message.includes('429') || error.message.includes('quota'))) {
+                    return { role: "model", text: "Exceeded request limit. Please try again later." };
+                }
+                throw error;
+            }
             const response = result.response;
             const functionCalls = response.functionCalls();
             if (functionCalls && functionCalls.length > 0) {
@@ -370,7 +379,7 @@ let ChatbotService = class ChatbotService {
                                 const fuse = new fuse_js_1.default(allSubCategories, {
                                     keys: ['name'],
                                     includeScore: true,
-                                    threshold: 0.4
+                                    threshold: 0.9
                                 });
                                 const results = fuse.search(serviceName);
                                 const suggestions = results.map(result => result.item);
@@ -505,7 +514,7 @@ let ChatbotService = class ChatbotService {
                                 break;
                             }
                             logger_1.default.info(`[Chatbot] Found ${nearbyProviders.length} providers in range.`);
-                            const providersInRange = nearbyProviders.map((p) => p._id.toString());
+                            const providersInRange = nearbyProviders.map((p) => p.id.toString());
                             logger_1.default.info(`[Chatbot] Provider IDs in range:`, providersInRange);
                             const services = yield this._serviceRepository.findServicesWithProvider(context.serviceSubCategoryId, undefined);
                             logger_1.default.info(`[Chatbot] Raw services fetched:`, services.length);
@@ -647,11 +656,17 @@ let ChatbotService = class ChatbotService {
                     logger_1.default.info(`[Chatbot] 🤖 Final Response after tool: "${botResponseText}"`);
                 }
                 catch (err) {
-                    session.context = workingContext;
-                    session.markModified('context');
-                    yield session.save();
-                    botResponseText = "Sorry, something went wrong while processing your request.";
-                    logger_1.default.error("[Chatbot] 💥 Error executing tool:", err);
+                    const errorMessage = err instanceof Error ? err.message : String(err);
+                    if (errorMessage.includes('429') || errorMessage.includes('quota')) {
+                        botResponseText = "Exceeded request limit. Please try again later.";
+                    }
+                    else {
+                        session.context = workingContext;
+                        session.markModified('context');
+                        yield session.save();
+                        botResponseText = "Sorry, something went wrong while processing your request.";
+                        logger_1.default.error("[Chatbot] 💥 Error executing tool:", err);
+                    }
                 }
                 yield this._messageRepo.create({ sessionId: session._id, role: "model", text: botResponseText });
                 yield session.save();

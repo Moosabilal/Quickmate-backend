@@ -2,6 +2,7 @@ import { IAddAndEditServiceForm, IProviderServicePageResponse } from "../../inte
 import { ServicesPriceUnit } from "../../enums/Services.enum";
 import { ICategory } from "../../models/Categories";
 import { IService } from "../../models/Service";
+import { getSignedUrl } from "../cloudinaryUpload";
 
 export function toProviderServicePage(
     services: IService[],
@@ -10,14 +11,21 @@ export function toProviderServicePage(
     reviewMap: Map<string, { avgRating: number; reviewCount: number }>
 ): IProviderServicePageResponse[] {
     return services.map(service => {
-        const reviewData = reviewMap.get(service.id.toString()) || { avgRating: 0, reviewCount: 0 };
+        const s = service.toObject ? service.toObject() : service;
+        const sId = s._id.toString();
+
+        const reviewData = reviewMap.get(sId) || { avgRating: 0, reviewCount: 0 };
+        const subCatData = subCategoryMap.get(s.subCategoryId.toString());
+
         return {
-            id: service.id,
-            category: categoryMap.get(service.categoryId.toString()) || '',
-            title: subCategoryMap.get(service.subCategoryId.toString())?.name || '',
-            serviceImage: subCategoryMap.get(service.subCategoryId.toString())?.iconUrl || '',
-            description: service.description,
-            price: service.price,
+            id: sId,
+            category: categoryMap.get(s.categoryId.toString()) || '',
+            title: subCatData?.name || s.title || '',
+            serviceImage: subCatData?.iconUrl
+                ? getSignedUrl(subCatData.iconUrl)
+                : '',
+            description: s.description || '',
+            price: s.price,
             rating: reviewData.avgRating,
             reviews: reviewData.reviewCount
         };
@@ -36,7 +44,7 @@ export function toServiceEditPage(service: IService, category: ICategory): IAddA
         priceUnit: service.priceUnit as ServicesPriceUnit,
         status: service.status,
         price: service.price,
-        businessCertification: service.businessCertification
+        businessCertification: service.businessCertification ? getSignedUrl(service.businessCertification) : ''
 
 
     }

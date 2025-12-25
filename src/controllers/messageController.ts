@@ -20,20 +20,9 @@ export class MessageController {
 
             console.log(`Processing file upload: ${req.file.originalname}, size: ${req.file.size} bytes`);
 
-            const baseUrl = process.env.CLOUDINARY_BASE_URL;
-            if (!baseUrl) {
-                console.error('CLOUDINARY_BASE_URL environment variable not set');
-                res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-                    success: false,
-                    message: "Server configuration error"
-                });
-                return;
-            }
+            const fileUrl = await uploadToCloudinary(req.file.path);
 
-            const publicId = await uploadToCloudinary(req.file.path);
-            const fileUrl = publicId.replace(baseUrl, '');
-
-            console.log(`File uploaded successfully: ${publicId}`);
+            console.log(`File uploaded successfully: ${fileUrl}`);
 
             res.status(HttpStatusCode.OK).json({
                 success: true,

@@ -17,6 +17,7 @@ export const updateProviderSchema = registerProviderSchema.partial();
 
 export const updateProviderStatusSchema = z.object({
     newStatus: z.nativeEnum(ProviderStatus),
+    reason: z.string().optional()
 });
 
 

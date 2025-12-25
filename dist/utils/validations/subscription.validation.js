@@ -10,6 +10,7 @@ exports.providerIdParamSchema = zod_1.z.object({
 });
 exports.createSubscriptionPlanSchema = zod_1.z.object({
     name: zod_1.z.string().min(3, "Plan name must be at least 3 characters long."),
+    description: zod_1.z.string().optional(),
     price: zod_1.z.coerce.number().positive("Price must be a positive number."),
     durationInDays: zod_1.z.coerce.number().int().positive("Duration must be a positive whole number."),
     features: zod_1.z.array(zod_1.z.string().min(1, "Feature description cannot be empty.")).min(1, "At least one feature is required."),
@@ -17,6 +18,7 @@ exports.createSubscriptionPlanSchema = zod_1.z.object({
 exports.updateSubscriptionPlanSchema = zod_1.z.object({
     id: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Plan ID format'),
     name: zod_1.z.string().min(3).optional(),
+    description: zod_1.z.string().optional(),
     price: zod_1.z.coerce.number().positive().optional(),
     durationInDays: zod_1.z.coerce.number().int().positive().optional(),
     features: zod_1.z.array(zod_1.z.string().min(1)).min(1).optional(),

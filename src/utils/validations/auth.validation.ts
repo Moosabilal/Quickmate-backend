@@ -21,6 +21,7 @@ export const verifyOtpSchema = z.object({
 
 export const emailOnlySchema = z.object({
     email: emailSchema,
+    currentPassword: z.string().min(1, "Current password is required.").optional(),
 });
 
 export const resetPasswordSchema = z.object({

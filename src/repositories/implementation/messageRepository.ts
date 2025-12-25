@@ -11,7 +11,6 @@ export class MessageRepository extends BaseRepository<IMessage> implements IMess
     async findAllSorted(joiningId: string): Promise<IMessage[]> {
         const data = Message.find({ joiningId })
             .sort({ createdAt: 1 })
-            .lean()
         return data
     }
 

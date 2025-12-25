@@ -3,14 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.toBookingConfirmationPage = toBookingConfirmationPage;
 exports.toBookingHistoryPage = toBookingHistoryPage;
 exports.toProviderBookingManagement = toProviderBookingManagement;
+exports.toGetAllFiltersBookingDto = toGetAllFiltersBookingDto;
+exports.toGetBookingForProvider = toGetBookingForProvider;
+exports.toBookingMessagesDto = toBookingMessagesDto;
+const cloudinaryUpload_1 = require("../cloudinaryUpload");
 function toBookingConfirmationPage(booking, address, categoryIcon, service, payment, provider, review, providerRating, providerReviewsCount) {
     var _a;
     return {
         id: booking._id.toString(),
         serviceName: service.title,
-        serviceImage: categoryIcon || '',
+        serviceImage: categoryIcon ? (0, cloudinaryUpload_1.getSignedUrl)(categoryIcon) : '',
         providerName: provider.fullName,
-        providerImage: provider.profilePhoto || '',
+        providerImage: provider.profilePhoto ? (0, cloudinaryUpload_1.getSignedUrl)(provider.profilePhoto) : '',
         providerRating: providerRating || 0,
         providerReviewsCount: providerReviewsCount || 0,
         priceUnit: service.priceUnit,
@@ -87,4 +91,20 @@ function toProviderBookingManagement(bookings, users, services, addresses, payme
                 : '',
         };
     });
+}
+function toGetAllFiltersBookingDto(booking) {
+    return Object.assign(Object.assign({}, booking), { serviceImage: booking.serviceImage
+            ? (0, cloudinaryUpload_1.getSignedUrl)(booking.serviceImage)
+            : '', providerImage: booking.providerImage
+            ? (0, cloudinaryUpload_1.getSignedUrl)(booking.providerImage)
+            : '' });
+}
+function toGetBookingForProvider(booking) {
+    return Object.assign(Object.assign({}, booking), { customerImage: booking.customerImage
+            ? (0, cloudinaryUpload_1.getSignedUrl)(booking.customerImage)
+            : '' });
+}
+function toBookingMessagesDto(message) {
+    const msgObj = message.toObject ? message.toObject() : message;
+    return Object.assign(Object.assign({}, msgObj), { fileUrl: msgObj.fileUrl ? (0, cloudinaryUpload_1.getSignedUrl)(msgObj.fileUrl) : '' });
 }

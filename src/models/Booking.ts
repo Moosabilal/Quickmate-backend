@@ -1,5 +1,5 @@
 
-import mongoose, { Schema, Document, HydratedDocument, InferSchemaType } from 'mongoose';
+import mongoose, { Schema, Document, HydratedDocument, InferSchemaType, Types } from 'mongoose';
 import { PaymentStatus } from '../enums/userRoles';
 import { BookingStatus } from '../enums/booking.enum';
 
@@ -81,7 +81,14 @@ const BookingSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-type BookingSchemaType = InferSchemaType<typeof BookingSchema>
+export type BookingSchemaType = InferSchemaType<typeof BookingSchema> & {
+  _id: Types.ObjectId;
+}
+export type BookingLean = BookingSchemaType & {
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type IBooking = HydratedDocument<BookingSchemaType>
 
 export default mongoose.model<IBooking>('Booking', BookingSchema)

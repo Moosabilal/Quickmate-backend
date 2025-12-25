@@ -5,6 +5,7 @@ export interface AdminSubscriptionPlanDTO {
   id?: string;
   name?: string;
   price?: number;
+  description?: string;
   durationInDays?: number;
   features?: string[];
   createdAt?: Date;

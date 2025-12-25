@@ -183,7 +183,6 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
             .sort({createdAt: sort as SortOrder} )
             .skip(skip)
             .limit(limit)
-            .lean();
     }
 
     public async findSubCategoryByName(name: string): Promise<ICategory | null> {
@@ -206,7 +205,6 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
             status: true       
         })
         .select('name')
-        .lean();
     }
 
     public async findRelatedCategories(parentId: string, currentId: string, limit: number): Promise<ICategory[]> {
@@ -217,7 +215,6 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         })
         .select('name iconUrl parentId')
         .limit(limit)
-        .lean(); 
     }
 
 }

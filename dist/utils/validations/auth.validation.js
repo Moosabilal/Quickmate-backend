@@ -19,6 +19,7 @@ exports.verifyOtpSchema = zod_1.z.object({
 });
 exports.emailOnlySchema = zod_1.z.object({
     email: emailSchema,
+    currentPassword: zod_1.z.string().min(1, "Current password is required.").optional(),
 });
 exports.resetPasswordSchema = zod_1.z.object({
     token: zod_1.z.string().min(1, "A valid token is required."),

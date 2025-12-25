@@ -43,7 +43,10 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
     public async getSubscriptionPlan(search?: string): Promise<AdminSubscriptionPlanDTO[]> {
         const filter: FilterQuery<ISubscriptionPlan> = {};
         if (search) {
-            filter.name = { $regex: search, $options: 'i' };
+            filter.$or = [
+                { name: { $regex: search, $options: 'i' } },
+                { description: { $regex: search, $options: 'i' } }
+            ];
         }
         const plans = await this._subscriptionPlanRepository.findAll(filter)
         if (!plans || plans.length <= 0) {

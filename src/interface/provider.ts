@@ -2,6 +2,7 @@ import mongoose, { Schema, Types } from "mongoose";
 import { ProviderStatus } from "../enums/provider.enum";
 import { BookingStatus } from "../enums/booking.enum";
 import { SubscriptionStatus } from "../enums/subscription.enum";
+import { IProvider } from "../models/Providers";
 
 export interface Availability {
   day: string;
@@ -327,4 +328,8 @@ export interface ILeavePeriod {
     from: string;
     to: string;
     reason?: string;
+}
+
+export interface IProviderDto extends Partial<IProvider> {
+  profilePicture: string | null;
 }

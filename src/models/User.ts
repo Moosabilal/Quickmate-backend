@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, HydratedDocument, InferSchemaType } from 'mongoose';
+import mongoose, { Schema, Document, HydratedDocument, InferSchemaType, Types } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { Roles } from '../enums/userRoles';
 import { Credentials } from "google-auth-library";
@@ -28,7 +28,9 @@ UserSchema.pre('save', async function (next) {
   next(); 
 });
 
-type UserSchemaType = InferSchemaType<typeof UserSchema>;
+export type UserSchemaType = InferSchemaType<typeof UserSchema> & {
+  _id: Types.ObjectId;
+};
 export interface IUser extends HydratedDocument<UserSchemaType> {
   googleCalendar?: {
     tokens?: Credentials;

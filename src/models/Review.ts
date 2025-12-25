@@ -1,5 +1,6 @@
 import mongoose, { Schema, HydratedDocument, InferSchemaType } from "mongoose";
 import { ReviewStatus } from "../enums/review.enum";
+import { Types } from "mongoose";
 
 const ReviewSchema: Schema = new Schema(
   {
@@ -43,7 +44,9 @@ const ReviewSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-type ReviewSchemaType = InferSchemaType<typeof ReviewSchema>;
+export type ReviewSchemaType = InferSchemaType<typeof ReviewSchema> & {
+  _id: Types.ObjectId;
+};
 export type IReview = HydratedDocument<ReviewSchemaType>;
 
 export default mongoose.model<IReview>("Review", ReviewSchema);

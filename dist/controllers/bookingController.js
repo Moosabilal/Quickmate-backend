@@ -125,9 +125,9 @@ let BookingController = class BookingController {
         this.updateBookingStatus = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id: bookingId } = booking_validation_1.paramIdSchema.parse(req.params);
-                const { status } = booking_validation_1.updateBookingStatusSchema.parse(req.body);
+                const { status, role } = booking_validation_1.updateBookingStatusSchema.parse(req.body);
                 const userId = req.user.id;
-                const response = yield this._bookingService.updateStatus(bookingId, status, userId);
+                const response = yield this._bookingService.updateStatus(bookingId, status, userId, role);
                 let bookingVerifyToken = response.completionToken;
                 res.cookie('bookingToken', bookingVerifyToken, {
                     httpOnly: true,

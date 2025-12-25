@@ -9,7 +9,7 @@ export interface IProviderService {
     registerProvider(data: IProviderRegistrationData): Promise<{message: string, email: string}>;
     verifyOtp(data: VerifyOtpRequestBody): Promise<{ provider?: IProviderProfile, user?: ILoginResponseDTO, message?: string }>
     resendOtp(data: ResendOtpRequestBody): Promise<{ message: string }>
-    getProviderWithAllDetails(): Promise<IProvider[]>;
+    getProviderWithAllDetails(): Promise<IProviderProfile[]>;
     providersForAdmin(page: number, limit: number, search: string, status: string, rating?: number): Promise<{ data: IProviderForAdminResponce[], total: number, totalPages: number, currentPage: number }>;
     getFeaturedProviders(page: number, limit: number, search: string): Promise<{
         providers: IFeaturedProviders[],
@@ -20,7 +20,7 @@ export interface IProviderService {
     getServicesForAddservice() : Promise<{mainCategories: IServiceAddPageResponse[], services: IServiceAddPageResponse[]}>
     fetchProviderById(userId: string): Promise<IProviderProfile>;
     updateProviderDetails(updateData: Partial<IProviderRegistrationData>): Promise<IProviderProfile>;
-    updateProviderStat(id: string, newStatus: string): Promise<{message: string}>;
+    updateProviderStat(id: string, newStatus: string, reason?: string): Promise<{message: string}>;
     getProviderwithFilters(userId: string, serviceId: string, filters: {radiusKm?: number, lat?: number, long?: number, experience?: number; date?: string; time?: string; price?: number}): Promise<IBackendProvider[]>;
     providerForChatPage(userId: string, search?: string): Promise<IProviderForChatListPage[]>;
     getProviderDashboard(userId: string): Promise<{dashboardData: IDashboardResponse[], dashboardStat: IDashboardStatus}>;
@@ -47,7 +47,7 @@ export interface IProviderService {
         coordinates: [number, number], 
         radiusInKm: number, 
         serviceId: string
-    ): Promise<IProvider[]>;
+    ): Promise<IProviderProfile[]>;
     getProviderFullDetails(providerId: string): Promise<IProviderFullDetails>
 
 }
