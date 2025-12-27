@@ -27,6 +27,7 @@ import { mapCategoryToDto, mapProviderToDto, mapServiceToDto } from '../../utils
 import { IServiceDto } from '../../interface/service';
 import { IProviderDto } from '../../interface/provider';
 import { ICategoryDto } from '../../interface/category';
+import { ProviderStatus } from '../../enums/provider.enum';
 
 
 
@@ -426,8 +427,8 @@ export class AuthService implements IAuthService {
 
     public async searchResources(query: string): Promise<{ services: ICategoryDto[]; providers: IProviderDto[] }> {
         const [services, providers] = await Promise.all([
-            await this._categoryRepository.findAll({ name: { $regex: query, $options: 'i' } }),
-            await this._providerRepository.findAll({ fullName: { $regex: query, $options: 'i' } })
+            await this._categoryRepository.findAll({ name: { $regex: query, $options: 'i' }, parentId:{$ne:null}, status: true }),
+            await this._providerRepository.findAll({ fullName: { $regex: query, $options: 'i' }, isVerified: true, status: ProviderStatus.ACTIVE  })
 
         ])
         const secureProviders = providers.map(mapProviderToDto);

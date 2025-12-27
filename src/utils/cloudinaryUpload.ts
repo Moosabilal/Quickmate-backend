@@ -18,7 +18,7 @@ cloudinary.config({
   api_key: apiKey,
   api_secret: apiSecret,
   secure: true,
-  timeout: 60000,
+  timeout: 100000,
 });
 
 const validateFile = (filePath: string): void => {

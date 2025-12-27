@@ -302,6 +302,7 @@ export class ChatbotService implements IChatBotService {
                         lat: selected.lat,
                         lng: selected.lng
                     };
+                    newContext.address = `${selected.label} (${selected.street}, ${selected.city})`;
                     delete newContext.tempAddressList;
 
                     session.context = newContext;
@@ -835,7 +836,6 @@ export class ChatbotService implements IChatBotService {
                     logger.error("[Chatbot] 💥 Error executing tool:", err);
                 }
             }
-
             await this._messageRepo.create({ sessionId: session._id, role: "model", text: botResponseText });
             await session.save();
             return { role: "model", text: botResponseText, options: responseOptions };

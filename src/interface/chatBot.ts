@@ -56,6 +56,7 @@ export interface IChatSessionContext {
     serviceSubCategoryId?: string;
     
     addressId?: string;
+    address?: string;
     location?: {
         lat: number;
         lng: number;
