@@ -2859,3 +2859,139 @@ Alternatively, I can help you book a service right here. What service are you lo
 [ERROR  ] - GET /favicon.ico 404 Not Found - /favicon.ico -> Not Found - /favicon.ico
 [INFO   ] - Server running on port 5000
 [INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: wTwK1yVLa5CRqjWcAAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: olZh7_XW_4sCUcRgAAAB
+[INFO   ] - Client disconnected: Y3yiD5m0tVBsVU63AAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Cvve8bBKValzuU-4AAAB
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: t1bHXaHdIGYe87JNAAAB
+[INFO   ] - Client disconnected: 6pdbH9PdoH8c4VuAAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: grGlxhL4w2-Y4kcuAAAB
+[INFO   ] - Client disconnected: er2fd3biVvE5hJZ7AAAD
+[ERROR  ] - GET /api/categories/top-level 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/categories/popular-services 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/categories/trending-services 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/chatbot/session/alE5Ku2rXT 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/categories/top-level 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/categories/popular-services 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/categories/trending-services 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/chatbot/session/alE5Ku2rXT 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[INFO   ] - Client disconnected: vaU-fuv5wpZTZDn9AAAG
+[ERROR  ] - GET /api/categories/top-level 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/auth/getUser 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/categories/popular-services 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/categories/trending-services 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[ERROR  ] - GET /api/chatbot/session/HoTIW4wlE8 500 CORS policy violation: Origin missing -> CORS policy violation: Origin missing
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: Mv3FWpiPZr802e_DAAAB
+[ERROR  ] - GET /api/auth/getUser 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/auth/getUser 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/top-level 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/popular-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/trending-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/chatbot/session/HoTIW4wlE8 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: K42PCG9iK5wBL-JyAAAB
+[INFO   ] - Client disconnected: LHKZXo-sofWmhLwwAAAF
+[INFO   ] - Client disconnected: AYTDYKij7l1W1hcZAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: fGTWmkSrKYUX23N2AAAB
+[ERROR  ] - GET /api/auth/getUser 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/auth/getUser 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/top-level 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/popular-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/trending-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/chatbot/session/HoTIW4wlE8 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/auth/getUser 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/top-level 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/popular-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/trending-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/chatbot/session/HoTIW4wlE8 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: PYvEyqZ2On05gE-cAAAB
+[INFO   ] - Client disconnected: 0pHWgGtDM73rnZ70AAAH
+[INFO   ] - Client disconnected: 4sXXrSyWgbal1_zqAAAD
+[INFO   ] - Client disconnected: Z4ZBeRuCsWsAw0KQAAAG
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - GET /api/auth/getUser 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/top-level 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/popular-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/trending-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/chatbot/session/HoTIW4wlE8 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[INFO   ] - Client disconnected: 4Q2hfSWSvfPDlB6TAAAB
+[INFO   ] - Client disconnected: H6aQyTv_K01kYgrfAAAD
+[ERROR  ] - GET /api/auth/getUser 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/auth/getUser 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/top-level 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/provider/getFeaturedProviders 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/popular-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/categories/trending-services 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[ERROR  ] - GET /api/chatbot/session/HoTIW4wlE8 500 CORS policy violation: Origin not allowed -> CORS policy violation: Origin not allowed
+[INFO   ] - Client disconnected: O_EtacPK3Lf_BHFYAAAF
+[INFO   ] - Client disconnected: 1g6DvpINwEBbx3g7AAAH
+[INFO   ] - Client disconnected: yR_4VsJWDbc8XxO8AAAJ
+[INFO   ] - Client disconnected: _QDSQkT8s1Oi9SwvAAAL
+[INFO   ] - Client disconnected: _McI4B-DOtm7TdmQAAAN
+[INFO   ] - Client disconnected: J86ooGJ10AJepxkTAAAP
+[INFO   ] - Client disconnected: 2gNcJ8XgoPTIwSkfAAAR
+[INFO   ] - Client disconnected: MTYprngUVA66YyoUAAAT
+[INFO   ] - Client disconnected: awYfSzo5CuPg0mxjAAAV
+[INFO   ] - Client disconnected: H4_Vui_QlHqS4PjGAAAX
+[INFO   ] - Client disconnected: J6agruh3pfwHoH2RAAAZ
+[INFO   ] - Client disconnected: UzNJPTrDXYUHQ2NdAAAb
+[INFO   ] - Client disconnected: JIiwVhn0t2C0S8C8AAAd
+[INFO   ] - Client disconnected: GtJhI92rl7RhGTf8AAAf
+[INFO   ] - Client disconnected: M4OvcB38ZXPiCujWAAAh
+[INFO   ] - Client disconnected: LA5om5xb_fxAdz79AAAj
+[INFO   ] - Client disconnected: 5xKB6EXWPHYzwtqjAAAl
+[INFO   ] - Client disconnected: AIOgaEZ-RmtTzvj8AAAn
+[INFO   ] - Client disconnected: eRQF4bG_yK2OhtxsAAAp
+[INFO   ] - Client disconnected: 5S_ubny34vcLWR85AAAu
+[INFO   ] - Client disconnected: c8b9dMtypbUr3TPqAAAr
+[INFO   ] - Client disconnected: 7Ne58NfMhELPfA1XAAAv
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 0xNlGnL9aSAt4NSZAAAB
+[INFO   ] - Client disconnected: wZkLCRsDux3sXjFFAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: qWdsJVFZgv6R74ZxAAAB
+[INFO   ] - Client disconnected: f2R8uACX5IRdX0uFAAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: mykRo7fKtoameSAFAAAB
+[INFO   ] - Client disconnected: AVt5JkMofEbJMYK3AAAD
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: mRVY0QgEKwF5Fb_DAAAB

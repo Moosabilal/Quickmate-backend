@@ -37,24 +37,32 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
 
-
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 //database
 connectDB()
 
+const allowedOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(",").map(p => p.trim())
+  : [];
+
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: function (origin, callback) {
+    if(allowedOrigins.includes(origin)){
+      return callback(null, true);
+    } else {
+      return callback(new Error('CORS policy violation: Origin not allowed'));
+    }
+  },
   credentials: true,
 }));
 app.use(helmet()); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser()) 
-// app.use(rateLimiter);
+app.use(rateLimiter);
 
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
