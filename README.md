@@ -2,7 +2,7 @@
 
 The robust server-side application for **QuickMate**, an on-demand service booking platform. This API handles business logic, real-time communication, and data persistence, architected with a strict focus on **Scalability** and **Maintainability**.
 
-> **🔗 Frontend Repository:** [Click here to view the Frontend Code](LINK_TO_YOUR_FRONTEND_REPO_HERE)
+> **🔗 Frontend Repository:** [Click here to view the Frontend Code](https://github.com/Moosabilal/Quickmate-frontend)
 
 ---
 
@@ -37,7 +37,7 @@ This project differentiates itself by moving away from the standard MVC "Fat Con
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/Moosabilal/Quickmate-backend.git](https://github.com/Moosabilal/Quickmate-backend.git)
+    git clone https://github.com/Moosabilal/Quickmate-backend.git
     cd quickmate-backend
     ```
 
