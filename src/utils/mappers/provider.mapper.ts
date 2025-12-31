@@ -15,8 +15,8 @@ import { getSignedUrl } from '../cloudinaryUpload';
 
 
 const createJoiningId = (id1: string, id2: string): string => {
-    if (!id1 || !id2) return '';
-    return [id1, id2].sort().join('-');
+  if (!id1 || !id2) return '';
+  return [id1, id2].sort().join('-');
 };
 
 
@@ -123,9 +123,9 @@ export function toProviderForChatListPage(
     const providerServices = services.filter(
       (s) => s.providerId?.toString() === provider._id.toString()
     );
-    
+
     const joiningId = createJoiningId(currentUserId, provider.userId.toString());
-    
+
     const lastMessageData = messageMap.get(joiningId);
 
     return {
@@ -135,7 +135,7 @@ export function toProviderForChatListPage(
       profilePicture: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
       location: provider.serviceArea,
       isOnline: true,
-      services: providerServices[0]?.title || "",      
+      services: providerServices[0]?.title || "",
       lastMessage: lastMessageData?.lastMessage || null,
       messageType: lastMessageData?.messageType || 'text',
       lastMessageSenderId: lastMessageData?.senderId || null,
@@ -164,9 +164,9 @@ export function toClientForChatListPage(
     const service = services.find(
       (s) => s._id.toString() === clientBooking.serviceId?.toString()
     );
-    
+
     const joiningId = createJoiningId(currentUserId, client._id.toString());
-    
+
     const lastMessageData = messageMap.get(joiningId);
 
     return {
@@ -175,8 +175,8 @@ export function toClientForChatListPage(
       name: client.name as string,
       profilePicture: client.profilePicture && client.profilePicture === 'string' ? getSignedUrl(client.profilePicture) : '',
       location: "",
-      isOnline: true, 
-      services: service?.title || "",      
+      isOnline: true,
+      services: service?.title || "",
       lastMessage: lastMessageData?.lastMessage || null,
       messageType: lastMessageData?.messageType || 'text',
       lastMessageSenderId: lastMessageData?.senderId || null,
@@ -400,17 +400,17 @@ export function toProviderPerformanceDTO(
 
 
 export function toServiceDetailsDTO(service: IService): IServiceDetails {
-    const serviceObj = service as IService;
+  const serviceObj = service as IService;
 
-    return {
-        _id: serviceObj._id.toString(),
-        title: serviceObj.title,
-        description: serviceObj.description,
-        price: serviceObj.price,
-        priceUnit: serviceObj.priceUnit,
-        duration: serviceObj.duration,
-        categoryId: serviceObj.categoryId.toString(), 
-        subCategoryId: serviceObj.subCategoryId.toString(),
-        experience: serviceObj.experience
-    };
+  return {
+    _id: serviceObj._id.toString(),
+    title: serviceObj.title,
+    description: serviceObj.description,
+    price: serviceObj.price,
+    priceUnit: serviceObj.priceUnit,
+    duration: serviceObj.duration,
+    categoryId: serviceObj.categoryId.toString(),
+    subCategoryId: serviceObj.subCategoryId.toString(),
+    experience: serviceObj.experience
+  };
 }

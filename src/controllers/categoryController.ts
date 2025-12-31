@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../interface/category';
-import { ICategory } from '../models/Categories';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import * as fsPromises from 'fs/promises';
 import { inject, injectable } from 'inversify';

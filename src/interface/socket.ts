@@ -9,7 +9,7 @@ interface WebRTCBasePayload {
 }
 
 interface WebRTCOfferPayload extends WebRTCBasePayload {
-  offer: RTCSessionDescriptionInit; // Standard WebRTC type
+  offer: RTCSessionDescriptionInit;
 }
 
 interface WebRTCAnswerPayload extends WebRTCBasePayload {

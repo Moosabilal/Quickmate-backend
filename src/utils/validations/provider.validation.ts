@@ -8,7 +8,14 @@ export const paramIdSchema = z.object({ id: IdSchema });
 export const registerProviderSchema = z.object({
     fullName: z.string().min(2, "Full name is required."),
     phoneNumber: z.string().min(10, "A valid phone number is required."),
-    email: z.string().email(),
+    email: z.string()
+    .trim()
+    .min(1, "Email address is required")
+    .email("Please enter a valid email address")
+    .max(50, "Email address is too long")
+    .refine((val) => val.split('@')[0].length >= 3, {
+        message: "Email address is too short",
+    }),
     serviceArea: z.string().min(3, "Service area is required."),
     serviceLocation: z.string().regex(/^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/, "Invalid location format."),
 });

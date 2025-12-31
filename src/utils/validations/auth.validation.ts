@@ -1,6 +1,13 @@
 import { z } from 'zod';
 
-const emailSchema = z.string().email("Invalid email address.");
+const emailSchema = z.string()
+    .trim()
+    .min(1, "Email address is required")
+    .email("Please enter a valid email address")
+    .max(50, "Email address is too long")
+    .refine((val) => val.split('@')[0].length >= 3, {
+        message: "Email address is too short",
+    });
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters long.");
 
 export const registerSchema = z.object({

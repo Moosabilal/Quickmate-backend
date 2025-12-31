@@ -2485,3 +2485,377 @@ Is this all correct?"
 [INFO   ] - [Chatbot] 📝 User confirmed service: washing machine repair
 [INFO   ] - [Chatbot] Context (Start of Turn):
 [INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: 2_uRHWanbQvnosywAAAB
+[INFO   ] - the email
+[INFO   ] - Sending verification email to providerone@gmail.com with OTP: 759576 mail
+[INFO   ] - Verification OTP sent to providerone@gmail.com
+[INFO   ] - Client disconnected: BE_xFanUJuCu8tqDAAAF
+[INFO   ] - the email
+[INFO   ] - Sending verification email to providerone@gmail.com with OTP: 441137 mail
+[INFO   ] - Verification OTP sent to providerone@gmail.com
+[ERROR  ] - POST /api/bookings/verify-bookingCompletion-otp 403 OTP Verification Failed. Please try again later. -> OTP Verification Failed. Please try again later.
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: EHLSRluX1Dfr1YWKAAAD
+[INFO   ] - Client disconnected: -ww0Yd8At-S3Z-_oAAAB
+[INFO   ] - Client disconnected: wCtA-ekLv9TP349CAAAF
+[INFO   ] - Socket NPCJk3HDVw5eOQROAAAJ joined booking room: 693a4eb555f277c041b5a631-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket NPCJk3HDVw5eOQROAAAJ joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket NPCJk3HDVw5eOQROAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket NPCJk3HDVw5eOQROAAAJ joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket NPCJk3HDVw5eOQROAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket NPCJk3HDVw5eOQROAAAJ joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vU2TWl-RzLhJRErTAAAL joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Client disconnected: vU2TWl-RzLhJRErTAAAL
+[INFO   ] - Socket 0rH9GW8O1sOZlTmrAAAN joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Client disconnected: NPCJk3HDVw5eOQROAAAJ
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693a4eb555f277c041b5a631-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:offer from 693b984afe1c6bb4909a86e2 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket 0rH9GW8O1sOZlTmrAAAN joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket 0rH9GW8O1sOZlTmrAAAN joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:answer from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:hangup from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket 0rH9GW8O1sOZlTmrAAAN joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket 0rH9GW8O1sOZlTmrAAAN joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:answer from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket 0rH9GW8O1sOZlTmrAAAN joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:answer from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b935ffe1c6bb4909a8656 to room 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Client disconnected: 0rH9GW8O1sOZlTmrAAAN
+[INFO   ] - Socket ovLoIIE_t_OWoYMSAAAR joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket ovLoIIE_t_OWoYMSAAAR joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: ovLoIIE_t_OWoYMSAAAR
+[INFO   ] - Client disconnected: hQgdyUP6pgRWwvBNAAAT
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693a4eb555f277c041b5a631-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693b935ffe1c6bb4909a8656-693b984afe1c6bb4909a86e2
+[INFO   ] - Socket vwKpnLgkLoi9Gh4NAAAP joined booking room: 693a4eb555f277c041b5a631-693b984afe1c6bb4909a86e2
+[ERROR  ] - PUT /api/provider/availability 400 Overlapping time slots detected for Monday: [09:00-17:00] and [09:00-17:00]. -> Overlapping time slots detected for Monday: [09:00-17:00] and [09:00-17:00].
+[ERROR  ] - PUT /api/provider/availability 400 Overlapping time slots detected for Monday: [09:00-17:00] and [16:00-20:00]. -> Overlapping time slots detected for Monday: [09:00-17:00] and [16:00-20:00].
+[ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[INFO   ] - Client disconnected: zg_6mFrFO587je4nAAAH
+[INFO   ] - Client disconnected: 2rOn-KUt_-kT6cXrAAAV
+[INFO   ] - Client disconnected: vwKpnLgkLoi9Gh4NAAAP
+[INFO   ] - Client disconnected: ozK_kJJGXZjR6KqCAAAX
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: CTpQloTG0-_UoPfRAAAB
+[INFO   ] - Client disconnected: W4sk__RVg3ozsKnvAAAD
+[INFO   ] - Sending verification email to lithesh123@gmail.com with OTP: 515626 mail
+[INFO   ] - Verification OTP sent to lithesh123@gmail.com
+[INFO   ] - [Chatbot] 📨 New message for session HoTIW4wlE8: "what is javascript"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "I'm sorry, I can only help you with booking home services or answering questions about QuickMate. How can I help you with that today?"
+[INFO   ] - [Chatbot] 📨 New message for session HoTIW4wlE8: "how to book service"
+[INFO   ] - [Chatbot] Context (Start of Turn):
+[INFO   ] - [Chatbot] 🚀 Sending to Gemini...
+[INFO   ] - [Chatbot] 🤖 Simple Text Response: "You can book a service by browsing our services on the website. Just go to the 'Services' page, find what you need, and you can book a provider directly from there.
+
+Alternatively, I can help you book a service right here. What service are you looking for today?"
+[INFO   ] - Socket H_wuKmkdmQzEM2qoAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket oN9FsMSzBhDQXfm_AAAG joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: oN9FsMSzBhDQXfm_AAAG
+[INFO   ] - Socket QMYZziRXKoEuZ-B1AAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket QMYZziRXKoEuZ-B1AAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket QMYZziRXKoEuZ-B1AAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket QMYZziRXKoEuZ-B1AAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket H_wuKmkdmQzEM2qoAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket H_wuKmkdmQzEM2qoAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:hangup from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket H_wuKmkdmQzEM2qoAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket QMYZziRXKoEuZ-B1AAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket H_wuKmkdmQzEM2qoAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket QMYZziRXKoEuZ-B1AAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: dDXTDs4pH9I8jO2vAAAB
+[INFO   ] - Socket 3z5l4u4vrBfNQ9w0AAAH joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket JDG8Z2zl3sGKCfvyAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[ERROR  ] - Error in sendBookingMessage:
+[INFO   ] - Client disconnected: hX6Y2N_R52XLkAqnAAAF
+[INFO   ] - Socket D9D0U1qD_z7kooIpAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: WYLTC-oCZKB_jymJAAAH
+[INFO   ] - Socket 15u_9acSbkKUYZQWAAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[ERROR  ] - Error in sendBookingMessage:
+[ERROR  ] - Error in sendBookingMessage:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: tZpztuypKOVHQonMAAAB
+[INFO   ] - Socket UwWhDA78Ursgk0WjAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[ERROR  ] - Error in sendBookingMessage:
+[ERROR  ] - Error in sendBookingMessage:
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket v1DjBiWvY5T3gMjbAAAH joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[ERROR  ] - Error in sendign sendchatmail
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: aHePqvWwntzjQWvyAAAD
+[INFO   ] - Socket OTzdAaY_4sbbAtwEAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket OTzdAaY_4sbbAtwEAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Client disconnected: ExXN0pgWdlihl0efAAAB
+[INFO   ] - Socket NlXVEOYcYqC563FIAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Server running on port 5000
+[INFO   ] - Socket lsRzyHEpg34OB-QmAAAD joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 8WSlW_q-cPVsN23-AAAF joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket reu8hCs3TfekN_p_AAAH joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: lsRzyHEpg34OB-QmAAAD
+[INFO   ] - Socket d-X6aj_qK1rRxn-NAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket d-X6aj_qK1rRxn-NAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...
+[INFO   ] - Socket l6a8RnbE7JyUP_IrAAAB joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket l6a8RnbE7JyUP_IrAAAB joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket l6a8RnbE7JyUP_IrAAAB joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket -roA9dACu3VY8BZUAAAD joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket -roA9dACu3VY8BZUAAAD joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:hangup from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket l6a8RnbE7JyUP_IrAAAB joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket l6a8RnbE7JyUP_IrAAAB joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket -roA9dACu3VY8BZUAAAD joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: -roA9dACu3VY8BZUAAAD
+[INFO   ] - Socket tc7eYGvaJZwSQQ5PAAAF joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket l6a8RnbE7JyUP_IrAAAB joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket l6a8RnbE7JyUP_IrAAAB joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket tc7eYGvaJZwSQQ5PAAAF joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket tc7eYGvaJZwSQQ5PAAAF joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: l6a8RnbE7JyUP_IrAAAB
+[INFO   ] - Socket tc7eYGvaJZwSQQ5PAAAF joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket tc7eYGvaJZwSQQ5PAAAF joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket bp0AONGyPRVnVS7vAAAH joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket bp0AONGyPRVnVS7vAAAH joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket tc7eYGvaJZwSQQ5PAAAF joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket tc7eYGvaJZwSQQ5PAAAF joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: tc7eYGvaJZwSQQ5PAAAF
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[WARN   ] - Invalid payload for webrtc:answer:
+[WARN   ] - Invalid payload for webrtc:ice-candidate:
+[WARN   ] - Invalid payload for webrtc:ice-candidate:
+[WARN   ] - Invalid payload for webrtc:ice-candidate:
+[WARN   ] - Invalid payload for webrtc:ice-candidate:
+[WARN   ] - Invalid payload for webrtc:ice-candidate:
+[INFO   ] - Socket bp0AONGyPRVnVS7vAAAH joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket bp0AONGyPRVnVS7vAAAH joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:hangup from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket bp0AONGyPRVnVS7vAAAH joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket bp0AONGyPRVnVS7vAAAH joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: bp0AONGyPRVnVS7vAAAH
+[INFO   ] - Socket 6NqVIhN2-4rbPw8fAAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 6NqVIhN2-4rbPw8fAAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 89Ou1iCeaQrJJgedAAAJ joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 6NqVIhN2-4rbPw8fAAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 6NqVIhN2-4rbPw8fAAAL joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: 89Ou1iCeaQrJJgedAAAJ
+[INFO   ] - Socket WZTik-dXjFhqpTJyAAAN joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket WZTik-dXjFhqpTJyAAAN joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: 6NqVIhN2-4rbPw8fAAAL
+[INFO   ] - Socket Ka222XDHsX571B8NAAAP joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket Ka222XDHsX571B8NAAAP joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket Ka222XDHsX571B8NAAAP joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket WZTik-dXjFhqpTJyAAAN joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket WZTik-dXjFhqpTJyAAAN joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: Ka222XDHsX571B8NAAAP
+[INFO   ] - Socket 1sij5DYp_sMUzZfPAAAR joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 1sij5DYp_sMUzZfPAAAR joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:offer from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693c34377b0eabc86dce77de to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket WZTik-dXjFhqpTJyAAAN joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket WZTik-dXjFhqpTJyAAAN joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket WZTik-dXjFhqpTJyAAAN joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:answer from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 1sij5DYp_sMUzZfPAAAR joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Socket 1sij5DYp_sMUzZfPAAAR joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Forwarding webrtc:ice-candidate from 693b984afe1c6bb4909a86e2 to room 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[INFO   ] - Client disconnected: WZTik-dXjFhqpTJyAAAN
+[INFO   ] - Client disconnected: 1sij5DYp_sMUzZfPAAAR
+[INFO   ] - Socket naBYYmwki1crFZE6AAAT joined booking room: 693b984afe1c6bb4909a86e2-693c34377b0eabc86dce77de
+[ERROR  ] - GET /api/provider/auth/google/callback 404 Not Found - /api/provider/auth/google/callback -> Not Found - /api/provider/auth/google/callback
+[ERROR  ] - GET /favicon.ico 404 Not Found - /favicon.ico -> Not Found - /favicon.ico
+[INFO   ] - Server running on port 5000
+[INFO   ] - MongoDB Connected...

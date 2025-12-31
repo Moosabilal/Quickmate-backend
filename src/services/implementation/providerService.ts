@@ -390,8 +390,6 @@ export class ProviderService implements IProviderService {
             throw new CustomError("User not found", HttpStatusCode.NOT_FOUND);
         }
 
-        console.log('the user role', user)
-
         const createJoiningId = (id1: string, id2: string) => [id1, id2].sort().join('-');
 
         let chatList: IProviderForChatListPage[] = [];
@@ -565,6 +563,7 @@ export class ProviderService implements IProviderService {
 
     public async getEarningsAnalytics(userId: string, period: 'week' | 'month'): Promise<EarningsAnalyticsData> {
         const provider = await this._providerRepository.findOne({ userId });
+        console.log('the provider', provider)
         if (!provider) {
             throw new CustomError("Provider profile not found", HttpStatusCode.NOT_FOUND);
         }
@@ -585,30 +584,74 @@ export class ProviderService implements IProviderService {
             prevEndDate = endOfMonth(sub(now, { months: 1 }));
         }
 
-        const [currentBookings, prevBookings] = await Promise.all([
-            this._bookingRepository.findByProviderAndDateRangeForEarnings(providerId, currentStartDate, currentEndDate),
-            this._bookingRepository.findByProviderAndDateRangeForEarnings(providerId, prevStartDate, prevEndDate)
+        const [currentPayments, prevPayments] = await Promise.all([
+            this._paymentRepository.findAll({
+                providerId: providerId,
+                paymentDate: { $gte: currentStartDate, $lte: currentEndDate }
+            }),
+            this._paymentRepository.findAll({
+                providerId: providerId,
+                paymentDate: { $gte: prevStartDate, $lte: prevEndDate }
+            })
         ]);
 
-        const totalEarnings = currentBookings.reduce((sum, b) => sum + (Number(b.amount) || 0), 0);
-        const prevTotalEarnings = prevBookings.reduce((sum, b) => sum + (Number(b.amount) || 0), 0);
+        const allBookingIds = [...new Set([
+            ...currentPayments.map(p => p.bookingId.toString()),
+            ...prevPayments.map(p => p.bookingId.toString())
+        ])];
+
+        const allBookings = await this._bookingRepository.findAll({ _id: { $in: allBookingIds } });
+        const bookingMap = new Map(allBookings.map(b => [b._id.toString(), b]));
+
+        const validCurrentPayments = currentPayments.filter(p => bookingMap.get(p.bookingId.toString())?.status === BookingStatus.COMPLETED);
+        const validPrevPayments = prevPayments.filter(p => bookingMap.get(p.bookingId.toString())?.status === BookingStatus.COMPLETED);
+
+        const totalEarnings = validCurrentPayments.reduce((sum, p) => sum + (Number(p.providerAmount) || 0), 0);
+        const prevTotalEarnings = validPrevPayments.reduce((sum, p) => sum + (Number(p.providerAmount) || 0), 0);
         const earningsChangePercentage = prevTotalEarnings > 0
             ? ((totalEarnings - prevTotalEarnings) / prevTotalEarnings) * 100
             : totalEarnings > 0 ? 100 : 0;
 
-        const currentClients = [...new Set(currentBookings.map(b => (b.userId as { _id: mongoose.Types.ObjectId })._id.toString()))];
+        const currentBookings = validCurrentPayments.map(p => bookingMap.get(p.bookingId.toString())).filter(b => !!b);
+
+        const serviceIds = [...new Set(currentBookings.map(b => b?.serviceId?.toString()).filter(Boolean))];
+        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
+
+        const userIds = [...new Set(currentBookings.map(b => b?.userId?.toString()).filter(Boolean))];
+        const users = await this._userRepository.findAll({ _id: { $in: userIds } });
+        
+        const serviceMap = new Map(services.map(s => [s._id.toString(), s]));
+        const userMap = new Map(users.map(u => [u._id.toString(), u]));
+
+        const populatedData = validCurrentPayments.map(payment => {
+            const booking = bookingMap.get(payment.bookingId.toString());
+            if (!booking) return null;
+
+            const service = booking.serviceId ? serviceMap.get(booking.serviceId.toString()) : null;
+            const user = booking.userId ? userMap.get(booking.userId.toString()) : null;
+
+            return {
+                createdAt: payment.paymentDate || payment.createdAt,
+                serviceId: service ? { title: service.title } : null,
+                userId: user ? { name: user.name, _id: user._id } : null,
+                amount: payment.providerAmount,
+                status: booking.status
+            };
+        }).filter(item => item !== null);
+
+        const currentClients = [...new Set(populatedData.map(d => d?.userId?._id.toString()).filter(Boolean))];
         const totalClients = currentClients.length;
 
         let newClients = 0;
-        for (const userId of currentClients) {
-            const hadPriorBooking = await this._bookingRepository.hasPriorBooking(userId, providerId, currentStartDate);
+        for (const clientId of currentClients) {
+            const hadPriorBooking = await this._bookingRepository.hasPriorBooking(clientId, providerId, currentStartDate);
             if (!hadPriorBooking) newClients++;
         }
 
         const serviceEarnings: { [key: string]: number } = {};
-        currentBookings.forEach(b => {
-            const serviceName = (b.serviceId)?.title || 'Unknown Service';
-            serviceEarnings[serviceName] = (serviceEarnings[serviceName] || 0) + (Number(b.amount) || 0);
+        populatedData.forEach(b => {
+            const serviceName = b?.serviceId?.title || 'Unknown Service';
+            serviceEarnings[serviceName] = (serviceEarnings[serviceName] || 0) + (Number(b?.amount) || 0);
         });
         const topServiceEntry = Object.entries(serviceEarnings).sort((a, b) => b[1] - a[1])[0] || ['N/A', 0];
         const topService = { name: topServiceEntry[0], earnings: topServiceEntry[1] };
@@ -619,7 +662,7 @@ export class ProviderService implements IProviderService {
             totalClients,
             newClients,
             topService,
-            currentBookings
+            populatedData as any
         );
     }
 

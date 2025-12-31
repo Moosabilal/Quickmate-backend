@@ -230,7 +230,6 @@ export class ProviderController {
 
             const userId = req.user.id
             const response = await this._providerService.providerForChatPage(userId, search)
-            console.log('the respose', response)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
