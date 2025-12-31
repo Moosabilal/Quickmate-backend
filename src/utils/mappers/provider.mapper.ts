@@ -1,5 +1,5 @@
 import { IProvider } from '../../models/Providers';
-import { EarningsAnalyticsData, IBackendProvider, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse, IServiceBreakdown } from '../../interface/provider';
+import { EarningsAnalyticsData, IBackendProvider, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse, IServiceBreakdown, IServiceDetails } from '../../interface/provider';
 import { ICategory } from '../../models/Categories';
 import { IBooking } from '../../models/Booking';
 import { IService } from '../../models/Service';
@@ -8,6 +8,16 @@ import { BookingStatus } from "../../enums/booking.enum";
 import { IReview as IReviewModel } from '../../models/Review';
 import { IUser } from '../../models/User';
 import { _haversineKm } from '../helperFunctions/haversineKm';
+import { LastMessageData } from '../../interface/message';
+import { IPopulatedBookingForEarnings } from '../../interface/booking';
+import { SignalMedium } from 'lucide-react';
+import { getSignedUrl } from '../cloudinaryUpload';
+
+
+const createJoiningId = (id1: string, id2: string): string => {
+  if (!id1 || !id2) return '';
+  return [id1, id2].sort().join('-');
+};
 
 
 export function toProviderDTO(provider: IProvider): IProviderProfile {
@@ -20,14 +30,16 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
     serviceArea: provider.serviceArea,
     availability: provider.availability,
-    profilePhoto: provider.profilePhoto,
+    profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
     earnings: provider.earnings,
     status: provider.status,
     totalBookings: provider.totalBookings,
     payoutPending: provider.payoutPending,
     rating: provider.rating,
     isVerified: provider.isVerified,
-    subscription: provider.subscription
+    subscription: provider.subscription,
+    aadhaarIdProof: provider.aadhaarIdProof ? getSignedUrl(provider.aadhaarIdProof) : '',
+    createdAt: provider.createdAt,
   };
 }
 
@@ -44,8 +56,9 @@ export function toProviderForAdminResponseDTO(
       phoneNumber: provider.phoneNumber,
       email: provider.email,
       serviceArea: provider.serviceArea,
-      profilePhoto: provider.profilePhoto,
+      profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
       status: provider.status,
+      rating: provider.rating,
       serviceOffered: serviceMap.get(providerIdStr) || [],
     };
   });
@@ -78,7 +91,7 @@ export function toBackendProviderDTO(
     fullName: provider.fullName,
     phoneNumber: provider.phoneNumber,
     email: provider.email,
-    profilePhoto: provider.profilePhoto,
+    profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
     serviceArea: provider.serviceArea,
     serviceLocation: `${provLat},${provLng}`,
     availability: provider.availability,
@@ -92,12 +105,16 @@ export function toBackendProviderDTO(
   };
 }
 
+
 export function toProviderForChatListPage(
+  currentUserId: string,
   bookings: IBooking[],
   providers: IProvider[],
   services: IService[],
-  messages: { bookingId: string; lastMessage: string; createdAt: Date }[]
+  messages: LastMessageData[]
 ): IProviderForChatListPage[] {
+
+  const messageMap = new Map(messages.map(m => [m.joiningId, m]));
 
   return providers.map((provider) => {
     const booking = bookings.find(
@@ -106,34 +123,36 @@ export function toProviderForChatListPage(
     const providerServices = services.filter(
       (s) => s.providerId?.toString() === provider._id.toString()
     );
-    const lastMessageData = messages.find(
-      (m) => m.bookingId === booking?._id.toString()
-    )
+
+    const joiningId = createJoiningId(currentUserId, provider.userId.toString());
+
+    const lastMessageData = messageMap.get(joiningId);
 
     return {
       id: provider.userId.toString(),
       bookingId: booking?._id.toString(),
       name: provider.fullName,
-      profilePicture: provider.profilePhoto || "",
+      profilePicture: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
       location: provider.serviceArea,
       isOnline: true,
       services: providerServices[0]?.title || "",
-      lastMessage: lastMessageData?.lastMessage || "",
+      lastMessage: lastMessageData?.lastMessage || null,
+      messageType: lastMessageData?.messageType || 'text',
+      lastMessageSenderId: lastMessageData?.senderId || null,
       lastMessageAt: lastMessageData?.createdAt || null,
     };
   });
 }
 
-
-
-
-
 export function toClientForChatListPage(
+  currentUserId: string,
   bookings: IBooking[],
   clients: IUser[],
   services: IService[],
-  messages: { bookingId: string; lastMessage: string; createdAt: Date }[]
+  messages: LastMessageData[]
 ): IProviderForChatListPage[] {
+
+  const messageMap = new Map(messages.map(m => [m.joiningId, m]));
 
   return clients.map((client) => {
     const clientBooking = bookings
@@ -145,28 +164,26 @@ export function toClientForChatListPage(
     const service = services.find(
       (s) => s._id.toString() === clientBooking.serviceId?.toString()
     );
-    const lastMessageData = messages.find(
-      (m) => m.bookingId === clientBooking._id.toString()
-    );
+
+    const joiningId = createJoiningId(currentUserId, client._id.toString());
+
+    const lastMessageData = messageMap.get(joiningId);
 
     return {
       id: client._id.toString(),
       bookingId: clientBooking._id.toString(),
       name: client.name as string,
-      profilePicture: (client.profilePicture as string) || "",
+      profilePicture: client.profilePicture && client.profilePicture === 'string' ? getSignedUrl(client.profilePicture) : '',
       location: "",
       isOnline: true,
       services: service?.title || "",
-      lastMessage: lastMessageData?.lastMessage || "",
+      lastMessage: lastMessageData?.lastMessage || null,
+      messageType: lastMessageData?.messageType || 'text',
+      lastMessageSenderId: lastMessageData?.senderId || null,
       lastMessageAt: lastMessageData?.createdAt || null,
-    } as IProviderForChatListPage
+    } as IProviderForChatListPage;
   }).filter((item): item is IProviderForChatListPage => item !== null);
 }
-
-
-
-
-
 
 
 function buildRatingHistory(reviews: IReviewModel[]) {
@@ -198,13 +215,13 @@ export function toEarningsAnalyticsDTO(
   totalClients: number,
   newClients: number,
   topService: { name: string, earnings: number },
-  currentBookings: IBooking[]
+  currentBookings: IPopulatedBookingForEarnings[]
 ): EarningsAnalyticsData {
 
   const breakdown = currentBookings.map(b => ({
-    date: new Date(b.bookingDate as string | number | Date),
-    service: (b.serviceId as any)?.title || 'Unknown Service',
-    client: (b.userId as any)?.name || 'Unknown Client',
+    date: new Date(b.createdAt as string | number | Date),
+    service: b.serviceId?.title || 'Unknown Service',
+    client: b.userId?.name || 'Unknown Client',
     amount: Number(b.amount) || 0,
     status: String(b.status || 'Unknown'),
   }));
@@ -250,7 +267,7 @@ export function toProviderDashboardDTO(
       service: service?.title || "Unknown Service",
       client: `${booking.customerName} • ${booking.scheduledDate} ${booking.scheduledTime}`,
       status: booking.status as BookingStatus,
-      image: subCategory?.iconUrl || "",
+      image: subCategory?.iconUrl ? getSignedUrl(subCategory.iconUrl) : '',
       category: parentCategory?.name || "Unknown Category",
     };
   });
@@ -314,7 +331,7 @@ export function toProviderPerformanceDTO(
       time: r.createdAt ? new Date(r.createdAt as string | Date).toLocaleDateString() : "N/A",
       rating: Number(r.rating) ?? 0,
       comment: (r.reviewText as string) || "",
-      avatar: (user?.profilePicture as string) ?? "default_avatar.png"
+      avatar: user?.profilePicture as string
     };
   });
 
@@ -378,5 +395,22 @@ export function toProviderPerformanceDTO(
     ratingDistribution,
     starRatingTrend,
     serviceBreakdown
+  };
+}
+
+
+export function toServiceDetailsDTO(service: IService): IServiceDetails {
+  const serviceObj = service as IService;
+
+  return {
+    _id: serviceObj._id.toString(),
+    title: serviceObj.title,
+    description: serviceObj.description,
+    price: serviceObj.price,
+    priceUnit: serviceObj.priceUnit,
+    duration: serviceObj.duration,
+    categoryId: serviceObj.categoryId.toString(),
+    subCategoryId: serviceObj.subCategoryId.toString(),
+    experience: serviceObj.experience
   };
 }

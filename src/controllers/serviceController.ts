@@ -30,9 +30,8 @@ export class ServiceController {
             };
 
             const certificate = files?.businessCertification?.[0]
-            const baseUrl = process.env.CLOUDINARY_BASE_URL;
 
-            const businessCertificationUrl = certificate ? (await uploadToCloudinary(certificate.path)).replace(baseUrl, '') : '';
+            const businessCertificationUrl = certificate ? (await uploadToCloudinary(certificate.path)) : '';
 
 
 

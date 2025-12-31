@@ -35,3 +35,8 @@ export interface IPaymentVerificationPayload {
     razorpay_payment_id: string;
     razorpay_signature: string;
 }
+
+export interface IPaymentTotals {
+    totalCommission: number;
+    totalProviderAmount: number;
+}

@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, HydratedDocument, InferSchemaType } from 'mongoose';
+import mongoose, { Schema, Document, HydratedDocument, InferSchemaType, Types } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { Roles } from '../enums/userRoles';
 import { Credentials } from "google-auth-library";
@@ -19,15 +19,6 @@ const UserSchema: Schema = new Schema({
   passwordResetExpires: { type: Date, select: false },
   googleId: { type: String, unique: true, sparse: true },
   provider: { type: String, enum: ['local', 'google'], default: 'local' },
-  googleCalendar: {
-        tokens: {
-            access_token: { type: String },
-            refresh_token: { type: String },
-            scope: { type: String },
-            token_type: { type: String },
-            expiry_date: { type: Number }
-        }
-    },
 }, { timestamps: true });
 
 UserSchema.pre('save', async function (next) {
@@ -37,7 +28,9 @@ UserSchema.pre('save', async function (next) {
   next(); 
 });
 
-type UserSchemaType = InferSchemaType<typeof UserSchema>;
+export type UserSchemaType = InferSchemaType<typeof UserSchema> & {
+  _id: Types.ObjectId;
+};
 export interface IUser extends HydratedDocument<UserSchemaType> {
   googleCalendar?: {
     tokens?: Credentials;

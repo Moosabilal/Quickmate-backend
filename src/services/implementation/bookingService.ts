@@ -2,23 +2,21 @@ import { inject, injectable } from "inversify";
 import { IBookingRepository } from "../../repositories/interface/IBookingRepository";
 import { IBookingService } from "../interface/IBookingService";
 import TYPES from "../../di/type";
-import { BookingOtpPayload, IAdminBookingsResponse, IBookingConfirmationRes, IBookingHistoryPage, IBookingLog, IBookingRequest, IGetMessages, IProviderBookingManagement } from "../../interface/booking";
+import { BookingOtpPayload, IAdminBookingsResponse, IBookingConfirmationRes, IBookingDetailData, IBookingHistoryPage, IBookingLog, IBookingRequest, IBookingStatusCount, IBookingStatusCounts, IGetMessages, IProviderBookingManagement, IProviderBookingsResponse, IUserBookingsResponse } from "../../interface/booking";
 import { paymentCreation, razorpay, verifyPaymentSignature } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
 import { RazorpayOrder } from "../../interface/razorpay";
-import { createHmac } from "crypto";
-import { IPaymentVerificationPayload, IPaymentVerificationRequest } from "../../interface/payment";
+import { IPaymentVerificationRequest } from "../../interface/payment";
 import { ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
 import { ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
-import { CommissionTypes } from "../../enums/CommissionType.enum";
 import { IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
-import mongoose, { FilterQuery, Types } from "mongoose";
+import { FilterQuery, Types, UpdateQuery } from "mongoose";
 import { IPayment } from "../../models/payment";
 import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
-import { toBookingConfirmationPage, toBookingHistoryPage, toProviderBookingManagement } from "../../utils/mappers/booking.mapper";
+import { toBookingConfirmationPage, toBookingMessagesDto, toGetAllFiltersBookingDto, toGetBookingForProvider } from "../../utils/mappers/booking.mapper";
 import { IProviderRepository } from "../../repositories/interface/IProviderRepository";
 import { IServiceRepository } from "../../repositories/interface/IServiceRepository";
 import { IUserRepository } from "../../repositories/interface/IUserRepository";
@@ -26,9 +24,7 @@ import { IMessageRepository } from "../../repositories/interface/IMessageReposit
 import { IMessage } from "../../models/message";
 import { BookingStatus } from "../../enums/booking.enum";
 import { IWalletRepository } from "../../repositories/interface/IWalletRepository";
-import { WalletRepository } from "../../repositories/implementation/WalletRepository";
 import { TransactionStatus } from "../../enums/payment&wallet.enum";
-import { IWallet } from "../../models/wallet";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../../interface/auth";
 import { generateOTP } from "../../utils/otpGenerator";
 import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils/emailService";
@@ -41,6 +37,10 @@ import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscr
 import { IBooking } from "../../models/Booking";
 import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
+import { ISocketMessage } from "../../interface/message";
+import { endOfDay, endOfMonth, endOfWeek, startOfDay, startOfMonth, startOfWeek } from "date-fns";
+import { Server } from "socket.io";
+import { getSignedUrl } from "../../utils/cloudinaryUpload";
 
 
 @injectable()
@@ -85,7 +85,6 @@ export class BookingService implements IBookingService {
     }
 
     async createNewBooking(data: Partial<IBookingRequest>): Promise<{ bookingId: string, message: string }> {
-
         const subCategoryId = data.serviceId
         const providerId = data.providerId
         const findServiceId = await this._serviceRepository.findOne({ subCategoryId, providerId })
@@ -118,6 +117,7 @@ export class BookingService implements IBookingService {
             );
             if (!isValid) throw new CustomError("transaction is not legit", HttpStatusCode.BAD_REQUEST);
         }
+
 
         const booking = await this._bookingRepository.findById(verifyPayment.bookingId);
         const service = await this._serviceRepository.findById(booking.serviceId.toString());
@@ -162,12 +162,10 @@ export class BookingService implements IBookingService {
 
         const durationInMinutes = convertDurationToMinutes(service.duration);
 
-        console.log('the service duration is:', typeof service.duration, service.duration)
-
-        const udpatedpayment123 = await this._bookingRepository.update(verifyPayment.bookingId, {
+        await this._bookingRepository.update(verifyPayment.bookingId, {
             paymentId: createdPayment._id,
             paymentStatus: PaymentStatus.PAID,
-            duration: durationInMinutes
+            duration: durationInMinutes,
         });
 
         return {
@@ -218,125 +216,182 @@ export class BookingService implements IBookingService {
             ? await this._paymentRepository.findById(booking.paymentId.toString())
             : null;
 
+        const reviewStats = await this._reviewRepository.getReviewStatsByServiceIds([service._id.toString()]);
+        const providerReviewStats = reviewStats.find(rs => rs.serviceId.toString() === service._id.toString());
+
         let review: IReview | undefined;
         if (booking.reviewed) {
             review = await this._reviewRepository.findOne({ bookingId: booking._id.toString() });
         }
 
-        return toBookingConfirmationPage(booking, address, subCat.iconUrl, service, payment, provider, review);
+        return toBookingConfirmationPage(
+            booking, address, subCat.iconUrl,
+            service, payment, provider, review,
+            providerReviewStats?.avgRating,
+            providerReviewStats?.reviewCount
+        );
     }
 
 
-    async getAllFilteredBookings(userId: string): Promise<IBookingHistoryPage[]> {
-        const bookings = await this._bookingRepository.findAll({ userId }, { createdAt: -1 });
-
-        const providerIds = [...new Set(bookings.map(s => {
-            return s.providerId?.toString();
-        }).filter(Boolean))];
-
-        const providers = await this._providerRepository.findAll({ _id: { $in: providerIds } });
-
-        const addressIds = [...new Set(bookings.map(s => {
-            return s.addressId?.toString();
-        }).filter(Boolean))];
-
-        const addresses = await this._addressRepository.findAll({ _id: { $in: addressIds } });
-
-        const serviceIds = [...new Set(bookings.map(s => {
-            return s.serviceId?.toString();
-        }).filter(Boolean))];
-
-        const services = await this._serviceRepository.findAll({ _id: { $in: serviceIds } });
-
-        const subCategoryIds = [...new Set(services.map(s => {
-            return s.subCategoryId?.toString();
-        }).filter(Boolean))];
-
-        const subCategories = await this._categoryRepository.findAll({ _id: { $in: subCategoryIds } });
-
-        const providerMap = new Map(providers.map(prov => [prov._id.toString(), { fullName: prov.fullName, profilePhoto: prov.profilePhoto }]));
-        const subCategoryMap = new Map(subCategories.map(sub => [sub._id.toString(), { iconUrl: sub.iconUrl }]));
-        const serviceMap = new Map(services.map(serv => [serv._id.toString(), { title: serv.title, priceUnit: serv.priceUnit, duration: serv.duration, price: serv.price, subCategoryId: serv.subCategoryId.toString() }]));
-        const addressMap = new Map(addresses.map(add => [add._id.toString(), { street: add.street, city: add.city }]));
-
-        const mappedBooking = toBookingHistoryPage(bookings, addressMap, providerMap, subCategoryMap, serviceMap);
-        return mappedBooking;
-    }
-
-
-    async getBookingFor_Prov_mngmnt(
+    public async getAllFilteredBookings(
         userId: string,
-        providerId: string,
-        search: string
-    ): Promise<{ earnings: number; bookings: IProviderBookingManagement[] }> {
+        filters: { search?: string, status?: BookingStatus }
+    ): Promise<IUserBookingsResponse> {
 
-        const provider = await this._providerRepository.findById(providerId);
+        const { search, status } = filters;
 
-        const bookings = await this._bookingRepository.findAll({ providerId, userId: { $ne: userId } });
-
-        let filteredBookings = bookings;
-        if (search) {
-            const searchRegex = { $regex: search, $options: 'i' };
-            const matchedUsers = await this._userRepository.findAll({ name: searchRegex });
-            const userIds = matchedUsers.map(u => u._id.toString());
-            filteredBookings = bookings.filter(b => userIds.includes(b.userId?.toString() || ''));
-        }
-
-        const userIds = [...new Set(filteredBookings.map(b => b.userId?.toString()).filter(Boolean))];
-        const serviceIds = [...new Set(filteredBookings.map(b => b.serviceId?.toString()).filter(Boolean))];
-        const addressIds = [...new Set(filteredBookings.map(b => b.addressId?.toString()).filter(Boolean))];
-        const paymentIds = [...new Set(filteredBookings.map(b => b.paymentId?.toString()).filter(Boolean))];
-
-        const [users, services, addresses, payments] = await Promise.all([
-            this._userRepository.findAll({ _id: { $in: userIds } }),
-            this._serviceRepository.findAll({ _id: { $in: serviceIds } }),
-            this._addressRepository.findAll({ _id: { $in: addressIds } }),
-            this._paymentRepository.findAll({ _id: { $in: paymentIds } })
+        const [data, statusCounts] = await Promise.all([
+            this._bookingRepository.findBookingsForUserHistory(userId, { status, search }),
+            this._bookingRepository.getBookingStatusCounts(userId, search)
         ]);
 
-        const mappedBookings = toProviderBookingManagement(filteredBookings, users, services, addresses, payments);
+        const { bookings } = data;
+
+        const counts: IBookingStatusCounts = {
+            [BookingStatus.All]: 0,
+            [BookingStatus.PENDING]: 0,
+            [BookingStatus.CONFIRMED]: 0,
+            [BookingStatus.IN_PROGRESS]: 0,
+            [BookingStatus.COMPLETED]: 0,
+            [BookingStatus.CANCELLED]: 0,
+            [BookingStatus.EXPIRED]: 0,
+        };
+
+        let allBookingsCount = 0;
+
+        statusCounts.forEach((item: IBookingStatusCount) => {
+            if (item._id && counts.hasOwnProperty(item._id)) {
+                counts[item._id] = item.count;
+            }
+            allBookingsCount += item.count;
+        });
+        counts.All = allBookingsCount;
+
+        const securedBookings = bookings.map(toGetAllFiltersBookingDto)
 
         return {
-            earnings: Number(provider?.earnings || 0),
-            bookings: mappedBookings
+            data: securedBookings,
+            counts: counts
         };
     }
 
-    async saveAndEmitMessage(io: any, joiningId: string, senderId: string, text: string) {
-        const data = {
-            joiningId,
-            senderId: senderId,
-            text,
+
+    public async getBookingFor_Prov_mngmnt(
+        providerId: string,
+        search?: string,
+        status?: BookingStatus
+    ): Promise<IProviderBookingsResponse> {
+
+        const provider = await this._providerRepository.findById(providerId);
+        if (!provider) {
+            throw new CustomError("Provider not found", HttpStatusCode.NOT_FOUND);
+        }
+
+        const [data, statusCounts] = await Promise.all([
+            this._bookingRepository.findBookingsForProvider(
+                providerId,
+                { status: status, search: search },
+                1,
+                1000
+            ),
+            this._bookingRepository.getBookingStatusCountsForProvider(providerId, search)
+        ]);
+
+        const { bookings } = data;
+
+        const counts: IBookingStatusCounts = {
+            [BookingStatus.All]: 0,
+            [BookingStatus.PENDING]: 0,
+            [BookingStatus.CONFIRMED]: 0,
+            [BookingStatus.IN_PROGRESS]: 0,
+            [BookingStatus.COMPLETED]: 0,
+            [BookingStatus.CANCELLED]: 0,
+            [BookingStatus.EXPIRED]: 0,
         };
 
-        const message = await this._messageRepository.create(data);
+        let allBookingsCount = 0;
+        statusCounts.forEach((item: IBookingStatusCount) => {
+            if (item._id && counts.hasOwnProperty(item._id)) {
+                counts[item._id] = item.count;
+            }
+            allBookingsCount += item.count;
+        });
+        counts.All = allBookingsCount;
 
-        io.to(joiningId).emit("receiveBookingMessage", message);
+        const securedBookings = bookings.map(toGetBookingForProvider)
 
-        return message;
+        return {
+            bookings: securedBookings,
+            earnings: provider.earnings || 0,
+            counts: counts
+        };
     }
 
-    async getBookingMessages(joiningId: string): Promise<IMessage[]> {
-        const data = await this._messageRepository.findAllSorted(joiningId);
+    async saveAndEmitMessage(
+        io: Server,
+        messageData: ISocketMessage
+    ): Promise<Partial<IMessage>> {
+        let signedFileUrl = messageData.fileUrl;
 
-        return data
+        if (messageData.messageType !== 'text' && messageData.fileUrl) {
+            signedFileUrl = getSignedUrl(messageData.fileUrl);
+        }
+        const dataToCreate = {
+            joiningId: messageData.joiningId,
+            senderId: messageData.senderId,
+            messageType: messageData.messageType,
+            text: messageData.text,
+            fileUrl: messageData.fileUrl,
+        };
+
+        const savedMessage = await this._messageRepository.create(dataToCreate);
+
+        const messageForFrontend = {
+            ...savedMessage.toObject(),
+            fileUrl: signedFileUrl
+        };
+
+        io.to(savedMessage.joiningId).emit("receiveBookingMessage", messageForFrontend);
+
+        return messageForFrontend;
+    }
+
+    async getBookingMessages(joiningId: string): Promise<ISocketMessage[]> {
+        const datas = await this._messageRepository.findAllSorted(joiningId);
+
+        const securedData = datas.map(toBookingMessagesDto)
+
+        return securedData
 
     }
 
-    async updateStatus(bookingId: string, status: BookingStatus, userId?: string): Promise<{ message: string, completionToken?: string }> {
+    async updateStatus(bookingId: string, status: BookingStatus, userId?: string, role?: Roles): Promise<{ message: string, completionToken?: string }> {
         const booking = await this._bookingRepository.findById(bookingId)
         if (!booking) {
             throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
+
         if (booking.status === BookingStatus.CANCELLED) {
             return { message: ErrorMessage.BOOKING_IS_ALREADY_CANCELLED }
         }
+
+        if (status === BookingStatus.IN_PROGRESS) {
+            const dateTimeString = `${booking.scheduledTime} ${booking.scheduledDate}`;
+            const scheduledTime = new Date(dateTimeString);
+            const currenttimeStamp = new Date()
+            const diffInMinutes = (scheduledTime.getTime() - currenttimeStamp.getTime()) / (1000 * 60);
+            if (diffInMinutes > 5) {
+                throw new CustomError("You can start the booking only 5 minutes before the scheduled time", HttpStatusCode.BAD_REQUEST)
+            }
+        }
+
         let bookingOtp: string | undefined;
+        const updatePayload: UpdateQuery<IBooking> = { status: status };
         if (status === BookingStatus.CANCELLED) {
             const userId = booking.userId.toString()
             const wallet = await this._walletRepository.findOne({ ownerId: userId })
             let returAmount: number;
-            if (booking.status === BookingStatus.CONFIRMED) {
+            if (booking.status === BookingStatus.CONFIRMED && role === Roles.USER) {
                 returAmount = (Number(booking.amount) * 0.5)
                 wallet.balance += returAmount
             } else {
@@ -358,6 +413,7 @@ export class BookingService implements IBookingService {
                     description: `Refund Received from ${service.title}`,
                 },
             );
+            updatePayload.paymentStatus = PaymentStatus.REFUNDED;
 
 
         } else if (status === BookingStatus.COMPLETED) {
@@ -365,6 +421,7 @@ export class BookingService implements IBookingService {
             if (!user) {
                 throw new CustomError('userId not found', HttpStatusCode.NOT_FOUND)
             }
+            await this._bookingRepository.update(bookingId, updatePayload);
             const otp = generateOTP()
             bookingOtp = jwt.sign({ bookingId, otp }, process.env.JWT_SECRET, { expiresIn: "10m" })
             await sendBookingVerificationEmail(String(user.email), otp)
@@ -422,8 +479,6 @@ export class BookingService implements IBookingService {
                 this._serviceRepository.findById(booking.serviceId.toString())
             ]);
 
-            console.log('the payment details are:', payment)
-
             const wallet = await this._walletRepository.findOne({ ownerId: user._id.toString() })
             if (!wallet) {
                 await this._walletRepository.create({
@@ -432,7 +487,6 @@ export class BookingService implements IBookingService {
                     ownerType: Roles.PROVIDER,
                 })
             } else {
-                console.log('the payment amount is:', payment.providerAmount)
                 wallet.balance += payment.providerAmount
                 provider.earnings += payment.providerAmount;
                 provider.totalBookings += 1
@@ -481,7 +535,7 @@ export class BookingService implements IBookingService {
     public async getAllBookingsForAdmin(
         page: number,
         limit: number,
-        filters: { search?: string; bookingStatus?: string; }
+        filters: { search?: string; bookingStatus?: string; dateRange?: string }
     ): Promise<IAdminBookingsResponse> {
 
         const bookingFilter: FilterQuery<IBooking> = {};
@@ -505,6 +559,36 @@ export class BookingService implements IBookingService {
 
         if (filters.bookingStatus && filters.bookingStatus !== 'All') {
             bookingFilter.status = filters.bookingStatus;
+        }
+
+        if (filters.dateRange && filters.dateRange !== 'All') {
+            const now = new Date();
+            let startDate: Date;
+            let endDate: Date;
+
+            switch (filters.dateRange) {
+                case 'All':
+                    startDate = startOfDay(now);
+                    endDate = endOfDay(now);
+                    break;
+                case 'Last 7 Days':
+                    startDate = startOfWeek(now);
+                    endDate = endOfWeek(now);
+                    break;
+                case 'Last 30 Days':
+                    startDate = startOfMonth(now);
+                    endDate = endOfMonth(now);
+                    break;
+                default:
+                    break;
+            }
+
+            if (startDate && endDate) {
+                bookingFilter.createdAt = {
+                    $gte: startDate,
+                    $lte: endDate,
+                };
+            }
         }
 
         const allBookings = await this._bookingRepository.findAll(bookingFilter, { createdAt: -1 });
@@ -534,7 +618,7 @@ export class BookingService implements IBookingService {
             return {
                 id: booking._id.toString(),
                 userName: user?.name as string || 'N/A',
-                userAvatar: (user?.profilePicture as string) || `https://i.pravatar.cc/150?u=${user?.id}`,
+                userAvatar: user?.profilePicture ? getSignedUrl(user?.profilePicture as string) : null,
                 providerName: provider?.fullName as string || 'N/A',
                 serviceType: service?.title as string || 'N/A',
                 dateTime: `${booking.scheduledDate || ''} ${booking.scheduledTime || ''}`.trim(),
@@ -566,6 +650,71 @@ export class BookingService implements IBookingService {
         const providerids = services.map(s => s.providerId.toString()).filter(id => id !== currentProviderId);
         const providers = await this._providerRepository.findAll({ _id: { $in: providerids } })
         return isProviderInRange(providers, lat, lng, radius);
+    }
+
+    public async createBookingFromBot(data: IBookingRequest): Promise<IBooking> {
+
+        const booking = await this._bookingRepository.create({
+            ...data,
+            status: BookingStatus.PENDING,
+            paymentStatus: PaymentStatus.UNPAID,
+            bookingDate: new Date(),
+        });
+        return booking;
+    }
+
+    public async getBookingDetailsForAdmin(bookingId: string): Promise<IBookingDetailData> {
+        const booking = await this._bookingRepository.findById(bookingId);
+        if (!booking) throw new CustomError("Booking not found", HttpStatusCode.NOT_FOUND);
+
+        const [user, provider, service, address, payment] = await Promise.all([
+            this._userRepository.findById(booking.userId?.toString() || ""),
+            this._providerRepository.findById(booking.providerId?.toString() || ""),
+            this._serviceRepository.findById(booking.serviceId?.toString() || ""),
+            this._addressRepository.findById(booking.addressId?.toString() || ""),
+            booking.paymentId ? this._paymentRepository.findById(booking.paymentId.toString()) : null
+        ]);
+
+        return {
+            booking: {
+                _id: booking._id.toString(),
+                status: booking.status as BookingStatus,
+                paymentStatus: booking.paymentStatus as PaymentStatus,
+                amount: booking.amount as string,
+                date: booking.scheduledDate as string,
+                time: booking.scheduledTime as string,
+                createdAt: new Date(booking.createdAt as string | Date).toISOString(),
+                instructions: booking.instructions as string,
+            },
+            user: user ? {
+                name: user.name as string,
+                email: user.email as string,
+                phone: user.phone as string,
+                image: user.profilePicture ? getSignedUrl(user.profilePicture as string) : ''
+            } : null,
+            provider: provider ? {
+                _id: provider._id.toString(),
+                name: provider.fullName as string,
+                email: provider.email as string,
+                phone: provider.phoneNumber as string,
+                image: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
+                serviceArea: provider.serviceArea as string
+            } : null,
+            service: service ? {
+                title: service.title as string,
+                duration: service.duration as string,
+                price: service.price as number
+            } : null,
+            address: address ? {
+                label: address.label,
+                fullAddress: `${address.street}, ${address.city}, ${address.state} - ${address.zip}`,
+            } : null,
+            payment: payment ? {
+                method: payment.paymentMethod as PaymentMethod,
+                transactionId: (payment.razorpay_payment_id || payment._id.toString()) as string,
+                date: new Date(payment.paymentDate).toISOString()
+            } : null
+        };
     }
 
 

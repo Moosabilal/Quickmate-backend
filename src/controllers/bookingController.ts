@@ -12,12 +12,14 @@ import {
     createBookingSchema,
     confirmPaymentSchema,
     verifyPaymentSchema,
-    mongoIdParamSchema,
     updateBookingStatusSchema,
     updateBookingDateTimeSchema,
     verifyBookingOtpSchema,
     adminBookingsQuerySchema,
     findProviderRangeSchema,
+    bookingFilterSchema,
+    providerBookingsQuerySchema,
+    paramIdSchema,
 } from "../utils/validations/booking.validation";
 import { Roles } from "../enums/userRoles";
 
@@ -36,7 +38,7 @@ export class BookingController {
         try {
             const userId = req.user.id
             const validatedBody = createBookingSchema.parse(req.body);
-            const response = await this._bookingService.createNewBooking({...validatedBody, userId})
+            const response = await this._bookingService.createNewBooking({ ...validatedBody, userId })
 
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -55,28 +57,28 @@ export class BookingController {
     }
 
     public verifyPayment = async (req: AuthRequest, res: Response, next: NextFunction) => {
-    try {
-        const validatedBody = verifyPaymentSchema.parse(req.body);
-        
-        const paymentPayload: IPaymentVerificationRequest = {
-            ...validatedBody,
-            userId: req.user.id,
-        };
+        try {
+            const validatedBody = verifyPaymentSchema.parse(req.body);
 
-        const response = await this._bookingService.paymentVerification(paymentPayload);
-        
-        res.status(HttpStatusCode.OK).json(response);
-    } catch (error) {
-        if (error instanceof ZodError) {
-             res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            const paymentPayload: IPaymentVerificationRequest = {
+                ...validatedBody,
+                userId: req.user.id,
+            };
+
+            const response = await this._bookingService.paymentVerification(paymentPayload);
+
+            res.status(HttpStatusCode.OK).json(response);
+        } catch (error) {
+            if (error instanceof ZodError) {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            }
+            next(error);
         }
-        next(error);
     }
-}
 
     public getBookingById = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id: bookingId } = mongoIdParamSchema.parse(req.params);
+            const { id: bookingId } = paramIdSchema.parse(req.params);
             const response = await this._bookingService.findBookingById(bookingId)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
@@ -86,20 +88,26 @@ export class BookingController {
 
     public getAllBookings = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
+            const { search, status } = bookingFilterSchema.parse(req.query);
+
             const userId = req.user.id;
-            const response = await this._bookingService.getAllFilteredBookings(userId)
-            res.status(HttpStatusCode.OK).json(response)
+
+            const response = await this._bookingService.getAllFilteredBookings(userId, { search, status });
+
+            res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
-            next(error)
+            if (error instanceof ZodError) {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            }
+            next(error);
         }
     }
 
     public getBookingFor_Prov_mngmnt = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const providerId = req.params.id
-            const search = req.query.search as string
-            const userId = req.user.id
-            const response = await this._bookingService.getBookingFor_Prov_mngmnt(userId, providerId, search)
+
+            const { providerId, search, status } = providerBookingsQuerySchema.parse(req.query);
+            const response = await this._bookingService.getBookingFor_Prov_mngmnt(providerId, search, status)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -118,10 +126,10 @@ export class BookingController {
 
     public updateBookingStatus = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id: bookingId } = mongoIdParamSchema.parse(req.params);
-            const { status } = updateBookingStatusSchema.parse(req.body);
+            const { id: bookingId } = paramIdSchema.parse(req.params);
+            const { status, role } = updateBookingStatusSchema.parse(req.body);
             const userId = req.user.id
-            const response = await this._bookingService.updateStatus(bookingId, status, userId)
+            const response = await this._bookingService.updateStatus(bookingId, status, userId, role as Roles);
             let bookingVerifyToken = response.completionToken
             res.cookie('bookingToken', bookingVerifyToken, {
                 httpOnly: true,
@@ -138,7 +146,7 @@ export class BookingController {
 
     public updateBookingDateTime = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id: bookingId } = mongoIdParamSchema.parse(req.params);
+            const { id: bookingId } = paramIdSchema.parse(req.params);
             const { date, time } = updateBookingDateTimeSchema.parse(req.body);
             await this._bookingService.updateBookingDateTime(bookingId, date, time);
             res.status(HttpStatusCode.NO_CONTENT).send()
@@ -191,11 +199,22 @@ export class BookingController {
             const { serviceId, lat, lng, radius } = findProviderRangeSchema.parse(req.query);
             const userId = req.user.id
             const userRole = req.user.role as Roles
-            const response = await this._bookingService.findProviderRange(userId, userRole, serviceId as string, Number(lat), Number(lng), Number(radius));
+            const response = await this._bookingService.findProviderRange(userId, userRole, serviceId, Number(lat), Number(lng), Number(radius));
             res.status(HttpStatusCode.OK).json(response);
         } catch (error) {
             next(error);
         }
     }
+
+    public getBookingDetailsForAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { id } = paramIdSchema.parse(req.params);
+            const data = await this._bookingService.getBookingDetailsForAdmin(id);
+            res.status(HttpStatusCode.OK).json({ success: true, data });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 
 }

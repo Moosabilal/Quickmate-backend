@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { BookingStatus } from "../enums/booking.enum";
 import { PaymentStatus } from "../enums/userRoles";
 import { DaySchedule } from "./provider";
@@ -12,6 +13,7 @@ export interface IBookingRequest {
   addressId: string
   scheduledDate?: string;
   scheduledTime?: string;
+  amount: number;
 }
 
 export interface IBookingConfirmationRes {
@@ -21,6 +23,8 @@ export interface IBookingConfirmationRes {
   serviceImage: string;
   providerName: string;
   providerImage: string;
+  providerRating?: number;
+  providerReviewsCount?: number;
   priceUnit: string;
   duration: string;
   customer?: string;
@@ -115,4 +119,64 @@ export interface IAdminBookingsResponse {
   totalPages: number;
   currentPage: number;
   totalBookings: number;
+}
+
+export interface IBookingStatusCounts {
+  [BookingStatus.All]: number;
+  [BookingStatus.PENDING]: number;
+  [BookingStatus.CONFIRMED]: number;
+  [BookingStatus.IN_PROGRESS]: number;
+  [BookingStatus.COMPLETED]: number;
+  [BookingStatus.CANCELLED]: number;
+  [BookingStatus.EXPIRED]: number;
+}
+
+export interface IBookingStatusCount {
+  _id: BookingStatus | null;
+  count: number;
+}
+
+export interface IUserBookingsResponse {
+  data: IBookingHistoryPage[];
+  counts: IBookingStatusCounts;
+}
+
+export interface IProviderBookingsResponse {
+  bookings: IProviderBookingManagement[];
+  earnings: number;
+  counts: IBookingStatusCounts;
+}
+
+export interface IBookingDetailData {
+  booking: {
+    _id: string;
+    status: BookingStatus;
+    paymentStatus: string;
+    amount: string;
+    date: string;
+    time: string;
+    createdAt: string;
+    instructions?: string;
+  };
+  user: { name: string; email: string; phone: string; image: string };
+  provider: { _id: string; name: string; email: string; phone: string; image: string; serviceArea: string };
+  service: { title: string; duration: string; price: number };
+  address: { label: string; fullAddress: string };
+  payment?: { method: string; transactionId: string; date: string };
+}
+
+export interface IPopulatedBookingForEarnings {
+  _id: Types.ObjectId | string;
+  amount: string;
+  status: BookingStatus;
+  userId: {
+    _id: Types.ObjectId | string;
+    name: string;
+  };
+  serviceId: {
+    _id: Types.ObjectId | string;
+    title: string;
+  };
+  updatedAt: Date;
+  createdAt: Date;
 }

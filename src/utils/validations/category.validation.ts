@@ -13,7 +13,7 @@ const categoryBaseSchema = z.object({
     return Boolean(val); 
   })
   .optional(),
-    parentId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Parent ID format').nullable().optional(),
+    parentId: z.string().min(1, "ID is required").nullable().optional(),
     commissionType: z.nativeEnum(CommissionTypes),
     commissionValue: z.coerce.number().min(0, "Commission cannot be negative.").max(100, "Commission cannot exceed 100.").optional(),
     commissionStatus: z
@@ -30,8 +30,8 @@ export const createCategorySchema = categoryBaseSchema;
 
 export const updateCategorySchema = categoryBaseSchema.partial();
 
-export const mongoIdParamSchema = z.object({
-    id: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
+export const paramIdSchema = z.object({
+    id: z.string().min(1, "ID is required"),
 });
 
 export const getSubcategoriesQuerySchema = z.object({

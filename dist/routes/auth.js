@@ -1,0 +1,35 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const multer_1 = __importDefault(require("../utils/multer"));
+const container_1 = require("../di/container");
+const type_1 = __importDefault(require("../di/type"));
+const authMiddleware_1 = require("../middleware/authMiddleware");
+const router = express_1.default.Router();
+const authController = container_1.container.get(type_1.default.AuthController);
+const isUser = [authMiddleware_1.authenticateToken, (0, authMiddleware_1.authorizeRoles)(['Customer', 'ServiceProvider'])];
+const isAdmin = [authMiddleware_1.authenticateToken, (0, authMiddleware_1.authorizeRoles)(['Admin'])];
+const isAdminOrUserOrProvider = [authMiddleware_1.authenticateToken, (0, authMiddleware_1.authorizeRoles)(['Admin', 'Customer', 'ServiceProvider'])];
+router.post('/register', authController.register);
+router.post('/login', authController.login);
+router.post('/verify-registration-otp', authController.verifyOtp);
+router.post('/resend-registration-otp', authController.resendOtp);
+router.post('/forgot-password', authController.forgotPassword);
+router.post('/reset-password', authController.resetPassword);
+router.post('/google-login', authController.googleLogin);
+router.post('/refresh-token', authController.refreshToken);
+router.post('/contactUsSubmission', isUser, authController.contactUsEmail);
+router.get('/getUser', authMiddleware_1.authenticateToken, authController.getUser);
+router.put('/update-profile', isAdminOrUserOrProvider, multer_1.default.single('profilePicture'), authController.updateProfile);
+router.post('/generateOtp', isUser, authController.generateOtp);
+router.get('/search-resources', authController.searchResources);
+router.get('/getAllDataForChatBot', isUser, authController.getAllDataForChatBot);
+router.post('/logout', authController.logout);
+// admin routes
+router.put('/update-user/:userId', isAdmin, authController.updateUser);
+router.get('/getUserWithAllDetails', authController.getUserWithRelated);
+router.get('/users/:userId', authController.getUserDetailsForAdmin);
+exports.default = router;

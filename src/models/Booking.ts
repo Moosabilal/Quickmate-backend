@@ -1,31 +1,31 @@
 
-import mongoose, { Schema, Document, HydratedDocument, InferSchemaType } from 'mongoose';
+import mongoose, { Schema, Document, HydratedDocument, InferSchemaType, Types } from 'mongoose';
 import { PaymentStatus } from '../enums/userRoles';
 import { BookingStatus } from '../enums/booking.enum';
 
 const BookingSchema: Schema = new Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: false,
     },
     serviceId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Service',
       required: false,
     },
     providerId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Provider',
       required: false,
     },
     paymentId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Payment',
     },
     addressId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Address'
     },
     customerName: {
@@ -81,7 +81,14 @@ const BookingSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-type BookingSchemaType = InferSchemaType<typeof BookingSchema>
+export type BookingSchemaType = InferSchemaType<typeof BookingSchema> & {
+  _id: Types.ObjectId;
+}
+export type BookingLean = BookingSchemaType & {
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type IBooking = HydratedDocument<BookingSchemaType>
 
 export default mongoose.model<IBooking>('Booking', BookingSchema)

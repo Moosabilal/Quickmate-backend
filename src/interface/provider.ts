@@ -2,11 +2,20 @@ import mongoose, { Schema, Types } from "mongoose";
 import { ProviderStatus } from "../enums/provider.enum";
 import { BookingStatus } from "../enums/booking.enum";
 import { SubscriptionStatus } from "../enums/subscription.enum";
+import { IProvider } from "../models/Providers";
 
 export interface Availability {
   day: string;
   startTime: string;
   endTime: string;
+}
+
+export interface IProviderFilter {
+    search?: string;
+    status?: string;
+    rating?: number;
+    page?: number;
+    limit?: number;
 }
 
 export interface IProviderRegistrationData {
@@ -37,6 +46,7 @@ export interface IProviderForAdminResponce {
   serviceArea: string;
   profilePhoto: string;
   status: string;
+  rating: number;
   serviceName?: string;
   serviceOffered?: string[]
 
@@ -102,7 +112,8 @@ export interface IProviderProfile {
   payoutPending: number;
   rating: number;
   isVerified: boolean
-  subscription?: ISubscription
+  subscription?: ISubscription;
+  createdAt?: Date;
 }
 
 export interface ProviderFilterQuery {
@@ -159,7 +170,9 @@ export interface IProviderForChatListPage {
   location: string;
   isOnline: boolean;
   services: string;
-  lastMessage?: string;
+  lastMessage: string | null; 
+  messageType: 'text' | 'image' | 'file';
+  lastMessageSenderId: string | null; 
   lastMessageAt?: Date | null;
 }
 
@@ -187,7 +200,7 @@ export interface IDashboardStatus {
 }
 
 export interface ITopActiveProviders {
-  _id: Types.ObjectId | string;
+  _id?: Types.ObjectId | string;
   fullName: string;
   totalBookings: number;
   profilePhoto: string;
@@ -273,4 +286,50 @@ export interface IAvailabilityUpdateData {
     weeklySchedule: DaySchedule[];
     dateOverrides: DateOverride[];
     leavePeriods: LeavePeriod[];
+}
+
+
+export interface IServiceDetails {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  priceUnit: string;
+  duration: string;
+  categoryId: string;
+  subCategoryId:string;
+  experience?: number;
+}
+
+export interface IProviderDetailsResponse {
+  provider: IProviderProfile;
+  services: IServiceDetails[];
+}
+
+export interface ITimeSlot {
+    start: string;
+    end: string;
+}
+
+export interface IDaySchedule {
+    day: string;
+    active: boolean;
+    slots: ITimeSlot[];
+}
+
+export interface IDateOverride {
+    date: string;
+    isUnavailable: boolean;
+    busySlots: ITimeSlot[];
+    reason?: string;
+}
+
+export interface ILeavePeriod {
+    from: string;
+    to: string;
+    reason?: string;
+}
+
+export interface IProviderDto extends Partial<IProvider> {
+  profilePicture: string | null;
 }

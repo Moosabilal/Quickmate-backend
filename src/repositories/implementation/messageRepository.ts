@@ -1,7 +1,6 @@
 import mongoose, { FilterQuery } from "mongoose";
 import Message, { IMessage } from "../../models/message";
 import { BaseRepository } from "./base/BaseRepository";
-import { IGetMessages } from "../../interface/booking";
 import { IMessageRepository } from "../interface/IMessageRepository";
 
 export class MessageRepository extends BaseRepository<IMessage> implements IMessageRepository {
@@ -10,32 +9,42 @@ export class MessageRepository extends BaseRepository<IMessage> implements IMess
     }
 
     async findAllSorted(joiningId: string): Promise<IMessage[]> {
-         const data = Message.find({ joiningId })
+        const data = Message.find({ joiningId })
             .sort({ createdAt: 1 })
-            .lean()
-            return data
+        return data
     }
 
-    async findLastMessagesByBookingIds(bookingIds: string[]): Promise<{ bookingId: string; lastMessage: string; createdAt: Date }[]> {
-        const objectIds = bookingIds.map(id => new mongoose.Types.ObjectId(id));
+    public async findLastMessagesByJoiningIds(
+        joiningIds: string[]
+    ): Promise<{
+        joiningId: string;
+        lastMessage: string | null;
+        messageType: 'text' | 'image' | 'file';
+        senderId: string;
+        createdAt: Date;
+    }[]> {
 
-        const results = await Message.aggregate([
-            { $match: { bookingId: { $in: objectIds } } },
+        const aggregation = await this.model.aggregate([
+            { $match: { joiningId: { $in: joiningIds } } },
             { $sort: { createdAt: -1 } },
             {
                 $group: {
-                    _id: "$bookingId",
-                    lastMessage: { $first: "$text" },
-                    createdAt: { $first: "$createdAt" }
+                    _id: "$joiningId",
+                    lastMessageDoc: { $first: "$$ROOT" }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    joiningId: "$_id",
+                    createdAt: "$lastMessageDoc.createdAt",
+                    messageType: "$lastMessageDoc.messageType",
+                    lastMessage: "$lastMessageDoc.text", 
+                    senderId: "$lastMessageDoc.senderId"
                 }
             }
         ]);
-
-        return results.map(result => ({
-            bookingId: result._id.toString(),
-            lastMessage: result.lastMessage,
-            createdAt: result.createdAt
-        }));
+        return aggregation;
     }
 }
 

@@ -3,9 +3,11 @@ import { IAddressService } from "../interface/IAddressService";
 import { IAddressRepository } from "../../repositories/interface/IAddressRepository";
 import TYPES from "../../di/type";
 import { IAddress } from "../../models/address";
-import { IAddressRequest } from "../../interface/address";
+import { IAddressData, IAddressRequest } from "../../interface/address";
 import { toAddressRequestDTO } from "../../utils/mappers/address.mapper";
 import { toAddressModel } from "../../utils/reverseMapper/address.rMapper";
+import { Types } from "mongoose";
+import { geocodeAddress } from "../../utils/helperFunctions/geocoder";
 
 injectable()
 export class AddressService implements IAddressService {
@@ -65,4 +67,9 @@ export class AddressService implements IAddressService {
             message: "Address Deleted"
         }
     }
+
+    public async getAddressesForUser(userId: string): Promise<IAddress[]> {
+        return this._addressRepository.findAll({ userId: new Types.ObjectId(userId), label: { $ne: "Current Location" }});
+    }
+
 }

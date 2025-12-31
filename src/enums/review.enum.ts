@@ -1,5 +1,7 @@
 export enum ReviewStatus {
+    ALL = 'All',
     APPROVED = 'Approved',
     REJECTED = 'Rejected',
-    PENDING = 'Pending,'
+    PENDING = 'Pending',
+    REMOVED = 'Removed',
 }

@@ -76,3 +76,10 @@ export interface IUserDetailsResponse {
     };
     bookingHistory: IBookingDetailsForAdmin[];
 }
+
+export interface IUserListFilter {
+    search?: string;
+    status?: 'Active' | 'Inactive' | 'All' | string;
+    role?: string; 
+}
+

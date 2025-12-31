@@ -8,6 +8,8 @@ const router = express.Router()
 const bookingController = container.get<BookingController>(TYPES.BookingController)
 const isUser = [authenticateToken, authorizeRoles(['Customer','ServiceProvider'])];
 const isProvider = [authenticateToken, authorizeRoles(['ServiceProvider'])]
+const isAdmin = [authenticateToken, authorizeRoles(['Admin'])]
+
 
 
 router.post('/createBooking', isUser, bookingController.createBooking)
@@ -21,10 +23,13 @@ router.patch('/updateBookingDateTime/:id', isUser, bookingController.updateBooki
 router.get('/findProviderRange', isUser, bookingController.findProviderRange)
 
 //provider
-router.get('/getBookingFor_Prov_mngmnt/:id', isProvider, bookingController.getBookingFor_Prov_mngmnt)
+router.get('/getBookingFor_Prov_mngmnt', isProvider, bookingController.getBookingFor_Prov_mngmnt)
 router.post('/verify-bookingCompletion-otp', isProvider, bookingController.verifyOtp);
 router.post('/resend-bookingCompletion-otp', isProvider, bookingController.resendOtp);
 router.get('/admin/bookings', bookingController.getAllBookingsForAdmin);
+
+//admin
+router.get('/admin/bookings/:id', isAdmin, bookingController.getBookingDetailsForAdmin);
 
 
 

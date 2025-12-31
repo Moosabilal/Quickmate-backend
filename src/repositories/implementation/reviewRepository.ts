@@ -3,7 +3,8 @@ import Review, { IReview } from "../../models/Review";
 import { IReviewRepository } from "../interface/IReviewRepository";
 import { BaseRepository } from "./base/BaseRepository";
 import { FilterQuery, PipelineStage, Types } from "mongoose";
-import { IReviewFilters, PopulatedReview } from "../../interface/review";
+import { IReviewFilters, PopulatedReview, RawAggregatedReview } from "../../interface/review";
+import { ReviewStatus } from "../../enums/review.enum";
 
 @injectable()
 export class ReviewRepository extends BaseRepository<IReview> implements IReviewRepository {
@@ -44,7 +45,7 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
     }
 
     public async findReviewsWithDetails(options: IReviewFilters): Promise<{ reviews: PopulatedReview[]; total: number }> {
-        const { page = 1, limit = 10, search, rating, sort = 'newest' } = options;
+        const { page = 1, limit = 10, search, rating, sort = 'newest', status } = options;
         const skip = (page - 1) * limit;
 
         const pipeline: PipelineStage[] = [];
@@ -70,7 +71,11 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
         pipeline.push({ $unwind: '$user' });
         pipeline.push({ $unwind: '$provider' });
 
-        const matchStage: FilterQuery<any> = {};
+        const matchStage: FilterQuery<IReview> = {};
+
+        if (status) {
+            matchStage.status = status;
+        }
 
         if (rating) {
             matchStage.rating = rating;
@@ -83,11 +88,11 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
                 { reviewText: { $regex: search, $options: 'i' } }
             ];
         }
-        
+
         if (Object.keys(matchStage).length > 0) {
             pipeline.push({ $match: matchStage });
         }
-        
+
         pipeline.push({
             $facet: {
                 total: [{ $count: 'count' }],
@@ -100,8 +105,12 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
                             _id: 1,
                             reviewContent: '$reviewText',
                             rating: 1,
+                            status: 1,
                             date: '$createdAt',
+                            'user.id': '$userId',
                             'user.name': '$user.name',
+                            'user.isVerified': '$user.isVerified',
+                            'provider.id': '$providerId',
                             'provider.name': '$provider.fullName'
                         }
                     }
@@ -110,11 +119,11 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
         });
 
         const result = await Review.aggregate(pipeline);
-        
+
         const reviews = result[0].data;
         const total = result[0].total[0] ? result[0].total[0].count : 0;
-        
-        const formattedReviews = reviews.map((r: any) => ({
+
+        const formattedReviews = reviews.map((r: RawAggregatedReview) => ({
             ...r,
             id: r._id.toString(),
             date: new Date(r.date).toISOString().split('T')[0]
@@ -129,5 +138,33 @@ export class ReviewRepository extends BaseRepository<IReview> implements IReview
         ]);
         return result[0]?.avgRating || 0;
     }
-    
+
+    public async getReviewStatsByServiceIds(serviceIds: string[]): Promise<{ serviceId: string; avgRating: number; reviewCount: number }[]> {
+        const result = await Review.aggregate([
+            {
+                $match: {
+                    serviceId: { $in: serviceIds.map(id => new Types.ObjectId(id)) },
+                    status: ReviewStatus.APPROVED
+                }
+            },
+            {
+                $group: {
+                    _id: "$serviceId",
+                    avgRating: { $avg: "$rating" },
+                    reviewCount: { $sum: 1 }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    serviceId: "$_id",
+                    avgRating: { $round: ["$avgRating", 1] },
+                    reviewCount: 1
+                }
+            }
+        ]);
+        return result;
+    }
+
+
 }

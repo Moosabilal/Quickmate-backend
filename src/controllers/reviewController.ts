@@ -7,7 +7,8 @@ import { response, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { IReviewFilters } from "../interface/review";
 import { ZodError } from "zod";
-import { addReviewSchema, getReviewsQuerySchema } from "../utils/validations/review.validation";
+import { addReviewSchema, getReviewsQuerySchema, updateReviewStatusSchema } from "../utils/validations/review.validation";
+import { paramIdSchema } from "../utils/validations/booking.validation";
 
 @injectable()
 export class ReviewController {
@@ -55,6 +56,27 @@ export class ReviewController {
         } catch (error) {
             if (error instanceof ZodError) {
                 res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            }
+            next(error);
+        }
+    }
+
+    public updateReviewStatus = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { id } = paramIdSchema.parse(req.params);
+            const { status } = updateReviewStatusSchema.parse(req.body);
+
+            const updatedReview = await this._reviewService.updateReviewStatus(id, status);
+            
+            res.status(HttpStatusCode.OK).json({
+                success: true,
+                message: "Review status updated successfully",
+                data: updatedReview
+            });
+        } catch (error) {
+            if (error instanceof ZodError) {
+                res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+                return
             }
             next(error);
         }

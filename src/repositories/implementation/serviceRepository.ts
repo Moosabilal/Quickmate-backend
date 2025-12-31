@@ -1,9 +1,9 @@
 import { injectable } from "inversify";
-import { IAddAndEditServiceForm } from "../../interface/service";
+import { IAddAndEditServiceForm, IServiceWithProvider } from "../../interface/service";
 import Service, { IService } from "../../models/Service";
 import { IServiceRepository } from "../interface/IServiceRepository";
 import { BaseRepository } from "./base/BaseRepository";
-import { FilterQuery, Types } from "mongoose";
+import { FilterQuery, PipelineStage, Types } from "mongoose";
 
 @injectable()
 export class ServiceRepository extends BaseRepository<IService> implements IServiceRepository {
@@ -48,5 +48,54 @@ export class ServiceRepository extends BaseRepository<IService> implements IServ
         }
 
         return this.findAll(filter);
+    }
+
+    public async findPopulatedByProviderId(providerId: string): Promise<IService[]> {
+
+        return this.model.find({ providerId: new Types.ObjectId(providerId) })
+            .populate('categoryId', 'name')
+            .populate('subCategoryId', 'name')
+    }
+
+    public async findServicesWithProvider(
+        subCategoryId: string, 
+        maxPrice?: number
+    ): Promise<IServiceWithProvider[]> {
+        
+        const matchStage: PipelineStage.Match = {
+            $match: {
+                subCategoryId: new Types.ObjectId(subCategoryId),
+                status: true,
+            }
+        };
+
+        if (maxPrice) {
+            matchStage.$match.price = { $lte: maxPrice };
+        }
+
+        return this.model.aggregate([
+            matchStage,
+            {
+                $lookup: {
+                    from: 'providers',
+                    localField: 'providerId',
+                    foreignField: '_id',
+                    as: 'provider'
+                }
+            },
+            { $unwind: '$provider' },
+            {
+                $match: { 'provider.status': 'Approved' }
+            },
+            {
+                $project: {
+                    title: 1,
+                    price: 1,
+                    'provider._id': 1,
+                    'provider.fullName': 1,
+                    'provider.rating': 1,
+                }
+            }
+        ]);
     }
 }

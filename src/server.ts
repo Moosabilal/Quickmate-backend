@@ -21,11 +21,15 @@ import serviceRoutes from './routes/serviceRoutes'
 import walletRoutes from './routes/walletRoutes'
 import reviewRoutes from './routes/reviewRoutes'
 import subscriptionRoutes from './routes/subscriptionRoutes'
+import messageRoutes from './routes/messageRoutes';
+import chatbotRoutes from './routes/chatBotRoutes';
 import fs from 'fs';
 import { CustomError } from './utils/CustomError';
 import { errorHandler } from './middleware/errorHandler';
 import logger from './logger/logger';
 import { chatSocket } from './utils/socket';
+import { startScheduleCleanupJob } from './jobs/cleanupProviderSchedule';
+import { startBookingExpiryJob } from './jobs/expireOverdueBookings';
 
 
 const uploadDir = path.join(__dirname, '../uploads');
@@ -66,6 +70,8 @@ app.use('/api/services', serviceRoutes)
 app.use('/api/wallet', walletRoutes)
 app.use('/api/review', reviewRoutes)
 app.use('/api/subscriptionPlan', subscriptionRoutes)
+app.use('/api/messages', messageRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 
 app.use((req, res, next) => {
@@ -86,6 +92,9 @@ const io = new SocketIOServer(server, {
 });
 
 chatSocket(io)
+
+startScheduleCleanupJob();
+startBookingExpiryJob();
 
 
 

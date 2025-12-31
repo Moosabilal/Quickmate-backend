@@ -17,7 +17,7 @@ import {
     contactUsSchema,
     updateProfileSchema
 } from '../utils/validations/auth.validation';
-import { ZodError } from 'zod';
+import { CustomError } from '../utils/CustomError';
 
 @injectable()
 export class AuthController {
@@ -137,8 +137,7 @@ export class AuthController {
     try {
       const refresh_token = req.cookies.refreshToken
       if (!refresh_token) {
-        res.status(401).json({ message: 'Refresh token not found' })
-        return
+        throw new CustomError('Refresh token not found', HttpStatusCode.UNAUTHORIZED)
       }
       const response = await this._authService.createRefreshToken(refresh_token)
       res.cookie('token', response.newToken, {
@@ -185,9 +184,7 @@ export class AuthController {
       let profilePicture: string | undefined | null;
 
       if (profilePicturePath) {
-        const fullUrl = await uploadToCloudinary(profilePicturePath);
-        const baseUrl = process.env.CLOUDINARY_BASE_URL;
-        profilePicture = fullUrl.replace(baseUrl, '');
+        profilePicture = await uploadToCloudinary(profilePicturePath);
       } else if (req.body.iconUrl === '') {
         profilePicture = null;
       } else if (req.body.iconUrl !== undefined) {
@@ -198,6 +195,17 @@ export class AuthController {
       res.status(HttpStatusCode.OK).json(updatedUser);
     } catch (error) {
       next(error);
+    }
+  }
+
+  public generateOtp  = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user.id;
+      const {email} = req.body
+      const response = await this._authService.generateOtp(userId, email)
+      res.status(HttpStatusCode.OK).json(response)
+    } catch (error) {
+      next(error)
     }
   }
 
@@ -219,7 +227,8 @@ export class AuthController {
   public updateUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId = req.params.userId;
-      const updatedUser = await this._authService.updateUser(userId);
+      const reason = req.body.reason ? req.body.reason as string : undefined
+      const updatedUser = await this._authService.updateUser(userId, reason);
       res.status(HttpStatusCode.OK).json(updatedUser);
     } catch (error) {
       next(error);
@@ -280,7 +289,16 @@ export class AuthController {
         }
     }
 
-  
+    public searchResources = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const query = req.query.query as string || '';
+            const result = await this._authService.searchResources(query);
+            res.status(HttpStatusCode.OK).json(result);
+        } catch (error) {
+            next(error);
+        }
+    }
+
 
 
 

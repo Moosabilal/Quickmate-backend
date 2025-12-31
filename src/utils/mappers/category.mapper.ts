@@ -2,6 +2,7 @@ import { ICategoryFormCombinedData, ICategoryResponse, ICommissionRuleResponse, 
 import { CommissionTypes } from "../../enums/CommissionType.enum";
 import { ICategory } from "../../models/Categories";
 import { ICommissionRule } from "../../models/Commission";
+import { getSignedUrl } from "../cloudinaryUpload";
 
 export function toHomePageDTO(category: ICategory): IserviceResponse {
     return {
@@ -19,8 +20,9 @@ export const toCategoryResponseDTO = (category: ICategory): ICategoryResponse =>
 
     return {
         ...categoryObject,
-        _id: categoryObject._id.toString(),
+        id: categoryObject._id.toString(),
         parentId: categoryObject.parentId ? categoryObject.parentId.toString() : null,
+        iconUrl:  categoryObject.iconUrl ? getSignedUrl(categoryObject.iconUrl) : null,
         createdAt: categoryObject.createdAt.toISOString(),
         updatedAt: categoryObject.updatedAt.toISOString(),
     };

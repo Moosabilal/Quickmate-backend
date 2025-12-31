@@ -1,5 +1,7 @@
 import { Types, Document } from 'mongoose';
 import { CommissionTypes } from '../enums/CommissionType.enum';
+import { FilterQuery } from 'mongoose';
+import { ICategory } from '../models/Categories';
 export interface ICategoryInput {
     name: string;
     description?: string | null;
@@ -7,8 +9,14 @@ export interface ICategoryInput {
     status?: boolean;
     iconUrl?: string | null; 
 }
+
+export interface ICategoryAndCommission extends ICategoryInput {
+    _id: Types.ObjectId;
+    subCategoryCount: number;
+    commissionRule: Omit<ICommissionRuleInput, 'categoryId'>;
+}
 export interface ICategoryResponse extends Omit<ICategoryInput, 'parentId'> {
-    _id: string; 
+    id: string; 
     parentId?: string | null; 
     createdAt: string; 
     updatedAt: string; 
@@ -55,4 +63,28 @@ export interface IserviceResponse {
     description?: string;
     iconUrl?: string | null;
     parentId?: string | null
+}
+
+export interface ICommissionSummary {
+    totalCommissionRevenue: number;
+    totalCommissionRevenueChange: number;
+    averageCommissionPerBooking: number;
+    averageCommissionPerBookingChange: number;
+    totalBookings: number;
+    totalBookingsChange: number;
+    commissionDeductionsToProviders: number;
+    commissionDeductionsToProvidersChange: number;
+}
+
+export interface ICategoryFilter extends FilterQuery<ICategory> {
+    take?: number | string;
+    skip?: number | string;
+}
+
+export interface ICategoryWithDetails extends ICategoryFormCombinedData {
+    subCategoriesCount: number;
+}
+
+export interface ICategoryDto extends Partial<ICategory> {
+    iconUrl: string | null;
 }

@@ -8,18 +8,20 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { ResendOtpRequestBody, VerifyOtpRequestBody } from "../interface/auth";
 import { ZodError } from "zod";
+import { z } from "zod";
 
 import {
     registerProviderSchema,
     updateProviderSchema,
     providersForAdminQuerySchema,
     updateProviderStatusSchema,
-    mongoIdParamSchema,
+    paramIdSchema,
     getServiceProviderQuerySchema,
     getAvailabilityQuerySchema,
     getEarningsQuerySchema,
     featuredProvidersQuerySchema,
-    updateAvailabilitySchema
+    updateAvailabilitySchema,
+    searchQuerySchema
 } from '../utils/validations/provider.validation';
 import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation";
 @injectable()
@@ -42,10 +44,8 @@ export class ProviderController {
             const aadhaar = files?.aadhaarIdProof?.[0];
             const profile = files?.profilePhoto?.[0];
 
-            const baseUrl = process.env.CLOUDINARY_BASE_URL;
-
-            const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '') : '';
-            const profileUrl = profile ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '') : '';
+            const aadhaarUrl = aadhaar ? (await uploadToCloudinary(aadhaar.path)) : '';
+            const profileUrl = profile ? (await uploadToCloudinary(profile.path)) : '';
 
             const [lat, lon] = validatedBody.serviceLocation.split(",").map(Number);
 
@@ -98,14 +98,10 @@ export class ProviderController {
             const aadhaar = files?.aadhaarIdProof?.[0];
             const profile = files?.profilePhoto?.[0];
 
-            const baseUrl = process.env.CLOUDINARY_BASE_URL;
-
             const aadhaarUrl = aadhaar
-                ? (await uploadToCloudinary(aadhaar.path)).replace(baseUrl, '')
-                : undefined;
+                ? (await uploadToCloudinary(aadhaar.path)) : undefined;
             const profileUrl = profile
-                ? (await uploadToCloudinary(profile.path)).replace(baseUrl, '')
-                : undefined;
+                ? (await uploadToCloudinary(profile.path)) : undefined;
 
             let lat: number | undefined;
             let lon: number | undefined;
@@ -174,8 +170,8 @@ export class ProviderController {
 
     public getProvidersforAdmin = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { page, limit, search, status } = providersForAdminQuerySchema.parse(req.query);
-            const providersDetails = await this._providerService.providersForAdmin(page, limit, search, status);
+            const { page, limit, search, status, rating } = providersForAdminQuerySchema.parse(req.query);
+            const providersDetails = await this._providerService.providersForAdmin(page, limit, search, status, rating);
             res.status(HttpStatusCode.OK).json(providersDetails);
         } catch (error) {
             next(error);
@@ -196,9 +192,9 @@ export class ProviderController {
 
     public updateProviderStatus = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdParamSchema.parse(req.params);
-            const { newStatus } = updateProviderStatusSchema.parse(req.body);
-            const response = await this._providerService.updateProviderStat(id, newStatus)
+            const { id } = paramIdSchema.parse(req.params);
+            const { newStatus, reason } = updateProviderStatusSchema.parse(req.body);
+            const response = await this._providerService.updateProviderStat(id, newStatus, reason)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -213,14 +209,12 @@ export class ProviderController {
             const filtersForService = {
                 lat: validatedQuery.latitude,
                 long: validatedQuery.longitude,
-                radius: validatedQuery.radius ?? 10, // Use parsed radius, or a default
+                radius: validatedQuery.radius ?? 10,
                 experience: validatedQuery.experience,
                 date: validatedQuery.date,
                 time: validatedQuery.time,
                 price: validatedQuery.price
             };
-
-            console.log('tbe faksdfbalsdfas', filtersForService)
 
             const response = await this._providerService.getProviderwithFilters(userId, validatedQuery.serviceId, filtersForService)
             res.status(200).json(response)
@@ -232,8 +226,10 @@ export class ProviderController {
     public getProviderForChatPage = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
 
+            const { search } = searchQuerySchema.parse(req.query);
+
             const userId = req.user.id
-            const response = await this._providerService.providerForChatPage(userId)
+            const response = await this._providerService.providerForChatPage(userId, search)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -278,6 +274,7 @@ export class ProviderController {
             const userId = req.user.id;
 
             const analyticsData = await this._providerService.getEarningsAnalytics(userId, period);
+            console.log(analyticsData)
 
             res.status(HttpStatusCode.OK).json({ success: true, data: analyticsData });
         } catch (error) {
@@ -325,6 +322,30 @@ export class ProviderController {
             });
         } catch (error) {
             if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
+        }
+    }
+
+    public getPublicProviderDetails = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+
+            const { providerId } = req.params;
+            
+            const response = await this._providerService.getPublicProviderDetails(providerId);
+            
+            res.status(HttpStatusCode.OK).json({ success: true, data: response });
+        } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
+        }
+    }
+
+    public getProviderFullDetails = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { id } = paramIdSchema.parse(req.params); 
+            const data = await this._providerService.getProviderFullDetails(id);
+            res.status(HttpStatusCode.OK).json({ success: true, data });
+        } catch (error) {
             next(error);
         }
     }

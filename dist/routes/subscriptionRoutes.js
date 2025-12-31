@@ -1,0 +1,25 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const authMiddleware_1 = require("../middleware/authMiddleware");
+const container_1 = require("../di/container");
+const type_1 = __importDefault(require("../di/type"));
+const router = express_1.default.Router();
+const subscriptionController = container_1.container.get(type_1.default.SubscriptionPlanController);
+const isAdmin = [authMiddleware_1.authenticateToken, (0, authMiddleware_1.authorizeRoles)(["Admin"])];
+const isAdminOrUser = [authMiddleware_1.authenticateToken, (0, authMiddleware_1.authorizeRoles)(["Admin", "ServiceProvider"])];
+const isProvider = [authMiddleware_1.authenticateToken, (0, authMiddleware_1.authorizeRoles)(["ServiceProvider"])];
+router.post('/createSubscriptionPlan', isAdmin, subscriptionController.createSubscriptionPlan);
+router.get('/getSubscriptionPlan', isAdminOrUser, subscriptionController.getSubscriptionPlan);
+router.put('/updateSubscriptionPlan', isAdmin, subscriptionController.updateSubscriptionPlan);
+router.delete('/deleteSubscriptionPlan/:id', isAdmin, subscriptionController.deleteSubscriptionPlan);
+router.get("/:providerId/check", isProvider, subscriptionController.checkProviderSubscription);
+router.post("/create-order", isProvider, subscriptionController.createSubscriptionOrder);
+router.post("/verify-payment", isProvider, subscriptionController.verifySubscriptionPayment);
+router.post("/calculate-upgrade", isProvider, subscriptionController.calculateUpgrade);
+router.post("/schedule-downgrade", isProvider, subscriptionController.scheduleDowngrade);
+router.post("/cancel-downgrade", isProvider, subscriptionController.cancelDowngrade);
+exports.default = router;

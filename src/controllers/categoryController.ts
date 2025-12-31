@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { ICategoryInput, ICategoryFormCombinedData, ICategoryResponse } from '../interface/category';
-import { ICategory } from '../models/Categories';
 import { uploadToCloudinary } from '../utils/cloudinaryUpload';
 import * as fsPromises from 'fs/promises';
 import { inject, injectable } from 'inversify';
@@ -12,7 +11,7 @@ import { ZodError } from 'zod';
 import {
   createCategorySchema,
   updateCategorySchema,
-  mongoIdParamSchema,
+  paramIdSchema,
   getSubcategoriesQuerySchema
 } from '../utils/validations/category.validation';
 
@@ -87,7 +86,7 @@ export class CategoryController {
 
   updateCategory = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id } = mongoIdParamSchema.parse(req.params);
+      const { id } = paramIdSchema.parse(req.params);
       const validatedBody = updateCategorySchema.parse(req.body);
       const { name, description, status, parentId, commissionType, commissionValue, commissionStatus } = validatedBody;
 
@@ -142,7 +141,7 @@ export class CategoryController {
 
   getCategoryById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id } = mongoIdParamSchema.parse(req.params);
+      const { id } = paramIdSchema.parse(req.params);
 
       const responseData = await this._categoryService.getCategoryById(id);
 
@@ -161,7 +160,7 @@ export class CategoryController {
 
 public getCategoryForEdit = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id } = mongoIdParamSchema.parse(req.params);
+      const { id } = paramIdSchema.parse(req.params);
       const categoryData = await this._categoryService.getCategoryForEdit(id);
       res.status(HttpStatusCode.OK).json(categoryData);
     } catch (error) {
@@ -176,44 +175,18 @@ public getCategoryForEdit = async (req: Request, res: Response, next: NextFuncti
 };
 
 
-  getAllCategories = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public getAllCategories = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      let categories: ICategory[] | ICategoryResponse[] | ICategoryFormCombinedData[];
-      categories = await this._categoryService.getAllCategoriesWithDetails();
+      const { page = 1, limit = 10, search } = getSubcategoriesQuerySchema.parse(req.query);
 
-      const mappedCategories = categories.map(cat => {
-        const hasCommissionRule = (obj): obj is { commissionRule } =>
-          obj && typeof obj === 'object' && 'commissionRule' in obj && obj.commissionRule !== undefined && obj.commissionRule !== null;
+      const response = await this._categoryService.getAllCategoriesWithDetails(page, limit, search);
 
-        let commissionType = 'none';
-        let commissionValue = '';
-        let commissionStatus = false;
+      res.status(HttpStatusCode.OK).json(response);
 
-        if (hasCommissionRule(cat)) {
-          commissionType = cat.commissionRule.commissionType;
-          commissionValue = cat.commissionRule.commissionValue;
-          commissionStatus = cat.commissionRule.status ?? false;
-        }
-
-
-        return {
-          _id: cat._id.toString(),
-          name: cat.name,
-          description: cat.description || '',
-          iconUrl: cat.iconUrl || '',
-          status: cat.status ?? false,
-          parentId: cat.parentId ? cat.parentId.toString() : null,
-          subCategoriesCount: (cat).subCategoryCount || 0,
-          subCategories: (cat).subCategories || [],
-          commissionType,
-          commissionValue,
-          commissionStatus,
-        };
-      });
-      res.status(HttpStatusCode.OK).json(mappedCategories);
-
-      return;
     } catch (error) {
+      if (error instanceof ZodError) {
+            res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+      }
       next(error);
     }
   };
@@ -228,6 +201,52 @@ public getCategoryForEdit = async (req: Request, res: Response, next: NextFuncti
             if (error instanceof ZodError) {
                 res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             }
+            next(error);
+        }
+    }
+
+    public getCommissionSummary = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const response = await this._categoryService.getCommissionSummary();
+            res.status(HttpStatusCode.OK).json({ success: true, data: response });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public getTopLevelCategories = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const response = await this._categoryService.getTopLevelCategories();
+            res.status(HttpStatusCode.OK).json({ success: true, data: response });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public getPopularServices = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const response = await this._categoryService.getPopularServices();
+            res.status(HttpStatusCode.OK).json({ success: true, data: response });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public getTrendingServices = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const response = await this._categoryService.getTrendingServices();
+            res.status(HttpStatusCode.OK).json({ success: true, data: response });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public getRelatedCategories = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const { id } = paramIdSchema.parse(req.params);
+            const related = await this._categoryService.getRelatedCategories(id);
+            res.status(HttpStatusCode.OK).json({ success: true, data: related });
+        } catch (error) {
             next(error);
         }
     }

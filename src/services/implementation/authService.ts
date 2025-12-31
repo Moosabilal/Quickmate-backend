@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { IUserRepository } from '../../repositories/interface/IUserRepository';
 import { RegisterRequestBody, VerifyOtpRequestBody, ResendOtpRequestBody, ForgotPasswordRequestBody, ResetPasswordRequestBody, AuthSuccessResponse, IUserDetailsResponse, IBookingDetailsForAdmin } from '../../interface/auth';
 import { generateOTP } from '../../utils/otpGenerator';
-import { sendVerificationEmail, sendPasswordResetEmail, sendContactUsEmail } from '../../utils/emailService';
+import { sendVerificationEmail, sendPasswordResetEmail, sendContactUsEmail, sendUserStatusChangeEmail } from '../../utils/emailService';
 import bcrypt from 'bcryptjs';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import crypto from 'crypto';
@@ -21,8 +21,13 @@ import { ICategoryRepository } from '../../repositories/interface/ICategoryRepos
 import { ICategory } from '../../models/Categories';
 import { IService } from '../../models/Service';
 import { IProvider } from '../../models/Providers';
-import { Credentials } from "google-auth-library";
 import { BookingStatus } from '../../enums/booking.enum';
+import { getSignedUrl } from '../../utils/cloudinaryUpload';
+import { mapCategoryToDto, mapProviderToDto, mapServiceToDto } from '../../utils/mappers/user.mapper';
+import { IServiceDto } from '../../interface/service';
+import { IProviderDto } from '../../interface/provider';
+import { ICategoryDto } from '../../interface/category';
+import { ProviderStatus } from '../../enums/provider.enum';
 
 
 
@@ -94,7 +99,7 @@ export class AuthService implements IAuthService {
             throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
         }
 
-        if (user.isVerified) {
+        if (user.isVerified && !user.registrationOtp) {
             return { message: 'Account already verified.' };
         }
 
@@ -142,9 +147,9 @@ export class AuthService implements IAuthService {
         if (user.registrationOtpExpires && user.registrationOtpExpires instanceof Date) {
             const timeSinceLastOtpSent = Date.now() - (user.registrationOtpExpires.getTime() - (OTP_EXPIRY_MINUTES * 60 * 1000));
             if (timeSinceLastOtpSent < RESEND_COOLDOWN_SECONDS * 1000) {
-                const error = new Error(`Please wait ${RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000)} seconds before requesting another OTP.`);
-                (error as any).statusCode = 429;
-                throw error;
+                const remainingSeconds = RESEND_COOLDOWN_SECONDS - Math.floor(timeSinceLastOtpSent / 1000);
+
+                throw new CustomError(`Please wait ${remainingSeconds} seconds before requesting another OTP.`, 429);
             }
         }
 
@@ -160,7 +165,7 @@ export class AuthService implements IAuthService {
         return { message: 'A new OTP has been sent to your email.' };
     }
 
-    public async login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; googleCalendar?: { tokens?: Credentials } }; token: string; refreshToken: string }> {
+    public async login(email: string, password: string): Promise<{ user: { id: string; name: string; email: string; role: string, isVerified: boolean; profilePicture: string; }; token: string; refreshToken: string }> {
         const user = await this._userRepository.findByEmail(email, true);
 
         if (!user || !user.password) {
@@ -183,7 +188,13 @@ export class AuthService implements IAuthService {
         const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
 
         user.refreshToken = refreshToken
-        await this._userRepository.update(user._id.toString(), user)
+        await this._userRepository.update(user._id.toString(), user);
+
+        let signedProfileUrl: string | undefined = undefined;
+
+        if (user.profilePicture && typeof user.profilePicture === 'string') {
+            signedProfileUrl = getSignedUrl(user.profilePicture);
+        }
 
         return {
             user: {
@@ -192,8 +203,7 @@ export class AuthService implements IAuthService {
                 email: user.email as string,
                 role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
                 isVerified: Boolean(user.isVerified),
-                profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
-                googleCalendar: user.googleCalendar
+                profilePicture: signedProfileUrl,
             },
             token,
             refreshToken,
@@ -341,7 +351,7 @@ export class AuthService implements IAuthService {
     }
 
 
-    public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string; googleCalendar?: { tokens?: Credentials } }> {
+    public async getUser(token: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string; }> {
 
         if (!token) {
             throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
@@ -359,6 +369,12 @@ export class AuthService implements IAuthService {
             throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
         }
 
+        let signedProfileUrl: string | undefined = undefined;
+
+        if (user.profilePicture && typeof user.profilePicture === 'string') {
+            signedProfileUrl = getSignedUrl(user.profilePicture);
+        }
+
 
         return {
             id: (user._id as { toString(): string }).toString(),
@@ -366,12 +382,11 @@ export class AuthService implements IAuthService {
             email: user.email as string,
             role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
             isVerified: Boolean(user.isVerified),
-            profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
-            googleCalendar: user.googleCalendar
+            profilePicture: signedProfileUrl,
         };
     }
 
-    public async updateProfile(token: string, data: { name: string; email: string; profilePicture?: string }): Promise<{ id: string; name: string; email: string; profilePicture?: string; }> {
+    public async updateProfile(token: string, data: { name: string; email: string; profilePicture?: string }): Promise<{ id: string; name: string; email: string; role: string; isVerified: boolean; profilePicture?: string; }> {
         if (!token) {
             throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
         }
@@ -395,14 +410,58 @@ export class AuthService implements IAuthService {
         }
 
         const updatedUser = await this._userRepository.update(user._id.toString(), user);
-        const { } = updatedUser
+        let signedProfileUrl: string | undefined = undefined;
+
+        if (updatedUser.profilePicture && typeof updatedUser.profilePicture === 'string') {
+            signedProfileUrl = getSignedUrl(updatedUser.profilePicture);
+        }
         return {
             id: (user._id as { toString(): string }).toString(),
             name: user.name as string,
             email: user.email as string,
-            profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
+            role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
+            isVerified: Boolean(user.isVerified),
+            profilePicture: signedProfileUrl,
         };
     }
+
+    public async searchResources(query: string): Promise<{ services: ICategoryDto[]; providers: IProviderDto[] }> {
+        const [services, providers] = await Promise.all([
+            await this._categoryRepository.findAll({ name: { $regex: query, $options: 'i' }, parentId:{$ne:null}, status: true }),
+            await this._providerRepository.findAll({ fullName: { $regex: query, $options: 'i' }, isVerified: true, status: ProviderStatus.ACTIVE  })
+
+        ])
+        const secureProviders = providers.map(mapProviderToDto);
+        const secureServices = services.map(mapCategoryToDto);
+
+        return { 
+            services: secureServices,
+            providers: secureProviders
+         };
+    }
+
+    public async generateOtp(userId: string, email: string): Promise<{ message: string }> {
+        if (!userId) {
+            throw new CustomError('UserId not found', HttpStatusCode.NOT_FOUND)
+        }
+        if (!email) {
+            throw new CustomError('Email not found!, Please try again later')
+        }
+        const user = await this._userRepository.findById(userId)
+        if (!user) {
+            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND)
+        }
+        const otp = generateOTP()
+        user.registrationOtp = otp;
+        user.registrationOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
+        user.registrationOtpAttempts = 0;
+        await this._userRepository.update(user._id.toString(), user);
+
+        await sendVerificationEmail(email, otp)
+
+        return { message: 'An OTP has been sent to your email for verification' }
+    }
+
 
     public async getUserWithAllDetails(page: number, limit: number, search: string, status: string): Promise<{
         users: Array<{
@@ -417,41 +476,36 @@ export class AuthService implements IAuthService {
         totalPages: number;
         currentPage: number;
     }> {
-        const skip = (page - 1) * limit;
-
-        const filter: any = {
-            $or: [
-                { name: { $regex: search, $options: 'i' } },
-                { email: { $regex: search, $options: 'i' } },
-            ],
-        };
-
-        if (status && status !== 'All') {
-            if (status === 'Active') {
-                filter.isVerified = true;
-            } else if (status === 'Inactive') {
-                filter.isVerified = false;
-            }
-        }
 
         const [users, total] = await Promise.all([
-            this._userRepository.findUsersWithFilter(filter, skip, limit),
-            this._userRepository.countUsers(filter),
+            this._userRepository.findUsersWithFilter({ search: search, status: status }, page, limit),
+            this._userRepository.countUsers({ search: search, status: status }),
         ]);
 
         if (!users || users.length === 0) {
-            throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
-
+            return {
+                users: [],
+                total: 0,
+                totalPages: 0,
+                currentPage: 1
+            };
         }
 
-        const mappedUsers = users.map(user => ({
-            id: user._id.toString(),
-            name: user.name as string,
-            email: user.email as string,
-            role: typeof user.role === 'string' ? user.role : 'Customer',
-            isVerified: Boolean(user.isVerified),
-            profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
-        }));
+        const mappedUsers = users.map(user => {
+            let signedProfileUrl: string | undefined = undefined;
+            if (user.profilePicture && typeof user.profilePicture === 'string') {
+                signedProfileUrl = getSignedUrl(user.profilePicture);
+            }
+
+            return {
+                id: (user._id as { toString(): string }).toString(),
+                name: user.name as string,
+                email: user.email as string,
+                role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
+                isVerified: Boolean(user.isVerified),
+                profilePicture: signedProfileUrl,
+            };
+        });
 
         return {
             users: mappedUsers,
@@ -461,7 +515,7 @@ export class AuthService implements IAuthService {
         };
     }
 
-    public async updateUser(id: string): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }> {
+    public async updateUser(id: string, reason?: string | undefined): Promise<{ id: string; name: string; email: string; role: string, isVerified: boolean, profilePicture?: string }> {
         const user = await this._userRepository.findById(id);
 
         if (!user) {
@@ -472,29 +526,49 @@ export class AuthService implements IAuthService {
 
         await this._userRepository.update(user._id.toString(), user);
 
+        const isNowBlocked = !user.isVerified;
+
+        await sendUserStatusChangeEmail(user.email as string, user.name as string, isNowBlocked, reason)
+
+        let signedProfileUrl: string | undefined = undefined;
+        if (user.profilePicture && typeof user.profilePicture === 'string') {
+            signedProfileUrl = getSignedUrl(user.profilePicture);
+        }
+
         return {
             id: (user._id as { toString(): string }).toString(),
             name: user.name as string,
             email: user.email as string,
             role: (typeof user.role === 'string' ? user.role : 'Customer') as string,
             isVerified: Boolean(user.isVerified),
-            profilePicture: typeof user.profilePicture === 'string' ? user.profilePicture : undefined,
+            profilePicture: signedProfileUrl,
         };
     }
 
-    getAllDataForChatBot = async (userId: string): Promise<{ categories: ICategory[]; services: IService[]; providers: IProvider[]; bookings: IBooking[] }> => {
+    getAllDataForChatBot = async (userId: string): Promise<{ categories: Partial<ICategory>[], services: Partial<IService>[], providers: Partial<IProvider>[], bookings: Partial<IBooking>[] }> => {
 
         const user = await this._userRepository.findById(userId);
         if (!user) {
             throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
         }
-        const bookings = await this._bookingRepository.findAll({ userId });
-        const providers = await this._providerRepository.findAll();
-        const categories = await this._categoryRepository.getAllCategories();
-        const services = await this._serviceRepository.findAll();
+        const [bookings, providers, categories, services] = await Promise.all([
+            this._bookingRepository.findAll({ userId }),
+            this._providerRepository.findAll(),
+            this._categoryRepository.getAllCategories(),
+            this._serviceRepository.findAll()
+        ]);
 
-        return { categories, services, providers, bookings };
+        const secureProviders = providers.map(mapProviderToDto);
+        const secureServices = services.map(mapServiceToDto);
+        const secureCategories = categories.map(mapCategoryToDto);
 
+
+        return {
+            categories: secureCategories,
+            services: secureServices,
+            providers: secureProviders,
+            bookings
+        };
     }
 
     public async logout(refreshToken: string | undefined): Promise<{ message: string }> {
@@ -562,11 +636,17 @@ export class AuthService implements IAuthService {
             };
         });
 
+        let signedProfileUrl: string | undefined = undefined;
+        if (user.profilePicture && typeof user.profilePicture === 'string') {
+            signedProfileUrl = getSignedUrl(user.profilePicture);
+        }
+
+
         const userDetailsResponse: IUserDetailsResponse = {
             id: user._id.toString(),
             name: user.name as string,
             email: user.email as string,
-            avatarUrl: (user.profilePicture as string) || `https://i.pravatar.cc/150?u=${user.id}`,
+            avatarUrl: signedProfileUrl,
             phone: providerProfile?.phoneNumber || 'N/A',
             registrationDate: (user.createdAt as Date).toISOString().split('T')[0],
             lastLogin: (user.updatedAt as Date).toISOString().split('T')[0],
@@ -583,4 +663,3 @@ export class AuthService implements IAuthService {
 
 
 }
-

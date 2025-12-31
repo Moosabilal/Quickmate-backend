@@ -4,6 +4,7 @@ import { BaseRepository } from "./base/BaseRepository";
 import { IWalletRepository } from "../interface/IWalletRepository";
 import { ITransaction, Transaction } from "../../models/transaction";
 import { ClientSession, FilterQuery } from "mongoose";
+import { TransactionFilterOptions } from "../../interface/wallet";
 
 @injectable()
 export class WalletRepository extends BaseRepository<IWallet> implements IWalletRepository {
@@ -19,11 +20,43 @@ export class WalletRepository extends BaseRepository<IWallet> implements IWallet
         return txn;
     }
  
-    async getTransactions(filter: FilterQuery<ITransaction>,skip: number, limit: number = 20): Promise<ITransaction[]> {
-        return Transaction.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit);
+    async getTransactions(filterOpts: TransactionFilterOptions, skip: number, limit: number = 20): Promise<ITransaction[]> {
+        const query = this.buildTransactionQuery(filterOpts);
+        return Transaction.find(query)
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit)
+            .exec();
     }
 
-    async transactionCount(): Promise<number> {
-        return Transaction.countDocuments()
+    async transactionCount(filterOpts: TransactionFilterOptions): Promise<number> {
+        const query = this.buildTransactionQuery(filterOpts);
+        return Transaction.countDocuments(query).exec();
+    }
+
+        private buildTransactionQuery(filterOpts: TransactionFilterOptions): FilterQuery<ITransaction> {
+        const query: FilterQuery<ITransaction> = { 
+            walletId: filterOpts.walletId 
+        };
+
+        if (filterOpts.status && filterOpts.status !== 'All') {
+            query.status = filterOpts.status;
+        }
+
+        if (filterOpts.transactionType) {
+            query.transactionType = filterOpts.transactionType;
+        }
+
+        if (filterOpts.startDate || filterOpts.endDate) {
+            query.createdAt = {};
+            if (filterOpts.startDate) {
+                query.createdAt.$gte = filterOpts.startDate;
+            }
+            if (filterOpts.endDate) {
+                query.createdAt.$lte = filterOpts.endDate;
+            }
+        }
+
+        return query;
     }
 }

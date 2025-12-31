@@ -1,4 +1,6 @@
+import { Types } from "mongoose";
 import { ServicesPriceUnit } from "../enums/Services.enum";
+import { IService } from "../models/Service";
 
 export interface IAddAndEditServiceForm {
     id?: string;
@@ -24,4 +26,22 @@ export interface IProviderServicePageResponse {
     price: number;
     serviceImage: string;
     description: string;
+    rating?: number;
+    reviews?: number;
+
+}
+
+export interface IServiceWithProvider {
+    _id: Types.ObjectId;
+    title: string;
+    price: number;
+    provider: {
+        _id: Types.ObjectId;
+        fullName: string;
+        rating: number;
+    };
+}
+
+export interface IServiceDto extends Partial<IService> {
+    businessCertification: string | null;
 }

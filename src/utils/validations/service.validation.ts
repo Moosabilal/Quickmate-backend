@@ -1,20 +1,20 @@
 import { z } from 'zod';
-import { ServicesPriceUnit } from '../../enums/Services.enum'; // Adjust import path
+import { ServicesPriceUnit } from '../../enums/Services.enum'; 
 
-const mongoIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format');
+const paramIdSchema = z.string().min(1, "ID is required");
 
 export const serviceIdParamSchema = z.object({
-    id: mongoIdSchema,
+    id: paramIdSchema,
 });
 export const providerIdParamSchema = z.object({
-    providerId: mongoIdSchema,
+    providerId: paramIdSchema,
 });
 
 const serviceBodySchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters long."),
     description: z.string(),
-    categoryId: mongoIdSchema,
-    subCategoryId: mongoIdSchema,
+    categoryId: paramIdSchema,
+    subCategoryId: paramIdSchema,
     priceUnit: z.nativeEnum(ServicesPriceUnit),
     duration: z.string(),
     status: z.coerce.boolean().optional(),

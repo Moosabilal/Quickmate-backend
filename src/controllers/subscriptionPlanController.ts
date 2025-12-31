@@ -5,14 +5,16 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import { NextFunction, Response } from "express";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { IVerifySubscriptionPaymentReq } from "../interface/subscriptionPlan";
-import { ZodError } from "zod";
+import z, { ZodError } from "zod";
 import {
     createSubscriptionPlanSchema,
     updateSubscriptionPlanSchema,
-    mongoIdParamSchema,
+    paramIdSchema,
     providerIdParamSchema,
     createSubscriptionOrderSchema,
-    verifySubscriptionPaymentSchema
+    verifySubscriptionPaymentSchema,
+    getSubscriptionPlanQuerySchema,
+    calculateUpgradeSchema
 } from '../utils/validations/subscription.validation';
 
 @injectable()
@@ -35,7 +37,8 @@ export class SubscriptionPlanController {
 
     public getSubscriptionPlan = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const response = await this._subscriptionPlanService.getSubscriptionPlan()
+            const { search } = getSubscriptionPlanQuerySchema.parse(req.query);
+            const response = await this._subscriptionPlanService.getSubscriptionPlan(search)
             res.status(HttpStatusCode.OK).json(response)
         } catch (error) {
             next(error)
@@ -55,7 +58,7 @@ export class SubscriptionPlanController {
 
     public deleteSubscriptionPlan = async (req: AuthRequest, res: Response, next: NextFunction) => {
         try {
-            const { id } = mongoIdParamSchema.parse(req.params);
+            const { id } = paramIdSchema.parse(req.params);
             await this._subscriptionPlanService.deleteSubscriptionPlan(id)
             res.status(HttpStatusCode.OK).json()
         } catch (error) {
@@ -69,7 +72,7 @@ export class SubscriptionPlanController {
             const { providerId } = providerIdParamSchema.parse(req.params);
             const subscription = await this._subscriptionPlanService.checkAndExpire(providerId);
             res.json(subscription);
-        } catch (error: any) {
+        } catch (error) {
             if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             res.status(400).json({ message: error.message });
         }
@@ -83,6 +86,50 @@ export class SubscriptionPlanController {
         } catch (error) {
             if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
             next(error)
+        }
+    }
+
+    public calculateUpgrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { newPlanId } = calculateUpgradeSchema.parse(req.body);
+            const userId = req.user.id;
+
+            const response = await this._subscriptionPlanService.calculateUpgradeCost(userId, newPlanId);
+            res.status(HttpStatusCode.OK).json({ success: true, data: response });
+        } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
+        }
+    }
+
+    public scheduleDowngrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const { newPlanId } = z.object({ newPlanId: paramIdSchema.shape.id }).parse(req.body);
+            const userId = req.user.id; 
+
+            const updatedSubscription = await this._subscriptionPlanService.scheduleDowngrade(userId, newPlanId);
+            res.status(HttpStatusCode.OK).json({ 
+                success: true, 
+                message: "Downgrade scheduled successfully.",
+                data: updatedSubscription 
+            });
+        } catch (error) {
+            if (error instanceof ZodError) res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+            next(error);
+        }
+    }
+    public cancelDowngrade = async (req: AuthRequest, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id;
+
+            const updatedSubscription = await this._subscriptionPlanService.cancelDowngrade(userId);
+            res.status(HttpStatusCode.OK).json({ 
+                success: true, 
+                message: "Your scheduled downgrade has been cancelled.",
+                data: updatedSubscription 
+            });
+        } catch (error) {
+            next(error);
         }
     }
 

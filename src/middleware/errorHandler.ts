@@ -1,16 +1,23 @@
 import { Request, Response, NextFunction } from "express";
 import logger from "../logger/logger";
+import { CustomError } from "../utils/CustomError";
 
-export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
+export const errorHandler = (err: Error | CustomError, req: Request, res: Response, next: NextFunction) => {
 
-    const statusCode = err.statusCode || 500
-    const message = err.message || 'Internal server error'
+    let statusCode = 500;
+    let message = 'Internal server error';
 
-    logger.error(`${req.method} ${req.url} ${statusCode} ${message} ->`, err)
+    if (err instanceof CustomError) {
+        statusCode = err.statusCode;
+        message = err.message;
+    } else {
+        message = err.message || message;
+    }
+
+    logger.error(`${req.method} ${req.url} ${statusCode} ${message} ->`, err);
 
     res.status(statusCode).json({
         success: false,
         message,
-    })
-
-}
+    });
+};

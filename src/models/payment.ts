@@ -4,17 +4,17 @@ import { PaymentMethod } from '../enums/userRoles';
 const PaymentSchema = new Schema(
   {
     userId: {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId, 
       ref: 'User',
       required: true,
     },
     providerId: {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Provider',
       required: true,
     },
     bookingId: {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'Booking',
       required: true,
     },
@@ -25,7 +25,7 @@ const PaymentSchema = new Schema(
     },
     paymentDate: {
       type: Date,
-      required: true,
+      required: false,
     },
     transactionId: {
       type: String,

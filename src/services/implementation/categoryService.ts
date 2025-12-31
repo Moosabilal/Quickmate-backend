@@ -1,8 +1,8 @@
 import { CategoryRepository } from '../../repositories/implementation/categoryRepository';
 import { CommissionRuleRepository } from '../../repositories/implementation/commissionRuleRepository';
-import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICommissionRuleInput, ICommissionRuleResponse, IserviceResponse } from '../../interface/category';
+import { ICategoryFormCombinedData, ICategoryInput, ICategoryResponse, ICategoryWithDetails, ICommissionRuleInput, ICommissionRuleResponse, ICommissionSummary, IserviceResponse } from '../../interface/category';
 import { ICategory } from '../../models/Categories';
-import { Types } from 'mongoose';
+import { FilterQuery, Types } from 'mongoose';
 import { inject, injectable } from 'inversify';
 import { ICategoryRepository } from '../../repositories/interface/ICategoryRepository';
 import TYPES from '../../di/type';
@@ -13,18 +13,28 @@ import { CustomError } from '../../utils/CustomError';
 import { HttpStatusCode } from '../../enums/HttpStatusCode';
 import { toCategoryResponseDTO, toCommissionRuleResponseDTO, toHomePageDTO } from '../../utils/mappers/category.mapper';
 import { ICommissionRule } from '../../models/Commission';
+import { endOfDay, startOfDay, subDays } from 'date-fns';
+import { IPaymentRepository } from '../../repositories/interface/IPaymentRepository';
+import { IBookingRepository } from '../../repositories/interface/IBookingRepository';
+import { getSignedUrl } from '../../utils/cloudinaryUpload';
 
 
 @injectable()
 export class CategoryService implements ICategoryService {
     private _categoryRepository: ICategoryRepository;
     private _commissionRuleRepository: ICommissionRuleRepository;
+    private _paymentRepository: IPaymentRepository;
+    private _bookingRepository: IBookingRepository;
 
     constructor(@inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
-        @inject(TYPES.CommissionRuleRepository) commissionRuleRepository: ICommissionRuleRepository
+        @inject(TYPES.CommissionRuleRepository) commissionRuleRepository: ICommissionRuleRepository,
+        @inject(TYPES.PaymentRepository) paymentRepository: IPaymentRepository,
+        @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository
     ) {
         this._categoryRepository = categoryRepository
         this._commissionRuleRepository = commissionRuleRepository
+        this._paymentRepository = paymentRepository
+        this._bookingRepository = bookingRepository
     }
 
 
@@ -60,8 +70,12 @@ export class CategoryService implements ICategoryService {
 
         const createdCategoryDoc = await this._categoryRepository.create(categoryDataToCreate);
 
-        const categoryResponse: ICategoryResponse = createdCategoryDoc.toJSON() as unknown as ICategoryResponse;
+        const categoryObj = createdCategoryDoc.toJSON() as unknown as ICategoryResponse;
 
+        const categoryResponse: ICategoryResponse = {
+            ...categoryObj,
+            iconUrl: categoryObj.iconUrl ? getSignedUrl(categoryObj.iconUrl) : null
+        };
         let createdCommissionRule: ICommissionRuleResponse | undefined;
 
         const ruleData: Partial<ICommissionRule> = {
@@ -96,32 +110,27 @@ export class CategoryService implements ICategoryService {
         let updatedCommissionRule = await this._handleCommissionRuleUpdate(categoryId, commissionRuleData);
 
         if (updateData.status !== undefined) {
-        const newStatus = updateData.status;
+            const newStatus = updateData.status;
 
-        await this._commissionRuleRepository.updateStatusForCategoryIds([existingCategory._id], newStatus);
+            await this._commissionRuleRepository.updateStatusForCategoryIds([existingCategory._id], newStatus);
 
-        if (!existingCategory.parentId) {
-            const subcategoryIds = await this._categoryRepository.findSubcategoryIds(categoryId.toString());
-            
-            if (subcategoryIds.length > 0) {
-                await this._categoryRepository.updateStatusForIds(subcategoryIds, newStatus);
-                
-                await this._commissionRuleRepository.updateStatusForCategoryIds(subcategoryIds, newStatus);
+            if (!existingCategory.parentId) {
+                const subcategoryIds = await this._categoryRepository.findSubcategoryIds(categoryId.toString());
+
+                if (subcategoryIds.length > 0) {
+                    await this._categoryRepository.updateStatusForIds(subcategoryIds, newStatus);
+
+                    await this._commissionRuleRepository.updateStatusForCategoryIds(subcategoryIds, newStatus);
+                }
             }
+
+            const rule = await this._commissionRuleRepository.findOne({ categoryId });
+            updatedCommissionRule = rule ? toCommissionRuleResponseDTO(rule) : null;
         }
-        
-        const rule = await this._commissionRuleRepository.findOne({ categoryId });
-        updatedCommissionRule = rule ? toCommissionRuleResponseDTO(rule) : null;
-    }
 
         return { category: updatedCategory, commissionRule: updatedCommissionRule };
     }
 
-
-    /**
-     * RESPONSIBILITY: Creates, updates, or deletes a commission rule for a category.
-     */
-    
 
     async updateManySubcategoriesStatus(parentCategoryId: string, status: boolean): Promise<void> {
         await this._categoryRepository.updateSubcategoriesStatus(parentCategoryId, status);
@@ -130,113 +139,138 @@ export class CategoryService implements ICategoryService {
 
 
     async getCategoryById(categoryId: string): Promise<{ categoryDetails: ICategoryFormCombinedData; subCategories: ICategoryFormCombinedData[] }> {
-    const [categoryDoc, commissionRuleDoc, subCategoryDocs] = await Promise.all([
-        this._categoryRepository.findById(categoryId),
-        this._commissionRuleRepository.findOne({ categoryId: categoryId }),
-        this._categoryRepository.findAll({ parentId: new Types.ObjectId(categoryId) })
-    ]);
+        const [categoryDoc, commissionRuleDoc, subCategoryDocs] = await Promise.all([
+            this._categoryRepository.findById(categoryId),
+            this._commissionRuleRepository.findOne({ categoryId: categoryId }),
+            this._categoryRepository.findAll({ parentId: new Types.ObjectId(categoryId) })
+        ]);
 
-    if (!categoryDoc) {
-        throw new Error('Category not found.');
-    }
+        if (!categoryDoc) {
+            throw new Error('Category not found.');
+        }
 
-    const categoryDetails: ICategoryFormCombinedData = {
-        id: categoryDoc._id.toString(),
-        name: categoryDoc.name,
-        description: categoryDoc.description || '',
-        iconUrl: categoryDoc.iconUrl || null,
-        status: categoryDoc.status ?? false,
-        parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
-        commissionType: commissionRuleDoc?.commissionType || CommissionTypes.NONE,
-        commissionValue: commissionRuleDoc?.commissionValue ?? '',
-        commissionStatus: commissionRuleDoc?.status ?? false,
-    };
-
-    const subCategoryIds = subCategoryDocs.map(sub => sub._id);
-    let allSubCategoryRules: ICommissionRule[] = [];
-    if (subCategoryIds.length > 0) {
-        allSubCategoryRules = await this._commissionRuleRepository.findAll({
-            categoryId: { $in: subCategoryIds }
-        });
-    }
-
-    const commissionRulesMap = new Map(
-        allSubCategoryRules.map(rule => [rule.categoryId.toString(), rule])
-    );
-
-    const subCategories = subCategoryDocs.map((sub): ICategoryFormCombinedData => {
-        const subRule = commissionRulesMap.get(sub._id.toString());
-        
-        return {
-            id: sub._id.toString(),
-            name: sub.name,
-            description: sub.description || '',
-            iconUrl: sub.iconUrl || null,
-            status: sub.status ?? false,
-            parentId: sub.parentId ? sub.parentId.toString() : null,
-            commissionType: subRule?.commissionType || CommissionTypes.NONE,
-            commissionValue: subRule?.commissionValue ?? '',
-            commissionStatus: subRule?.status ?? false,
+        const categoryDetails: ICategoryFormCombinedData = {
+            id: categoryDoc._id.toString(),
+            name: categoryDoc.name,
+            description: categoryDoc.description || '',
+            iconUrl: categoryDoc.iconUrl ? getSignedUrl(categoryDoc.iconUrl) : null,
+            status: categoryDoc.status ?? false,
+            parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
+            commissionType: commissionRuleDoc?.commissionType || CommissionTypes.NONE,
+            commissionValue: commissionRuleDoc?.commissionValue ?? '',
+            commissionStatus: commissionRuleDoc?.status ?? false,
         };
-    });
 
-    return {
-        categoryDetails,
-        subCategories
-    };
-}
+        const subCategoryIds = subCategoryDocs.map(sub => sub._id);
+        let allSubCategoryRules: ICommissionRule[] = [];
+        if (subCategoryIds.length > 0) {
+            allSubCategoryRules = await this._commissionRuleRepository.findAll({
+                categoryId: { $in: subCategoryIds }
+            });
+        }
 
-async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData> {
-    const [categoryDoc, commissionRuleDoc] = await Promise.all([
-        this._categoryRepository.findById(categoryId),
-        this._commissionRuleRepository.findOne({ categoryId: categoryId })
-    ]);
+        const commissionRulesMap = new Map(
+            allSubCategoryRules.map(rule => [rule.categoryId.toString(), rule])
+        );
 
-    if (!categoryDoc) {
-        throw new Error('Category not found.');
-    }
+        const subCategories = subCategoryDocs.map((sub): ICategoryFormCombinedData => {
+            const subRule = commissionRulesMap.get(sub._id.toString());
 
-    const categoryDetails: ICategoryFormCombinedData = {
-        id: categoryDoc._id.toString(),
-        name: categoryDoc.name,
-        description: categoryDoc.description || '',
-        iconUrl: categoryDoc.iconUrl || null,
-        status: categoryDoc.status ?? false,
-        parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
-        commissionType: CommissionTypes.NONE,
-        commissionValue: '',
-        commissionStatus: false,
-    };
-
-    if (commissionRuleDoc) {
-        categoryDetails.commissionType = commissionRuleDoc.commissionType;
-        categoryDetails.commissionValue = commissionRuleDoc.commissionValue || '';
-        categoryDetails.commissionStatus = commissionRuleDoc.status ?? false;
-    }
-
-    return categoryDetails;
-}
-
-
-    async getAllCategoriesWithDetails(): Promise<Array<ICategoryResponse>> {
-        const topLevelCategoryDocs = await this._categoryRepository.findAll({ parentId: null });
-        const subCategories = await this._categoryRepository.findAllSubcategories({});
-        const resultPromises = topLevelCategoryDocs.map(async (catDoc) => {
-            const category = catDoc.toJSON() as unknown as ICategoryResponse;
-            const subCategoryCount = await this._categoryRepository.countSubcategories(catDoc._id);
-            const commissionRuleDoc = await this._commissionRuleRepository.findOne({ categoryId: catDoc._id });
-            const commissionRule = commissionRuleDoc ? commissionRuleDoc.toJSON() as unknown as ICommissionRuleResponse : null;
-
-            const finalCategory: ICategoryResponse = {
-                ...category,
-                parentId: category.parentId || null,
-                subCategoryCount,
-                commissionRule,
-                subCategories: subCategories.map((subCat: any) => subCat.toJSON() as unknown as ICategoryResponse)
+            return {
+                id: sub._id.toString(),
+                name: sub.name,
+                description: sub.description || '',
+                iconUrl: sub.iconUrl ? getSignedUrl(sub.iconUrl) : null,
+                status: sub.status ?? false,
+                parentId: sub.parentId ? sub.parentId.toString() : null,
+                commissionType: subRule?.commissionType || CommissionTypes.NONE,
+                commissionValue: subRule?.commissionValue ?? '',
+                commissionStatus: subRule?.status ?? false,
             };
-            return finalCategory;
         });
-        return Promise.all(resultPromises);
+
+        return {
+            categoryDetails,
+            subCategories
+        };
+    }
+
+    async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData> {
+        const [categoryDoc, commissionRuleDoc] = await Promise.all([
+            this._categoryRepository.findById(categoryId),
+            this._commissionRuleRepository.findOne({ categoryId: categoryId })
+        ]);
+
+        if (!categoryDoc) {
+            throw new Error('Category not found.');
+        }
+
+        const categoryDetails: ICategoryFormCombinedData = {
+            id: categoryDoc._id.toString(),
+            name: categoryDoc.name,
+            description: categoryDoc.description || '',
+            iconUrl: categoryDoc.iconUrl ? getSignedUrl(categoryDoc.iconUrl) : null,
+            status: categoryDoc.status ?? false,
+            parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
+            commissionType: CommissionTypes.NONE,
+            commissionValue: '',
+            commissionStatus: false,
+        };
+
+        if (commissionRuleDoc) {
+            categoryDetails.commissionType = commissionRuleDoc.commissionType;
+            categoryDetails.commissionValue = commissionRuleDoc.commissionValue || '';
+            categoryDetails.commissionStatus = commissionRuleDoc.status ?? false;
+        }
+
+        return categoryDetails;
+    }
+
+
+    async getAllCategoriesWithDetails(
+        page: number,
+        limit: number,
+        search?: string
+    ): Promise<{
+        data: ICategoryWithDetails[];
+        total: number;
+        totalPages: number;
+    }> {
+
+        const filter: FilterQuery<ICategory> = { parentId: null };
+        if (search) {
+            filter.name = { $regex: search, $options: 'i' };
+        }
+
+        const { categories, total } = await this._categoryRepository.findCategoriesWithDetails({
+            filter,
+            page,
+            limit
+        });
+
+        const mappedData = categories.map(cat => {
+            const categoryWithExtras = cat;
+
+            return {
+                id: categoryWithExtras._id.toString(),
+                name: categoryWithExtras.name,
+                description: categoryWithExtras.description || '',
+                iconUrl: categoryWithExtras.iconUrl ? getSignedUrl(categoryWithExtras.iconUrl) : null,
+                status: categoryWithExtras.status ?? false,
+                parentId: categoryWithExtras.parentId ? categoryWithExtras.parentId.toString() : null,
+
+                subCategoriesCount: categoryWithExtras.subCategoryCount || 0,
+                commissionType: categoryWithExtras.commissionRule?.commissionType || CommissionTypes.NONE,
+                commissionValue: (categoryWithExtras.commissionRule?.commissionValue ?? '' as number | ''),
+                commissionStatus: categoryWithExtras.commissionRule?.status ?? false,
+            };
+        });
+
+        return {
+            data: mappedData,
+            total,
+            totalPages: Math.ceil(total / limit)
+        };
     }
 
 
@@ -257,7 +291,7 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
                     _id: raw._id.toString(),
                     name: raw.name,
                     description: raw.description || '',
-                    iconUrl: raw.iconUrl || null,
+                    iconUrl: raw.iconUrl ? getSignedUrl(raw.iconUrl) : null,
                     status: raw.status ?? false,
                     parentId: raw.parentId ? raw.parentId.toString() : null,
                 };
@@ -289,17 +323,16 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
         currentPage: number
     }> {
         const skip = (page - 1) * limit;
-        const filter: any = {
-            name: { $regex: search, $options: 'i' },
-            parentId: { $ne: null }
-        }
-        const services = await this._categoryRepository.findAllSubCategories(filter, skip, limit);
-        const total = await this._categoryRepository.countOfSubCategories(filter)
+        const [services, total] = await Promise.all([
+            this._categoryRepository.findAllSubCategories(search, skip, limit),
+            this._categoryRepository.countOfSubCategories(search),
+        ]);
+
         const featuredServices = services.map(service => {
             return {
                 id: service._id.toString(),
                 name: service.name,
-                iconUrl: service.iconUrl,
+                iconUrl: service.iconUrl ? getSignedUrl(service.iconUrl) : null,
                 parentId: service.parentId.toString()
             }
 
@@ -338,7 +371,7 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
     }
 
     private async _validateParentCategory(categoryId: string, newParentId?: string | null): Promise<void> {
-        if (newParentId === undefined) return; 
+        if (newParentId === undefined) return;
 
         if (newParentId !== null) {
             if (!Types.ObjectId.isValid(newParentId)) {
@@ -374,5 +407,125 @@ async getCategoryForEdit(categoryId: string): Promise<ICategoryFormCombinedData>
                 : 'A top-level category with this name already exists.';
             throw new Error(message);
         }
+    }
+
+    public async getCommissionSummary(): Promise<ICommissionSummary> {
+        const now = new Date();
+        const currentPeriodStart = startOfDay(subDays(now, 30));
+        const currentPeriodEnd = endOfDay(now);
+
+        const previousPeriodStart = startOfDay(subDays(now, 60));
+        const previousPeriodEnd = endOfDay(subDays(now, 31));
+
+        const [currentPayments, previousPayments, currentBookingsCount, previousBookingsCount] = await Promise.all([
+            this._paymentRepository.getTotalsInDateRange(currentPeriodStart, currentPeriodEnd),
+            this._paymentRepository.getTotalsInDateRange(previousPeriodStart, previousPeriodEnd),
+            this._bookingRepository.countInDateRange(currentPeriodStart, currentPeriodEnd),
+            this._bookingRepository.countInDateRange(previousPeriodStart, previousPeriodEnd)
+        ]);
+
+        const calculateChange = (current: number, previous: number) => {
+            if (previous === 0) {
+                return current > 0 ? 100 : 0;
+            }
+            return ((current - previous) / previous) * 100;
+        };
+
+        const avgCommissionCurrent = currentBookingsCount > 0 ? currentPayments.totalCommission / currentBookingsCount : 0;
+        const avgCommissionPrevious = previousBookingsCount > 0 ? previousPayments.totalCommission / previousBookingsCount : 0;
+
+        return {
+            totalCommissionRevenue: currentPayments.totalCommission,
+            totalCommissionRevenueChange: calculateChange(currentPayments.totalCommission, previousPayments.totalCommission),
+
+            averageCommissionPerBooking: avgCommissionCurrent,
+            averageCommissionPerBookingChange: calculateChange(avgCommissionCurrent, avgCommissionPrevious),
+
+            totalBookings: currentBookingsCount,
+            totalBookingsChange: calculateChange(currentBookingsCount, previousBookingsCount),
+
+            commissionDeductionsToProviders: currentPayments.totalProviderAmount,
+            commissionDeductionsToProvidersChange: calculateChange(currentPayments.totalProviderAmount, previousPayments.totalProviderAmount)
+        };
+    }
+
+    public async getTopLevelCategories(): Promise<ICategoryResponse[]> {
+        const categories = await this._categoryRepository.findAll({
+            parentId: null,
+            status: true
+        });
+        return categories.map(toCategoryResponseDTO);
+    }
+
+    public async getPopularServices(): Promise<IserviceResponse[]> {
+        const services = await this._categoryRepository.findActiveSubCategories(-1, 0, 5);
+
+        return services.map(s => ({
+            id: s._id.toString(),
+            name: s.name,
+            iconUrl: s.iconUrl ? getSignedUrl(s.iconUrl) : null,
+            parentId: s.parentId.toString(),
+            description: s.description || '',
+        }));
+    }
+
+    public async getTrendingServices(): Promise<IserviceResponse[]> {
+        const services = await this._categoryRepository.findActiveSubCategories(-1, 5, 6);
+
+        return services.map(s => ({
+            id: s._id.toString(),
+            name: s.name,
+            iconUrl: s.iconUrl ? getSignedUrl(s.iconUrl) : null,
+            parentId: s.parentId.toString(),
+            description: s.description || '',
+        }));
+    }
+
+    public async getTopLevelCategoryNames(): Promise<string[]> {
+        const categories = await this._categoryRepository.findAll({
+            parentId: null,
+            status: true
+        });
+        return categories.map(cat => cat.name);
+    }
+
+    public async getSubcategoriesForCategory(parentCategoryName: string): Promise<string[]> {
+        const parentCategory = await this._categoryRepository.findOne({
+            name: { $regex: new RegExp(`^${parentCategoryName}$`, 'i') },
+            parentId: null
+        });
+
+        if (!parentCategory) {
+            return [];
+        }
+
+        const subCategories = await this._categoryRepository.findAll({
+            parentId: parentCategory._id,
+            status: true
+        });
+
+        return subCategories.map(cat => cat.name);
+    }
+
+    public async getRelatedCategories(categoryId: string): Promise<IserviceResponse[]> {
+        const currentCategory = await this._categoryRepository.findById(categoryId);
+
+        if (!currentCategory || !currentCategory.parentId) {
+            return [];
+        }
+
+        const related = await this._categoryRepository.findRelatedCategories(
+            currentCategory.parentId.toString(),
+            categoryId,
+            4
+        );
+
+        return related.map(cat => ({
+            id: cat._id.toString(),
+            name: cat.name,
+            description: cat.description || '',
+            iconUrl: cat.iconUrl ? getSignedUrl(cat.iconUrl) : '',
+            parentId: cat.parentId?.toString() || null,
+        }));
     }
 }

@@ -7,7 +7,7 @@ import { HttpStatusCode } from "../../enums/HttpStatusCode";
 import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
 import { toIInitiateDepositRes } from "../../utils/mappers/wallet.mapper";
 import { IOrder, WalletFilter } from "../../interface/payment";
-import { IDepositVerification, IInitiateDepositRes } from "../../interface/wallet";
+import { IDepositVerification, IInitiateDepositRes, TransactionFilterOptions } from "../../interface/wallet";
 import { IWallet } from "../../models/wallet";
 import { startSession, Types } from "mongoose";
 import { Roles } from "../../enums/userRoles";
@@ -36,22 +36,17 @@ export class WalletService implements IWalletService {
     public async getSummary(userId: string, ownerType: Roles, filters: Partial<WalletFilter>, page: number, limit: number) {
 
         const wallet = await this.getOrCreateWallet(userId, ownerType);
-        const walletId = wallet._id.toString()
         const skip = (page - 1) * limit
-        const query: any = { walletId };
 
-        if (filters.status && filters.status !== TransactionStatus.ALL) {
-            query.status = filters.status;
-        }
-        if (filters.transactionType) {
-            query.transactionType = filters.transactionType;
-        }
-        if (filters.startDate) {
-            query.createdAt = { $gte: new Date(filters.startDate) };
-        }
+        const filterOptions: TransactionFilterOptions = {
+        walletId: wallet._id.toString(),
+        status: filters.status as TransactionStatus,
+        transactionType: filters.transactionType,
+        startDate: filters.startDate ? new Date(filters.startDate) : undefined
+    };
         const [txns, total] = await Promise.all([
-            this._walletRepository.getTransactions(query, skip, limit),
-            this._walletRepository.transactionCount()
+            this._walletRepository.getTransactions(filterOptions, skip, limit),
+            this._walletRepository.transactionCount(filterOptions)
         ]) 
         return { 
             wallet, 

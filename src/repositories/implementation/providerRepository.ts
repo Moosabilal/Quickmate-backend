@@ -3,7 +3,7 @@ import mongoose, { FilterQuery, Types } from 'mongoose';
 
 import { Provider, IProvider } from "../../models/Providers";
 import User from "../../models/User";
-import { IProviderForAdminResponce, IProviderProfile, IProviderRegistrationData, ProviderFilterQuery } from "../../interface/provider";
+import { IDateOverride, IDaySchedule, ILeavePeriod, IProviderFilter, IProviderForAdminResponce, IProviderProfile, IProviderRegistrationData, ITimeSlot, ITopActiveProviders, ProviderFilterQuery } from "../../interface/provider";
 import { IProviderRepository } from "../interface/IProviderRepository";
 import { injectable } from "inversify";
 import { BaseRepository } from "./base/BaseRepository";
@@ -46,15 +46,21 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return await Provider.find({});
     }
 
-    async findProvidersWithFilter(filter: any, skip: number, limit: number): Promise<IProvider[]> {
-        return await Provider.find(filter)
+    async findProvidersWithFilter(filter: IProviderFilter): Promise<IProvider[]> {
+        const mongooseQuery = this.buildQuery(filter);
+        const page = filter.page || 1;
+        const limit = filter.limit || 10;
+        const skip = (page - 1) * limit;
+
+        return await this.model.find(mongooseQuery)
             .skip(skip)
             .limit(limit)
             .sort({ createdAt: -1 });
     }
 
-    async countProviders(filter: any): Promise<number> {
-        return await Provider.countDocuments(filter);
+    async countProviders(filter: IProviderFilter): Promise<number> {
+        const mongooseQuery = this.buildQuery(filter);
+        return await this.model.countDocuments(mongooseQuery);
     }
 
     async updateStatusById(id: string, newStatus: string): Promise<void> {
@@ -71,7 +77,7 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
         return provider._id.toString()
     }
 
-    async getTopActiveProviders(): Promise<any[]> {
+    async getTopActiveProviders(): Promise<ITopActiveProviders[]> {
         const result = await Provider.aggregate([
             {
                 $project: {
@@ -87,56 +93,6 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
 
         return result;
     }
-
-    //     public async findFilteredProviders(criteria: {
-    //     providerIds: string[];
-    //     userIdToExclude: string;
-    //     lat?: number;
-    //     long?: number;
-    //     radius?: number;
-    //     date?: string; 
-    //     time?: string; 
-    // }): Promise<IProvider[]> {
-    //     console.log('\n[DEBUG][findFilteredProviders] ▶️ Start');
-
-    //     const filter: mongoose.FilterQuery<IProvider> = {
-    //         _id: { $in: criteria.providerIds },
-    //         userId: { $ne: criteria.userIdToExclude},
-    //     };
-
-    //     const testData = await this.findAll(filter)
-    // console.log('Full data:', JSON.stringify(testData, null, 2));
-
-
-    //     if (criteria.lat && criteria.long && criteria.radius) {
-    //         filter.serviceLocation = {
-    //             $geoWithin: {
-    //                 $centerSphere: [
-    //                     [criteria.long, criteria.lat],
-    //                     criteria.radius / 6378.1, // Earth radius in km
-    //                 ],
-    //             },
-    //         };
-    //     }
-
-    //     if (criteria.date || criteria.time) {
-    //         filter.availability = { $elemMatch: {} as any };
-
-    //         if (criteria.date) {
-    //             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    //             const dayOfWeek = days[new Date(criteria.date).getDay()];
-    //             filter.availability.$elemMatch.day = dayOfWeek;
-    //         }
-
-    //         if (criteria.time) {
-    //             filter.availability.$elemMatch.startTime = { $lte: criteria.time };
-    //             filter.availability.$elemMatch.endTime = { $gte: criteria.time };
-    //         }
-    //     }
-
-    //     const result = await this.findAll(filter);
-    //     return result;
-    // }
 
     public async findFilteredProviders(criteria: {
         providerIds: string[];
@@ -177,21 +133,21 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
                 if (!availability || !availability.weeklySchedule) return false;
 
                 const isOnLeave = availability.leavePeriods?.some(
-                    (period: any) => criteria.date >= period.from && criteria.date <= period.to
+                    (period: ILeavePeriod) => criteria.date >= period.from && criteria.date <= period.to
                 );
                 if (isOnLeave) return false;
 
                 const override = availability.dateOverrides?.find(
-                    (o: any) => o.date === criteria.date
+                    (o: IDateOverride) => o.date === criteria.date
                 );
                 if (override?.isUnavailable) return false;
 
-                const daySchedule = availability.weeklySchedule.find((d: any) => d.day === targetDay && d.active);
+                const daySchedule = availability.weeklySchedule.find((d: IDaySchedule) => d.day === targetDay && d.active);
                 if (!daySchedule) return false;
 
                 if (targetTime && daySchedule.slots?.length) {
                     return daySchedule.slots.some(
-                        (slot: any) => targetTime >= slot.start && targetTime <= slot.end
+                        (slot: ITimeSlot) => targetTime >= slot.start && targetTime <= slot.end
                     );
                 }
 
@@ -211,5 +167,42 @@ export class ProviderRepository extends BaseRepository<IProvider> implements IPr
             .then(providers => providers.map(p => ({ name: p.fullName, earnings: p.earnings || 0 })));
     }
 
+    public async findProvidersByIdsAndSearch(
+        providerIds: string[], 
+        search?: string
+    ): Promise<IProvider[]> {
+        
+        const filter: FilterQuery<IProvider> = {
+             _id: { $in: providerIds.map(id => new Types.ObjectId(id)) }
+        };
+
+        if (search) {
+            filter.fullName = { $regex: search, $options: 'i' };
+        }
+
+        return this.findAll(filter);
+    }
+
+    private buildQuery(filter: IProviderFilter): FilterQuery<IProvider> {
+        const query: FilterQuery<IProvider> = {};
+
+        if (filter.search) {
+            query.$or = [
+                { fullName: { $regex: filter.search, $options: 'i' } },
+                { email: { $regex: filter.search, $options: 'i' } },
+                { serviceName: { $regex: filter.search, $options: 'i' } }
+            ];
+        }
+
+        if (filter.status && filter.status !== 'All') {
+            query.status = filter.status;
+        }
+
+        if (filter.rating) {
+            query.rating = { $gte: filter.rating, $lt: filter.rating + 1 };
+        }
+
+        return query;
+    }
 
 }

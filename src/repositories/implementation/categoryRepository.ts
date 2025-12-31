@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import { Category, ICategory } from '../../models/Categories';
-import { ICategoryInput } from '../../interface/category';
-import { Types } from 'mongoose';
+import { ICategoryAndCommission, ICategoryFilter, ICategoryInput } from '../../interface/category';
+import { FilterQuery, PipelineStage, SortOrder, Types } from 'mongoose';
 import { ICategoryRepository } from '../interface/ICategoryRepository';
 import { BaseRepository } from './base/BaseRepository';
 
@@ -26,22 +26,22 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         return await Category.findOne({ name, parentId: parentObjectId }).exec();
     }
 
-    async findAll(filter: any = {}): Promise<ICategory[]> {
-    const queryFilter = { ...filter };
+    async findAll(filter: ICategoryFilter = {}): Promise<ICategory[]> {
+        const queryFilter = { ...filter };
 
-    if (queryFilter.parentId && typeof queryFilter.parentId === 'string') {
-        queryFilter.parentId = new Types.ObjectId(queryFilter.parentId);
+        if (queryFilter.parentId && typeof queryFilter.parentId === 'string') {
+            queryFilter.parentId = new Types.ObjectId(queryFilter.parentId);
+        }
+
+        const { take, skip, ...conditions } = queryFilter;
+
+        let query = Category.find(conditions);
+
+        if (skip) query = query.skip(Number(skip));
+        if (take) query = query.limit(Number(take));
+
+        return await query.exec();
     }
-
-    const { take, skip, ...conditions } = queryFilter;
-
-    let query = Category.find(conditions);
-
-    if (skip) query = query.skip(Number(skip));
-    if (take) query = query.limit(Number(take));
-
-    return await query.exec();
-}
 
 
     async findAllSubcategories(p0: {}): Promise<ICategory[]> {
@@ -76,13 +76,24 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         await Category.updateMany({ parentId: parentObjectId }, { status }).exec();
     }
 
-    async findAllSubCategories(filter: any, skip: number, limit: number): Promise<ICategory[]> {
-        return await Category.find(filter).skip(skip).limit(limit).exec()
+    async findAllSubCategories(search: string, skip: number, limit: number): Promise<ICategory[]> {
+        const filter = {
+            name: { $regex: search, $options: 'i' },
+            parentId: { $ne: null },
+            status: true    
+        };
+        return Category.find(filter).skip(skip).limit(limit).exec();
     }
 
-    async countOfSubCategories(filter: any): Promise<number> {
-        return await Category.countDocuments(filter).exec()
+    async countOfSubCategories(search: string): Promise<number> {
+        const filter = {
+            name: { $regex: search, $options: 'i' },
+            parentId: { $ne: null },
+            status: true
+        };
+        return Category.countDocuments(filter).exec();
     }
+
 
     async findByIds(ids: string[]): Promise<ICategory[]> {
         return Category.find({ _id: { $in: ids } });
@@ -97,5 +108,113 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
         await this.model.updateMany({ _id: { $in: ids } }, { $set: { status } });
     }
 
+    public async findCategoriesWithDetails(options: {
+        filter: FilterQuery<ICategory>,
+        page: number,
+        limit: number
+    }): Promise<{ categories: ICategoryAndCommission[], total: number }> {
+
+        const { filter, page, limit } = options;
+        const skip = (page - 1) * limit;
+
+        const mainPipeline: PipelineStage[] = [
+            { $match: filter },
+            {
+                $lookup: {
+                    from: "categories",
+                    localField: "_id",
+                    foreignField: "parentId",
+                    as: "subCategories"
+                }
+            },
+            {
+                $lookup: {
+                    from: "commissionrules",
+                    localField: "_id",
+                    foreignField: "categoryId",
+                    as: "commissionRule"
+                }
+            },
+            {
+                $addFields: {
+                    subCategoryCount: { $size: "$subCategories" },
+                    commissionRule: { $arrayElemAt: ["$commissionRule", 0] }
+                }
+            },
+            {
+                $project: {
+                    subCategories: 0
+                }
+            }
+        ];
+
+        const results = await this.model.aggregate([
+            ...mainPipeline,
+            {
+                $facet: {
+                    data: [
+                        { $sort: { createdAt: -1 } },
+                        { $skip: skip },
+                        { $limit: limit },
+                    ],
+                    metadata: [
+                        { $count: 'total' }
+                    ]
+                }
+            }
+        ]);
+
+        const categories = results[0].data;
+        const total = results[0].metadata[0] ? results[0].metadata[0].total : 0;
+
+        return { categories, total };
+    }
+
+    public async findActiveSubCategories(
+        sort: number,
+        skip: number,
+        limit: number
+    ): Promise<ICategory[]> {
+
+        return this.model.find({
+            parentId: { $ne: null },
+            status: true
+        })
+            .sort({createdAt: sort as SortOrder} )
+            .skip(skip)
+            .limit(limit)
+    }
+
+    public async findSubCategoryByName(name: string): Promise<ICategory | null> {
+        return this.model.findOne({
+            name: { $regex: new RegExp(`^${name}$`, 'i') },
+            parentId: { $ne: null }
+        });
+    }
+
+    public async findParentCategoryByName(name: string): Promise<ICategory | null> {
+        return this.model.findOne({
+            name: { $regex: new RegExp(`^${name}$`, 'i') },
+            parentId: null
+        });
+    }
+
+    public async findAllActiveSubCategories(): Promise<ICategory[]> {
+        return this.model.find({ 
+            parentId: { $ne: null },
+            status: true       
+        })
+        .select('name')
+    }
+
+    public async findRelatedCategories(parentId: string, currentId: string, limit: number): Promise<ICategory[]> {
+        return this.model.find({
+            parentId: new Types.ObjectId(parentId), 
+            _id: { $ne: new Types.ObjectId(currentId) },
+            status: true 
+        })
+        .select('name iconUrl parentId')
+        .limit(limit)
+    }
 
 }

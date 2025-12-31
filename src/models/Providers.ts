@@ -130,6 +130,11 @@ const ProviderSchema = new Schema({
             type: String,
             enum: Object.values(SubscriptionStatus),
             default: SubscriptionStatus.NONE
+        },
+        pendingDowngradePlanId: {
+            type: Schema.Types.ObjectId,
+            ref: "SubscriptionPlan",
+            default: null
         }
     },
 
