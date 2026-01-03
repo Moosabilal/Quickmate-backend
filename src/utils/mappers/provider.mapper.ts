@@ -1,5 +1,5 @@
 import { IProvider } from '../../models/Providers';
-import { EarningsAnalyticsData, IBackendProvider, IMonthlyTrend, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse, IServiceBreakdown, IServiceDetails } from '../../interface/provider';
+import { EarningsAnalyticsData, IBackendProvider, IMonthlyTrend, IPopulatedService, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse, IServiceBreakdown, IServiceDetails } from '../../interface/provider';
 import { ICategory } from '../../models/Categories';
 import { IBooking } from '../../models/Booking';
 import { IService } from '../../models/Service';
@@ -161,9 +161,7 @@ export function toClientForChatListPage(
 
     if (!clientBooking) return null;
 
-    const service = services.find(
-      (s) => s._id.toString() === clientBooking.serviceId?.toString()
-    );
+    const service = services.find((s) => s._id.toString() === clientBooking.serviceId?.toString());
 
     const joiningId = createJoiningId(currentUserId, client._id.toString());
 
@@ -399,8 +397,8 @@ export function toProviderPerformanceDTO(
 }
 
 
-export function toServiceDetailsDTO(service: IService): IServiceDetails {
-  const serviceObj = service as IService;
+export function toServiceDetailsDTO(service: IPopulatedService): IServiceDetails {
+  const serviceObj = service;
 
   return {
     _id: serviceObj._id.toString(),
@@ -409,8 +407,7 @@ export function toServiceDetailsDTO(service: IService): IServiceDetails {
     price: serviceObj.price,
     priceUnit: serviceObj.priceUnit,
     duration: serviceObj.duration,
-    categoryId: serviceObj.categoryId.toString(),
-    subCategoryId: serviceObj.subCategoryId.toString(),
+    subCategoryId: { _id:serviceObj.subCategoryId._id.toString(), name: serviceObj.subCategoryId.name || '' },
     experience: serviceObj.experience
-  };
+  } as IServiceDetails;
 }

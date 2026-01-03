@@ -3,6 +3,7 @@ import { ProviderStatus } from "../enums/provider.enum";
 import { BookingStatus } from "../enums/booking.enum";
 import { SubscriptionStatus } from "../enums/subscription.enum";
 import { IProvider } from "../models/Providers";
+import { IService } from "../models/Service";
 
 export interface Availability {
   day: string;
@@ -288,7 +289,10 @@ export interface IAvailabilityUpdateData {
     leavePeriods: LeavePeriod[];
 }
 
-
+interface ICatAndSubCat {
+  _id: string;
+  name: string;
+}
 export interface IServiceDetails {
   _id: string;
   title: string;
@@ -296,9 +300,12 @@ export interface IServiceDetails {
   price: number;
   priceUnit: string;
   duration: string;
-  categoryId: string;
-  subCategoryId:string;
+  subCategoryId:ICatAndSubCat;IPopulatedService
   experience?: number;
+}
+
+export interface IPopulatedService extends Omit<IService, 'categoryId' | 'subCategoryId'> {
+    subCategoryId: { _id: Types.ObjectId; name: string };
 }
 
 export interface IProviderDetailsResponse {

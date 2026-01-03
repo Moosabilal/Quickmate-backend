@@ -4,6 +4,7 @@ import Service, { IService } from "../../models/Service";
 import { IServiceRepository } from "../interface/IServiceRepository";
 import { BaseRepository } from "./base/BaseRepository";
 import { FilterQuery, PipelineStage, Types } from "mongoose";
+import { IPopulatedService } from "../../interface/provider";
 
 @injectable()
 export class ServiceRepository extends BaseRepository<IService> implements IServiceRepository {
@@ -50,18 +51,20 @@ export class ServiceRepository extends BaseRepository<IService> implements IServ
         return this.findAll(filter);
     }
 
-    public async findPopulatedByProviderId(providerId: string): Promise<IService[]> {
+    public async findPopulatedByProviderId(providerId: string): Promise<IPopulatedService[]> {
 
-        return this.model.find({ providerId: new Types.ObjectId(providerId) })
-            .populate('categoryId', 'name')
+        const services = await this.model.find({ providerId: new Types.ObjectId(providerId) })
             .populate('subCategoryId', 'name')
+            .exec();
+
+        return services as unknown as IPopulatedService[];
     }
 
     public async findServicesWithProvider(
-        subCategoryId: string, 
+        subCategoryId: string,
         maxPrice?: number
     ): Promise<IServiceWithProvider[]> {
-        
+
         const matchStage: PipelineStage.Match = {
             $match: {
                 subCategoryId: new Types.ObjectId(subCategoryId),
