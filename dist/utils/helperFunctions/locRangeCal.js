@@ -1,10 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.isProviderInRange = void 0;
-const isProviderInRange = (providers, userLat, userLng, radiusKm) => {
-    var _a;
+export const isProviderInRange = (providers, userLat, userLng, radiusKm) => {
     for (const provider of providers) {
-        const coords = (_a = provider.serviceLocation) === null || _a === void 0 ? void 0 : _a.coordinates;
+        const coords = provider.serviceLocation?.coordinates;
         if (!coords || coords.length !== 2)
             continue;
         const providerLng = coords[0];
@@ -16,14 +12,12 @@ const isProviderInRange = (providers, userLat, userLng, radiusKm) => {
     }
     return false;
 };
-exports.isProviderInRange = isProviderInRange;
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     const R = 6371;
     const dLat = deg2rad(lat2 - lat1);
     const dLon = deg2rad(lon2 - lon1);
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }

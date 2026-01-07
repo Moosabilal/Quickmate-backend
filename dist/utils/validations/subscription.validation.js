@@ -1,42 +1,41 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.calculateUpgradeSchema = exports.getSubscriptionPlanQuerySchema = exports.verifySubscriptionPaymentSchema = exports.createSubscriptionOrderSchema = exports.updateSubscriptionPlanSchema = exports.createSubscriptionPlanSchema = exports.providerIdParamSchema = exports.paramIdSchema = void 0;
-const zod_1 = require("zod");
-exports.paramIdSchema = zod_1.z.object({
-    id: zod_1.z.string().min(1, "ID is required"),
+import { z } from "zod";
+export const paramIdSchema = z.object({
+    id: z.string().min(1, "ID is required"),
 });
-exports.providerIdParamSchema = zod_1.z.object({
-    providerId: zod_1.z.string().min(1, "ID is required"),
+export const providerIdParamSchema = z.object({
+    providerId: z.string().min(1, "ID is required"),
 });
-exports.createSubscriptionPlanSchema = zod_1.z.object({
-    name: zod_1.z.string().min(3, "Plan name must be at least 3 characters long."),
-    description: zod_1.z.string().optional(),
-    price: zod_1.z.coerce.number().positive("Price must be a positive number."),
-    durationInDays: zod_1.z.coerce.number().int().positive("Duration must be a positive whole number."),
-    features: zod_1.z.array(zod_1.z.string().min(1, "Feature description cannot be empty.")).min(1, "At least one feature is required."),
+export const createSubscriptionPlanSchema = z.object({
+    name: z.string().min(3, "Plan name must be at least 3 characters long."),
+    description: z.string().optional(),
+    price: z.coerce.number().positive("Price must be a positive number."),
+    durationInDays: z.coerce.number().int().positive("Duration must be a positive whole number."),
+    features: z
+        .array(z.string().min(1, "Feature description cannot be empty."))
+        .min(1, "At least one feature is required."),
 });
-exports.updateSubscriptionPlanSchema = zod_1.z.object({
-    id: zod_1.z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid Plan ID format'),
-    name: zod_1.z.string().min(3).optional(),
-    description: zod_1.z.string().optional(),
-    price: zod_1.z.coerce.number().positive().optional(),
-    durationInDays: zod_1.z.coerce.number().int().positive().optional(),
-    features: zod_1.z.array(zod_1.z.string().min(1)).min(1).optional(),
+export const updateSubscriptionPlanSchema = z.object({
+    id: z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid Plan ID format"),
+    name: z.string().min(3).optional(),
+    description: z.string().optional(),
+    price: z.coerce.number().positive().optional(),
+    durationInDays: z.coerce.number().int().positive().optional(),
+    features: z.array(z.string().min(1)).min(1).optional(),
 });
-exports.createSubscriptionOrderSchema = zod_1.z.object({
-    providerId: zod_1.z.string().min(1, "ID is required"),
-    planId: zod_1.z.string().min(1, "ID is required"),
+export const createSubscriptionOrderSchema = z.object({
+    providerId: z.string().min(1, "ID is required"),
+    planId: z.string().min(1, "ID is required"),
 });
-exports.verifySubscriptionPaymentSchema = zod_1.z.object({
-    providerId: zod_1.z.string().min(1, "ID is required"),
-    planId: zod_1.z.string().min(1, "ID is required"),
-    razorpay_order_id: zod_1.z.string(),
-    razorpay_payment_id: zod_1.z.string(),
-    razorpay_signature: zod_1.z.string(),
+export const verifySubscriptionPaymentSchema = z.object({
+    providerId: z.string().min(1, "ID is required"),
+    planId: z.string().min(1, "ID is required"),
+    razorpay_order_id: z.string(),
+    razorpay_payment_id: z.string(),
+    razorpay_signature: z.string(),
 });
-exports.getSubscriptionPlanQuerySchema = zod_1.z.object({
-    search: zod_1.z.string().optional(),
+export const getSubscriptionPlanQuerySchema = z.object({
+    search: z.string().optional(),
 });
-exports.calculateUpgradeSchema = zod_1.z.object({
-    newPlanId: zod_1.z.string().min(1, "ID is required"),
+export const calculateUpgradeSchema = z.object({
+    newPlanId: z.string().min(1, "ID is required"),
 });

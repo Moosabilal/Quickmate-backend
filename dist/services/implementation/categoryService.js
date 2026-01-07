@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,442 +10,409 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoryService = void 0;
-const mongoose_1 = require("mongoose");
-const inversify_1 = require("inversify");
-const type_1 = __importDefault(require("../../di/type"));
-const CommissionType_enum_1 = require("../../enums/CommissionType.enum");
-const CustomError_1 = require("../../utils/CustomError");
-const HttpStatusCode_1 = require("../../enums/HttpStatusCode");
-const category_mapper_1 = require("../../utils/mappers/category.mapper");
-const date_fns_1 = require("date-fns");
-const cloudinaryUpload_1 = require("../../utils/cloudinaryUpload");
+import { Types } from "mongoose";
+import { inject, injectable } from "inversify";
+import TYPES from "../../di/type";
+import { CommissionTypes } from "../../enums/CommissionType.enum";
+import { CustomError } from "../../utils/CustomError";
+import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import { toCategoryResponseDTO, toCommissionRuleResponseDTO } from "../../utils/mappers/category.mapper";
+import { endOfDay, startOfDay, subDays } from "date-fns";
+import { getSignedUrl } from "../../utils/cloudinaryUpload";
 let CategoryService = class CategoryService {
+    _categoryRepository;
+    _commissionRuleRepository;
+    _paymentRepository;
+    _bookingRepository;
     constructor(categoryRepository, commissionRuleRepository, paymentRepository, bookingRepository) {
         this._categoryRepository = categoryRepository;
         this._commissionRuleRepository = commissionRuleRepository;
         this._paymentRepository = paymentRepository;
         this._bookingRepository = bookingRepository;
     }
-    createCategory(categoryInput, commissionRuleInput) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var _a, _b;
-            if (categoryInput.parentId) {
-                const parentCategory = yield this._categoryRepository.findOne({ _id: categoryInput.parentId });
-                if (!parentCategory) {
-                    throw new CustomError_1.CustomError('Parent category not found.', HttpStatusCode_1.HttpStatusCode.NOT_FOUND);
-                }
-                const existingSubcategory = yield this._categoryRepository.findSubCatByName(categoryInput.name);
-                if (existingSubcategory) {
-                    throw new CustomError_1.CustomError('A subcategory with this name already exists under the parent.', HttpStatusCode_1.HttpStatusCode.CONFLICT);
-                }
-            }
-            else {
-                const existingTopLevelCategory = yield this._categoryRepository.findByName(categoryInput.name);
-                if (existingTopLevelCategory) {
-                    throw new CustomError_1.CustomError('A top-level category with this name already exists.', HttpStatusCode_1.HttpStatusCode.CONFLICT);
-                }
-            }
-            const categoryDataToCreate = Object.assign(Object.assign({}, categoryInput), { parentId: categoryInput.parentId
-                    ? new mongoose_1.Types.ObjectId(categoryInput.parentId)
-                    : null, status: (_a = categoryInput.status) !== null && _a !== void 0 ? _a : true });
-            const createdCategoryDoc = yield this._categoryRepository.create(categoryDataToCreate);
-            const categoryObj = createdCategoryDoc.toJSON();
-            const categoryResponse = Object.assign(Object.assign({}, categoryObj), { iconUrl: categoryObj.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(categoryObj.iconUrl) : null });
-            let createdCommissionRule;
-            const ruleData = {
-                categoryId: createdCategoryDoc._id ? new mongoose_1.Types.ObjectId(createdCategoryDoc._id) : null,
-                commissionType: commissionRuleInput.commissionType,
-                commissionValue: commissionRuleInput.commissionValue,
-                status: (_b = commissionRuleInput.status) !== null && _b !== void 0 ? _b : true,
-            };
-            const newRule = yield this._commissionRuleRepository.create(ruleData);
-            createdCommissionRule = newRule.toJSON();
-            return { category: categoryResponse, commissionRule: createdCommissionRule };
-        });
-    }
-    updateCategory(categoryId, updateData, commissionRuleData) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const existingCategory = yield this._categoryRepository.findById(categoryId);
-            if (!existingCategory) {
-                throw new Error('Category not found.');
-            }
-            yield this._validateParentCategory(categoryId, updateData.parentId);
-            yield this._validateNameUniqueness(categoryId, updateData, existingCategory);
-            const updatedCategoryDoc = yield this._categoryRepository.update(categoryId, updateData);
-            const updatedCategory = updatedCategoryDoc ? (0, category_mapper_1.toCategoryResponseDTO)(updatedCategoryDoc) : null;
-            let updatedCommissionRule = yield this._handleCommissionRuleUpdate(categoryId, commissionRuleData);
-            if (updateData.status !== undefined) {
-                const newStatus = updateData.status;
-                yield this._commissionRuleRepository.updateStatusForCategoryIds([existingCategory._id], newStatus);
-                if (!existingCategory.parentId) {
-                    const subcategoryIds = yield this._categoryRepository.findSubcategoryIds(categoryId.toString());
-                    if (subcategoryIds.length > 0) {
-                        yield this._categoryRepository.updateStatusForIds(subcategoryIds, newStatus);
-                        yield this._commissionRuleRepository.updateStatusForCategoryIds(subcategoryIds, newStatus);
-                    }
-                }
-                const rule = yield this._commissionRuleRepository.findOne({ categoryId });
-                updatedCommissionRule = rule ? (0, category_mapper_1.toCommissionRuleResponseDTO)(rule) : null;
-            }
-            return { category: updatedCategory, commissionRule: updatedCommissionRule };
-        });
-    }
-    updateManySubcategoriesStatus(parentCategoryId, status) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this._categoryRepository.updateSubcategoriesStatus(parentCategoryId, status);
-        });
-    }
-    getCategoryById(categoryId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var _a, _b, _c;
-            const [categoryDoc, commissionRuleDoc, subCategoryDocs] = yield Promise.all([
-                this._categoryRepository.findById(categoryId),
-                this._commissionRuleRepository.findOne({ categoryId: categoryId }),
-                this._categoryRepository.findAll({ parentId: new mongoose_1.Types.ObjectId(categoryId) })
-            ]);
-            if (!categoryDoc) {
-                throw new Error('Category not found.');
-            }
-            const categoryDetails = {
-                id: categoryDoc._id.toString(),
-                name: categoryDoc.name,
-                description: categoryDoc.description || '',
-                iconUrl: categoryDoc.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(categoryDoc.iconUrl) : null,
-                status: (_a = categoryDoc.status) !== null && _a !== void 0 ? _a : false,
-                parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
-                commissionType: (commissionRuleDoc === null || commissionRuleDoc === void 0 ? void 0 : commissionRuleDoc.commissionType) || CommissionType_enum_1.CommissionTypes.NONE,
-                commissionValue: (_b = commissionRuleDoc === null || commissionRuleDoc === void 0 ? void 0 : commissionRuleDoc.commissionValue) !== null && _b !== void 0 ? _b : '',
-                commissionStatus: (_c = commissionRuleDoc === null || commissionRuleDoc === void 0 ? void 0 : commissionRuleDoc.status) !== null && _c !== void 0 ? _c : false,
-            };
-            const subCategoryIds = subCategoryDocs.map(sub => sub._id);
-            let allSubCategoryRules = [];
-            if (subCategoryIds.length > 0) {
-                allSubCategoryRules = yield this._commissionRuleRepository.findAll({
-                    categoryId: { $in: subCategoryIds }
-                });
-            }
-            const commissionRulesMap = new Map(allSubCategoryRules.map(rule => [rule.categoryId.toString(), rule]));
-            const subCategories = subCategoryDocs.map((sub) => {
-                var _a, _b, _c;
-                const subRule = commissionRulesMap.get(sub._id.toString());
-                return {
-                    id: sub._id.toString(),
-                    name: sub.name,
-                    description: sub.description || '',
-                    iconUrl: sub.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(sub.iconUrl) : null,
-                    status: (_a = sub.status) !== null && _a !== void 0 ? _a : false,
-                    parentId: sub.parentId ? sub.parentId.toString() : null,
-                    commissionType: (subRule === null || subRule === void 0 ? void 0 : subRule.commissionType) || CommissionType_enum_1.CommissionTypes.NONE,
-                    commissionValue: (_b = subRule === null || subRule === void 0 ? void 0 : subRule.commissionValue) !== null && _b !== void 0 ? _b : '',
-                    commissionStatus: (_c = subRule === null || subRule === void 0 ? void 0 : subRule.status) !== null && _c !== void 0 ? _c : false,
-                };
+    async createCategory(categoryInput, commissionRuleInput) {
+        if (categoryInput.parentId) {
+            const parentCategory = await this._categoryRepository.findOne({
+                _id: categoryInput.parentId,
             });
+            if (!parentCategory) {
+                throw new CustomError("Parent category not found.", HttpStatusCode.NOT_FOUND);
+            }
+            const existingSubcategory = await this._categoryRepository.findSubCatByName(categoryInput.name);
+            if (existingSubcategory) {
+                throw new CustomError("A subcategory with this name already exists under the parent.", HttpStatusCode.CONFLICT);
+            }
+        }
+        else {
+            const existingTopLevelCategory = await this._categoryRepository.findByName(categoryInput.name);
+            if (existingTopLevelCategory) {
+                throw new CustomError("A top-level category with this name already exists.", HttpStatusCode.CONFLICT);
+            }
+        }
+        const categoryDataToCreate = {
+            ...categoryInput,
+            parentId: categoryInput.parentId ? new Types.ObjectId(categoryInput.parentId) : null,
+            status: categoryInput.status ?? true,
+        };
+        const createdCategoryDoc = await this._categoryRepository.create(categoryDataToCreate);
+        const categoryObj = createdCategoryDoc.toJSON();
+        const categoryResponse = {
+            ...categoryObj,
+            iconUrl: categoryObj.iconUrl ? getSignedUrl(categoryObj.iconUrl) : null,
+        };
+        const ruleData = {
+            categoryId: createdCategoryDoc._id ? new Types.ObjectId(createdCategoryDoc._id) : null,
+            commissionType: commissionRuleInput.commissionType,
+            commissionValue: commissionRuleInput.commissionValue,
+            status: commissionRuleInput.status ?? true,
+        };
+        const newRule = await this._commissionRuleRepository.create(ruleData);
+        const createdCommissionRule = newRule.toJSON();
+        return {
+            category: categoryResponse,
+            commissionRule: createdCommissionRule,
+        };
+    }
+    async updateCategory(categoryId, updateData, commissionRuleData) {
+        const existingCategory = await this._categoryRepository.findById(categoryId);
+        if (!existingCategory) {
+            throw new Error("Category not found.");
+        }
+        await this._validateParentCategory(categoryId, updateData.parentId);
+        await this._validateNameUniqueness(categoryId, updateData, existingCategory);
+        const updatedCategoryDoc = await this._categoryRepository.update(categoryId, updateData);
+        const updatedCategory = updatedCategoryDoc ? toCategoryResponseDTO(updatedCategoryDoc) : null;
+        let updatedCommissionRule = await this._handleCommissionRuleUpdate(categoryId, commissionRuleData);
+        if (updateData.status !== undefined) {
+            const newStatus = updateData.status;
+            await this._commissionRuleRepository.updateStatusForCategoryIds([existingCategory._id], newStatus);
+            if (!existingCategory.parentId) {
+                const subcategoryIds = await this._categoryRepository.findSubcategoryIds(categoryId.toString());
+                if (subcategoryIds.length > 0) {
+                    await this._categoryRepository.updateStatusForIds(subcategoryIds, newStatus);
+                    await this._commissionRuleRepository.updateStatusForCategoryIds(subcategoryIds, newStatus);
+                }
+            }
+            const rule = await this._commissionRuleRepository.findOne({ categoryId });
+            updatedCommissionRule = rule ? toCommissionRuleResponseDTO(rule) : null;
+        }
+        return { category: updatedCategory, commissionRule: updatedCommissionRule };
+    }
+    async updateManySubcategoriesStatus(parentCategoryId, status) {
+        await this._categoryRepository.updateSubcategoriesStatus(parentCategoryId, status);
+    }
+    async getCategoryById(categoryId) {
+        const [categoryDoc, commissionRuleDoc, subCategoryDocs] = await Promise.all([
+            this._categoryRepository.findById(categoryId),
+            this._commissionRuleRepository.findOne({ categoryId: categoryId }),
+            this._categoryRepository.findAll({
+                parentId: new Types.ObjectId(categoryId),
+            }),
+        ]);
+        if (!categoryDoc) {
+            throw new Error("Category not found.");
+        }
+        const categoryDetails = {
+            id: categoryDoc._id.toString(),
+            name: categoryDoc.name,
+            description: categoryDoc.description || "",
+            iconUrl: categoryDoc.iconUrl ? getSignedUrl(categoryDoc.iconUrl) : null,
+            status: categoryDoc.status ?? false,
+            parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
+            commissionType: commissionRuleDoc?.commissionType || CommissionTypes.NONE,
+            commissionValue: commissionRuleDoc?.commissionValue ?? "",
+            commissionStatus: commissionRuleDoc?.status ?? false,
+        };
+        const subCategoryIds = subCategoryDocs.map((sub) => sub._id);
+        let allSubCategoryRules = [];
+        if (subCategoryIds.length > 0) {
+            allSubCategoryRules = await this._commissionRuleRepository.findAll({
+                categoryId: { $in: subCategoryIds },
+            });
+        }
+        const commissionRulesMap = new Map(allSubCategoryRules.map((rule) => [rule.categoryId.toString(), rule]));
+        const subCategories = subCategoryDocs.map((sub) => {
+            const subRule = commissionRulesMap.get(sub._id.toString());
             return {
-                categoryDetails,
-                subCategories
+                id: sub._id.toString(),
+                name: sub.name,
+                description: sub.description || "",
+                iconUrl: sub.iconUrl ? getSignedUrl(sub.iconUrl) : null,
+                status: sub.status ?? false,
+                parentId: sub.parentId ? sub.parentId.toString() : null,
+                commissionType: subRule?.commissionType || CommissionTypes.NONE,
+                commissionValue: subRule?.commissionValue ?? "",
+                commissionStatus: subRule?.status ?? false,
             };
         });
+        return {
+            categoryDetails,
+            subCategories,
+        };
     }
-    getCategoryForEdit(categoryId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var _a, _b;
-            const [categoryDoc, commissionRuleDoc] = yield Promise.all([
-                this._categoryRepository.findById(categoryId),
-                this._commissionRuleRepository.findOne({ categoryId: categoryId })
-            ]);
-            if (!categoryDoc) {
-                throw new Error('Category not found.');
-            }
-            const categoryDetails = {
-                id: categoryDoc._id.toString(),
-                name: categoryDoc.name,
-                description: categoryDoc.description || '',
-                iconUrl: categoryDoc.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(categoryDoc.iconUrl) : null,
-                status: (_a = categoryDoc.status) !== null && _a !== void 0 ? _a : false,
-                parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
-                commissionType: CommissionType_enum_1.CommissionTypes.NONE,
-                commissionValue: '',
+    async getCategoryForEdit(categoryId) {
+        const [categoryDoc, commissionRuleDoc] = await Promise.all([
+            this._categoryRepository.findById(categoryId),
+            this._commissionRuleRepository.findOne({ categoryId: categoryId }),
+        ]);
+        if (!categoryDoc) {
+            throw new Error("Category not found.");
+        }
+        const categoryDetails = {
+            id: categoryDoc._id.toString(),
+            name: categoryDoc.name,
+            description: categoryDoc.description || "",
+            iconUrl: categoryDoc.iconUrl ? getSignedUrl(categoryDoc.iconUrl) : null,
+            status: categoryDoc.status ?? false,
+            parentId: categoryDoc.parentId ? categoryDoc.parentId.toString() : null,
+            commissionType: CommissionTypes.NONE,
+            commissionValue: "",
+            commissionStatus: false,
+        };
+        if (commissionRuleDoc) {
+            categoryDetails.commissionType = commissionRuleDoc.commissionType;
+            categoryDetails.commissionValue = commissionRuleDoc.commissionValue || "";
+            categoryDetails.commissionStatus = commissionRuleDoc.status ?? false;
+        }
+        return categoryDetails;
+    }
+    async getAllCategoriesWithDetails(page, limit, search) {
+        const filter = { parentId: null };
+        if (search) {
+            filter.name = { $regex: search, $options: "i" };
+        }
+        const { categories, total } = await this._categoryRepository.findCategoriesWithDetails({
+            filter,
+            page,
+            limit,
+        });
+        const mappedData = categories.map((cat) => {
+            const categoryWithExtras = cat;
+            return {
+                id: categoryWithExtras._id.toString(),
+                name: categoryWithExtras.name,
+                description: categoryWithExtras.description || "",
+                iconUrl: categoryWithExtras.iconUrl ? getSignedUrl(categoryWithExtras.iconUrl) : null,
+                status: categoryWithExtras.status ?? false,
+                parentId: categoryWithExtras.parentId ? categoryWithExtras.parentId.toString() : null,
+                subCategoriesCount: categoryWithExtras.subCategoryCount || 0,
+                commissionType: categoryWithExtras.commissionRule?.commissionType || CommissionTypes.NONE,
+                commissionValue: categoryWithExtras.commissionRule?.commissionValue ?? "",
+                commissionStatus: categoryWithExtras.commissionRule?.status ?? false,
+            };
+        });
+        return {
+            data: mappedData,
+            total,
+            totalPages: Math.ceil(total / limit),
+        };
+    }
+    async getAllSubcategories(parentId) {
+        if (!Types.ObjectId.isValid(parentId)) {
+            throw new Error("Invalid parent ID.");
+        }
+        const subcategoryDocs = await this._categoryRepository.findAll({
+            parentId: new Types.ObjectId(parentId),
+        });
+        const subcategoriesWithRule = await Promise.all(subcategoryDocs.map(async (doc) => {
+            const raw = doc.toJSON();
+            const commonData = {
+                _id: raw._id.toString(),
+                name: raw.name,
+                description: raw.description || "",
+                iconUrl: raw.iconUrl ? getSignedUrl(raw.iconUrl) : null,
+                status: raw.status ?? false,
+                parentId: raw.parentId ? raw.parentId.toString() : null,
+            };
+            const commissionRuleDoc = await this._commissionRuleRepository.findOne({
+                categoryId: doc._id.toString(),
+            });
+            const mappedSubCategoryForFrontend = {
+                ...commonData,
+                commissionType: CommissionTypes.NONE,
+                commissionValue: 0,
                 commissionStatus: false,
             };
             if (commissionRuleDoc) {
-                categoryDetails.commissionType = commissionRuleDoc.commissionType;
-                categoryDetails.commissionValue = commissionRuleDoc.commissionValue || '';
-                categoryDetails.commissionStatus = (_b = commissionRuleDoc.status) !== null && _b !== void 0 ? _b : false;
+                mappedSubCategoryForFrontend.commissionType = commissionRuleDoc.commissionType;
+                mappedSubCategoryForFrontend.commissionValue = commissionRuleDoc.commissionValue;
+                mappedSubCategoryForFrontend.commissionStatus = commissionRuleDoc.status ?? false;
             }
-            return categoryDetails;
-        });
+            return { ...mappedSubCategoryForFrontend };
+        }));
+        return subcategoriesWithRule;
     }
-    getAllCategoriesWithDetails(page, limit, search) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const filter = { parentId: null };
-            if (search) {
-                filter.name = { $regex: search, $options: 'i' };
-            }
-            const { categories, total } = yield this._categoryRepository.findCategoriesWithDetails({
-                filter,
-                page,
-                limit
-            });
-            const mappedData = categories.map(cat => {
-                var _a, _b, _c, _d, _e, _f;
-                const categoryWithExtras = cat;
-                return {
-                    id: categoryWithExtras._id.toString(),
-                    name: categoryWithExtras.name,
-                    description: categoryWithExtras.description || '',
-                    iconUrl: categoryWithExtras.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(categoryWithExtras.iconUrl) : null,
-                    status: (_a = categoryWithExtras.status) !== null && _a !== void 0 ? _a : false,
-                    parentId: categoryWithExtras.parentId ? categoryWithExtras.parentId.toString() : null,
-                    subCategoriesCount: categoryWithExtras.subCategoryCount || 0,
-                    commissionType: ((_b = categoryWithExtras.commissionRule) === null || _b === void 0 ? void 0 : _b.commissionType) || CommissionType_enum_1.CommissionTypes.NONE,
-                    commissionValue: ((_d = (_c = categoryWithExtras.commissionRule) === null || _c === void 0 ? void 0 : _c.commissionValue) !== null && _d !== void 0 ? _d : ''),
-                    commissionStatus: (_f = (_e = categoryWithExtras.commissionRule) === null || _e === void 0 ? void 0 : _e.status) !== null && _f !== void 0 ? _f : false,
-                };
-            });
+    async getSubcategories(page, limit, search) {
+        const skip = (page - 1) * limit;
+        const [services, total] = await Promise.all([
+            this._categoryRepository.findAllSubCategories(search, skip, limit),
+            this._categoryRepository.countOfSubCategories(search),
+        ]);
+        const featuredServices = services.map((service) => {
             return {
-                data: mappedData,
-                total,
-                totalPages: Math.ceil(total / limit)
+                id: service._id.toString(),
+                name: service.name,
+                iconUrl: service.iconUrl ? getSignedUrl(service.iconUrl) : null,
+                parentId: service.parentId.toString(),
             };
         });
+        return {
+            allServices: featuredServices,
+            total,
+            totalPages: Math.ceil(total / limit),
+            currentPage: page,
+        };
     }
-    getAllSubcategories(parentId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!mongoose_1.Types.ObjectId.isValid(parentId)) {
-                throw new Error('Invalid parent ID.');
-            }
-            const subcategoryDocs = yield this._categoryRepository.findAll({
-                parentId: new mongoose_1.Types.ObjectId(parentId),
+    async _handleCommissionRuleUpdate(categoryId, commissionRuleInput) {
+        if (commissionRuleInput === undefined) {
+            const existingRule = await this._commissionRuleRepository.findOne({
+                categoryId,
             });
-            const subcategoriesWithRule = yield Promise.all(subcategoryDocs.map((doc) => __awaiter(this, void 0, void 0, function* () {
-                var _a, _b;
-                const raw = doc.toJSON();
-                const commonData = {
-                    _id: raw._id.toString(),
-                    name: raw.name,
-                    description: raw.description || '',
-                    iconUrl: raw.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(raw.iconUrl) : null,
-                    status: (_a = raw.status) !== null && _a !== void 0 ? _a : false,
-                    parentId: raw.parentId ? raw.parentId.toString() : null,
-                };
-                const commissionRuleDoc = yield this._commissionRuleRepository.findOne({ categoryId: doc._id.toString() });
-                const mappedSubCategoryForFrontend = Object.assign(Object.assign({}, commonData), { commissionType: CommissionType_enum_1.CommissionTypes.NONE, commissionValue: 0, commissionStatus: false });
-                if (commissionRuleDoc) {
-                    mappedSubCategoryForFrontend.commissionType = commissionRuleDoc.commissionType;
-                    mappedSubCategoryForFrontend.commissionValue = commissionRuleDoc.commissionValue;
-                    mappedSubCategoryForFrontend.commissionStatus = (_b = commissionRuleDoc.status) !== null && _b !== void 0 ? _b : false;
-                }
-                return Object.assign({}, mappedSubCategoryForFrontend);
-            })));
-            return subcategoriesWithRule;
+            return existingRule ? toCommissionRuleResponseDTO(existingRule) : null;
+        }
+        const existingRule = await this._commissionRuleRepository.findOne({
+            categoryId,
         });
-    }
-    getSubcategories(page, limit, search) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const skip = (page - 1) * limit;
-            const [services, total] = yield Promise.all([
-                this._categoryRepository.findAllSubCategories(search, skip, limit),
-                this._categoryRepository.countOfSubCategories(search),
-            ]);
-            const featuredServices = services.map(service => {
-                return {
-                    id: service._id.toString(),
-                    name: service.name,
-                    iconUrl: service.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(service.iconUrl) : null,
-                    parentId: service.parentId.toString()
-                };
-            });
-            return {
-                allServices: featuredServices,
-                total,
-                totalPages: Math.ceil(total / limit),
-                currentPage: page,
-            };
-        });
-    }
-    _handleCommissionRuleUpdate(categoryId, commissionRuleInput) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (commissionRuleInput === undefined) {
-                const existingRule = yield this._commissionRuleRepository.findOne({ categoryId });
-                return existingRule ? (0, category_mapper_1.toCommissionRuleResponseDTO)(existingRule) : null;
+        if (commissionRuleInput.commissionType === CommissionTypes.NONE) {
+            if (existingRule) {
+                await this._commissionRuleRepository.delete(existingRule._id.toString());
             }
-            const existingRule = yield this._commissionRuleRepository.findOne({ categoryId });
-            if (commissionRuleInput.commissionType === CommissionType_enum_1.CommissionTypes.NONE) {
-                if (existingRule) {
-                    yield this._commissionRuleRepository.delete(existingRule._id.toString());
-                }
-                return null;
+            return null;
+        }
+        const resultDoc = await this._commissionRuleRepository.createOrUpdate(categoryId, commissionRuleInput);
+        return resultDoc ? toCommissionRuleResponseDTO(resultDoc) : null;
+    }
+    async _validateParentCategory(categoryId, newParentId) {
+        if (newParentId === undefined)
+            return;
+        if (newParentId !== null) {
+            if (!Types.ObjectId.isValid(newParentId)) {
+                throw new Error("Invalid parent category ID provided.");
             }
-            const resultDoc = yield this._commissionRuleRepository.createOrUpdate(categoryId, commissionRuleInput);
-            return resultDoc ? (0, category_mapper_1.toCommissionRuleResponseDTO)(resultDoc) : null;
-        });
-    }
-    _validateParentCategory(categoryId, newParentId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (newParentId === undefined)
-                return;
-            if (newParentId !== null) {
-                if (!mongoose_1.Types.ObjectId.isValid(newParentId)) {
-                    throw new Error('Invalid parent category ID provided.');
-                }
-                if (categoryId === newParentId) {
-                    throw new Error('Category cannot be its own parent.');
-                }
-                const parentCategory = yield this._categoryRepository.findById(newParentId);
-                if (!parentCategory) {
-                    throw new Error('New parent category not found.');
-                }
+            if (categoryId === newParentId) {
+                throw new Error("Category cannot be its own parent.");
             }
-        });
-    }
-    _validateNameUniqueness(categoryId, updateData, existingCategory) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!updateData.name || updateData.name === existingCategory.name) {
-                return;
-            }
-            const targetParentId = updateData.parentId !== undefined ? updateData.parentId : existingCategory.parentId;
-            const existingWithNewName = targetParentId
-                ? yield this._categoryRepository.findByNameAndParent(updateData.name, targetParentId)
-                : yield this._categoryRepository.findByName(updateData.name);
-            if (existingWithNewName && existingWithNewName._id.toString() !== categoryId) {
-                const message = targetParentId
-                    ? 'A subcategory with this name already exists under the specified parent.'
-                    : 'A top-level category with this name already exists.';
-                throw new Error(message);
-            }
-        });
-    }
-    getCommissionSummary() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const now = new Date();
-            const currentPeriodStart = (0, date_fns_1.startOfDay)((0, date_fns_1.subDays)(now, 30));
-            const currentPeriodEnd = (0, date_fns_1.endOfDay)(now);
-            const previousPeriodStart = (0, date_fns_1.startOfDay)((0, date_fns_1.subDays)(now, 60));
-            const previousPeriodEnd = (0, date_fns_1.endOfDay)((0, date_fns_1.subDays)(now, 31));
-            const [currentPayments, previousPayments, currentBookingsCount, previousBookingsCount] = yield Promise.all([
-                this._paymentRepository.getTotalsInDateRange(currentPeriodStart, currentPeriodEnd),
-                this._paymentRepository.getTotalsInDateRange(previousPeriodStart, previousPeriodEnd),
-                this._bookingRepository.countInDateRange(currentPeriodStart, currentPeriodEnd),
-                this._bookingRepository.countInDateRange(previousPeriodStart, previousPeriodEnd)
-            ]);
-            const calculateChange = (current, previous) => {
-                if (previous === 0) {
-                    return current > 0 ? 100 : 0;
-                }
-                return ((current - previous) / previous) * 100;
-            };
-            const avgCommissionCurrent = currentBookingsCount > 0 ? currentPayments.totalCommission / currentBookingsCount : 0;
-            const avgCommissionPrevious = previousBookingsCount > 0 ? previousPayments.totalCommission / previousBookingsCount : 0;
-            return {
-                totalCommissionRevenue: currentPayments.totalCommission,
-                totalCommissionRevenueChange: calculateChange(currentPayments.totalCommission, previousPayments.totalCommission),
-                averageCommissionPerBooking: avgCommissionCurrent,
-                averageCommissionPerBookingChange: calculateChange(avgCommissionCurrent, avgCommissionPrevious),
-                totalBookings: currentBookingsCount,
-                totalBookingsChange: calculateChange(currentBookingsCount, previousBookingsCount),
-                commissionDeductionsToProviders: currentPayments.totalProviderAmount,
-                commissionDeductionsToProvidersChange: calculateChange(currentPayments.totalProviderAmount, previousPayments.totalProviderAmount)
-            };
-        });
-    }
-    getTopLevelCategories() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const categories = yield this._categoryRepository.findAll({
-                parentId: null,
-                status: true
-            });
-            return categories.map(category_mapper_1.toCategoryResponseDTO);
-        });
-    }
-    getPopularServices() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const services = yield this._categoryRepository.findActiveSubCategories(-1, 0, 5);
-            return services.map(s => ({
-                id: s._id.toString(),
-                name: s.name,
-                iconUrl: s.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(s.iconUrl) : null,
-                parentId: s.parentId.toString(),
-                description: s.description || '',
-            }));
-        });
-    }
-    getTrendingServices() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const services = yield this._categoryRepository.findActiveSubCategories(-1, 5, 6);
-            return services.map(s => ({
-                id: s._id.toString(),
-                name: s.name,
-                iconUrl: s.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(s.iconUrl) : null,
-                parentId: s.parentId.toString(),
-                description: s.description || '',
-            }));
-        });
-    }
-    getTopLevelCategoryNames() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const categories = yield this._categoryRepository.findAll({
-                parentId: null,
-                status: true
-            });
-            return categories.map(cat => cat.name);
-        });
-    }
-    getSubcategoriesForCategory(parentCategoryName) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const parentCategory = yield this._categoryRepository.findOne({
-                name: { $regex: new RegExp(`^${parentCategoryName}$`, 'i') },
-                parentId: null
-            });
+            const parentCategory = await this._categoryRepository.findById(newParentId);
             if (!parentCategory) {
-                return [];
+                throw new Error("New parent category not found.");
             }
-            const subCategories = yield this._categoryRepository.findAll({
-                parentId: parentCategory._id,
-                status: true
-            });
-            return subCategories.map(cat => cat.name);
-        });
+        }
     }
-    getRelatedCategories(categoryId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const currentCategory = yield this._categoryRepository.findById(categoryId);
-            if (!currentCategory || !currentCategory.parentId) {
-                return [];
+    async _validateNameUniqueness(categoryId, updateData, existingCategory) {
+        if (!updateData.name || updateData.name === existingCategory.name) {
+            return;
+        }
+        const targetParentId = updateData.parentId !== undefined ? updateData.parentId : existingCategory.parentId;
+        const existingWithNewName = targetParentId
+            ? await this._categoryRepository.findByNameAndParent(updateData.name, targetParentId)
+            : await this._categoryRepository.findByName(updateData.name);
+        if (existingWithNewName && existingWithNewName._id.toString() !== categoryId) {
+            const message = targetParentId
+                ? "A subcategory with this name already exists under the specified parent."
+                : "A top-level category with this name already exists.";
+            throw new Error(message);
+        }
+    }
+    async getCommissionSummary() {
+        const now = new Date();
+        const currentPeriodStart = startOfDay(subDays(now, 30));
+        const currentPeriodEnd = endOfDay(now);
+        const previousPeriodStart = startOfDay(subDays(now, 60));
+        const previousPeriodEnd = endOfDay(subDays(now, 31));
+        const [currentPayments, previousPayments, currentBookingsCount, previousBookingsCount] = await Promise.all([
+            this._paymentRepository.getTotalsInDateRange(currentPeriodStart, currentPeriodEnd),
+            this._paymentRepository.getTotalsInDateRange(previousPeriodStart, previousPeriodEnd),
+            this._bookingRepository.countInDateRange(currentPeriodStart, currentPeriodEnd),
+            this._bookingRepository.countInDateRange(previousPeriodStart, previousPeriodEnd),
+        ]);
+        const calculateChange = (current, previous) => {
+            if (previous === 0) {
+                return current > 0 ? 100 : 0;
             }
-            const related = yield this._categoryRepository.findRelatedCategories(currentCategory.parentId.toString(), categoryId, 4);
-            return related.map(cat => {
-                var _a;
-                return ({
-                    id: cat._id.toString(),
-                    name: cat.name,
-                    description: cat.description || '',
-                    iconUrl: cat.iconUrl ? (0, cloudinaryUpload_1.getSignedUrl)(cat.iconUrl) : '',
-                    parentId: ((_a = cat.parentId) === null || _a === void 0 ? void 0 : _a.toString()) || null,
-                });
-            });
+            return ((current - previous) / previous) * 100;
+        };
+        const avgCommissionCurrent = currentBookingsCount > 0 ? currentPayments.totalCommission / currentBookingsCount : 0;
+        const avgCommissionPrevious = previousBookingsCount > 0 ? previousPayments.totalCommission / previousBookingsCount : 0;
+        return {
+            totalCommissionRevenue: currentPayments.totalCommission,
+            totalCommissionRevenueChange: calculateChange(currentPayments.totalCommission, previousPayments.totalCommission),
+            averageCommissionPerBooking: avgCommissionCurrent,
+            averageCommissionPerBookingChange: calculateChange(avgCommissionCurrent, avgCommissionPrevious),
+            totalBookings: currentBookingsCount,
+            totalBookingsChange: calculateChange(currentBookingsCount, previousBookingsCount),
+            commissionDeductionsToProviders: currentPayments.totalProviderAmount,
+            commissionDeductionsToProvidersChange: calculateChange(currentPayments.totalProviderAmount, previousPayments.totalProviderAmount),
+        };
+    }
+    async getTopLevelCategories() {
+        const categories = await this._categoryRepository.findAll({
+            parentId: null,
+            status: true,
         });
+        return categories.map(toCategoryResponseDTO);
+    }
+    async getPopularServices() {
+        const services = await this._categoryRepository.findActiveSubCategories(-1, 0, 5);
+        return services.map((s) => ({
+            id: s._id.toString(),
+            name: s.name,
+            iconUrl: s.iconUrl ? getSignedUrl(s.iconUrl) : null,
+            parentId: s.parentId.toString(),
+            description: s.description || "",
+        }));
+    }
+    async getTrendingServices() {
+        const services = await this._categoryRepository.findActiveSubCategories(-1, 5, 6);
+        return services.map((s) => ({
+            id: s._id.toString(),
+            name: s.name,
+            iconUrl: s.iconUrl ? getSignedUrl(s.iconUrl) : null,
+            parentId: s.parentId.toString(),
+            description: s.description || "",
+        }));
+    }
+    async getTopLevelCategoryNames() {
+        const categories = await this._categoryRepository.findAll({
+            parentId: null,
+            status: true,
+        });
+        return categories.map((cat) => cat.name);
+    }
+    async getSubcategoriesForCategory(parentCategoryName) {
+        const parentCategory = await this._categoryRepository.findOne({
+            name: { $regex: new RegExp(`^${parentCategoryName}$`, "i") },
+            parentId: null,
+        });
+        if (!parentCategory) {
+            return [];
+        }
+        const subCategories = await this._categoryRepository.findAll({
+            parentId: parentCategory._id,
+            status: true,
+        });
+        return subCategories.map((cat) => cat.name);
+    }
+    async getRelatedCategories(categoryId) {
+        const currentCategory = await this._categoryRepository.findById(categoryId);
+        if (!currentCategory || !currentCategory.parentId) {
+            return [];
+        }
+        const related = await this._categoryRepository.findRelatedCategories(currentCategory.parentId.toString(), categoryId, 4);
+        return related.map((cat) => ({
+            id: cat._id.toString(),
+            name: cat.name,
+            description: cat.description || "",
+            iconUrl: cat.iconUrl ? getSignedUrl(cat.iconUrl) : "",
+            parentId: cat.parentId?.toString() || null,
+        }));
     }
 };
-exports.CategoryService = CategoryService;
-exports.CategoryService = CategoryService = __decorate([
-    (0, inversify_1.injectable)(),
-    __param(0, (0, inversify_1.inject)(type_1.default.CategoryRepository)),
-    __param(1, (0, inversify_1.inject)(type_1.default.CommissionRuleRepository)),
-    __param(2, (0, inversify_1.inject)(type_1.default.PaymentRepository)),
-    __param(3, (0, inversify_1.inject)(type_1.default.BookingRepository)),
+CategoryService = __decorate([
+    injectable(),
+    __param(0, inject(TYPES.CategoryRepository)),
+    __param(1, inject(TYPES.CommissionRuleRepository)),
+    __param(2, inject(TYPES.PaymentRepository)),
+    __param(3, inject(TYPES.BookingRepository)),
     __metadata("design:paramtypes", [Object, Object, Object, Object])
 ], CategoryService);
+export { CategoryService };

@@ -1,5 +1,5 @@
-import { IChatMessage } from "../../models/chatMessage";
-import { IBaseRepository } from "./base/IBaseRepository";
+import { type IChatMessage } from "../../models/chatMessage";
+import { type IBaseRepository } from "./base/IBaseRepository";
 
-
-export interface IChatMessageRepository extends IBaseRepository<IChatMessage> {}
+// export interface IChatMessageRepository extends IBaseRepository<IChatMessage> {}
+export type IChatMessageRepository = IBaseRepository<IChatMessage>;

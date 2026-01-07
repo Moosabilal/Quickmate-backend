@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,18 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.AddressRepository = void 0;
-const inversify_1 = require("inversify");
-const address_1 = require("../../models/address");
-const BaseRepository_1 = require("./base/BaseRepository");
-let AddressRepository = class AddressRepository extends BaseRepository_1.BaseRepository {
+import { injectable } from "inversify";
+import { Address } from "../../models/address";
+import { BaseRepository } from "./base/BaseRepository";
+let AddressRepository = class AddressRepository extends BaseRepository {
     constructor() {
-        super(address_1.Address);
+        super(Address);
     }
 };
-exports.AddressRepository = AddressRepository;
-exports.AddressRepository = AddressRepository = __decorate([
-    (0, inversify_1.injectable)(),
+AddressRepository = __decorate([
+    injectable(),
     __metadata("design:paramtypes", [])
 ], AddressRepository);
+export { AddressRepository };

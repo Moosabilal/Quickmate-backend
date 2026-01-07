@@ -20,8 +20,4 @@ interface WebRTCIceCandidatePayload extends WebRTCBasePayload {
   candidate: RTCIceCandidateInit;
 }
 
-export type WebRTCPayload = 
-  | WebRTCOfferPayload 
-  | WebRTCAnswerPayload 
-  | WebRTCIceCandidatePayload 
-  | WebRTCBasePayload; 
+export type WebRTCPayload = WebRTCOfferPayload | WebRTCAnswerPayload | WebRTCIceCandidatePayload | WebRTCBasePayload;

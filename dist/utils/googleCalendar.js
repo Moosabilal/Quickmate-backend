@@ -1,18 +1,14 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOAuthClient = getOAuthClient;
-exports.getAuthUrl = getAuthUrl;
-const googleapis_1 = require("googleapis");
-const SCOPES = ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/calendar.events",];
-function getOAuthClient() {
-    return new googleapis_1.google.auth.OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, process.env.GOOGLE_REDIRECT_URI);
+import { google } from "googleapis";
+const SCOPES = ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/calendar.events"];
+export function getOAuthClient() {
+    return new google.auth.OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, process.env.GOOGLE_REDIRECT_URI);
 }
-function getAuthUrl(userId) {
+export function getAuthUrl(userId) {
     const oAuth2Client = getOAuthClient();
     return oAuth2Client.generateAuthUrl({
         access_type: "offline",
         prompt: "consent",
         scope: SCOPES,
-        state: userId
+        state: userId,
     });
 }

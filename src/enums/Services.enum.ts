@@ -1,4 +1,4 @@
 export enum ServicesPriceUnit {
-    PERHOUR = "PerHour",
-    PERSERVICE = "PerService"
+  PERHOUR = "PerHour",
+  PERSERVICE = "PerService",
 }

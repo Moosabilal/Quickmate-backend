@@ -1,19 +1,18 @@
-import { CommissionRule, ICommissionRule } from '../../models/Commission';
-import { ICommissionRuleInput } from '../../interface/category';
-import { Types } from 'mongoose';
-import { ICommissionRuleRepository } from '../interface/ICommissonRuleRepository';
-import { injectable } from 'inversify';
-import { BaseRepository } from './base/BaseRepository';
+import { CommissionRule, type ICommissionRule } from "../../models/Commission";
+import { type ICommissionRuleInput } from "../../interface/category";
+import { Types } from "mongoose";
+import { type ICommissionRuleRepository } from "../interface/ICommissonRuleRepository";
+import { injectable } from "inversify";
+import { BaseRepository } from "./base/BaseRepository";
 
 @injectable()
 export class CommissionRuleRepository extends BaseRepository<ICommissionRule> implements ICommissionRuleRepository {
-
   constructor() {
-    super(CommissionRule)
+    super(CommissionRule);
   }
 
   async getAllCommissions(): Promise<ICommissionRule[]> {
-    return CommissionRule.find()
+    return CommissionRule.find();
   }
 
   async delete(id: string | Types.ObjectId): Promise<ICommissionRule | null> {
@@ -25,8 +24,9 @@ export class CommissionRuleRepository extends BaseRepository<ICommissionRule> im
   }
 
   async createOrUpdate(categoryId: string, ruleInput: ICommissionRuleInput): Promise<ICommissionRule> {
-
-    const existingRule = await this.findOne({ categoryId: new Types.ObjectId(categoryId) });
+    const existingRule = await this.findOne({
+      categoryId: new Types.ObjectId(categoryId),
+    });
 
     const ruleData = {
       categoryId: new Types.ObjectId(categoryId),

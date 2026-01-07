@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/.fafefa53e83df2442b5564aa66ed9a5439d794ab-audit.json",
+    "files": [
+        {
+            "date": 1767640432517,
+            "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-06.log",
+            "hash": "ecf6c905443529c49edaf94b186b28aaafe563754b77ae0b2aba6e49e1005bb3"
+        }
+    ],
+    "hashType": "sha256"
+}

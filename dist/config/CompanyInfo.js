@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CompanyInfo = void 0;
-exports.CompanyInfo = `
+export const CompanyInfo = `
 1. Introduction
 Your platform is a modern local services aggregator designed to connect customers with trusted service providers in their area.
 It uses AI-based recommendations, real-time tracking, and a seamless booking system to make finding, booking, and managing services faster and easier than ever before.

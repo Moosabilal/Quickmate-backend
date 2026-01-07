@@ -1,13 +1,13 @@
-import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
-import logger from '../logger/logger';
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+import logger from "../logger/logger";
 
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
-  port: parseInt(process.env.EMAIL_PORT || '465'),
-  secure: process.env.EMAIL_SECURE === 'true',
+  port: parseInt(process.env.EMAIL_PORT || "465"),
+  secure: process.env.EMAIL_SECURE === "true",
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -19,14 +19,14 @@ export const sendVerificationEmail = async (toEmail: string, otp: string): Promi
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: toEmail,
-      subject: 'QuickMate Account Verification OTP',
+      subject: "QuickMate Account Verification OTP",
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <h2>Account Verification</h2>
           <p>Hello,</p>
           <p>Thank you for registering with QuickMate. To complete your registration, please use the following One-Time Password (OTP):</p>
           <p style="font-size: 24px; font-weight: bold; color: #007bff; background-color: #f0f0f0; padding: 15px; border-radius: 5px; text-align: center;">${otp}</p>
-          <p>This OTP is valid for <strong>${process.env.OTP_EXPIRY_MINUTES || '5'} minutes</strong>.</p>
+          <p>This OTP is valid for <strong>${process.env.OTP_EXPIRY_MINUTES || "5"} minutes</strong>.</p>
           <p>If you did not request this, please ignore this email.</p>
           <p>Regards,<br/>QuickMate Team</p>
         </div>
@@ -38,7 +38,7 @@ export const sendVerificationEmail = async (toEmail: string, otp: string): Promi
     logger.info(`Verification OTP sent to ${toEmail}`);
   } catch (error) {
     logger.error(`Error sending verification email to ${toEmail}:`, error);
-    throw new Error('Failed to send verification email.');
+    throw new Error("Failed to send verification email.");
   }
 };
 
@@ -46,7 +46,7 @@ export const sendPasswordResetEmail = async (to: string, resetLink: string) => {
   const mailOptions = {
     from: process.env.EMAIL_FROM,
     to,
-    subject: 'QuickMate Password Reset Request',
+    subject: "QuickMate Password Reset Request",
     html: `
       <p>You requested a password reset for your QuickMate account.</p>
       <p>Please click on the following link to reset your password:</p>
@@ -63,16 +63,15 @@ export const sendPasswordResetEmail = async (to: string, resetLink: string) => {
     logger.info(`Password reset email sent to ${to}`);
   } catch (error) {
     logger.error(`Error sending password reset email to ${to}:`, error);
-    throw new Error('Failed to send password reset email.');
+    throw new Error("Failed to send password reset email.");
   }
-
 };
 
 export const sendContactUsEmail = async (name: string, email: string, message: string) => {
   const mailOptions = {
     from: `"${name}" <${email}>`,
     to: process.env.RECEIVER_EMAIL,
-    subject: 'New Contact Form Submission',
+    subject: "New Contact Form Submission",
     text: message,
     html: `<p><strong>Name:</strong> ${name}</p>
            <p><strong>Email:</strong> ${email}</p>
@@ -81,20 +80,20 @@ export const sendContactUsEmail = async (name: string, email: string, message: s
 
   try {
     await transporter.sendMail(mailOptions);
-    logger.info('Email received from the customer ')
+    logger.info("Email received from the customer ");
   } catch (err) {
-    logger.error('Error sending email:', err);
-    throw new Error('Failed to send email');
+    logger.error("Error sending email:", err);
+    throw new Error("Failed to send email");
   }
-}
+};
 
 export const sendBookingVerificationEmail = async (toEmail: string, otp: string): Promise<void> => {
   try {
-    logger.info('the email', toEmail, otp)
+    logger.info("the email", toEmail, otp);
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: toEmail,
-      subject: 'QuickMate Booked Service Completion OTP',
+      subject: "QuickMate Booked Service Completion OTP",
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <h2>Booking Completion Verification</h2>
@@ -112,17 +111,16 @@ export const sendBookingVerificationEmail = async (toEmail: string, otp: string)
     logger.info(`Verification OTP sent to ${toEmail}`);
   } catch (error) {
     logger.error(`Error sending booking completion email to ${toEmail}:`, error);
-    throw new Error('Failed to send booking completion email.');
+    throw new Error("Failed to send booking completion email.");
   }
 };
-
 
 export const sendPenaltyEmail = async (toEmail: string, bookingDate: string, newRating: number): Promise<void> => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: toEmail,
-      subject: '⚠️ Notice: Penalty Applied for Missed Booking - QuickMate',
+      subject: "⚠️ Notice: Penalty Applied for Missed Booking - QuickMate",
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px;">
           <h2 style="color: #d9534f; border-bottom: 2px solid #d9534f; padding-bottom: 10px;">Missed Booking Alert</h2>
@@ -155,17 +153,16 @@ export const sendPenaltyEmail = async (toEmail: string, bookingDate: string, new
   }
 };
 
-
 export const sendUserStatusChangeEmail = async (
   toEmail: string,
   userName: string,
   isBlocked: boolean,
-  reason?: string
+  reason?: string,
 ): Promise<void> => {
   try {
     const subject = isBlocked
-      ? '⚠️ Important: Your QuickMate Account Access Has Been Restricted'
-      : '✅ Your QuickMate Account Has Been Reactivated';
+      ? "⚠️ Important: Your QuickMate Account Access Has Been Restricted"
+      : "✅ Your QuickMate Account Has Been Reactivated";
 
     const blockTemplate = `
         <h2 style="color: #d9534f; border-bottom: 2px solid #d9534f; padding-bottom: 10px;">Account Access Suspended</h2>
@@ -217,17 +214,17 @@ export const sendProviderStatusUpdateEmail = async (
   toEmail: string,
   providerName: string,
   status: string,
-  reason?: string
+  reason?: string,
 ): Promise<void> => {
   try {
-    let subject = '';
-    let bodyContent = '';
-    let colorCode = '#333';
+    let subject = "";
+    let bodyContent = "";
+    let colorCode = "#333";
 
     switch (status) {
-      case 'Pending':
-        subject = 'Application Under Review - QuickMate';
-        colorCode = '#17a2b8';
+      case "Pending":
+        subject = "Application Under Review - QuickMate";
+        colorCode = "#17a2b8";
         bodyContent = `
                     <h2 style="color: ${colorCode}; border-bottom: 2px solid ${colorCode}; padding-bottom: 10px;">Verification Successful</h2>
                     <p>Dear ${providerName},</p>
@@ -246,9 +243,9 @@ export const sendProviderStatusUpdateEmail = async (
                     </ul>
                 `;
         break;
-      case 'Approved':
-        subject = '🎉 Congratulations! Your QuickMate Provider Account is Approved';
-        colorCode = '#28a745';
+      case "Approved":
+        subject = "🎉 Congratulations! Your QuickMate Provider Account is Approved";
+        colorCode = "#28a745";
         bodyContent = `
                     <h2 style="color: ${colorCode}; border-bottom: 2px solid ${colorCode}; padding-bottom: 10px;">Application Approved</h2>
                     <p>Dear ${providerName},</p>
@@ -261,9 +258,9 @@ export const sendProviderStatusUpdateEmail = async (
                 `;
         break;
 
-      case 'Rejected':
-        subject = 'Update regarding your QuickMate Provider Application';
-        colorCode = '#d9534f';
+      case "Rejected":
+        subject = "Update regarding your QuickMate Provider Application";
+        colorCode = "#d9534f";
         bodyContent = `
                     <h2 style="color: ${colorCode}; border-bottom: 2px solid ${colorCode}; padding-bottom: 10px;">Application Status</h2>
                     <p>Dear ${providerName},</p>
@@ -278,9 +275,9 @@ export const sendProviderStatusUpdateEmail = async (
                 `;
         break;
 
-      case 'Suspended':
-        subject = '⚠️ Urgent: Your QuickMate Provider Account Suspended';
-        colorCode = '#ffc107';
+      case "Suspended":
+        subject = "⚠️ Urgent: Your QuickMate Provider Account Suspended";
+        colorCode = "#ffc107";
         bodyContent = `
                     <h2 style="color: #856404; border-bottom: 2px solid ${colorCode}; padding-bottom: 10px;">Account Suspended</h2>
                     <p>Dear ${providerName},</p>
@@ -297,12 +294,12 @@ export const sendProviderStatusUpdateEmail = async (
         break;
 
       default:
-        subject = 'QuickMate Provider Account Status Update';
+        subject = "QuickMate Provider Account Status Update";
         bodyContent = `
                     <h2>Status Update</h2>
                     <p>Dear ${providerName},</p>
                     <p>Your provider account status has been updated to: <strong>${status}</strong>.</p>
-                    ${reason ? `<p><strong>Note:</strong> ${reason}</p>` : ''}
+                    ${reason ? `<p><strong>Note:</strong> ${reason}</p>` : ""}
                 `;
         break;
     }
@@ -322,7 +319,6 @@ export const sendProviderStatusUpdateEmail = async (
     logger.info(`Sending provider status email (${status}) to ${toEmail}`);
     await transporter.sendMail(mailOptions);
     logger.info(`Provider status email sent successfully`);
-
   } catch (error) {
     logger.error(`Error sending provider status email to ${toEmail}:`, error);
   }

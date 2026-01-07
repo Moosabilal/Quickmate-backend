@@ -7,10 +7,10 @@ export enum ErrorMessage {
   INTERNAL_ERROR = "Something went wrong. Please try again later.",
 
   //token errors
-  TOKEN_EXPIRED = 'Token has expired.',
-  INVALID_TOKEN = 'Invalid token.',
-  MISSING_TOKEN = 'Authorization token is missing. Please re-login',
-  INVALID_REFRESH_TOKEN = 'Refresh token invalid or expired. Please re-login.',
+  TOKEN_EXPIRED = "Token has expired.",
+  INVALID_TOKEN = "Invalid token.",
+  MISSING_TOKEN = "Authorization token is missing. Please re-login",
+  INVALID_REFRESH_TOKEN = "Refresh token invalid or expired. Please re-login.",
 
   //provider errors
   PROVIDER_NOT_FOUND = "Provider not found",
@@ -28,5 +28,5 @@ export enum ErrorMessage {
   //subscriptionPlan errors
   PLAN_ALREADY_EXITS = "This named plan already exist, Please provide another name",
   NO_PLANS = "No subscription Plan created",
-  PLAN_NOT_FOUND = "Subscription Plan not found"
+  PLAN_NOT_FOUND = "Subscription Plan not found",
 }

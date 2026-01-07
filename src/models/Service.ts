@@ -1,5 +1,5 @@
-import mongoose, { Schema, Types, InferSchemaType, HydratedDocument } from 'mongoose';
-import { ServicesPriceUnit } from '../enums/Services.enum';
+import mongoose, { Schema, Types, type InferSchemaType, type HydratedDocument } from "mongoose";
+import { ServicesPriceUnit } from "../enums/Services.enum";
 
 const ServiceSchema = new Schema(
   {
@@ -13,12 +13,12 @@ const ServiceSchema = new Schema(
     },
     categoryId: {
       type: Types.ObjectId,
-      ref: 'Category',
+      ref: "Category",
       required: true,
     },
     subCategoryId: {
       type: Types.ObjectId,
-      ref: 'Category',
+      ref: "Category",
       required: true,
     },
     priceUnit: {
@@ -29,11 +29,10 @@ const ServiceSchema = new Schema(
     },
     duration: {
       type: String,
-      
     },
     providerId: {
       type: Types.ObjectId,
-      ref: 'Provider',
+      ref: "Provider",
       required: true,
     },
     status: {
@@ -47,7 +46,7 @@ const ServiceSchema = new Schema(
 
     experience: {
       type: Number,
-      required: false
+      required: false,
     },
 
     businessCertification: {
@@ -56,13 +55,13 @@ const ServiceSchema = new Schema(
     },
     isApproved: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 type ServiceSchemaType = InferSchemaType<typeof ServiceSchema>;
 export type IService = HydratedDocument<ServiceSchemaType>;
 
-export default mongoose.model<IService>('Service', ServiceSchema);
+export default mongoose.model<IService>("Service", ServiceSchema);

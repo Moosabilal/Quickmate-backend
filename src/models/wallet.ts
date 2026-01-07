@@ -1,4 +1,4 @@
-import { Schema, model, Types, HydratedDocument, InferSchemaType } from "mongoose";
+import { Schema, model, type HydratedDocument, type InferSchemaType } from "mongoose";
 import { Roles } from "../enums/userRoles";
 
 const WalletSchema = new Schema(
@@ -17,16 +17,16 @@ const WalletSchema = new Schema(
       type: String,
       enum: Object.values(Roles),
       required: true,
-      default: Roles.USER
+      default: Roles.USER,
     },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 type WalletSchemaType = InferSchemaType<typeof WalletSchema>;
 
-export interface IWallet extends HydratedDocument<WalletSchemaType> {}
+export type IWallet = HydratedDocument<WalletSchemaType>;
 
 export const Wallet = model<IWallet>("Wallet", WalletSchema);

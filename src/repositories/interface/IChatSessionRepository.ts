@@ -1,7 +1,5 @@
-import { IChatSession } from "../../models/chatSession";
-import { IBaseRepository } from "./base/IBaseRepository";
+import { type IChatSession } from "../../models/chatSession";
+import { type IBaseRepository } from "./base/IBaseRepository";
 
-
-export interface IChatSessionRepository extends IBaseRepository<IChatSession> {
-    
-}
+// export interface IChatSessionRepository extends IBaseRepository<IChatSession> {}
+export type IChatSessionRepository = IBaseRepository<IChatSession>;

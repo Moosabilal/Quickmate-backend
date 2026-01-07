@@ -1,22 +1,25 @@
-import { Schema, model, Types, HydratedDocument, InferSchemaType } from 'mongoose';
+import { Schema, model, type HydratedDocument, type InferSchemaType } from "mongoose";
 
-const ChatMessageSchema = new Schema({
+const ChatMessageSchema = new Schema(
+  {
     sessionId: {
-        type: Schema.Types.ObjectId,
-        ref: 'ChatSession',
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "ChatSession",
+      required: true,
     },
     role: {
-        type: String,
-        enum: ['user', 'model'],
-        required: true
+      type: String,
+      enum: ["user", "model"],
+      required: true,
     },
     text: {
-        type: String,
-        required: false
+      type: String,
+      required: false,
     },
-}, { timestamps: true });
+  },
+  { timestamps: true },
+);
 
 type ChatMessageSchemaType = InferSchemaType<typeof ChatMessageSchema>;
-export interface IChatMessage extends HydratedDocument<ChatMessageSchemaType> {}
-export const ChatMessage = model<IChatMessage>('ChatMessage', ChatMessageSchema);
+export type IChatMessage = HydratedDocument<ChatMessageSchemaType>;
+export const ChatMessage = model<IChatMessage>("ChatMessage", ChatMessageSchema);

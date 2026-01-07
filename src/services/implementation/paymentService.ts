@@ -1,8 +1,8 @@
-import { injectable } from 'inversify';
-import Razorpay from 'razorpay';
-import crypto from 'crypto';
-import { IPaymentService } from '../interface/IPaymentService';
-import { RazorpayOrder } from '../../interface/razorpay';
+import { injectable } from "inversify";
+import Razorpay from "razorpay";
+import crypto from "crypto";
+import { type IPaymentService } from "../interface/IPaymentService";
+import { type RazorpayOrder } from "../../interface/razorpay";
 
 @injectable()
 export class PaymentService implements IPaymentService {
@@ -18,7 +18,7 @@ export class PaymentService implements IPaymentService {
   public async createOrder(amount: number): Promise<RazorpayOrder> {
     const options = {
       amount: amount * 100,
-      currency: 'INR',
+      currency: "INR",
       receipt: `receipt_${Date.now()}`,
     };
 
@@ -29,13 +29,10 @@ export class PaymentService implements IPaymentService {
   public async verifySignature(
     razorpay_order_id: string,
     razorpay_payment_id: string,
-    razorpay_signature: string
+    razorpay_signature: string,
   ): Promise<boolean> {
-    const body = razorpay_order_id + '|' + razorpay_payment_id;
-    const expectedSignature = crypto
-      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET!)
-      .update(body)
-      .digest('hex');
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSignature = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET!).update(body).digest("hex");
 
     return expectedSignature === razorpay_signature;
   }

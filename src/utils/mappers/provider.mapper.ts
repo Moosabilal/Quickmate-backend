@@ -1,24 +1,36 @@
-import { IProvider } from '../../models/Providers';
-import { EarningsAnalyticsData, IBackendProvider, IMonthlyTrend, IPopulatedService, IProviderForAdminResponce, IProviderForChatListPage, IProviderPerformance, IProviderProfile, IRatingDistribution, IReview, IReviewsOfUser, IServiceAddPageResponse, IServiceBreakdown, IServiceDetails } from '../../interface/provider';
-import { ICategory } from '../../models/Categories';
-import { IBooking } from '../../models/Booking';
-import { IService } from '../../models/Service';
-import { IDashboardResponse, IDashboardStatus } from "../../interface/provider";
+import { type IProvider } from "../../models/Providers";
+import {
+  type EarningsAnalyticsData,
+  type IBackendProvider,
+  type IMonthlyTrend,
+  type IPopulatedService,
+  type IProviderForAdminResponce,
+  type IProviderForChatListPage,
+  type IProviderPerformance,
+  type IProviderProfile,
+  type IRatingDistribution,
+  type IReview,
+  type IReviewsOfUser,
+  type IServiceAddPageResponse,
+  type IServiceBreakdown,
+  type IServiceDetails,
+} from "../../interface/provider";
+import { type ICategory } from "../../models/Categories";
+import { type IBooking } from "../../models/Booking";
+import { type IService } from "../../models/Service";
+import { type IDashboardResponse, type IDashboardStatus } from "../../interface/provider";
 import { BookingStatus } from "../../enums/booking.enum";
-import { IReview as IReviewModel } from '../../models/Review';
-import { IUser } from '../../models/User';
-import { _haversineKm } from '../helperFunctions/haversineKm';
-import { LastMessageData } from '../../interface/message';
-import { IPopulatedBookingForEarnings } from '../../interface/booking';
-import { SignalMedium } from 'lucide-react';
-import { getSignedUrl } from '../cloudinaryUpload';
-
+import { type IReview as IReviewModel } from "../../models/Review";
+import { type IUser } from "../../models/User";
+import { _haversineKm } from "../helperFunctions/haversineKm";
+import { type LastMessageData } from "../../interface/message";
+import { type IPopulatedBookingForEarnings } from "../../interface/booking";
+import { getSignedUrl } from "../cloudinaryUpload";
 
 const createJoiningId = (id1: string, id2: string): string => {
-  if (!id1 || !id2) return '';
-  return [id1, id2].sort().join('-');
+  if (!id1 || !id2) return "";
+  return [id1, id2].sort().join("-");
 };
-
 
 export function toProviderDTO(provider: IProvider): IProviderProfile {
   return {
@@ -30,7 +42,7 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     serviceLocation: `${provider.serviceLocation.coordinates[1]},${provider.serviceLocation.coordinates[0]}`,
     serviceArea: provider.serviceArea,
     availability: provider.availability,
-    profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
+    profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : "",
     earnings: provider.earnings,
     status: provider.status,
     totalBookings: provider.totalBookings,
@@ -38,16 +50,16 @@ export function toProviderDTO(provider: IProvider): IProviderProfile {
     rating: provider.rating,
     isVerified: provider.isVerified,
     subscription: provider.subscription,
-    aadhaarIdProof: provider.aadhaarIdProof ? getSignedUrl(provider.aadhaarIdProof) : '',
+    aadhaarIdProof: provider.aadhaarIdProof ? getSignedUrl(provider.aadhaarIdProof) : "",
     createdAt: provider.createdAt,
   };
 }
 
 export function toProviderForAdminResponseDTO(
   providers: IProvider[],
-  serviceMap: Map<string, string[]>
+  serviceMap: Map<string, string[]>,
 ): IProviderForAdminResponce[] {
-  return providers.map(provider => {
+  return providers.map((provider) => {
     const providerIdStr = provider._id.toString();
     return {
       id: providerIdStr,
@@ -56,7 +68,7 @@ export function toProviderForAdminResponseDTO(
       phoneNumber: provider.phoneNumber,
       email: provider.email,
       serviceArea: provider.serviceArea,
-      profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
+      profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : "",
       status: provider.status,
       rating: provider.rating,
       serviceOffered: serviceMap.get(providerIdStr) || [],
@@ -68,8 +80,8 @@ export function toServiceAddPage(category: ICategory): IServiceAddPageResponse {
   return {
     id: category._id.toString(),
     name: category.name,
-    parentId: category.parentId ? category.parentId.toString() : null
-  }
+    parentId: category.parentId ? category.parentId.toString() : null,
+  };
 }
 
 export function toBackendProviderDTO(
@@ -78,10 +90,11 @@ export function toBackendProviderDTO(
   reviews: IReviewsOfUser[],
   subCategoryId: string,
   userLat: number,
-  userLng: number
+  userLng: number,
 ): IBackendProvider {
-  const providerServices = services.filter(s => s.providerId.toString() === provider._id.toString());
-  const primaryService = providerServices.find(s => s.subCategoryId.toString() === subCategoryId) || providerServices[0];
+  const providerServices = services.filter((s) => s.providerId.toString() === provider._id.toString());
+  const primaryService =
+    providerServices.find((s) => s.subCategoryId.toString() === subCategoryId) || providerServices[0];
 
   const [provLng, provLat] = provider.serviceLocation.coordinates;
   const distanceKm = _haversineKm(userLat, userLng, provLat, provLng);
@@ -91,7 +104,7 @@ export function toBackendProviderDTO(
     fullName: provider.fullName,
     phoneNumber: provider.phoneNumber,
     email: provider.email,
-    profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
+    profilePhoto: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : "",
     serviceArea: provider.serviceArea,
     serviceLocation: `${provLat},${provLng}`,
     availability: provider.availability,
@@ -105,24 +118,18 @@ export function toBackendProviderDTO(
   };
 }
 
-
 export function toProviderForChatListPage(
   currentUserId: string,
   bookings: IBooking[],
   providers: IProvider[],
   services: IService[],
-  messages: LastMessageData[]
+  messages: LastMessageData[],
 ): IProviderForChatListPage[] {
-
-  const messageMap = new Map(messages.map(m => [m.joiningId, m]));
+  const messageMap = new Map(messages.map((m) => [m.joiningId, m]));
 
   return providers.map((provider) => {
-    const booking = bookings.find(
-      (b) => b.providerId?.toString() === provider._id.toString()
-    );
-    const providerServices = services.filter(
-      (s) => s.providerId?.toString() === provider._id.toString()
-    );
+    const booking = bookings.find((b) => b.providerId?.toString() === provider._id.toString());
+    const providerServices = services.filter((s) => s.providerId?.toString() === provider._id.toString());
 
     const joiningId = createJoiningId(currentUserId, provider.userId.toString());
 
@@ -132,12 +139,12 @@ export function toProviderForChatListPage(
       id: provider.userId.toString(),
       bookingId: booking?._id.toString(),
       name: provider.fullName,
-      profilePicture: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : '',
+      profilePicture: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : "",
       location: provider.serviceArea,
       isOnline: true,
       services: providerServices[0]?.title || "",
       lastMessage: lastMessageData?.lastMessage || null,
-      messageType: lastMessageData?.messageType || 'text',
+      messageType: lastMessageData?.messageType || "text",
       lastMessageSenderId: lastMessageData?.senderId || null,
       lastMessageAt: lastMessageData?.createdAt || null,
     };
@@ -149,40 +156,41 @@ export function toClientForChatListPage(
   bookings: IBooking[],
   clients: IUser[],
   services: IService[],
-  messages: LastMessageData[]
+  messages: LastMessageData[],
 ): IProviderForChatListPage[] {
+  const messageMap = new Map(messages.map((m) => [m.joiningId, m]));
 
-  const messageMap = new Map(messages.map(m => [m.joiningId, m]));
+  return clients
+    .map((client) => {
+      const clientBooking = bookings
+        .filter((b) => b.userId?.toString() === client._id.toString())
+        .sort((a, b) => new Date(b.createdAt as Date).getTime() - new Date(a.createdAt as Date).getTime())[0];
 
-  return clients.map((client) => {
-    const clientBooking = bookings
-      .filter((b) => b.userId?.toString() === client._id.toString())
-      .sort((a, b) => new Date(b.createdAt as Date).getTime() - new Date(a.createdAt as Date).getTime())[0];
+      if (!clientBooking) return null;
 
-    if (!clientBooking) return null;
+      const service = services.find((s) => s._id.toString() === clientBooking.serviceId?.toString());
 
-    const service = services.find((s) => s._id.toString() === clientBooking.serviceId?.toString());
+      const joiningId = createJoiningId(currentUserId, client._id.toString());
 
-    const joiningId = createJoiningId(currentUserId, client._id.toString());
+      const lastMessageData = messageMap.get(joiningId);
 
-    const lastMessageData = messageMap.get(joiningId);
-
-    return {
-      id: client._id.toString(),
-      bookingId: clientBooking._id.toString(),
-      name: client.name as string,
-      profilePicture: client.profilePicture && client.profilePicture === 'string' ? getSignedUrl(client.profilePicture) : '',
-      location: "",
-      isOnline: true,
-      services: service?.title || "",
-      lastMessage: lastMessageData?.lastMessage || null,
-      messageType: lastMessageData?.messageType || 'text',
-      lastMessageSenderId: lastMessageData?.senderId || null,
-      lastMessageAt: lastMessageData?.createdAt || null,
-    } as IProviderForChatListPage;
-  }).filter((item): item is IProviderForChatListPage => item !== null);
+      return {
+        id: client._id.toString(),
+        bookingId: clientBooking._id.toString(),
+        name: client.name as string,
+        profilePicture:
+          client.profilePicture && client.profilePicture === "string" ? getSignedUrl(client.profilePicture) : "",
+        location: "",
+        isOnline: true,
+        services: service?.title || "",
+        lastMessage: lastMessageData?.lastMessage || null,
+        messageType: lastMessageData?.messageType || "text",
+        lastMessageSenderId: lastMessageData?.senderId || null,
+        lastMessageAt: lastMessageData?.createdAt || null,
+      } as IProviderForChatListPage;
+    })
+    .filter((item): item is IProviderForChatListPage => item !== null);
 }
-
 
 function buildRatingHistory(reviews: IReviewModel[]) {
   const monthMap = new Map<string, { total: number; count: number }>();
@@ -206,22 +214,20 @@ function buildRatingHistory(reviews: IReviewModel[]) {
   }));
 }
 
-
 export function toEarningsAnalyticsDTO(
   totalEarnings: number,
   earningsChangePercentage: number,
   totalClients: number,
   newClients: number,
-  topService: { name: string, earnings: number },
-  currentBookings: IPopulatedBookingForEarnings[]
+  topService: { name: string; earnings: number },
+  currentBookings: IPopulatedBookingForEarnings[],
 ): EarningsAnalyticsData {
-
-  const breakdown = currentBookings.map(b => ({
-    date: new Date(b.createdAt as string | number | Date),
-    service: b.serviceId?.title || 'Unknown Service',
-    client: b.userId?.name || 'Unknown Client',
+  const breakdown = currentBookings.map((b) => ({
+    date: new Date(b.updatedAt as string | number | Date),
+    service: b.serviceId?.title || "Unknown Service",
+    client: b.userId?.name || "Unknown Client",
     amount: Number(b.amount) || 0,
-    status: String(b.status || 'Unknown'),
+    status: String(b.status || "Unknown"),
   }));
 
   return {
@@ -234,45 +240,34 @@ export function toEarningsAnalyticsDTO(
   };
 }
 
-
 export function toProviderDashboardDTO(
   provider: IProvider,
   bookings: IBooking[],
   services: IService[],
   subCategories: ICategory[],
   parentCategories: ICategory[],
-  reviews: IReviewModel[]
+  reviews: IReviewModel[],
 ): { dashboardData: IDashboardResponse[]; dashboardStat: IDashboardStatus } {
   const serviceMap = new Map(services.map((s) => [s._id.toString(), s]));
-  const subCategoryMap = new Map(
-    subCategories.map((sc) => [sc._id.toString(), sc])
-  );
-  const parentCategoryMap = new Map(
-    parentCategories.map((pc) => [pc._id.toString(), pc])
-  );
+  const subCategoryMap = new Map(subCategories.map((sc) => [sc._id.toString(), sc]));
+  const parentCategoryMap = new Map(parentCategories.map((pc) => [pc._id.toString(), pc]));
 
   const dashboardData: IDashboardResponse[] = bookings.map((booking) => {
     const service = serviceMap.get(booking.serviceId?.toString() || "");
-    const subCategory = service
-      ? subCategoryMap.get(service.subCategoryId?.toString() || "")
-      : undefined;
-    const parentCategory = subCategory
-      ? parentCategoryMap.get(subCategory.parentId?.toString() || "")
-      : undefined;
+    const subCategory = service ? subCategoryMap.get(service.subCategoryId?.toString() || "") : undefined;
+    const parentCategory = subCategory ? parentCategoryMap.get(subCategory.parentId?.toString() || "") : undefined;
 
     return {
       id: booking._id.toString(),
       service: service?.title || "Unknown Service",
       client: `${booking.customerName} • ${booking.scheduledDate} ${booking.scheduledTime}`,
       status: booking.status as BookingStatus,
-      image: subCategory?.iconUrl ? getSignedUrl(subCategory.iconUrl) : '',
+      image: subCategory?.iconUrl ? getSignedUrl(subCategory.iconUrl) : "",
       category: parentCategory?.name || "Unknown Category",
     };
   });
 
-  const completedJobs = bookings.filter(
-    (b) => b.status === BookingStatus.COMPLETED
-  ).length;
+  const completedJobs = bookings.filter((b) => b.status === BookingStatus.COMPLETED).length;
 
   const today = new Date();
   const upcomingBookings = bookings.filter((b) => {
@@ -281,13 +276,9 @@ export function toProviderDashboardDTO(
   }).length;
 
   const averageRating =
-    reviews.length > 0
-      ? reviews.reduce((acc, r) => acc + (Number(r.rating) || 0), 0) /
-      reviews.length
-      : 0;
+    reviews.length > 0 ? reviews.reduce((acc, r) => acc + (Number(r.rating) || 0), 0) / reviews.length : 0;
 
   const ratingHistory = buildRatingHistory(reviews);
-
 
   const dashboardStat: IDashboardStatus = {
     earnings: provider.earnings,
@@ -300,58 +291,64 @@ export function toProviderDashboardDTO(
   return { dashboardData, dashboardStat };
 }
 
-
 export function toProviderPerformanceDTO(
   provider: IProvider,
   bookings: IBooking[],
   reviewsFromDb: IReviewModel[],
   users: IUser[],
   activeServicesCount: number,
-  serviceBreakdown: IServiceBreakdown[]
+  serviceBreakdown: IServiceBreakdown[],
 ): IProviderPerformance {
-
   const totalBookings = bookings.length;
-  const completedBookings = bookings.filter(b => b.status === BookingStatus.COMPLETED).length;
-  const cancelledBookings = bookings.filter(b => b.status === BookingStatus.CANCELLED).length;
+  const completedBookings = bookings.filter((b) => b.status === BookingStatus.COMPLETED).length;
+  const cancelledBookings = bookings.filter((b) => b.status === BookingStatus.CANCELLED).length;
 
   const totalEarnings = bookings
-    .filter(b => b.status === BookingStatus.COMPLETED)
-    .reduce((sum, b) => sum + (Number(b.amount) ?? 0), 0);
+    .filter((b) => b.status === BookingStatus.COMPLETED)
+    .reduce((sum, b) => sum + (Number(b.amount) || 0), 0);
 
   const avgRating = reviewsFromDb.length
-    ? reviewsFromDb.reduce((sum, r) => sum + (Number(r.rating) ?? 0), 0) / reviewsFromDb.length
+    ? reviewsFromDb.reduce((sum, r) => sum + (Number(r.rating) || 0), 0) / reviewsFromDb.length
     : 0;
 
-  const reviews: IReview[] = reviewsFromDb.map(r => {
-    const user = users.find(u => u._id.toString() === r.userId?.toString());
+  const reviews: IReview[] = reviewsFromDb.map((r) => {
+    const user = users.find((u) => u._id.toString() === r.userId?.toString());
     return {
-      name: (user?.name as string) ?? "Anonymous",
+      name: (user?.name as string) || "Anonymous",
       time: r.createdAt ? new Date(r.createdAt as string | Date).toLocaleDateString() : "N/A",
-      rating: Number(r.rating) ?? 0,
+      rating: Number(r.rating) || 0,
       comment: (r.reviewText as string) || "",
-      avatar: user?.profilePicture as string
+      avatar: user?.profilePicture as string,
     };
   });
 
-  const ratingCounts = new Map<number, number>([[5, 0], [4, 0], [3, 0], [2, 0], [1, 0]]);
-  reviewsFromDb.forEach(review => {
+  const ratingCounts = new Map<number, number>([
+    [5, 0],
+    [4, 0],
+    [3, 0],
+    [2, 0],
+    [1, 0],
+  ]);
+  reviewsFromDb.forEach((review) => {
     const rating = Math.round(Number(review.rating));
     if (ratingCounts.has(rating)) {
       ratingCounts.set(rating, ratingCounts.get(rating)! + 1);
     }
   });
   const totalReviews = reviewsFromDb.length;
-  const ratingDistribution: IRatingDistribution[] = Array.from(ratingCounts.entries()).map(([stars, count]) => ({
-    stars,
-    count,
-    percentage: totalReviews > 0 ? parseFloat(((count / totalReviews) * 100).toFixed(1)) : 0
-  })).sort((a, b) => b.stars - a.stars);
+  const ratingDistribution: IRatingDistribution[] = Array.from(ratingCounts.entries())
+    .map(([stars, count]) => ({
+      stars,
+      count,
+      percentage: totalReviews > 0 ? parseFloat(((count / totalReviews) * 100).toFixed(1)) : 0,
+    }))
+    .sort((a, b) => b.stars - a.stars);
 
-  const monthlyRatingData: { [key: string]: { sum: number, count: number } } = {};
+  const monthlyRatingData: { [key: string]: { sum: number; count: number } } = {};
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
-  reviewsFromDb.forEach(review => {
+  reviewsFromDb.forEach((review) => {
     const reviewDate = new Date(review.createdAt as string | Date);
     if (reviewDate >= sixMonthsAgo) {
       const monthKey = `${reviewDate.getFullYear()}-${reviewDate.getMonth()}`;
@@ -362,7 +359,7 @@ export function toProviderPerformanceDTO(
   });
 
   const starRatingTrend: IMonthlyTrend[] = [];
-  const monthFormatter = new Intl.DateTimeFormat('en-US', { month: 'short' });
+  const monthFormatter = new Intl.DateTimeFormat("en-US", { month: "short" });
   for (let i = 5; i >= 0; i--) {
     const date = new Date();
     date.setMonth(date.getMonth() - i);
@@ -371,7 +368,7 @@ export function toProviderPerformanceDTO(
     const data = monthlyRatingData[monthKey];
     starRatingTrend.push({
       month: monthName,
-      value: data && data.count > 0 ? parseFloat((data.sum / data.count).toFixed(1)) : 0
+      value: data && data.count > 0 ? parseFloat((data.sum / data.count).toFixed(1)) : 0,
     });
   }
 
@@ -392,10 +389,9 @@ export function toProviderPerformanceDTO(
     reviews,
     ratingDistribution,
     starRatingTrend,
-    serviceBreakdown
+    serviceBreakdown,
   };
 }
-
 
 export function toServiceDetailsDTO(service: IPopulatedService): IServiceDetails {
   const serviceObj = service;
@@ -407,7 +403,10 @@ export function toServiceDetailsDTO(service: IPopulatedService): IServiceDetails
     price: serviceObj.price,
     priceUnit: serviceObj.priceUnit,
     duration: serviceObj.duration,
-    subCategoryId: { _id:serviceObj.subCategoryId._id.toString(), name: serviceObj.subCategoryId.name || '' },
-    experience: serviceObj.experience
+    subCategoryId: {
+      _id: serviceObj.subCategoryId._id.toString(),
+      name: serviceObj.subCategoryId.name || "",
+    },
+    experience: serviceObj.experience,
   } as IServiceDetails;
 }

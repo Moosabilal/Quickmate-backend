@@ -1,63 +1,29 @@
-import cron from 'node-cron';
-import { format, subDays } from 'date-fns';
-import { IProvider, Provider } from '../models/Providers';
+import cron from "node-cron";
+import { format, subDays } from "date-fns";
+import logger from "../logger/logger";
+import { container } from "../di/container";
+import TYPES from "../di/type";
+import { type IProviderRepository } from "../repositories/interface/IProviderRepository";
 
 export const startScheduleCleanupJob = () => {
-    cron.schedule('0 0 * * *', async () => {
-        console.log('🧹 Starting Provider Schedule Cleanup Job...');
-        
-        try {
-            const yesterday = subDays(new Date(), 1);
-            const cutoffDateStr = format(yesterday, 'yyyy-MM-dd');
+  cron.schedule("0 0 * * *", async () => {
+    logger.info("🧹 Starting Provider Schedule Cleanup Job...");
 
-            const providers = await Provider.find({
-                $or: [
-                    { 'availability.dateOverrides': { $exists: true, $not: { $size: 0 } } },
-                    { 'availability.leavePeriods': { $exists: true, $not: { $size: 0 } } }
-                ]
-            });
+    try {
+      const providerRepository = container.get<IProviderRepository>(TYPES.ProviderRepository);
 
-            let updatedCount = 0;
+      const yesterday = subDays(new Date(), 1);
+      const cutoffDateStr = format(yesterday, "yyyy-MM-dd");
 
-            for (const provider of providers) {
-                let isModified = false;
+      const modifiedCount = await providerRepository.removePastAvailability(cutoffDateStr);
 
-                if (provider.availability.dateOverrides && provider.availability.dateOverrides.length > 0) {
-                    const originalLength = provider.availability.dateOverrides.length;
-                    
-                    const filteredOverrides = provider.availability.dateOverrides.filter(
-                        (override) => override.date > cutoffDateStr
-                    );
-
-                    if (filteredOverrides.length !== originalLength) {
-                        provider.availability.dateOverrides = filteredOverrides as IProvider['availability']['dateOverrides'    ];
-                        isModified = true;
-                    }
-                }
-
-                if (provider.availability.leavePeriods && provider.availability.leavePeriods.length > 0) {
-                    const originalLength = provider.availability.leavePeriods.length;
-
-                    const filteredLeaves = provider.availability.leavePeriods.filter(
-                        (leave) => leave.to > cutoffDateStr
-                    );
-
-                    if (filteredLeaves.length !== originalLength) {
-                        provider.availability.leavePeriods = filteredLeaves as IProvider['availability']['leavePeriods'];
-                        isModified = true;
-                    }
-                }
-
-                if (isModified) {
-                    await provider.save();
-                    updatedCount++;
-                }
-            }
-
-            console.log(`Schedule Cleanup Complete. Updated ${updatedCount} providers.`);
-
-        } catch (error) {
-            console.error('Error in Schedule Cleanup Job:', error);
-        }
-    });
+      if (modifiedCount > 0) {
+        logger.info(`Schedule Cleanup Complete. Cleaned schedules for ${modifiedCount} providers.`);
+      } else {
+        logger.info("Checked providers but found nothing to clean.");
+      }
+    } catch (error) {
+      logger.error("Error in Schedule Cleanup Job:", error);
+    }
+  });
 };

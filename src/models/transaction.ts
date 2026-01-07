@@ -1,4 +1,4 @@
-import { Schema, model, Types, HydratedDocument, InferSchemaType } from "mongoose";
+import { Schema, model, type HydratedDocument, type InferSchemaType } from "mongoose";
 import { TransactionStatus } from "../enums/payment&wallet.enum";
 
 const TransactionSchema = new Schema(
@@ -33,17 +33,16 @@ const TransactionSchema = new Schema(
     status: {
       type: String,
       enum: Object.values(TransactionStatus),
-      default: TransactionStatus.PAYMENT
-
-    }
+      default: TransactionStatus.PAYMENT,
+    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 type TransactionSchemaType = InferSchemaType<typeof TransactionSchema>;
 
-export interface ITransaction extends HydratedDocument<TransactionSchemaType> {}
+export type ITransaction = HydratedDocument<TransactionSchemaType>;
 
 export const Transaction = model<ITransaction>("Transaction", TransactionSchema);

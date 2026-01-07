@@ -1,18 +1,17 @@
-import { BookingService } from "../services/implementation/bookingService";
+import { type BookingService } from "../services/implementation/bookingService";
 import { container } from "../di/container";
 import TYPES from "../di/type";
 import logger from "../logger/logger";
-import { ISocketMessage } from "../interface/message";
-import { Server, Socket } from "socket.io";
-import { WebRTCPayload } from "../interface/socket";
+import { type ISocketMessage } from "../interface/message";
+import { type Server, type Socket } from "socket.io";
+import { type WebRTCPayload } from "../interface/socket";
 
 export function chatSocket(io: Server) {
   const bookingService = container.get<BookingService>(TYPES.BookingService);
 
   io.on("connection", (socket: Socket) => {
-
     socket.on("joinBookingRoom", (joiningId: string) => {
-      if (!joiningId || typeof joiningId !== 'string' || joiningId.trim() === '') {
+      if (!joiningId || typeof joiningId !== "string" || joiningId.trim() === "") {
         logger.warn("Invalid joiningId received:", joiningId);
         return;
       }
@@ -25,23 +24,20 @@ export function chatSocket(io: Server) {
       });
     });
 
-    socket.on(
-      "sendBookingMessage",
-      async (messageData: ISocketMessage) => {
-        if (!messageData || !messageData.joiningId || !messageData.senderId) {
-          logger.warn("Invalid message data received:", messageData);
-          socket.emit("chat:error", { message: "Invalid message data" });
-          return;
-        }
-        try {
-          await bookingService.saveAndEmitMessage(io, messageData);
-        } catch (err: unknown) {
-          const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-          logger.error("Error in sendBookingMessage:", errorMessage);
-          socket.emit("chat:error", { message: "Failed to send message" });
-        }
+    socket.on("sendBookingMessage", async (messageData: ISocketMessage) => {
+      if (!messageData || !messageData.joiningId || !messageData.senderId) {
+        logger.warn("Invalid message data received:", messageData);
+        socket.emit("chat:error", { message: "Invalid message data" });
+        return;
       }
-    );
+      try {
+        await bookingService.saveAndEmitMessage(io, messageData);
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        logger.error("Error in sendBookingMessage:", errorMessage);
+        socket.emit("chat:error", { message: "Failed to send message" });
+      }
+    });
 
     const forwardEventHandler = (eventName: string) => {
       socket.on(eventName, (payload: WebRTCPayload) => {
