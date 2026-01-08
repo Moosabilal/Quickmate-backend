@@ -40,7 +40,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 //database
 connectDB();
-const allowedOrigins = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(",").map((p) => p.trim()) : [];
+const allowedOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(",").map((p) => p.trim()) : [];
 // Middleware
 app.use(cors({
     origin: function (origin, callback) {
@@ -79,7 +79,14 @@ app.use(errorHandler);
 const server = http.createServer(app);
 const io = new SocketIOServer(server, {
     cors: {
-        origin: "http://localhost:5173",
+        origin: function (origin, callback) {
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+            else {
+                return callback(new Error("CORS policy violation: Origin not allowed"));
+            }
+        },
         methods: ["GET", "POST"],
         credentials: true,
     },
