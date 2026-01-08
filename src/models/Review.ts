@@ -1,6 +1,6 @@
-import mongoose, { Schema, HydratedDocument, InferSchemaType } from "mongoose";
+import mongoose, { Schema, type HydratedDocument, type InferSchemaType } from "mongoose";
 import { ReviewStatus } from "../enums/review.enum";
-import { Types } from "mongoose";
+import { type Types } from "mongoose";
 
 const ReviewSchema: Schema = new Schema(
   {
@@ -26,7 +26,7 @@ const ReviewSchema: Schema = new Schema(
     },
     rating: {
       type: Number,
-      min: 1, 
+      min: 1,
       max: 5,
       required: true,
     },
@@ -39,9 +39,9 @@ const ReviewSchema: Schema = new Schema(
       type: String,
       enum: Object.values(ReviewStatus),
       default: ReviewStatus.PENDING,
-    }
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export type ReviewSchemaType = InferSchemaType<typeof ReviewSchema> & {

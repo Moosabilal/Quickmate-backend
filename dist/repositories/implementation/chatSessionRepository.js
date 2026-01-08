@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,18 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChatSessionRepository = void 0;
-const BaseRepository_1 = require("./base/BaseRepository");
-const inversify_1 = require("inversify");
-const chatSession_1 = require("../../models/chatSession");
-let ChatSessionRepository = class ChatSessionRepository extends BaseRepository_1.BaseRepository {
+import { BaseRepository } from "./base/BaseRepository";
+import { injectable } from "inversify";
+import { ChatSession } from "../../models/chatSession";
+let ChatSessionRepository = class ChatSessionRepository extends BaseRepository {
     constructor() {
-        super(chatSession_1.ChatSession);
+        super(ChatSession);
     }
 };
-exports.ChatSessionRepository = ChatSessionRepository;
-exports.ChatSessionRepository = ChatSessionRepository = __decorate([
-    (0, inversify_1.injectable)(),
+ChatSessionRepository = __decorate([
+    injectable(),
     __metadata("design:paramtypes", [])
 ], ChatSessionRepository);
+export { ChatSessionRepository };

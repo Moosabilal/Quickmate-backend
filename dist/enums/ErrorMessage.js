@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ErrorMessage = void 0;
-var ErrorMessage;
+export var ErrorMessage;
 (function (ErrorMessage) {
     ErrorMessage["USER_NOT_FOUND"] = "User not found.";
     ErrorMessage["USER_ALREADY_EXISTS"] = "User with this email already exists";
@@ -28,4 +25,4 @@ var ErrorMessage;
     ErrorMessage["PLAN_ALREADY_EXITS"] = "This named plan already exist, Please provide another name";
     ErrorMessage["NO_PLANS"] = "No subscription Plan created";
     ErrorMessage["PLAN_NOT_FOUND"] = "Subscription Plan not found";
-})(ErrorMessage || (exports.ErrorMessage = ErrorMessage = {}));
+})(ErrorMessage || (ErrorMessage = {}));

@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Transaction = void 0;
-const mongoose_1 = require("mongoose");
-const payment_wallet_enum_1 = require("../enums/payment&wallet.enum");
-const TransactionSchema = new mongoose_1.Schema({
+import { Schema, model } from "mongoose";
+import { TransactionStatus } from "../enums/payment&wallet.enum";
+const TransactionSchema = new Schema({
     walletId: {
-        type: mongoose_1.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Wallet",
         required: true,
     },
@@ -33,10 +30,10 @@ const TransactionSchema = new mongoose_1.Schema({
     },
     status: {
         type: String,
-        enum: Object.values(payment_wallet_enum_1.TransactionStatus),
-        default: payment_wallet_enum_1.TransactionStatus.PAYMENT
-    }
+        enum: Object.values(TransactionStatus),
+        default: TransactionStatus.PAYMENT,
+    },
 }, {
     timestamps: true,
 });
-exports.Transaction = (0, mongoose_1.model)("Transaction", TransactionSchema);
+export const Transaction = model("Transaction", TransactionSchema);

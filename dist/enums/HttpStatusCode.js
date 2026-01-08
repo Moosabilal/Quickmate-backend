@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.HttpStatusCode = void 0;
-var HttpStatusCode;
+export var HttpStatusCode;
 (function (HttpStatusCode) {
     HttpStatusCode[HttpStatusCode["OK"] = 200] = "OK";
     HttpStatusCode[HttpStatusCode["CREATED"] = 201] = "CREATED";
@@ -12,4 +9,4 @@ var HttpStatusCode;
     HttpStatusCode[HttpStatusCode["NOT_FOUND"] = 404] = "NOT_FOUND";
     HttpStatusCode[HttpStatusCode["CONFLICT"] = 409] = "CONFLICT";
     HttpStatusCode[HttpStatusCode["INTERNAL_SERVER_ERROR"] = 500] = "INTERNAL_SERVER_ERROR";
-})(HttpStatusCode || (exports.HttpStatusCode = HttpStatusCode = {}));
+})(HttpStatusCode || (HttpStatusCode = {}));

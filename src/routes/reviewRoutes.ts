@@ -1,18 +1,17 @@
-import express from 'express'
-import { ReviewController } from '../controllers/reviewController'
-import { container } from '../di/container'
-import TYPES from '../di/type'
-import { authenticateToken, authorizeRoles } from '../middleware/authMiddleware'
+import express from "express";
+import { type ReviewController } from "../controllers/reviewController";
+import { container } from "../di/container";
+import TYPES from "../di/type";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
 
-const router = express.Router()
-const reviewController = container.get<ReviewController>(TYPES.ReviewController)
+const router = express.Router();
+const reviewController = container.get<ReviewController>(TYPES.ReviewController);
 
-const isProvOrUser = [authenticateToken, authorizeRoles(['Customer','ServiceProvider'])]
-const isAdmin = [authenticateToken, authorizeRoles(['Admin'])]
+const isProvOrUser = [authenticateToken, authorizeRoles(["Customer", "ServiceProvider"])];
+const isAdmin = [authenticateToken, authorizeRoles(["Admin"])];
 
-router.post('/addReview', isProvOrUser, reviewController.addReview)
-router.get('/reviews', isAdmin, reviewController.getAllReviewsForAdmin);
-router.patch('/reviews/:id/status', isAdmin, reviewController.updateReviewStatus);
+router.post("/addReview", isProvOrUser, reviewController.addReview);
+router.get("/reviews", isAdmin, reviewController.getAllReviewsForAdmin);
+router.patch("/reviews/:id/status", isAdmin, reviewController.updateReviewStatus);
 
-
-export default router
+export default router;

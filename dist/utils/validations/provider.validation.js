@@ -1,89 +1,95 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchQuerySchema = exports.updateAvailabilitySchema = exports.featuredProvidersQuerySchema = exports.getEarningsQuerySchema = exports.getAvailabilityQuerySchema = exports.getServiceProviderQuerySchema = exports.providersForAdminQuerySchema = exports.updateProviderStatusSchema = exports.updateProviderSchema = exports.registerProviderSchema = exports.paramIdSchema = void 0;
-const zod_1 = require("zod");
-const provider_enum_1 = require("../../enums/provider.enum");
-const IdSchema = zod_1.z.string().min(1, "ID is required");
-exports.paramIdSchema = zod_1.z.object({ id: IdSchema });
-exports.registerProviderSchema = zod_1.z.object({
-    fullName: zod_1.z.string().min(2, "Full name is required."),
-    phoneNumber: zod_1.z.string().min(10, "A valid phone number is required."),
-    email: zod_1.z.string().email(),
-    serviceArea: zod_1.z.string().min(3, "Service area is required."),
-    serviceLocation: zod_1.z.string().regex(/^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/, "Invalid location format."),
+import { z } from "zod";
+import { ProviderStatus } from "../../enums/provider.enum";
+const IdSchema = z.string().min(1, "ID is required");
+export const paramIdSchema = z.object({ id: IdSchema });
+export const registerProviderSchema = z.object({
+    fullName: z.string().min(2, "Full name is required."),
+    phoneNumber: z.string().min(10, "A valid phone number is required."),
+    email: z
+        .string()
+        .trim()
+        .min(1, "Email address is required")
+        .email("Please enter a valid email address")
+        .max(50, "Email address is too long")
+        .refine((val) => val.split("@")[0].length >= 3, {
+        message: "Email address is too short",
+    }),
+    serviceArea: z.string().min(3, "Service area is required."),
+    serviceLocation: z.string().regex(/^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/, "Invalid location format."),
 });
-exports.updateProviderSchema = exports.registerProviderSchema.partial();
-exports.updateProviderStatusSchema = zod_1.z.object({
-    newStatus: zod_1.z.nativeEnum(provider_enum_1.ProviderStatus),
-    reason: zod_1.z.string().optional()
+export const updateProviderSchema = registerProviderSchema.partial();
+export const updateProviderStatusSchema = z.object({
+    newStatus: z.nativeEnum(ProviderStatus),
+    reason: z.string().optional(),
 });
-exports.providersForAdminQuerySchema = zod_1.z.object({
-    page: zod_1.z.coerce.number().int().positive().optional(),
-    limit: zod_1.z.coerce.number().int().positive().optional(),
-    search: zod_1.z.string().optional(),
-    status: zod_1.z.string().optional()
-        .transform(val => (val === 'undefined' || val === 'All') ? undefined : val)
-        .pipe(zod_1.z.nativeEnum(provider_enum_1.ProviderStatus).optional()),
-    rating: zod_1.z
-        .union([
-        zod_1.z.coerce.number().int().min(1).max(5),
-        zod_1.z.literal('undefined'),
-        zod_1.z.literal('All'),
-    ])
+export const providersForAdminQuerySchema = z.object({
+    page: z.coerce.number().int().positive().optional(),
+    limit: z.coerce.number().int().positive().optional(),
+    search: z.string().optional(),
+    status: z
+        .string()
         .optional()
-        .transform((val) => (val === 'undefined' || val === 'All') ? undefined : val),
+        .transform((val) => (val === "undefined" || val === "All" ? undefined : val))
+        .pipe(z.nativeEnum(ProviderStatus).optional()),
+    rating: z
+        .union([z.coerce.number().int().min(1).max(5), z.literal("undefined"), z.literal("All")])
+        .optional()
+        .transform((val) => (val === "undefined" || val === "All" ? undefined : val)),
 });
-exports.getServiceProviderQuerySchema = zod_1.z.object({
+export const getServiceProviderQuerySchema = z.object({
     serviceId: IdSchema,
-    experience: zod_1.z.coerce.number().positive().optional(),
-    radius: zod_1.z.coerce.number().positive().optional(),
-    price: zod_1.z.coerce.number().positive().optional(),
-    latitude: zod_1.z.coerce.number().optional(),
-    longitude: zod_1.z.coerce.number().optional(),
-    date: zod_1.z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format').optional(),
-    time: zod_1.z.string().optional(),
+    experience: z.coerce.number().positive().optional(),
+    radius: z.coerce.number().positive().optional(),
+    price: z.coerce.number().positive().optional(),
+    latitude: z.coerce.number().optional(),
+    longitude: z.coerce.number().optional(),
+    date: z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format")
+        .optional(),
+    time: z.string().optional(),
 });
-exports.getAvailabilityQuerySchema = zod_1.z.object({
+export const getAvailabilityQuerySchema = z.object({
     serviceId: IdSchema,
-    latitude: zod_1.z.coerce.number(),
-    longitude: zod_1.z.coerce.number(),
-    radius: zod_1.z.coerce.number().int().positive().optional(),
-    timeMin: zod_1.z.string().datetime(),
-    timeMax: zod_1.z.string().datetime(),
+    latitude: z.coerce.number(),
+    longitude: z.coerce.number(),
+    radius: z.coerce.number().int().positive().optional(),
+    timeMin: z.string().datetime(),
+    timeMax: z.string().datetime(),
 });
-exports.getEarningsQuerySchema = zod_1.z.object({
-    period: zod_1.z.enum(['week', 'month']).optional().default('week'),
+export const getEarningsQuerySchema = z.object({
+    period: z.enum(["week", "month"]).optional().default("week"),
 });
-exports.featuredProvidersQuerySchema = zod_1.z.object({
-    page: zod_1.z.coerce.number().int().positive().optional(),
-    limit: zod_1.z.coerce.number().int().positive().optional(),
-    search: zod_1.z.string().optional(),
+export const featuredProvidersQuerySchema = z.object({
+    page: z.coerce.number().int().positive().optional(),
+    limit: z.coerce.number().int().positive().optional(),
+    search: z.string().optional(),
 });
-const timeSlotSchema = zod_1.z.object({
-    start: zod_1.z.string(),
-    end: zod_1.z.string(),
+const timeSlotSchema = z.object({
+    start: z.string(),
+    end: z.string(),
 });
-const dayScheduleSchema = zod_1.z.object({
-    day: zod_1.z.string(),
-    active: zod_1.z.boolean(),
-    slots: zod_1.z.array(timeSlotSchema),
+const dayScheduleSchema = z.object({
+    day: z.string(),
+    active: z.boolean(),
+    slots: z.array(timeSlotSchema),
 });
-const dateOverrideSchema = zod_1.z.object({
-    date: zod_1.z.string(),
-    isUnavailable: zod_1.z.boolean(),
-    busySlots: zod_1.z.array(timeSlotSchema),
-    reason: zod_1.z.string().optional(),
+const dateOverrideSchema = z.object({
+    date: z.string(),
+    isUnavailable: z.boolean(),
+    busySlots: z.array(timeSlotSchema),
+    reason: z.string().optional(),
 });
-const leavePeriodSchema = zod_1.z.object({
-    from: zod_1.z.string(),
-    to: zod_1.z.string(),
-    reason: zod_1.z.string().optional(),
+const leavePeriodSchema = z.object({
+    from: z.string(),
+    to: z.string(),
+    reason: z.string().optional(),
 });
-exports.updateAvailabilitySchema = zod_1.z.object({
-    weeklySchedule: zod_1.z.array(dayScheduleSchema),
-    dateOverrides: zod_1.z.array(dateOverrideSchema),
-    leavePeriods: zod_1.z.array(leavePeriodSchema),
+export const updateAvailabilitySchema = z.object({
+    weeklySchedule: z.array(dayScheduleSchema),
+    dateOverrides: z.array(dateOverrideSchema),
+    leavePeriods: z.array(leavePeriodSchema),
 });
-exports.searchQuerySchema = zod_1.z.object({
-    search: zod_1.z.string().optional(),
+export const searchQuerySchema = z.object({
+    search: z.string().optional(),
 });

@@ -1,5 +1,5 @@
-import { BookingStatus } from "../enums/booking.enum";
-import { Roles } from "../enums/userRoles";
+import { type BookingStatus } from "../enums/booking.enum";
+import { type Roles } from "../enums/userRoles";
 
 export interface ILoginResponseDTO {
   id: string;
@@ -10,7 +10,6 @@ export interface ILoginResponseDTO {
   profilePicture?: string;
 }
 
-
 export interface RegisterRequestBody {
   name: string;
   email: string;
@@ -19,7 +18,7 @@ export interface RegisterRequestBody {
 
 export interface AuthSuccessResponse {
   message: string;
-  email?: string; 
+  email?: string;
 }
 
 export interface VerifyOtpRequestBody {
@@ -31,7 +30,7 @@ export interface ResendOtpRequestBody {
 }
 
 export interface ResetPasswordRequestBody {
-  token: string; 
+  token: string;
   newPassword: string;
   confirmNewPassword: string;
 }
@@ -47,39 +46,38 @@ export interface ForgotPasswordRequestBody {
 
 export interface ForgotPasswordSuccessResponse {
   message: string;
-  email?: string; 
+  email?: string;
 }
 
 export interface IBookingDetailsForAdmin {
-    id: string;
-    providerName: string; 
-    service: string;
-    bookingDate: string;
-    serviceDate: string;
-    status: BookingStatus;
+  id: string;
+  providerName: string;
+  service: string;
+  bookingDate: string;
+  serviceDate: string;
+  status: BookingStatus;
 }
 
 export interface IUserDetailsResponse {
-    id: string;
-    name: string;
-    avatarUrl: string;
-    email: string;
-    phone: string; 
-    registrationDate: string;
-    lastLogin: string;
-    totalBookings: number;
-    isActive: boolean;
-    bookingStats: {
-        completed: number;
-        canceled: number;
-        pending: number;
-    };
-    bookingHistory: IBookingDetailsForAdmin[];
+  id: string;
+  name: string;
+  avatarUrl: string;
+  email: string;
+  phone: string;
+  registrationDate: string;
+  lastLogin: string;
+  totalBookings: number;
+  isActive: boolean;
+  bookingStats: {
+    completed: number;
+    canceled: number;
+    pending: number;
+  };
+  bookingHistory: IBookingDetailsForAdmin[];
 }
 
 export interface IUserListFilter {
-    search?: string;
-    status?: 'Active' | 'Inactive' | 'All' | string;
-    role?: string; 
+  search?: string;
+  status?: "Active" | "Inactive" | "All" | string;
+  role?: string;
 }
-

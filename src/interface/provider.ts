@@ -1,8 +1,9 @@
-import mongoose, { Schema, Types } from "mongoose";
-import { ProviderStatus } from "../enums/provider.enum";
-import { BookingStatus } from "../enums/booking.enum";
-import { SubscriptionStatus } from "../enums/subscription.enum";
-import { IProvider } from "../models/Providers";
+import { type Types } from "mongoose";
+import { type ProviderStatus } from "../enums/provider.enum";
+import { type BookingStatus } from "../enums/booking.enum";
+import { type SubscriptionStatus } from "../enums/subscription.enum";
+import { type IProvider } from "../models/Providers";
+import { type IService } from "../models/Service";
 
 export interface Availability {
   day: string;
@@ -11,11 +12,11 @@ export interface Availability {
 }
 
 export interface IProviderFilter {
-    search?: string;
-    status?: string;
-    rating?: number;
-    page?: number;
-    limit?: number;
+  search?: string;
+  status?: string;
+  rating?: number;
+  page?: number;
+  limit?: number;
 }
 
 export interface IProviderRegistrationData {
@@ -38,8 +39,8 @@ export interface IProviderRegistrationData {
 }
 
 export interface IProviderForAdminResponce {
-  id: string
-  userId: string
+  id: string;
+  userId: string;
   fullName: string;
   phoneNumber: string;
   email: string;
@@ -48,8 +49,7 @@ export interface IProviderForAdminResponce {
   status: string;
   rating: number;
   serviceName?: string;
-  serviceOffered?: string[]
-
+  serviceOffered?: string[];
 }
 
 export interface IFeaturedProviders {
@@ -57,14 +57,13 @@ export interface IFeaturedProviders {
   userId: string;
   fullName: string;
   profilePhoto: string;
-
 }
 
 export interface ISubscription {
   planId?: string | Types.ObjectId;
   startDate?: Date;
   endDate?: Date;
-  status: SubscriptionStatus
+  status: SubscriptionStatus;
 }
 
 export interface TimeSlot {
@@ -111,7 +110,7 @@ export interface IProviderProfile {
   totalBookings: number;
   payoutPending: number;
   rating: number;
-  isVerified: boolean
+  isVerified: boolean;
   subscription?: ISubscription;
   createdAt?: Date;
 }
@@ -128,16 +127,14 @@ export interface IServiceAddPageResponse {
   id: string;
   name: string;
   parentId: string | null;
-
 }
 
 export interface IReviewsOfUser {
-  userName?: string,
-  userImg?: string,
-  rating?: number
-  review?: string,
+  userName?: string;
+  userImg?: string;
+  rating?: number;
+  review?: string;
 }
-
 
 export interface IBackendProvider {
   _id: string;
@@ -170,9 +167,9 @@ export interface IProviderForChatListPage {
   location: string;
   isOnline: boolean;
   services: string;
-  lastMessage: string | null; 
-  messageType: 'text' | 'image' | 'file';
-  lastMessageSenderId: string | null; 
+  lastMessage: string | null;
+  messageType: "text" | "image" | "file";
+  lastMessageSenderId: string | null;
   lastMessageAt?: Date | null;
 }
 
@@ -183,7 +180,6 @@ export interface IDashboardResponse {
   status: BookingStatus;
   image: string;
   category: string;
-
 }
 
 export interface IRatingPoint {
@@ -232,12 +228,11 @@ export interface EarningsAnalyticsData {
   breakdown: Array<{
     date: Date;
     service: string;
-    client: string;
+    client: string | unknown;
     amount: number;
     status: string;
   }>;
 }
-
 
 export interface IReview {
   name: string;
@@ -255,7 +250,7 @@ export interface IRatingDistribution {
 
 export interface IMonthlyTrend {
   month: string;
-  value: number; 
+  value: number;
 }
 
 export interface IServiceBreakdown {
@@ -283,12 +278,15 @@ export interface IProviderPerformance {
 }
 
 export interface IAvailabilityUpdateData {
-    weeklySchedule: DaySchedule[];
-    dateOverrides: DateOverride[];
-    leavePeriods: LeavePeriod[];
+  weeklySchedule: DaySchedule[];
+  dateOverrides: DateOverride[];
+  leavePeriods: LeavePeriod[];
 }
 
-
+interface ICatAndSubCat {
+  _id: string;
+  name: string;
+}
 export interface IServiceDetails {
   _id: string;
   title: string;
@@ -296,9 +294,13 @@ export interface IServiceDetails {
   price: number;
   priceUnit: string;
   duration: string;
-  categoryId: string;
-  subCategoryId:string;
+  subCategoryId: ICatAndSubCat;
+  IPopulatedService;
   experience?: number;
+}
+
+export interface IPopulatedService extends Omit<IService, "categoryId" | "subCategoryId"> {
+  subCategoryId: { _id: Types.ObjectId; name: string };
 }
 
 export interface IProviderDetailsResponse {
@@ -307,27 +309,27 @@ export interface IProviderDetailsResponse {
 }
 
 export interface ITimeSlot {
-    start: string;
-    end: string;
+  start: string;
+  end: string;
 }
 
 export interface IDaySchedule {
-    day: string;
-    active: boolean;
-    slots: ITimeSlot[];
+  day: string;
+  active: boolean;
+  slots: ITimeSlot[];
 }
 
 export interface IDateOverride {
-    date: string;
-    isUnavailable: boolean;
-    busySlots: ITimeSlot[];
-    reason?: string;
+  date: string;
+  isUnavailable: boolean;
+  busySlots: ITimeSlot[];
+  reason?: string;
 }
 
 export interface ILeavePeriod {
-    from: string;
-    to: string;
-    reason?: string;
+  from: string;
+  to: string;
+  reason?: string;
 }
 
 export interface IProviderDto extends Partial<IProvider> {

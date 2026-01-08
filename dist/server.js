@@ -1,83 +1,90 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-require("reflect-metadata");
-const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
-const cookie_parser_1 = __importDefault(require("cookie-parser"));
-const helmet_1 = __importDefault(require("helmet"));
-const dotenv_1 = __importDefault(require("dotenv"));
-const http_1 = __importDefault(require("http"));
-const socket_io_1 = require("socket.io");
-dotenv_1.default.config();
-const database_1 = __importDefault(require("./config/database"));
-const path_1 = __importDefault(require("path"));
-const auth_1 = __importDefault(require("./routes/auth"));
-const adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
-const categoryRoutes_1 = __importDefault(require("./routes/categoryRoutes"));
-const providerRoute_1 = __importDefault(require("./routes/providerRoute"));
-const address_1 = __importDefault(require("./routes/address"));
-const bookingRoutes_1 = __importDefault(require("./routes/bookingRoutes"));
-const serviceRoutes_1 = __importDefault(require("./routes/serviceRoutes"));
-const walletRoutes_1 = __importDefault(require("./routes/walletRoutes"));
-const reviewRoutes_1 = __importDefault(require("./routes/reviewRoutes"));
-const subscriptionRoutes_1 = __importDefault(require("./routes/subscriptionRoutes"));
-const messageRoutes_1 = __importDefault(require("./routes/messageRoutes"));
-const chatBotRoutes_1 = __importDefault(require("./routes/chatBotRoutes"));
-const fs_1 = __importDefault(require("fs"));
-const CustomError_1 = require("./utils/CustomError");
-const errorHandler_1 = require("./middleware/errorHandler");
-const logger_1 = __importDefault(require("./logger/logger"));
-const socket_1 = require("./utils/socket");
-const cleanupProviderSchedule_1 = require("./jobs/cleanupProviderSchedule");
-const expireOverdueBookings_1 = require("./jobs/expireOverdueBookings");
-const uploadDir = path_1.default.join(__dirname, '../uploads');
-if (!fs_1.default.existsSync(uploadDir)) {
-    fs_1.default.mkdirSync(uploadDir);
+import "reflect-metadata";
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import dotenv from "dotenv";
+import http from "http";
+import { Server as SocketIOServer } from "socket.io";
+import { fileURLToPath } from "url";
+dotenv.config();
+import { rateLimiter } from "./middleware/rateLimiter";
+import connectDB from "./config/database";
+import path from "path";
+import authRoutes from "./routes/auth";
+import adminRoutes from "./routes/adminRoutes";
+import categoryRoutes from "./routes/categoryRoutes";
+import providerRoutes from "./routes/providerRoute";
+import addressRoutes from "./routes/address";
+import bookingRoutes from "./routes/bookingRoutes";
+import serviceRoutes from "./routes/serviceRoutes";
+import walletRoutes from "./routes/walletRoutes";
+import reviewRoutes from "./routes/reviewRoutes";
+import subscriptionRoutes from "./routes/subscriptionRoutes";
+import messageRoutes from "./routes/messageRoutes";
+import chatbotRoutes from "./routes/chatBotRoutes";
+import fs from "fs";
+import { CustomError } from "./utils/CustomError";
+import { errorHandler } from "./middleware/errorHandler";
+import logger from "./logger/logger";
+import { chatSocket } from "./utils/socket";
+import { startScheduleCleanupJob } from "./jobs/cleanupProviderSchedule";
+import { startBookingExpiryJob } from "./jobs/expireOverdueBookings";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadDir = path.join(__dirname, "../uploads");
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
 }
-const app = (0, express_1.default)();
+const app = express();
 const PORT = process.env.PORT || 5000;
 //database
-(0, database_1.default)();
+connectDB();
+const allowedOrigins = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(",").map((p) => p.trim()) : [];
 // Middleware
-app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+app.use(cors({
+    origin: function (origin, callback) {
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        else {
+            return callback(new Error("CORS policy violation: Origin not allowed"));
+        }
+    },
     credentials: true,
 }));
-app.use((0, helmet_1.default)());
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
-app.use((0, cookie_parser_1.default)());
-// app.use(rateLimiter);
-app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '..', 'uploads')));
-app.use('/api/auth', auth_1.default);
-app.use('/api/admin', adminRoutes_1.default);
-app.use('/api/provider', providerRoute_1.default);
-app.use('/api/categories', categoryRoutes_1.default);
-app.use('/api/address', address_1.default);
-app.use('/api/bookings', bookingRoutes_1.default);
-app.use('/api/services', serviceRoutes_1.default);
-app.use('/api/wallet', walletRoutes_1.default);
-app.use('/api/review', reviewRoutes_1.default);
-app.use('/api/subscriptionPlan', subscriptionRoutes_1.default);
-app.use('/api/messages', messageRoutes_1.default);
-app.use('/api/chatbot', chatBotRoutes_1.default);
+app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(rateLimiter);
+app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
+app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/provider", providerRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/address", addressRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/services", serviceRoutes);
+app.use("/api/wallet", walletRoutes);
+app.use("/api/review", reviewRoutes);
+app.use("/api/subscriptionPlan", subscriptionRoutes);
+app.use("/api/messages", messageRoutes);
+app.use("/api/chatbot", chatbotRoutes);
 app.use((req, res, next) => {
-    const error = new CustomError_1.CustomError(`Not Found - ${req.originalUrl}`, 404);
+    const error = new CustomError(`Not Found - ${req.originalUrl}`, 404);
     next(error);
 });
-app.use(errorHandler_1.errorHandler);
-const server = http_1.default.createServer(app);
-const io = new socket_io_1.Server(server, {
+app.use(errorHandler);
+const server = http.createServer(app);
+const io = new SocketIOServer(server, {
     cors: {
         origin: "http://localhost:5173",
         methods: ["GET", "POST"],
-        credentials: true
-    }
+        credentials: true,
+    },
 });
-(0, socket_1.chatSocket)(io);
-(0, cleanupProviderSchedule_1.startScheduleCleanupJob)();
-(0, expireOverdueBookings_1.startBookingExpiryJob)();
-server.listen(PORT, () => logger_1.default.info(`Server running on port ${PORT}`));
+chatSocket(io);
+startScheduleCleanupJob();
+startBookingExpiryJob();
+server.listen(PORT, () => logger.info(`Server running on port ${PORT}`));

@@ -1,16 +1,16 @@
-import { Types } from "mongoose";
-import { BookingStatus } from "../enums/booking.enum";
-import { PaymentStatus } from "../enums/userRoles";
-import { DaySchedule } from "./provider";
+import { type Types } from "mongoose";
+import { type BookingStatus } from "../enums/booking.enum";
+import { type PaymentStatus } from "../enums/userRoles";
+import { type DaySchedule } from "./provider";
 
 export interface IBookingRequest {
-  userId?: string
+  userId?: string;
   serviceId: string;
   providerId: string;
   customerName: string;
   phone: string;
   instructions?: string;
-  addressId: string
+  addressId: string;
   scheduledDate?: string;
   scheduledTime?: string;
   amount: number;
@@ -18,7 +18,7 @@ export interface IBookingRequest {
 
 export interface IBookingConfirmationRes {
   id: string;
-  bookedOrderId: string
+  bookedOrderId: string;
   serviceName: string;
   serviceImage: string;
   providerName: string;
@@ -44,17 +44,16 @@ export interface IBookingConfirmationRes {
   specialInstruction: string;
   providerTimings?: DaySchedule[];
   createdAt: Date;
-  reviewed?: Boolean;
+  reviewed?: boolean;
   rating?: number;
-  review?: string
+  review?: string;
 }
-
 
 export interface IBookingHistoryPage {
   id: string;
   serviceName: string;
   serviceImage: string;
-  providerName: string
+  providerName: string;
   providerImage: string;
   date: string;
   time: string;
@@ -67,40 +66,38 @@ export interface IBookingHistoryPage {
   createdAt?: Date;
 }
 
-
 export interface IProviderBookingManagement {
   id: string;
   customerId?: string;
   customerName: string;
   customerImage: string;
-  service: string;    
-  date: string;    
-  time: string;   
-  duration: string; 
-  location: string; 
-  payment: number;  
-  paymentStatus: string; 
-  status: BookingStatus; 
-  description: string;  
+  service: string;
+  date: string;
+  time: string;
+  duration: string;
+  location: string;
+  payment: number;
+  paymentStatus: string;
+  status: BookingStatus;
+  description: string;
   customerPhone: string;
   customerEmail: string;
-  specialRequests: string; 
-  createdAt: string; 
+  specialRequests: string;
+  createdAt: string;
 }
 
 export interface IGetMessages {
   id: string;
-  bookingId: string,
-  senderId: string,
-  text: string
-
+  bookingId: string;
+  senderId: string;
+  text: string;
 }
 
 export interface BookingOtpPayload {
   bookingId: string;
   otp: string;
   iat: number;
-  exp: number; 
+  exp: number;
 }
 
 export interface IBookingLog {
@@ -159,24 +156,31 @@ export interface IBookingDetailData {
     instructions?: string;
   };
   user: { name: string; email: string; phone: string; image: string };
-  provider: { _id: string; name: string; email: string; phone: string; image: string; serviceArea: string };
+  provider: {
+    _id: string;
+    name: string;
+    email: string;
+    phone: string;
+    image: string;
+    serviceArea: string;
+  };
   service: { title: string; duration: string; price: number };
   address: { label: string; fullAddress: string };
   payment?: { method: string; transactionId: string; date: string };
 }
 
 export interface IPopulatedBookingForEarnings {
-  _id: Types.ObjectId | string;
-  amount: string;
-  status: BookingStatus;
+  _id?: Types.ObjectId | string;
+  amount: string | number;
+  status: BookingStatus | unknown;
   userId: {
     _id: Types.ObjectId | string;
-    name: string;
+    name: string | unknown;
   };
   serviceId: {
-    _id: Types.ObjectId | string;
+    _id?: Types.ObjectId | string;
     title: string;
   };
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt?: Date;
+  createdAt?: Date;
 }

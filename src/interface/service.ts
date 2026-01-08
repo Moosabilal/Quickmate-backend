@@ -1,47 +1,46 @@
-import { Types } from "mongoose";
-import { ServicesPriceUnit } from "../enums/Services.enum";
-import { IService } from "../models/Service";
+import { type Types } from "mongoose";
+import { type ServicesPriceUnit } from "../enums/Services.enum";
+import { type IService } from "../models/Service";
 
 export interface IAddAndEditServiceForm {
-    id?: string;
-    title: string;
-    description: string;
-    experience: number;
-    userId?: string;
-    categoryId: string;
-    subCategoryId: string | null;
-    duration: string,
-    priceUnit: ServicesPriceUnit;
-    providerId?: string;
-    status: boolean;
-    price: number;
-    businessCertification?: string;
-    categoryName?: string;
+  id?: string;
+  title: string;
+  description: string;
+  experience: number;
+  userId?: string;
+  categoryId: string;
+  subCategoryId: string | null;
+  duration: string;
+  priceUnit: ServicesPriceUnit;
+  providerId?: string;
+  status: boolean;
+  price: number;
+  businessCertification?: string;
+  categoryName?: string;
 }
 
 export interface IProviderServicePageResponse {
-    id: string;
-    category: string;
-    title: string;
-    price: number;
-    serviceImage: string;
-    description: string;
-    rating?: number;
-    reviews?: number;
-
+  id: string;
+  category: string;
+  title: string;
+  price: number;
+  serviceImage: string;
+  description: string;
+  rating?: number;
+  reviews?: number;
 }
 
 export interface IServiceWithProvider {
+  _id: Types.ObjectId;
+  title: string;
+  price: number;
+  provider: {
     _id: Types.ObjectId;
-    title: string;
-    price: number;
-    provider: {
-        _id: Types.ObjectId;
-        fullName: string;
-        rating: number;
-    };
+    fullName: string;
+    rating: number;
+  };
 }
 
 export interface IServiceDto extends Partial<IService> {
-    businessCertification: string | null;
+  businessCertification: string | null;
 }

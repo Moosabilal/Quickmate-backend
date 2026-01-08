@@ -1,21 +1,16 @@
-import express from 'express';
-import { container } from '../di/container';
-import TYPES from '../di/type';
-import { authenticateToken, authorizeRoles } from '../middleware/authMiddleware';
-import { AdminController } from '../controllers/adminController';
+import express from "express";
+import { container } from "../di/container";
+import TYPES from "../di/type";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
+import { type AdminController } from "../controllers/adminController";
 
 const router = express.Router();
-const adminController = container.get<AdminController>(TYPES.AdminController)
+const adminController = container.get<AdminController>(TYPES.AdminController);
 
-const isAdmin = [authenticateToken, authorizeRoles(['Admin'])];
+const isAdmin = [authenticateToken, authorizeRoles(["Admin"])];
 
-router.get('/getAdminDashboard', adminController.getAdminDashboard)
-router.get('/analytics/dashboard', isAdmin, adminController.getDashboardAnalytics);
-router.put('/change-password', isAdmin, adminController.changePassword
-);
-
-
+router.get("/getAdminDashboard", adminController.getAdminDashboard);
+router.get("/analytics/dashboard", isAdmin, adminController.getDashboardAnalytics);
+router.put("/change-password", isAdmin, adminController.changePassword);
 
 export default router;
-
-

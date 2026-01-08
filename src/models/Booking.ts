@@ -1,32 +1,31 @@
-
-import mongoose, { Schema, Document, HydratedDocument, InferSchemaType, Types } from 'mongoose';
-import { PaymentStatus } from '../enums/userRoles';
-import { BookingStatus } from '../enums/booking.enum';
+import mongoose, { Schema, type HydratedDocument, type InferSchemaType, type Types } from "mongoose";
+import { PaymentStatus } from "../enums/userRoles";
+import { BookingStatus } from "../enums/booking.enum";
 
 const BookingSchema: Schema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: false,
     },
     serviceId: {
       type: Schema.Types.ObjectId,
-      ref: 'Service',
+      ref: "Service",
       required: false,
     },
     providerId: {
       type: Schema.Types.ObjectId,
-      ref: 'Provider',
+      ref: "Provider",
       required: false,
     },
     paymentId: {
       type: Schema.Types.ObjectId,
-      ref: 'Payment',
+      ref: "Payment",
     },
     addressId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Address'
+      type: Schema.Types.ObjectId,
+      ref: "Address",
     },
     customerName: {
       type: String,
@@ -54,11 +53,11 @@ const BookingSchema: Schema = new Schema(
     },
     scheduledDate: {
       type: String,
-      required: false
+      required: false,
     },
     scheduledTime: {
       type: String,
-      required: false
+      required: false,
     },
     duration: {
       type: Number,
@@ -74,21 +73,26 @@ const BookingSchema: Schema = new Schema(
     },
     createdBy: {
       type: String,
-      enum: ['Bot', 'Manual'],
-      default: 'Manual',
+      enum: ["Bot", "Manual"],
+      default: "Manual",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+);
+
+BookingSchema.index(
+  { providerId: 1, scheduledDate: 1, scheduledTime: 1 },
+  { unique: true, name: "unique_provider_date_time" },
 );
 
 export type BookingSchemaType = InferSchemaType<typeof BookingSchema> & {
   _id: Types.ObjectId;
-}
+};
 export type BookingLean = BookingSchemaType & {
   createdAt: Date;
   updatedAt: Date;
 };
 
-export type IBooking = HydratedDocument<BookingSchemaType>
+export type IBooking = HydratedDocument<BookingSchemaType>;
 
-export default mongoose.model<IBooking>('Booking', BookingSchema)
+export default mongoose.model<IBooking>("Booking", BookingSchema);

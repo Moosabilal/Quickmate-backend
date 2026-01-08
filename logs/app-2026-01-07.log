@@ -1,0 +1,338 @@
+[2026-01-07 07:07:22] [INFO   ] - Server running on port 5000
+[2026-01-07 07:07:24] [INFO   ] - MongoDB Connected...
+[2026-01-07 07:08:03] [INFO   ] - Client disconnected: EAmRSrE5uQt6WDtAAAAB
+[2026-01-07 07:08:03] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 07:16:10] [INFO   ] - Server running on port 5000
+[2026-01-07 07:16:11] [INFO   ] - MongoDB Connected...
+[2026-01-07 07:51:02] [INFO   ] - Server running on port 5000
+[2026-01-07 07:51:03] [INFO   ] - MongoDB Connected...
+[2026-01-07 07:55:37] [INFO   ] - Client disconnected: v6M6f_DLkQWYbNYzAAAD
+[2026-01-07 07:55:37] [INFO   ] - Client disconnected: 9r7WtmGxvqoiUkMJAAAB
+[2026-01-07 07:55:43] [INFO   ] - Client disconnected: 5VdoA6LqrRsWTIzkAAAF
+[2026-01-07 07:55:43] [INFO   ] - Client disconnected: gO5rC1OAO4LIFVa5AAAH
+[2026-01-07 07:56:00] [INFO   ] - Client disconnected: cLHeliyIAxoq84AHAAAL
+[2026-01-07 07:56:00] [INFO   ] - Client disconnected: wI3ap57FpNIhRIVPAAAJ
+[2026-01-07 07:56:12] [INFO   ] - Client disconnected: P2X0wd7Lx9bxOezjAAAO
+[2026-01-07 07:56:12] [INFO   ] - Client disconnected: 4Q0dgkJmHhPY6_5CAAAP
+[2026-01-07 07:56:25] [INFO   ] - Client disconnected: bBob6PGzBvgx2m72AAAS
+[2026-01-07 07:56:25] [INFO   ] - Client disconnected: sOiur9-eQBsQYY1KAAAT
+[2026-01-07 07:56:39] [INFO   ] - Client disconnected: O_c9SoZdNjotgVwxAAAX
+[2026-01-07 07:56:39] [INFO   ] - Client disconnected: -XuLGAyExb2D_LrkAAAW
+[2026-01-07 07:56:53] [INFO   ] - Client disconnected: B4lH0pjfpRj87EalAAAZ
+[2026-01-07 07:56:53] [INFO   ] - Client disconnected: dr3m3oXxS33ClU7rAAAb
+[2026-01-07 07:57:06] [INFO   ] - Client disconnected: d3b77A9RvdoItccaAAAd
+[2026-01-07 07:57:06] [INFO   ] - Client disconnected: 8PiTV35w39FndP8dAAAf
+[2026-01-07 07:57:20] [INFO   ] - Client disconnected: ByQ2IIIFbUKXAgELAAAj
+[2026-01-07 07:57:20] [INFO   ] - Client disconnected: 7NCgEGFdyaLOi2JRAAAh
+[2026-01-07 07:57:33] [INFO   ] - Client disconnected: smyZOLWjM8ChJNxJAAAn
+[2026-01-07 07:57:33] [INFO   ] - Client disconnected: 0HC6AAzLMWkuGzJ_AAAm
+[2026-01-07 07:57:47] [INFO   ] - Client disconnected: 4Gkx414Uz-Rz_1ZMAAAq
+[2026-01-07 07:57:47] [INFO   ] - Client disconnected: qTo85VPBjotNluC0AAAr
+[2026-01-07 07:58:00] [INFO   ] - Client disconnected: BkqejjaVR4JUNChVAAAt
+[2026-01-07 07:58:00] [INFO   ] - Client disconnected: hQIH9J0_EFbF8KtiAAAv
+[2026-01-07 07:58:14] [INFO   ] - Client disconnected: lMAg-w0aET6EZtPvAAAz
+[2026-01-07 07:58:14] [INFO   ] - Client disconnected: AFu0zxSlSK6OSPxvAAAy
+[2026-01-07 07:58:27] [INFO   ] - Client disconnected: kHunWEeguesrk6uqAAA3
+[2026-01-07 07:58:27] [INFO   ] - Client disconnected: MrlHSz7vn-Bs_dBjAAA1
+[2026-01-07 07:58:41] [INFO   ] - Client disconnected: UFam1U8w7LYiU6eRAAA7
+[2026-01-07 07:58:41] [INFO   ] - Client disconnected: -Xn42odder7pP8wOAAA5
+[2026-01-07 07:58:54] [INFO   ] - Client disconnected: G0Q343vr2OrHpnsCAAA_
+[2026-01-07 07:58:54] [INFO   ] - Client disconnected: FQxoVQPyrbsYIHW2AAA9
+[2026-01-07 07:59:08] [INFO   ] - Client disconnected: gp8fqC2LZsj83ub2AABB
+[2026-01-07 07:59:21] [INFO   ] - Client disconnected: XM-qzA8sHjD5sgpRAABD
+[2026-01-07 07:59:35] [INFO   ] - Client disconnected: NCpDQOY8QTWwtcC-AABG
+[2026-01-07 07:59:35] [INFO   ] - Client disconnected: m4lKoO8ZcNRdwiCOAABH
+[2026-01-07 07:59:48] [INFO   ] - Client disconnected: um-hVfsaGqXUix3oAABK
+[2026-01-07 07:59:48] [INFO   ] - Client disconnected: sNgWxxvk-KIXxa4eAABL
+[2026-01-07 08:00:01] [INFO   ] - Client disconnected: jciK_H8I84oV1rzZAABO
+[2026-01-07 08:00:01] [INFO   ] - Client disconnected: Q39tQcDYJKjTetXKAABP
+[2026-01-07 08:00:13] [INFO   ] - Client disconnected: 0CoiN63qIKkzBb_mAABR
+[2026-01-07 08:00:13] [INFO   ] - Client disconnected: g2MEgKfN3SYq7F2cAABT
+[2026-01-07 08:00:26] [INFO   ] - Client disconnected: K2KwZJq7s9BJLXOcAABV
+[2026-01-07 08:00:26] [INFO   ] - Client disconnected: MeIyhjD5ws03JpbjAABX
+[2026-01-07 08:00:38] [INFO   ] - Client disconnected: kdu96JQQtPw4WRk5AABZ
+[2026-01-07 08:00:38] [INFO   ] - Client disconnected: Vh04ND5X_nAUdeknAABb
+[2026-01-07 08:00:51] [INFO   ] - Client disconnected: kLtS_O4zMSOPR3SiAABf
+[2026-01-07 08:00:51] [INFO   ] - Client disconnected: Q_oY7JoZUBYynXKsAABd
+[2026-01-07 08:01:03] [INFO   ] - Client disconnected: dUHu5D_vx0JwtGFaAABj
+[2026-01-07 08:01:03] [INFO   ] - Client disconnected: jb3hrxb6tvskEd_hAABh
+[2026-01-07 08:01:16] [INFO   ] - Client disconnected: 70jz8Nlp_v-ktJkvAABn
+[2026-01-07 08:01:16] [INFO   ] - Client disconnected: y5EaTceP5mk0LNKuAABm
+[2026-01-07 08:01:28] [INFO   ] - Client disconnected: lxRpY8Fe4MtInYlSAABr
+[2026-01-07 08:01:28] [INFO   ] - Client disconnected: C97N3dNPoIQfPkgwAABp
+[2026-01-07 08:01:41] [INFO   ] - Client disconnected: aQccPouAOC46tmWTAABv
+[2026-01-07 08:01:41] [INFO   ] - Client disconnected: -LiZTU4qC-M5iIBrAABt
+[2026-01-07 08:01:54] [INFO   ] - Client disconnected: krCo602yEo8ubO6rAABz
+[2026-01-07 08:01:54] [INFO   ] - Client disconnected: LXnrnP8mbT1l2XhlAABy
+[2026-01-07 08:02:06] [INFO   ] - Client disconnected: vcVEo2cWwUJftw3AAAB3
+[2026-01-07 08:02:06] [INFO   ] - Client disconnected: 4wDqm5b044uQjmmsAAB1
+[2026-01-07 08:02:19] [INFO   ] - Client disconnected: VR4QypewWQMVnq2PAAB7
+[2026-01-07 08:02:19] [INFO   ] - Client disconnected: wGeASA2YraxkiDzCAAB6
+[2026-01-07 08:02:31] [INFO   ] - Client disconnected: 59ZMy6OKAkjsf1V4AAB_
+[2026-01-07 08:02:31] [INFO   ] - Client disconnected: mruBmiphePDzbW1bAAB9
+[2026-01-07 08:02:44] [INFO   ] - Client disconnected: qGqfmTvHMPb1lRo0AACD
+[2026-01-07 08:02:44] [INFO   ] - Client disconnected: VBdC-gUDfVWU35fyAACC
+[2026-01-07 08:02:56] [INFO   ] - Client disconnected: 3nGjjCMTJUmVvACbAACH
+[2026-01-07 08:02:56] [INFO   ] - Client disconnected: YtLvdHcnl6pIJLrHAACG
+[2026-01-07 08:03:10] [INFO   ] - Client disconnected: BPJDxaXUJC2vkUnnAACJ
+[2026-01-07 08:03:23] [INFO   ] - Client disconnected: p6KRoiAEddecRnY-AACL
+[2026-01-07 08:03:23] [INFO   ] - Client disconnected: 1OsUTsFcMcYUXK78AACN
+[2026-01-07 08:03:37] [INFO   ] - Client disconnected: FXwrWqH9OWB-DNlfAACR
+[2026-01-07 08:03:37] [INFO   ] - Client disconnected: JDTqK0zAmhQdeOQJAACQ
+[2026-01-07 08:03:50] [INFO   ] - Client disconnected: QRpK9iWtDgERINStAACV
+[2026-01-07 08:03:50] [INFO   ] - Client disconnected: Q1mSBaPxhIFC-7cYAACU
+[2026-01-07 08:04:04] [INFO   ] - Client disconnected: 4_yJ_dav6zayX6G1AACX
+[2026-01-07 08:04:18] [INFO   ] - Client disconnected: Di-F8L_bf7uVD5p0AACZ
+[2026-01-07 08:04:31] [INFO   ] - Client disconnected: 2u6Y_EQbIVnFAN7IAACb
+[2026-01-07 08:04:31] [INFO   ] - Client disconnected: G58Cw_PBdkg48ANxAACd
+[2026-01-07 08:04:43] [INFO   ] - Client disconnected: YQBdiHJfgDj2bblFAACf
+[2026-01-07 08:04:43] [INFO   ] - Client disconnected: Cs9xPwbf3KKo22FHAACh
+[2026-01-07 08:04:56] [INFO   ] - Client disconnected: A_tjXWFYS8cUrmrLAACl
+[2026-01-07 08:04:56] [INFO   ] - Client disconnected: ZmcnC1hURlfVndQDAACj
+[2026-01-07 08:05:08] [INFO   ] - Client disconnected: rGef7UdZQwyANaRUAACn
+[2026-01-07 08:05:08] [INFO   ] - Client disconnected: wtEnFEW430j2jjEWAACp
+[2026-01-07 08:05:21] [INFO   ] - Client disconnected: K0sP6z6a27uJjgYpAACr
+[2026-01-07 08:05:21] [INFO   ] - Client disconnected: F1EkS02qIV0Xp_ZFAACt
+[2026-01-07 08:05:33] [INFO   ] - Client disconnected: oE7HecX2SeBYpnQCAACx
+[2026-01-07 08:05:33] [INFO   ] - Client disconnected: jrODPCQE9zcpX6urAACw
+[2026-01-07 08:05:46] [INFO   ] - Client disconnected: UkFH_6S8A4yc4KQgAAC1
+[2026-01-07 08:05:46] [INFO   ] - Client disconnected: bJV3uL_h2Mx48fy9AAC0
+[2026-01-07 08:05:58] [INFO   ] - Client disconnected: nwNGCL7DegGIwMCvAAC5
+[2026-01-07 08:05:58] [INFO   ] - Client disconnected: OZNFiQFDRC98cgwMAAC3
+[2026-01-07 08:06:11] [INFO   ] - Client disconnected: m8FWKMAUOulhxNkXAAC8
+[2026-01-07 08:06:11] [INFO   ] - Client disconnected: oFhUCTGI0sGdK_k4AAC9
+[2026-01-07 08:06:24] [INFO   ] - Client disconnected: RS_LfLCw_SDPpLrbAADA
+[2026-01-07 08:06:24] [INFO   ] - Client disconnected: AGwuvTYNZwiWNx8SAADB
+[2026-01-07 08:06:37] [INFO   ] - Client disconnected: dZmogTIt6oQwmBddAADF
+[2026-01-07 08:06:37] [INFO   ] - Client disconnected: 1iTfvnwGevpBfqb5AADD
+[2026-01-07 08:06:49] [INFO   ] - Client disconnected: eilFmSdgJlEzIRf-AADJ
+[2026-01-07 08:06:49] [INFO   ] - Client disconnected: ChVSoKLZ3f7f70mnAADH
+[2026-01-07 08:07:02] [INFO   ] - Client disconnected: _k0xMTjegA0Kf3nfAADN
+[2026-01-07 08:07:02] [INFO   ] - Client disconnected: NKwnTseiTMYKUV8bAADM
+[2026-01-07 08:07:14] [INFO   ] - Client disconnected: WsLYbosoLVI7NojDAADR
+[2026-01-07 08:07:14] [INFO   ] - Client disconnected: dQ-XqzwhOVAmzrHzAADP
+[2026-01-07 08:07:27] [INFO   ] - Client disconnected: a9PD7wCAvCSm0jxJAADU
+[2026-01-07 08:07:27] [INFO   ] - Client disconnected: ihg_5_KkouSoSGf6AADV
+[2026-01-07 08:07:40] [INFO   ] - Client disconnected: KbLEKP8tmzAFSgRCAADZ
+[2026-01-07 08:07:40] [INFO   ] - Client disconnected: k4W1rLNFchTsKVvCAADX
+[2026-01-07 08:07:52] [INFO   ] - Client disconnected: AyeE7x-VJC5z1ZY8AADd
+[2026-01-07 08:07:52] [INFO   ] - Client disconnected: 8m0YIe1GE7bemlM6AADb
+[2026-01-07 08:08:04] [INFO   ] - Client disconnected: CaYZEHkcdIKw0npTAADh
+[2026-01-07 08:08:04] [INFO   ] - Client disconnected: kCUE3c3NxAPPtlksAADg
+[2026-01-07 08:08:07] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:08:08] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:08:08] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:08:17] [INFO   ] - Client disconnected: uJvL7MOD1HMdDZ_bAADl
+[2026-01-07 08:08:17] [INFO   ] - Client disconnected: 9Vkq-JszRTgsZH1YAADk
+[2026-01-07 08:08:29] [INFO   ] - Client disconnected: WGmXODUrV67id58rAADp
+[2026-01-07 08:08:29] [INFO   ] - Client disconnected: AIbas1YEwTOZffe_AADn
+[2026-01-07 08:08:32] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:08:42] [INFO   ] - Client disconnected: yALFYJDHkI8tbEp1AADt
+[2026-01-07 08:08:42] [INFO   ] - Client disconnected: mRYpnAIgKZioAtlDAADs
+[2026-01-07 08:08:45] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:08:55] [INFO   ] - Client disconnected: DBTIWU-2SNbwGGoyAADv
+[2026-01-07 08:08:57] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:09:08] [INFO   ] - Client disconnected: Axl6mS76vdyn76UiAADx
+[2026-01-07 08:09:10] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:09:20] [INFO   ] - Client disconnected: TuhogIRjcyhEH_PqAADz
+[2026-01-07 08:09:23] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:09:34] [INFO   ] - Client disconnected: hLKZyNKzb0DmTuzYAAD2
+[2026-01-07 08:09:34] [INFO   ] - Client disconnected: tCJCOG-7qdZNqZv3AAD3
+[2026-01-07 08:09:36] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:09:46] [INFO   ] - Client disconnected: GhbDsoGmLYS8_yBOAAD7
+[2026-01-07 08:09:46] [INFO   ] - Client disconnected: txpOcs2umYaZFHv-AAD5
+[2026-01-07 08:09:49] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:10:00] [INFO   ] - Client disconnected: YBoIaVjCi9CS6rY-AAD_
+[2026-01-07 08:10:00] [INFO   ] - Client disconnected: Wq0ObrbImf8sYGWWAAD9
+[2026-01-07 08:10:02] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:10:12] [INFO   ] - Client disconnected: cROcd7p_juUJzQjpAAED
+[2026-01-07 08:10:12] [INFO   ] - Client disconnected: N11IaS6hM8eXuudYAAEB
+[2026-01-07 08:10:15] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:10:25] [INFO   ] - Client disconnected: TChwZ48zu5kL2zWJAAEH
+[2026-01-07 08:10:25] [INFO   ] - Client disconnected: yNCN5bDftjnT3a_TAAEF
+[2026-01-07 08:10:28] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:10:37] [INFO   ] - Client disconnected: WPohoKwiYAMOWPemAAEL
+[2026-01-07 08:10:37] [INFO   ] - Client disconnected: BWpySYeBrSKjD6iaAAEJ
+[2026-01-07 08:10:40] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:10:50] [INFO   ] - Client disconnected: H84SkcWAHuVMlJ6JAAEP
+[2026-01-07 08:10:50] [INFO   ] - Client disconnected: mSglCPSkZ2y8pXHTAAEO
+[2026-01-07 08:10:53] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:11:03] [INFO   ] - Client disconnected: qaaCX-B9w8oF5n17AAER
+[2026-01-07 08:11:03] [INFO   ] - Client disconnected: FjthZDY05qgyk63UAAET
+[2026-01-07 08:11:15] [INFO   ] - Client disconnected: a_kgD58HX5RzbtiKAAEX
+[2026-01-07 08:11:15] [INFO   ] - Client disconnected: -HJWB6WDgbUhL-IaAAEV
+[2026-01-07 08:11:17] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 08:11:17] [INFO   ] - Client disconnected: ISXgH3FPutGp3yPHAAEb
+[2026-01-07 08:11:27] [INFO   ] - Client disconnected: fjbzn3zxih3lghFlAAEZ
+[2026-01-07 08:11:27] [INFO   ] - Client disconnected: _5cR9SrY2dXO5T78AAEd
+[2026-01-07 08:11:40] [INFO   ] - Client disconnected: 0zENxJyzCFe9GtchAAEf
+[2026-01-07 08:11:40] [INFO   ] - Client disconnected: 8cu1p1jTzNeQbeJbAAEh
+[2026-01-07 08:11:53] [INFO   ] - Client disconnected: tC42dafyQXU8J4f1AAEl
+[2026-01-07 08:11:53] [INFO   ] - Client disconnected: RS8m3wV33DTcb-57AAEj
+[2026-01-07 09:54:07] [INFO   ] - Server running on port 5000
+[2026-01-07 09:54:10] [INFO   ] - MongoDB Connected...
+[2026-01-07 09:54:16] [INFO   ] - Client disconnected: Zz06OyQbLPOStg3TAAAB
+[2026-01-07 09:54:18] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 10:05:35] [INFO   ] - Client disconnected: Fb6aI5Y_RRFWqHPkAAAD
+[2026-01-07 10:23:24] [INFO   ] - Server running on port 5000
+[2026-01-07 10:23:25] [INFO   ] - MongoDB Connected...
+[2026-01-07 10:24:14] [INFO   ] - Server running on port 5000
+[2026-01-07 10:24:15] [INFO   ] - MongoDB Connected...
+[2026-01-07 10:24:22] [INFO   ] - Server running on port 5000
+[2026-01-07 10:24:23] [INFO   ] - MongoDB Connected...
+[2026-01-07 10:55:13] [INFO   ] - Client disconnected: kthI9vvpaR-42WbHAAAB
+[2026-01-07 10:55:16] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 10:55:17] [INFO   ] - Client disconnected: 16jtp9vA6SojESPEAAAD
+[2026-01-07 10:55:17] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 10:55:19] [INFO   ] - Client disconnected: jyoVg5wC41Jn5a40AAAF
+[2026-01-07 10:56:43] [INFO   ] - Client disconnected: 8IZC8UkTFUu_H_OTAAAH
+[2026-01-07 10:56:46] [INFO   ] - Client disconnected: k63sjBMO-NEj7CzaAAAJ
+[2026-01-07 10:58:11] [INFO   ] - Client disconnected: hqlViRR9OPqVsBPiAAAL
+[2026-01-07 11:14:31] [INFO   ] - Server running on port 5000
+[2026-01-07 11:14:32] [INFO   ] - MongoDB Connected...
+[2026-01-07 11:48:43] [INFO   ] - Client disconnected: CnLmSSeaG97_dbJSAAAD
+[2026-01-07 11:48:44] [INFO   ] - Client disconnected: hpW5TgOcYSjTuIVOAAAB
+[2026-01-07 11:48:46] [INFO   ] - Client disconnected: MsLoetSjya5kSyXpAAAG
+[2026-01-07 11:48:47] [INFO   ] - Client disconnected: VG-ND7CIKPsNNUc1AAAH
+[2026-01-07 11:48:49] [INFO   ] - Client disconnected: cLShwVjF12UjXjr4AAAJ
+[2026-01-07 11:48:49] [INFO   ] - Client disconnected: kJ_NnUU1ZK5Ho6iAAAAL
+[2026-01-07 11:48:51] [INFO   ] - Client disconnected: o-gOjZIIadhoEMhuAAAN
+[2026-01-07 11:48:52] [INFO   ] - Client disconnected: xjhFKQqa6yB1_H59AAAP
+[2026-01-07 12:02:24] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 12:08:09] [INFO   ] - Server running on port 5000
+[2026-01-07 12:08:09] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:15:46] [INFO   ] - Server running on port 5000
+[2026-01-07 12:15:48] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:23:24] [INFO   ] - Server running on port 5000
+[2026-01-07 12:23:27] [INFO   ] - Server running on port 5000
+[2026-01-07 12:23:28] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:23:38] [INFO   ] - Server running on port 5000
+[2026-01-07 12:23:39] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:23:45] [INFO   ] - Server running on port 5000
+[2026-01-07 12:23:46] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:23:56] [INFO   ] - Server running on port 5000
+[2026-01-07 12:23:58] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:24:30] [ERROR  ] - POST /api/bookings/createBooking 409 This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider. -> This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider.
+[2026-01-07 12:24:56] [INFO   ] - Server running on port 5000
+[2026-01-07 12:24:58] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:25:00] [INFO   ] - Server running on port 5000
+[2026-01-07 12:25:02] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:26:26] [INFO   ] - Server running on port 5000
+[2026-01-07 12:26:28] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:26:54] [ERROR  ] - POST /api/bookings/createBooking 409 This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider. -> This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider.
+[2026-01-07 12:27:15] [INFO   ] - Server running on port 5000
+[2026-01-07 12:27:17] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:36:23] [INFO   ] - Server running on port 5000
+[2026-01-07 12:36:24] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:36:50] [ERROR  ] - POST /api/bookings/createBooking 409 This time slot is already booked. Your amount will creadit within 5-7 days. Please choose another time/Provider. -> This time slot is already booked. Your amount will creadit within 5-7 days. Please choose another time/Provider.
+[2026-01-07 12:38:04] [INFO   ] - Server running on port 5000
+[2026-01-07 12:38:06] [INFO   ] - Server running on port 5000
+[2026-01-07 12:38:09] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:38:27] [INFO   ] - Server running on port 5000
+[2026-01-07 12:38:28] [INFO   ] - MongoDB Connected...
+[2026-01-07 12:52:09] [INFO   ] - Client disconnected: dRFimw-VIqMwAdIUAAAB
+[2026-01-07 12:52:09] [INFO   ] - Client disconnected: XqEYZZFF7sGSlp71AAAD
+[2026-01-07 12:52:11] [INFO   ] - Client disconnected: HDh0HNUPzn57ghD1AAAF
+[2026-01-07 12:52:12] [INFO   ] - Client disconnected: F3z3O8cU657tTSZ7AAAH
+[2026-01-07 12:52:32] [INFO   ] - Client disconnected: 64hbxeGeW4V966Z-AAAJ
+[2026-01-07 12:52:33] [INFO   ] - Client disconnected: ADywBQSHSx-EaqFIAAAL
+[2026-01-07 12:52:35] [INFO   ] - Client disconnected: Eay3eg9Q4GfB8wXaAAAN
+[2026-01-07 12:52:36] [INFO   ] - Client disconnected: IL9XAav-xlPKL8oFAAAP
+[2026-01-07 12:53:01] [INFO   ] - Client disconnected: jurtrPByCHu2VxbgAAAR
+[2026-01-07 12:53:02] [INFO   ] - Client disconnected: 0reYifscrMj-J8hLAAAT
+[2026-01-07 12:53:04] [INFO   ] - Client disconnected: s1UXW0fqyh6aeFjqAAAV
+[2026-01-07 12:53:04] [INFO   ] - Client disconnected: remqtq2XFmQgrtrsAAAX
+[2026-01-07 13:48:06] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 13:48:13] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 13:49:27] [ERROR  ] - POST /api/bookings/createBooking 409 This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider. -> This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider.
+[2026-01-07 14:10:03] [ERROR  ] - POST /api/bookings/createBooking 409 This time slot is already booked. Your amount will creadit within 5-7 days. Please choose another time/Provider. -> This time slot is already booked. Your amount will creadit within 5-7 days. Please choose another time/Provider.
+[2026-01-07 14:11:55] [INFO   ] - Client disconnected: MWKFB30GGKqj3R3jAAAZ
+[2026-01-07 14:11:56] [INFO   ] - Client disconnected: 6wT3SeUrgI5ZZJrpAAAb
+[2026-01-07 14:12:20] [INFO   ] - Client disconnected: ljbYGS5Eh8ieJ6chAAAd
+[2026-01-07 14:31:33] [INFO   ] - Client disconnected: UUYLKFmaIDIqMtaQAAAf
+[2026-01-07 14:31:34] [INFO   ] - Client disconnected: e8kSWHpArLm3GAPlAAAh
+[2026-01-07 14:31:53] [INFO   ] - Client disconnected: MJAc7idO2G6_Lpk2AAAj
+[2026-01-07 14:31:54] [INFO   ] - Client disconnected: Lb_BneA6fODKPmDdAAAl
+[2026-01-07 14:35:46] [INFO   ] - Client disconnected: pG83-jUvCOesrSLMAAAn
+[2026-01-07 14:35:47] [INFO   ] - Client disconnected: RSLRqjo3Aa-HLfs0AAAp
+[2026-01-07 14:35:49] [INFO   ] - Client disconnected: UEGayJIim4Q_BAW2AAAr
+[2026-01-07 14:35:50] [INFO   ] - Client disconnected: _8DiEB6xZh50oco4AAAt
+[2026-01-07 14:35:56] [INFO   ] - Client disconnected: ghR0_elaQQdECeQhAAAv
+[2026-01-07 14:35:57] [INFO   ] - Client disconnected: WikEBC6Cf91JznOaAAAx
+[2026-01-07 14:35:59] [INFO   ] - Client disconnected: rN4pBIl5J4w8uclaAAAz
+[2026-01-07 14:36:00] [INFO   ] - Client disconnected: ESAsH6AM4f9P8YoAAAA1
+[2026-01-07 14:36:02] [INFO   ] - Client disconnected: URQ2sOTAnwxZRcexAAA3
+[2026-01-07 14:36:02] [INFO   ] - Client disconnected: 8geGQApjkBofyvEUAAA5
+[2026-01-07 14:47:09] [INFO   ] - Client disconnected: zLjDRFA_eafllxjoAAA7
+[2026-01-07 14:47:09] [INFO   ] - Client disconnected: IO1Nmcxmm_zWvO4pAAA9
+[2026-01-07 14:47:12] [INFO   ] - Client disconnected: ntTQz7GPZ0-hgTnWAABA
+[2026-01-07 14:47:15] [INFO   ] - Client disconnected: Gp90weUP2XFGjD1lAABC
+[2026-01-07 14:47:17] [INFO   ] - Client disconnected: x_hvRCGy0svgUQWyAABE
+[2026-01-07 14:47:19] [INFO   ] - Client disconnected: U_8at9OGiuLf9LzpAABG
+[2026-01-07 14:47:34] [INFO   ] - Client disconnected: uDk3bc0q3X-B3CglAABI
+[2026-01-07 14:47:34] [INFO   ] - Client disconnected: RrD9uySgrVukTS5nAABK
+[2026-01-07 14:49:46] [INFO   ] - Client disconnected: AV_k0aViFuNtPIg_AABM
+[2026-01-07 14:49:47] [INFO   ] - Client disconnected: 2XoLUzHifbA_wfUaAABO
+[2026-01-07 14:49:48] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 14:49:48] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 14:49:48] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 14:49:49] [INFO   ] - Client disconnected: jbLT_52RnCStByjyAABQ
+[2026-01-07 14:49:51] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 14:52:35] [ERROR  ] - GET /api/categories/edit/693a810255f277c041b5a71f 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[2026-01-07 14:52:35] [ERROR  ] - GET /api/categories/693a810255f277c041b5a71f/related 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[2026-01-07 14:52:35] [ERROR  ] - GET /api/categories/edit/693a810255f277c041b5a71f 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[2026-01-07 14:52:35] [ERROR  ] - GET /api/categories/693a810255f277c041b5a71f/related 500 getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-00.1xluc.mongodb.net
+[2026-01-07 16:22:40] [INFO   ] - Client disconnected: 7cQF9Imsc3D3oACNAABS
+[2026-01-07 16:45:40] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 16:46:27] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 16:46:27] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 16:46:27] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 21:40:59] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 21:41:00] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 21:41:30] [ERROR  ] - POST /api/bookings/createBooking 500 Caused by ::  :: Please retry your operation or multi-document transaction. -> Caused by ::  :: Please retry your operation or multi-document transaction.
+[2026-01-07 21:42:37] [INFO   ] - Server running on port 5000
+[2026-01-07 21:42:39] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:45:18] [INFO   ] - Server running on port 5000
+[2026-01-07 21:45:20] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:45:34] [INFO   ] - Client disconnected: mwRWDQGJWuPIzE8dAAAB
+[2026-01-07 21:45:42] [INFO   ] - Client disconnected: G-ufsCZVO-3fRj9WAAAD
+[2026-01-07 21:47:15] [ERROR  ] - POST /api/bookings/createBooking 409 This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider. -> This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider.
+[2026-01-07 21:53:48] [INFO   ] - Server running on port 5000
+[2026-01-07 21:53:49] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:55:26] [INFO   ] - Server running on port 5000
+[2026-01-07 21:55:28] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:55:31] [INFO   ] - Server running on port 5000
+[2026-01-07 21:55:34] [INFO   ] - Server running on port 5000
+[2026-01-07 21:55:36] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:56:14] [INFO   ] - Server running on port 5000
+[2026-01-07 21:56:15] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:56:22] [INFO   ] - Server running on port 5000
+[2026-01-07 21:56:43] [INFO   ] - Server running on port 5000
+[2026-01-07 21:56:45] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:56:58] [INFO   ] - Server running on port 5000
+[2026-01-07 21:57:03] [INFO   ] - Server running on port 5000
+[2026-01-07 21:57:05] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:57:24] [INFO   ] - Server running on port 5000
+[2026-01-07 21:57:25] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:57:40] [INFO   ] - Server running on port 5000
+[2026-01-07 21:57:41] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:58:10] [INFO   ] - Server running on port 5000
+[2026-01-07 21:58:11] [INFO   ] - MongoDB Connected...
+[2026-01-07 21:58:38] [INFO   ] - Server running on port 5000
+[2026-01-07 21:58:39] [INFO   ] - MongoDB Connected...
+[2026-01-07 22:08:49] [INFO   ] - Server running on port 5000
+[2026-01-07 22:08:53] [INFO   ] - MongoDB Connected...
+[2026-01-07 22:09:38] [INFO   ] - Server running on port 5000
+[2026-01-07 22:09:45] [INFO   ] - MongoDB Connected...
+[2026-01-07 22:09:54] [INFO   ] - Server running on port 5000
+[2026-01-07 22:10:00] [INFO   ] - Server running on port 5000
+[2026-01-07 22:10:02] [INFO   ] - MongoDB Connected...
+[2026-01-07 22:10:06] [INFO   ] - Server running on port 5000
+[2026-01-07 22:10:07] [INFO   ] - MongoDB Connected...
+[2026-01-07 22:38:18] [INFO   ] - Server running on port 5000
+[2026-01-07 22:38:21] [INFO   ] - MongoDB Connected...
+[2026-01-07 22:38:53] [INFO   ] - Client disconnected: -GtV8H7XxjrH1v5cAAAB
+[2026-01-07 22:39:06] [INFO   ] - Client disconnected: lSbaO4Kiz1T2e1zoAAAD
+[2026-01-07 22:41:31] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-07 22:43:41] [INFO   ] - Client disconnected: lzDj3kTnvIblIV87AAAF
+[2026-01-07 22:45:57] [ERROR  ] - POST /api/bookings/createBooking 409 This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider. -> This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider.

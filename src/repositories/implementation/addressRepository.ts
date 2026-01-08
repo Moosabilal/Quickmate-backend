@@ -1,14 +1,11 @@
 import { injectable } from "inversify";
-import { IAddressRepository } from "../interface/IAddressRepository";
-import { Address, IAddress } from "../../models/address";
+import { type IAddressRepository } from "../interface/IAddressRepository";
+import { Address, type IAddress } from "../../models/address";
 import { BaseRepository } from "./base/BaseRepository";
-
 
 @injectable()
 export class AddressRepository extends BaseRepository<IAddress> implements IAddressRepository {
-
-    constructor() {
-        super(Address)
-    }
-
+  constructor() {
+    super(Address);
+  }
 }

@@ -1,6 +1,5 @@
-import { ISubscriptionPlan } from "../../models/subscription";
-import { IBaseRepository } from "./base/IBaseRepository";
+import { type ISubscriptionPlan } from "../../models/subscription";
+import { type IBaseRepository } from "./base/IBaseRepository";
 
-export interface ISubscriptionPlanRepository extends IBaseRepository<ISubscriptionPlan> {
-
-}
+// export interface ISubscriptionPlanRepository extends IBaseRepository<ISubscriptionPlan> {}
+export type ISubscriptionPlanRepository = IBaseRepository<ISubscriptionPlan>;

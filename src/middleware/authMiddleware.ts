@@ -1,20 +1,20 @@
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import { type Request, type Response, type NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import logger from "../logger/logger";
 
 interface AuthPayload {
   id: string;
-  role: string
+  role: string;
 }
 export interface AuthRequest extends Request {
   user?: AuthPayload;
 }
 
-
 export const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction): void => {
   const token = req.cookies.token;
   if (!token) {
-    res.status(401).json({ message: 'Access token not found' });
-    return; 
+    res.status(401).json({ message: "Access token not found" });
+    return;
   }
 
   try {
@@ -23,24 +23,22 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
 
     next();
   } catch (error) {
-    console.log('the token verification failed')
-    res.status(401).json({ message: 'Access token invalid or expired' });
-    return; 
+    logger.error("Token verification failed:", error);
+    res.status(401).json({ message: "Access token invalid or expired" });
+    return;
   }
 };
 
-
 export const authorizeRoles = (roles: string[]) => {
-
-  return (req: AuthRequest, res: Response, next: NextFunction): void => { 
+  return (req: AuthRequest, res: Response, next: NextFunction): void => {
     if (!req.user) {
-      res.status(401).json({ message: 'User not authenticated for role check.' });
-      return; 
+      res.status(401).json({ message: "User not authenticated for role check." });
+      return;
     }
     if (!roles.includes(req.user.role)) {
-      res.status(403).json({ message: 'Access denied: Insufficient privileges.' });
-      return; 
+      res.status(403).json({ message: "Access denied: Insufficient privileges." });
+      return;
     }
-    next(); 
+    next();
   };
 };

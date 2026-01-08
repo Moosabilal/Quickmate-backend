@@ -1,5 +1,4 @@
-import { IAddress } from "../../models/address";
-import { IBaseRepository } from "./base/IBaseRepository";
-export interface IAddressRepository extends IBaseRepository<IAddress> {
-
-}
+import { type IAddress } from "../../models/address";
+import { type IBaseRepository } from "./base/IBaseRepository";
+// export interface IAddressRepository extends IBaseRepository<IAddress> {}
+export type IAddressRepository = IBaseRepository<IAddress>;

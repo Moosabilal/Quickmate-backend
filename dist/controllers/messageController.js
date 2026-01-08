@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,73 +7,57 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.MessageController = void 0;
-const inversify_1 = require("inversify");
-const HttpStatusCode_1 = require("../enums/HttpStatusCode");
-const cloudinaryUpload_1 = require("../utils/cloudinaryUpload");
+import { injectable } from "inversify";
+import { HttpStatusCode } from "../enums/HttpStatusCode";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload";
+import logger from "../logger/logger";
+import { CustomError } from "../utils/CustomError";
 let MessageController = class MessageController {
-    constructor() {
-        this.uploadChatFile = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                if (!req.file) {
-                    res.status(HttpStatusCode_1.HttpStatusCode.BAD_REQUEST).json({
-                        success: false,
-                        message: "No file uploaded."
-                    });
-                    return;
-                }
-                console.log(`Processing file upload: ${req.file.originalname}, size: ${req.file.size} bytes`);
-                const fileUrl = yield (0, cloudinaryUpload_1.uploadToCloudinary)(req.file.path);
-                console.log(`File uploaded successfully: ${fileUrl}`);
-                res.status(HttpStatusCode_1.HttpStatusCode.OK).json({
-                    success: true,
-                    message: "File uploaded successfully",
-                    url: fileUrl
-                });
+    constructor() { }
+    uploadChatFile = async (req, res) => {
+        try {
+            if (!req.file) {
+                throw new CustomError("No file uploaded.", HttpStatusCode.BAD_REQUEST);
             }
-            catch (error) {
-                console.error('File upload error in controller:', error);
-                let statusCode = HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR;
-                let errorMessage = "Failed to upload file";
-                if (error instanceof Error) {
-                    const msg = error.message;
-                    if (msg === null || msg === void 0 ? void 0 : msg.includes('File size exceeds')) {
-                        statusCode = HttpStatusCode_1.HttpStatusCode.BAD_REQUEST;
-                        errorMessage = msg;
-                    }
-                    else if (msg === null || msg === void 0 ? void 0 : msg.includes('not supported')) {
-                        statusCode = HttpStatusCode_1.HttpStatusCode.BAD_REQUEST;
-                        errorMessage = msg;
-                    }
-                    else if (msg === null || msg === void 0 ? void 0 : msg.includes('authentication failed')) {
-                        statusCode = HttpStatusCode_1.HttpStatusCode.INTERNAL_SERVER_ERROR;
-                        errorMessage = "Server configuration error";
-                    }
-                    else if (msg === null || msg === void 0 ? void 0 : msg.includes('Invalid file format')) {
-                        statusCode = HttpStatusCode_1.HttpStatusCode.BAD_REQUEST;
-                        errorMessage = "Invalid file format";
-                    }
+            const fileUrl = await uploadToCloudinary(req.file.path);
+            res.status(HttpStatusCode.OK).json({
+                success: true,
+                message: "File uploaded successfully",
+                url: fileUrl,
+            });
+        }
+        catch (error) {
+            logger.error("File upload error in controller:", error);
+            let statusCode = HttpStatusCode.INTERNAL_SERVER_ERROR;
+            let errorMessage = "Failed to upload file";
+            if (error instanceof Error) {
+                const msg = error.message;
+                if (msg?.includes("File size exceeds")) {
+                    statusCode = HttpStatusCode.BAD_REQUEST;
+                    errorMessage = msg;
                 }
-                res.status(statusCode).json({
-                    success: false,
-                    message: errorMessage
-                });
+                else if (msg?.includes("not supported")) {
+                    statusCode = HttpStatusCode.BAD_REQUEST;
+                    errorMessage = msg;
+                }
+                else if (msg?.includes("authentication failed")) {
+                    statusCode = HttpStatusCode.INTERNAL_SERVER_ERROR;
+                    errorMessage = "Server configuration error";
+                }
+                else if (msg?.includes("Invalid file format")) {
+                    statusCode = HttpStatusCode.BAD_REQUEST;
+                    errorMessage = "Invalid file format";
+                }
             }
-        });
-    }
+            res.status(statusCode).json({
+                success: false,
+                message: errorMessage,
+            });
+        }
+    };
 };
-exports.MessageController = MessageController;
-exports.MessageController = MessageController = __decorate([
-    (0, inversify_1.injectable)(),
+MessageController = __decorate([
+    injectable(),
     __metadata("design:paramtypes", [])
 ], MessageController);
+export { MessageController };

@@ -1,27 +1,27 @@
-import mongoose, { Schema, Types, InferSchemaType, HydratedDocument } from 'mongoose';
-import { PaymentMethod } from '../enums/userRoles';
+import mongoose, { Schema, type InferSchemaType, type HydratedDocument } from "mongoose";
+import { PaymentMethod } from "../enums/userRoles";
 
 const PaymentSchema = new Schema(
   {
     userId: {
-      type: Schema.Types.ObjectId, 
-      ref: 'User',
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     providerId: {
       type: Schema.Types.ObjectId,
-      ref: 'Provider',
+      ref: "Provider",
       required: true,
     },
     bookingId: {
       type: Schema.Types.ObjectId,
-      ref: 'Booking',
+      ref: "Booking",
       required: true,
     },
     paymentMethod: {
       type: String,
       enum: Object.values(PaymentMethod),
-      default: PaymentMethod.BANK
+      default: PaymentMethod.BANK,
     },
     paymentDate: {
       type: Date,
@@ -35,7 +35,7 @@ const PaymentSchema = new Schema(
       type: Number,
       required: true,
     },
-    adminCommission: {  
+    adminCommission: {
       type: Number,
       required: false,
     },
@@ -44,22 +44,22 @@ const PaymentSchema = new Schema(
       required: false,
     },
     razorpay_order_id: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
     },
     razorpay_payment_id: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
     },
     razorpay_signature: {
-        type: String,
-        required: false,
-    }
+      type: String,
+      required: false,
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 type PaymentSchemaType = InferSchemaType<typeof PaymentSchema>;
 export type IPayment = HydratedDocument<PaymentSchemaType>;
 
-export default mongoose.model<IPayment>('Payment', PaymentSchema);
+export default mongoose.model<IPayment>("Payment", PaymentSchema);

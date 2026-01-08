@@ -1,5 +1,5 @@
 export enum CommissionTypes {
-    PERCENTAGE = 'Percentage',
-    FLATFEE = 'FlatFee',
-    NONE = 'None'
+  PERCENTAGE = "Percentage",
+  FLATFEE = "FlatFee",
+  NONE = "None",
 }
