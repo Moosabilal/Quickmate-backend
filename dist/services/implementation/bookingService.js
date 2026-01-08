@@ -12,11 +12,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { inject, injectable } from "inversify";
 import TYPES from "../../di/type";
-import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
+import { initiateRefund, paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
 import { CustomError } from "../../utils/CustomError";
 import { ErrorMessage } from "../../enums/ErrorMessage";
 import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import { Types } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
 import { toBookingConfirmationPage, toBookingMessagesDto, toGetAllFiltersBookingDto, toGetBookingForProvider, } from "../../utils/mappers/booking.mapper";
 import { BookingStatus } from "../../enums/booking.enum";
@@ -30,6 +30,7 @@ import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
 import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
 import { endOfDay, endOfMonth, endOfWeek, startOfDay, startOfMonth, startOfWeek } from "date-fns";
 import { getSignedUrl } from "../../utils/cloudinaryUpload";
+import { getBookingTimes } from "../../utils/helperFunctions/bookingUtils";
 let BookingService = class BookingService {
     _bookingRepository;
     _categoryRepository;
@@ -58,18 +59,51 @@ let BookingService = class BookingService {
         this._subscriptionPlanRepository = subscriptionPlanRepository;
     }
     async createNewBooking(data) {
-        const subCategoryId = data.serviceId;
-        const providerId = data.providerId;
-        const findServiceId = await this._serviceRepository.findOne({
-            subCategoryId,
-            providerId,
-        });
-        data.serviceId = findServiceId._id.toString();
-        const bookings = await this._bookingRepository.create(data);
-        return {
-            bookingId: bookings._id.toString(),
-            message: "your booking confirmed successfully",
-        };
+        const session = await mongoose.startSession();
+        session.startTransaction();
+        try {
+            const subCategoryId = data.serviceId;
+            const providerId = data.providerId;
+            const service = await this._serviceRepository.findOne({
+                subCategoryId,
+                providerId,
+            });
+            if (!service) {
+                throw new CustomError("Service not found", HttpStatusCode.NOT_FOUND);
+            }
+            if (!data.scheduledDate || !data.scheduledTime) {
+                throw new CustomError("Date and Time are required", HttpStatusCode.BAD_REQUEST);
+            }
+            const requestedDuration = convertDurationToMinutes(service.duration);
+            const { start: reqStart, end: reqEnd } = getBookingTimes(data.scheduledDate, data.scheduledTime, requestedDuration);
+            const dayBookings = await this._bookingRepository.findByProviderAndDate(providerId, data.scheduledDate, session);
+            const hasConflict = dayBookings.some((booking) => {
+                if (!booking.scheduledTime || !booking.duration)
+                    return false;
+                const { start: existingStart, end: existingEnd } = getBookingTimes(booking.scheduledDate, booking.scheduledTime, booking.duration);
+                return existingStart < reqEnd && existingEnd > reqStart;
+            });
+            if (hasConflict) {
+                throw new CustomError("This time slot is already booked. Your amount will creadit within 5-7 days. Please choose another time/Provider.", HttpStatusCode.CONFLICT);
+            }
+            data.serviceId = service._id.toString();
+            const newBooking = await this._bookingRepository.create(data, session);
+            await session.commitTransaction();
+            return {
+                bookingId: newBooking._id.toString(),
+                message: "Booking confirmed successfully",
+            };
+        }
+        catch (error) {
+            await session.abortTransaction();
+            if (error.code === 11000) {
+                throw new CustomError("This time slot is already booked. Your amount will refunded within 5-7 days. Please choose another time/Provider.", HttpStatusCode.CONFLICT);
+            }
+            throw error;
+        }
+        finally {
+            session.endSession();
+        }
     }
     async createPayment(amount) {
         const order = await paymentCreation(amount);
@@ -583,6 +617,31 @@ let BookingService = class BookingService {
                 }
                 : null,
         };
+    }
+    async refundPayment(paymentId, amount, userId) {
+        try {
+            const refund = await initiateRefund(paymentId, amount);
+            const userWallet = await this._walletRepository.findOne({ ownerId: userId });
+            if (userWallet) {
+                await this._walletRepository.createTransaction({
+                    walletId: userWallet._id,
+                    transactionType: "credit",
+                    source: "Razorpay (Refund)",
+                    amount: amount,
+                    description: "Refund for booking slot conflict",
+                    remarks: `Refund ID: ${refund.id}`,
+                    status: TransactionStatus.REFUND,
+                });
+            }
+            return {
+                refundId: refund.id,
+                message: "Refund initiated successfully",
+            };
+        }
+        catch (error) {
+            console.error("Refund failed:", error);
+            throw new CustomError("Failed to process refund", HttpStatusCode.INTERNAL_SERVER_ERROR);
+        }
     }
 };
 BookingService = __decorate([

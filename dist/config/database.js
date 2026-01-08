@@ -3,7 +3,7 @@ import config from ".";
 import logger from "../logger/logger";
 const connectDB = async () => {
     try {
-        await mongoose.connect(config.MONGO_URI);
+        await mongoose.connect(config.MONGO_URI, { autoIndex: true });
         logger.info("MongoDB Connected...");
     }
     catch (err) {
