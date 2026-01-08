@@ -17,3 +17,13 @@ export const verifyPaymentSignature = (orderId, paymentId, signature) => {
     const generatedSignature = hmac.digest("hex");
     return generatedSignature === signature;
 };
+export const initiateRefund = async (paymentId, amount) => {
+    const refund = await razorpay.payments.refund(paymentId, {
+        amount: amount * 100,
+        speed: "normal",
+        notes: {
+            reason: "Booking Conflict / Slot Unavailable",
+        },
+    });
+    return refund;
+};

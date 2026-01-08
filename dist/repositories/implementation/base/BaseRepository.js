@@ -13,9 +13,15 @@ let BaseRepository = class BaseRepository {
     constructor(model) {
         this.model = model;
     }
-    async create(data) {
-        const created = new this.model(data);
-        return await created.save();
+    async create(data, session) {
+        if (session) {
+            const [created] = await this.model.create([data], { session });
+            return created;
+        }
+        else {
+            const created = new this.model(data);
+            return await created.save();
+        }
     }
     async findById(id) {
         return await this.model.findById(id);

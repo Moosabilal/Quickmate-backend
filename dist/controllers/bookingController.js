@@ -15,6 +15,7 @@ import TYPES from "../di/type";
 import { HttpStatusCode } from "../enums/HttpStatusCode";
 import { ZodError } from "zod";
 import { createBookingSchema, confirmPaymentSchema, verifyPaymentSchema, updateBookingStatusSchema, updateBookingDateTimeSchema, verifyBookingOtpSchema, adminBookingsQuerySchema, findProviderRangeSchema, bookingFilterSchema, providerBookingsQuerySchema, paramIdSchema, } from "../utils/validations/booking.validation";
+import { CustomError } from "../utils/CustomError";
 let BookingController = class BookingController {
     _bookingService;
     _providerService;
@@ -192,6 +193,20 @@ let BookingController = class BookingController {
             const { id } = paramIdSchema.parse(req.params);
             const data = await this._bookingService.getBookingDetailsForAdmin(id);
             res.status(HttpStatusCode.OK).json({ success: true, data });
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    refundPayment = async (req, res, next) => {
+        try {
+            const { paymentId, amount } = req.body;
+            const userId = req.user.id;
+            if (!paymentId || !amount) {
+                throw new CustomError("Payment ID and Amount are required", HttpStatusCode.BAD_REQUEST);
+            }
+            const result = await this._bookingService.refundPayment(paymentId, Number(amount), userId);
+            res.status(HttpStatusCode.OK).json(result);
         }
         catch (error) {
             next(error);

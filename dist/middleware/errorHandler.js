@@ -1,6 +1,6 @@
 import logger from "../logger/logger";
 import { CustomError } from "../utils/CustomError";
-export const errorHandler = (err, req, res) => {
+export const errorHandler = (err, req, res, _next) => {
     let statusCode = 500;
     let message = "Internal server error";
     if (err instanceof CustomError) {

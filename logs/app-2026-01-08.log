@@ -1,0 +1,13 @@
+[2026-01-08 16:32:59] [INFO   ] - Server running on port 5000
+[2026-01-08 16:33:01] [INFO   ] - MongoDB Connected...
+[2026-01-08 16:33:16] [INFO   ] - Client disconnected: x8_dlQhCRrJmntVlAAAB
+[2026-01-08 16:40:17] [INFO   ] - Server running on port 5000
+[2026-01-08 16:40:19] [INFO   ] - MongoDB Connected...
+[2026-01-08 16:40:27] [ERROR  ] - GET /api/categories/trending-services 500 assignValue is not a function -> assignValue is not a function
+[2026-01-08 16:40:27] [ERROR  ] - GET /api/categories/popular-services 500 assignValue is not a function -> assignValue is not a function
+[2026-01-08 16:40:27] [ERROR  ] - GET /api/provider/getFeaturedProviders 500 assignValue is not a function -> assignValue is not a function
+[2026-01-08 16:41:17] [INFO   ] - Server running on port 5000
+[2026-01-08 16:41:20] [INFO   ] - MongoDB Connected...
+[2026-01-08 16:44:35] [INFO   ] - Server running on port 5000
+[2026-01-08 16:44:37] [INFO   ] - MongoDB Connected...
+[2026-01-08 16:45:00] [INFO   ] - Client disconnected: XTXAm1eof-j81tU0AAAB

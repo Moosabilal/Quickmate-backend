@@ -494,6 +494,16 @@ let BookingRepository = class BookingRepository extends BaseRepository {
     async updateStatus(bookingId, status) {
         return this.model.findByIdAndUpdate(bookingId, { status: status }, { new: true });
     }
+    async findByProviderAndDate(providerId, dateStr, session) {
+        return await this.model
+            .find({
+            providerId: providerId,
+            scheduledDate: dateStr,
+            paymentStatus: { $ne: "FAILED" },
+            status: { $ne: "CANCELLED" },
+        })
+            .session(session || null);
+    }
 };
 BookingRepository = __decorate([
     injectable(),

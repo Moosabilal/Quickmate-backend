@@ -34,6 +34,7 @@ import { format } from "date-fns/format";
 import { ReviewStatus } from "../../enums/review.enum";
 import { BookingStatus } from "../../enums/booking.enum";
 import { getSignedUrl } from "../../utils/cloudinaryUpload";
+import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5;
 const RESEND_COOLDOWN_SECONDS = parseInt(process.env.RESEND_COOLDOWN_SECONDS, 10) || 30;
@@ -407,8 +408,10 @@ let ProviderService = class ProviderService {
                     continue;
                 }
                 const busySlots = override ? override.busySlots : [];
-                const slotMinutes = 60;
-                const slotMs = slotMinutes * 60 * 1000;
+                const providerService = services.find((s) => s.providerId?.toString() === provider._id.toString());
+                const durationMins = providerService ? convertDurationToMinutes(providerService.duration) : 60; // Default to 60 if not found
+                const serviceDurationMs = durationMins * 60 * 1000;
+                const stepMs = 60 * 60 * 1000;
                 for (const timeSlot of weeklySlots) {
                     const [sh, sm] = String(timeSlot.start).split(":").map(Number);
                     const [eh, em] = String(timeSlot.end).split(":").map(Number);
@@ -416,8 +419,8 @@ let ProviderService = class ProviderService {
                     dayStart.setHours(sh || 0, sm || 0, 0, 0);
                     const dayEnd = new Date(d);
                     dayEnd.setHours(eh || 0, em || 0, 0, 0);
-                    for (let slotStart = new Date(dayStart); slotStart.getTime() + slotMs <= dayEnd.getTime(); slotStart = new Date(slotStart.getTime() + slotMs)) {
-                        const slotEnd = new Date(slotStart.getTime() + slotMs);
+                    for (let slotStart = new Date(dayStart); slotStart.getTime() + serviceDurationMs <= dayEnd.getTime(); slotStart = new Date(slotStart.getTime() + stepMs)) {
+                        const slotEnd = new Date(slotStart.getTime() + serviceDurationMs);
                         const isAvailable = this._isSlotAvailable(slotStart, slotEnd, existingBookings, busySlots);
                         if (isAvailable) {
                             availableSlots.push({

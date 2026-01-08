@@ -75,4 +75,5 @@ const BookingSchema = new Schema({
         default: "Manual",
     },
 }, { timestamps: true });
+BookingSchema.index({ providerId: 1, scheduledDate: 1, scheduledTime: 1 }, { unique: true, name: "unique_provider_date_time" });
 export default mongoose.model("Booking", BookingSchema);
