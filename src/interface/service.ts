@@ -1,6 +1,6 @@
 import { type Types } from "mongoose";
-import { type ServicesPriceUnit } from "../enums/Services.enum";
-import { type IService } from "../models/Service";
+import { type ServicesPriceUnit } from "../enums/Services.enum.js";
+import { type IService } from "../models/Service.js";
 
 export interface IAddAndEditServiceForm {
   id?: string;

@@ -1,4 +1,4 @@
-import { type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../../interface/auth";
+import { type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../../interface/auth.js";
 import {
   type IAdminBookingsResponse,
   type IBookingConfirmationRes,
@@ -6,14 +6,14 @@ import {
   type IBookingRequest,
   type IProviderBookingManagement,
   type IUserBookingsResponse,
-} from "../../interface/booking";
-import { type IPaymentVerificationRequest } from "../../interface/payment";
-import { type RazorpayOrder } from "../../interface/razorpay";
-import { type BookingStatus } from "../../enums/booking.enum";
-import { type IMessage } from "../../models/message";
-import { type Roles } from "../../enums/userRoles";
-import { type ISocketMessage } from "../../interface/message";
-import { type IBooking } from "../../models/Booking";
+} from "../../interface/booking.js";
+import { type IPaymentVerificationRequest } from "../../interface/payment.js";
+import { type RazorpayOrder } from "../../interface/razorpay.js";
+import { type BookingStatus } from "../../enums/booking.enum.js";
+import { type IMessage } from "../../models/message.js";
+import { type Roles } from "../../enums/userRoles.js";
+import { type ISocketMessage } from "../../interface/message.js";
+import { type IBooking } from "../../models/Booking.js";
 import { type Server } from "socket.io";
 
 export interface IBookingService {

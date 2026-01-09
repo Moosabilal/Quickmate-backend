@@ -1,11 +1,11 @@
 import "reflect-metadata";
-import { type IUserRepository } from "../interface/IUserRepository";
-import { type IUser } from "../../models/User";
+import { type IUserRepository } from "../interface/IUserRepository.js";
+import { type IUser } from "../../models/User.js";
 import { injectable } from "inversify";
-import User from "../../models/User";
-import { BaseRepository } from "./base/BaseRepository";
+import User from "../../models/User.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 import { type FilterQuery, Types } from "mongoose";
-import { type IUserListFilter } from "../../interface/auth";
+import { type IUserListFilter } from "../../interface/auth.js";
 
 @injectable()
 export class UserRepository extends BaseRepository<IUser> implements IUserRepository {

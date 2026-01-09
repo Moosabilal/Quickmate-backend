@@ -1,5 +1,5 @@
-import { type ISubscriptionPlan } from "../models/subscription";
-import { type RazorpayOrder } from "./razorpay";
+import { type ISubscriptionPlan } from "../models/subscription.js";
+import { type RazorpayOrder } from "./razorpay.js";
 
 export interface AdminSubscriptionPlanDTO {
   id?: string;

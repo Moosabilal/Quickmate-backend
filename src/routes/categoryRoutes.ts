@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { type CategoryController } from "../controllers/categoryController";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
-import upload from "../utils/multer";
-import TYPES from "../di/type";
-import { container } from "../di/container";
+import { type CategoryController } from "../controllers/categoryController.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
+import upload from "../utils/multer.js";
+import TYPES from "../di/type.js";
+import { container } from "../di/container.js";
 
 const router = Router();
 const categoryController = container.get<CategoryController>(TYPES.CategoryController);

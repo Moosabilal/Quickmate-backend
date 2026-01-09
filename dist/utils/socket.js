@@ -1,6 +1,10 @@
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import logger from "../logger/logger";
+import {} from "../services/implementation/bookingService.js";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import logger from "../logger/logger.js";
+import {} from "../interface/message.js";
+import {} from "socket.io";
+import {} from "../interface/socket.js";
 export function chatSocket(io) {
     const bookingService = container.get(TYPES.BookingService);
     io.on("connection", (socket) => {

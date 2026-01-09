@@ -1,18 +1,18 @@
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { type IServiceService } from "../services/interface/IServiceService";
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { type IAddAndEditServiceForm } from "../interface/service";
+import TYPES from "../di/type.js";
+import { type IServiceService } from "../services/interface/IServiceService.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
+import { type IAddAndEditServiceForm } from "../interface/service.js";
 import { type NextFunction, type Response } from "express";
-import { type AuthRequest } from "../middleware/authMiddleware";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
 import { ZodError } from "zod";
 import {
   addServiceSchema,
   updateServiceSchema,
   serviceIdParamSchema,
   providerIdParamSchema,
-} from "../utils/validations/service.validation";
+} from "../utils/validations/service.validation.js";
 
 @injectable()
 export class ServiceController {

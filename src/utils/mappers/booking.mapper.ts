@@ -2,19 +2,19 @@ import {
   type IBookingConfirmationRes,
   type IBookingHistoryPage,
   type IProviderBookingManagement,
-} from "../../interface/booking";
-import { type BookingStatus } from "../../enums/booking.enum";
-import { type PaymentStatus } from "../../enums/userRoles";
-import { type IAddress } from "../../models/address";
-import { type IBooking } from "../../models/Booking";
-import { type IMessage } from "../../models/message";
-import { type IPayment } from "../../models/payment";
-import { type IService } from "../../models/Service";
-import { type IProvider } from "../../models/Providers";
-import { type IUser } from "../../models/User";
-import { type IReview } from "../../models/Review";
-import { getSignedUrl } from "../cloudinaryUpload";
-import { type ISocketMessage } from "../../interface/message";
+} from "../../interface/booking.js";
+import { type BookingStatus } from "../../enums/booking.enum.js";
+import { type PaymentStatus } from "../../enums/userRoles.js";
+import { type IAddress } from "../../models/address.js";
+import { type IBooking } from "../../models/Booking.js";
+import { type IMessage } from "../../models/message.js";
+import { type IPayment } from "../../models/payment.js";
+import { type IService } from "../../models/Service.js";
+import { type IProvider } from "../../models/Providers.js";
+import { type IUser } from "../../models/User.js";
+import { type IReview } from "../../models/Review.js";
+import { getSignedUrl } from "../cloudinaryUpload.js";
+import { type ISocketMessage } from "../../interface/message.js";
 
 export function toBookingConfirmationPage(
   booking: IBooking,

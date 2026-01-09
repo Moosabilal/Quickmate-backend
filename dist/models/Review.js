@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { ReviewStatus } from "../enums/review.enum";
+import { ReviewStatus } from "../enums/review.enum.js";
+import {} from "mongoose";
 const ReviewSchema = new Schema({
     providerId: {
         type: mongoose.Schema.Types.ObjectId,

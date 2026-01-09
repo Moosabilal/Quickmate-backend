@@ -7,23 +7,23 @@ import {
   type ICommissionRuleResponse,
   type ICommissionSummary,
   type IserviceResponse,
-} from "../../interface/category";
-import { type ICategory } from "../../models/Categories";
+} from "../../interface/category.js";
+import { type ICategory } from "../../models/Categories.js";
 import { type FilterQuery, Types } from "mongoose";
 import { inject, injectable } from "inversify";
-import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
-import TYPES from "../../di/type";
-import { type ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
-import { type ICategoryService } from "../interface/ICategoryService";
-import { CommissionTypes } from "../../enums/CommissionType.enum";
-import { CustomError } from "../../utils/CustomError";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import { toCategoryResponseDTO, toCommissionRuleResponseDTO } from "../../utils/mappers/category.mapper";
-import { type ICommissionRule } from "../../models/Commission";
+import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository.js";
+import TYPES from "../../di/type.js";
+import { type ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository.js";
+import { type ICategoryService } from "../interface/ICategoryService.js";
+import { CommissionTypes } from "../../enums/CommissionType.enum.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import { toCategoryResponseDTO, toCommissionRuleResponseDTO } from "../../utils/mappers/category.mapper.js";
+import { type ICommissionRule } from "../../models/Commission.js";
 import { endOfDay, startOfDay, subDays } from "date-fns";
-import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
-import { type IBookingRepository } from "../../repositories/interface/IBookingRepository";
-import { getSignedUrl } from "../../utils/cloudinaryUpload";
+import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository.js";
+import { type IBookingRepository } from "../../repositories/interface/IBookingRepository.js";
+import { getSignedUrl } from "../../utils/cloudinaryUpload.js";
 
 @injectable()
 export class CategoryService implements ICategoryService {

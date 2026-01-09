@@ -1,4 +1,4 @@
-import { convertTo24Hour } from "./convertTo24hrs";
+import { convertTo24Hour } from "./convertTo24hrs.js";
 export const getBookingTimes = (dateStr, timeStr, durationInMinutes) => {
     const time24 = convertTo24Hour(timeStr);
     const start = new Date(`${dateStr}T${time24}:00.000Z`);

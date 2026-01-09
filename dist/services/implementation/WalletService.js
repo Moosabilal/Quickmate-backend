@@ -11,12 +11,19 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../../di/type";
-import { CustomError } from "../../utils/CustomError";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
-import { toIInitiateDepositRes } from "../../utils/mappers/wallet.mapper";
+import {} from "../interface/IWalletService.js";
+import {} from "../../repositories/interface/IWalletRepository.js";
+import TYPES from "../../di/type.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay.js";
+import { toIInitiateDepositRes } from "../../utils/mappers/wallet.mapper.js";
+import {} from "../../interface/payment.js";
+import {} from "../../interface/wallet.js";
+import {} from "../../models/wallet.js";
 import { Types } from "mongoose";
+import {} from "../../enums/userRoles.js";
+import {} from "../../enums/payment&wallet.enum.js";
 let WalletService = class WalletService {
     _walletRepository;
     constructor(walletRepository) {

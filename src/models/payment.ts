@@ -1,5 +1,5 @@
 import mongoose, { Schema, type InferSchemaType, type HydratedDocument } from "mongoose";
-import { PaymentMethod } from "../enums/userRoles";
+import { PaymentMethod } from "../enums/userRoles.js";
 
 const PaymentSchema = new Schema(
   {

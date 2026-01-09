@@ -1,8 +1,8 @@
 import express from "express";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
-import { type AdminController } from "../controllers/adminController";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
+import { type AdminController } from "../controllers/adminController.js";
 
 const router = express.Router();
 const adminController = container.get<AdminController>(TYPES.AdminController);

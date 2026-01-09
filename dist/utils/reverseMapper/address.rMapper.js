@@ -1,4 +1,6 @@
 import { Types } from "mongoose";
+import {} from "../../interface/address.js";
+import {} from "../../models/address.js";
 export const toAddressModel = (userId, data) => {
     const [lat, lon] = data.locationCoords.split(",").map(Number);
     const locationCoords = {

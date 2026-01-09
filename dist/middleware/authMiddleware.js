@@ -1,5 +1,6 @@
+import {} from "express";
 import jwt from "jsonwebtoken";
-import logger from "../logger/logger";
+import logger from "../logger/logger.js";
 export const authenticateToken = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {

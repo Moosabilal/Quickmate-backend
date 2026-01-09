@@ -1,8 +1,8 @@
-import { type WalletFilter } from "../../interface/payment";
-import { type IDepositVerification, type IInitiateDepositRes } from "../../interface/wallet";
-import { type Roles } from "../../enums/userRoles";
-import { type ITransaction } from "../../models/transaction";
-import { type IWallet } from "../../models/wallet";
+import { type WalletFilter } from "../../interface/payment.js";
+import { type IDepositVerification, type IInitiateDepositRes } from "../../interface/wallet.js";
+import { type Roles } from "../../enums/userRoles.js";
+import { type ITransaction } from "../../models/transaction.js";
+import { type IWallet } from "../../models/wallet.js";
 
 export interface IWalletService {
   initiateDeposit(amount: number): Promise<IInitiateDepositRes>;

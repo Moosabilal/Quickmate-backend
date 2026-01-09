@@ -7,6 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+import {} from "mongoose";
+import {} from "../../interface/base/IBaseRepository.js";
 import { injectable } from "inversify";
 let BaseRepository = class BaseRepository {
     model;

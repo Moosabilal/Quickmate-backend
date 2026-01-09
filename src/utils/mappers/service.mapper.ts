@@ -1,8 +1,8 @@
-import { type IAddAndEditServiceForm, type IProviderServicePageResponse } from "../../interface/service";
-import { type ServicesPriceUnit } from "../../enums/Services.enum";
-import { type ICategory } from "../../models/Categories";
-import { type IService } from "../../models/Service";
-import { getSignedUrl } from "../cloudinaryUpload";
+import { type IAddAndEditServiceForm, type IProviderServicePageResponse } from "../../interface/service.js";
+import { type ServicesPriceUnit } from "../../enums/Services.enum.js";
+import { type ICategory } from "../../models/Categories.js";
+import { type IService } from "../../models/Service.js";
+import { getSignedUrl } from "../cloudinaryUpload.js";
 
 export function toProviderServicePage(
   services: IService[],

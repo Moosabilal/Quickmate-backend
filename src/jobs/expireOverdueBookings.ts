@@ -1,16 +1,16 @@
 import cron from "node-cron";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import { type IBookingRepository } from "../repositories/interface/IBookingRepository";
-import { type IWalletRepository } from "../repositories/interface/IWalletRepository";
-import { BookingStatus } from "../enums/booking.enum";
-import { PaymentStatus } from "../enums/userRoles";
-import { TransactionStatus } from "../enums/payment&wallet.enum";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import { type IBookingRepository } from "../repositories/interface/IBookingRepository.js";
+import { type IWalletRepository } from "../repositories/interface/IWalletRepository.js";
+import { BookingStatus } from "../enums/booking.enum.js";
+import { PaymentStatus } from "../enums/userRoles.js";
+import { TransactionStatus } from "../enums/payment&wallet.enum.js";
 import { format, subDays } from "date-fns";
-import logger from "../logger/logger";
-import { type IProviderRepository } from "../repositories/interface/IProviderRepository";
-import { sendPenaltyEmail } from "../utils/emailService";
-import { type IBooking } from "../models/Booking";
+import logger from "../logger/logger.js";
+import { type IProviderRepository } from "../repositories/interface/IProviderRepository.js";
+import { sendPenaltyEmail } from "../utils/emailService.js";
+import { type IBooking } from "../models/Booking.js";
 
 export const startBookingExpiryJob = () => {
   cron.schedule("1 0 * * *", async () => {

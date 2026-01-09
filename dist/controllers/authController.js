@@ -11,11 +11,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import TYPES from "../di/type";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { registerSchema, loginSchema, verifyOtpSchema, emailOnlySchema, resetPasswordSchema, googleLoginSchema, contactUsSchema, updateProfileSchema, } from "../utils/validations/auth.validation";
-import { CustomError } from "../utils/CustomError";
+import {} from "express";
+import {} from "../services/interface/IAuthService.js";
+import {} from "../interface/auth.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
+import TYPES from "../di/type.js";
+import {} from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { registerSchema, loginSchema, verifyOtpSchema, emailOnlySchema, resetPasswordSchema, googleLoginSchema, contactUsSchema, updateProfileSchema, } from "../utils/validations/auth.validation.js";
+import { CustomError } from "../utils/CustomError.js";
 let AuthController = class AuthController {
     _authService;
     constructor(authService) {

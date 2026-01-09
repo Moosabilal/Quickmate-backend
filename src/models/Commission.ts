@@ -1,5 +1,5 @@
 import { Schema, type HydratedDocument, type InferSchemaType, model } from "mongoose";
-import { CommissionTypes } from "../enums/CommissionType.enum";
+import { CommissionTypes } from "../enums/CommissionType.enum.js";
 
 const CommissionRuleSchema = new Schema(
   {

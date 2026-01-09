@@ -1,7 +1,7 @@
-import { type IProviderProfile, type ISubscription } from "../../interface/provider";
-import { type RazorpayOrder } from "../../interface/razorpay";
-import { type AdminSubscriptionPlanDTO, type IUpgradeCostResponse } from "../../interface/subscriptionPlan";
-import { type ISubscriptionPlan } from "../../models/subscription";
+import { type IProviderProfile, type ISubscription } from "../../interface/provider.js";
+import { type RazorpayOrder } from "../../interface/razorpay.js";
+import { type AdminSubscriptionPlanDTO, type IUpgradeCostResponse } from "../../interface/subscriptionPlan.js";
+import { type ISubscriptionPlan } from "../../models/subscription.js";
 
 export interface ISubscriptionPlanService {
   createSubscriptionPlan(data: AdminSubscriptionPlanDTO): Promise<void>;

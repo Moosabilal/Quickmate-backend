@@ -1,4 +1,4 @@
-import { type IProvider } from "../../models/Providers";
+import { type IProvider } from "../../models/Providers.js";
 
 export const isProviderInRange = (
   providers: IProvider[],

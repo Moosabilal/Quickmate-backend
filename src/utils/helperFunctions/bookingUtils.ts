@@ -1,4 +1,4 @@
-import { convertTo24Hour } from "./convertTo24hrs";
+import { convertTo24Hour } from "./convertTo24hrs.js";
 
 export const getBookingTimes = (dateStr: string, timeStr: string, durationInMinutes: number) => {
   const time24 = convertTo24Hour(timeStr);

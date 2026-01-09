@@ -1,5 +1,5 @@
 import mongoose, { Schema, type HydratedDocument, type InferSchemaType } from "mongoose";
-import { ReviewStatus } from "../enums/review.enum";
+import { ReviewStatus } from "../enums/review.enum.js";
 import { type Types } from "mongoose";
 
 const ReviewSchema: Schema = new Schema(

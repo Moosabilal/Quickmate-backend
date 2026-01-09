@@ -1,4 +1,5 @@
-import { CommissionTypes } from "../../enums/CommissionType.enum";
+import { CommissionTypes } from "../../enums/CommissionType.enum.js";
+import {} from "../../models/Commission.js";
 export async function calculateCommission(amount, commissionRule) {
     if (!commissionRule || commissionRule.commissionType === CommissionTypes.NONE)
         return 0;
@@ -6,15 +7,4 @@ export async function calculateCommission(amount, commissionRule) {
         return (amount * (commissionRule.commissionValue || 0)) / 100;
     }
     return commissionRule.commissionValue || 0;
-}
-export async function calculateParentCommission(amount, subCategory, categoryRepo, commissionRepo) {
-    if (!subCategory.parentId)
-        return 0;
-    const parentCategory = await categoryRepo.findById(subCategory.parentId.toString());
-    if (!parentCategory)
-        return 0;
-    const parentCommission = await commissionRepo.findOne({
-        categoryId: parentCategory._id.toString(),
-    });
-    return calculateCommission(amount, parentCommission);
 }

@@ -1,1 +1,1 @@
-export {};
+import {} from "../../interface/service.js";

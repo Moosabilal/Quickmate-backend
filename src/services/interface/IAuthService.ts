@@ -6,13 +6,12 @@ import {
   type ResendOtpRequestBody,
   type ResetPasswordRequestBody,
   type VerifyOtpRequestBody,
-} from "../../interface/auth";
-import { type IBooking } from "../../models/Booking";
-import { type ICategory } from "../../models/Categories";
-import { type IProvider } from "../../models/Providers";
-import { type IService } from "../../models/Service";
-import { type IProviderDto } from "../../interface/provider";
-import { type ICategoryDto } from "../../interface/category";
+} from "../../interface/auth.js";
+import { type IBooking } from "../../models/Booking.js";
+import { type ICategory } from "../../models/Categories.js";
+import { type IService } from "../../models/Service.js";
+import { type IProviderDto } from "../../interface/provider.js";
+import { type ICategoryDto } from "../../interface/category.js";
 
 export interface IAuthService {
   registerUser(data: RegisterRequestBody): Promise<AuthSuccessResponse>;
@@ -93,7 +92,7 @@ export interface IAuthService {
   getAllDataForChatBot(userId: string): Promise<{
     categories: Partial<ICategory>[];
     services: Partial<IService>[];
-    providers: Partial<IProvider>[];
+    providers: IProviderDto[];
     bookings: Partial<IBooking>[];
   }>;
   logout(refreshToken: string | undefined): Promise<{ message: string }>;

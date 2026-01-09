@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types, type InferSchemaType, type HydratedDocument } from "mongoose";
-import { ServicesPriceUnit } from "../enums/Services.enum";
+import { ServicesPriceUnit } from "../enums/Services.enum.js";
 
 const ServiceSchema = new Schema(
   {

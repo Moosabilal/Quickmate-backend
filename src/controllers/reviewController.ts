@@ -1,18 +1,18 @@
 import { inject, injectable } from "inversify";
-import { type IReviewService } from "../services/interface/IReviewService";
-import TYPES from "../di/type";
-import { type AuthRequest } from "../middleware/authMiddleware";
+import { type IReviewService } from "../services/interface/IReviewService.js";
+import TYPES from "../di/type.js";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
 import { type NextFunction } from "express-serve-static-core";
 import { type Response } from "express";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { type IReviewFilters } from "../interface/review";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { type IReviewFilters } from "../interface/review.js";
 import { ZodError } from "zod";
 import {
   addReviewSchema,
   getReviewsQuerySchema,
   updateReviewStatusSchema,
-} from "../utils/validations/review.validation";
-import { paramIdSchema } from "../utils/validations/booking.validation";
+} from "../utils/validations/review.validation.js";
+import { paramIdSchema } from "../utils/validations/booking.validation.js";
 
 @injectable()
 export class ReviewController {

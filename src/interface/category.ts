@@ -1,7 +1,7 @@
 import { type Types, type Document } from "mongoose";
-import { type CommissionTypes } from "../enums/CommissionType.enum";
+import { type CommissionTypes } from "../enums/CommissionType.enum.js";
 import { type FilterQuery } from "mongoose";
-import { type ICategory } from "../models/Categories";
+import { type ICategory } from "../models/Categories.js";
 export interface ICategoryInput {
   name: string;
   description?: string | null;
@@ -79,6 +79,7 @@ export interface ICommissionSummary {
 export interface ICategoryFilter extends FilterQuery<ICategory> {
   take?: number | string;
   skip?: number | string;
+  parentId?: string | Types.ObjectId;
 }
 
 export interface ICategoryWithDetails extends ICategoryFormCombinedData {

@@ -1,12 +1,16 @@
 import cron from "node-cron";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import { BookingStatus } from "../enums/booking.enum";
-import { PaymentStatus } from "../enums/userRoles";
-import { TransactionStatus } from "../enums/payment&wallet.enum";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import {} from "../repositories/interface/IBookingRepository.js";
+import {} from "../repositories/interface/IWalletRepository.js";
+import { BookingStatus } from "../enums/booking.enum.js";
+import { PaymentStatus } from "../enums/userRoles.js";
+import { TransactionStatus } from "../enums/payment&wallet.enum.js";
 import { format, subDays } from "date-fns";
-import logger from "../logger/logger";
-import { sendPenaltyEmail } from "../utils/emailService";
+import logger from "../logger/logger.js";
+import {} from "../repositories/interface/IProviderRepository.js";
+import { sendPenaltyEmail } from "../utils/emailService.js";
+import {} from "../models/Booking.js";
 export const startBookingExpiryJob = () => {
     cron.schedule("1 0 * * *", async () => {
         logger.info("⏳ [Cron] Checking for expired bookings...");

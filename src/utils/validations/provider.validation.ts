@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ProviderStatus } from "../../enums/provider.enum";
+import { ProviderStatus } from "../../enums/provider.enum.js";
 
 const IdSchema = z.string().min(1, "ID is required");
 export const paramIdSchema = z.object({ id: IdSchema });

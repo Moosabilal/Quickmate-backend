@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
-import { type IBookingRepository } from "../../repositories/interface/IBookingRepository";
-import { type IBookingService } from "../interface/IBookingService";
-import TYPES from "../../di/type";
+import { type IBookingRepository } from "../../repositories/interface/IBookingRepository.js";
+import { type IBookingService } from "../interface/IBookingService.js";
+import TYPES from "../../di/type.js";
 import {
   type BookingOtpPayload,
   type IAdminBookingsResponse,
@@ -13,51 +13,52 @@ import {
   type IBookingStatusCounts,
   type IProviderBookingsResponse,
   type IUserBookingsResponse,
-} from "../../interface/booking";
-import { initiateRefund, paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
-import { CustomError } from "../../utils/CustomError";
-import { ErrorMessage } from "../../enums/ErrorMessage";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import { type RazorpayOrder } from "../../interface/razorpay";
-import { type IPaymentVerificationRequest } from "../../interface/payment";
-import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
-import { type ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
-import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
+} from "../../interface/booking.js";
+import { initiateRefund, paymentCreation, verifyPaymentSignature } from "../../utils/razorpay.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { ErrorMessage } from "../../enums/ErrorMessage.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import { type RazorpayOrder } from "../../interface/razorpay.js";
+import { type IPaymentVerificationRequest } from "../../interface/payment.js";
+import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository.js";
+import { type ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository.js";
+import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository.js";
 import mongoose, { type FilterQuery, Types, type UpdateQuery } from "mongoose";
-import { type IPayment } from "../../models/payment";
-import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
-import { type IAddressRepository } from "../../repositories/interface/IAddressRepository";
+import { type IPayment } from "../../models/payment.js";
+import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles.js";
+import { type IAddressRepository } from "../../repositories/interface/IAddressRepository.js";
 import {
   toBookingConfirmationPage,
   toBookingMessagesDto,
   toGetAllFiltersBookingDto,
   toGetBookingForProvider,
-} from "../../utils/mappers/booking.mapper";
-import { type IProviderRepository } from "../../repositories/interface/IProviderRepository";
-import { type IServiceRepository } from "../../repositories/interface/IServiceRepository";
-import { type IUserRepository } from "../../repositories/interface/IUserRepository";
-import { type IMessageRepository } from "../../repositories/interface/IMessageRepository";
-import { type IMessage } from "../../models/message";
-import { BookingStatus } from "../../enums/booking.enum";
-import { type IWalletRepository } from "../../repositories/interface/IWalletRepository";
-import { TransactionStatus } from "../../enums/payment&wallet.enum";
-import { type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../../interface/auth";
-import { generateOTP } from "../../utils/otpGenerator";
-import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils/emailService";
+} from "../../utils/mappers/booking.mapper.js";
+import { type IProviderRepository } from "../../repositories/interface/IProviderRepository.js";
+import { type IServiceRepository } from "../../repositories/interface/IServiceRepository.js";
+import { type IUserRepository } from "../../repositories/interface/IUserRepository.js";
+import { type IMessageRepository } from "../../repositories/interface/IMessageRepository.js";
+import { type IMessage } from "../../models/message.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { type IWalletRepository } from "../../repositories/interface/IWalletRepository.js";
+import { TransactionStatus } from "../../enums/payment&wallet.enum.js";
+import { type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../../interface/auth.js";
+import { generateOTP } from "../../utils/otpGenerator.js";
+import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils/emailService.js";
 import jwt from "jsonwebtoken";
-import { type IReviewRepository } from "../../repositories/interface/IReviewRepository";
-import { type IReview } from "../../models/Review";
-import { type ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository";
-import { calculateCommission, calculateParentCommission } from "../../utils/helperFunctions/commissionRule";
-import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription";
-import { type IBooking } from "../../models/Booking";
-import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
-import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
-import { type ISocketMessage } from "../../interface/message";
+import { type IReviewRepository } from "../../repositories/interface/IReviewRepository.js";
+import { type IReview } from "../../models/Review.js";
+import { type ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository.js";
+import { calculateCommission } from "../../utils/helperFunctions/commissionRule.js";
+import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription.js";
+import { type IBooking } from "../../models/Booking.js";
+import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal.js";
+import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes.js";
+import { type ISocketMessage } from "../../interface/message.js";
 import { endOfDay, endOfMonth, endOfWeek, startOfDay, startOfMonth, startOfWeek } from "date-fns";
 import { type Server } from "socket.io";
-import { getSignedUrl } from "../../utils/cloudinaryUpload";
-import { getBookingTimes } from "../../utils/helperFunctions/bookingUtils";
+import { getSignedUrl } from "../../utils/cloudinaryUpload.js";
+import { getBookingTimes } from "../../utils/helperFunctions/bookingUtils.js";
+import type { ICategory } from "../../models/Categories.js";
 
 @injectable()
 export class BookingService implements IBookingService {
@@ -202,12 +203,7 @@ export class BookingService implements IBookingService {
     });
 
     let totalCommission = await calculateCommission(verifyPayment.amount, commissionRule);
-    totalCommission += await calculateParentCommission(
-      verifyPayment.amount,
-      subCategory,
-      this._categoryRepository,
-      this._commissionRuleRepository,
-    );
+    totalCommission += await this._calculateParentCommissionInternal(verifyPayment.amount, subCategory);
 
     const provider = await this._providerRepository.findById(verifyPayment.providerId.toString());
     if (provider?.subscription?.status === "ACTIVE") {
@@ -849,5 +845,18 @@ export class BookingService implements IBookingService {
       console.error("Refund failed:", error);
       throw new CustomError("Failed to process refund", HttpStatusCode.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  private async _calculateParentCommissionInternal(amount: number, subCategory: ICategory): Promise<number> {
+    if (!subCategory.parentId) return 0;
+
+    const parentCategory = await this._categoryRepository.findById(subCategory.parentId.toString());
+    if (!parentCategory) return 0;
+
+    const parentCommission = await this._commissionRuleRepository.findOne({
+      categoryId: parentCategory._id.toString(),
+    });
+
+    return calculateCommission(amount, parentCommission);
   }
 }

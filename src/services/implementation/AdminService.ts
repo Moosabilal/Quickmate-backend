@@ -1,20 +1,20 @@
 import { inject, injectable } from "inversify";
-import { type IUserRepository } from "../../repositories/interface/IUserRepository";
-import { type IAdminService } from "../interface/IAdminService";
-import TYPES from "../../di/type";
+import { type IUserRepository } from "../../repositories/interface/IUserRepository.js";
+import { type IAdminService } from "../interface/IAdminService.js";
+import TYPES from "../../di/type.js";
 import bcrypt from "bcryptjs";
-import { type IBookingRepository } from "../../repositories/interface/IBookingRepository";
-import { BookingStatus } from "../../enums/booking.enum";
-import { Roles } from "../../enums/userRoles";
-import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
-import { type IProviderRepository } from "../../repositories/interface/IProviderRepository";
-import { type IReviewRepository } from "../../repositories/interface/IReviewRepository";
-import { toAdminDashboardDTO } from "../../utils/mappers/admin.mapper";
-import { type IProviderDashboardRes } from "../../interface/provider";
-import { type IAnalyticsData } from "../../interface/admin";
-import { CustomError } from "../../utils/CustomError";
-import { ErrorMessage } from "../../enums/ErrorMessage";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import { type IBookingRepository } from "../../repositories/interface/IBookingRepository.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { Roles } from "../../enums/userRoles.js";
+import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository.js";
+import { type IProviderRepository } from "../../repositories/interface/IProviderRepository.js";
+import { type IReviewRepository } from "../../repositories/interface/IReviewRepository.js";
+import { toAdminDashboardDTO } from "../../utils/mappers/admin.mapper.js";
+import { type IProviderDashboardRes } from "../../interface/provider.js";
+import { type IAnalyticsData } from "../../interface/admin.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { ErrorMessage } from "../../enums/ErrorMessage.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
 
 @injectable()
 export class AdminService implements IAdminService {
@@ -77,7 +77,7 @@ export class AdminService implements IAdminService {
       this._bookingRepository.getBookingTrendsByMonth(),
       this._bookingRepository.getBookingPatternsByDayOfWeek(),
       this._providerRepository.getTopProvidersByEarnings(),
-      this._bookingRepository.count({}),
+      this._bookingRepository.countTotalBookings(),
       this._userRepository.getActiveUserCount(),
       this._paymentRepository.getTotalRevenue(),
       this._reviewRepository.getAverageRating(),

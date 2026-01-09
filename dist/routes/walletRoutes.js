@@ -1,7 +1,8 @@
 import expres from "express";
-import TYPES from "../di/type";
-import { container } from "../di/container";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
+import TYPES from "../di/type.js";
+import {} from "../controllers/walletController.js";
+import { container } from "../di/container.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
 const router = expres.Router();
 const walletController = container.get(TYPES.WalletController);
 const isUser = [authenticateToken, authorizeRoles(["Customer", "ServiceProvider"])];

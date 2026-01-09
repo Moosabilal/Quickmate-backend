@@ -1,4 +1,8 @@
-import { getSignedUrl } from "../cloudinaryUpload";
+import {} from "../../interface/service.js";
+import {} from "../../enums/Services.enum.js";
+import {} from "../../models/Categories.js";
+import {} from "../../models/Service.js";
+import { getSignedUrl } from "../cloudinaryUpload.js";
 export function toProviderServicePage(services, categoryMap, subCategoryMap, reviewMap) {
     return services.map((service) => {
         const s = service.toObject ? service.toObject() : service;

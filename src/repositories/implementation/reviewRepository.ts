@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
-import Review, { type IReview } from "../../models/Review";
-import { type IReviewRepository } from "../interface/IReviewRepository";
-import { BaseRepository } from "./base/BaseRepository";
+import Review, { type IReview } from "../../models/Review.js";
+import { type IReviewRepository } from "../interface/IReviewRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 import { type FilterQuery, type PipelineStage, Types } from "mongoose";
-import { type IReviewFilters, type PopulatedReview, type RawAggregatedReview } from "../../interface/review";
-import { ReviewStatus } from "../../enums/review.enum";
+import { type IReviewFilters, type PopulatedReview, type RawAggregatedReview } from "../../interface/review.js";
+import { ReviewStatus } from "../../enums/review.enum.js";
 
 @injectable()
 export class ReviewRepository extends BaseRepository<IReview> implements IReviewRepository {

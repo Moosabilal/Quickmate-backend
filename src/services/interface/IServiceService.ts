@@ -1,4 +1,4 @@
-import { type IAddAndEditServiceForm, type IProviderServicePageResponse } from "../../interface/service";
+import { type IAddAndEditServiceForm, type IProviderServicePageResponse } from "../../interface/service.js";
 
 export interface IServiceService {
   addService(serviceData: IAddAndEditServiceForm): Promise<{ message: string; success: boolean }>;

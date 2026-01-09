@@ -1,6 +1,6 @@
 import mongoose, { Schema, type HydratedDocument, type InferSchemaType, type Types } from "mongoose";
 import bcrypt from "bcrypt";
-import { Roles } from "../enums/userRoles";
+import { Roles } from "../enums/userRoles.js";
 import { type Credentials } from "google-auth-library";
 
 const UserSchema: Schema = new Schema(

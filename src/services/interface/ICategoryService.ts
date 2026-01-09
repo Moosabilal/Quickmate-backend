@@ -6,7 +6,7 @@ import {
   type ICommissionRuleResponse,
   type ICommissionSummary,
   type IserviceResponse,
-} from "../../interface/category";
+} from "../../interface/category.js";
 
 export interface ICategoryService {
   createCategory(

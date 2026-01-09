@@ -11,11 +11,18 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
+import {} from "../services/interface/IBookingService.js";
+import TYPES from "../di/type.js";
+import {} from "express";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import {} from "../middleware/authMiddleware.js";
+import {} from "../interface/payment.js";
+import {} from "../interface/auth.js";
+import {} from "../services/interface/IProviderService.js";
 import { ZodError } from "zod";
-import { createBookingSchema, confirmPaymentSchema, verifyPaymentSchema, updateBookingStatusSchema, updateBookingDateTimeSchema, verifyBookingOtpSchema, adminBookingsQuerySchema, findProviderRangeSchema, bookingFilterSchema, providerBookingsQuerySchema, paramIdSchema, } from "../utils/validations/booking.validation";
-import { CustomError } from "../utils/CustomError";
+import { createBookingSchema, confirmPaymentSchema, verifyPaymentSchema, updateBookingStatusSchema, updateBookingDateTimeSchema, verifyBookingOtpSchema, adminBookingsQuerySchema, findProviderRangeSchema, bookingFilterSchema, providerBookingsQuerySchema, paramIdSchema, } from "../utils/validations/booking.validation.js";
+import {} from "../enums/userRoles.js";
+import { CustomError } from "../utils/CustomError.js";
 let BookingController = class BookingController {
     _bookingService;
     _providerService;

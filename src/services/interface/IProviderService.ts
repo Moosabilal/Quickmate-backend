@@ -1,4 +1,4 @@
-import { type IProvider } from "../../models/Providers";
+import { type IProvider } from "../../models/Providers.js";
 import {
   type EarningsAnalyticsData,
   type IAvailabilityUpdateData,
@@ -13,10 +13,10 @@ import {
   type IProviderProfile,
   type IProviderRegistrationData,
   type IServiceAddPageResponse,
-} from "../../interface/provider";
-import { type ILoginResponseDTO, type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../../interface/auth";
+} from "../../interface/provider.js";
+import { type ILoginResponseDTO, type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../../interface/auth.js";
 import { type calendar_v3 } from "googleapis";
-import { type IProviderFullDetails } from "../../interface/admin";
+import { type IProviderFullDetails } from "../../interface/admin.js";
 
 export interface IProviderService {
   registerProvider(data: IProviderRegistrationData): Promise<{ message: string; email: string }>;

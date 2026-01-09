@@ -1,8 +1,9 @@
 import express from "express";
-import upload from "../utils/multer";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import { authenticateToken } from "../middleware/authMiddleware";
+import upload from "../utils/multer.js";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import { authenticateToken } from "../middleware/authMiddleware.js";
+import {} from "../controllers/messageController.js";
 const router = express.Router();
 const messageController = container.get(TYPES.MessageController);
 router.post("/upload-file", authenticateToken, upload.single("chatFile"), messageController.uploadChatFile);

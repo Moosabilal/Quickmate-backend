@@ -1,12 +1,12 @@
 import { inject, injectable } from "inversify";
-import { type IBookingService } from "../services/interface/IBookingService";
-import TYPES from "../di/type";
+import { type IBookingService } from "../services/interface/IBookingService.js";
+import TYPES from "../di/type.js";
 import { type NextFunction, type Request, type Response } from "express";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { type AuthRequest } from "../middleware/authMiddleware";
-import { type IPaymentVerificationRequest } from "../interface/payment";
-import { type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../interface/auth";
-import { type IProviderService } from "../services/interface/IProviderService";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
+import { type IPaymentVerificationRequest } from "../interface/payment.js";
+import { type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../interface/auth.js";
+import { type IProviderService } from "../services/interface/IProviderService.js";
 import { ZodError } from "zod";
 import {
   createBookingSchema,
@@ -20,9 +20,9 @@ import {
   bookingFilterSchema,
   providerBookingsQuerySchema,
   paramIdSchema,
-} from "../utils/validations/booking.validation";
-import { type Roles } from "../enums/userRoles";
-import { CustomError } from "../utils/CustomError";
+} from "../utils/validations/booking.validation.js";
+import { type Roles } from "../enums/userRoles.js";
+import { CustomError } from "../utils/CustomError.js";
 
 @injectable()
 export class BookingController {

@@ -1,15 +1,15 @@
 import { inject, injectable } from "inversify";
-import { type IServiceRepository } from "../../repositories/interface/IServiceRepository";
-import { type IServiceService } from "../interface/IServiceService";
-import TYPES from "../../di/type";
-import { type IAddAndEditServiceForm, type IProviderServicePageResponse } from "../../interface/service";
-import { type IProviderRepository } from "../../repositories/interface/IProviderRepository";
-import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
-import { toProviderServicePage, toServiceEditPage } from "../../utils/mappers/service.mapper";
-import { type IService } from "../../models/Service";
-import { CustomError } from "../../utils/CustomError";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import { type IReviewRepository } from "../../repositories/interface/IReviewRepository";
+import { type IServiceRepository } from "../../repositories/interface/IServiceRepository.js";
+import { type IServiceService } from "../interface/IServiceService.js";
+import TYPES from "../../di/type.js";
+import { type IAddAndEditServiceForm, type IProviderServicePageResponse } from "../../interface/service.js";
+import { type IProviderRepository } from "../../repositories/interface/IProviderRepository.js";
+import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository.js";
+import { toProviderServicePage, toServiceEditPage } from "../../utils/mappers/service.mapper.js";
+import { type IService } from "../../models/Service.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import { type IReviewRepository } from "../../repositories/interface/IReviewRepository.js";
 
 @injectable()
 export class ServiceService implements IServiceService {

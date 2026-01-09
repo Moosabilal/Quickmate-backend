@@ -1,19 +1,19 @@
 import { type Request, type Response, type NextFunction } from "express";
-import { type ICategoryInput } from "../interface/category";
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
+import { type ICategoryInput } from "../interface/category.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
 import * as fsPromises from "fs/promises";
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { type ICategoryService } from "../services/interface/ICategoryService";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import logger from "../logger/logger";
+import TYPES from "../di/type.js";
+import { type ICategoryService } from "../services/interface/ICategoryService.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import logger from "../logger/logger.js";
 import { ZodError } from "zod";
 import {
   createCategorySchema,
   updateCategorySchema,
   paramIdSchema,
   getSubcategoriesQuerySchema,
-} from "../utils/validations/category.validation";
+} from "../utils/validations/category.validation.js";
 
 interface AuthRequest extends Request {
   user?: { id: string; role: string };

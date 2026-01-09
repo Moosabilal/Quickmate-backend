@@ -1,16 +1,16 @@
 import { inject, injectable } from "inversify";
-import { type IWalletService } from "../services/interface/IWalletService";
-import TYPES from "../di/type";
-import { type AuthRequest } from "../middleware/authMiddleware";
+import { type IWalletService } from "../services/interface/IWalletService.js";
+import TYPES from "../di/type.js";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
 import { type NextFunction, type Response } from "express";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { type Roles } from "../enums/userRoles";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { type Roles } from "../enums/userRoles.js";
 import { ZodError } from "zod";
 import {
   getWalletQuerySchema,
   initiateDepositSchema,
   verifyDepositSchema,
-} from "../utils/validations/wallet.validation";
+} from "../utils/validations/wallet.validation.js";
 
 @injectable()
 export class WalletController {

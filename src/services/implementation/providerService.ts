@@ -1,9 +1,9 @@
 import { inject, injectable } from "inversify";
-import { type IProviderRepository } from "../../repositories/interface/IProviderRepository";
-import { type IProviderService } from "../interface/IProviderService";
-import TYPES from "../../di/type";
+import { type IProviderRepository } from "../../repositories/interface/IProviderRepository.js";
+import { type IProviderService } from "../interface/IProviderService.js";
+import TYPES from "../../di/type.js";
 import { Types } from "mongoose";
-import { type IProvider } from "../../models/Providers";
+import { type IProvider } from "../../models/Providers.js";
 import {
   type EarningsAnalyticsData,
   type IAvailabilityUpdateData,
@@ -20,17 +20,17 @@ import {
   type IReviewsOfUser,
   type IServiceAddPageResponse,
   type TimeSlot,
-} from "../../interface/provider";
-import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
+} from "../../interface/provider.js";
+import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository.js";
 import jwt, { type JwtPayload } from "jsonwebtoken";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import { ErrorMessage } from "../../enums/ErrorMessage";
-import { CustomError } from "../../utils/CustomError";
-import { generateOTP } from "../../utils/otpGenerator";
-import { sendProviderStatusUpdateEmail, sendVerificationEmail } from "../../utils/emailService";
-import { type ILoginResponseDTO, type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../../interface/auth";
-import { type IUserRepository } from "../../repositories/interface/IUserRepository";
-import { Roles } from "../../enums/userRoles";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import { ErrorMessage } from "../../enums/ErrorMessage.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { generateOTP } from "../../utils/otpGenerator.js";
+import { sendProviderStatusUpdateEmail, sendVerificationEmail } from "../../utils/emailService.js";
+import { type ILoginResponseDTO, type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../../interface/auth.js";
+import { type IUserRepository } from "../../repositories/interface/IUserRepository.js";
+import { Roles } from "../../enums/userRoles.js";
 import {
   toBackendProviderDTO,
   toClientForChatListPage,
@@ -42,31 +42,31 @@ import {
   toProviderPerformanceDTO,
   toServiceAddPage,
   toServiceDetailsDTO,
-} from "../../utils/mappers/provider.mapper";
-import { toLoginResponseDTO } from "../../utils/mappers/user.mapper";
-import { ProviderStatus } from "../../enums/provider.enum";
-import { type IServiceRepository } from "../../repositories/interface/IServiceRepository";
-import { type IBookingRepository } from "../../repositories/interface/IBookingRepository";
-import { type IMessageRepository } from "../../repositories/interface/IMessageRepository";
-import { type IReviewRepository } from "../../repositories/interface/IReviewRepository";
+} from "../../utils/mappers/provider.mapper.js";
+import { toLoginResponseDTO } from "../../utils/mappers/user.mapper.js";
+import { ProviderStatus } from "../../enums/provider.enum.js";
+import { type IServiceRepository } from "../../repositories/interface/IServiceRepository.js";
+import { type IBookingRepository } from "../../repositories/interface/IBookingRepository.js";
+import { type IMessageRepository } from "../../repositories/interface/IMessageRepository.js";
+import { type IReviewRepository } from "../../repositories/interface/IReviewRepository.js";
 import { type calendar_v3 } from "googleapis";
-import { convertTo24Hour } from "../../utils/helperFunctions/convertTo24hrs";
+import { convertTo24Hour } from "../../utils/helperFunctions/convertTo24hrs.js";
 import { endOfMonth } from "date-fns/endOfMonth";
 import { endOfWeek } from "date-fns/endOfWeek";
 import { startOfMonth } from "date-fns/startOfMonth";
 import { startOfWeek } from "date-fns/startOfWeek";
 import { sub } from "date-fns/sub";
-import { _haversineKm } from "../../utils/helperFunctions/haversineKm";
+import { _haversineKm } from "../../utils/helperFunctions/haversineKm.js";
 import { format } from "date-fns/format";
-import { type BookingLean } from "../../models/Booking";
-import { ReviewStatus } from "../../enums/review.enum";
-import { type IProviderFullDetails } from "../../interface/admin";
-import { BookingStatus } from "../../enums/booking.enum";
-import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
-import { type ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository";
-import { getSignedUrl } from "../../utils/cloudinaryUpload";
-import { type IService } from "../../models/Service";
-import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
+import { type BookingLean } from "../../models/Booking.js";
+import { ReviewStatus } from "../../enums/review.enum.js";
+import { type IProviderFullDetails } from "../../interface/admin.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository.js";
+import { type ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository.js";
+import { getSignedUrl } from "../../utils/cloudinaryUpload.js";
+import { type IService } from "../../models/Service.js";
+import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes.js";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = parseInt(process.env.MAX_OTP_ATTEMPTS, 10) || 5;

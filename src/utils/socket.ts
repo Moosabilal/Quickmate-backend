@@ -1,10 +1,10 @@
-import { type BookingService } from "../services/implementation/bookingService";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import logger from "../logger/logger";
-import { type ISocketMessage } from "../interface/message";
+import { type BookingService } from "../services/implementation/bookingService.js";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import logger from "../logger/logger.js";
+import { type ISocketMessage } from "../interface/message.js";
 import { type Server, type Socket } from "socket.io";
-import { type WebRTCPayload } from "../interface/socket";
+import { type WebRTCPayload } from "../interface/socket.js";
 
 export function chatSocket(io: Server) {
   const bookingService = container.get<BookingService>(TYPES.BookingService);

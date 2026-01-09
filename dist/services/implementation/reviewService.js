@@ -11,10 +11,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../../di/type";
-import { ReviewStatus } from "../../enums/review.enum";
-import { CustomError } from "../../utils/CustomError";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import {} from "../interface/IReviewService.js";
+import {} from "../../repositories/interface/IReviewRepository.js";
+import TYPES from "../../di/type.js";
+import {} from "../../repositories/interface/IBookingRepository.js";
+import {} from "../../models/Review.js";
+import { ReviewStatus } from "../../enums/review.enum.js";
+import {} from "../../repositories/interface/IProviderRepository.js";
+import {} from "../../models/Booking.js";
+import {} from "../../interface/review.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
 let ReviewService = class ReviewService {
     _reviewRepository;
     _bookingRepository;

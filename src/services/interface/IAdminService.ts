@@ -1,5 +1,5 @@
-import { type IAnalyticsData } from "../../interface/admin";
-import { type IProviderDashboardRes } from "../../interface/provider";
+import { type IAnalyticsData } from "../../interface/admin.js";
+import { type IProviderDashboardRes } from "../../interface/provider.js";
 
 export interface IAdminService {
   getAdminDashboard(): Promise<IProviderDashboardRes>;

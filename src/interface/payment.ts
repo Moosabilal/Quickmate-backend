@@ -1,5 +1,5 @@
-import { type TransactionStatus } from "../enums/payment&wallet.enum";
-import { type PaymentMethod } from "../enums/userRoles";
+import { type TransactionStatus } from "../enums/payment&wallet.enum.js";
+import { type PaymentMethod } from "../enums/userRoles.js";
 
 export interface IOrder {
   id?: string;

@@ -8,8 +8,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { injectable } from "inversify";
-import { Address } from "../../models/address";
-import { BaseRepository } from "./base/BaseRepository";
+import {} from "../interface/IAddressRepository.js";
+import { Address } from "../../models/address.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 let AddressRepository = class AddressRepository extends BaseRepository {
     constructor() {
         super(Address);

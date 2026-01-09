@@ -1,7 +1,7 @@
 import { type Types } from "mongoose";
-import { type BookingStatus } from "../enums/booking.enum";
-import { type PaymentStatus } from "../enums/userRoles";
-import { type DaySchedule } from "./provider";
+import { type BookingStatus } from "../enums/booking.enum.js";
+import { type PaymentStatus } from "../enums/userRoles.js";
+import { type DaySchedule } from "./provider.js";
 
 export interface IBookingRequest {
   userId?: string;

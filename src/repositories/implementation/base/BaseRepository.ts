@@ -6,7 +6,7 @@ import {
   type QueryOptions,
   type ClientSession,
 } from "mongoose";
-import { type IBaseRepository } from "../../interface/base/IBaseRepository";
+import { type IBaseRepository } from "../../interface/base/IBaseRepository.js";
 import { injectable } from "inversify";
 
 @injectable()

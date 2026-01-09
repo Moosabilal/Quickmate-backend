@@ -8,9 +8,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { injectable } from "inversify";
-import Payment from "../../models/payment";
-import { BaseRepository } from "./base/BaseRepository";
-import { BookingStatus } from "../../enums/booking.enum";
+import Payment, {} from "../../models/payment.js";
+import {} from "../interface/IPaymentRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import {} from "../../interface/payment.js";
 let PaymentRepository = class PaymentRepository extends BaseRepository {
     constructor() {
         super(Payment);

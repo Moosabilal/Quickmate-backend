@@ -1,6 +1,6 @@
-import { ChatMessage, type IChatMessage } from "../../models/chatMessage";
-import { type IChatMessageRepository } from "../interface/IChatMessageRepository";
-import { BaseRepository } from "./base/BaseRepository";
+import { ChatMessage, type IChatMessage } from "../../models/chatMessage.js";
+import { type IChatMessageRepository } from "../interface/IChatMessageRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 import { injectable } from "inversify";
 
 @injectable()

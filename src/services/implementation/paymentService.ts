@@ -1,8 +1,8 @@
 import { injectable } from "inversify";
 import Razorpay from "razorpay";
 import crypto from "crypto";
-import { type IPaymentService } from "../interface/IPaymentService";
-import { type RazorpayOrder } from "../../interface/razorpay";
+import { type IPaymentService } from "../interface/IPaymentService.js";
+import { type RazorpayOrder } from "../../interface/razorpay.js";
 
 @injectable()
 export class PaymentService implements IPaymentService {

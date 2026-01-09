@@ -1,7 +1,7 @@
-import { type IChatbotResponse, type IChatPaymentVerify } from "../../interface/chatBot";
-import { type IBooking } from "../../models/Booking";
-import { type IChatMessage } from "../../models/chatMessage";
-import { type IChatSession } from "../../models/chatSession";
+import { type IChatbotResponse, type IChatPaymentVerify } from "../../interface/chatBot.js";
+import { type IBooking } from "../../models/Booking.js";
+import { type IChatMessage } from "../../models/chatMessage.js";
+import { type IChatSession } from "../../models/chatSession.js";
 
 export interface IChatBotService {
   startSession(userId?: string): Promise<IChatSession>;

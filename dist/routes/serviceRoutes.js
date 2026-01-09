@@ -1,8 +1,9 @@
 import express from "express";
-import upload from "../utils/multer";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
-import { container } from "../di/container";
-import TYPES from "../di/type";
+import upload from "../utils/multer.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
+import { container } from "../di/container.js";
+import {} from "../controllers/serviceController.js";
+import TYPES from "../di/type.js";
 const router = express.Router();
 const serviceController = container.get(TYPES.ServiceController);
 const isProvider = [authenticateToken, authorizeRoles(["ServiceProvider"])];

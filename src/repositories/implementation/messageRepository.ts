@@ -1,6 +1,6 @@
-import Message, { type IMessage } from "../../models/message";
-import { BaseRepository } from "./base/BaseRepository";
-import { type IMessageRepository } from "../interface/IMessageRepository";
+import Message, { type IMessage } from "../../models/message.js";
+import { BaseRepository } from "./base/BaseRepository.js";
+import { type IMessageRepository } from "../interface/IMessageRepository.js";
 
 export class MessageRepository extends BaseRepository<IMessage> implements IMessageRepository {
   constructor() {

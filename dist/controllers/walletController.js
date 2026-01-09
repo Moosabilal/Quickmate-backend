@@ -11,10 +11,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
+import {} from "../services/interface/IWalletService.js";
+import TYPES from "../di/type.js";
+import {} from "../middleware/authMiddleware.js";
+import {} from "express";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import {} from "../enums/userRoles.js";
 import { ZodError } from "zod";
-import { getWalletQuerySchema, initiateDepositSchema, verifyDepositSchema, } from "../utils/validations/wallet.validation";
+import { getWalletQuerySchema, initiateDepositSchema, verifyDepositSchema, } from "../utils/validations/wallet.validation.js";
 let WalletController = class WalletController {
     _walletService;
     constructor(walletService) {

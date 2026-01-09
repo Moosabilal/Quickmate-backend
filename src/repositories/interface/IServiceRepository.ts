@@ -1,7 +1,7 @@
-import { type IServiceWithProvider } from "../../interface/service";
-import { type IService } from "../../models/Service";
-import { type IBaseRepository } from "./base/IBaseRepository";
-import { type IPopulatedService } from "../../interface/provider";
+import { type IServiceWithProvider } from "../../interface/service.js";
+import { type IService } from "../../models/Service.js";
+import { type IBaseRepository } from "./base/IBaseRepository.js";
+import { type IPopulatedService } from "../../interface/provider.js";
 
 export interface IServiceRepository extends IBaseRepository<IService> {
   findBySubCategoryId(subCategoryId: string, providerid: string): Promise<boolean>;

@@ -1,15 +1,15 @@
 import { inject, injectable } from "inversify";
-import { type IReviewService } from "../interface/IReviewService";
-import { type IReviewRepository } from "../../repositories/interface/IReviewRepository";
-import TYPES from "../../di/type";
-import { type IBookingRepository } from "../../repositories/interface/IBookingRepository";
-import { type IReview } from "../../models/Review";
-import { ReviewStatus } from "../../enums/review.enum";
-import { type IProviderRepository } from "../../repositories/interface/IProviderRepository";
-import { type IBooking } from "../../models/Booking";
-import { type IReviewFilters, type PopulatedReview } from "../../interface/review";
-import { CustomError } from "../../utils/CustomError";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import { type IReviewService } from "../interface/IReviewService.js";
+import { type IReviewRepository } from "../../repositories/interface/IReviewRepository.js";
+import TYPES from "../../di/type.js";
+import { type IBookingRepository } from "../../repositories/interface/IBookingRepository.js";
+import { type IReview } from "../../models/Review.js";
+import { ReviewStatus } from "../../enums/review.enum.js";
+import { type IProviderRepository } from "../../repositories/interface/IProviderRepository.js";
+import { type IBooking } from "../../models/Booking.js";
+import { type IReviewFilters, type PopulatedReview } from "../../interface/review.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
 
 @injectable()
 export class ReviewService implements IReviewService {
