@@ -2,7 +2,7 @@ import { type FilterQuery } from "mongoose";
 import type mongoose from "mongoose";
 import { Types } from "mongoose";
 
-import { Provider, type IProvider } from "../../models/Providers";
+import { Provider, type IProvider } from "../../models/Providers.js";
 import {
   type IDateOverride,
   type IDaySchedule,
@@ -12,10 +12,10 @@ import {
   type ITimeSlot,
   type ITopActiveProviders,
   type ProviderFilterQuery,
-} from "../../interface/provider";
-import { type IProviderRepository } from "../interface/IProviderRepository";
+} from "../../interface/provider.js";
+import { type IProviderRepository } from "../interface/IProviderRepository.js";
 import { injectable } from "inversify";
-import { BaseRepository } from "./base/BaseRepository";
+import { BaseRepository } from "./base/BaseRepository.js";
 
 @injectable()
 export class ProviderRepository extends BaseRepository<IProvider> implements IProviderRepository {

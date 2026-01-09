@@ -11,26 +11,49 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../../di/type";
-import { initiateRefund, paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
-import { CustomError } from "../../utils/CustomError";
-import { ErrorMessage } from "../../enums/ErrorMessage";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import {} from "../../repositories/interface/IBookingRepository.js";
+import {} from "../interface/IBookingService.js";
+import TYPES from "../../di/type.js";
+import {} from "../../interface/booking.js";
+import { initiateRefund, paymentCreation, verifyPaymentSignature } from "../../utils/razorpay.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { ErrorMessage } from "../../enums/ErrorMessage.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import {} from "../../interface/razorpay.js";
+import {} from "../../interface/payment.js";
+import {} from "../../repositories/interface/ICategoryRepository.js";
+import {} from "../../repositories/interface/ICommissonRuleRepository.js";
+import {} from "../../repositories/interface/IPaymentRepository.js";
 import mongoose, { Types } from "mongoose";
-import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
-import { toBookingConfirmationPage, toBookingMessagesDto, toGetAllFiltersBookingDto, toGetBookingForProvider, } from "../../utils/mappers/booking.mapper";
-import { BookingStatus } from "../../enums/booking.enum";
-import { TransactionStatus } from "../../enums/payment&wallet.enum";
-import { generateOTP } from "../../utils/otpGenerator";
-import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils/emailService";
+import {} from "../../models/payment.js";
+import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles.js";
+import {} from "../../repositories/interface/IAddressRepository.js";
+import { toBookingConfirmationPage, toBookingMessagesDto, toGetAllFiltersBookingDto, toGetBookingForProvider, } from "../../utils/mappers/booking.mapper.js";
+import {} from "../../repositories/interface/IProviderRepository.js";
+import {} from "../../repositories/interface/IServiceRepository.js";
+import {} from "../../repositories/interface/IUserRepository.js";
+import {} from "../../repositories/interface/IMessageRepository.js";
+import {} from "../../models/message.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import {} from "../../repositories/interface/IWalletRepository.js";
+import { TransactionStatus } from "../../enums/payment&wallet.enum.js";
+import {} from "../../interface/auth.js";
+import { generateOTP } from "../../utils/otpGenerator.js";
+import { sendBookingVerificationEmail, sendVerificationEmail } from "../../utils/emailService.js";
 import jwt from "jsonwebtoken";
-import { calculateCommission, calculateParentCommission } from "../../utils/helperFunctions/commissionRule";
-import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription";
-import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal";
-import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
+import {} from "../../repositories/interface/IReviewRepository.js";
+import {} from "../../models/Review.js";
+import {} from "../../repositories/interface/ISubscriptionPlanRepository.js";
+import { calculateCommission } from "../../utils/helperFunctions/commissionRule.js";
+import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription.js";
+import {} from "../../models/Booking.js";
+import { isProviderInRange } from "../../utils/helperFunctions/locRangeCal.js";
+import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes.js";
+import {} from "../../interface/message.js";
 import { endOfDay, endOfMonth, endOfWeek, startOfDay, startOfMonth, startOfWeek } from "date-fns";
-import { getSignedUrl } from "../../utils/cloudinaryUpload";
-import { getBookingTimes } from "../../utils/helperFunctions/bookingUtils";
+import {} from "socket.io";
+import { getSignedUrl } from "../../utils/cloudinaryUpload.js";
+import { getBookingTimes } from "../../utils/helperFunctions/bookingUtils.js";
 let BookingService = class BookingService {
     _bookingRepository;
     _categoryRepository;
@@ -126,7 +149,7 @@ let BookingService = class BookingService {
             categoryId: subCategory._id.toString(),
         });
         let totalCommission = await calculateCommission(verifyPayment.amount, commissionRule);
-        totalCommission += await calculateParentCommission(verifyPayment.amount, subCategory, this._categoryRepository, this._commissionRuleRepository);
+        totalCommission += await this._calculateParentCommissionInternal(verifyPayment.amount, subCategory);
         const provider = await this._providerRepository.findById(verifyPayment.providerId.toString());
         if (provider?.subscription?.status === "ACTIVE") {
             const plan = await this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
@@ -642,6 +665,17 @@ let BookingService = class BookingService {
             console.error("Refund failed:", error);
             throw new CustomError("Failed to process refund", HttpStatusCode.INTERNAL_SERVER_ERROR);
         }
+    }
+    async _calculateParentCommissionInternal(amount, subCategory) {
+        if (!subCategory.parentId)
+            return 0;
+        const parentCategory = await this._categoryRepository.findById(subCategory.parentId.toString());
+        if (!parentCategory)
+            return 0;
+        const parentCommission = await this._commissionRuleRepository.findOne({
+            categoryId: parentCategory._id.toString(),
+        });
+        return calculateCommission(amount, parentCommission);
     }
 };
 BookingService = __decorate([

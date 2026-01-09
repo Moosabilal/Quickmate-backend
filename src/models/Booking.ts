@@ -1,6 +1,6 @@
 import mongoose, { Schema, type HydratedDocument, type InferSchemaType, type Types } from "mongoose";
-import { PaymentStatus } from "../enums/userRoles";
-import { BookingStatus } from "../enums/booking.enum";
+import { PaymentStatus } from "../enums/userRoles.js";
+import { BookingStatus } from "../enums/booking.enum.js";
 
 const BookingSchema: Schema = new Schema(
   {

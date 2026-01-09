@@ -1,12 +1,12 @@
 import { inject, injectable } from "inversify";
 import { type Request, type Response, type NextFunction } from "express";
-import { type IProviderService } from "../services/interface/IProviderService";
-import TYPES from "../di/type";
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { type IProviderRegistrationData } from "../interface/provider";
-import { type AuthRequest } from "../middleware/authMiddleware";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../interface/auth";
+import { type IProviderService } from "../services/interface/IProviderService.js";
+import TYPES from "../di/type.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
+import { type IProviderRegistrationData } from "../interface/provider.js";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../interface/auth.js";
 import { ZodError } from "zod";
 
 import {
@@ -21,8 +21,8 @@ import {
   featuredProvidersQuerySchema,
   updateAvailabilitySchema,
   searchQuerySchema,
-} from "../utils/validations/provider.validation";
-import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation";
+} from "../utils/validations/provider.validation.js";
+import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation.js";
 @injectable()
 export class ProviderController {
   private _providerService: IProviderService;

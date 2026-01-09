@@ -11,9 +11,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../../di/type";
-import { toAddressRequestDTO } from "../../utils/mappers/address.mapper";
-import { toAddressModel } from "../../utils/reverseMapper/address.rMapper";
+import {} from "../interface/IAddressService.js";
+import {} from "../../repositories/interface/IAddressRepository.js";
+import TYPES from "../../di/type.js";
+import {} from "../../models/address.js";
+import {} from "../../interface/address.js";
+import { toAddressRequestDTO } from "../../utils/mappers/address.mapper.js";
+import { toAddressModel } from "../../utils/reverseMapper/address.rMapper.js";
 import { Types } from "mongoose";
 injectable();
 let AddressService = class AddressService {

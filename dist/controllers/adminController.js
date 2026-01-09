@@ -11,9 +11,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { changePasswordSchema } from "../utils/validations/admin.validation";
+import {} from "../services/interface/IAdminService.js";
+import TYPES from "../di/type.js";
+import {} from "../middleware/authMiddleware.js";
+import {} from "express";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { changePasswordSchema } from "../utils/validations/admin.validation.js";
 import { ZodError } from "zod";
 let AdminController = class AdminController {
     _adminService;

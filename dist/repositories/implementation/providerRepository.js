@@ -7,10 +7,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+import {} from "mongoose";
 import { Types } from "mongoose";
-import { Provider } from "../../models/Providers";
+import { Provider } from "../../models/Providers.js";
+import {} from "../../interface/provider.js";
+import {} from "../interface/IProviderRepository.js";
 import { injectable } from "inversify";
-import { BaseRepository } from "./base/BaseRepository";
+import { BaseRepository } from "./base/BaseRepository.js";
 let ProviderRepository = class ProviderRepository extends BaseRepository {
     constructor() {
         super(Provider);

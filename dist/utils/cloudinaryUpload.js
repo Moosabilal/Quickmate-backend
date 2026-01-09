@@ -1,7 +1,8 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import path from "path";
-import logger from "../logger/logger";
+import {} from "../interface/cloudinary.js";
+import logger from "../logger/logger.js";
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
 const apiKey = process.env.CLOUDINARY_API_KEY;
 const apiSecret = process.env.CLOUDINARY_API_SECRET;

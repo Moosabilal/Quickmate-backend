@@ -7,9 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { BaseRepository } from "./base/BaseRepository";
+import { BaseRepository } from "./base/BaseRepository.js";
 import { injectable } from "inversify";
-import { ChatSession } from "../../models/chatSession";
+import { ChatSession } from "../../models/chatSession.js";
+import {} from "../interface/IChatSessionRepository.js";
 let ChatSessionRepository = class ChatSessionRepository extends BaseRepository {
     constructor() {
         super(ChatSession);

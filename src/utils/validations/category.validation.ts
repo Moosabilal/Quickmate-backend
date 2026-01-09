@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { CommissionTypes } from "../../enums/CommissionType.enum";
+import { CommissionTypes } from "../../enums/CommissionType.enum.js";
 
 const categoryBaseSchema = z.object({
   name: z.string().min(1, "Category name is required."),

@@ -1,8 +1,8 @@
 import { Router } from "express";
-import TYPES from "../di/type";
-import { container } from "../di/container";
-import { type ChatbotController } from "../controllers/chatBotController";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
+import TYPES from "../di/type.js";
+import { container } from "../di/container.js";
+import { type ChatbotController } from "../controllers/chatBotController.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
 
 const router = Router();
 const chatbotController = container.get<ChatbotController>(TYPES.ChatbotController);

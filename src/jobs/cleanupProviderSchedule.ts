@@ -1,9 +1,9 @@
 import cron from "node-cron";
 import { format, subDays } from "date-fns";
-import logger from "../logger/logger";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import { type IProviderRepository } from "../repositories/interface/IProviderRepository";
+import logger from "../logger/logger.js";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import { type IProviderRepository } from "../repositories/interface/IProviderRepository.js";
 
 export const startScheduleCleanupJob = () => {
   cron.schedule("0 0 * * *", async () => {

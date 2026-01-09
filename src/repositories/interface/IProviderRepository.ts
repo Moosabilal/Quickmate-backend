@@ -1,11 +1,11 @@
-import { type IProvider } from "../../models/Providers";
+import { type IProvider } from "../../models/Providers.js";
 import {
   type IProviderFilter,
   type IProviderRegistrationData,
   type ITopActiveProviders,
   type ProviderFilterQuery,
-} from "../../interface/provider";
-import { type IBaseRepository } from "./base/IBaseRepository";
+} from "../../interface/provider.js";
+import { type IBaseRepository } from "./base/IBaseRepository.js";
 
 export interface IProviderRepository extends IBaseRepository<IProvider> {
   createProvider(data: IProviderRegistrationData): Promise<IProvider>;

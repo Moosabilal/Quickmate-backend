@@ -11,9 +11,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { createAddressSchema, paramIdSchema, updateAddressSchema } from "../utils/validations/address.validation";
+import {} from "../services/interface/IAddressService.js";
+import TYPES from "../di/type.js";
+import {} from "express";
+import {} from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { createAddressSchema, paramIdSchema, updateAddressSchema } from "../utils/validations/address.validation.js";
+import {} from "../interface/address.js";
 injectable();
 let AddressController = class AddressController {
     _addressService;

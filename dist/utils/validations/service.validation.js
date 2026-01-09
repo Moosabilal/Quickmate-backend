@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ServicesPriceUnit } from "../../enums/Services.enum";
+import { ServicesPriceUnit } from "../../enums/Services.enum.js";
 const paramIdSchema = z.string().min(1, "ID is required");
 export const serviceIdParamSchema = z.object({
     id: paramIdSchema,

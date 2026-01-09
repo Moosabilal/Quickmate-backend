@@ -11,14 +11,22 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../../di/type";
+import {} from "../../repositories/interface/IUserRepository.js";
+import {} from "../interface/IAdminService.js";
+import TYPES from "../../di/type.js";
 import bcrypt from "bcryptjs";
-import { BookingStatus } from "../../enums/booking.enum";
-import { Roles } from "../../enums/userRoles";
-import { toAdminDashboardDTO } from "../../utils/mappers/admin.mapper";
-import { CustomError } from "../../utils/CustomError";
-import { ErrorMessage } from "../../enums/ErrorMessage";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import {} from "../../repositories/interface/IBookingRepository.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { Roles } from "../../enums/userRoles.js";
+import {} from "../../repositories/interface/IPaymentRepository.js";
+import {} from "../../repositories/interface/IProviderRepository.js";
+import {} from "../../repositories/interface/IReviewRepository.js";
+import { toAdminDashboardDTO } from "../../utils/mappers/admin.mapper.js";
+import {} from "../../interface/provider.js";
+import {} from "../../interface/admin.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { ErrorMessage } from "../../enums/ErrorMessage.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
 let AdminService = class AdminService {
     _userRepository;
     _bookingRepository;
@@ -52,7 +60,7 @@ let AdminService = class AdminService {
             this._bookingRepository.getBookingTrendsByMonth(),
             this._bookingRepository.getBookingPatternsByDayOfWeek(),
             this._providerRepository.getTopProvidersByEarnings(),
-            this._bookingRepository.count({}),
+            this._bookingRepository.countTotalBookings(),
             this._userRepository.getActiveUserCount(),
             this._paymentRepository.getTotalRevenue(),
             this._reviewRepository.getAverageRating(),

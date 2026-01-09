@@ -1,6 +1,6 @@
-import { type IUser } from "../../models/User";
-import { type IBaseRepository } from "./base/IBaseRepository";
-import { type IUserListFilter } from "../../interface/auth";
+import { type IUser } from "../../models/User.js";
+import { type IBaseRepository } from "./base/IBaseRepository.js";
+import { type IUserListFilter } from "../../interface/auth.js";
 export interface IUserRepository extends IBaseRepository<IUser> {
   findByEmail(email: string, includeOtpFields?: boolean): Promise<IUser | null>;
   findByGoogleId(googleId: string): Promise<IUser | null>;

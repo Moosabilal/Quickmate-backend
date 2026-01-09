@@ -1,17 +1,17 @@
 import { inject, injectable } from "inversify";
 import { type Request, type Response, type NextFunction } from "express";
-import { type IAuthService } from "../services/interface/IAuthService";
+import { type IAuthService } from "../services/interface/IAuthService.js";
 import {
   type RegisterRequestBody,
   type VerifyOtpRequestBody,
   type ResendOtpRequestBody,
   type ForgotPasswordRequestBody,
   type ResetPasswordRequestBody,
-} from "../interface/auth";
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import TYPES from "../di/type";
-import { type AuthRequest } from "../middleware/authMiddleware";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
+} from "../interface/auth.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
+import TYPES from "../di/type.js";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
 import {
   registerSchema,
   loginSchema,
@@ -21,8 +21,8 @@ import {
   googleLoginSchema,
   contactUsSchema,
   updateProfileSchema,
-} from "../utils/validations/auth.validation";
-import { CustomError } from "../utils/CustomError";
+} from "../utils/validations/auth.validation.js";
+import { CustomError } from "../utils/CustomError.js";
 
 @injectable()
 export class AuthController {

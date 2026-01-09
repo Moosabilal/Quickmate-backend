@@ -1,5 +1,6 @@
-import Message from "../../models/message";
-import { BaseRepository } from "./base/BaseRepository";
+import Message, {} from "../../models/message.js";
+import { BaseRepository } from "./base/BaseRepository.js";
+import {} from "../interface/IMessageRepository.js";
 export class MessageRepository extends BaseRepository {
     constructor() {
         super(Message);

@@ -1,6 +1,6 @@
 import { Schema, model, Types, type HydratedDocument, type InferSchemaType } from "mongoose";
-import { ProviderStatus } from "../enums/provider.enum";
-import { SubscriptionStatus } from "../enums/subscription.enum";
+import { ProviderStatus } from "../enums/provider.enum.js";
+import { SubscriptionStatus } from "../enums/subscription.enum.js";
 
 const TimeSlotSchema = new Schema(
   {

@@ -1,10 +1,10 @@
 import { inject, injectable } from "inversify";
-import { type IAdminService } from "../services/interface/IAdminService";
-import TYPES from "../di/type";
-import { type AuthRequest } from "../middleware/authMiddleware";
+import { type IAdminService } from "../services/interface/IAdminService.js";
+import TYPES from "../di/type.js";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
 import { type NextFunction, type Response } from "express";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { changePasswordSchema } from "../utils/validations/admin.validation";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { changePasswordSchema } from "../utils/validations/admin.validation.js";
 import { ZodError } from "zod";
 
 @injectable()

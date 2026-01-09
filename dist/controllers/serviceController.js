@@ -11,11 +11,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
+import TYPES from "../di/type.js";
+import {} from "../services/interface/IServiceService.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
+import {} from "../interface/service.js";
+import {} from "express";
+import {} from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
 import { ZodError } from "zod";
-import { addServiceSchema, updateServiceSchema, serviceIdParamSchema, providerIdParamSchema, } from "../utils/validations/service.validation";
+import { addServiceSchema, updateServiceSchema, serviceIdParamSchema, providerIdParamSchema, } from "../utils/validations/service.validation.js";
 let ServiceController = class ServiceController {
     _serviceService;
     constructor(serviceService) {

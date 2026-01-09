@@ -7,8 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { ChatMessage } from "../../models/chatMessage";
-import { BaseRepository } from "./base/BaseRepository";
+import { ChatMessage } from "../../models/chatMessage.js";
+import {} from "../interface/IChatMessageRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 import { injectable } from "inversify";
 let ChatMessageRepository = class ChatMessageRepository extends BaseRepository {
     constructor() {

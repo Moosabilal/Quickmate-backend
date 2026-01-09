@@ -1,44 +1,45 @@
 import { inject, injectable } from "inversify";
 import { GoogleGenerativeAI, type FunctionDeclaration, SchemaType } from "@google/generative-ai";
 import { nanoid } from "nanoid";
-import TYPES from "../../di/type";
-import { CustomError } from "../../utils/CustomError";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import TYPES from "../../di/type.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
 import { Types } from "mongoose";
-import { type IChatBotService } from "../interface/IChatBotService";
-import { type IChatSessionRepository } from "../../repositories/interface/IChatSessionRepository";
-import { type IChatMessageRepository } from "../../repositories/interface/IChatMessageRepository";
-import { type IChatSession } from "../../models/chatSession";
-import { type IChatMessage } from "../../models/chatMessage";
-import { type ICategoryService } from "../interface/ICategoryService";
-import { type IServiceRepository } from "../../repositories/interface/IServiceRepository";
-import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
-import { type IAddressService } from "../interface/IAddressService";
-import { type IBookingService } from "../interface/IBookingService";
-import { type IProviderService } from "../interface/IProviderService";
-import { type IPaymentService } from "../interface/IPaymentService";
-import { type IBookingRepository } from "../../repositories/interface/IBookingRepository";
-import { type IUserRepository } from "../../repositories/interface/IUserRepository";
+import { type IChatBotService } from "../interface/IChatBotService.js";
+import { type IChatSessionRepository } from "../../repositories/interface/IChatSessionRepository.js";
+import { type IChatMessageRepository } from "../../repositories/interface/IChatMessageRepository.js";
+import { type IChatSession } from "../../models/chatSession.js";
+import { type IChatMessage } from "../../models/chatMessage.js";
+import { type ICategoryService } from "../interface/ICategoryService.js";
+import { type IServiceRepository } from "../../repositories/interface/IServiceRepository.js";
+import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository.js";
+import { type IAddressService } from "../interface/IAddressService.js";
+import { type IBookingService } from "../interface/IBookingService.js";
+import { type IProviderService } from "../interface/IProviderService.js";
+import { type IPaymentService } from "../interface/IPaymentService.js";
+import { type IBookingRepository } from "../../repositories/interface/IBookingRepository.js";
+import { type IUserRepository } from "../../repositories/interface/IUserRepository.js";
 import {
   type IChatbotResponse,
   type IChatPaymentVerify,
   type IChatSessionContext,
   type IResponseOption,
   type IToolExecutionResult,
-} from "../../interface/chatBot";
-import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
-import { type ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository";
-import { type ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository";
-import { verifyPaymentSignature } from "../../utils/razorpay";
-import { calculateCommission, calculateParentCommission } from "../../utils/helperFunctions/commissionRule";
-import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription";
-import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
-import { type IProviderRepository } from "../../repositories/interface/IProviderRepository";
-import { BookingStatus } from "../../enums/booking.enum";
-import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository";
-import logger from "../../logger/logger";
+} from "../../interface/chatBot.js";
+import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles.js";
+import { type ICommissionRuleRepository } from "../../repositories/interface/ICommissonRuleRepository.js";
+import { type ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository.js";
+import { verifyPaymentSignature } from "../../utils/razorpay.js";
+import { calculateCommission } from "../../utils/helperFunctions/commissionRule.js";
+import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription.js";
+import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes.js";
+import { type IProviderRepository } from "../../repositories/interface/IProviderRepository.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { type IPaymentRepository } from "../../repositories/interface/IPaymentRepository.js";
+import logger from "../../logger/logger.js";
 import Fuse from "fuse.js";
-import { type IBooking } from "../../models/Booking";
+import { type IBooking } from "../../models/Booking.js";
+import type { ICategory } from "../../models/Categories.js";
 
 const BOOKING_KEYWORDS = ["book", "schedule", "appointment", "clean", "repair", "service", "want"];
 
@@ -972,12 +973,7 @@ export class ChatbotService implements IChatBotService {
     });
 
     let totalCommission = await calculateCommission(amount, commissionRule);
-    totalCommission += await calculateParentCommission(
-      amount,
-      subCategory,
-      this._categoryRepository,
-      this._commissionRuleRepository,
-    );
+    totalCommission += await this._calculateParentCommissionInternal(amount, subCategory);
 
     const provider = await this._providerRepository.findById(bookingData.providerId);
     if (provider?.subscription?.status === "ACTIVE" && provider.subscription.planId) {
@@ -1052,5 +1048,18 @@ Your provider will contact you shortly. Thank you for using QuickMate!
     });
 
     return booking;
+  }
+
+  private async _calculateParentCommissionInternal(amount: number, subCategory: ICategory): Promise<number> {
+    if (!subCategory.parentId) return 0;
+
+    const parentCategory = await this._categoryRepository.findById(subCategory.parentId.toString());
+    if (!parentCategory) return 0;
+
+    const parentCommission = await this._commissionRuleRepository.findOne({
+      categoryId: parentCategory._id.toString(),
+    });
+
+    return calculateCommission(amount, parentCommission);
   }
 }

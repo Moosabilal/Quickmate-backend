@@ -1,5 +1,5 @@
-import { type IMessage } from "../../models/message";
-import { type IBaseRepository } from "./base/IBaseRepository";
+import { type IMessage } from "../../models/message.js";
+import { type IBaseRepository } from "./base/IBaseRepository.js";
 
 export interface IMessageRepository extends IBaseRepository<IMessage> {
   findAllSorted(joiningId: string): Promise<IMessage[]>;

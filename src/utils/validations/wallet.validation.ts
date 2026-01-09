@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TransactionStatus } from "../../enums/payment&wallet.enum";
+import { TransactionStatus } from "../../enums/payment&wallet.enum.js";
 
 export const getWalletQuerySchema = z.object({
   status: z.nativeEnum(TransactionStatus).optional(),

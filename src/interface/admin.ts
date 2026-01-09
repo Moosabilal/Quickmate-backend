@@ -1,7 +1,7 @@
-import { type IBooking } from "../models/Booking";
-import { type IPayment } from "../models/payment";
-import { type IService } from "../models/Service";
-import { type IProviderProfile } from "./provider";
+import { type IBooking } from "../models/Booking.js";
+import { type IPayment } from "../models/payment.js";
+import { type IService } from "../models/Service.js";
+import { type IProviderProfile } from "./provider.js";
 
 export interface IKpiData {
   totalBookings: number;

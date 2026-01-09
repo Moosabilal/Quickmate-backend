@@ -1,4 +1,4 @@
-import { type IOrder } from "../../interface/payment";
+import { type IOrder } from "../../interface/payment.js";
 
 export const toIInitiateDepositRes = async (order: IOrder) => {
   return {

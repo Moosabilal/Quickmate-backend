@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
 import { type Response } from "express";
-import { type AuthRequest } from "../middleware/authMiddleware";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import logger from "../logger/logger";
-import { CustomError } from "../utils/CustomError";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
+import logger from "../logger/logger.js";
+import { CustomError } from "../utils/CustomError.js";
 
 @injectable()
 export class MessageController {

@@ -1,5 +1,5 @@
-import { type BookingStatus } from "../enums/booking.enum";
-import { type Roles } from "../enums/userRoles";
+import { type BookingStatus } from "../enums/booking.enum.js";
+import { type Roles } from "../enums/userRoles.js";
 
 export interface ILoginResponseDTO {
   id: string;

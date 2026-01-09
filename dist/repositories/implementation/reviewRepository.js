@@ -8,10 +8,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { injectable } from "inversify";
-import Review from "../../models/Review";
-import { BaseRepository } from "./base/BaseRepository";
+import Review, {} from "../../models/Review.js";
+import {} from "../interface/IReviewRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 import { Types } from "mongoose";
-import { ReviewStatus } from "../../enums/review.enum";
+import {} from "../../interface/review.js";
+import { ReviewStatus } from "../../enums/review.enum.js";
 let ReviewRepository = class ReviewRepository extends BaseRepository {
     constructor() {
         super(Review);

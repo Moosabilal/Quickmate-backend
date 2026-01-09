@@ -1,11 +1,11 @@
 import { inject, injectable } from "inversify";
-import { type IAddressService } from "../interface/IAddressService";
-import { type IAddressRepository } from "../../repositories/interface/IAddressRepository";
-import TYPES from "../../di/type";
-import { type IAddress } from "../../models/address";
-import { type IAddressRequest } from "../../interface/address";
-import { toAddressRequestDTO } from "../../utils/mappers/address.mapper";
-import { toAddressModel } from "../../utils/reverseMapper/address.rMapper";
+import { type IAddressService } from "../interface/IAddressService.js";
+import { type IAddressRepository } from "../../repositories/interface/IAddressRepository.js";
+import TYPES from "../../di/type.js";
+import { type IAddress } from "../../models/address.js";
+import { type IAddressRequest } from "../../interface/address.js";
+import { toAddressRequestDTO } from "../../utils/mappers/address.mapper.js";
+import { toAddressModel } from "../../utils/reverseMapper/address.rMapper.js";
 import { Types } from "mongoose";
 
 injectable();

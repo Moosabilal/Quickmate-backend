@@ -1,4 +1,4 @@
-import { type IProviderDashboardRes, type ITopActiveProviders } from "../../interface/provider";
+import { type IProviderDashboardRes, type ITopActiveProviders } from "../../interface/provider.js";
 
 export const toAdminDashboardDTO = (
   totalUsers: number,

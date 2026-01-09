@@ -1,9 +1,9 @@
 import { injectable } from "inversify";
-import { Category, type ICategory } from "../../models/Categories";
-import { type ICategoryAndCommission, type ICategoryFilter, type ICategoryInput } from "../../interface/category";
+import { Category, type ICategory } from "../../models/Categories.js";
+import { type ICategoryAndCommission, type ICategoryFilter, type ICategoryInput } from "../../interface/category.js";
 import { type FilterQuery, type PipelineStage, type SortOrder, Types } from "mongoose";
-import { type ICategoryRepository } from "../interface/ICategoryRepository";
-import { BaseRepository } from "./base/BaseRepository";
+import { type ICategoryRepository } from "../interface/ICategoryRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 
 @injectable()
 export class CategoryRepository extends BaseRepository<ICategory> implements ICategoryRepository {
@@ -24,7 +24,7 @@ export class CategoryRepository extends BaseRepository<ICategory> implements ICa
     return await Category.findOne({ name, parentId: parentObjectId }).exec();
   }
 
-  async findAll(filter: ICategoryFilter = {}): Promise<ICategory[]> {
+  async findAll(filter: FilterQuery<ICategory>): Promise<ICategory[]> {
     const queryFilter = { ...filter };
 
     if (queryFilter.parentId && typeof queryFilter.parentId === "string") {

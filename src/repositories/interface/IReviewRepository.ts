@@ -1,6 +1,6 @@
-import { type IReviewFilters, type PopulatedReview } from "../../interface/review";
-import { type IReview } from "../../models/Review";
-import { type IBaseRepository } from "./base/IBaseRepository";
+import { type IReviewFilters, type PopulatedReview } from "../../interface/review.js";
+import { type IReview } from "../../models/Review.js";
+import { type IBaseRepository } from "./base/IBaseRepository.js";
 
 export interface IReviewRepository extends IBaseRepository<IReview> {
   getReviewCountsByProvider(): Promise<{ providerId: string; reviewCount: number }[]>;

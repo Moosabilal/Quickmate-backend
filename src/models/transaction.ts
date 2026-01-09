@@ -1,5 +1,5 @@
 import { Schema, model, type HydratedDocument, type InferSchemaType } from "mongoose";
-import { TransactionStatus } from "../enums/payment&wallet.enum";
+import { TransactionStatus } from "../enums/payment&wallet.enum.js";
 
 const TransactionSchema = new Schema(
   {

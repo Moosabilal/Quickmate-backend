@@ -1,11 +1,11 @@
 import { inject, injectable } from "inversify";
-import { type IAddressService } from "../services/interface/IAddressService";
-import TYPES from "../di/type";
+import { type IAddressService } from "../services/interface/IAddressService.js";
+import TYPES from "../di/type.js";
 import { type Request, type NextFunction, type Response } from "express";
-import { type AuthRequest } from "../middleware/authMiddleware";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { createAddressSchema, paramIdSchema, updateAddressSchema } from "../utils/validations/address.validation";
-import { type IAddressData, type IAddressRequest } from "../interface/address";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { createAddressSchema, paramIdSchema, updateAddressSchema } from "../utils/validations/address.validation.js";
+import { type IAddressData, type IAddressRequest } from "../interface/address.js";
 
 injectable();
 export class AddressController {

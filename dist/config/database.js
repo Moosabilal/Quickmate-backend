@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import config from ".";
-import logger from "../logger/logger";
+import config from "./index.js";
+import logger from "../logger/logger.js";
 const connectDB = async () => {
     try {
         await mongoose.connect(config.MONGO_URI, { autoIndex: true });

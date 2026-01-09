@@ -7,10 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { CommissionRule } from "../../models/Commission";
+import { CommissionRule } from "../../models/Commission.js";
+import {} from "../../interface/category.js";
 import { Types } from "mongoose";
+import {} from "../interface/ICommissonRuleRepository.js";
 import { injectable } from "inversify";
-import { BaseRepository } from "./base/BaseRepository";
+import { BaseRepository } from "./base/BaseRepository.js";
 let CommissionRuleRepository = class CommissionRuleRepository extends BaseRepository {
     constructor() {
         super(CommissionRule);

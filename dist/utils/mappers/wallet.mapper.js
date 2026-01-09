@@ -1,3 +1,4 @@
+import {} from "../../interface/payment.js";
 export const toIInitiateDepositRes = async (order) => {
     return {
         success: true,

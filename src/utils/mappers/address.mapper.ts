@@ -1,5 +1,5 @@
-import { type IAddressRequest } from "../../interface/address";
-import { type IAddress } from "../../models/address";
+import { type IAddressRequest } from "../../interface/address.js";
+import { type IAddress } from "../../models/address.js";
 
 export const toAddressRequestDTO = (address: IAddress): IAddressRequest => {
   return {

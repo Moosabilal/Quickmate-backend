@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ReviewStatus } from "../../enums/review.enum";
+import { ReviewStatus } from "../../enums/review.enum.js";
 export const updateReviewStatusSchema = z.object({
     status: z.nativeEnum(ReviewStatus),
 });

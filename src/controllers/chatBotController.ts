@@ -1,10 +1,10 @@
 import { type Request, type Response, type NextFunction } from "express";
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { type IChatBotService } from "../services/interface/IChatBotService";
-import { CustomError } from "../utils/CustomError";
-import { type IChatPaymentVerify } from "../interface/chatBot";
+import TYPES from "../di/type.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { type IChatBotService } from "../services/interface/IChatBotService.js";
+import { CustomError } from "../utils/CustomError.js";
+import { type IChatPaymentVerify } from "../interface/chatBot.js";
 
 @injectable()
 export class ChatbotController {

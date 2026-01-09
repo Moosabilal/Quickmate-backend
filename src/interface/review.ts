@@ -1,6 +1,6 @@
 import { type Types } from "mongoose";
-import { type IReview } from "../models/Review";
-import { type ReviewStatus } from "../enums/review.enum";
+import { type IReview } from "../models/Review.js";
+import { type ReviewStatus } from "../enums/review.enum.js";
 
 export interface IReviewFilters {
   page: number;

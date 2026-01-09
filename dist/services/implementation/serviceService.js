@@ -11,10 +11,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../../di/type";
-import { toProviderServicePage, toServiceEditPage } from "../../utils/mappers/service.mapper";
-import { CustomError } from "../../utils/CustomError";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import {} from "../../repositories/interface/IServiceRepository.js";
+import {} from "../interface/IServiceService.js";
+import TYPES from "../../di/type.js";
+import {} from "../../interface/service.js";
+import {} from "../../repositories/interface/IProviderRepository.js";
+import {} from "../../repositories/interface/ICategoryRepository.js";
+import { toProviderServicePage, toServiceEditPage } from "../../utils/mappers/service.mapper.js";
+import {} from "../../models/Service.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import {} from "../../repositories/interface/IReviewRepository.js";
 let ServiceService = class ServiceService {
     _serviceRepository;
     _providerRepositroy;

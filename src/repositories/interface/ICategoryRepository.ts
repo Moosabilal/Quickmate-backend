@@ -1,14 +1,14 @@
 import { type Types } from "mongoose";
-import { type ICategory } from "../../models/Categories";
-import { type ICategoryAndCommission, type ICategoryFilter, type ICategoryInput } from "../../interface/category";
-import { type IBaseRepository } from "./base/IBaseRepository";
+import { type ICategory } from "../../models/Categories.js";
+import { type ICategoryAndCommission, type ICategoryInput } from "../../interface/category.js";
+import { type IBaseRepository } from "./base/IBaseRepository.js";
 import { type FilterQuery } from "mongoose";
 
 export interface ICategoryRepository extends IBaseRepository<ICategory> {
   findByName(name: string): Promise<ICategory | null>;
   findSubCatByName(name: string): Promise<ICategory | null>;
   findByNameAndParent(name: string, parentId: string | Types.ObjectId): Promise<ICategory | null>;
-  findAll(filter: ICategoryFilter): Promise<ICategory[]>;
+  findAll(filter: FilterQuery<ICategory>): Promise<ICategory[]>;
   getAllCategories(): Promise<ICategory[]>;
   update(id: string | Types.ObjectId, updateData: Partial<ICategoryInput>): Promise<ICategory | null>;
   countSubcategories(parentId: string | Types.ObjectId): Promise<number>;

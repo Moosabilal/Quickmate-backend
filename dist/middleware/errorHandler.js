@@ -1,5 +1,6 @@
-import logger from "../logger/logger";
-import { CustomError } from "../utils/CustomError";
+import {} from "express";
+import logger from "../logger/logger.js";
+import { CustomError } from "../utils/CustomError.js";
 export const errorHandler = (err, req, res, _next) => {
     let statusCode = 500;
     let message = "Internal server error";

@@ -10,10 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+import {} from "express";
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { CustomError } from "../utils/CustomError";
+import TYPES from "../di/type.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import {} from "../services/interface/IChatBotService.js";
+import { CustomError } from "../utils/CustomError.js";
+import {} from "../interface/chatBot.js";
 let ChatbotController = class ChatbotController {
     _chatbotService;
     constructor(chatbotService) {

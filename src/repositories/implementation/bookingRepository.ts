@@ -4,13 +4,13 @@ import {
   type IBookingStatusCount,
   type IPopulatedBookingForEarnings,
   type IProviderBookingManagement,
-} from "../../interface/booking";
-import Booking, { type BookingLean, type IBooking } from "../../models/Booking";
-import { type IBookingRepository } from "../interface/IBookingRepository";
-import { BaseRepository } from "./base/BaseRepository";
+} from "../../interface/booking.js";
+import Booking, { type BookingLean, type IBooking } from "../../models/Booking.js";
+import { type IBookingRepository } from "../interface/IBookingRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 import { type ClientSession, type PipelineStage, Types } from "mongoose";
-import { BookingStatus } from "../../enums/booking.enum";
-import { type IServiceBreakdown } from "../../interface/provider";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { type IServiceBreakdown } from "../../interface/provider.js";
 
 @injectable()
 export class BookingRepository extends BaseRepository<IBooking> implements IBookingRepository {
@@ -234,6 +234,10 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
       },
     ]);
     return result;
+  }
+
+  public async countTotalBookings(): Promise<number> {
+    return this.model.countDocuments({ status: BookingStatus.COMPLETED });
   }
 
   public async getTopServiceCategories(limit: number = 5): Promise<{ name: string; value: number }[]> {

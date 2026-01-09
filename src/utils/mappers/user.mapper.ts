@@ -1,13 +1,13 @@
-import { type ILoginResponseDTO } from "../../interface/auth";
-import { type ICategoryDto } from "../../interface/category";
-import { type IProviderDto } from "../../interface/provider";
-import { type IServiceDto } from "../../interface/service";
-import { type Roles } from "../../enums/userRoles";
-import { type IUser } from "../../models/User";
-import { type ICategory } from "../../models/Categories";
-import { type IService } from "../../models/Service";
-import { type IProvider } from "../../models/Providers";
-import { getSignedUrl } from "../cloudinaryUpload";
+import { type ILoginResponseDTO } from "../../interface/auth.js";
+import { type ICategoryDto } from "../../interface/category.js";
+import { type IProviderDto } from "../../interface/provider.js";
+import { type IServiceDto } from "../../interface/service.js";
+import { type Roles } from "../../enums/userRoles.js";
+import { type IUser } from "../../models/User.js";
+import { type ICategory } from "../../models/Categories.js";
+import { type IService } from "../../models/Service.js";
+import { type IProvider } from "../../models/Providers.js";
+import { getSignedUrl } from "../cloudinaryUpload.js";
 
 export function toLoginResponseDTO(user: IUser): ILoginResponseDTO {
   return {

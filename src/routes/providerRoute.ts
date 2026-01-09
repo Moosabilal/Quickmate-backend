@@ -1,9 +1,9 @@
 import express from "express";
-import upload from "../utils/multer";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
-import { type ProviderController } from "../controllers/providerController";
+import upload from "../utils/multer.js";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
+import { type ProviderController } from "../controllers/providerController.js";
 
 const router = express.Router();
 const providerController = container.get<ProviderController>(TYPES.ProviderController);

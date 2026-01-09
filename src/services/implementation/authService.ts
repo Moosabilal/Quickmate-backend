@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify";
-import { type IUserRepository } from "../../repositories/interface/IUserRepository";
+import { type IUserRepository } from "../../repositories/interface/IUserRepository.js";
 import {
   type RegisterRequestBody,
   type VerifyOtpRequestBody,
@@ -9,38 +9,37 @@ import {
   type AuthSuccessResponse,
   type IUserDetailsResponse,
   type IBookingDetailsForAdmin,
-} from "../../interface/auth";
-import { generateOTP } from "../../utils/otpGenerator";
+} from "../../interface/auth.js";
+import { generateOTP } from "../../utils/otpGenerator.js";
 import {
   sendVerificationEmail,
   sendPasswordResetEmail,
   sendContactUsEmail,
   sendUserStatusChangeEmail,
-} from "../../utils/emailService";
+} from "../../utils/emailService.js";
 import bcrypt from "bcryptjs";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import crypto from "crypto";
 import { OAuth2Client } from "google-auth-library";
-import TYPES from "../../di/type";
-import { type IAuthService } from "../interface/IAuthService";
-import { CustomError } from "../../utils/CustomError";
-import { ErrorMessage } from "../../enums/ErrorMessage";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import logger from "../../logger/logger";
-import { type IBooking } from "../../models/Booking";
-import { type IBookingRepository } from "../../repositories/interface/IBookingRepository";
-import { type IProviderRepository } from "../../repositories/interface/IProviderRepository";
-import { type IServiceRepository } from "../../repositories/interface/IServiceRepository";
-import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository";
-import { type ICategory } from "../../models/Categories";
-import { type IService } from "../../models/Service";
-import { type IProvider } from "../../models/Providers";
-import { BookingStatus } from "../../enums/booking.enum";
-import { getSignedUrl } from "../../utils/cloudinaryUpload";
-import { mapCategoryToDto, mapProviderToDto, mapServiceToDto } from "../../utils/mappers/user.mapper";
-import { type IProviderDto } from "../../interface/provider";
-import { type ICategoryDto } from "../../interface/category";
-import { ProviderStatus } from "../../enums/provider.enum";
+import TYPES from "../../di/type.js";
+import { type IAuthService } from "../interface/IAuthService.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { ErrorMessage } from "../../enums/ErrorMessage.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import logger from "../../logger/logger.js";
+import { type IBooking } from "../../models/Booking.js";
+import { type IBookingRepository } from "../../repositories/interface/IBookingRepository.js";
+import { type IProviderRepository } from "../../repositories/interface/IProviderRepository.js";
+import { type IServiceRepository } from "../../repositories/interface/IServiceRepository.js";
+import { type ICategoryRepository } from "../../repositories/interface/ICategoryRepository.js";
+import { type ICategory } from "../../models/Categories.js";
+import { type IService } from "../../models/Service.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { getSignedUrl } from "../../utils/cloudinaryUpload.js";
+import { mapCategoryToDto, mapProviderToDto, mapServiceToDto } from "../../utils/mappers/user.mapper.js";
+import { type IProviderDto } from "../../interface/provider.js";
+import { type ICategoryDto } from "../../interface/category.js";
+import { ProviderStatus } from "../../enums/provider.enum.js";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
@@ -615,7 +614,7 @@ export class AuthService implements IAuthService {
   ): Promise<{
     categories: Partial<ICategory>[];
     services: Partial<IService>[];
-    providers: Partial<IProvider>[];
+    providers: IProviderDto[];
     bookings: Partial<IBooking>[];
   }> => {
     const user = await this._userRepository.findById(userId);

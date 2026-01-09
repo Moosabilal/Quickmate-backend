@@ -1,8 +1,8 @@
 import express from "express";
-import { type ReviewController } from "../controllers/reviewController";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
+import { type ReviewController } from "../controllers/reviewController.js";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 const reviewController = container.get<ReviewController>(TYPES.ReviewController);

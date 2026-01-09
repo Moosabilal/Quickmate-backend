@@ -1,9 +1,9 @@
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { type ISubscriptionPlanService } from "../services/interface/ISubscriptionPlanService";
-import { type AuthRequest } from "../middleware/authMiddleware";
+import TYPES from "../di/type.js";
+import { type ISubscriptionPlanService } from "../services/interface/ISubscriptionPlanService.js";
+import { type AuthRequest } from "../middleware/authMiddleware.js";
 import { type NextFunction, type Response } from "express";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
 import z, { ZodError } from "zod";
 import {
   createSubscriptionPlanSchema,
@@ -14,7 +14,7 @@ import {
   verifySubscriptionPaymentSchema,
   getSubscriptionPlanQuerySchema,
   calculateUpgradeSchema,
-} from "../utils/validations/subscription.validation";
+} from "../utils/validations/subscription.validation.js";
 
 @injectable()
 export class SubscriptionPlanController {

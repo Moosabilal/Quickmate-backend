@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { PaymentStatus } from "../enums/userRoles";
-import { BookingStatus } from "../enums/booking.enum";
+import { PaymentStatus } from "../enums/userRoles.js";
+import { BookingStatus } from "../enums/booking.enum.js";
 const BookingSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,

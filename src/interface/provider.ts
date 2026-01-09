@@ -1,9 +1,9 @@
 import { type Types } from "mongoose";
-import { type ProviderStatus } from "../enums/provider.enum";
-import { type BookingStatus } from "../enums/booking.enum";
-import { type SubscriptionStatus } from "../enums/subscription.enum";
-import { type IProvider } from "../models/Providers";
-import { type IService } from "../models/Service";
+import { type ProviderStatus } from "../enums/provider.enum.js";
+import { type BookingStatus } from "../enums/booking.enum.js";
+import { type SubscriptionStatus } from "../enums/subscription.enum.js";
+import { type IProvider } from "../models/Providers.js";
+import { type IService } from "../models/Service.js";
 
 export interface Availability {
   day: string;
@@ -63,7 +63,8 @@ export interface ISubscription {
   planId?: string | Types.ObjectId;
   startDate?: Date;
   endDate?: Date;
-  status: SubscriptionStatus;
+  status?: SubscriptionStatus;
+  pendingDowngradePlanId?: string | Types.ObjectId;
 }
 
 export interface TimeSlot {

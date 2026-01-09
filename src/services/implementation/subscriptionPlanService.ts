@@ -1,19 +1,19 @@
 import { inject, injectable } from "inversify";
-import { type ISubscriptionPlanService } from "../interface/ISubscriptionPlanService";
-import { type ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository";
-import TYPES from "../../di/type";
-import { type ISubscriptionPlan } from "../../models/subscription";
-import { CustomError } from "../../utils/CustomError";
-import { ErrorMessage } from "../../enums/ErrorMessage";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import { toAdminSubscriptionPlanList } from "../../utils/mappers/subscription.mapper";
-import { type AdminSubscriptionPlanDTO, type IUpgradeCostResponse } from "../../interface/subscriptionPlan";
-import { type IProviderRepository } from "../../repositories/interface/IProviderRepository";
-import { SubscriptionStatus } from "../../enums/subscription.enum";
-import { type IProviderProfile, type ISubscription } from "../../interface/provider";
-import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
-import { type RazorpayOrder } from "../../interface/razorpay";
-import { toProviderDTO } from "../../utils/mappers/provider.mapper";
+import { type ISubscriptionPlanService } from "../interface/ISubscriptionPlanService.js";
+import { type ISubscriptionPlanRepository } from "../../repositories/interface/ISubscriptionPlanRepository.js";
+import TYPES from "../../di/type.js";
+import { type ISubscriptionPlan } from "../../models/subscription.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { ErrorMessage } from "../../enums/ErrorMessage.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import { toAdminSubscriptionPlanList } from "../../utils/mappers/subscription.mapper.js";
+import { type AdminSubscriptionPlanDTO, type IUpgradeCostResponse } from "../../interface/subscriptionPlan.js";
+import { type IProviderRepository } from "../../repositories/interface/IProviderRepository.js";
+import { SubscriptionStatus } from "../../enums/subscription.enum.js";
+import { type IProviderProfile, type ISubscription } from "../../interface/provider.js";
+import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay.js";
+import { type RazorpayOrder } from "../../interface/razorpay.js";
+import { toProviderDTO } from "../../utils/mappers/provider.mapper.js";
 import { type FilterQuery, Types } from "mongoose";
 
 @injectable()

@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
-import { type IWallet, Wallet } from "../../models/wallet";
-import { BaseRepository } from "./base/BaseRepository";
-import { type IWalletRepository } from "../interface/IWalletRepository";
-import { type ITransaction, Transaction } from "../../models/transaction";
+import { type IWallet, Wallet } from "../../models/wallet.js";
+import { BaseRepository } from "./base/BaseRepository.js";
+import { type IWalletRepository } from "../interface/IWalletRepository.js";
+import { type ITransaction, Transaction } from "../../models/transaction.js";
 import { type ClientSession, type FilterQuery } from "mongoose";
-import { type TransactionFilterOptions } from "../../interface/wallet";
+import { type TransactionFilterOptions } from "../../interface/wallet.js";
 
 @injectable()
 export class WalletRepository extends BaseRepository<IWallet> implements IWalletRepository {

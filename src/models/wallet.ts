@@ -1,5 +1,5 @@
 import { Schema, model, type HydratedDocument, type InferSchemaType } from "mongoose";
-import { Roles } from "../enums/userRoles";
+import { Roles } from "../enums/userRoles.js";
 
 const WalletSchema = new Schema(
   {

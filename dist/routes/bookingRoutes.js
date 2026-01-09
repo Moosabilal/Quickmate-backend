@@ -1,7 +1,8 @@
 import express from "express";
-import TYPES from "../di/type";
-import { container } from "../di/container";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
+import {} from "../controllers/bookingController.js";
+import TYPES from "../di/type.js";
+import { container } from "../di/container.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
 const router = express.Router();
 const bookingController = container.get(TYPES.BookingController);
 const isUser = [authenticateToken, authorizeRoles(["Customer", "ServiceProvider"])];

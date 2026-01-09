@@ -10,14 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
+import {} from "express";
+import {} from "../interface/category.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
 import * as fsPromises from "fs/promises";
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import logger from "../logger/logger";
+import TYPES from "../di/type.js";
+import {} from "../services/interface/ICategoryService.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import logger from "../logger/logger.js";
 import { ZodError } from "zod";
-import { createCategorySchema, updateCategorySchema, paramIdSchema, getSubcategoriesQuerySchema, } from "../utils/validations/category.validation";
+import { createCategorySchema, updateCategorySchema, paramIdSchema, getSubcategoriesQuerySchema, } from "../utils/validations/category.validation.js";
 let CategoryController = class CategoryController {
     _categoryService;
     constructor(categoryService) {

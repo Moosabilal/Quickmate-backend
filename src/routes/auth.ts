@@ -1,9 +1,9 @@
 import express from "express";
-import { type AuthController } from "../controllers/authController";
-import upload from "../utils/multer";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
+import { type AuthController } from "../controllers/authController.js";
+import upload from "../utils/multer.js";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 const authController = container.get<AuthController>(TYPES.AuthController);

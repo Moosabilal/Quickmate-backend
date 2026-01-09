@@ -4,11 +4,11 @@ import {
   type IBookingStatusCount,
   type IPopulatedBookingForEarnings,
   type IProviderBookingManagement,
-} from "../../interface/booking";
-import { type BookingLean, type IBooking } from "../../models/Booking";
-import { type IBaseRepository } from "./base/IBaseRepository";
-import { type IServiceBreakdown } from "../../interface/provider";
-import { type BookingStatus } from "../../enums/booking.enum";
+} from "../../interface/booking.js";
+import { type BookingLean, type IBooking } from "../../models/Booking.js";
+import { type IBaseRepository } from "./base/IBaseRepository.js";
+import { type IServiceBreakdown } from "../../interface/provider.js";
+import { type BookingStatus } from "../../enums/booking.enum.js";
 
 export interface IBookingRepository extends IBaseRepository<IBooking> {
   getDailyBookingCount(filter?: FilterQuery<IBooking>): Promise<{ date: string; total: number }[]>;
@@ -34,6 +34,7 @@ export interface IBookingRepository extends IBaseRepository<IBooking> {
   getBookingStatsByService(providerId: string): Promise<IServiceBreakdown[]>;
   getBookingTrendsByMonth(months?: number): Promise<{ month: string; value: number }[]>;
   getBookingPatternsByDayOfWeek(): Promise<{ day: string; value: number }[]>;
+  countTotalBookings(): Promise<number>;
   getTopServiceCategories(limit?: number): Promise<{ name: string; value: number }[]>;
   getBookingsByFilter(userId: string, status: BookingStatus, search?: string): Promise<IBooking[]>;
   findBookingsForUserHistory(

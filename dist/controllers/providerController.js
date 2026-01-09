@@ -11,12 +11,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { inject, injectable } from "inversify";
-import TYPES from "../di/type";
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
+import {} from "express";
+import {} from "../services/interface/IProviderService.js";
+import TYPES from "../di/type.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
+import {} from "../interface/provider.js";
+import {} from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import {} from "../interface/auth.js";
 import { ZodError } from "zod";
-import { registerProviderSchema, updateProviderSchema, providersForAdminQuerySchema, updateProviderStatusSchema, paramIdSchema, getServiceProviderQuerySchema, getAvailabilityQuerySchema, getEarningsQuerySchema, featuredProvidersQuerySchema, updateAvailabilitySchema, searchQuerySchema, } from "../utils/validations/provider.validation";
-import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation";
+import { registerProviderSchema, updateProviderSchema, providersForAdminQuerySchema, updateProviderStatusSchema, paramIdSchema, getServiceProviderQuerySchema, getAvailabilityQuerySchema, getEarningsQuerySchema, featuredProvidersQuerySchema, updateAvailabilitySchema, searchQuerySchema, } from "../utils/validations/provider.validation.js";
+import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation.js";
 let ProviderController = class ProviderController {
     _providerService;
     constructor(providerService) {

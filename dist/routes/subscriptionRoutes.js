@@ -1,7 +1,8 @@
 import express from "express";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
-import { container } from "../di/container";
-import TYPES from "../di/type";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import {} from "../controllers/subscriptionPlanController.js";
 const router = express.Router();
 const subscriptionController = container.get(TYPES.SubscriptionPlanController);
 const isAdmin = [authenticateToken, authorizeRoles(["Admin"])];

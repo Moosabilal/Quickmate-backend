@@ -8,10 +8,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { injectable } from "inversify";
-import { HttpStatusCode } from "../enums/HttpStatusCode";
-import { uploadToCloudinary } from "../utils/cloudinaryUpload";
-import logger from "../logger/logger";
-import { CustomError } from "../utils/CustomError";
+import {} from "express";
+import {} from "../middleware/authMiddleware.js";
+import { HttpStatusCode } from "../enums/HttpStatusCode.js";
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
+import logger from "../logger/logger.js";
+import { CustomError } from "../utils/CustomError.js";
 let MessageController = class MessageController {
     constructor() { }
     uploadChatFile = async (req, res) => {

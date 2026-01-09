@@ -8,10 +8,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { injectable } from "inversify";
-import Booking from "../../models/Booking";
-import { BaseRepository } from "./base/BaseRepository";
+import {} from "../../interface/booking.js";
+import Booking, {} from "../../models/Booking.js";
+import {} from "../interface/IBookingRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 import { Types } from "mongoose";
-import { BookingStatus } from "../../enums/booking.enum";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import {} from "../../interface/provider.js";
 let BookingRepository = class BookingRepository extends BaseRepository {
     constructor() {
         super(Booking);
@@ -204,6 +207,9 @@ let BookingRepository = class BookingRepository extends BaseRepository {
             },
         ]);
         return result;
+    }
+    async countTotalBookings() {
+        return this.model.countDocuments({ status: BookingStatus.COMPLETED });
     }
     async getTopServiceCategories(limit = 5) {
         const result = await this.model.aggregate([

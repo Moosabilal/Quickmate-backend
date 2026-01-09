@@ -1,9 +1,9 @@
-import { CommissionRule, type ICommissionRule } from "../../models/Commission";
-import { type ICommissionRuleInput } from "../../interface/category";
+import { CommissionRule, type ICommissionRule } from "../../models/Commission.js";
+import { type ICommissionRuleInput } from "../../interface/category.js";
 import { Types } from "mongoose";
-import { type ICommissionRuleRepository } from "../interface/ICommissonRuleRepository";
+import { type ICommissionRuleRepository } from "../interface/ICommissonRuleRepository.js";
 import { injectable } from "inversify";
-import { BaseRepository } from "./base/BaseRepository";
+import { BaseRepository } from "./base/BaseRepository.js";
 
 @injectable()
 export class CommissionRuleRepository extends BaseRepository<ICommissionRule> implements ICommissionRuleRepository {

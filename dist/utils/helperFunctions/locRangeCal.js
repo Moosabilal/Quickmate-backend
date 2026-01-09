@@ -1,3 +1,4 @@
+import {} from "../../models/Providers.js";
 export const isProviderInRange = (providers, userLat, userLng, radiusKm) => {
     for (const provider of providers) {
         const coords = provider.serviceLocation?.coordinates;

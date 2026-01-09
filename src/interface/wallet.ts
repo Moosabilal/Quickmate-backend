@@ -1,5 +1,5 @@
-import { type TransactionStatus } from "../enums/payment&wallet.enum";
-import { type Roles } from "../enums/userRoles";
+import { type TransactionStatus } from "../enums/payment&wallet.enum.js";
+import { type Roles } from "../enums/userRoles.js";
 
 export interface IInitiateDepositRes {
   success: boolean;

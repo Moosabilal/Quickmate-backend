@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
-import upload from "../utils/multer";
-import TYPES from "../di/type";
-import { container } from "../di/container";
+import {} from "../controllers/categoryController.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
+import upload from "../utils/multer.js";
+import TYPES from "../di/type.js";
+import { container } from "../di/container.js";
 const router = Router();
 const categoryController = container.get(TYPES.CategoryController);
 const isAdmin = [authenticateToken, authorizeRoles(["Admin"])];

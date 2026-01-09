@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { injectable } from "inversify";
 import Razorpay from "razorpay";
 import crypto from "crypto";
+import {} from "../interface/IPaymentService.js";
+import {} from "../../interface/razorpay.js";
 let PaymentService = class PaymentService {
     razorpay;
     constructor() {

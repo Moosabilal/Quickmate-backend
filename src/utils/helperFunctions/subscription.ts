@@ -1,6 +1,6 @@
-import { CommissionTypes } from "../../enums/CommissionType.enum";
-import { type ICommissionRule } from "../../models/Commission";
-import { type ISubscriptionPlan } from "../../models/subscription";
+import { CommissionTypes } from "../../enums/CommissionType.enum.js";
+import { type ICommissionRule } from "../../models/Commission.js";
+import { type ISubscriptionPlan } from "../../models/subscription.js";
 
 export function applySubscriptionAdjustments(
   amount: number,

@@ -1,8 +1,8 @@
 import express from "express";
-import { container } from "../di/container";
-import TYPES from "../di/type";
-import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware";
-import { type AddressController } from "../controllers/addressController";
+import { container } from "../di/container.js";
+import TYPES from "../di/type.js";
+import { authenticateToken, authorizeRoles } from "../middleware/authMiddleware.js";
+import { type AddressController } from "../controllers/addressController.js";
 
 const router = express.Router();
 const addressController = container.get<AddressController>(TYPES.AddressController);

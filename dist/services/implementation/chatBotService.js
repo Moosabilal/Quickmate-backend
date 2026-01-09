@@ -13,18 +13,38 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 import { inject, injectable } from "inversify";
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import { nanoid } from "nanoid";
-import TYPES from "../../di/type";
-import { CustomError } from "../../utils/CustomError";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
+import TYPES from "../../di/type.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
 import { Types } from "mongoose";
-import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles";
-import { verifyPaymentSignature } from "../../utils/razorpay";
-import { calculateCommission, calculateParentCommission } from "../../utils/helperFunctions/commissionRule";
-import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription";
-import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes";
-import { BookingStatus } from "../../enums/booking.enum";
-import logger from "../../logger/logger";
+import {} from "../interface/IChatBotService.js";
+import {} from "../../repositories/interface/IChatSessionRepository.js";
+import {} from "../../repositories/interface/IChatMessageRepository.js";
+import {} from "../../models/chatSession.js";
+import {} from "../../models/chatMessage.js";
+import {} from "../interface/ICategoryService.js";
+import {} from "../../repositories/interface/IServiceRepository.js";
+import {} from "../../repositories/interface/ICategoryRepository.js";
+import {} from "../interface/IAddressService.js";
+import {} from "../interface/IBookingService.js";
+import {} from "../interface/IProviderService.js";
+import {} from "../interface/IPaymentService.js";
+import {} from "../../repositories/interface/IBookingRepository.js";
+import {} from "../../repositories/interface/IUserRepository.js";
+import {} from "../../interface/chatBot.js";
+import { PaymentMethod, PaymentStatus, Roles } from "../../enums/userRoles.js";
+import {} from "../../repositories/interface/ICommissonRuleRepository.js";
+import {} from "../../repositories/interface/ISubscriptionPlanRepository.js";
+import { verifyPaymentSignature } from "../../utils/razorpay.js";
+import { calculateCommission } from "../../utils/helperFunctions/commissionRule.js";
+import { applySubscriptionAdjustments } from "../../utils/helperFunctions/subscription.js";
+import { convertDurationToMinutes } from "../../utils/helperFunctions/convertDurationToMinutes.js";
+import {} from "../../repositories/interface/IProviderRepository.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import {} from "../../repositories/interface/IPaymentRepository.js";
+import logger from "../../logger/logger.js";
 import Fuse from "fuse.js";
+import {} from "../../models/Booking.js";
 const BOOKING_KEYWORDS = ["book", "schedule", "appointment", "clean", "repair", "service", "want"];
 let ChatbotService = class ChatbotService {
     _genAI;
@@ -773,7 +793,7 @@ let ChatbotService = class ChatbotService {
             categoryId: subCategory._id.toString(),
         });
         let totalCommission = await calculateCommission(amount, commissionRule);
-        totalCommission += await calculateParentCommission(amount, subCategory, this._categoryRepository, this._commissionRuleRepository);
+        totalCommission += await this._calculateParentCommissionInternal(amount, subCategory);
         const provider = await this._providerRepository.findById(bookingData.providerId);
         if (provider?.subscription?.status === "ACTIVE" && provider.subscription.planId) {
             const plan = await this._subscriptionPlanRepository.findById(provider.subscription.planId.toString());
@@ -838,6 +858,17 @@ Your provider will contact you shortly. Thank you for using QuickMate!
             text: confirmationMsg,
         });
         return booking;
+    }
+    async _calculateParentCommissionInternal(amount, subCategory) {
+        if (!subCategory.parentId)
+            return 0;
+        const parentCategory = await this._categoryRepository.findById(subCategory.parentId.toString());
+        if (!parentCategory)
+            return 0;
+        const parentCommission = await this._commissionRuleRepository.findOne({
+            categoryId: parentCategory._id.toString(),
+        });
+        return calculateCommission(amount, parentCommission);
     }
 };
 ChatbotService = __decorate([

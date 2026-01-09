@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { BookingStatus } from "../../enums/booking.enum";
-import { PaymentMethod } from "../../enums/userRoles";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { PaymentMethod } from "../../enums/userRoles.js";
 export const paramIdSchema = z.object({
     id: z.string().min(1, "ID is required"),
 });

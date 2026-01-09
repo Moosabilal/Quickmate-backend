@@ -1,21 +1,21 @@
 import { inject, injectable } from "inversify";
-import { type IWalletService } from "../interface/IWalletService";
-import { type IWalletRepository } from "../../repositories/interface/IWalletRepository";
-import TYPES from "../../di/type";
-import { CustomError } from "../../utils/CustomError";
-import { HttpStatusCode } from "../../enums/HttpStatusCode";
-import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay";
-import { toIInitiateDepositRes } from "../../utils/mappers/wallet.mapper";
-import { type IOrder, type WalletFilter } from "../../interface/payment";
+import { type IWalletService } from "../interface/IWalletService.js";
+import { type IWalletRepository } from "../../repositories/interface/IWalletRepository.js";
+import TYPES from "../../di/type.js";
+import { CustomError } from "../../utils/CustomError.js";
+import { HttpStatusCode } from "../../enums/HttpStatusCode.js";
+import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay.js";
+import { toIInitiateDepositRes } from "../../utils/mappers/wallet.mapper.js";
+import { type IOrder, type WalletFilter } from "../../interface/payment.js";
 import {
   type IDepositVerification,
   type IInitiateDepositRes,
   type TransactionFilterOptions,
-} from "../../interface/wallet";
-import { type IWallet } from "../../models/wallet";
+} from "../../interface/wallet.js";
+import { type IWallet } from "../../models/wallet.js";
 import { Types } from "mongoose";
-import { type Roles } from "../../enums/userRoles";
-import { type TransactionStatus } from "../../enums/payment&wallet.enum";
+import { type Roles } from "../../enums/userRoles.js";
+import { type TransactionStatus } from "../../enums/payment&wallet.enum.js";
 
 @injectable()
 export class WalletService implements IWalletService {

@@ -8,9 +8,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { injectable } from "inversify";
-import { Category } from "../../models/Categories";
+import { Category } from "../../models/Categories.js";
+import {} from "../../interface/category.js";
 import { Types } from "mongoose";
-import { BaseRepository } from "./base/BaseRepository";
+import {} from "../interface/ICategoryRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 let CategoryRepository = class CategoryRepository extends BaseRepository {
     constructor() {
         super(Category);
@@ -25,7 +27,7 @@ let CategoryRepository = class CategoryRepository extends BaseRepository {
         const parentObjectId = new Types.ObjectId(parentId);
         return await Category.findOne({ name, parentId: parentObjectId }).exec();
     }
-    async findAll(filter = {}) {
+    async findAll(filter) {
         const queryFilter = { ...filter };
         if (queryFilter.parentId && typeof queryFilter.parentId === "string") {
             queryFilter.parentId = new Types.ObjectId(queryFilter.parentId);

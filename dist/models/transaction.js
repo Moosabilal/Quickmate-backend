@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { TransactionStatus } from "../enums/payment&wallet.enum";
+import { TransactionStatus } from "../enums/payment&wallet.enum.js";
 const TransactionSchema = new Schema({
     walletId: {
         type: Schema.Types.ObjectId,

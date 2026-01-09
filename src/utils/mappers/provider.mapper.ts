@@ -1,4 +1,4 @@
-import { type IProvider } from "../../models/Providers";
+import { type IProvider } from "../../models/Providers.js";
 import {
   type EarningsAnalyticsData,
   type IBackendProvider,
@@ -14,18 +14,18 @@ import {
   type IServiceAddPageResponse,
   type IServiceBreakdown,
   type IServiceDetails,
-} from "../../interface/provider";
-import { type ICategory } from "../../models/Categories";
-import { type IBooking } from "../../models/Booking";
-import { type IService } from "../../models/Service";
-import { type IDashboardResponse, type IDashboardStatus } from "../../interface/provider";
-import { BookingStatus } from "../../enums/booking.enum";
-import { type IReview as IReviewModel } from "../../models/Review";
-import { type IUser } from "../../models/User";
-import { _haversineKm } from "../helperFunctions/haversineKm";
-import { type LastMessageData } from "../../interface/message";
-import { type IPopulatedBookingForEarnings } from "../../interface/booking";
-import { getSignedUrl } from "../cloudinaryUpload";
+} from "../../interface/provider.js";
+import { type ICategory } from "../../models/Categories.js";
+import { type IBooking } from "../../models/Booking.js";
+import { type IService } from "../../models/Service.js";
+import { type IDashboardResponse, type IDashboardStatus } from "../../interface/provider.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { type IReview as IReviewModel } from "../../models/Review.js";
+import { type IUser } from "../../models/User.js";
+import { _haversineKm } from "../helperFunctions/haversineKm.js";
+import { type LastMessageData } from "../../interface/message.js";
+import { type IPopulatedBookingForEarnings } from "../../interface/booking.js";
+import { getSignedUrl } from "../cloudinaryUpload.js";
 
 const createJoiningId = (id1: string, id2: string): string => {
   if (!id1 || !id2) return "";

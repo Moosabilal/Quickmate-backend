@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
-import { type IServiceWithProvider } from "../../interface/service";
-import Service, { type IService } from "../../models/Service";
-import { type IServiceRepository } from "../interface/IServiceRepository";
-import { BaseRepository } from "./base/BaseRepository";
+import { type IServiceWithProvider } from "../../interface/service.js";
+import Service, { type IService } from "../../models/Service.js";
+import { type IServiceRepository } from "../interface/IServiceRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
 import { type FilterQuery, type PipelineStage, Types } from "mongoose";
-import { type IPopulatedService } from "../../interface/provider";
+import { type IPopulatedService } from "../../interface/provider.js";
 
 @injectable()
 export class ServiceRepository extends BaseRepository<IService> implements IServiceRepository {

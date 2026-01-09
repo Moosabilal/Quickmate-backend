@@ -1,9 +1,9 @@
 import { injectable } from "inversify";
-import Payment, { type IPayment } from "../../models/payment";
-import { type IPaymentRepository } from "../interface/IPaymentRepository";
-import { BaseRepository } from "./base/BaseRepository";
-import { BookingStatus } from "../../enums/booking.enum";
-import { type IPaymentTotals } from "../../interface/payment";
+import Payment, { type IPayment } from "../../models/payment.js";
+import { type IPaymentRepository } from "../interface/IPaymentRepository.js";
+import { BaseRepository } from "./base/BaseRepository.js";
+import { BookingStatus } from "../../enums/booking.enum.js";
+import { type IPaymentTotals } from "../../interface/payment.js";
 
 @injectable()
 export class PaymentRepository extends BaseRepository<IPayment> implements IPaymentRepository {
