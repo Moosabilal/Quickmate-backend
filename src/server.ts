@@ -52,6 +52,7 @@ const allowedOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split
 app.use(
   cors({
     origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       } else {
@@ -94,6 +95,7 @@ const server = http.createServer(app);
 const io = new SocketIOServer(server, {
   cors: {
     origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       } else {
