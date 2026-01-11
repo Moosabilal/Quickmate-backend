@@ -45,7 +45,7 @@
     "express-validator": "^7.2.1",
     "fuse.js": "^7.1.0",
     "google-auth-library": "^10.3.0",
-    "googleapis": "^160.0.0",
+    "googleapis": "^158.0.0",
     "helmet": "^8.1.0",
     "inversify": "^7.5.4",
     "jsonwebtoken": "^9.0.2",

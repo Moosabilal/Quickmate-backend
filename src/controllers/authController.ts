@@ -63,7 +63,7 @@ export class AuthController {
         sameSite: "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000, //7d
       });
-      res.status(HttpStatusCode.OK).json(result);
+      return res.status(HttpStatusCode.OK).json(result);
     } catch (error) {
       next(error);
     }
