@@ -1,0 +1,54 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build & Test (Safety Check)
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Test Build
+        run: npm run build
+
+      # - name: Run Tests
+      #   run: npm test
+
+  deploy:
+    name: 🚀 Deploy to AWS
+    needs: build-and-test 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/Quickmate-backend
+
+            git pull origin main
+
+            npm install
+
+            NODE_OPTIONS="--max-old-space-size=3072" npm run build
+
+            pm2 restart quickmate-api
+
+            pm2 save
