@@ -1,0 +1,6 @@
+[2026-01-12 19:02:58] [INFO   ] - Server running on port 5000
+[2026-01-12 19:03:14] [INFO   ] - MongoDB Connected...
+[2026-01-12 19:03:41] [ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[2026-01-12 19:03:41] [INFO   ] - Client disconnected: lEkJ-TDXkEEOsnVbAAAB
+[2026-01-12 19:03:51] [ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[2026-01-12 19:04:23] [INFO   ] - Client disconnected: vHOswfAwz9k3frzvAAAD
