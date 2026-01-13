@@ -34,6 +34,11 @@
             "date": 1768224776320,
             "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-12.log",
             "hash": "0907cf24513491230b0ac3d7bf748618f8695b21929e9e8c33d6ce94d17f8029"
+        },
+        {
+            "date": 1768243668543,
+            "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-13.log",
+            "hash": "d41571f0d2b0a67d072800688b528cd43106f363e8db94849932bba2ccfae81b"
         }
     ],
     "hashType": "sha256"
