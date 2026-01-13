@@ -8,7 +8,6 @@ import http from "http";
 import { Server as SocketIOServer } from "socket.io";
 import { fileURLToPath } from "url";
 dotenv.config();
-import { rateLimiter } from "./middleware/rateLimiter.js";
 import connectDB from "./config/database.js";
 
 import path from "path";
@@ -66,7 +65,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(rateLimiter);
+// app.use(rateLimiter);
 
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 

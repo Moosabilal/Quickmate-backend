@@ -1,0 +1,33 @@
+[2026-01-13 00:17:49] [INFO   ] - Server running on port 5000
+[2026-01-13 00:17:51] [INFO   ] - MongoDB Connected...
+[2026-01-13 00:18:02] [ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[2026-01-13 00:18:02] [INFO   ] - Client disconnected: rCydNcfSej82I-RJAAAB
+[2026-01-13 00:18:59] [INFO   ] - Client disconnected: 0TagzQBU97HgOajHAAAD
+[2026-01-13 00:23:45] [INFO   ] - Server running on port 5000
+[2026-01-13 00:23:46] [INFO   ] - MongoDB Connected...
+[2026-01-13 00:24:40] [INFO   ] - Client disconnected: QWNvCbeJmi5A3TMAAAAB
+[2026-01-13 00:24:40] [ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[2026-01-13 00:24:40] [INFO   ] - Client disconnected: 2n1Cb4urpl92CxudAAAD
+[2026-01-13 00:24:44] [INFO   ] - Client disconnected: mws3z1itSVbV1QYaAAAF
+[2026-01-13 00:24:44] [ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[2026-01-13 00:24:44] [INFO   ] - Client disconnected: UERGBnGQE4qdBr1xAAAH
+[2026-01-13 00:26:14] [INFO   ] - Client disconnected: 1hmGw51LRPJC9wp6AAAJ
+[2026-01-13 00:26:14] [ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[2026-01-13 00:26:14] [INFO   ] - Client disconnected: xEnYe0V0o7zE3YVxAAAL
+[2026-01-13 00:28:16] [INFO   ] - Client disconnected: NuE6hA1EAv1z4uXdAAAN
+[2026-01-13 06:54:51] [INFO   ] - Server running on port 5000
+[2026-01-13 06:54:53] [INFO   ] - MongoDB Connected...
+[2026-01-13 06:58:21] [ERROR  ] - Cloudinary upload error details:
+[2026-01-13 06:58:21] [INFO   ] - Cleaned up local file after error: uploads/1768267696750-Screenshot_20251113_105959.png
+[2026-01-13 06:58:21] [INFO   ] - Retrying upload in 1000ms...
+[2026-01-13 06:58:22] [ERROR  ] - Cloudinary upload error details: File does not exist
+[2026-01-13 06:58:22] [INFO   ] - Retrying upload in 2000ms...
+[2026-01-13 06:58:24] [ERROR  ] - Cloudinary upload error details: File does not exist
+[2026-01-13 06:58:24] [INFO   ] - Retrying upload in 4000ms...
+[2026-01-13 06:58:28] [ERROR  ] - Cloudinary upload error details: File does not exist
+[2026-01-13 06:58:28] [ERROR  ] - Error in createCategory controller: Failed to upload image to Cloudinary: File does not exist
+[2026-01-13 06:58:28] [ERROR  ] - Failed to delete temp file on error: ENOENT: no such file or directory, unlink 'uploads/1768267696750-Screenshot_20251113_105959.png'
+[2026-01-13 06:58:28] [ERROR  ] - POST /api/categories 500 Failed to upload image to Cloudinary: File does not exist -> Failed to upload image to Cloudinary: File does not exist
+[2026-01-13 07:08:25] [INFO   ] - Client disconnected: r-KZYxqlWOpR8KhOAAAB
+[2026-01-13 07:08:26] [ERROR  ] - GET /api/categories/69659f9d8f3b1cc6b0af4302 500 Category not found. -> Category not found.
+[2026-01-13 07:24:59] [INFO   ] - Client disconnected: 8VMPzlrkUh11Jx86AAAD
