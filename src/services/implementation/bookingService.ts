@@ -835,6 +835,8 @@ export class BookingService implements IBookingService {
           remarks: `Refund ID: ${refund.id}`,
           status: TransactionStatus.REFUND,
         });
+        userWallet.balance += amount;
+        await this._walletRepository.update(userWallet._id.toString(), userWallet);
       }
 
       return {

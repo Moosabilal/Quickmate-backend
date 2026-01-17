@@ -14,7 +14,7 @@ router.post("/createSubscriptionPlan", isAdmin, subscriptionController.createSub
 router.get("/getSubscriptionPlan", isAdminOrUser, subscriptionController.getSubscriptionPlan);
 router.put("/updateSubscriptionPlan", isAdmin, subscriptionController.updateSubscriptionPlan);
 router.delete("/deleteSubscriptionPlan/:id", isAdmin, subscriptionController.deleteSubscriptionPlan);
-router.get("/:providerId/check", isProvider, subscriptionController.checkProviderSubscription);
+router.put("/:providerId/check", isProvider, subscriptionController.checkProviderSubscription);
 router.post("/create-order", isProvider, subscriptionController.createSubscriptionOrder);
 router.post("/verify-payment", isProvider, subscriptionController.verifySubscriptionPayment);
 router.post("/calculate-upgrade", isProvider, subscriptionController.calculateUpgrade);

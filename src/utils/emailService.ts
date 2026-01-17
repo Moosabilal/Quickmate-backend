@@ -323,3 +323,40 @@ export const sendProviderStatusUpdateEmail = async (
     logger.error(`Error sending provider status email to ${toEmail}:`, error);
   }
 };
+
+export const sendSubscriptionExpiredEmail = async (
+  toEmail: string,
+  providerName: string,
+  expiryDate: string,
+): Promise<void> => {
+  try {
+    const subject = "⚠️ Alert: Your QuickMate Subscription Has Expired";
+    const mailOptions = {
+      from: process.env.EMAIL_FROM,
+      to: toEmail,
+      subject: subject,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px;">
+          <h2 style="color: #d9534f; border-bottom: 2px solid #d9534f; padding-bottom: 10px;">Subscription Expired</h2>
+          <p>Dear ${providerName},</p>
+          <p>This is to inform you that your subscription plan on QuickMate expired on <strong>${expiryDate}</strong>.</p>
+          
+          <div style="background-color: #fff3f3; border-left: 4px solid #d9534f; padding: 15px; margin: 20px 0;">
+             <p style="margin: 0; font-weight: bold;">Status Update:</p>
+             <p style="margin: 5px 0 0 0;">Your account has been downgraded to the free tier limit. Any services exceeding this limit have been deactivated.</p>
+          </div>
+
+          <p>To restore full access and reactivate your services, please renew your subscription via your dashboard.</p>
+          
+          <p style="margin-top: 30px; font-size: 14px; color: #777;">Regards,<br/>QuickMate Team</p>
+        </div>
+      `,
+    };
+
+    logger.info(`Sending subscription expired email to ${toEmail}`);
+    await transporter.sendMail(mailOptions);
+    logger.info(`Subscription expired email sent successfully`);
+  } catch (error) {
+    logger.error(`Error sending subscription expired email to ${toEmail}:`, error);
+  }
+};

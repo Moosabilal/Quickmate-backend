@@ -86,11 +86,6 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
       retryCount,
     });
 
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-      logger.info(`Cleaned up local file after error: ${filePath}`);
-    }
-
     const isRetryableError =
       error.http_code === 500 ||
       error.http_code === 502 ||
@@ -106,6 +101,15 @@ export const uploadToCloudinary = async (filePath: string, retryCount = 0): Prom
       logger.info(`Retrying upload in ${delay}ms...`);
       await new Promise((resolve) => setTimeout(resolve, delay));
       return uploadToCloudinary(filePath, retryCount + 1);
+    }
+
+    if (fs.existsSync(filePath)) {
+      try {
+        fs.unlinkSync(filePath);
+        logger.info(`Cleaned up local file after fatal error: ${filePath}`);
+      } catch (unlinkError) {
+        logger.error(`Failed to delete file after error: ${filePath}`, unlinkError);
+      }
     }
 
     if (error.message?.includes("File size")) {

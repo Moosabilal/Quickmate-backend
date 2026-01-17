@@ -23,6 +23,7 @@ import {
   searchQuerySchema,
 } from "../utils/validations/provider.validation.js";
 import { verifyOtpSchema, emailOnlySchema } from "../utils/validations/auth.validation.js";
+import { generateAccessToken, generateRefreshToken } from "../utils/jwt.js";
 @injectable()
 export class ProviderController {
   private _providerService: IProviderService;
@@ -70,6 +71,34 @@ export class ProviderController {
     try {
       const validatedBody = verifyOtpSchema.parse(req.body);
       const response = await this._providerService.verifyOtp(validatedBody);
+
+      const { user } = response;
+
+      if (user && user.id && user.role) {
+        const newAccessToken = generateAccessToken({
+          id: user.id,
+          role: user.role,
+        });
+
+        const newRefreshToken = generateRefreshToken({
+          id: user.id,
+          role: user.role,
+        });
+
+        res.cookie("token", newAccessToken, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "strict",
+          maxAge: 60 * 60 * 1000, //1h
+        });
+
+        res.cookie("refreshToken", newRefreshToken, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "strict",
+          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        });
+      }
       res.status(HttpStatusCode.OK).json(response);
     } catch (error) {
       next(error);

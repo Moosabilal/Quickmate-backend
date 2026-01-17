@@ -18,7 +18,7 @@ export class ServiceRepository extends BaseRepository<IService> implements IServ
   }
 
   async findByProviderId(providerId: string): Promise<IService[]> {
-    const services = await Service.find({ providerId });
+    const services = await Service.find({ providerId, status: true });
     return services;
   }
 
