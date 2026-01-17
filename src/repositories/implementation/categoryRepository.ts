@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { Category, type ICategory } from "../../models/Categories.js";
-import { type ICategoryAndCommission, type ICategoryFilter, type ICategoryInput } from "../../interface/category.js";
+import { type ICategoryAndCommission, type ICategoryInput } from "../../interface/category.js";
 import { type FilterQuery, type PipelineStage, type SortOrder, Types } from "mongoose";
 import { type ICategoryRepository } from "../interface/ICategoryRepository.js";
 import { BaseRepository } from "./base/BaseRepository.js";

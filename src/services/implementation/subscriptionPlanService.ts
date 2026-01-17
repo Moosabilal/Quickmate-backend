@@ -15,18 +15,25 @@ import { paymentCreation, verifyPaymentSignature } from "../../utils/razorpay.js
 import { type RazorpayOrder } from "../../interface/razorpay.js";
 import { toProviderDTO } from "../../utils/mappers/provider.mapper.js";
 import { type FilterQuery, Types } from "mongoose";
+import type { IServiceRepository } from "../../repositories/interface/IServiceRepository.js";
+import type { IService } from "../../models/Service.js";
+import { sendSubscriptionExpiredEmail } from "../../utils/emailService.js";
 
 @injectable()
 export class SubscriptionPlanService implements ISubscriptionPlanService {
   private _subscriptionPlanRepository: ISubscriptionPlanRepository;
   private _providerRepository: IProviderRepository;
+  private _serviceRepository: IServiceRepository;
+
   constructor(
     @inject(TYPES.SubscriptionPlanRepository)
     subscriptionPlanRepository: ISubscriptionPlanRepository,
     @inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
+    @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
   ) {
     this._subscriptionPlanRepository = subscriptionPlanRepository;
     this._providerRepository = providerRepository;
+    this._serviceRepository = serviceRepository;
   }
 
   public async createSubscriptionPlan(data: AdminSubscriptionPlanDTO): Promise<void> {
@@ -161,9 +168,44 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
       subscription.status = SubscriptionStatus.EXPIRED;
       subscription.pendingDowngradePlanId = undefined;
       await provider.save();
+
+      if (provider.email && provider.fullName) {
+        const expiryDate = new Date(subscription.endDate).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        await sendSubscriptionExpiredEmail(provider.email, provider.fullName, expiryDate);
+      }
+
+      await this.deactivateExcessServices(providerId);
     }
 
     return provider.subscription;
+  }
+
+  private async deactivateExcessServices(providerId: string): Promise<void> {
+    try {
+      const services = await this._serviceRepository.findAll({ providerId: new Types.ObjectId(providerId) });
+
+      const sortedServices = services.sort((a: IService, b: IService) => {
+        const dateA = new Date(a.createdAt).getTime();
+        const dateB = new Date(b.createdAt).getTime();
+        return dateA - dateB;
+      });
+
+      if (sortedServices.length > 1) {
+        const servicesToDeactivate = sortedServices.slice(1);
+
+        for (const service of servicesToDeactivate) {
+          if (service.status === true) {
+            await this._serviceRepository.update(service._id.toString(), { status: false });
+          }
+        }
+      }
+    } catch (error) {
+      console.error(`Failed to deactivate services for provider ${providerId}`, error);
+    }
   }
 
   public async createSubscriptionOrder(
@@ -193,9 +235,28 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
 
     const sub = provider.subscription;
 
-    if (!sub || !sub.planId || !sub.endDate || sub.status !== SubscriptionStatus.ACTIVE) {
+    if (!sub || !sub.planId || !sub.endDate) {
       throw new CustomError(
         "No active subscription found. Please use the standard subscribe method.",
+        HttpStatusCode.BAD_REQUEST,
+      );
+    }
+
+    const today = new Date();
+    const endDate = new Date(sub.endDate);
+    if (today >= endDate) {
+      provider.subscription.status = SubscriptionStatus.EXPIRED;
+      provider.subscription.pendingDowngradePlanId = undefined;
+      await provider.save();
+      throw new CustomError(
+        "Your plan is expired. Please create a new subscription Instead of upgrading.",
+        HttpStatusCode.BAD_REQUEST,
+      );
+    }
+
+    if (sub.status !== SubscriptionStatus.ACTIVE) {
+      throw new CustomError(
+        "Subscription is not active. Please use the standard subscribe method.",
         HttpStatusCode.BAD_REQUEST,
       );
     }
@@ -208,12 +269,6 @@ export class SubscriptionPlanService implements ISubscriptionPlanService {
         "This is a downgrade or same plan. Downgrades will be supported in a future update.",
         HttpStatusCode.BAD_REQUEST,
       );
-    }
-
-    const today = new Date();
-    const endDate = new Date(sub.endDate);
-    if (today >= endDate) {
-      throw new CustomError("Your plan is expired. Please create a new subscription.", HttpStatusCode.BAD_REQUEST);
     }
 
     const msInDay = 1000 * 60 * 60 * 24;

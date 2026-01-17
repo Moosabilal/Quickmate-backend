@@ -94,7 +94,7 @@ export class AuthService implements IAuthService {
     await sendVerificationEmail(email, otp);
 
     return {
-      message: "Registration successful! An OTP has been sent to your email for verification.",
+      message: "An OTP has been sent to your email for verification.",
       email: String(user.email),
     };
   }

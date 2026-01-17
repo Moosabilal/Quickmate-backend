@@ -30,6 +30,7 @@ import logger from "./logger/logger.js";
 import { chatSocket } from "./utils/socket.js";
 import { startScheduleCleanupJob } from "./jobs/cleanupProviderSchedule.js";
 import { startBookingExpiryJob } from "./jobs/expireOverdueBookings.js";
+import { startSubscriptionCron } from "./jobs/subscriptionCleanUp.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -110,5 +111,6 @@ chatSocket(io);
 
 startScheduleCleanupJob();
 startBookingExpiryJob();
+startSubscriptionCron();
 
 server.listen(PORT, () => logger.info(`Server running on port ${PORT}`));

@@ -1,0 +1,127 @@
+[2026-01-16 07:15:11] [INFO   ] - Server running on port 5000
+[2026-01-16 07:15:13] [INFO   ] - MongoDB Connected...
+[2026-01-16 07:15:32] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-16 07:16:15] [INFO   ] - Client disconnected: 1wTwN0JC_QD5TUEpAAAB
+[2026-01-16 08:13:20] [INFO   ] - Server running on port 5000
+[2026-01-16 08:13:23] [INFO   ] - MongoDB Connected...
+[2026-01-16 08:15:36] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-16 09:19:49] [INFO   ] - Server running on port 5000
+[2026-01-16 09:19:50] [INFO   ] - MongoDB Connected...
+[2026-01-16 09:19:53] [INFO   ] - Server running on port 5000
+[2026-01-16 09:19:56] [INFO   ] - Server running on port 5000
+[2026-01-16 09:20:01] [INFO   ] - Server running on port 5000
+[2026-01-16 09:20:02] [INFO   ] - MongoDB Connected...
+[2026-01-16 09:20:06] [INFO   ] - Server running on port 5000
+[2026-01-16 09:20:08] [INFO   ] - MongoDB Connected...
+[2026-01-16 09:20:26] [INFO   ] - Server running on port 5000
+[2026-01-16 09:20:28] [INFO   ] - MongoDB Connected...
+[2026-01-16 09:20:43] [INFO   ] - Server running on port 5000
+[2026-01-16 09:20:44] [INFO   ] - MongoDB Connected...
+[2026-01-16 10:25:10] [INFO   ] - Server running on port 5000
+[2026-01-16 10:25:11] [INFO   ] - MongoDB Connected...
+[2026-01-16 10:25:16] [INFO   ] - Client disconnected: uU1yXpBMkXPXY2eIAAAB
+[2026-01-16 10:25:17] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-16 10:25:17] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-16 10:25:31] [INFO   ] - Client disconnected: tmvLnoMnnWzVi95lAAAD
+[2026-01-16 10:31:13] [INFO   ] - Server running on port 5000
+[2026-01-16 10:31:15] [INFO   ] - MongoDB Connected...
+[2026-01-16 10:31:33] [INFO   ] - Server running on port 5000
+[2026-01-16 10:31:34] [INFO   ] - MongoDB Connected...
+[2026-01-16 10:31:45] [INFO   ] - Client disconnected: yCwicRrMUv6zomMmAAAB
+[2026-01-16 10:55:39] [INFO   ] - Server running on port 5000
+[2026-01-16 10:55:42] [INFO   ] - MongoDB Connected...
+[2026-01-16 10:55:46] [INFO   ] - Client disconnected: 5V6PjyiOMdoyn4EmAAAB
+[2026-01-16 10:56:19] [INFO   ] - Server running on port 5000
+[2026-01-16 10:56:20] [INFO   ] - MongoDB Connected...
+[2026-01-16 12:13:18] [INFO   ] - Client disconnected: Ja7Zn5Bk-sHU-FpiAAAB
+[2026-01-16 12:13:18] [INFO   ] - Client disconnected: nniTKcPqOf9GjZZXAAAD
+[2026-01-16 12:13:20] [ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[2026-01-16 12:13:20] [INFO   ] - Client disconnected: VrNCUCEOhkqyTi9LAAAH
+[2026-01-16 12:14:16] [INFO   ] - Sending verification email to providerfour@gmail.com with OTP: 690199 mail
+[2026-01-16 12:14:19] [INFO   ] - Verification OTP sent to providerfour@gmail.com
+[2026-01-16 12:16:09] [INFO   ] - Sending verification email to providerfour@gmail.com with OTP: 132236 mail
+[2026-01-16 12:16:16] [INFO   ] - Verification OTP sent to providerfour@gmail.com
+[2026-01-16 12:16:55] [INFO   ] - Server running on port 5000
+[2026-01-16 12:16:57] [INFO   ] - MongoDB Connected...
+[2026-01-16 12:17:02] [INFO   ] - Server running on port 5000
+[2026-01-16 12:17:03] [INFO   ] - MongoDB Connected...
+[2026-01-16 14:24:05] [INFO   ] - Server running on port 5000
+[2026-01-16 14:24:06] [INFO   ] - MongoDB Connected...
+[2026-01-16 14:24:23] [ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[2026-01-16 14:24:23] [ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[2026-01-16 14:24:23] [INFO   ] - Client disconnected: zouJqjKBpDA7EDY9AAAB
+[2026-01-16 14:26:14] [INFO   ] - Sending verification email to providerfive@gmail.com with OTP: 772726 mail
+[2026-01-16 14:26:18] [INFO   ] - Verification OTP sent to providerfive@gmail.com
+[2026-01-16 14:27:30] [ERROR  ] - Cloudinary upload error details:
+[2026-01-16 14:27:30] [INFO   ] - Cleaned up local file after error: uploads/1768553846339-dummy-aadhar-card-unique-identity-260nw-1661857771.webp
+[2026-01-16 14:27:30] [INFO   ] - Retrying upload in 1000ms...
+[2026-01-16 14:27:31] [ERROR  ] - Cloudinary upload error details: File does not exist
+[2026-01-16 14:27:31] [INFO   ] - Retrying upload in 2000ms...
+[2026-01-16 14:27:33] [ERROR  ] - Cloudinary upload error details: File does not exist
+[2026-01-16 14:27:33] [INFO   ] - Retrying upload in 4000ms...
+[2026-01-16 14:27:37] [ERROR  ] - Cloudinary upload error details: File does not exist
+[2026-01-16 14:27:37] [ERROR  ] - POST /api/provider/register 500 Failed to upload image to Cloudinary: File does not exist -> Failed to upload image to Cloudinary: File does not exist
+[2026-01-16 14:27:57] [INFO   ] - Sending verification email to providerfive@gmail.com with OTP: 104655 mail
+[2026-01-16 14:28:00] [INFO   ] - Verification OTP sent to providerfive@gmail.com
+[2026-01-16 14:28:18] [INFO   ] - Sending provider status email (Pending) to providerfive@gmail.com
+[2026-01-16 14:28:22] [INFO   ] - Provider status email sent successfully
+[2026-01-16 15:24:29] [INFO   ] - Client disconnected: wYlsfxcdtAqipaTmAAAF
+[2026-01-16 15:24:29] [INFO   ] - Client disconnected: gstNc2rhu9Fl-73CAAAD
+[2026-01-16 15:24:32] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-16 15:34:32] [INFO   ] - Client disconnected: 35S6KkgYYdU7lCicAAAJ
+[2026-01-16 15:34:32] [INFO   ] - Client disconnected: msQpmKa1ErcSdLP_AAAH
+[2026-01-16 15:34:41] [INFO   ] - Client disconnected: XbS2cTTLGrggg7EZAAAN
+[2026-01-16 19:16:25] [INFO   ] - Client disconnected: mTiksP29asZBUCKMAAAP
+[2026-01-16 19:16:25] [INFO   ] - Client disconnected: EQctJlrifBLGZ-DbAAAL
+[2026-01-16 19:16:25] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-16 19:37:31] [INFO   ] - Server running on port 5000
+[2026-01-16 19:37:33] [INFO   ] - MongoDB Connected...
+[2026-01-16 20:14:08] [INFO   ] - Server running on port 5000
+[2026-01-16 20:14:13] [INFO   ] - MongoDB Connected...
+[2026-01-16 20:23:36] [INFO   ] - Server running on port 5000
+[2026-01-16 20:23:40] [INFO   ] - MongoDB Connected...
+[2026-01-16 20:23:48] [INFO   ] - Server running on port 5000
+[2026-01-16 20:23:49] [INFO   ] - MongoDB Connected...
+[2026-01-16 20:33:28] [INFO   ] - Server running on port 5000
+[2026-01-16 20:33:30] [INFO   ] - MongoDB Connected...
+[2026-01-16 20:48:15] [INFO   ] - Client disconnected: KVNXQTZRzUkOkbsKAAAD
+[2026-01-16 20:48:15] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-16 20:49:17] [INFO   ] - Sending verification email to providerfive@gmail.com with OTP: 788018 mail
+[2026-01-16 20:49:21] [INFO   ] - Verification OTP sent to providerfive@gmail.com
+[2026-01-16 20:49:37] [INFO   ] - Sending provider status email (Pending) to providerfive@gmail.com
+[2026-01-16 20:49:42] [INFO   ] - Provider status email sent successfully
+[2026-01-16 21:24:23] [INFO   ] - Socket mdGXUHQJ_eDBE0mEAAAF joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:29:09] [INFO   ] - Client disconnected: mdGXUHQJ_eDBE0mEAAAF
+[2026-01-16 21:29:10] [INFO   ] - Socket oSFttP1_ROl0J4kVAAAH joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:29:29] [INFO   ] - Client disconnected: oSFttP1_ROl0J4kVAAAH
+[2026-01-16 21:29:30] [INFO   ] - Socket mO4i5uv3tEpefYocAAAJ joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:29:48] [INFO   ] - Socket mO4i5uv3tEpefYocAAAJ joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:30:11] [INFO   ] - Client disconnected: mO4i5uv3tEpefYocAAAJ
+[2026-01-16 21:30:13] [INFO   ] - Socket 43yOczFJw8ZT8IUUAAAL joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:30:53] [INFO   ] - Socket 43yOczFJw8ZT8IUUAAAL joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:31:06] [INFO   ] - Socket 43yOczFJw8ZT8IUUAAAL joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:32:46] [INFO   ] - Socket 43yOczFJw8ZT8IUUAAAL joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:45:22] [INFO   ] - Client disconnected: 43yOczFJw8ZT8IUUAAAL
+[2026-01-16 21:45:22] [INFO   ] - Client disconnected: SU1W0UnGgW8-yxd-AAAB
+[2026-01-16 21:45:25] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-16 21:45:27] [INFO   ] - Socket 8VqU3fAItOWwvxGcAAAP joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:46:24] [ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[2026-01-16 21:46:24] [ERROR  ] - GET /api/provider/getProviderList?search=&page=1&limit=4 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[2026-01-16 21:46:24] [ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[2026-01-16 21:46:24] [ERROR  ] - GET /api/bookings/getAllPreviousChats/693a4eb555f277c041b5a631-693c34377b0eabc86dce77de 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[2026-01-16 21:46:24] [ERROR  ] - GET /api/auth/getUser 500 getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net -> getaddrinfo EAI_AGAIN cluster0-shard-00-02.1xluc.mongodb.net
+[2026-01-16 21:46:24] [INFO   ] - Client disconnected: nTwevqsXRh2Zs2NMAAAN
+[2026-01-16 21:55:26] [INFO   ] - Client disconnected: xlSviAFiV45e-onGAAAR
+[2026-01-16 21:55:26] [INFO   ] - Client disconnected: 8VqU3fAItOWwvxGcAAAP
+[2026-01-16 21:55:28] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-16 21:55:30] [INFO   ] - Socket nr-sbP_WMN5WmDLaAAAV joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 21:55:34] [INFO   ] - Socket nr-sbP_WMN5WmDLaAAAV joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 22:05:29] [INFO   ] - Client disconnected: nr-sbP_WMN5WmDLaAAAV
+[2026-01-16 22:05:29] [INFO   ] - Client disconnected: _SwXFdASNzOkCdgeAAAT
+[2026-01-16 22:05:34] [INFO   ] - Socket ek8fzlIpRIEu8Gp1AAAZ joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 22:05:41] [INFO   ] - Socket ek8fzlIpRIEu8Gp1AAAZ joined booking room: 693a4eb555f277c041b5a631-693c34377b0eabc86dce77de
+[2026-01-16 22:36:37] [INFO   ] - Client disconnected: UvizWLYivu5pe1OZAAAX
+[2026-01-16 22:44:30] [INFO   ] - Server running on port 5000
+[2026-01-16 22:44:31] [INFO   ] - MongoDB Connected...
+[2026-01-16 22:47:08] [INFO   ] - Client disconnected: 99e0zcnkoDmhA7uQAAAB
+[2026-01-16 22:48:41] [INFO   ] - Client disconnected: _XKWBAxES2sFMXnAAAAD

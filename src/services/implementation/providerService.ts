@@ -133,7 +133,7 @@ export class ProviderService implements IProviderService {
     await sendVerificationEmail(provider.email, otp);
 
     return {
-      message: "Registration successful! An OTP has been sent to your email for verification.",
+      message: "An OTP has been sent to your email for verification.",
       email: String(provider.email),
     };
   }

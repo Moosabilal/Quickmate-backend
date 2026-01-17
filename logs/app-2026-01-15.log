@@ -1,0 +1,31 @@
+[2026-01-15 10:44:17] [INFO   ] - Server running on port 5000
+[2026-01-15 10:44:18] [INFO   ] - MongoDB Connected...
+[2026-01-15 10:44:31] [ERROR  ] - POST /api/auth/refresh-token 403 Refresh token invalid or expired. Please re-login. -> Refresh token invalid or expired. Please re-login.
+[2026-01-15 10:44:31] [INFO   ] - Client disconnected: LtW1lphd-fyz1LI8AAAB
+[2026-01-15 10:46:12] [ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 400 Your plan is expired. Please create a new subscription. -> Your plan is expired. Please create a new subscription.
+[2026-01-15 10:52:46] [ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 400 Your plan is expired. Please create a new subscription. -> Your plan is expired. Please create a new subscription.
+[2026-01-15 10:52:57] [ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 400 Your plan is expired. Please create a new subscription. -> Your plan is expired. Please create a new subscription.
+[2026-01-15 10:53:01] [ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 400 Your plan is expired. Please create a new subscription. -> Your plan is expired. Please create a new subscription.
+[2026-01-15 10:53:08] [ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 400 Your plan is expired. Please create a new subscription. -> Your plan is expired. Please create a new subscription.
+[2026-01-15 10:53:15] [ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 400 Your plan is expired. Please create a new subscription. -> Your plan is expired. Please create a new subscription.
+[2026-01-15 10:58:18] [ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 400 Your plan is expired. Please create a new subscription. -> Your plan is expired. Please create a new subscription.
+[2026-01-15 11:09:57] [INFO   ] - Server running on port 5000
+[2026-01-15 11:10:02] [INFO   ] - Server running on port 5000
+[2026-01-15 11:10:03] [INFO   ] - MongoDB Connected...
+[2026-01-15 11:10:06] [INFO   ] - Server running on port 5000
+[2026-01-15 11:10:09] [INFO   ] - Server running on port 5000
+[2026-01-15 11:10:10] [INFO   ] - MongoDB Connected...
+[2026-01-15 11:10:18] [INFO   ] - Client disconnected: x5oTyPvicNFOPbPeAAAB
+[2026-01-15 11:10:24] [ERROR  ] - POST /api/subscriptionPlan/calculate-upgrade 400 Your plan is expired. Please create a new subscription. -> Your plan is expired. Please create a new subscription.
+[2026-01-15 14:03:03] [INFO   ] - Server running on port 5000
+[2026-01-15 14:03:06] [INFO   ] - MongoDB Connected...
+[2026-01-15 14:54:59] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-15 16:42:45] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-15 16:49:03] [INFO   ] - Client disconnected: DABH3LpG4VvsebqxAAAB
+[2026-01-15 17:08:58] [INFO   ] - Client disconnected: C2dQkq2gNhvY73DJAAAD
+[2026-01-15 19:43:46] [INFO   ] - Server running on port 5000
+[2026-01-15 19:43:58] [ERROR  ] - MongoDB connection error:
+[2026-01-15 19:44:10] [INFO   ] - Server running on port 5000
+[2026-01-15 19:44:11] [INFO   ] - MongoDB Connected...
+[2026-01-15 19:44:36] [INFO   ] - Server running on port 5000
+[2026-01-15 19:44:37] [INFO   ] - MongoDB Connected...
