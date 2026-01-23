@@ -236,7 +236,9 @@ export class AuthService implements IAuthService {
     };
   }
 
-  public async requestPasswordReset(data: ForgotPasswordRequestBody): Promise<{ message: string }> {
+  public async requestPasswordReset(
+    data: ForgotPasswordRequestBody,
+  ): Promise<{ message?: string; resetToken?: string }> {
     const { email, currentPassword } = data;
     const user = await this._userRepository.findByEmail(email, true);
 
@@ -258,6 +260,10 @@ export class AuthService implements IAuthService {
     user.passwordResetExpires = new Date(Date.now() + PASSWORD_RESET_EXPIRY_MINUTES * 60 * 1000);
 
     await this._userRepository.update(user._id.toString(), user);
+
+    if (currentPassword) {
+      return { resetToken: resetToken };
+    }
 
     const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
     logger.info("the reset link", resetLink);

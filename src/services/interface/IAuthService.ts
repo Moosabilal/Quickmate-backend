@@ -32,7 +32,7 @@ export interface IAuthService {
     token: string;
     refreshToken: string;
   }>;
-  requestPasswordReset(data: ForgotPasswordRequestBody): Promise<{ message: string }>;
+  requestPasswordReset(data: ForgotPasswordRequestBody): Promise<{ message?: string; resetToken?: string }>;
   resetPassword(data: ResetPasswordRequestBody): Promise<{ message: string }>;
   googleAuthLogin(token: string): Promise<{
     user: { id: string; name: string; email: string; role: string };

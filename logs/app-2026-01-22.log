@@ -1,0 +1,48 @@
+[2026-01-22 12:45:01] [INFO   ] - Server running on port 5000
+[2026-01-22 12:45:03] [INFO   ] - MongoDB Connected...
+[2026-01-22 12:57:34] [INFO   ] - Server running on port 5000
+[2026-01-22 12:57:37] [INFO   ] - MongoDB Connected...
+[2026-01-22 13:21:55] [INFO   ] - Client disconnected: s6Ur4Oczg8fAU_lPAAAB
+[2026-01-22 13:21:57] [ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[2026-01-22 13:21:57] [INFO   ] - Client disconnected: bjF4fsaIozxcplWDAAAD
+[2026-01-22 13:23:03] [ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 13:25:13] [INFO   ] - Client disconnected: qehyZfUDCzBOR8-OAAAF
+[2026-01-22 21:43:18] [INFO   ] - Server running on port 5000
+[2026-01-22 21:43:19] [INFO   ] - MongoDB Connected...
+[2026-01-22 21:43:23] [INFO   ] - Client disconnected: C90Rb9VWZtV_C3IhAAAB
+[2026-01-22 21:44:44] [INFO   ] - the reset link
+[2026-01-22 21:44:44] [INFO   ] - Sending resetLink email http://localhost:5173/reset-password/07344d8702fc051fbf7ddb5f88f78d08b68c49539fbae02f38afc540c02e4bbe 
+[2026-01-22 21:44:51] [INFO   ] - Password reset email sent to lithesh@gmail.com
+[2026-01-22 21:56:38] [INFO   ] - Client disconnected: wIC15kNS3UsFfjF2AAAF
+[2026-01-22 21:56:39] [ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[2026-01-22 21:56:39] [INFO   ] - Client disconnected: qd_YiQ5GFJdRp-HGAAAH
+[2026-01-22 21:56:43] [INFO   ] - Client disconnected: CKTG69rzTsjDA6NTAAAJ
+[2026-01-22 21:56:47] [INFO   ] - Client disconnected: g6bzUOVtCOA8HdzMAAAL
+[2026-01-22 21:57:36] [INFO   ] - Client disconnected: sRR0LXNh0UyZcUDkAAAP
+[2026-01-22 21:57:38] [INFO   ] - Client disconnected: _h8U0-qnIhSotkdNAAAN
+[2026-01-22 21:58:01] [INFO   ] - Client disconnected: _V2Feqn1i6vMBQBEAAAD
+[2026-01-22 22:00:17] [ERROR  ] - POST /api/auth/forgot-password 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 22:00:18] [ERROR  ] - POST /api/auth/forgot-password 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 22:00:29] [INFO   ] - the reset link
+[2026-01-22 22:00:29] [INFO   ] - Sending resetLink email http://localhost:5173/reset-password/0fbe9a0985c005fdc2e4b5a20a2372ef516af39f6cbf2a2c6b821c90f4c4a672 
+[2026-01-22 22:00:34] [INFO   ] - Password reset email sent to lithesh@gmail.com
+[2026-01-22 22:54:26] [INFO   ] - Server running on port 5000
+[2026-01-22 22:54:28] [INFO   ] - MongoDB Connected...
+[2026-01-22 22:54:40] [INFO   ] - Server running on port 5000
+[2026-01-22 22:54:41] [INFO   ] - MongoDB Connected...
+[2026-01-22 23:04:09] [INFO   ] - Client disconnected: JPxhojeuUprVRk9xAAAB
+[2026-01-22 23:04:10] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-22 23:04:21] [ERROR  ] - POST /api/auth/forgot-password 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 23:04:22] [ERROR  ] - POST /api/auth/forgot-password 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 23:04:31] [ERROR  ] - POST /api/auth/forgot-password 500 reset is not defined -> reset is not defined
+[2026-01-22 23:07:13] [INFO   ] - Server running on port 5000
+[2026-01-22 23:07:14] [INFO   ] - MongoDB Connected...
+[2026-01-22 23:07:20] [INFO   ] - Client disconnected: FkiuKusq4Wfn3xC0AAAB
+[2026-01-22 23:11:34] [ERROR  ] - POST /api/auth/login 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 23:15:57] [ERROR  ] - POST /api/auth/forgot-password 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 23:15:58] [ERROR  ] - POST /api/auth/forgot-password 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 23:16:03] [ERROR  ] - POST /api/auth/forgot-password 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 23:16:03] [ERROR  ] - POST /api/auth/forgot-password 401 Invalid credentials. -> Invalid credentials.
+[2026-01-22 23:20:47] [INFO   ] - Server running on port 5000
+[2026-01-22 23:20:53] [INFO   ] - MongoDB Connected...
+[2026-01-22 23:21:05] [INFO   ] - Client disconnected: kwcz_tIM1MJHOTp9AAAB

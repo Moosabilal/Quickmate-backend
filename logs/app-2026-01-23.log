@@ -1,0 +1,15 @@
+[2026-01-23 08:47:08] [INFO   ] - Server running on port 5000
+[2026-01-23 08:47:09] [INFO   ] - MongoDB Connected...
+[2026-01-23 08:47:15] [INFO   ] - Client disconnected: y2CXMMJNCFvWTltAAAAB
+[2026-01-23 08:47:18] [ERROR  ] - Token verification failed: jwt expired
+[2026-01-23 08:52:33] [INFO   ] - the reset link
+[2026-01-23 08:52:33] [INFO   ] - Sending resetLink email http://localhost:5173/reset-password/f0ca9c8979ec373591d3a3ce941f99915336c24a368d004a9dab29c332445602 
+[2026-01-23 08:52:37] [INFO   ] - Password reset email sent to lithesh@gmail.com
+[2026-01-23 08:53:07] [INFO   ] - Client disconnected: AfOXftdWkl2LKh8-AAAH
+[2026-01-23 08:54:43] [INFO   ] - Client disconnected: 7QjlYHQ-GPjw9lYIAAAD
+[2026-01-23 08:55:42] [INFO   ] - Client disconnected: Os4d2S92aGOq6vmZAAAJ
+[2026-01-23 08:55:43] [ERROR  ] - POST /api/auth/refresh-token 401 Refresh token not found -> Refresh token not found
+[2026-01-23 08:55:43] [INFO   ] - Client disconnected: GK_b5yxxUzB9dHKTAAAL
+[2026-01-23 08:55:50] [INFO   ] - Client disconnected: vjkZIL3_kbBmuM_1AAAN
+[2026-01-23 08:55:50] [INFO   ] - Client disconnected: 5-DMRIaE1AJmu1RdAAAF
+[2026-01-23 08:56:03] [INFO   ] - Client disconnected: 9zcwPII3kmH-SVBxAAAP

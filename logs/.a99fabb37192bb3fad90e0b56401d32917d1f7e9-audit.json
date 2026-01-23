@@ -6,21 +6,6 @@
     "auditLog": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/.a99fabb37192bb3fad90e0b56401d32917d1f7e9-audit.json",
     "files": [
         {
-            "date": 1767640443426,
-            "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-06.log",
-            "hash": "2fd599d2422883b5ffdf38b70a076f1450f3e8685e849fb4eaeab36008dcc00c"
-        },
-        {
-            "date": 1767749842327,
-            "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-07.log",
-            "hash": "71246b0d3b2c9bdc767f0754ea392f45d48d6fad3422a28a4942269b1d0131c7"
-        },
-        {
-            "date": 1767870178711,
-            "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-08.log",
-            "hash": "a00c6f5e86a651848af2d82fffdf02c3a38cc96edb3c6525c4a5b1e3368dd2d4"
-        },
-        {
             "date": 1768024160895,
             "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-10.log",
             "hash": "b432197832fad9981502e0862ad6c3b1acab35750f072a72c984200ced3fa972"
@@ -54,6 +39,16 @@
             "date": 1768613043213,
             "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-17.log",
             "hash": "e3fb21d94b524741af013597b3624971c3f1e4c50d33e1f24589275bdd733c93"
+        },
+        {
+            "date": 1769066098595,
+            "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-22.log",
+            "hash": "3fe69dd66b9b6a0151c48fb3077db488522dd2d4ef286ba76110eb2802f1342f"
+        },
+        {
+            "date": 1769138226505,
+            "name": "/home/moosa/Documents/secondProject2/QuickMate/Quickmate-backend/logs/app-2026-01-23.log",
+            "hash": "ade2ceb4b48271db77980c0dd9b3caf0dc35d6e98b0ac937204d30f905538fdf"
         }
     ],
     "hashType": "sha256"
