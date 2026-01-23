@@ -566,6 +566,9 @@ export class ProviderService implements IProviderService {
       availableSlots: calendar_v3.Schema$TimePeriod[];
     }> = [];
 
+    const now = new Date();
+    const oneHourBuffer = 60 * 60 * 1000;
+
     for (const provider of providersInRange) {
       const providerId = provider._id.toString();
       const providerName = provider.fullName;
@@ -617,6 +620,10 @@ export class ProviderService implements IProviderService {
             slotStart.getTime() + serviceDurationMs <= dayEnd.getTime();
             slotStart = new Date(slotStart.getTime() + stepMs)
           ) {
+            if (slotStart.getTime() < now.getTime() + oneHourBuffer) {
+              continue;
+            }
+
             const slotEnd = new Date(slotStart.getTime() + serviceDurationMs);
 
             const isAvailable = this._isSlotAvailable(slotStart, slotEnd, existingBookings, busySlots);
