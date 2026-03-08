@@ -8,6 +8,11 @@ const WalletSchema = new Schema(
       required: true,
       default: 0,
     },
+    pendingBalance: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     ownerId: {
       type: Schema.Types.ObjectId,
       required: true,

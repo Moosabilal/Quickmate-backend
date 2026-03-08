@@ -9,7 +9,6 @@ const router = express.Router();
 const providerController = container.get<ProviderController>(TYPES.ProviderController);
 
 const isProvider = [authenticateToken, authorizeRoles(["ServiceProvider"])];
-const isProvOrUser = [authenticateToken, authorizeRoles(["ServiceProvider", "Customer"])];
 const isAdmin = [authenticateToken, authorizeRoles(["Admin"])];
 
 router.post(
@@ -36,11 +35,11 @@ router.post(
 router.get("/getProvider", providerController.getProvider);
 router.get("/details/:providerId", providerController.getPublicProviderDetails);
 router.get("/getFeaturedProviders", providerController.featuredProviders);
-router.get("/getFilteredServiceProvider", isProvOrUser, providerController.getServiceProvider);
+router.get("/getFilteredServiceProvider", providerController.getServiceProvider);
 router.get("/getServicesForAddPage", providerController.getServicesForAddPage);
 router.get("/getProviderForChatPage", authenticateToken, providerController.getProviderForChatPage);
 router.get("/getProviderDashboard", isProvider, providerController.getProviderDashboard);
-router.get("/calendar/availability", isProvOrUser, providerController.getProviderAvailability);
+router.get("/calendar/availability", providerController.getProviderAvailability);
 router.get("/performance", isProvider, providerController.getPerformance);
 
 //provider

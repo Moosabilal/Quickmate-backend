@@ -86,3 +86,10 @@ export const verifyChatPaymentSchema = z.object({
   razorpay_signature: z.string(),
   bookingData: chatBookingSchema,
 });
+
+export const claimWarrantySchema = z.object({
+  originalBookingId: z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid Booking ID"),
+  issueDescription: z.string().min(10, "Description must be at least 10 characters."),
+  requestedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format. Expected YYYY-MM-DD"),
+  requestedTime: z.string().regex(/^(0?[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/, "Invalid time format. Expected hh:mm AM/PM"),
+});

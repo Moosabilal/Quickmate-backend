@@ -20,6 +20,7 @@ import {
   bookingFilterSchema,
   providerBookingsQuerySchema,
   paramIdSchema,
+  claimWarrantySchema,
 } from "../utils/validations/booking.validation.js";
 import { type Roles } from "../enums/userRoles.js";
 import { CustomError } from "../utils/CustomError.js";
@@ -205,8 +206,8 @@ export class BookingController {
   public findProviderRange = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       const { serviceId, lat, lng, radius } = findProviderRangeSchema.parse(req.query);
-      const userId = req.user.id;
-      const userRole = req.user.role as Roles;
+      const userId = req.user?.id ?? null;
+      const userRole = (req.user?.role ?? null) as Roles | null;
       const response = await this._bookingService.findProviderRange(
         userId,
         userRole,
@@ -243,6 +244,32 @@ export class BookingController {
       const result = await this._bookingService.refundPayment(paymentId, Number(amount), userId);
       res.status(HttpStatusCode.OK).json(result);
     } catch (error) {
+      next(error);
+    }
+  };
+
+  public claimWarranty = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user.id;
+      const validatedBody = claimWarrantySchema.parse(req.body);
+
+      const response = await this._bookingService.claimWarranty(
+        userId,
+        validatedBody.originalBookingId,
+        validatedBody.issueDescription,
+        validatedBody.requestedDate,
+        validatedBody.requestedTime,
+      );
+
+      res.status(HttpStatusCode.CREATED).json({
+        success: true,
+        message: "Warranty claim successful. A new booking has been created.",
+        booking: response,
+      });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(HttpStatusCode.BAD_REQUEST).json({ success: false, errors: error.issues });
+      }
       next(error);
     }
   };

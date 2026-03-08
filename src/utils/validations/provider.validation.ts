@@ -65,6 +65,7 @@ export const getAvailabilityQuerySchema = z.object({
   radius: z.coerce.number().int().positive().optional(),
   timeMin: z.string().datetime(),
   timeMax: z.string().datetime(),
+  providerId: z.string().optional(),
 });
 
 export const getEarningsQuerySchema = z.object({

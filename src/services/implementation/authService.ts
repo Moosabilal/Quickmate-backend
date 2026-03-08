@@ -40,6 +40,7 @@ import { mapCategoryToDto, mapProviderToDto, mapServiceToDto } from "../../utils
 import { type IProviderDto } from "../../interface/provider.js";
 import { type ICategoryDto } from "../../interface/category.js";
 import { ProviderStatus } from "../../enums/provider.enum.js";
+import type { ISmsService } from "../interface/ISmsService.js";
 
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES, 10) || 5;
 const MAX_OTP_ATTEMPTS = 5;
@@ -53,6 +54,7 @@ export class AuthService implements IAuthService {
   private _providerRepository: IProviderRepository;
   private _categoryRepository: ICategoryRepository;
   private _serviceRepository: IServiceRepository;
+  private _smsService: ISmsService;
 
   constructor(
     @inject(TYPES.UserRepository) userRepository: IUserRepository,
@@ -60,12 +62,14 @@ export class AuthService implements IAuthService {
     @inject(TYPES.ProviderRepository) providerRepository: IProviderRepository,
     @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
     @inject(TYPES.ServiceRepository) serviceRepository: IServiceRepository,
+    @inject(TYPES.SmsService) smsService: ISmsService,
   ) {
     this._userRepository = userRepository;
     this._bookingRepository = bookingRepository;
     this._providerRepository = providerRepository;
     this._categoryRepository = categoryRepository;
     this._serviceRepository = serviceRepository;
+    this._smsService = smsService;
   }
 
   public async registerUser(data: RegisterRequestBody): Promise<AuthSuccessResponse> {
@@ -188,6 +192,7 @@ export class AuthService implements IAuthService {
       role: string;
       isVerified: boolean;
       profilePicture: string;
+      phone: string | null;
     };
     token: string;
     refreshToken: string;
@@ -230,6 +235,7 @@ export class AuthService implements IAuthService {
         role: (typeof user.role === "string" ? user.role : "Customer") as string,
         isVerified: Boolean(user.isVerified),
         profilePicture: signedProfileUrl,
+        phone: (user.phone as string) || null,
       },
       token,
       refreshToken,
@@ -393,6 +399,7 @@ export class AuthService implements IAuthService {
     role: string;
     isVerified: boolean;
     profilePicture?: string;
+    phone: string | null;
   }> {
     if (!token) {
       throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
@@ -423,6 +430,7 @@ export class AuthService implements IAuthService {
       role: (typeof user.role === "string" ? user.role : "Customer") as string,
       isVerified: Boolean(user.isVerified),
       profilePicture: signedProfileUrl,
+      phone: (user.phone as string) || null,
     };
   }
 
@@ -436,6 +444,7 @@ export class AuthService implements IAuthService {
     role: string;
     isVerified: boolean;
     profilePicture?: string;
+    phone: string | null;
   }> {
     if (!token) {
       throw new CustomError(ErrorMessage.MISSING_TOKEN, HttpStatusCode.UNAUTHORIZED);
@@ -472,6 +481,7 @@ export class AuthService implements IAuthService {
       role: (typeof user.role === "string" ? user.role : "Customer") as string,
       isVerified: Boolean(user.isVerified),
       profilePicture: signedProfileUrl,
+      phone: (user.phone as string) || null,
     };
   }
 
@@ -744,5 +754,54 @@ export class AuthService implements IAuthService {
     };
 
     return userDetailsResponse;
+  }
+
+  public async sendPhoneOtp(userId: string, phone: string): Promise<{ message: string }> {
+    if (!userId) {
+      throw new CustomError("UserId not found", HttpStatusCode.NOT_FOUND);
+    }
+    const user = await this._userRepository.findById(userId);
+    if (!user) {
+      throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+    }
+
+    const otp = generateOTP();
+    user.phoneOtp = otp;
+    user.phoneOtpExpires = new Date(Date.now() + OTP_EXPIRY_MINUTES * 60 * 1000);
+
+    await this._userRepository.update(user._id.toString(), user);
+
+    await this._smsService.sendOtpSms(phone, otp);
+    logger.info(`OTP for phone verification (${phone}): ${otp}`);
+
+    return { message: `Verification OTP sent to ${phone}` };
+  }
+
+  public async verifyPhoneOtp(userId: string, otp: string, phone: string): Promise<{ message: string }> {
+    if (!userId) {
+      throw new CustomError("UserId not found", HttpStatusCode.NOT_FOUND);
+    }
+    const user = await this._userRepository.findById(userId);
+    if (!user) {
+      throw new CustomError(ErrorMessage.USER_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+    }
+
+    const userWithOtp = await this._userRepository.findByEmail(user.email as string, true);
+
+    if (!userWithOtp || !userWithOtp.phoneOtp || userWithOtp.phoneOtp !== otp) {
+      throw new CustomError("Invalid OTP", HttpStatusCode.BAD_REQUEST);
+    }
+
+    if (!userWithOtp.phoneOtpExpires || new Date() > userWithOtp.phoneOtpExpires) {
+      throw new CustomError("OTP has expired", HttpStatusCode.BAD_REQUEST);
+    }
+
+    userWithOtp.phone = phone;
+    userWithOtp.phoneOtp = undefined;
+    userWithOtp.phoneOtpExpires = undefined;
+
+    await this._userRepository.update(userWithOtp._id.toString(), userWithOtp);
+
+    return { message: "Phone number verified and updated successfully!" };
   }
 }

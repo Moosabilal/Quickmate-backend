@@ -8,4 +8,5 @@ export interface IWalletRepository extends IBaseRepository<IWallet> {
   createTransaction(data: Partial<ITransaction>, session?: ClientSession): Promise<ITransaction>;
   getTransactions(filterOpts: TransactionFilterOptions, skip?: number, limit?: number): Promise<ITransaction[]>;
   transactionCount(filterOpts: TransactionFilterOptions): Promise<number>;
+  findPendingTransactionsToClear(): Promise<ITransaction[]>;
 }

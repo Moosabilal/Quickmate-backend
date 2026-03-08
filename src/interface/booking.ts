@@ -1,5 +1,5 @@
 import { type Types } from "mongoose";
-import { type BookingStatus } from "../enums/booking.enum.js";
+import { type BookingStatus, type WarrantyStatus } from "../enums/booking.enum.js";
 import { type PaymentStatus } from "../enums/userRoles.js";
 import { type DaySchedule } from "./provider.js";
 
@@ -18,9 +18,12 @@ export interface IBookingRequest {
 
 export interface IBookingConfirmationRes {
   id: string;
-  bookedOrderId: string;
+  bookedOrderId?: string;
+  serviceId: string;
+  subCategoryId?: string;
   serviceName: string;
   serviceImage: string;
+  providerId: string;
   providerName: string;
   providerImage: string;
   providerRating?: number;
@@ -37,6 +40,8 @@ export interface IBookingConfirmationRes {
     city: string;
     state: string;
     zip: string;
+    latitude?: number;
+    longitude?: number;
   };
   amount: number;
   status: BookingStatus;
@@ -44,9 +49,14 @@ export interface IBookingConfirmationRes {
   specialInstruction: string;
   providerTimings?: DaySchedule[];
   createdAt: Date;
+  completedAt?: Date;
   reviewed?: boolean;
   rating?: number;
   review?: string;
+  warrantyValidUntil?: Date;
+  warrantyStatus?: WarrantyStatus;
+  isWarrantyClaim?: boolean;
+  parentBookingId?: string | Types.ObjectId;
 }
 
 export interface IBookingHistoryPage {
@@ -64,6 +74,15 @@ export interface IBookingHistoryPage {
   duration?: string;
   description?: string;
   createdAt?: Date;
+  completedAt?: Date;
+  warrantyStatus?: WarrantyStatus;
+  isWarrantyClaim?: boolean;
+}
+
+export interface IParentBookingDetails {
+  date: string;
+  serviceName: string;
+  amount: number;
 }
 
 export interface IProviderBookingManagement {
@@ -84,6 +103,9 @@ export interface IProviderBookingManagement {
   customerEmail: string;
   specialRequests: string;
   createdAt: string;
+  parentBookingId?: string;
+  parentBookingDetails?: IParentBookingDetails;
+  isWarrantyClaim?: boolean;
 }
 
 export interface IGetMessages {
@@ -153,6 +175,7 @@ export interface IBookingDetailData {
     date: string;
     time: string;
     createdAt: string;
+    completedAt?: string;
     instructions?: string;
   };
   user: { name: string; email: string; phone: string; image: string };

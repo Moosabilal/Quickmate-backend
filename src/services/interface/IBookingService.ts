@@ -57,4 +57,11 @@ export interface IBookingService {
   createBookingFromBot(data: IBookingRequest): Promise<IBooking>;
   getBookingDetailsForAdmin(bookingId: string): Promise<IBookingDetailData>;
   refundPayment(paymentId: string, amount: number, userId: string): Promise<{ refundId: string; message: string }>;
+  claimWarranty(
+    userId: string,
+    originalBookingId: string,
+    issueDescription: string,
+    requestedDate: string,
+    requestedTime: string,
+  ): Promise<IBooking>;
 }

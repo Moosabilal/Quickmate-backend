@@ -236,7 +236,7 @@ export class ProviderController {
   public getServiceProvider = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       const validatedQuery = getServiceProviderQuerySchema.parse(req.query);
-      const userId = req.user.id;
+      const userId = req.user?.id ?? null;
 
       const filtersForService = {
         lat: validatedQuery.latitude,
@@ -284,7 +284,7 @@ export class ProviderController {
   public getProviderAvailability = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       const query = getAvailabilityQuerySchema.parse(req.query);
-      const userId = req.user.id;
+      const userId = req.user?.id ?? null;
 
       const response = await this._providerService.getAvailabilityByLocation(
         userId,
@@ -294,6 +294,7 @@ export class ProviderController {
         query.radius ?? 10,
         query.timeMin,
         query.timeMax,
+        query.providerId,
       );
 
       res.status(HttpStatusCode.OK).json(response);

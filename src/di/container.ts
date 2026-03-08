@@ -65,6 +65,16 @@ import { ChatSessionRepository } from "../repositories/implementation/chatSessio
 import { ChatMessageRepository } from "../repositories/implementation/chatMessageRepository.js";
 import { type IPaymentService } from "../services/interface/IPaymentService.js";
 import { PaymentService } from "../services/implementation/paymentService.js";
+import { type IReportRepository } from "../repositories/interface/IReportRepository.js";
+import { ReportRepository } from "../repositories/implementation/ReportRepository.js";
+import { type IReportService } from "../services/interface/IReportService.js";
+import { ReportService } from "../services/implementation/reportService.js";
+import { AdminResolutionService } from "../services/implementation/adminResolutionService.js";
+import { type IAdminResolutionService } from "../services/interface/IAdminResolutionService.js";
+import { ReportController } from "../controllers/reportController.js";
+import { AdminReportController } from "../controllers/admin/AdminReportController.js";
+import type { ISmsService } from "../services/interface/ISmsService.js";
+import { TwilioSmsService } from "../services/implementation/twilioSmsService.js";
 
 const container = new Container();
 container.bind<AuthController>(TYPES.AuthController).to(AuthController);
@@ -118,5 +128,13 @@ container.bind<ChatbotController>(TYPES.ChatbotController).to(ChatbotController)
 container.bind<IChatBotService>(TYPES.ChatbotService).to(ChatbotService);
 container.bind<IChatSessionRepository>(TYPES.ChatSessionRepository).to(ChatSessionRepository);
 container.bind<IChatMessageRepository>(TYPES.ChatMessageRepository).to(ChatMessageRepository);
+
+container.bind<IReportRepository>(TYPES.ReportRepository).to(ReportRepository);
+container.bind<IReportService>(TYPES.ReportService).to(ReportService);
+container.bind<IAdminResolutionService>(TYPES.AdminResolutionService).to(AdminResolutionService);
+container.bind<AdminReportController>(TYPES.AdminReportController).to(AdminReportController);
+container.bind<ReportController>(TYPES.ReportController).to(ReportController);
+
+container.bind<ISmsService>(TYPES.SmsService).to(TwilioSmsService);
 
 export { container };

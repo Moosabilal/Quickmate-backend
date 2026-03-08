@@ -369,6 +369,7 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 duration: "$service.duration",
                 description: "$instructions",
                 createdAt: "$createdAt",
+                isWarrantyClaim: "$isWarrantyClaim",
               },
             },
           ],
@@ -501,6 +502,24 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
             },
             { $unwind: { path: "$payment", preserveNullAndEmptyArrays: true } },
             {
+              $lookup: {
+                from: "bookings",
+                localField: "parentBookingId",
+                foreignField: "_id",
+                as: "parentBooking",
+              },
+            },
+            { $unwind: { path: "$parentBooking", preserveNullAndEmptyArrays: true } },
+            {
+              $lookup: {
+                from: "services",
+                localField: "parentBooking.serviceId",
+                foreignField: "_id",
+                as: "parentService",
+              },
+            },
+            { $unwind: { path: "$parentService", preserveNullAndEmptyArrays: true } },
+            {
               $project: {
                 _id: 0,
                 id: "$_id",
@@ -522,6 +541,19 @@ export class BookingRepository extends BaseRepository<IBooking> implements IBook
                 customerEmail: "$user.email",
                 specialRequests: "$instructions",
                 createdAt: "$createdAt",
+                isWarrantyClaim: "$isWarrantyClaim",
+                parentBookingId: "$parentBookingId",
+                parentBookingDetails: {
+                  $cond: {
+                    if: "$parentBookingId",
+                    then: {
+                      date: "$parentBooking.scheduledDate",
+                      serviceName: "$parentService.title",
+                      amount: { $toDouble: "$parentBooking.amount" },
+                    },
+                    else: "$$REMOVE",
+                  },
+                },
               },
             },
           ],

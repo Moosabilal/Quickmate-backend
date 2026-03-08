@@ -266,6 +266,7 @@ export interface IProviderPerformance {
   providerName: string;
   totalBookings: number;
   completedBookings: number;
+  completedPaidBookings: number;
   cancelledBookings: number;
   totalEarnings: number;
   avgRating: number;

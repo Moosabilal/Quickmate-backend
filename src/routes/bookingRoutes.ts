@@ -18,8 +18,9 @@ router.get("/", isUser, bookingController.getAllBookings);
 router.get("/getAllPreviousChats/:joiningId", isUser, bookingController.getAllPreviousChats);
 router.patch("/updateBookingStatus/:id", isUser, bookingController.updateBookingStatus);
 router.patch("/updateBookingDateTime/:id", isUser, bookingController.updateBookingDateTime);
-router.get("/findProviderRange", isUser, bookingController.findProviderRange);
+router.get("/findProviderRange", bookingController.findProviderRange);
 router.post("/refund", isUser, bookingController.refundPayment);
+router.post("/claim-warranty", isUser, bookingController.claimWarranty);
 
 //provider
 router.get("/getBookingFor_Prov_mngmnt", isProvider, bookingController.getBookingFor_Prov_mngmnt);

@@ -1,20 +1,21 @@
-import {
-  type IBookingConfirmationRes,
-  type IBookingHistoryPage,
-  type IProviderBookingManagement,
+import type {
+  IBookingConfirmationRes,
+  IBookingHistoryPage,
+  IParentBookingDetails,
+  IProviderBookingManagement,
 } from "../../interface/booking.js";
-import { type BookingStatus } from "../../enums/booking.enum.js";
-import { type PaymentStatus } from "../../enums/userRoles.js";
-import { type IAddress } from "../../models/address.js";
-import { type IBooking } from "../../models/Booking.js";
-import { type IMessage } from "../../models/message.js";
-import { type IPayment } from "../../models/payment.js";
-import { type IService } from "../../models/Service.js";
-import { type IProvider } from "../../models/Providers.js";
-import { type IUser } from "../../models/User.js";
-import { type IReview } from "../../models/Review.js";
+import type { WarrantyStatus, BookingStatus } from "../../enums/booking.enum.js";
+import type { PaymentStatus } from "../../enums/userRoles.js";
+import type { IAddress } from "../../models/address.js";
+import type { IBooking } from "../../models/Booking.js";
+import type { IMessage } from "../../models/message.js";
+import type { IPayment } from "../../models/payment.js";
+import type { IService } from "../../models/Service.js";
+import type { IProvider } from "../../models/Providers.js";
+import type { IUser } from "../../models/User.js";
+import type { IReview } from "../../models/Review.js";
 import { getSignedUrl } from "../cloudinaryUpload.js";
-import { type ISocketMessage } from "../../interface/message.js";
+import type { ISocketMessage } from "../../interface/message.js";
 
 export function toBookingConfirmationPage(
   booking: IBooking,
@@ -29,15 +30,18 @@ export function toBookingConfirmationPage(
 ): IBookingConfirmationRes {
   return {
     id: booking._id.toString(),
+    serviceId: service._id.toString(),
+    subCategoryId: service.subCategoryId?.toString(),
     serviceName: service.title,
     serviceImage: categoryIcon ? getSignedUrl(categoryIcon) : "",
+    providerId: provider._id.toString(),
     providerName: provider.fullName,
     providerImage: provider.profilePhoto ? getSignedUrl(provider.profilePhoto) : "",
     providerRating: providerRating || 0,
     providerReviewsCount: providerReviewsCount || 0,
     priceUnit: service.priceUnit as string,
     duration: service.duration || "",
-    bookedOrderId: payment.razorpay_order_id,
+    bookedOrderId: payment?.razorpay_order_id,
     customer: booking.customerName as string,
     phone: booking.phone as string,
     date: booking.scheduledDate as string,
@@ -48,16 +52,23 @@ export function toBookingConfirmationPage(
       city: address.city,
       state: address.state,
       zip: address.zip,
+      latitude: address.locationCoords?.coordinates[1],
+      longitude: address.locationCoords?.coordinates[0],
     },
-    amount: payment.amount,
+    amount: payment?.amount || Number(booking.amount) || 0,
     status: booking.status as BookingStatus,
     paymentStatus: booking.paymentStatus as PaymentStatus,
     specialInstruction: booking.instructions as string,
     providerTimings: provider.availability?.weeklySchedule || [],
     createdAt: booking.createdAt as Date,
+    completedAt: booking.completedAt as Date,
     reviewed: (booking.reviewed as boolean) || false,
     rating: (review && (review.rating as number)) || 0,
     review: (review && (review.reviewText as string)) || "",
+    warrantyValidUntil: booking.warrantyValidUntil as Date,
+    warrantyStatus: booking.warrantyStatus as WarrantyStatus,
+    isWarrantyClaim: booking.isWarrantyClaim as boolean,
+    parentBookingId: booking.parentBookingId as string,
   };
 }
 
@@ -92,6 +103,9 @@ export function toBookingHistoryPage(
     duration: serviceMap.get(booking.serviceId.toString())?.duration || "",
     description: (booking?.instructions as string) || "",
     createdAt: booking?.createdAt as Date,
+    completedAt: booking?.completedAt as Date,
+    warrantyStatus: booking.warrantyStatus as WarrantyStatus,
+    isWarrantyClaim: booking.isWarrantyClaim as boolean,
   }));
 }
 
@@ -126,6 +140,9 @@ export function toProviderBookingManagement(
       customerEmail: String(user?.email || ""),
       specialRequests: String(booking.instructions || ""),
       createdAt: booking.createdAt ? (booking.createdAt as Date).toISOString() : "",
+      isWarrantyClaim: booking.isWarrantyClaim as boolean,
+      parentBookingId: booking.parentBookingId as string,
+      parentBookingDetails: booking.parentBookingDetails as IParentBookingDetails,
     };
   });
 }

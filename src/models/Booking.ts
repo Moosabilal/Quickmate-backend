@@ -1,6 +1,6 @@
 import mongoose, { Schema, type HydratedDocument, type InferSchemaType, type Types } from "mongoose";
 import { PaymentStatus } from "../enums/userRoles.js";
-import { BookingStatus } from "../enums/booking.enum.js";
+import { BookingStatus, WarrantyStatus } from "../enums/booking.enum.js";
 
 const BookingSchema: Schema = new Schema(
   {
@@ -75,6 +75,26 @@ const BookingSchema: Schema = new Schema(
       type: String,
       enum: ["Bot", "Manual"],
       default: "Manual",
+    },
+    completedAt: {
+      type: Date,
+    },
+    warrantyValidUntil: {
+      type: Date,
+    },
+    warrantyStatus: {
+      type: String,
+      enum: Object.values(WarrantyStatus),
+      default: WarrantyStatus.NONE,
+    },
+    isWarrantyClaim: {
+      type: Boolean,
+      default: false,
+    },
+    parentBookingId: {
+      type: Schema.Types.ObjectId,
+      ref: "Booking",
+      default: null,
     },
   },
   { timestamps: true },

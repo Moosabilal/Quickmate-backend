@@ -47,7 +47,7 @@ jobs:
 
             npm install
 
-            NODE_OPTIONS="--max-old-space-size=3072" npm run build
+            NODE_OPTIONS="--max-old-space-size=4096" npm run build
 
             pm2 restart quickmate-api
 

@@ -17,7 +17,9 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
     const query = User.findOne({ email });
 
     if (includeOtpFields) {
-      query.select("+registrationOtp +registrationOtpExpires +registrationOtpAttempts +password");
+      query.select(
+        "+registrationOtp +registrationOtpExpires +registrationOtpAttempts +password +phoneOtp +phoneOtpExpires",
+      );
     }
     return await query.exec();
   }
@@ -51,12 +53,7 @@ export class UserRepository extends BaseRepository<IUser> implements IUserReposi
     const mongooseQuery = this.buildMongooseQuery(filter);
     const skip = (page - 1) * limit;
 
-    return await this.model
-      .find(mongooseQuery)
-      .skip(skip)
-      .limit(limit)
-      .sort({ createdAt: -1 }) // Usually you want newest first
-      .exec();
+    return await this.model.find(mongooseQuery).skip(skip).limit(limit).sort({ createdAt: -1 }).exec();
   }
 
   public async countUsers(filter: IUserListFilter = {}): Promise<number> {

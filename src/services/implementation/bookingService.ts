@@ -38,7 +38,7 @@ import { type IServiceRepository } from "../../repositories/interface/IServiceRe
 import { type IUserRepository } from "../../repositories/interface/IUserRepository.js";
 import { type IMessageRepository } from "../../repositories/interface/IMessageRepository.js";
 import { type IMessage } from "../../models/message.js";
-import { BookingStatus } from "../../enums/booking.enum.js";
+import { BookingStatus, WarrantyStatus } from "../../enums/booking.enum.js";
 import { type IWalletRepository } from "../../repositories/interface/IWalletRepository.js";
 import { TransactionStatus } from "../../enums/payment&wallet.enum.js";
 import { type ResendOtpRequestBody, type VerifyOtpRequestBody } from "../../interface/auth.js";
@@ -59,6 +59,7 @@ import { type Server } from "socket.io";
 import { getSignedUrl } from "../../utils/cloudinaryUpload.js";
 import { getBookingTimes } from "../../utils/helperFunctions/bookingUtils.js";
 import type { ICategory } from "../../models/Categories.js";
+import type { IProviderService } from "../interface/IProviderService.js";
 
 @injectable()
 export class BookingService implements IBookingService {
@@ -74,6 +75,7 @@ export class BookingService implements IBookingService {
   private _walletRepository: IWalletRepository;
   private _reviewRepository: IReviewRepository;
   private _subscriptionPlanRepository: ISubscriptionPlanRepository;
+  private _providerService: IProviderService;
   constructor(
     @inject(TYPES.BookingRepository) bookingRepository: IBookingRepository,
     @inject(TYPES.CategoryRepository) categoryRepository: ICategoryRepository,
@@ -89,6 +91,7 @@ export class BookingService implements IBookingService {
     @inject(TYPES.ReviewRepository) reviewRepository: IReviewRepository,
     @inject(TYPES.SubscriptionPlanRepository)
     subscriptionPlanRepository: ISubscriptionPlanRepository,
+    @inject(TYPES.ProviderService) providerService: IProviderService,
   ) {
     this._bookingRepository = bookingRepository;
     this._categoryRepository = categoryRepository;
@@ -102,6 +105,7 @@ export class BookingService implements IBookingService {
     this._walletRepository = WalletRepository;
     this._reviewRepository = reviewRepository;
     this._subscriptionPlanRepository = subscriptionPlanRepository;
+    this._providerService = providerService;
   }
 
   async createNewBooking(data: Partial<IBookingRequest>): Promise<{ bookingId: string; message: string }> {
@@ -494,7 +498,6 @@ export class BookingService implements IBookingService {
       if (!user) {
         throw new CustomError("userId not found", HttpStatusCode.NOT_FOUND);
       }
-      await this._bookingRepository.update(bookingId, updatePayload);
       const otp = generateOTP();
       bookingOtp = jwt.sign({ bookingId, otp }, process.env.JWT_SECRET, {
         expiresIn: "10m",
@@ -548,42 +551,144 @@ export class BookingService implements IBookingService {
         throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND);
       }
       booking.status = BookingStatus.COMPLETED;
+      booking.completedAt = new Date();
+
+      if (booking.isWarrantyClaim) {
+        booking.warrantyStatus = WarrantyStatus.NONE;
+      } else {
+        const warrantyDays = 7;
+        const warrantyValidUntil = new Date();
+        warrantyValidUntil.setDate(warrantyValidUntil.getDate() + warrantyDays);
+        booking.warrantyValidUntil = warrantyValidUntil;
+        booking.warrantyStatus = WarrantyStatus.AVAILABLE;
+      }
+
       await this._bookingRepository.update(booking._id.toString(), booking);
 
-      const [provider, payment, service] = await Promise.all([
-        this._providerRepository.findOne({ userId: user._id.toString() }),
-        this._paymentRepository.findById(booking.paymentId.toString()),
-        this._serviceRepository.findById(booking.serviceId.toString()),
-      ]);
+      const provider = await this._providerRepository.findById(booking.providerId.toString());
+      if (!provider) {
+        throw new CustomError("Provider not found for this booking", HttpStatusCode.NOT_FOUND);
+      }
 
-      const wallet = await this._walletRepository.findOne({
-        ownerId: user._id.toString(),
+      const service = await this._serviceRepository.findById(booking.serviceId.toString());
+      if (!service) {
+        throw new CustomError("Service record not found", HttpStatusCode.NOT_FOUND);
+      }
+
+      if (booking.isWarrantyClaim && Number(booking.amount) === 0) {
+        await this._bookingRepository.update(booking._id.toString(), booking);
+        provider.totalBookings += 1;
+        await this._providerRepository.update(provider._id.toString(), provider);
+        return;
+      }
+
+      const payment = await this._paymentRepository.findById(booking.paymentId?.toString());
+      if (!payment) {
+        throw new CustomError("Payment record not found for this booking", HttpStatusCode.NOT_FOUND);
+      }
+
+      let wallet = await this._walletRepository.findOne({
+        ownerId: provider.userId.toString(),
       });
       if (!wallet) {
-        await this._walletRepository.create({
-          balance: payment.providerAmount,
-          ownerId: user._id as Types.ObjectId,
+        wallet = await this._walletRepository.create({
+          pendingBalance: payment.providerAmount,
+          ownerId: provider.userId as Types.ObjectId,
           ownerType: Roles.PROVIDER,
         });
       } else {
-        wallet.balance += payment.providerAmount;
-        provider.earnings += payment.providerAmount;
-        provider.totalBookings += 1;
+        wallet.pendingBalance += payment.providerAmount;
+        await this._walletRepository.update(wallet._id.toString(), {
+          pendingBalance: wallet.pendingBalance,
+        });
       }
+
+      provider.earnings += payment.providerAmount;
+      provider.totalBookings += 1;
+
       await this._walletRepository.createTransaction({
         walletId: wallet._id,
         transactionType: "credit",
         source: "payment",
         remarks: `Order ${payment.razorpay_order_id}`,
         amount: payment.providerAmount,
-        status: TransactionStatus.PAYMENT,
-        description: `Payment Received from ${service.title}`,
+        status: TransactionStatus.PENDING,
+        clearingDate: booking.warrantyValidUntil as Date,
+        description: `Payment Held for ${service.title}`,
       });
 
       await this._providerRepository.update(provider._id.toString(), provider);
-    } catch {
+    } catch (error) {
+      if (error instanceof CustomError) {
+        throw error;
+      }
+      console.error("OTP Verification Error:", error);
       throw new CustomError(ErrorMessage.OTP_VERIFICATION_FAILED, HttpStatusCode.FORBIDDEN);
     }
+  }
+
+  public async claimWarranty(
+    userId: string,
+    originalBookingId: string,
+    issueDescription: string,
+    requestedDate: string,
+    requestedTime: string,
+  ): Promise<IBooking> {
+    const originalBooking = await this._bookingRepository.findById(originalBookingId);
+    if (!originalBooking) {
+      throw new CustomError(ErrorMessage.BOOKING_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+    }
+
+    if (originalBooking.userId?.toString() !== userId) {
+      throw new CustomError(ErrorMessage.UNAUTHORIZED_ACCESS, HttpStatusCode.UNAUTHORIZED);
+    }
+
+    if (originalBooking.status !== BookingStatus.COMPLETED) {
+      throw new CustomError("Original booking must be completed to claim warranty", HttpStatusCode.BAD_REQUEST);
+    }
+
+    if (originalBooking.warrantyStatus !== WarrantyStatus.AVAILABLE) {
+      throw new CustomError("Warranty is not available for this booking", HttpStatusCode.BAD_REQUEST);
+    }
+
+    if (!originalBooking.warrantyValidUntil || new Date() > originalBooking.warrantyValidUntil) {
+      throw new CustomError("Warranty period has expired", HttpStatusCode.BAD_REQUEST);
+    }
+
+    const availableProviders = await this._providerService.findProvidersAvailableAtSlot(
+      [originalBooking.providerId.toString()],
+      requestedDate,
+      requestedTime,
+    );
+
+    if (availableProviders.length === 0) {
+      throw new CustomError("Provider is not available at the requested time", HttpStatusCode.CONFLICT);
+    }
+
+    const newBookingData: Partial<IBooking> = {
+      userId: originalBooking.userId,
+      serviceId: originalBooking.serviceId,
+      providerId: originalBooking.providerId,
+      addressId: originalBooking.addressId,
+      customerName: originalBooking.customerName,
+      phone: originalBooking.phone,
+      instructions: `WARRANTY CLAIM: ${issueDescription}`,
+      amount: "0",
+      status: BookingStatus.CONFIRMED,
+      paymentStatus: PaymentStatus.PAID,
+      scheduledDate: requestedDate,
+      scheduledTime: requestedTime,
+      bookingDate: new Date(),
+      isWarrantyClaim: true,
+      parentBookingId: originalBooking._id,
+    };
+
+    const newBooking = await this._bookingRepository.create(newBookingData);
+
+    originalBooking.warrantyStatus = WarrantyStatus.CLAIMED;
+    await this._bookingRepository.update(originalBooking._id.toString(), originalBooking);
+
+    return newBooking;
   }
 
   public async resendOtp(
@@ -712,8 +817,8 @@ export class BookingService implements IBookingService {
   }
 
   public async findProviderRange(
-    userId: string,
-    userRole: Roles,
+    userId: string | null,
+    userRole: Roles | null,
     serviceId: string,
     lat: number,
     lng: number,
@@ -726,7 +831,7 @@ export class BookingService implements IBookingService {
       throw new CustomError("Currently no service available", HttpStatusCode.NOT_FOUND);
     }
     let currentProviderId: string | null = null;
-    if (userRole === Roles.PROVIDER) {
+    if (userRole === Roles.PROVIDER && userId) {
       const currentProvider = await this._providerRepository.findOne({
         userId,
       });
@@ -772,6 +877,7 @@ export class BookingService implements IBookingService {
         date: booking.scheduledDate as string,
         time: booking.scheduledTime as string,
         createdAt: new Date(booking.createdAt as string | Date).toISOString(),
+        completedAt: booking.completedAt ? new Date(booking.completedAt as string | Date).toISOString() : undefined,
         instructions: booking.instructions as string,
       },
       user: user

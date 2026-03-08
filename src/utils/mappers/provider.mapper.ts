@@ -301,6 +301,9 @@ export function toProviderPerformanceDTO(
 ): IProviderPerformance {
   const totalBookings = bookings.length;
   const completedBookings = bookings.filter((b) => b.status === BookingStatus.COMPLETED).length;
+  const completedPaidBookings = bookings.filter(
+    (b) => b.status === BookingStatus.COMPLETED && Number(b.amount) > 0,
+  ).length;
   const cancelledBookings = bookings.filter((b) => b.status === BookingStatus.CANCELLED).length;
 
   const totalEarnings = bookings
@@ -380,6 +383,7 @@ export function toProviderPerformanceDTO(
     providerName: provider.fullName,
     totalBookings,
     completedBookings,
+    completedPaidBookings,
     cancelledBookings,
     totalEarnings,
     avgRating: parseFloat(avgRating.toFixed(1)),

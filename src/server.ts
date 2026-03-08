@@ -23,6 +23,7 @@ import reviewRoutes from "./routes/reviewRoutes.js";
 import subscriptionRoutes from "./routes/subscriptionRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import chatbotRoutes from "./routes/chatBotRoutes.js";
+import reportRoutes from "./routes/reportRoutes.js";
 import fs from "fs";
 import { CustomError } from "./utils/CustomError.js";
 import { errorHandler } from "./middleware/errorHandler.js";
@@ -31,6 +32,7 @@ import { chatSocket } from "./utils/socket.js";
 import { startScheduleCleanupJob } from "./jobs/cleanupProviderSchedule.js";
 import { startBookingExpiryJob } from "./jobs/expireOverdueBookings.js";
 import { startSubscriptionCron } from "./jobs/subscriptionCleanUp.js";
+import { startWalletClearingJob } from "./jobs/walletClearing.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -82,6 +84,7 @@ app.use("/api/review", reviewRoutes);
 app.use("/api/subscriptionPlan", subscriptionRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/chatbot", chatbotRoutes);
+app.use("/api/reports", reportRoutes);
 
 app.use((req, res, next) => {
   const error = new CustomError(`Not Found - ${req.originalUrl}`, 404);
@@ -112,5 +115,6 @@ chatSocket(io);
 startScheduleCleanupJob();
 startBookingExpiryJob();
 startSubscriptionCron();
+startWalletClearingJob();
 
 server.listen(PORT, () => logger.info(`Server running on port ${PORT}`));

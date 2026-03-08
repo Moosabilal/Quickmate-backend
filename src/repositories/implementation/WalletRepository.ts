@@ -56,4 +56,12 @@ export class WalletRepository extends BaseRepository<IWallet> implements IWallet
 
     return query;
   }
+
+  async findPendingTransactionsToClear(): Promise<ITransaction[]> {
+    const now = new Date();
+    return Transaction.find({
+      status: "Pending",
+      clearingDate: { $lte: now },
+    }).exec();
+  }
 }

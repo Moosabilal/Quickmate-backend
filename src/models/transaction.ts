@@ -35,6 +35,9 @@ const TransactionSchema = new Schema(
       enum: Object.values(TransactionStatus),
       default: TransactionStatus.PAYMENT,
     },
+    clearingDate: {
+      type: Date,
+    },
   },
   {
     timestamps: true,

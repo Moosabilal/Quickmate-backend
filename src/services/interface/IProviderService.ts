@@ -82,6 +82,7 @@ export interface IProviderService {
     radiusKm: number,
     timeMin: string,
     timeMax: string,
+    providerId?: string,
   ): Promise<
     Array<{
       providerId: string;

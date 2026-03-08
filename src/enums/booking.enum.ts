@@ -7,3 +7,10 @@ export enum BookingStatus {
   IN_PROGRESS = "In-Progress",
   EXPIRED = "Expired",
 }
+
+export enum WarrantyStatus {
+  AVAILABLE = "AVAILABLE",
+  CLAIMED = "CLAIMED",
+  EXPIRED = "EXPIRED",
+  NONE = "NONE",
+}

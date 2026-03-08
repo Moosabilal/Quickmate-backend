@@ -28,6 +28,8 @@ router.post("/contactUsSubmission", isUser, authController.contactUsEmail);
 router.get("/getUser", authenticateToken, authController.getUser);
 router.put("/update-profile", isAdminOrUserOrProvider, upload.single("profilePicture"), authController.updateProfile);
 router.post("/generateOtp", isUser, authController.generateOtp);
+router.post("/send-phone-otp", isUser, authController.sendPhoneOtp);
+router.post("/verify-phone-otp", isUser, authController.verifyPhoneOtp);
 router.get("/search-resources", authController.searchResources);
 router.get("/getAllDataForChatBot", isUser, authController.getAllDataForChatBot);
 router.post("/logout", authController.logout);

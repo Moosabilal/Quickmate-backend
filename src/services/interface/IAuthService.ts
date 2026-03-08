@@ -28,6 +28,7 @@ export interface IAuthService {
       role: string;
       isVerified: boolean;
       profilePicture: string;
+      phone: string | null;
     };
     token: string;
     refreshToken: string;
@@ -48,6 +49,7 @@ export interface IAuthService {
     role: string;
     isVerified: boolean;
     profilePicture?: string;
+    phone: string | null;
   }>;
   updateProfile(
     token: string,
@@ -57,7 +59,10 @@ export interface IAuthService {
     name: string;
     email: string;
     profilePicture?: string;
+    phone: string | null;
   }>;
+  sendPhoneOtp(userId: string, phone: string): Promise<{ message: string }>;
+  verifyPhoneOtp(userId: string, otp: string, phone: string): Promise<{ message: string }>;
   searchResources(query: string): Promise<{ services: ICategoryDto[]; providers: IProviderDto[] }>;
   generateOtp(userId: string, email: string): Promise<{ message: string }>;
   getUserWithAllDetails(

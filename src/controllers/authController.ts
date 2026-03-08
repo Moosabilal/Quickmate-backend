@@ -326,4 +326,32 @@ export class AuthController {
       next(error);
     }
   };
+
+  public sendPhoneOtp = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user.id;
+      const { phone } = req.body;
+      if (!phone) {
+        throw new CustomError("Phone number is required", HttpStatusCode.BAD_REQUEST);
+      }
+      const response = await this._authService.sendPhoneOtp(userId, phone);
+      res.status(HttpStatusCode.OK).json(response);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public verifyPhoneOtp = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user.id;
+      const { otp, phone } = req.body;
+      if (!otp || !phone) {
+        throw new CustomError("OTP and phone number are required", HttpStatusCode.BAD_REQUEST);
+      }
+      const response = await this._authService.verifyPhoneOtp(userId, otp, phone);
+      res.status(HttpStatusCode.OK).json(response);
+    } catch (error) {
+      next(error);
+    }
+  };
 }

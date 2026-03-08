@@ -1,4 +1,5 @@
 const TYPES = {
+  ReportController: Symbol.for("ReportController"),
   AuthController: Symbol.for("AuthController"),
   AuthService: Symbol.for("AuthService"),
   UserRepository: Symbol.for("UserRepository"),
@@ -37,6 +38,11 @@ const TYPES = {
   ChatbotService: Symbol.for("ChatbotService"),
   ChatSessionRepository: Symbol.for("ChatSessionRepository"),
   ChatMessageRepository: Symbol.for("ChatMessageRepository"),
+  ReportRepository: Symbol.for("ReportRepository"),
+  ReportService: Symbol.for("ReportService"),
+  AdminResolutionService: Symbol.for("AdminResolutionService"),
+  AdminReportController: Symbol.for("AdminReportController"),
+  SmsService: Symbol.for("SmsService"),
 };
 
 export default TYPES;

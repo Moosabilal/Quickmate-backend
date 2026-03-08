@@ -533,6 +533,7 @@ export class ProviderService implements IProviderService {
     radiusKm: number,
     timeMin: string,
     timeMax: string,
+    providerId?: string,
   ): Promise<
     Array<{
       providerId: string;
@@ -540,18 +541,32 @@ export class ProviderService implements IProviderService {
       availableSlots: calendar_v3.Schema$TimePeriod[];
     }>
   > {
-    const services = await this._serviceRepository.findAll({
+    let providers;
+    let services = await this._serviceRepository.findAll({
       subCategoryId: serviceSubCategoryId,
     });
-    const providerIdSet = new Set<string>(services.map((s) => s.providerId?.toString()).filter(Boolean) as string[]);
-    if (providerIdSet.size === 0) return [];
 
-    const providers = await this._providerRepository.findAll({
-      _id: { $in: Array.from(providerIdSet) },
-      userId: { $ne: userId },
-    });
+    if (providerId) {
+      if (services.length === 0) {
+        services = await this._serviceRepository.findAll({ providerId });
+      }
+      providers = await this._providerRepository.findAll({
+        _id: providerId,
+        userId: { $ne: userId },
+      });
+    } else {
+      const providerIdSet = new Set<string>(services.map((s) => s.providerId?.toString()).filter(Boolean) as string[]);
+      if (providerIdSet.size === 0) return [];
+
+      providers = await this._providerRepository.findAll({
+        _id: { $in: Array.from(providerIdSet) },
+        userId: { $ne: userId },
+      });
+    }
 
     const providersInRange = providers.filter((p) => {
+      if (providerId && p._id.toString() === providerId.toString()) return true;
+
       const coords = p.serviceLocation?.coordinates;
       if (!coords || coords.length !== 2) return false;
       const [provLng, provLat] = coords;
@@ -601,7 +616,7 @@ export class ProviderService implements IProviderService {
         const busySlots = override ? override.busySlots : [];
 
         const providerService = services.find((s: IService) => s.providerId?.toString() === provider._id.toString());
-        const durationMins = providerService ? convertDurationToMinutes(providerService.duration) : 60; // Default to 60 if not found
+        const durationMins = providerService ? convertDurationToMinutes(providerService.duration) : 60;
         const serviceDurationMs = durationMins * 60 * 1000;
 
         const stepMs = 60 * 60 * 1000;
