@@ -49,6 +49,6 @@ jobs:
 
             NODE_OPTIONS="--max-old-space-size=4096" npm run build
 
-            pm2 restart quickmate-api
+            pm2 restart Quickmate
 
             pm2 save
