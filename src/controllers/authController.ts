@@ -53,14 +53,14 @@ export class AuthController {
       const token = result.token;
       res.cookie("token", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 60 * 60 * 1000, //1h
       });
       res.cookie("refreshToken", result.refreshToken, {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000, //7d
       });
       return res.status(HttpStatusCode.OK).json(result);
@@ -136,14 +136,14 @@ export class AuthController {
       const jwtToken = response.token;
       res.cookie("token", jwtToken, {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000, //1h
       });
       res.cookie("refreshToken", response.refreshToken, {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000, //7d
       });
       res.status(HttpStatusCode.OK).json(response);
@@ -161,8 +161,8 @@ export class AuthController {
       const response = await this._authService.createRefreshToken(refresh_token);
       res.cookie("token", response.newToken, {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000, //7d
       });
 
@@ -261,15 +261,15 @@ export class AuthController {
 
       res.cookie("token", "", {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         expires: new Date(0),
       });
 
       res.cookie("refreshToken", "", {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         expires: new Date(0),
       });
 
@@ -277,14 +277,14 @@ export class AuthController {
     } catch (error) {
       res.cookie("token", "", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         expires: new Date(0),
       });
       res.cookie("refreshToken", "", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         expires: new Date(0),
       });
       next(error);
