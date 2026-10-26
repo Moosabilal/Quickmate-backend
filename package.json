@@ -61,7 +61,7 @@
     "react-toastify": "^11.0.5",
     "reflect-metadata": "^0.2.2",
     "socket.io": "^4.8.1",
-    "twilio": "^5.12.2",
+    "twilio": "^5.13.1",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0",
     "ws": "^8.18.3",
@@ -73,6 +73,7 @@
     "@types/node": "^24.0.3",
     "@types/node-cron": "^3.0.11",
     "@types/nodemailer": "^6.4.17",
+    "@types/twilio": "^3.19.2",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -83,5 +84,9 @@
     "tsx": "^4.21.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.51.0"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true,
+    "esbuild@0.27.2": true
   }
 }
